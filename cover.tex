@@ -1,0 +1,416 @@
+%
+% Niniejszy plik stanowi przykład formatowania pracy magisterskiej na
+% Wydziale MIM UW.  Szkielet użytych poleceń można wykorzystywać do
+% woli, np. formatujac wlasna prace.
+%
+% Zawartosc merytoryczna stanowi oryginalnosiagniecie
+% naukowosciowe Marcina Wolinskiego.  Wszelkie prawa zastrzeżone.
+%
+% Copyright (c) 2001 by Marcin Woliński <M.Wolinski@gust.org.pl>
+% Poprawki spowodowane zmianami przepisów - Marcin Szczuka, 1.10.2004
+% Poprawki spowodowane zmianami przepisow i ujednolicenie 
+% - Seweryn Karłowicz, 05.05.2006
+% Dodanie wielu autorów i tłumaczenia na angielski - Kuba Pochrybniak, 29.11.2016
+
+% dodaj opcję [licencjacka] dla pracy licencjackiej
+% dodaj opcję [en] dla wersji angielskiej (mogą być obie: [licencjacka,en])
+\documentclass[en]{pracamgr}
+
+% Dane magistranta:
+\autor{Katarzyna Kowalska}{371053}
+
+% Dane magistrantów:
+%\autor{Autor Zerowy}{342007}
+%\autori{Autor Pierwszy}{342013}
+%\autorii{Drugi Autor-Z-Rzędu}{231023}
+%\autoriii{Trzeci z Autorów}{777321}
+%\autoriv{Autor nr Cztery}{432145}
+%\autorv{Autor nr Pięć}{342011}
+
+\title{Approximation and Parametrized Algorithms for Geometric Set Cover}
+\titlepl{Algorytmy parametryzowania i
+trudność aproksymacji problemu pokrywania zbiorów na płaszczyźnie}
+
+%\tytulang{An implementation of a difference blabalizer based on the theory of $\sigma$ -- $\rho$ phetors}
+
+%kierunek: 
+% - matematyka, informacyka, ...
+% - Mathematics, Computer Science, ...
+\kierunek{Computer Science}
+
+% informatyka - nie okreslamy zakresu (opcja zakomentowana)
+% matematyka - zakres moze pozostac nieokreslony,
+% a jesli ma byc okreslony dla pracy mgr,
+% to przyjmuje jedna z wartosci:
+% {metod matematycznych w finansach}
+% {metod matematycznych w ubezpieczeniach}
+% {matematyki stosowanej}
+% {nauczania matematyki}
+% Dla pracy licencjackiej mamy natomiast
+% mozliwosc wpisania takiej wartosci zakresu:
+% {Jednoczesnych Studiow Ekonomiczno--Matematycznych}
+
+% \zakres{Tu wpisac, jesli trzeba, jedna z opcji podanych wyzej}
+
+% Praca wykonana pod kierunkiem:
+% (podać tytuł/stopień imię i nazwisko opiekuna
+% Instytut
+% ew. Wydział ew. Uczelnia (jeżeli nie MIM UW))
+\opiekun{dr Michał Pilipczuk\\
+  Instytut Informatyki\\
+  }
+
+% miesiąc i~rok:
+\date{June 2020}
+
+%Podać dziedzinę wg klasyfikacji Socrates-Erasmus:
+\dziedzina{ 
+%11.0 Matematyka, Informatyka:\\ 
+%11.1 Matematyka\\ 
+%11.2 Statystyka\\ 
+11.3 Informatyka\\ 
+%11.4 Sztuczna inteligencja\\ 
+%11.5 Nauki aktuarialne\\
+%11.9 Inne nauki matematyczne i informatyczne
+}
+
+%Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
+\klasyfikacja{D. Software\\
+  D.127. Blabalgorithms\\
+  D.127.6. Numerical blabalysis}
+
+% Słowa kluczowe:
+\keywords{blabaliza różnicowa, fetory $\sigma$-$\rho$, fooizm,
+  blarbarucja, blaba, fetoryka, baleronik}
+
+% Tu jest dobre miejsce na Twoje własne makra i~środowiska:
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\newtheorem{defi}{Definition}[section]
+\newtheorem{tw}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+% koniec definicji
+
+\begin{document}
+\maketitle
+
+%tu idzie streszczenie na strone poczatkowa
+\begin{abstract}
+  W~pracy przedstawiono prototypową implementację blabalizatora
+  różnicowego bazującą na teorii fetorów $\sigma$-$\rho$ profesora
+  Fifaka.  Wykorzystanie teorii Fifaka daje wreszcie możliwość
+  efektywnego wykonania blabalizy numerycznej.  Fakt ten stanowi
+  przełom technologiczny, którego konsekwencje trudno z~góry
+  przewidzieć.
+\end{abstract}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+
+\chapter{Introduction}
+This is some very boring and really nothing on the topic introduction.
+\chapter{Definitions}
+Some definitions what geometric set cover is.
+$\mathcal{P}$ -- set of objects, $\mathcal{C}$ -- set of points.
+Choose $\mathcal{R} \subset \mathcal{P}$ such that
+every point in $C$ is inside some $R \in \mathcal{R}$
+and $|\mathcal{R}|$ is minimal.
+
+In parametrized setting we only look among $|\mathcal{R}| \le k$.
+In weighted settings there is some $f : \mathcal{P} -> \mathbb{R}$
+and we minimize $\sum_{R \in \mathcal{R}} f(R)$.
+ 
+\chapter{Geometric Set Cover with segments}
+
+\chapter{Geometric Set Cover with lines}
+\section{Lines parallel to one of the axis}
+When $\mathcal{R}$ consists only of lines parallel to
+one of the axis, the problem can be solved in
+polynomial time.
+
+We create bipartial graph $G$ with node for every line on the input
+split into sets: $H$ -- horizontal lines and $V$ -- vertical lines.
+If any two lines cover the same point from $\mathcal{C}$, then
+we add edge between them.
+
+Of course there will be no edges between nodes inside $H$,
+because all of them are pararell and if they share 
+one point, they are the same lines. Similar argument for $V$.
+So the graph is bipartial.
+
+Now Geometric Set Cover can be solved with Vertex Cover on graph $G$.
+Since Vertex Cover (even in weighted setting) 
+on bipartial graphs can be solved in polynomial time.
+
+Short note for myself just to remember how to this in polynomial time:
+
+Non-weighted setting - Konig theorem + max matching
+
+Weighted setting - Min cut in graph of $\neg A$ or $\neg B$
+(edges directed from $V$ to $H$)
+
+\section{FPT for arbitrary lines}
+You can find this is Platypus book.
+We will show FPT kernel of size at most $k^2$.
+For every line if there is more than $k$ points on it,
+you have to take it. At the end, if there is more than $k^2$ lines,
+return NO.
+
+In weighted settings among the same lines with different weights
+you leave the cheapest one and use the same algorithm.
+
+
+\section{APX-completeness for arbitrary lines}
+We will show reduction from Vertex Cover problem.
+Let's take instance of Vertex Cover problem for graph $G$.
+We will create set of $|V(G)|$ pairwise non-pararell lines
+that any 3 of them don't cross in the same point.
+
+Then for every edge in $(v, w) \in E(G)$
+we put point on crossing of lines for vertices $v$ and $w$.
+They are not pararell, so there exists exactly one such point
+and any other line don't cover this point (any 3 of them don't
+cross in the same point).
+So this solving geometric set cover will choose
+for every edge at least one vertex connected by this edge,
+because we need to choose at least one of
+lines corresponding to $v$ or $w$ to cover this point.
+
+Vertex Cover for arbitrary graph is APX-complete,
+so this problem in also APX-complete.
+
+\section{2-approximation for arbitrary lines}
+Vertex Cover has an easy 2-approximation algorithm,
+but here very many lines can cross through
+the same point, so we can do $d$-approximation,
+where $d$ is the biggest number of lines crossing through the same point.
+So for set where any 3 lines don't cross in the same point
+it yields 2-approximation.
+
+The problematic cases are where through all points
+cross at least $k$ points and all lines have at least $k$ points on them.
+It can be created by casting $k$-grid in $k$-D space on 2D space.
+
+Greedy algorithm yields $\log |\mathcal{R}|$-approximation,
+but I have example for this for bipartial graph and
+reduction with taking all lines crossing through some point
+(if there are no more than $k$) would solve this case.
+So maybe it works.
+
+Unfortunaly I haven't done this :(
+
+I can link some papers telling it's hard to do.
+
+\section{Connection with general set cover}
+Of course every two lines have at most one common point,
+so is every family of sets that have at most one point
+in common equivalent to some geometric set cover with lines?
+
+No, because of Desargues's theorem.
+Have to write down exactly what configuration is banned.
+
+
+\chapter{Geometric Set Cover with Weighted Polygons with $\delta$-expansion}
+\section{Definitions}
+This is very similar to every other paper about it.
+\section{Problem Statement}
+\section{APX-completness for rectangles with uniform weights (maybe segments)}
+\section{$1+\epsilon$ approximation algorithm for weighted polygons of bounded thickness $\theta$}
+
+\begin{defi}
+  \textbf{Thickness} of the polygon
+  is the ratio of the circumsribed circle's
+  radius to the inscribed circle's radius.
+\end{defi}
+
+\begin{defi}[MWSCP]
+	TODO: wstawić to jakoś wcześniej i inaczej
+	Minimal Weight Set Cover for Polygons
+\end{defi}
+
+\begin{tw}[EPTAS for MWSCP with bounded thickness and $\delta$-expansion]
+There is a randomized algorithm that given
+a weighted family $\mathcal{P}$ of $n$ polygons
+with thickness bouded by $\theta$
+and set $\mathcal{C}$ of $m$ points
+with total encoding
+size of both sets $N$, and parameters $\delta$, $\epsilon$,
+runs in time $f(\epsilon, \delta, \theta) \cdot (nN)^c$
+for some computable functions $f$ and constant $c$,
+and outputs a subfamily $\mathcal{S} \subseteq \mathcal{P}$
+such that $\mathcal{S}^{\delta}$
+covers the $\mathcal{C}$
+and $w(\mathcal{S}) \le (1+\epsilon)OPT(\mathcal{P})$
+with probability at least 1/2.
+\end{tw}
+
+\subsection{Sparsifying the family}
+Intuitively, we will create a new input family
+$\mathcal{P'}$ of polygons that 
+can cover set of points $\mathcal{C}$
+if and only if set $\mathcal{P}$
+can cover set of $\mathcal{C}$
+and OPT($\mathcal{P'}$)
+is worse only by $\mathcal{O}(\epsilon)$-fraction of OPT($\mathcal{P}$).
+The polygons in $\mathcal{P'}$ will be classified
+into groups of similar size of edge of their
+circumscribed squares.
+
+Ogólnie wszystko tutaj będzie takie samo jak
+w paperze, ale wstawimy stałą dla siatki 
+$1/(\delta\theta\epsilon)$
+zamiast $1/\delta\epsilon$.
+
+$L = (1/\delta\theta\epsilon)^{\ell}$
+for some $\ell = \mathcal{O}(N)$ -- limit for data.
+
+Let's denote $d_i$ as a length of edge of the
+circumscribed square on a polygon $P_i \in \mathcal{P}$.
+
+\paragraph{Partition into layers}
+Let's define a partition:
+$$(\mathcal{P}_1, \mathcal{P}_2, \ldots, \mathcal{P_{\ell}})$$
+of $\mathcal{P}$ and such reals $\nu_t, \mu_t$
+for $t = 1, 2, \ldots, \ell$ with
+the following properties satisfied for each $t \in \{1,2,\ldots, \ell\}$:
+\begin{itemize}
+\item $\nu_t \le d_i \le \mu_t$ for each $P_i \in \mathcal{P}_t$
+\item $\nu_t = \mu_{t-1}$ (expect for $t=1$) and $\mu_t/\nu_t = (1/\delta\theta\epsilon)^{1/\epsilon}$
+\item $\nu_1 \ge 1, \mu_\ell \ge L$, and all numbers $\nu_t$ and $\mu_t$ apart from $\nu_1$ are integers.
+\end{itemize}
+
+How to divide these polygons and choose numbers
+is pretty straightforward,
+but we also use some shifting parameter $0 \le b \le 1/\epsilon$
+to be determined later.
+
+$\nu_t = (1/\delta\theta\epsilon)^{t/\epsilon + b}$
+$\mu_t = (1/\delta\theta\epsilon)^{(t+1)/\epsilon + b}$
+
+\paragraph{Hierarchical grid structure}
+Let $a \in \{1, \ldots, L - 1\}$ be an integer shift
+parameter, to be determined later. Given $a$
+we construct a hierarchy of grid lines in the plane.
+
+For level $t$, define the \textit{level-t unit}
+as $u_t = \delta \nu_t/(\theta 2\sqrt{2})$.
+Note that $u_t$ is an integer.
+
+We define a set of horiontal lines with $y$-coordinates
+from the set:
+$$a + b \cdot u_t : b \in \mathbb{Z}$$
+
+Then for every polygon $P_i \in \mathcal{P}_t$
+if the lines (horizontal or vertical)
+from level $t+1$ cross the polygon $P_i$,
+we split it according to lines
+to at most 4 polygons with the
+same weights and add these to $\mathcal{P'}$.
+Otherwise $P_i \in \mathcal{P'}$.
+
+\begin{lemma}
+In polynomial time one can yield a family $\mathcal{P'}$
+that satisfies $$OPT(\mathcal{P'}) \le (1+16\epsilon)OPT(\mathcal{P})$$
+with probability at least 3/4.
+Moreover one can construct the solution $S \subseteq \mathcal{P}$
+back from the solution of $S' \subseteq \mathcal{P'}$
+such that $w(S) \le w(S')$.
+\end{lemma}
+
+\textit{Sketch of proof}
+If $\nu_t \le d_i \le \mu_t\epsilon$, then there is at most
+$\epsilon$ probability that with random offset $a$,
+the line will cut this polygon on the $t$-th level vertically.
+Analogically for horizontal cuts.
+
+If $\mu_t\epsilon < d_i < \nu_{t+1}$, then this situation happens
+only for one $b$ in set $\{0, 1, 2, \ldots, 1\ \epsilon\}$.
+
+Then for every polygon $P_i$ in optimal solution $OPT$, the expected value
+of sum of weights for all polygons in $\mathcal{P'}$
+corresponsing to the polygon $P_i$ is at most $4\epsilon$.
+
+So with Markov inequality we can prove that
+Pr($OPT(\mathcal{P'}) > (1+16\epsilon)OPT(\mathcal{P})) \le 1/4$
+
+\paragraph{Extending polygons}
+On every level $t$, for every $P_i \in \mathcal{P'}_t$,
+we will create a new polygon $P_i'$ that
+consists of every cell in hierarchical grid on level $t$,
+that have non-empty intersection with $P_i$.
+
+New polygon will fit inside $P_i$ shifted to every dimension by
+$u_t\sqrt{2} = \delta \nu_t/(2\theta) \le \delta d_i/(2\theta)$.
+
+The larger dimension is not extended more than by $\delta$:
+$$2 \cdot \delta d_i/(2\theta) = \delta d_i/\theta \le \delta d_i$$
+
+The shorter dimension is at most $d_i/\theta$,
+so it also wouldn't be extended by more than $\delta$.
+
+
+
+\subsection{Dynamic programming}
+
+
+
+
+
+
+\chapter{Conclusions}
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliografia}
+
+\bibitem[Bea65]{beaman} Juliusz Beaman, \textit{Morbidity of the Jolly
+    function}, Mathematica Absurdica, 117 (1965) 338--9.
+
+\bibitem[Blar16]{eb1} Elizjusz Blarbarucki, \textit{O pewnych
+    aspektach pewnych aspektów}, Astrolog Polski, Zeszyt 16, Warszawa
+  1916.
+
+\bibitem[Fif00]{ffgg} Filigran Fifak, Gizbert Gryzogrzechotalski,
+  \textit{O blabalii fetorycznej}, Materiały Konferencji Euroblabal
+  2000.
+
+\bibitem[Fif01]{ff-sr} Filigran Fifak, \textit{O fetorach
+    $\sigma$-$\rho$}, Acta Fetorica, 2001.
+
+\bibitem[Głomb04]{grglo} Gryzybór Głombaski, \textit{Parazytonikacja
+    blabiczna fetorów --- nowa teoria wszystkiego}, Warszawa 1904.
+
+\bibitem[Hopp96]{hopp} Claude Hopper, \textit{On some $\Pi$-hedral
+    surfaces in quasi-quasi space}, Omnius University Press, 1996.
+
+\bibitem[Leuk00]{leuk} Lechoslav Leukocyt, \textit{Oval mappings ab ovo},
+  Materiały Białostockiej Konferencji Hodowców Drobiu, 2000.
+
+\bibitem[Rozk93]{JR} Josip A.~Rozkosza, \textit{O pewnych własnościach
+    pewnych funkcji}, Północnopomorski Dziennik Matematyczny 63491
+  (1993).
+
+\bibitem[Spy59]{spyrpt} Mrowclaw Spyrpt, \textit{A matrix is a matrix
+    is a matrix}, Mat. Zburp., 91 (1959) 28--35.
+
+\bibitem[Sri64]{srinis} Rajagopalachari Sriniswamiramanathan,
+  \textit{Some expansions on the Flausgloten Theorem on locally
+    congested lutches}, J. Math.  Soc., North Bombay, 13 (1964) 72--6.
+
+\bibitem[Whi25]{russell} Alfred N. Whitehead, Bertrand Russell,
+  \textit{Principia Mathematica}, Cambridge University Press, 1925.
+
+\bibitem[Zen69]{heu} Zenon Zenon, \textit{Użyteczne heurystyki
+    w~blabalizie}, Młody Technik, nr~11, 1969.
+
+\end{thebibliography}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% coding: latin-2
+%%% End:

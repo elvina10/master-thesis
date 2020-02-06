@@ -84,6 +84,11 @@ trudność aproksymacji problemu pokrywania zbiorów na płaszczyźnie}
   blarbarucja, blaba, fetoryka, baleronik}
 
 % Tu jest dobre miejsce na Twoje własne makra i~środowiska:
+
+\newcommand{\points}{\mathcal{C}}
+\newcommand{\sets}{\mathcal{P}}
+\newcommand{\sol}{\mathcal{R}}
+
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \newtheorem{defi}{Definition}[section]
@@ -113,16 +118,63 @@ trudność aproksymacji problemu pokrywania zbiorów na płaszczyźnie}
 This is some very boring and really nothing on the topic introduction.
 \chapter{Definitions}
 Some definitions what geometric set cover is.
-$\mathcal{P}$ -- set of objects, $\mathcal{C}$ -- set of points.
-Choose $\mathcal{R} \subset \mathcal{P}$ such that
-every point in $C$ is inside some $R \in \mathcal{R}$
-and $|\mathcal{R}|$ is minimal.
+$\sets$ -- set of objects, $\points$ -- set of points.
+Choose $\sol \subset \sets$ such that
+every point in $\points$ is inside some element from $\sol$
+and $|\sol|$ is minimal.
 
-In parametrized setting we only look among $|\mathcal{R}| \le k$.
-In weighted settings there is some $f : \mathcal{P} -> \mathbb{R}$
-and we minimize $\sum_{R \in \mathcal{R}} f(R)$.
+In parametrized setting we only look among $|\sol| \le k$.
+In weighted settings there is some $f : \sets -> \mathbb{R}$
+and we minimize $\sum_{R \in \sol} f(R)$.
  
 \chapter{Geometric Set Cover with segments}
+
+\section{FPT for segments}
+\subsection{Segments parallel to one of the axis}
+We'll show $\mathcal{O}(2^k)$ branching algorithm.
+Let's take point $K$ that hasn't been covered yet with
+the smallest coordinate in lexicograpical order.
+We need to cover $K$ with some of the remaining segments.
+
+We choose one of the 2 directions on which we will cover this point.
+In this direction we take greedly the segment that will cover
+the most points (there are points in $\points$ only on
+one side of $K$ in this direction, so all
+segments covering $K$ in this direction create monotone sequence
+of sets -- zbiory zstępujące).
+
+\subsection{Segments in $d$ directions}
+The same algorithm as before but in complexity $\mathcal{O}(d^k)$.
+
+\subsection{Segments in arbitrary direction}
+You can find this is Platypus book (?? or not).
+
+First remove segments that cover the same sets of points
+(we only leave one segment for each covered set of points).
+
+We will find kernel where every segment doesn't have more than $3k$
+points on it and every segment has at least 2 points on them.
+Then we will have at most $3k^2$ points (otherwise there is no solution).
+So we will have at most $\mathcal{O}(k^4)$ different segments
+in the kernel.
+
+Reductions and a little branching:
+\begin{enumerate}
+\item If some point is covered by only one segment, take it
+\item If some segment covers only one point, remove it
+\item If some segment has more than $3k$ points do the branching over it
+\end{enumerate}
+
+Branching:
+
+First take the direction on the segment and take the extreme
+segment in this direction having at least $k$ points on it.
+\begin{enumerate}
+\item Choose 
+\end{enumerate}
+
+
+
 
 \chapter{Geometric Set Cover with lines}
 \section{Lines parallel to one of the axis}
@@ -157,6 +209,7 @@ We will show FPT kernel of size at most $k^2$.
 For every line if there is more than $k$ points on it,
 you have to take it. At the end, if there is more than $k^2$ lines,
 return NO.
+TODO: is this even the truth?
 
 In weighted settings among the same lines with different weights
 you leave the cheapest one and use the same algorithm.
@@ -204,6 +257,13 @@ Unfortunaly I haven't done this :(
 I can link some papers telling it's hard to do.
 
 \section{Connection with general set cover}
+Problem with finite set of lines with more dimensions
+is equivalent
+to problem in 2D, because we can project
+lines on the plane which is not perpendicular
+to any plane created by pairs of
+(point from $\mathcal{C}$, line from $\mathcal{P}$).
+
 Of course every two lines have at most one common point,
 so is every family of sets that have at most one point
 in common equivalent to some geometric set cover with lines?

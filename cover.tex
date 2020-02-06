@@ -194,6 +194,17 @@ at least one segment for every pair of parameters
 So the final algorithm complexity is $\mathcal{O}(k^k)$ from
 branching.
 
+\section{APX-completeness for segments}
+It works even with extensions for unit weights.
+TODO: wrtie this down (little convoluted)
+
+\section{Weights}
+\subsection{FPT for segments pararell with $\delta$-extensios}
+\subsection{W[1]-completeness for arbitrary segments with weights}
+\subsection{What is missing}
+We don't know FPT for pararell segments
+and arbitrary lines with $\delta$-extensions.
+
 \chapter{Geometric Set Cover with lines}
 \section{Lines parallel to one of the axis}
 When $\mathcal{R}$ consists only of lines parallel to
@@ -224,14 +235,16 @@ Weighted setting - Min cut in graph of $\neg A$ or $\neg B$
 \section{FPT for arbitrary lines}
 You can find this is Platypus book.
 We will show FPT kernel of size at most $k^2$.
+
+(Maybe we need to reduce lines with one point/points with one line).
+
 For every line if there is more than $k$ points on it,
-you have to take it. At the end, if there is more than $k^2$ lines,
+you have to take it. At the end, if there is more than $k^2$ points,
 return NO.
-TODO: is this even the truth?
+Otherwise there is no more than $k^4$ lines.
 
 In weighted settings among the same lines with different weights
 you leave the cheapest one and use the same algorithm.
-
 
 \section{APX-completeness for arbitrary lines}
 We will show reduction from Vertex Cover problem.
@@ -290,12 +303,17 @@ No, because of Desargues's theorem.
 Have to write down exactly what configuration is banned.
 
 
-\chapter{Geometric Set Cover with Weighted Polygons with $\delta$-expansion}
-\section{Definitions}
-This is very similar to every other paper about it.
-\section{Problem Statement}
-\section{APX-completness for rectangles with uniform weights (maybe segments)}
+\chapter{Geometric Set Cover with polygons}
+\section{Introduction}
+The problem is APX-complete and W[1]-complete,
+so we introduce $\delta$-expansions.
+
+\section{FPT -- ?? I don't know :(}
+
+\section{APX-completness for rectangles with $\delta$-expansion without weights}
+It follows from APX-completeness for segments with $\delta$-expansion.
 \section{$1+\epsilon$ approximation algorithm for weighted polygons of bounded thickness $\theta$}
+This should be written.
 
 \begin{defi}
   \textbf{Thickness} of the polygon

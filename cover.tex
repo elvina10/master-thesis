@@ -153,46 +153,30 @@ If there is a segment that covers no more
 points than some other segment (inclusion-wise), remove it.
 Repeat until such segment exists.
 
-We define long segments as having more than $k$ points on them
-and all others will be called short segments.
 
-We also sort segments on their respective lines
-(eg. lexicographicaly over coordinates).
-
-We will find the kernel where every segment is short.
+We will find the kernel where at every line (not only segment)
+there is not more than $k$ points.
 Then we will have at most $k^2$ points (otherwise there is no solution).
 So we will have at most $\mathcal{O}(k^4)$ different segments
 in the kernel. (We can choose leftmost and rightmost
 point for each such segment and all other points are implied).
 
-As long as there is a long segment $s$, do branching.
+As long as there is a line with more than $k$ points, do branching.
+Let's name points on this line $x_1, x_2, \ldots x_t$
+in order they appear on the line.
 
-Consider the line containing $s$ and 
-without loss of generality, assume $s$ is the first (leftmost)
-long segment on this line.
+So we choose on which point the chosen segment on this line
+will start. Of course we have to take at least one segment
+covering at least one point among first $k+1$ points,
+because covering all of them with only segments
+on different lines we would use
+exactly $k+1$ segments (any of them can't contain more than
+one point from this line).
 
-We need to take some segment on this line,
-because using only segments on different lines we would use
-more than $k$ segments.
 
-We either:
-\begin{itemize}
-\item take $s$ to solution
-\item first point on the line is covered by segment in this direction -- cover some prefix of points on $s$ by some earlier (therefore short) segment
-\item first point on the line is covered by segment in other direction -- leave some of the first points to be covered by segments in different directions (no more than $k$) and cover the suffix by some other segment
-\end{itemize}
-
-If we decide that we cover $0 < i \le k$ first point by some earlier segment,
-we just take the segment on this line that ends exactly in $i$-th point
-on this line (there is at most one such segment, because we removed those included in it).
-
-If we decide that first $0 < j < k$ points will be covered by
-some segments in other directions and $j+1$-th will be the first 
-to be covered by segment in this direction, we just take
-the segment on this line that starts exactly in $j+1$-th point
-on this line
-
-So we have braching over $2k$ choices on this segment.
+There is at most one segment starting on each of the points
+$x_1, x_2, \ldots x_{k+1}$,
+so we have braching over $k+1$ choices on this segment.
 
 So the final algorithm complexity is $\mathcal{O}(k^k)$ from
 branching.

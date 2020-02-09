@@ -131,6 +131,8 @@ and we minimize $\sum_{R \in \sol} f(R)$.
 
 \section{FPT for segments}
 \subsection{Segments parallel to one of the axis}
+You can find this in Platypus book.
+
 We'll show $\mathcal{O}(2^k)$ branching algorithm.
 Let's take point $K$ that hasn't been covered yet with
 the smallest coordinate in lexicograpical order.
@@ -147,56 +149,61 @@ of sets -- zbiory zstępujące).
 The same algorithm as before but in complexity $\mathcal{O}(d^k)$.
 
 \subsection{Segments in arbitrary direction}
-You can find this is Platypus book (?? or not).
+If there is a segment that covers no more 
+points than some other segment (inclusion-wise), remove it.
+Repeat until such segment exists.
 
-First remove segments that cover the same sets of points
-(we only leave one segment for each covered set of points).
+We define long segments as having more than $k$ points on them
+and all others will be called short segments.
 
-We will find kernel where every segment doesn't have more than $k$
-points on it and every segment has at least 2 points on them.
+We also sort segments on their respective lines
+(eg. lexicographicaly over coordinates).
+
+We will find the kernel where every segment is short.
 Then we will have at most $k^2$ points (otherwise there is no solution).
 So we will have at most $\mathcal{O}(k^4)$ different segments
-in the kernel.
+in the kernel. (We can choose leftmost and rightmost
+point for each such segment and all other points are implied).
 
-Reductions and a little branching:
-\begin{enumerate}
-\item If some point is covered by only one segment, take it
-\item If some segment covers only one point, remove it
-\item If some segment has more than $3k$ points do the branching over it
-\end{enumerate}
+As long as there is a long segment $s$, do branching.
 
-Branching:
+Consider the line containing $s$ and 
+without loss of generality, assume $s$ is the first (leftmost)
+long segment on this line.
 
-First take the direction on the segment and take the extreme
-segment in this direction having at least $k+1$ points on it
--- it has $d$ points.
+We need to take some segment on this line,
+because using only segments on different lines we would use
+more than $k$ segments.
 
-We either take this point or branch over $k^2$ options:
-\begin{enumerate}
-\item Choose how many first points $0 \le i \le k$ will be covered
-by some short segment on prefix.
-\item Choose how many next points $0 \le j \le k$ will be covered
-by some segments in other directions.
-\item $i + j + 1$-th point (if it's still in this segment)
-will be covered by some segment in the same direction (maybe long,
-maybe short)
-\item With $i$ and $j$ chosen we greedily choose segments.
-\item If $i > 0$ take the prefix segment that covers first $i$ points
-and the most points to the left from them.
-\item If $d - i - j > 0$ take the segment that covers $d-i-j$-th point
-and the most points to the right from it.
-\end{enumerate}
+We either:
+\begin{itemize}
+\item take $s$ to solution
+\item first point on the line is covered by segment in this direction -- cover some prefix of points on $s$ by some earlier (therefore short) segment
+\item first point on the line is covered by segment in other direction -- leave some of the first points to be covered by segments in different directions (no more than $k$) and cover the suffix by some other segment
+\end{itemize}
 
-Let's see that either $i > 0$ or $d - i - j > 0$, so we will take
-at least one segment for every pair of parameters
-(decrease parameter by at least 1).
+If we decide that we cover $0 < i \le k$ first point by some earlier segment,
+we just take the segment on this line that ends exactly in $i$-th point
+on this line (there is at most one such segment, because we removed those included in it).
+
+If we decide that first $0 < j < k$ points will be covered by
+some segments in other directions and $j+1$-th will be the first 
+to be covered by segment in this direction, we just take
+the segment on this line that starts exactly in $j+1$-th point
+on this line
+
+So we have braching over $2k$ choices on this segment.
 
 So the final algorithm complexity is $\mathcal{O}(k^k)$ from
 branching.
 
-\section{APX-completeness for segments}
+\section{APX-completeness for segments pararell to axis}
 It works even with extensions for unit weights.
-TODO: wrtie this down (little convoluted)
+
+We will show reduction from MAXSAT
+to Geometric Set Cover with segments pararell to axis.
+
+
 
 \section{Weights}
 \subsection{FPT for segments pararell with $\delta$-extensios}

@@ -91,6 +91,7 @@ trudność aproksymacji problemu pokrywania zbiorów na płaszczyźnie}
 
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \newtheorem{defi}{Definition}[section]
 \newtheorem{tw}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
@@ -207,7 +208,48 @@ It works even with extensions for unit weights.
 We will show reduction from MAXSAT
 to Geometric Set Cover with segments pararell to axis.
 
+\subsection{Reduction contruction}
 
+\includegraphics[width=0.7\textwidth]{segment_apx_sketch.jpg}
+
+\subsubsection{Choose $x_i$ gadget}
+\includegraphics[width=0.6\textwidth]{choose_x_gadget.jpg}
+
+We can cover all these points with 3 segments
+and choose segment $x_i$ by taking blue segments
+or $\neg x_i$ by taking green segments.
+
+\begin{lemma}
+Points $A, B, C, D, E, F$ can be covered using at least
+3 segments (even with $1/2$-extensions).
+\end{lemma}
+\paragraph{Proof.}
+We need to take at least one segment on line $ABC$,
+because it's the only way to cover $C$.
+All other points ($D, E, F$) are not colinear,
+so we need at least 2 other segments to cover them.
+
+\begin{lemma}
+If we choose both segments $x_i$ and $\neg x_i$, we need to use at
+least 4 segments to cover all points $A, B, C, D, E, F$
+(even with $1/2$-extensions).
+\end{lemma}
+
+\paragraph{Proof.}
+Choosing both segments $x_i$ and $\neg x_i$
+we only cover points $C$
+(becuase $B$ is too far away to be covered with $1/2$-extension)
+and $F$.
+
+All other points ($A, B, D, E$) are not colinear,
+so we need at least 2 other segments to cover them.
+
+\begin{lemma}
+No points in \textbf{clauses} area can be covered
+by $AC$ with $1/2$-extension.
+\end{lemma}
+
+\subsection{Proof that contruction is sound}
 
 \section{Weights}
 \subsection{FPT for segments pararell with $\delta$-extensios}

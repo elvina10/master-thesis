@@ -149,17 +149,29 @@ of sets -- zbiory zstępujące).
 The same algorithm as before but in complexity $\mathcal{O}(d^k)$.
 
 \subsection{Segments in arbitrary direction}
-If there is a segment that covers no more 
-points than some other segment (inclusion-wise), remove it.
-Repeat until such segment exists.
+If there exist two segments $a$ and $b$ in $\sets$,
+such that any point covered by $a$ is also covered by $b$,
+then without loss of generality we can remove segment $a$ from $\sets$.
+We repeat this process until no such $(a, b)$ pair exists.
 
 
-We will find the kernel where at every line (not only segment)
-there is not more than $k$ points.
-Then we will have at most $k^2$ points (otherwise there is no solution).
-So we will have at most $\mathcal{O}(k^4)$ different segments
-in the kernel. (We can choose leftmost and rightmost
-point for each such segment and all other points are implied).
+Let us first assume that we reduced our instance to a kernel,
+where \textit{any line} contains no more than $k$ points.
+
+Since any segment covers a set of colinear points,
+for such a kernel $k$ segments can cover only at most $k^2$ points.
+Therefore, for the answer to be positive,
+the number of points has to be at most $k^2$.
+The number of segments is now bounded by $k^4$,
+since if we consider two \textit{extreme} points
+covered by a given segment,
+then these pairs must be distinct,
+otherwise two segments would contain the same set of points.
+Since both the number of points and the number of segments
+is bounded by a function of $k$,
+this instance can be easily solved in time $O(f(k))$.
+
+In remains to show how to construct the kernel.
 
 As long as there is a line with more than $k$ points, do branching.
 Let's name points on this line $x_1, x_2, \ldots x_t$
@@ -174,12 +186,20 @@ exactly $k+1$ segments (any of them can't contain more than
 one point from this line).
 
 
-There is at most one segment starting on each of the points
-$x_1, x_2, \ldots x_{k+1}$,
-so we have braching over $k+1$ choices on this segment.
+Assume there exists a line $l$ containing points $x_1$, \ldots $x_t$,
+where $t \geq k + 1$.
+Note that a segment that does not lie on $l$ can cover only at most one
+of the points $x_i$.
+Therefore, out of points $x_1$, ..., $x_{k+1}$,
+at least one has to be covered by a segment that lies on $l$,
+let us fix $x_i$ to be the first such point.
+Then, we can greedily choose a segment that lies on $l$,
+covers $x_i$,
+and also covers the largest number of points $x_j$ for $j > i$.
 
-So the final algorithm complexity is $\mathcal{O}(k^k)$ from
-branching.
+Since we have at most $k + 1$ choices to branch over
+and each choice adds a segment to the constructed solution,
+we obtain an algorithm with complexity $O(k^k)$.
 
 \section{APX-completeness for segments pararell to axis}
 It works even with extensions for unit weights.

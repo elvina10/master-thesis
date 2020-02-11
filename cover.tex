@@ -249,7 +249,55 @@ No points in \textbf{clauses} area can be covered
 by $AC$ with $1/2$-extension.
 \end{lemma}
 
-\subsection{Proof that contruction is sound}
+
+\subsubsection{Clause gadget}
+\includegraphics[width=0.6\textwidth]{clause_gadget.jpg}
+
+\begin{lemma}
+In order to cover $D$ ($E, F$) point at least one
+of the segments $AD$ ($BE, CF$) or $x'$ ($y', z'$).
+\end{lemma}
+
+\begin{lemma}
+Points $A$ and $D$ can be covered
+with one additional segment $x'$
+only if $x$ is already chosen.
+Otherwise they can be covered with one segment
+only by using $AD$.
+\end{lemma}
+
+\begin{lemma}
+Points $A, B, C, D, E, F, G$ can be covered with 
+3 or 4 segments, depending if at least one of the segments
+$x, y, z$ was previously chosen.
+\end{lemma}
+
+\subsubsection{Or gadget}
+\begin{lemma}
+Points $A, B, C, D, E, F, G, H, I, J$ can be covered using
+at least 4 segments even with $1/2$-extension.
+\end{lemma}
+
+\begin{lemma}
+Points $A, B, C, D, E, F, G, H, I, J$ can be covered using
+4 segments and segment $x \lor y$ can be chosen
+even with $1/2$-extension
+only if at least one of the segments $x$ or $y$ is chosen.
+\end{lemma}
+
+\subsection{Proof that construction is sound}
+\begin{lemma}
+If there exists setting of values of variables that exactly $k$
+clauses are satisfied, we can cover all the points
+with $3n + 11m + (m-k)$ segments.
+\end{lemma}
+
+\begin{lemma}
+If there exists cover with $k$ segments,
+then also there exists solution to MAXSAT.
+
+TODO: Formulate this lemma better.
+\end{lemma}
 
 \section{Weights}
 \subsection{FPT for segments pararell with $\delta$-extensios}

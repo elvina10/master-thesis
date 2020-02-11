@@ -300,20 +300,21 @@ In weighted settings among the same lines with different weights
 you leave the cheapest one and use the same algorithm.
 
 \section{APX-completeness for arbitrary lines}
-We will show reduction from Vertex Cover problem.
-Let's take instance of Vertex Cover problem for graph $G$.
-We will create set of $|V(G)|$ pairwise non-pararell lines
-that any 3 of them don't cross in the same point.
+We will show a reduction from Vertex Cover problem.
+Let's take an instance of the Vertex Cover problem for graph $G$.
+We will create a set of $|V(G)|$ pairwise non-pararell lines,
+such that no three of them share a common point.
 
 Then for every edge in $(v, w) \in E(G)$
-we put point on crossing of lines for vertices $v$ and $w$.
+we put a point on crossing of lines for vertices $v$ and $w$.
 They are not pararell, so there exists exactly one such point
-and any other line don't cover this point (any 3 of them don't
+and any other line don't cover this point (any three of them don't
 cross in the same point).
-So this solving geometric set cover will choose
-for every edge at least one vertex connected by this edge,
-because we need to choose at least one of
-lines corresponding to $v$ or $w$ to cover this point.
+
+Solution of Geometric Set Cover for this instance would yield
+a sound solution of Vertex Cover for graph $G$.
+For every point (edge) we need to choose at least one of
+lines (vertices) $v$ or $w$ to cover this point.
 
 Vertex Cover for arbitrary graph is APX-complete,
 so this problem in also APX-complete.

@@ -210,10 +210,18 @@ to Geometric Set Cover with segments pararell to axis.
 
 \subsection{Reduction contruction}
 
+\begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{segment_apx_sketch.jpg}
+\caption{General scheme of reduction.}
+\label{fig:segment_apx}
+\end{figure}
 
 \subsubsection{Choose $x_i$ gadget}
+\begin{figure}[h]
 \includegraphics[width=0.6\textwidth]{choose_x_gadget.jpg}
+\caption{Scheme of choose $x_i$ gadget.}
+\label{fig:choose_x_gadget}
+\end{figure}
 
 We can cover points $A, B, C, D, E, F$ with 3 segments.
 One of the segments (starting at~$C$) equates to $x_i$
@@ -248,11 +256,31 @@ and $F$.
 All other points ($A, B, D, E$) are not colinear,
 so we need at least 2 other segments to cover them.
 
+\paragraph{Robustness with $1/2$-extension.}
+Take a look at figure~\ref{fig:segment_apx}.
+The points will be included in choose gadgets (horizontal boxes)
+and clause gadgets (vertical boxes).
+
+Since segment $AC$ is very long
+and colinear with $x_i$, after $1/2$-extension
+it will cover a significant part of segment $x_i$,
+even though $x_i$ will not be chosen.
+
+If we put all the clause gadgets in the area
+marked with \textbf{clauses} at gadget scheme in figure~\ref{fig:choose_x_gadget},
+it is enough to prove that $AC$ will not cover any points
+in the \textbf{clauses} area even with $1/2$-extensions.
+
 \begin{lemma}
 No points in \textbf{clauses} area can be covered
 by $AC$ with $1/2$-extension.
 \end{lemma}
 
+\paragraph{Proof.}
+Bear in mind that length of $AC$ is equal to length of $x_i$.
+Area \textbf{clauses} takes a second half
+of the segment $x_i$ and $AC$ after extension will cover the first
+half of segment $x_i$.
 
 \subsubsection{Clause gadget}
 \includegraphics[width=0.6\textwidth]{clause_gadget.jpg}

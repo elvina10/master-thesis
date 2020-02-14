@@ -233,14 +233,21 @@ if the clauses are met (any of the variables were chosen).
 \caption{Scheme of choose $x_i$ gadget.}
 \label{fig:choose_x_gadget}
 \end{figure}
+In Figure~\ref{fig:choose_x_gadget},
+we show a gadget that simulates a single variable $x_i$.
+It consists of six points A, B, C, D, E, F, and several segments.
+Selecting the segment marked with $x_i$
+to the solution will correspond to setting $x_i$ to \textit{true},
+while selecting the segment marked with $\neg x_i$
+to setting $x_i$ to \textit{false}.
+In the following lemmas,
+we show that this construction indeed models a binary variable.
 
-We can cover points $A, B, C, D, E, F$ with 3 segments.
-One of the segments (starting at~$C$) equates to $x_i$
-and the other one (starting at~$F$) equates to $\neg x_i$.
-
-There are 2 solutions covering $A, B, C, D, E, F$
-with 3 segments -- the one choosing $x_i$ (blue segments)
-or the one choosing $\neg x_i$ (green segments).
+First, note that in the gadget
+there are exactly two sets of three segments
+that cover all points $A, B, C, D, E, F$.
+These two sets of segments are marked in
+Figure~\ref{fig:choose_x_gadget} in blue and green, respectively.
 
 \begin{lemma}
 Points $A, B, C, D, E, F$ cannot be covered using less than

@@ -205,10 +205,21 @@ we obtain an algorithm with complexity $O(k^k)$.
 \section{APX-completeness for segments pararell to axis}
 It works even with extensions for unit weights.
 
-We will show reduction from MAXSAT
+We will show reduction from MAX-(3,3)-SAT
 to Geometric Set Cover with segments pararell to axis.
 
-\subsection{Reduction contruction}
+\subsection{Definition of  MAX-(3,3)-SAT problem}
+Here we define MAXSAT problem.
+
+\subsection{Reduction construction}
+
+Let's take some instance of  MAX-(3,3)-SAT with
+variables $x_1, x_2 \ldots x_n$
+and clauses $C_1, C_2 \dots C_n$.
+
+We will create gadgets for choosing the value
+of variables (\textit{true} or \textit{false}) and checking
+if the clauses are met (any of the variables were chosen).
 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{segment_apx_sketch.jpg}
@@ -326,7 +337,7 @@ with $3n + 11m + (m-k)$ segments.
 
 \begin{lemma}
 If there exists cover with $k$ segments,
-then also there exists solution to MAXSAT.
+then also there exists solution for MAX-(3,3)-SAT.
 
 TODO: Formulate this lemma better.
 \end{lemma}

@@ -203,6 +203,7 @@ and each choice adds a segment to the constructed solution,
 we obtain an algorithm with complexity $O(k^k)$.
 
 \section{APX-completeness for segments pararell to axis}
+\label{section:segment_apx}
 It works even with extensions for unit weights.
 
 We will show reduction from MAX-(3,3)-SAT
@@ -464,10 +465,14 @@ Covering points with unit discs or squares is APX-hard
 
 Covering points with squares is W[1]-hard \cite{marx05}.
 
+If we allow $\delta$-expansion, the Set Cover with rectangles
+remains APX-complete (for~$\delta = 1/2$),
+it follows from APX-completeness for segments with $\delta$-expansion
+in Section \ref{section:segment_apx}.
 
-\section{APX-completness for rectangles with $\delta$-expansion without weights}
-It follows from APX-completeness for segments with $\delta$-expansion.
 \section{$1+\epsilon$ approximation algorithm for weighted polygons of bounded thickness $\theta$}
+It can be found in Har-Peled-Lee paper (TODO: ?).
+
 This should be written.
 
 \begin{defi}

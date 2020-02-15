@@ -274,7 +274,7 @@ and $F$.
 The remaining points ($A, B, D, E$) are not colinear,
 so we need at least two more segments to cover them.
 
-\paragraph{Robustness with $1/2$-extension.}
+\paragraph{Robustness to $1/2$-extension.}
 Take a look at Figure~\ref{fig:segment_apx}.
 The points will be included in choose gadgets (horizontal boxes)
 and clause gadgets (vertical boxes).
@@ -456,11 +456,14 @@ Have to write down exactly what configuration is banned.
 
 
 \chapter{Geometric Set Cover with polygons}
-\section{Introduction}
-The problem is APX-complete and W[1]-complete,
-so we introduce $\delta$-expansions.
+\section{State of the art}
 
-\section{FPT -- ?? I don't know :(}
+
+Covering points with unit discs or squares is APX-hard
+\cite{marx07}.
+
+Covering points with squares is W[1]-hard \cite{marx05}.
+
 
 \section{APX-completness for rectangles with $\delta$-expansion without weights}
 It follows from APX-completeness for segments with $\delta$-expansion.
@@ -610,47 +613,16 @@ so it also wouldn't be extended by more than $\delta$.
 \chapter{Conclusions}
 
 \begin{thebibliography}{99}
-\addcontentsline{toc}{chapter}{Bibliografia}
+\addcontentsline{toc}{chapter}{Bibliography}
 
-\bibitem[Bea65]{beaman} Juliusz Beaman, \textit{Morbidity of the Jolly
-    function}, Mathematica Absurdica, 117 (1965) 338--9.
+\bibitem[Marx05]{marx05} D. Marx, \textit{Efficient Approximation
+	Schemes for Geometric Problems?},
+	In \textit{Brodal G.S., Leonardi S. (eds) Algorithms -- ESA 2005. ESA 2005.}
+	Lecture Notes in Computer Science, vol 3669. Springer, Berlin, Heidelberg
 
-\bibitem[Blar16]{eb1} Elizjusz Blarbarucki, \textit{O pewnych
-    aspektach pewnych aspektów}, Astrolog Polski, Zeszyt 16, Warszawa
-  1916.
-
-\bibitem[Fif00]{ffgg} Filigran Fifak, Gizbert Gryzogrzechotalski,
-  \textit{O blabalii fetorycznej}, Materiały Konferencji Euroblabal
-  2000.
-
-\bibitem[Fif01]{ff-sr} Filigran Fifak, \textit{O fetorach
-    $\sigma$-$\rho$}, Acta Fetorica, 2001.
-
-\bibitem[Głomb04]{grglo} Gryzybór Głombaski, \textit{Parazytonikacja
-    blabiczna fetorów --- nowa teoria wszystkiego}, Warszawa 1904.
-
-\bibitem[Hopp96]{hopp} Claude Hopper, \textit{On some $\Pi$-hedral
-    surfaces in quasi-quasi space}, Omnius University Press, 1996.
-
-\bibitem[Leuk00]{leuk} Lechoslav Leukocyt, \textit{Oval mappings ab ovo},
-  Materiały Białostockiej Konferencji Hodowców Drobiu, 2000.
-
-\bibitem[Rozk93]{JR} Josip A.~Rozkosza, \textit{O pewnych własnościach
-    pewnych funkcji}, Północnopomorski Dziennik Matematyczny 63491
-  (1993).
-
-\bibitem[Spy59]{spyrpt} Mrowclaw Spyrpt, \textit{A matrix is a matrix
-    is a matrix}, Mat. Zburp., 91 (1959) 28--35.
-
-\bibitem[Sri64]{srinis} Rajagopalachari Sriniswamiramanathan,
-  \textit{Some expansions on the Flausgloten Theorem on locally
-    congested lutches}, J. Math.  Soc., North Bombay, 13 (1964) 72--6.
-
-\bibitem[Whi25]{russell} Alfred N. Whitehead, Bertrand Russell,
-  \textit{Principia Mathematica}, Cambridge University Press, 1925.
-
-\bibitem[Zen69]{heu} Zenon Zenon, \textit{Użyteczne heurystyki
-    w~blabalizie}, Młody Technik, nr~11, 1969.
+\bibitem[Marx07]{marx07} D. Marx, \textit{On the optimality of
+	planar and geometric approximation schemes},
+	In \textit{FOCS 2007}, pages 338--348. IEEE Computer Society, 2007
 
 \end{thebibliography}
 

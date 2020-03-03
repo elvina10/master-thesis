@@ -463,6 +463,11 @@ Covering points with unit discs or squares is APX-hard
 \cite{marx07}.
 
 Covering points with squares is W[1]-hard \cite{marx05}.
+It can be proven that assuming SETH,
+there is no $f(k)\cdot(|\points|+|\sets|)^{k-\epsilon}$ time algorithm
+for any computable function $f$ and $\epsilon >0$ that decides if there
+are $k$ polygons in $\sets$ that together cover $\points$,
+\textit{Theorem 1.9} in \cite{voronoi}.
 
 If we allow $\delta$-expansion, the Set Cover with rectangles
 remains APX-complete (for~$\delta = 1/2$),
@@ -478,6 +483,11 @@ in Section \ref{section:segment_apx}.
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliography}
+
+\bibitem[Marx15]{voronoi} D. Marx, Michal Pilipczuk,
+	\textit{Optimal parameterized algorithms for planar facility
+	location problems using Voronoi diagrams},
+	In \textit{CoRR}, abs/1504.05476, 2015
 
 \bibitem[Marx05]{marx05} D. Marx, \textit{Efficient Approximation
 	Schemes for Geometric Problems?},

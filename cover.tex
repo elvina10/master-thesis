@@ -459,20 +459,25 @@ Have to write down exactly what configuration is banned.
 \chapter{Geometric Set Cover with polygons}
 \section{State of the art}
 
-Covering points with unit discs or squares is APX-hard
-\cite{marx07}.
+Covering points with weighted discs admits PTAS \cite{li}
+and with fat polygons with $\delta$-extensions with unit weights
+admits EPTAS \cite{harpeled12}.
+
+Although with thin objects, even if we allow $\delta$-expansion,
+the Set Cover with rectangles
+is APX-complete (for~$\delta = 1/2$),
+it follows from APX-completeness for segments with $\delta$-expansion
+in Section \ref{section:segment_apx}.
 
 Covering points with squares is W[1]-hard \cite{marx05}.
-It can be proven that assuming SETH,
+It can be proven that assuming $SETH$,
 there is no $f(k)\cdot(|\points|+|\sets|)^{k-\epsilon}$ time algorithm
 for any computable function $f$ and $\epsilon >0$ that decides if there
 are $k$ polygons in $\sets$ that together cover $\points$,
 \textit{Theorem 1.9} in \cite{voronoi}.
 
-If we allow $\delta$-expansion, the Set Cover with rectangles
-remains APX-complete (for~$\delta = 1/2$),
-it follows from APX-completeness for segments with $\delta$-expansion
-in Section \ref{section:segment_apx}.
+
+
 
 
 
@@ -483,6 +488,15 @@ in Section \ref{section:segment_apx}.
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliography}
+
+\bibitem[HarPeled12]{harpeled12} S. Har-Peled, M. Lee,,
+	\textit{Weighted geometric set cover problems revisited.}
+	In: \textit{JoCG 3(1)}, 65–85, 2012
+
+\bibitem[Li]{li} J. Li, Y. Jin, 
+	\textit{A PTAS for the Weighted Unit Disk Cover Problem},
+	In: \textit{Halldórsson M., Iwama K., Kobayashi N., Speckmann B. (eds) Automata, Languages, and Programming. ICALP 2015. Lecture Notes in Computer Science},
+	vol 9134, 2015
 
 \bibitem[Marx15]{voronoi} D. Marx, Michal Pilipczuk,
 	\textit{Optimal parameterized algorithms for planar facility

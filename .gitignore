@@ -1,5 +1,5 @@
-cover.aux
-cover.bbl
-cover.blg
-cover.log
-cover.toc
+*.aux
+*.bbl
+*.blg
+*.log
+*.toc

@@ -1,0 +1,25 @@
+\begin{thebibliography}{}
+
+\bibitem[Har-Peled and Lee, 2009]{harpeled12}
+Har-Peled, S. and Lee, M. (2009).
+\newblock Weighted geometric set cover problems revisited.
+\newblock {\em Journal of Computational Geometry}, 3.
+
+\bibitem[Li and Jin, 2015]{li}
+Li, J. and Jin, Y. (2015).
+\newblock A {PTAS} for the weighted unit disk cover problem.
+\newblock {\em CoRR}, abs/1502.04918.
+
+\bibitem[Marx, 2005]{marx05}
+Marx, D. (2005).
+\newblock Efficient approximation schemes for geometric problems?
+\newblock In Brodal, G.~S. and Leonardi, S., editors, {\em Algorithms -- ESA
+  2005}, pages 448--459, Berlin, Heidelberg. Springer Berlin Heidelberg.
+
+\bibitem[Marx and Pilipczuk, 2015]{voronoi}
+Marx, D. and Pilipczuk, M. (2015).
+\newblock Optimal parameterized algorithms for planar facility location
+  problems using voronoi diagrams.
+\newblock {\em CoRR}, abs/1504.05476.
+
+\end{thebibliography}

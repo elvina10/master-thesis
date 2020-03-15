@@ -21,12 +21,14 @@ The same algorithm as before but in complexity $\mathcal{O}(d^k)$.
 
 \subsection{Segments in arbitrary direction}
 \begin{tw}{
-	\textbf{(FPT for weighted segment cover)}.
+	\textbf{(FPT for segment cover)}.
 	There exists an algorithm that given a family $\sets$ of
-	$n$ segments (in any direction)
-	and a set of points $\points$,
-	outputs a subfamily $\sol \subseteq \sets$
-	such that $\sol$ covers all points in $\points$.
+	$n$ segments (in any direction),
+	a set of $m$ points $\points$
+	and a parameter $k$,
+	runs in time $f(k) \cdot (nm)^c$ for some computable function f and constant c,
+	and outputs a subfamily $\sol \subseteq \sets$
+	such that $|\sol| \le k$ and $\sol$ covers all points in $\points$.
 }\end{tw}
 \paragraph{Proof.}
 We will show such algorithm in FPT.

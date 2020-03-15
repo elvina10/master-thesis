@@ -21,9 +21,12 @@ The same algorithm as before but in complexity $\mathcal{O}(d^k)$.
 
 \subsection{Segments in arbitrary direction}
 \begin{tw}{
-	There exists an FPT algorithm
-	deciding whether a set of points $\points$
-	can be covered with at most $k$ segments from $\sets$.
+	\textbf{(FPT for weighted segment cover)}.
+	There exists an algorithm that given a family $\sets$ of
+	$n$ segments (in any direction)
+	and a set of points $\points$,
+	outputs a subfamily $\sol \subseteq \sets$
+	such that $\sol$ covers all points in $\points$.
 }\end{tw}
 \paragraph{Proof.}
 We will show such algorithm in FPT.

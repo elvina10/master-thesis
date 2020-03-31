@@ -1,5 +1,60 @@
 \section{Weighted segments}
-\subsection{FPT for weighted segments with $\delta$-extensios}
+\subsection{FPT for weighted segments with $\delta$-extensions}
+\begin{tw}{
+	\textbf{(FPT for weighted segment cover with $\delta$-extensions)}.
+	There exists an algorithm that given a family $\sets$ of
+	$n$ weighted segments (in any direction),
+	a set of $m$ points $\points$
+	and a parameter $k$,
+	runs in time $f(k) \cdot (nm)^c$ for some computable function $f$ and constant $c$,
+	and outputs a subfamily $\sol \subseteq \sets$
+	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$.
+}\end{tw}
+
+To solve this problem we will introduce kernel for slightly different
+problem: Weighted segment cover of points and segments.
+In shortcut: WSCPS.
+
+\begin{lemma}
+	\textbf{(Algorithm for kernel of WSCPS)}.
+	There exists an algorithm that given a family $\sets$ of
+	$n$ weighted segments (in any direction),
+	a set of $m_1$ points $\points_1$ and $m_2$ segments $\points_2$
+	and a parameter $k$,
+	runs in time $f(k) \cdot g(m_1, m_2) \cdot n^c$ for some computable functions $f, g$ and constant $c$,
+	and outputs a subfamily $sol \subseteq \sets$
+	such that $|\sol| \le k$ and $\sol$ covers all points in $\points_1$ and all segments in $\points_2$. 
+\end{lemma}
+\paragraph{Proof}
+Only sketch for now.
+
+We can compute dynamic programming $dp(A, B, z)$ --
+the best cost to cover at least whole segment $A, B$
+using at most $z$ segments.
+$A, B$ are all interesting points -- ends of any segment given on the input or points given on the input.
+We can compute it in polynomial time.
+
+Then we can create a new double weighted set (original weight,
+number of used segments from $\sets$) -- $\sets_2$
+that has only segments which never cover partially any segment from $\points_2$
+(covers the whole segment or doesn't cover at all).
+In such $\sets_2$ we can find solution $\sol$ where any 2 segments
+have empty intersection (don't cover each other and don't meet at the ends).
+Because if we had such solution, we can merge these two segments and
+such segment there's also in $\sets_2$.
+
+In that case we can find kernel of $\sets_2$ of size $k\cdot(m_1 + 2m_2)^2$,
+because we only need to take the best weight covering some subset of $\points_1 \cup \points_2$.
+
+\begin{lemma}
+	\textbf{Kernel in WSCPS}.
+	For segment cover, there is a kernel of size $f(k)$.
+\end{lemma}
+
+\begin{lemma}
+	If the biggest $(1/delta)^{k+1}$ spaces between points are filled,
+	the whole segment is filled after $\delta$-extensions of segments.
+\end{lemma}
 
 \subsection{W[1]-completeness for weighted segments in 3 directions}
 

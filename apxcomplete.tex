@@ -121,6 +121,7 @@ least 4 segments to cover all points $A, B, C, D, E, F$
 (even with $1/2$-extensions).
 \end{lemma}
 
+
 \paragraph{Proof.}
 Choosing both segments $x_i$ and $\neg x_i$
 we only cover points $C$
@@ -129,6 +130,18 @@ and $F$.
 
 The remaining points ($A, B, D, E$) are not colinear,
 so we need at least two more segments to cover them.
+
+
+\begin{lemma}
+\label{choose_clause_solution}
+There exist a solution such that takes a segment $x_i$ ($\neg x_i$)
+and 2 other segments, and covers all points $A, B, C, D, E, F$
+\end{lemma}
+
+\paragraph{Proof.}
+We can choose $x_i$, $AD$ and $BF$.
+
+Alternatively we can choose $\neg x_i$, $AC$, $DE$.
 
 \paragraph{Robustness to $1/2$-extension.}
 Take a look at Figure~\ref{fig:segment_apx}.
@@ -173,10 +186,15 @@ only by using $AD$.
 \end{lemma}
 
 \begin{lemma}
-Points $A, B, C, D, E, F, G$ can be covered with 
-3 or 4 segments, depending if at least one of the segments
-$x, y, z$ was previously chosen.
+Points $A, B, C, D, E, F$ can be covered with 
+3 segments and cannot be covered in less.
 \end{lemma}
+
+\paragraph{Proof.}
+There are 3 points that aren't pairwise connected,
+so they have to be covered with 3 separate segments.
+
+Also there exists solution with 3 segments, ie. $AD$, $BE$, $CF$.
 
 \subsubsection{Or gadget}
 \begin{lemma}
@@ -198,13 +216,6 @@ clauses are satisfied, we can cover all the points
 with $3n + 11m + (m-k)$ segments.
 \end{lemma}
 
-\begin{lemma}
-If there exists cover with $k$ segments,
-then also there exists solution for MAX-(3,3)-SAT.
-
-TODO: Formulate this lemma better.
-\end{lemma}
-
 
 \subsection{Proofs of construction Lemma \ref{apxconstruction}}
 \begin{lemma}
@@ -214,6 +225,15 @@ TODO: Formulate this lemma better.
 	in the aforementioned manner, 
 	there exists a solution of weight $17n - k$.
 \end{lemma}
+\paragraph{Proof.}
+Let's name the assignments of the variables in MAX-(3,3)-SAT
+instance $y_1$,~$y_2$~$\ldots$~$y_n$,
+Let's cover every clause with solution described in Lemma~\ref{choose_clause_solution},
+in the $i$-th segment choosing the segment responsible for value $y_i$.
+
+
+
+This solution uses $3n$ + .
 
 \begin{lemma}
 	\label{construction_completness}
@@ -222,6 +242,8 @@ TODO: Formulate this lemma better.
 	in the aforementioned manner, 
 	there exists a solution to MAX-(3,3)-SAT of size at least $17n - w$.
 \end{lemma}
+\paragraph{Proof.}
+TODO
 
 \subsubsection{Proof of Lemma \ref{apxconstruction}}
 Given an instance of MAX-(3,3)-SAT of size $n$

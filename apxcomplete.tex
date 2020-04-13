@@ -1,20 +1,23 @@
 \section{APX-completeness for segments parallel to axis}
 \label{section:segment_apx}
 
+\subsection{Definition of  MAX-(3,3)-SAT problem}
+Here we define MAXSAT problem.
+
 \begin{tw}{
 	\label{hastadtheorem}
 	\textbf{\cite{hastad}}
 	Assume NP $\not\subseteq$ $DTIME(2^{O(\log n \log \log n)})$.
 	Then, there exists such constant $c > 0$, such for
-	$$\epsilon = \frac{c \log \log \log n}{\log \log n}$$ 
+	$$\epsilon' = \frac{c \log \log \log n}{\log \log n}$$ 
 	satifiable 3-SAT formulas cannot be distinguished from
-	3-SAT formulas where only $7/8+\epsilon$ of~the clauses
+	3-SAT formulas where only $7/8+\epsilon'$ of~the clauses
 	can be satisfied in polynomial time.
 }\end{tw}
 
 \begin{tw}{
 	\label{apxconstruction}
-	Given an instance of MAX-3-SAT 
+	Given an instance of  MAX-(3,3)-SAT 
 	with $n$ variables and optimal result $k$,
 	we can construct an instance of axis-parallel segments in 2D,
 	which optimal result (even with 1/2-extension) is exactly $17n - k$.
@@ -31,16 +34,28 @@
 
 \paragraph{Proof.}
 Take any $\epsilon > 0$.
-Combining \ref{hastadtheorem} and \ref{apxconstruction}.
+Take such $n$, that $\epsilon'$ from \ref{hastadtheorem}
+is not greater than $max(\epsilon, 1/2)$.
 
+Let's assume that there exists an $(1-\epsilon)$-approximation scheme
+for unweighted geometric set cover with axis-pararell segments in 2D.
+We will construct an algorithm distinguishing instances of MAX-(3,3)-SAT
+in \ref{hastadtheorem}.
+Take two instances to be distinguished and using \ref{apxconstruction}
+let's construct two instances of geometric set cover,
+name the one constructed from satisfiable 3-SAT $I_1$
+and the unsatisfiable 3-SAT as $I_0$.
 
-It works even with extensions for unit weights.
+Use $(1-\epsilon)$-approximation scheme for instances of geometric
+set cover, let's name the result of this approximation
+for an instance of problem $I$ as $approx(I)$.
 
-We will show reduction from MAX-(3,3)-SAT
-to Geometric Set Cover with segments pararell to axis.
+$$approx(I_1) \ge (1-\epsilon)17n > 16\frac{1}{8}n - \epsilon' \ge approx(I_2)$$ 
 
-\subsection{Definition of  MAX-(3,3)-SAT problem}
-Here we define MAXSAT problem.
+So we can distinguish these instances, since the satifiable instance
+will always yield greater result in approximation scheme.
+
+Therefore such approximation scheme cannot exist.
 
 \subsection{Reduction construction}
 

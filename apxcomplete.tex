@@ -68,6 +68,7 @@ will always yield lesser result in approximation scheme.
 Therefore such approximation scheme cannot exist.
 
 \subsection{Reduction construction}
+\label{reduction_construction}
 
 Let's take some instance of  MAX-(3,3)-SAT with
 variables $x_1, x_2 \ldots x_n$
@@ -204,3 +205,33 @@ then also there exists solution for MAX-(3,3)-SAT.
 
 TODO: Formulate this lemma better.
 \end{lemma}
+
+
+\subsection{Proofs of construction Lemma \ref{apxconstruction}}
+\begin{lemma}
+	\label{construction_correctness}
+	Given an instance of MAX-(3,3)-SAT of size $n$ with optimum solution $k$.
+	For instance of geometric cover, constructed
+	in the aforementioned manner, 
+	there exists a solution of weight $17n - k$.
+\end{lemma}
+
+\begin{lemma}
+	\label{construction_completness}
+	Given an instance of MAX-(3,3)-SAT of size $n$,
+	and solution of size $w$ to the instance of geometric cover, constructed
+	in the aforementioned manner, 
+	there exists a solution to MAX-(3,3)-SAT of size at least $17n - w$.
+\end{lemma}
+
+\subsubsection{Proof of Lemma \ref{apxconstruction}}
+Given an instance of MAX-(3,3)-SAT of size $n$
+with optimal result $k$.
+Let's construct an instance of geometric cover,
+constructed in aforementioned manner.
+
+Given the Lemma~\ref{construction_correctness}, we know
+the optimal solution for the constructed geometric cover is
+at most $17n - k$ and since the $k$ is optiomal solution
+for MAX-(3,3)-SAT, then according to Lemma~\ref{construction_completness}
+there doesn't exist a solution with cost lesser than $17n - k$.

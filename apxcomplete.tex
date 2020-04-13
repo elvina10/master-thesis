@@ -2,19 +2,12 @@
 \label{section:segment_apx}
 
 \begin{tw}{
-	\textbf{(axis-parallel segment set cover with 1/2-extension is APX-hard)}.
-	There doesn't exist an algorithm that given a family $\sets$ of
-	$n$ segments in 2D parallel to one of the axis,
-	a set of $m$ points $\points$
-	and a parameter $\epsilon > 0$,
-	runs in time $2^{o(nm)}$,
-	and outputs a subfamily $\sol \subseteq \sets$
-	such that $|\sol| \le k$ and $\sol$ covers all points in $\points$.
-	
-	
-	Given an instance of unweighted geometric set cover
-	with axis-parallel segments in 2D and $\epsilon>0$, there doesn't
-	exist $(1+\epsilon)$-approximation scheme unless $ETH$ fails.
+	\textbf{(axis-parallel segment set cover with 1/2-extension is APX-hard)}.	
+	For every $\epsilon > 0$,
+	there doesn't exist an $(1-\epsilon)$-approximation scheme
+	for unweighted geometric set cover
+	with axis-parallel segments in 2D (even with 1/2-extension)
+	(problem is APX-hard).
 }\end{tw}
 
 It works even with extensions for unit weights.

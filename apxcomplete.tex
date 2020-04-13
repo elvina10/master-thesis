@@ -2,6 +2,25 @@
 \label{section:segment_apx}
 
 \begin{tw}{
+	\label{hastadtheorem}
+	\textbf{\cite{hastad}}
+	Assume NP $\not\subseteq$ $DTIME(2^{O(\log n \log \log n)})$.
+	Then, there exists such constant $c > 0$, such for
+	$$\epsilon = \frac{c \log \log \log n}{\log \log n}$$ 
+	satifiable 3-SAT formulas cannot be distinguished from
+	3-SAT formulas where only $7/8+\epsilon$ of~the clauses
+	can be satisfied in polynomial time.
+}\end{tw}
+
+\begin{tw}{
+	\label{apxconstruction}
+	Given an instance of MAX-3-SAT 
+	with $n$ variables and optimal result $k$,
+	we can construct an instance of axis-parallel segments in 2D,
+	which optimal result (even with 1/2-extension) is exactly $17n - k$.
+}\end{tw}
+
+\begin{tw}{
 	\textbf{(axis-parallel segment set cover with 1/2-extension is APX-hard)}.	
 	For every $\epsilon > 0$,
 	there doesn't exist an $(1-\epsilon)$-approximation scheme
@@ -9,6 +28,11 @@
 	with axis-parallel segments in 2D (even with 1/2-extension)
 	(problem is APX-hard).
 }\end{tw}
+
+\paragraph{Proof.}
+Take any $\epsilon > 0$.
+Combining \ref{hastadtheorem} and \ref{apxconstruction}.
+
 
 It works even with extensions for unit weights.
 

@@ -33,9 +33,9 @@ Here we define MAXSAT problem.
 }\end{tw}
 
 \paragraph{Proof.}
-Take any $\epsilon > 0$.
+Take any $1/(18 \cdot 8) > \epsilon > 0$.
 Take such $n$, that $\epsilon'$ from Theorem \ref{hastadtheorem}
-is not greater than $max(\epsilon, 1/2)$.
+is not greater than $\epsilon$.
 
 Let's assume that there exists an $(1-\epsilon)$-approximation scheme
 for unweighted geometric set cover with axis-pararell segments in 2D.
@@ -51,10 +51,19 @@ Use $(1-\epsilon)$-approximation scheme for instances of geometric
 set cover, let's name the result of this approximation
 for an instance of problem $I$ as $approx(I)$.
 
-$$approx(I_1) \ge (1-\epsilon)17n > 16\frac{1}{8}n - \epsilon' \ge approx(I_2)$$ 
+$$16\frac{1}{8}n\epsilon + \epsilon' - \epsilon\epsilon' 
+	< 17\frac{1}{8}n\epsilon - \epsilon\epsilon' 
+	< 17\frac{1}{8}n\epsilon < 1/8n$$
+	
+$$(1-\epsilon)(16\frac{1}{8}n - \epsilon') =
+	16\frac{1}{8}n - 16\frac{1}{8}n\epsilon - \epsilon' + \epsilon\epsilon'
+	> 16n$$
+
+$$approx(I_2) \ge (1-\epsilon)OPT(I_2) = (1-\epsilon)(16\frac{1}{8}n - \epsilon')
+	> 16n = OPT(I_1)\ge approx(I_1)$$ 
 
 So we can distinguish these instances, since the satifiable instance
-will always yield greater result in approximation scheme.
+will always yield lesser result in approximation scheme.
 
 Therefore such approximation scheme cannot exist.
 

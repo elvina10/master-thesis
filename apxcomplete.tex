@@ -21,7 +21,7 @@ Here we define MAXSAT problem.
 	Given an instance of  MAX-(3,3)-SAT 
 	with $n$ variables and optimal result $k$,
 	we can construct an instance of axis-parallel segments in 2D,
-	which optimal result (even with 1/2-extension) is exactly $17n - k$.
+	which optimal result (even with 1/2-extension) is exactly $15n - k$.
 }\end{lemma}
 
 \begin{tw}{
@@ -34,7 +34,7 @@ Here we define MAXSAT problem.
 }\end{tw}
 
 \paragraph{Proof.}
-Take any $0 < \epsilon < 1/(17 \cdot 8)$.
+Take any $0 < \epsilon < 1/(15 \cdot 8)$.
 Choose $n$ sufficiently large, so that $\epsilon'(n)$ from
 Theorem \ref{hastadtheorem}
 is not greater than $\epsilon$.
@@ -60,17 +60,17 @@ $$OPT(S_2) \le (\frac{7}{8} + \epsilon'(n))n$$
 
 From Lemmma \ref{apxconstruction} we have:
 
-$$OPT(I_1) = 17n$$
-$$OPT(I_2) = 18n - (\frac{7}{8} + \epsilon'(n))n$$
+$$OPT(I_1) = 14n$$
+$$OPT(I_2) = 15n - (\frac{7}{8} + \epsilon'(n))n$$
 
 Let's prove that $approx(I_2) > approx(I_1)$:
 
-$$approx(I_2) \ge OPT(I_2) = 18n - (\frac{7}{8} + \epsilon'(n))n
-	= 17n + (\frac{1}{8} - \epsilon'(n))n
-	> 17n + (\frac{1}{8} - \epsilon)n > $$
-$$	> 17n + (17\epsilon - \epsilon)n
-	= 17n + (16\epsilon)n
-	= 17n(1+\epsilon)
+$$approx(I_2) \ge OPT(I_2) = 15n - (\frac{7}{8} + \epsilon'(n))n
+	= 14n + (\frac{1}{8} - \epsilon'(n))n
+	> 14n + (\frac{1}{8} - \epsilon)n > $$
+$$	> 14n + (15\epsilon - \epsilon)n
+	= 14n + (14\epsilon)n
+	= 14n(1+\epsilon)
 	= OPT(I_1)(1+\epsilon) \ge approx(I_1)$$ 
 
 
@@ -121,6 +121,7 @@ These two sets of segments are marked in
 Figure~\ref{fig:choose_x_gadget} in blue and green, respectively.
 
 \begin{lemma}
+\label{choose_variables_no_less}
 Points $A, B, C, D, E, F$ cannot be covered using less than
 3 segments (even with $1/2$-extensions).
 \end{lemma}
@@ -131,6 +132,7 @@ All other points ($D, E, F$) are not colinear,
 so we need at least 2 other segments to cover them.
 
 \begin{lemma}
+\label{choose_variables_both}
 If we choose both segments $x_i$ and $\neg x_i$, we need to use at
 least 4 segments to cover all points $A, B, C, D, E, F$
 (even with $1/2$-extensions).
@@ -201,8 +203,9 @@ only by using $AD$.
 \end{lemma}
 
 \begin{lemma}
+\label{cover_or_gadget_no_less}
 Points $A, B, C, D, E, F$ can be covered with 
-3 segments and cannot be covered in less.
+3 segments and cannot be covered in less even with $1/2$-extension.
 \end{lemma}
 
 \paragraph{Proof.}
@@ -213,8 +216,10 @@ Also there exists solution with 3 segments, ie. $AD$, $BE$, $CF$.
 
 \subsubsection{Or gadget}
 \begin{lemma}
+\label{cover_clauses_segments_no_less}
 Points $A, B, C, D, E, F, G, H, I, J$ can be covered using
-at least 4 segments even with $1/2$-extension.
+at least 4 segments and cannot be covered with less
+even with $1/2$-extension.
 \end{lemma}
 
 \begin{lemma}
@@ -225,13 +230,18 @@ only if at least one of the segments $x$ or $y$ is chosen.
 \end{lemma}
 
 \begin{lemma}
-\label{cover_clauses_solution}
-If there exists setting of values of variables that exactly $k$
-clauses are satisfied, we can cover all the points
-with $3n + 11m + (m-k)$ segments.
+\label{cover_clauses_segments_no_less}
+The whole caluse gadget can be covered with 11 segments and
+cannot be covered with less
+even with $1/2$-extension.
 \end{lemma}
-\paragraph{Proof.}
-TODO (should be relatively easy)
+
+\begin{lemma}
+\label{cover_clauses_solution}
+The whole caluse gadget can be covered with 11 segments and
+only when one of the variables $x, y$ or $z$ is chosen,
+otherwise it can be covered with 12 segments.
+\end{lemma}
 
 \subsection{Proofs of construction Lemma \ref{apxconstruction}}
 \begin{lemma}
@@ -240,7 +250,7 @@ TODO (should be relatively easy)
 	with optimal solution $k$.
 	For instance of geometric cover, constructed
 	in the aforementioned manner, 
-	there exists a solution of weight $18n - k$.
+	there exists a solution of weight $15n - k$.
 \end{lemma}
 \paragraph{Proof.}
 Let's name the assignments of the variables in MAX-(3,3)-SAT instance,
@@ -253,17 +263,54 @@ in the $i$-th segment choosing the segment responsible for value $y_i$.
 Cover every clause gadget with solution described in
 Lemma~\ref{cover_clauses_solution}.
 
-This solution uses $3n + (3n + 11m + (m-k)) = 18n - k$ segments.
+This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 
 \begin{lemma}
 	\label{construction_completness}
 	Given an instance of MAX-(3,3)-SAT of size $n$,
-	and solution of size $w$ to the instance of geometric cover, constructed
-	in the aforementioned manner, 
-	there exists a solution to MAX-(3,3)-SAT of size at least $18n - w$.
+	and solution of size $w$ to the instance of geometric cover,
+	constructed in the aforementioned manner, 
+	there exists a solution to MAX-(3,3)-SAT of size at least $15n - w$.
 \end{lemma}
 \paragraph{Proof.}
-TODO
+Among the segments responsible for choosing the value of variable $x_i$,
+we need to use at least 3 segments (Lemma~\ref{choose_variables_no_less}).
+If we have chosen segments responsible for both $x_i$ and $\neg x_i$,
+then we have used at least 4 segments (Lemma~\ref{choose_variables_both}).
+
+If we chose at most one of the variables $x_i$ and $\neg x_i$,
+choose that value to the solution. If we chose both values,
+choose the value that appears in most (at least 2) clauses.
+If we have chosen none of the values, choose any value.
+
+To cover these segments we have used at least $3n + a$ segments,
+where $a$ is the number of variables that we have chosen both
+values for.
+
+Among the segments responsible for the clause $C_i = x \lor y \lor z$
+we need to use at least 11 segments
+(Lemma~\ref{cover_clauses_segments_no_less})
+and if we can cover it with 11 segments, then we have 
+earlier chosen
+one of the variables $x$, $y$ or $z$.
+
+So we have 11 segments for satisfied clauses and 12 segments
+for unsatisfied clauses, so we cover it with 
+at least $11n + b$ segments, where $b$ is number of clauses
+where none of the variables $x, y, z$ were chosen.
+If the segment responsible for $x$ was taken,
+but this variable is set to have this value,
+then we have chosen both $x$ and $\neg x$ for this variable,
+so "we cheated" and this maybe clause is not met,
+but we assigned the value for this $x_i$ that meets
+the most clauses, so for each of this variables,
+at most one of the clauses isn't met.
+
+So there are at most $a+b$ unsatsfied clauses in this instance,
+so we have shown the resultwith result at least $n-(a+b)$.
+
+$$w > 3n + a + 11n + b = 14n + a + b$$
+$$15n - w < n - (a+b)$$
 
 \subsubsection{Proof of Lemma \ref{apxconstruction}}
 Given an instance of MAX-(3,3)-SAT of size $n$

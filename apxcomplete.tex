@@ -60,17 +60,17 @@ $$OPT(S_2) \le (\frac{7}{8} + \epsilon'(n))n$$
 
 From Lemmma \ref{apxconstruction} we have:
 
-$$OPT(I_1) = 16n$$
-$$OPT(I_2) = 17n - (\frac{7}{8} + \epsilon'(n))n$$
+$$OPT(I_1) = 17n$$
+$$OPT(I_2) = 18n - (\frac{7}{8} + \epsilon'(n))n$$
 
 Let's prove that $approx(I_2) > approx(I_1)$:
 
-$$approx(I_2) \ge OPT(I_2) = 17n - (\frac{7}{8} + \epsilon'(n))n
-	= 16n + (\frac{1}{8} - \epsilon'(n))n
-	> 16n + (\frac{1}{8} - \epsilon)n > $$
-$$	> 16n + (17\epsilon - \epsilon)n
-	= 16n + (16\epsilon)n
-	= 16n(1+\epsilon)
+$$approx(I_2) \ge OPT(I_2) = 18n - (\frac{7}{8} + \epsilon'(n))n
+	= 17n + (\frac{1}{8} - \epsilon'(n))n
+	> 17n + (\frac{1}{8} - \epsilon)n > $$
+$$	> 17n + (17\epsilon - \epsilon)n
+	= 17n + (16\epsilon)n
+	= 17n(1+\epsilon)
 	= OPT(I_1)(1+\epsilon) \ge approx(I_1)$$ 
 
 
@@ -148,7 +148,7 @@ so we need at least two more segments to cover them.
 
 
 \begin{lemma}
-\label{choose_clause_solution}
+\label{choose_variables_solution}
 There exist a solution such that takes a segment $x_i$ ($\neg x_i$)
 and 2 other segments, and covers all points $A, B, C, D, E, F$
 \end{lemma}
@@ -224,38 +224,43 @@ even with $1/2$-extension
 only if at least one of the segments $x$ or $y$ is chosen.
 \end{lemma}
 
-\subsection{Proof that construction is sound}
 \begin{lemma}
+\label{cover_clauses_solution}
 If there exists setting of values of variables that exactly $k$
 clauses are satisfied, we can cover all the points
 with $3n + 11m + (m-k)$ segments.
 \end{lemma}
-
+\paragraph{Proof.}
+TODO (should be relatively easy)
 
 \subsection{Proofs of construction Lemma \ref{apxconstruction}}
 \begin{lemma}
 	\label{construction_correctness}
-	Given an instance of MAX-(3,3)-SAT of size $n$ with optimum solution $k$.
+	Given an instance of MAX-(3,3)-SAT of size $n$
+	with optimal solution $k$.
 	For instance of geometric cover, constructed
 	in the aforementioned manner, 
-	there exists a solution of weight $17n - k$.
+	there exists a solution of weight $18n - k$.
 \end{lemma}
 \paragraph{Proof.}
-Let's name the assignments of the variables in MAX-(3,3)-SAT
-instance $y_1$,~$y_2$~$\ldots$~$y_n$,
-Let's cover every clause with solution described in Lemma~\ref{choose_clause_solution},
+Let's name the assignments of the variables in MAX-(3,3)-SAT instance,
+that achieve the optimal solution,
+$y_1$,~$y_2$~$\ldots$~$y_n$,
+Let's cover every clause with solution described in
+Lemma~\ref{choose_variables_solution},
 in the $i$-th segment choosing the segment responsible for value $y_i$.
 
+Cover every clause gadget with solution described in
+Lemma~\ref{cover_clauses_solution}.
 
-
-This solution uses $3n$ + .
+This solution uses $3n + (3n + 11m + (m-k)) = 18n - k$ segments.
 
 \begin{lemma}
 	\label{construction_completness}
 	Given an instance of MAX-(3,3)-SAT of size $n$,
 	and solution of size $w$ to the instance of geometric cover, constructed
 	in the aforementioned manner, 
-	there exists a solution to MAX-(3,3)-SAT of size at least $17n - w$.
+	there exists a solution to MAX-(3,3)-SAT of size at least $18n - w$.
 \end{lemma}
 \paragraph{Proof.}
 TODO

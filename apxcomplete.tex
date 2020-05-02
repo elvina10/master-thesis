@@ -41,32 +41,45 @@ is not greater than $\epsilon$.
 
 Let's assume that there exists an $(1+\epsilon)$-approximation scheme
 for unweighted geometric set cover with axis-pararell segments in 2D.
-We will construct an algorithm distinguishing instances of MAX-(3,3)-SAT
+We will construct an algorithm distinguishing instances of
+MAX-(3,3)-SAT
 in Theorem \ref{hastadtheorem}.
 Take two instances to be distinguished and using
 Lemma \ref{apxconstruction}
-let's construct two instances of geometric set cover,
-name the one constructed from satisfiable 3-SAT $I_1$
-and the unsatisfiable 3-SAT as $I_2$.
+and name them satisfiable -- $S_1$ and unsatisfiable -- $S_2$.
+Let's construct two instances of geometric set cover
+and name them respectively $I_1$ and $I_2$.
 
 Use $(1+\epsilon)$-approximation scheme for instances of geometric
 set cover, let's name the result of this approximation
 for an instance of problem $I$ as $approx(I)$.
 
-$$\frac{1}{8}n - \epsilon' 
-	> \frac{1}{8}n - \epsilon
-	> 17n\epsilon - \epsilon
-	> (16n+1)\epsilon - \epsilon = 16n\epsilon$$
-	
-$$16\frac{1}{8}n - \epsilon' > 16n + 16n\epsilon = 16n(1+\epsilon)$$
+From defintion of $S_1$ and $S_2$ we have:
+$$OPT(S_1) = n$$
+$$OPT(S_2) \le (\frac{7}{8} + \epsilon'(n))n$$
 
-$$approx(I_2) \ge OPT(I_2) = 16\frac{1}{8}n - \epsilon'
-	> 16n(1+\epsilon) = OPT(I_1)(1+\epsilon) \ge approx(I_1)$$ 
+From Lemmma \ref{apxconstruction} we have:
 
-So we can distinguish these instances, since the satifiable instance
-will always yield lesser result in approximation scheme.
+$$OPT(I_1) = 16n$$
+$$OPT(I_2) = 17n - (\frac{7}{8} + \epsilon'(n))n$$
 
-Therefore such approximation scheme cannot exist.
+Let's prove that $approx(I_2) > approx(I_1)$:
+
+$$approx(I_2) \ge OPT(I_2) = 17n - (\frac{7}{8} + \epsilon'(n))n
+	= 16n + (\frac{1}{8} - \epsilon'(n))n
+	> 16n + (\frac{1}{8} - \epsilon)n > $$
+$$	> 16n + (17\epsilon - \epsilon)n
+	= 16n + (16\epsilon)n
+	= 16n(1+\epsilon)
+	= OPT(I_1)(1+\epsilon) \ge approx(I_1)$$ 
+
+
+
+Therefore, by using out supposed $(1+\epsilon)$ approximation,
+it’s possible to distinguish $S_1$ from $S_2$, since
+the approximation scheme will always return a smaller value
+for $I_1$ than for $I_2$. This is a contradiction,
+hence the approximation scheme cannot exist.
 
 \subsection{Reduction construction}
 \label{reduction_construction}

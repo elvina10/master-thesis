@@ -216,7 +216,11 @@ VER &= &\{ver_{i, j, t_1, t_2} : 1 \le i \le k, 1 \le j < k,
 $$DIAG := \{ (h_{i, j, t}, v_{j, i, t}) :
 	1 \le i, j \le k, 1 \le t \le n^2, a_t \in S_{i, j}\}$$
 
+TODO: explain that these segments are in fact diagonal
+
 $$\sets := HOR \cup VER \cup DIAG$$
+
+
 
 \begin{lemma}
 	If there exists solution for grid tiling,
@@ -226,9 +230,20 @@ $$\sets := HOR \cup VER \cup DIAG$$
 \end{lemma}
 
 \begin{claim}
+	If there exists a solution to the grid tiling
+	$c_1 \ldots c_k$ and $r_1 \ldots r_k$,
+	then there exists a solution covering
+	all points
+	$$\{h_{i, j, t} : 1 \le i, j \le k, t=(c_i, r_j)\}
+	\cup \{v_{i, j, t} : 1 \le i, j \le k, t=(c_j, r_i)\}$$
 	
+	with segments in $DIAG$
+	and the rest in $VER$ or $HOR$
+	and has weight $2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1))$.
 \end{claim}
 
+\paragraph{Proof.}
+TODO: jakiś prosty z definicji
 
 \begin{lemma}
 	If there exists solution for our construction
@@ -237,7 +252,69 @@ $$\sets := HOR \cup VER \cup DIAG$$
 	then there exists a solution for grid tiling
 \end{lemma}
 
-	
+\paragraph{Proof.}
+This follows from Lemma $\ref{main_soundness_construction}$,
+because we just take which points are covered with $DIAG$.
+
+\begin{claim}
+\label{guards}
+Points $p^{L}, p^R, p^U, p^D$ cannot be covered with $DIAG$.
+\end{claim}
+
+\begin{claim}
+\label{hor_ver_sound}
+Points in $H \cup \{p^L : p \in H\} \cup \{p^R : p \in H\}$
+cannot be covered with $VER$.
+
+Points in $V \cup \{p^U : p \in V\} \cup \{p^D : p \in V\} $
+cannot be covered with $HOR$.
+\end{claim}
+
+\begin{claim}
+For given $i, j$ if none of the points $h_{i, j, t}$ ($v_{i, j, t}$)
+for $1 \le t \le n^2$ are covered with $DIAG$,
+then some spaces between neighbouring points were covered twice.
+\end{claim}
+
+\begin{claim}
+For given $i, j$ two points $h_{i, j, t_1}, h_{i, j, t_2}$
+($v_{i, j, t_1}, v_{i, j, t_2}$)
+for $1 \le t_1 < t_2 \le n^2$ are covered with $DIAG$,
+then one of them had to be also covered with a segment from $HOR$
+($VER$).
+\end{claim}
+\paragraph{Proof.}
+Point $v^L_{i, j, t_2}$ had to be covered with $VER$
+from Claims $\ref{guards}$ and $\ref{hor_ver_sound}$.
+And every segment in $VER$ covering $v^L_{i, j, t_2}$,
+covers also $v^L_{i, j, t_1}$.
+
+\begin{lemma}
+	\label{main_soundness_construction}
+	If there exists solution for our construction
+	with weight at most (exactly)
+	$2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1))$,
+	then for every $i, j$
+	there must be exactly one $t$ such that $h_{i, j, t}$
+	($v_{i, j, t}$) 
+	is covered with $DIAG$
+	and moreover if $h_{i, j, t_1}$ and $h_{i, j+1, t_2}$
+	are uncovered, then $math_h(t_1, t_2)$.
+	Analogically for $v$.
+\end{lemma}
+\paragraph{Proof.}
+Only $k^2$ points can be covered only in $DIAG$, the rest
+has to be covered with $VER \cup HOR$.
+Therefore every result must be at least $ALL\_LINES$ - $2k^2\epsilon$,
+because only $2k^2$ spaces of length $\epsilon$
+can be uncovered in this axis.
+
+Of course if $h_{i, j, t_1}$ and $h_{i, j+1, t_2}$
+are uncovered, then there must exist
+a segment in $HOR$ between $h^R_{i, j, t_1}$ and $h^L_{i, j+1, t_2}$,
+so $math_h(t_1, t_2)$ must be true.
+
+
 
 \subsection{What is missing}
 We don't know FPT for axis-pararell segments without $\delta$-extensions.

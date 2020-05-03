@@ -132,12 +132,112 @@ TODO
 	\textbf{W[1]-completeness for weighted segments in 3 directions}.
 	Consider the problem of covering a set $\points$ of points
 	by selecting $k$ axis-pararell or right-diagonal weighted segments
-	with weights in $\{0, 1\}$
-	from a set $\sets$. Assuming ETH, there is no algorithm for this
+	with weights
+	from a set $\sets$ with minimal weight.
+	Assuming ETH, there is no algorithm for this
 	problem with running time
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt(k))}$
 	for any computable function $f$.
 \end{tw}
+
+We will show reduction from grid tiling problem.
+
+
+Let's have an instance of grid tiling problem -- size of the
+gird $k$, number of elements available $n$
+and $k^2$ sets of available pairs in every tile
+$S_{i, j} \subseteq \{1,n\} \times \{1,n\}$.
+
+\paragraph{Construction.}
+We construct a set $\sets$ of segments and a set $\points$
+of points.
+
+First let's choose any ordering of $n^2$ elements
+$\{1,n\} \times \{1,n\}$ and name this sequence $a_1 \ldots a_{n^2}$.
+
+$$match_v(i, j) \iff
+a_i = \{x_i, y_i\} \land a_j = \{x_j, y_j\} \land x_i = x_j$$
+
+$$match_h(i, j) \iff
+a_i = \{x_i, y_i\} \land a_j = \{x_j, y_j\} \land y_i = y_j$$
+
+
+\subparagraph{Points.}
+
+Define points:
+	$$h_{i, j, t} = (j \cdot (n^2+1) + t, (n^2+1) \cdot i)$$
+	$$v_{i, j, t} = ((n^2+1) \cdot i, j \cdot (n^2+1) + t)$$
+	
+Let's define sets $H$ and $V$ as:
+$$H = \{h_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\}$$
+$$V = \{v_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\}$$
+	
+Let's define $\epsilon = 0.1$.
+For a point $\{x, y\} = p$ we define points
+$p^{L} = \{x - \epsilon, y\}$,
+$p^{R} = \{x + \epsilon, y\}$,
+$p^{U} = \{x, y - \epsilon\}$,
+and $p^{D} = \{x, y + \epsilon\}$.
+
+Then we define:
+$$\points := H \cup \{p^L : p \in H\} \cup \{p^R : p \in H\}
+\cup V \cup \{p^U : p \in V\} \cup \{p^D : p \in V\} $$
+
+
+\subparagraph{Segments.}
+Define horizontal segments.
+
+$$hor_{i, j, t_1, t_2} = (h^R_{i,j,t_1}, h^L_{i, j+1, t_2})$$
+$$ver_{i, j, t_1, t_2} = (v^D_{i,j,t_1}, v^U_{i, j+1, t_2})$$
+
+$$horbeg_{i, t} = (h^L_{i, 1, 1}, h^L_{i, 1, t})$$
+$$horend_{i, t} = (h^R_{i, n, t}, h^R_{i, n, n^2})$$
+
+
+$$verbeg_{i, t} = (v^U_{i, 1, 1}, v^U_{i, 1, t})$$
+$$verend_{i, t} = (v^D_{i, n, t}, v^D_{i, n, n^2})$$
+
+\begin{eqnarray*}
+HOR &= &\{hor_{i, j, t_1, t_2} : 1 \le i \le k, 1 \le j < k,
+1 \le t_1, t_2 \le n^2, match_h(t_1, t_2)\} \\
+&\cup &\{horbeg_{i,t} : 1 \le i \le k, 1 \le t \le n^2\}
+\\
+&\cup &\{horend_{i,t} : 1 \le i \le k, 1 \le t \le n^2\}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+VER &= &\{ver_{i, j, t_1, t_2} : 1 \le i \le k, 1 \le j < k,
+1 \le t_1, t_2 \le n^2, match_v(t_1, t_2)\} \\
+&\cup &\{verbeg_{i,t} : 1 \le i \le k, 1 \le t \le n^2\}
+\\
+&\cup &\{verend_{i,t} : 1 \le i \le k, 1 \le t \le n^2\}
+\end{eqnarray*}
+
+$$DIAG := \{ (h_{i, j, t}, v_{j, i, t}) :
+	1 \le i, j \le k, 1 \le t \le n^2, a_t \in S_{i, j}\}$$
+
+$$\sets := HOR \cup VER \cup DIAG$$
+
+\begin{lemma}
+	If there exists solution for grid tiling,
+	then there exists solution for our construction
+	using $2(k+1)k + k^2$ segments
+	with weight exactly $2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1))$.
+\end{lemma}
+
+\begin{claim}
+	
+\end{claim}
+
+
+\begin{lemma}
+	If there exists solution for our construction
+	using $2(k+1)k + k^2$ segments
+	with weight exactly $2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1))$,
+	then there exists a solution for grid tiling
+\end{lemma}
+
+	
 
 \subsection{What is missing}
 We don't know FPT for axis-pararell segments without $\delta$-extensions.

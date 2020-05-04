@@ -47,14 +47,48 @@ In that case we can find kernel of $\sets_2$ of size $k\cdot(m_1 + 2m_2)^2$,
 because we only need to take the best weight covering some subset of $\points_1 \cup \points_2$.
 
 \begin{lemma}
+	\label{kernel_wscps}
 	\textbf{Kernel in WSCPS}.
 	TODO: formulate it properly
 	
 	For segment cover, there is a kernel of size $f(k)$
 	in WSCPS.
 \end{lemma}
-\paragraph{Proof.}
-TODO
+
+\begin{claim}
+If there are more than $k$ lines with
+at least $k+1$ points on them, then 
+they can't be covered with $k$ segments.
+\end{claim}
+
+\begin{claim}
+If there is more than $k^2$ points
+that don't lie on any line with more than $k$
+points on it, then they can't be covered with $k$ segments.
+\end{claim}
+
+\begin{claim}
+For every long line $L$ (with more than $k$ points on them)
+we can choose $f(k)$ points on them,
+that if we cover all of these points with at most $k$
+segments, then the rest of the points
+with $\delta$-extensions will be covered by
+segments in the direction of line $L$.
+\end{claim}
+
+
+\paragraph{Proof of Lemma \ref{kernel_wscps}.}
+After applying the previous lemmas,
+we have at most $k^2 + k\cdot f(k)$
+points that can be covered in any direction
+and for the rest of the points we can draw 
+at most $k\cdot f(k)$ segments along
+their respective long lines that have to be covered
+by segments after $\delta$-extensions.
+
+Then we extend every available segment by $\delta$-extension
+and we achieve the kernel in WSCPS for this instance of problem.
+
 
 \begin{lemma}
 	\label{covered_spaces_lemma}

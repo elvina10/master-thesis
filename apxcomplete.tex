@@ -82,166 +82,278 @@ for $I_1$ than for $I_2$. This is a contradiction,
 hence the approximation scheme cannot exist.
 
 \subsection{Reduction construction}
-\label{reduction_construction}
+\subsubsection{Definition of points and segments}
 
-Let's take some instance of  MAX-(3,3)-SAT with
-variables $x_1, x_2 \ldots x_n$
-and clauses $C_1, C_2 \dots C_n$.
+\paragraph{Points.}
 
-We will create gadgets for choosing the value
-of variables (\textit{true} or \textit{false}) and checking
-if the clauses are met (any of the variables were chosen).
+Define points:
+	$$a_{i} = (-L, 4i)$$
+	$$b_{i} = (-\frac{2}{3}L, 4i)$$
+	$$c_{i} = (-\frac{1}{3}L, 4i)$$
+	$$d_{i} = (-L, 4i+1)$$
+	$$e_{i} = (-\frac{2}{3}L, 4i+1)$$
+	$$f_{i} = (-\frac{2}{3}L, 4i+2)$$
+	$$g_i = (L, 4i)$$
+	$$h_j = (L, 4i+2)$$
+	
+	$$x_{0, i} = (4i+1, 4\cdot idx(x_i) + 2\cdot val(x_i))$$
+	$$x_{1, i} = (4i+1, 4n)$$
+	$$y_{0, i} = (4i+2, 4\cdot idx(y_i) + 2\cdot val(y_i))$$
+	$$y_{1, i} = (4i+2, 4n + 4)$$	
+	$$z_{0, i} = (4i+3, 4\cdot idx(z_i) + 2\cdot val(z_i))$$
+	$$z_{1, i} = (4i+3, 4n + 6)$$
+	
+	$$vec_{i, j} = (4i + 2 + 4j, 4n + 2j)$$
+	
+	$$l_0 = (0, 0)$$
+	$$m_0 = (0, 1)$$
+	$$n_0 = (0, 2)$$
+	$$o_0 = (0, 3)$$
+	$$p_0 = (0, 4)$$
+	$$q_0 = (1, 1)$$
+	$$r_0 = (1, 3)$$
+	$$s_0 = (2, 1)$$
+	$$t_0 = (2, 2)$$
+	$$u_0 = (2, 3)$$
+	$$v_0 = (3, 2)$$
+	
+	$$l_{i, j} = l_0 + vec_{i, j}$$
+	
 
-\begin{figure}[h]
-\includegraphics[width=0.7\textwidth]{segment_apx_sketch.jpg}
-\caption{General scheme of reduction.}
-\label{fig:segment_apx}
-\end{figure}
+Let's define $$variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$	
+ 
+ $$clause_i = \{x_{i, j} : j \in \{0, 1\}\} \cup
+ \{y_{i, j} : j \in \{0, 1\}\} \cup
+ \{z_{i, j} : j \in \{0, 1\}\} \cup
+ \{l_{i, j} : j \in \{0, 1\}\} \cup
+ \{m_{i, j} : j \in \{0, 1\}\} \cup
+ \{n_{i, j} : j \in \{0, 1\}\} \cup
+ \{o_{i, j} : j \in \{0, 1\}\} \cup
+ \{p_{i, j} : j \in \{0, 1\}\} \cup
+ \{q_{i, j} : j \in \{0, 1\}\} \cup
+ \{r_{i, j} : j \in \{0, 1\}\} \cup
+ \{s_{i, j} : j \in \{0, 1\}\} \cup
+ \{t_{i, j} : j \in \{0, 1\}\} \cup
+ \{u_{i, j} : j \in \{0, 1\}\} \cup
+ \{v_{i, 1} \} 
+ $$
+ 
 
-\subsubsection{Choose $x_i$ gadget}
-\begin{figure}[h]
-\includegraphics[width=0.6\textwidth]{choose_x_gadget.jpg}
-\caption{Scheme of choose $x_i$ gadget.}
-\label{fig:choose_x_gadget}
-\end{figure}
-In Figure~\ref{fig:choose_x_gadget},
-we show a gadget that simulates a single variable $x_i$.
-It consists of six points A, B, C, D, E, F, and several segments.
-Selecting the segment marked with $x_i$
-to the solution will correspond to setting $x_i$ to \textit{true},
-while selecting the segment marked with $\neg x_i$
-to setting $x_i$ to \textit{false}.
-In the following lemmas,
-we show that this construction indeed models a binary variable.
-
-First, note that in the gadget
-there are exactly two sets of three segments
-that cover all points $A, B, C, D, E, F$.
-These two sets of segments are marked in
-Figure~\ref{fig:choose_x_gadget} in blue and green, respectively.
-
-\begin{lemma}
-\label{choose_variables_no_less}
-Points $A, B, C, D, E, F$ cannot be covered using less than
-3 segments (even with $1/2$-extensions).
-\end{lemma}
-\paragraph{Proof.}
-We need to take at least one segment on line $ABC$,
-because it's the only way to cover $C$.
-All other points ($D, E, F$) are not colinear,
-so we need at least 2 other segments to cover them.
-
-\begin{lemma}
-\label{choose_variables_both}
-If we choose both segments $x_i$ and $\neg x_i$, we need to use at
-least 4 segments to cover all points $A, B, C, D, E, F$
-(even with $1/2$-extensions).
-\end{lemma}
+Then we define:
+$$\points := \bigcup_{1 \le i \le n} variable_i \cup clause_i $$
 
 
-\paragraph{Proof.}
-Choosing both segments $x_i$ and $\neg x_i$
-we only cover points $C$
-(becuase $B$ is too far away to be covered with $1/2$-extension)
-and $F$.
+\paragraph{Segments.}
 
-The remaining points ($A, B, D, E$) are not colinear,
-so we need at least two more segments to cover them.
+Let's define 
 
+$$x\_true_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
+$$x\_false_i \{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
+
+$$variable_i = x\_true_i \cup x\_false_i$$
+
+$$clause_i = \{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
+(z_{0, i}, z_{0, i}),
+(x_{1, i}, l_{i, 0}),
+(y_{1, i}, p_{i, 0}),
+(z_{1, i}, p_{i, 1}),
+(t_{i, 0}, l_{i, 1}),
+\}
+\cup \{ \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}
+\cup \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),(t_{i, j}, v_{i, j}) \}
+\cup \{ (q_{i, j}, t_{i, j}), (s_{i, j}, u_{i, j})\} : j \in {0, 1}\}
+$$
+
+
+$$\sets := \bigcup_{1 \le i \le n} variable_i \cup clause_i $$
+
+%~ \if{false}
+%~ \label{reduction_construction}
+
+%~ Let's take some instance of  MAX-(3,3)-SAT with
+%~ variables $x_1, x_2 \ldots x_n$
+%~ and clauses $C_1, C_2 \dots C_n$.
+
+%~ We will create gadgets for choosing the value
+%~ of variables (\textit{true} or \textit{false}) and checking
+%~ if the clauses are met (any of the variables were chosen).
+
+%~ \begin{figure}[h]
+%~ \includegraphics[width=0.7\textwidth]{segment_apx_sketch.jpg}
+%~ \caption{General scheme of reduction.}
+%~ \label{fig:segment_apx}
+%~ \end{figure}
+
+%~ \subsubsection{Choose $x_i$ gadget}
+%~ \begin{figure}[h]
+%~ \includegraphics[width=0.6\textwidth]{choose_x_gadget.jpg}
+%~ \caption{Scheme of choose $x_i$ gadget.}
+%~ \label{fig:choose_x_gadget}
+%~ \end{figure}
+%~ In Figure~\ref{fig:choose_x_gadget},
+%~ we show a gadget that simulates a single variable $x_i$.
+%~ It consists of six points A, B, C, D, E, F, and several segments.
+%~ Selecting the segment marked with $x_i$
+%~ to the solution will correspond to setting $x_i$ to \textit{true},
+%~ while selecting the segment marked with $\neg x_i$
+%~ to setting $x_i$ to \textit{false}.
+%~ In the following lemmas,
+%~ we show that this construction indeed models a binary variable.
+
+%~ First, note that in the gadget
+%~ there are exactly two sets of three segments
+%~ that cover all points $A, B, C, D, E, F$.
+%~ These two sets of segments are marked in
+%~ Figure~\ref{fig:choose_x_gadget} in blue and green, respectively.
+
+%~ \begin{lemma}
+%~ \label{choose_variables_no_less}
+%~ Points $A, B, C, D, E, F$ cannot be covered using less than
+%~ 3 segments (even with $1/2$-extensions).
+%~ \end{lemma}
+%~ \paragraph{Proof.}
+%~ We need to take at least one segment on line $ABC$,
+%~ because it's the only way to cover $C$.
+%~ All other points ($D, E, F$) are not colinear,
+%~ so we need at least 2 other segments to cover them.
+
+%~ \begin{lemma}
+%~ \label{choose_variables_both}
+%~ If we choose both segments $x_i$ and $\neg x_i$, we need to use at
+%~ least 4 segments to cover all points $A, B, C, D, E, F$
+%~ (even with $1/2$-extensions).
+%~ \end{lemma}
+
+
+%~ \paragraph{Proof.}
+%~ Choosing both segments $x_i$ and $\neg x_i$
+%~ we only cover points $C$
+%~ (becuase $B$ is too far away to be covered with $1/2$-extension)
+%~ and $F$.
+
+%~ The remaining points ($A, B, D, E$) are not colinear,
+%~ so we need at least two more segments to cover them.
+
+
+%~ \begin{lemma}
+%~ \label{choose_variables_solution}
+%~ There exist a solution such that takes a segment $x_i$ ($\neg x_i$)
+%~ and 2 other segments, and covers all points $A, B, C, D, E, F$
+%~ \end{lemma}
+
+%~ \paragraph{Proof.}
+%~ We can choose $x_i$, $AD$ and $BF$.
+
+%~ Alternatively we can choose $\neg x_i$, $AC$, $DE$.
+
+%~ \paragraph{Robustness to $1/2$-extension.}
+%~ Take a look at Figure~\ref{fig:segment_apx}.
+%~ The points will be included in choose gadgets (horizontal boxes)
+%~ and clause gadgets (vertical boxes).
+
+%~ Since segment $AC$ is very long
+%~ and colinear with $x_i$, after $1/2$-extension
+%~ it will cover a significant part of segment $x_i$,
+%~ even though $x_i$ will not be chosen.
+
+%~ If we put all the clause gadgets in the area
+%~ marked with \textbf{clauses} at gadget scheme in Figure~\ref{fig:choose_x_gadget},
+%~ it is enough to prove that $AC$ will not cover any points
+%~ in the \textbf{clauses} area even with $1/2$-extensions.
+
+%~ \begin{lemma}
+%~ No points in \textbf{clauses} area can be covered
+%~ by $AC$ with $1/2$-extension.
+%~ \end{lemma}
+
+%~ \paragraph{Proof.}
+%~ Bear in mind that length of $AC$ is equal to length of $x_i$.
+%~ Area \textbf{clauses} takes a second half
+%~ of the segment $x_i$ and $AC$ after extension will cover the first
+%~ half of segment $x_i$.
+
+%~ \subsubsection{Clause gadget}
+%~ \includegraphics[width=0.6\textwidth]{clause_gadget.jpg}
+
+%~ \begin{lemma}
+%~ In order to cover $D$ ($E, F$) point at least one
+%~ of the segments $AD$ ($BE, CF$) or $x'$ ($y', z'$).
+%~ \end{lemma}
+
+%~ \begin{lemma}
+%~ Points $A$ and $D$ can be covered
+%~ with one additional segment $x'$
+%~ only if $x$ is already chosen.
+%~ Otherwise they can be covered with one segment
+%~ only by using $AD$.
+%~ \end{lemma}
+
+%~ \begin{lemma}
+%~ \label{cover_or_gadget_no_less}
+%~ Points $A, B, C, D, E, F$ can be covered with 
+%~ 3 segments and cannot be covered in less even with $1/2$-extension.
+%~ \end{lemma}
+
+%~ \paragraph{Proof.}
+%~ There are 3 points that aren't pairwise connected,
+%~ so they have to be covered with 3 separate segments.
+
+%~ Also there exists solution with 3 segments, ie. $AD$, $BE$, $CF$.
+
+%~ \subsubsection{Or gadget}
+%~ \begin{lemma}
+%~ \label{cover_clauses_segments_no_less}
+%~ Points $A, B, C, D, E, F, G, H, I, J$ can be covered using
+%~ at least 4 segments and cannot be covered with less
+%~ even with $1/2$-extension.
+%~ \end{lemma}
+
+%~ \begin{lemma}
+%~ Points $A, B, C, D, E, F, G, H, I, J$ can be covered using
+%~ 4 segments and segment $x \lor y$ can be chosen
+%~ even with $1/2$-extension
+%~ only if at least one of the segments $x$ or $y$ is chosen.
+%~ \end{lemma}
+
+%~ \begin{lemma}
+%~ \label{cover_clauses_segments_no_less}
+%~ The whole caluse gadget can be covered with 11 segments and
+%~ cannot be covered with less
+%~ even with $1/2$-extension.
+%~ \end{lemma}
+
+%~ \begin{lemma}
+%~ \label{cover_clauses_solution}
+%~ The whole caluse gadget can be covered with 11 segments and
+%~ only when one of the variables $x, y$ or $z$ is chosen,
+%~ otherwise it can be covered with 12 segments.
+%~ \end{lemma}
+
+%~ \fi
 
 \begin{lemma}
 \label{choose_variables_solution}
-There exist a solution such that takes a segment $x_i$ ($\neg x_i$)
-and 2 other segments, and covers all points $A, B, C, D, E, F$
+For any $1 \le i \le n$, points $variable_i$
+can be covered using 3 segments -- set $x\_true_i$ or $x\_false_i$
 \end{lemma}
 
-\paragraph{Proof.}
-We can choose $x_i$, $AD$ and $BF$.
-
-Alternatively we can choose $\neg x_i$, $AC$, $DE$.
-
-\paragraph{Robustness to $1/2$-extension.}
-Take a look at Figure~\ref{fig:segment_apx}.
-The points will be included in choose gadgets (horizontal boxes)
-and clause gadgets (vertical boxes).
-
-Since segment $AC$ is very long
-and colinear with $x_i$, after $1/2$-extension
-it will cover a significant part of segment $x_i$,
-even though $x_i$ will not be chosen.
-
-If we put all the clause gadgets in the area
-marked with \textbf{clauses} at gadget scheme in Figure~\ref{fig:choose_x_gadget},
-it is enough to prove that $AC$ will not cover any points
-in the \textbf{clauses} area even with $1/2$-extensions.
-
-\begin{lemma}
-No points in \textbf{clauses} area can be covered
-by $AC$ with $1/2$-extension.
-\end{lemma}
-
-\paragraph{Proof.}
-Bear in mind that length of $AC$ is equal to length of $x_i$.
-Area \textbf{clauses} takes a second half
-of the segment $x_i$ and $AC$ after extension will cover the first
-half of segment $x_i$.
-
-\subsubsection{Clause gadget}
-\includegraphics[width=0.6\textwidth]{clause_gadget.jpg}
-
-\begin{lemma}
-In order to cover $D$ ($E, F$) point at least one
-of the segments $AD$ ($BE, CF$) or $x'$ ($y', z'$).
-\end{lemma}
-
-\begin{lemma}
-Points $A$ and $D$ can be covered
-with one additional segment $x'$
-only if $x$ is already chosen.
-Otherwise they can be covered with one segment
-only by using $AD$.
-\end{lemma}
-
-\begin{lemma}
-\label{cover_or_gadget_no_less}
-Points $A, B, C, D, E, F$ can be covered with 
-3 segments and cannot be covered in less even with $1/2$-extension.
-\end{lemma}
-
-\paragraph{Proof.}
-There are 3 points that aren't pairwise connected,
-so they have to be covered with 3 separate segments.
-
-Also there exists solution with 3 segments, ie. $AD$, $BE$, $CF$.
-
-\subsubsection{Or gadget}
-\begin{lemma}
-\label{cover_clauses_segments_no_less}
-Points $A, B, C, D, E, F, G, H, I, J$ can be covered using
-at least 4 segments and cannot be covered with less
-even with $1/2$-extension.
-\end{lemma}
-
-\begin{lemma}
-Points $A, B, C, D, E, F, G, H, I, J$ can be covered using
-4 segments and segment $x \lor y$ can be chosen
-even with $1/2$-extension
-only if at least one of the segments $x$ or $y$ is chosen.
-\end{lemma}
-
-\begin{lemma}
-\label{cover_clauses_segments_no_less}
-The whole caluse gadget can be covered with 11 segments and
-cannot be covered with less
-even with $1/2$-extension.
-\end{lemma}
 
 \begin{lemma}
 \label{cover_clauses_solution}
-The whole caluse gadget can be covered with 11 segments and
-only when one of the variables $x, y$ or $z$ is chosen,
-otherwise it can be covered with 12 segments.
+For any $1 \le i \le n$, points $clause_i$
+can be covered using 15 segments if at least one of the $\xTrueSegment$
+or $\xFalseSegment$ on which points $x_{0, i}, y_{0, i}$ or $z_{0, i}$
+are on is already covered.
+
+They can be covered with 16 segments if none of them were covered.
 \end{lemma}
+
+
+\begin{lemma}
+\textbf{Robustness to 1/2-extensions}. For every segment $s \in \sets$,
+$s$ and $s^{+\delta}$ cover the same points from $\points$.
+\end{lemma}
+
 
 \subsection{Proofs of construction Lemma \ref{apxconstruction}}
 \begin{lemma}

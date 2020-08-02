@@ -131,20 +131,19 @@ Define points:
 
 Let's define $$variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$	
  
- $$clause_i = \{x_{i, j} : j \in \{0, 1\}\} \cup
+ $$move\_variable_i = 
+ \{x_{i, j} : j \in \{0, 1\}\} \cup
  \{y_{i, j} : j \in \{0, 1\}\} \cup
- \{z_{i, j} : j \in \{0, 1\}\} \cup
- \{l_{i, j} : j \in \{0, 1\}\} \cup
- \{m_{i, j} : j \in \{0, 1\}\} \cup
- \{n_{i, j} : j \in \{0, 1\}\} \cup
- \{o_{i, j} : j \in \{0, 1\}\} \cup
- \{p_{i, j} : j \in \{0, 1\}\} \cup
- \{q_{i, j} : j \in \{0, 1\}\} \cup
- \{r_{i, j} : j \in \{0, 1\}\} \cup
- \{s_{i, j} : j \in \{0, 1\}\} \cup
- \{t_{i, j} : j \in \{0, 1\}\} \cup
- \{u_{i, j} : j \in \{0, 1\}\} \cup
- \{v_{i, 1} \} 
+ \{z_{i, j} : j \in \{0, 1\}\} 
+ $$
+ 
+ $$or\_gadget_{i, j} = 
+ \{l_{i, j}, m_{i, j}, n_{i, j}, o_{i, j},
+ p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
+ $$
+ 
+ $$clause_i = 
+ move\_variable_i \cup or\_gadget_{i, 0} \cup or\_gadget_{i, 1} \cup \{v_{i, 1} \} 
  $$
  
 
@@ -161,6 +160,9 @@ $$x\_false_i \{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
 
 $$variable_i = x\_true_i \cup x\_false_i$$
 
+$$or\_false_{i, j} = \{ (q_{i, j}, t_{i, j}), (s_{i, j}, u_{i, j})\}$$
+$$or\_true_{i, j} = \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),(t_{i, j}, v_{i, j}) \}$$
+
 $$clause_i = \{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
 (z_{0, i}, z_{0, i}),
 (x_{1, i}, l_{i, 0}),
@@ -169,8 +171,8 @@ $$clause_i = \{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
 (t_{i, 0}, l_{i, 1}),
 \}
 \cup \{ \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}
-\cup \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),(t_{i, j}, v_{i, j}) \}
-\cup \{ (q_{i, j}, t_{i, j}), (s_{i, j}, u_{i, j})\} : j \in {0, 1}\}
+\cup  or\_true_{i, 0} \cup or\_true_{i, 1}
+\cup or\_false_{i, 0} \cup or\_false_{i, 1}\}
 $$
 
 
@@ -346,23 +348,65 @@ For any $1 \le i \le n$, points $variable_i$
 can be covered using 3 segments -- set $x\_true_i$ or $x\_false_i$
 \end{lemma}
 
+\begin{lemma}
+\label{cover_or_true}
+For any $1 \le i \le n, j \in \{0, 1\}$, we can cover points in
+$or\_gadget_{i, j} - \{l_{i, j} (p_{i, j})\} \cup \{v_{i, j}\}$
+with 4 segments.
+\end{lemma}
+
+\paragraph{Proof.}
+We can do that using  $(n_{i, j}, p_{i, j}) ((l_{i, j}, n_{i, j})) $
+and $or\_true_{i, j}$.
+
+\begin{lemma}
+\label{cover_or_false}
+For any $1 \le i \le n, j \in \{0, 1\}$, we can cover points in $or\_gadget_{i, j}$
+with 4 segments.
+\end{lemma}
+\paragraph{Proof.}
+We can do that using  $\{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$
+and $or\_false_{i, j}$.
+
 
 \begin{lemma}
 \label{cover_clauses_solution}
 For any $1 \le i \le n$, points $clause_i$
-can be covered using 15 segments if at least one of the $\xTrueSegment$
+can be covered using 11 segments if at least one of the $\xTrueSegment$
 or $\xFalseSegment$ on which points $x_{0, i}, y_{0, i}$ or $z_{0, i}$
-are on is already covered.
+doesn't have to be covered with segments from $clause_i$ (is covered by
+segments from $variable_i$).
 
-They can be covered with 16 segments if none of them were covered.
+They can be covered with 12 segments if all of the points in $clause_i$
+have to be covered with segments from $covered_i$. 
 \end{lemma}
+
+\paragraph{Proof of cover with 12 segments.}
+Using Lemma \ref{cover_or_false}
+We use 
+$\{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
+(z_{0, i}, z_{0, i}) \} \cup or\_false_{i, 0} \cup or\_false_{i, 1} \cup \{ (t_{i, 1}, v_{i, 1}) \}$
+
+\paragraph{Proof of cover with 11 segments.}
+Assumming $x_{0, i}$ is already covered:
+Using Lemma\ref{cover_or_true} twice with $l_{i, 0}$  and $l_{i, 1} = v_{i, 0}$ already covered by other segment:
+
+We use 
+$\{ (x_{1, i}, l_{i, 0}), (y_{0, i}, y_{1, i}),
+(z_{0, i}, z_{1, i}) \} \cup or\_true_{i, 0} \cup or\_true_{i, 1}\}$
+
+Assumming $z_{0, i}$ is already covered:
+Using Lemma\ref{cover_or_false} and Lemma\ref{cover_or_true} with $p_{i, 1}$ already covered by other segment:
+
+We use 
+$\{ (x_{0, 1}, x_{0, 1}), (y_{0, i}, y_{1, i}),
+(z_{1, i}, p_{i, 1}) \} \cup or\_false_{i, 0} \cup or\_true_{i, 1}\}$
 
 
 \begin{lemma}
 \textbf{Robustness to 1/2-extensions}. For every segment $s \in \sets$,
 $s$ and $s^{+\delta}$ cover the same points from $\points$.
 \end{lemma}
-
 
 \subsection{Proofs of construction Lemma \ref{apxconstruction}}
 \begin{lemma}

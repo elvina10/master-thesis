@@ -54,5 +54,16 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{apx_or_gadget.pdf}}%
+    \put(0.06998203,1.06793478){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$l_{i,j}$\end{tabular}}}}%
+    \put(0.06998203,0.844928){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$m_{i,j}$\end{tabular}}}}%
+    \put(0.06998203,0.62192121){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$n_{i,j}$\end{tabular}}}}%
+    \put(0.06998203,0.39891443){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$o_{i,j}$\end{tabular}}}}%
+    \put(0.06998203,0.19077465){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$p_{i,j}$\end{tabular}}}}%
+    \put(0.36732441,0.85979512){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$q_{i,j}$\end{tabular}}}}%
+    \put(0.39705865,0.41378155){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$r_{i,j}$\end{tabular}}}}%
+    \put(0.62006532,0.844928){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$s_{i,j}$\end{tabular}}}}%
+    \put(0.53086261,0.62192121){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_{i,j}$\end{tabular}}}}%
+    \put(0.81333798,0.63678833){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_{i,j}$\end{tabular}}}}%
+    \put(0.59033108,0.32457883){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$u_{i,j}$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

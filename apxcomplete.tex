@@ -393,14 +393,14 @@ Using Lemma\ref{cover_or_true} twice with $l_{i, 0}$  and $l_{i, 1} = v_{i, 0}$ 
 
 We use 
 $\{ (x_{1, i}, l_{i, 0}), (y_{0, i}, y_{1, i}),
-(z_{0, i}, z_{1, i}) \} \cup or\_true_{i, 0} \cup or\_true_{i, 1}\}$
+(z_{0, i}, z_{1, i}) \} \cup or\_true_{i, 0} \cup or\_true_{i, 1}$
 
 Assumming $z_{0, i}$ is already covered:
 Using Lemma\ref{cover_or_false} and Lemma\ref{cover_or_true} with $p_{i, 1}$ already covered by other segment:
 
 We use 
 $\{ (x_{0, 1}, x_{0, 1}), (y_{0, i}, y_{1, i}),
-(z_{1, i}, p_{i, 1}) \} \cup or\_false_{i, 0} \cup or\_true_{i, 1}\}$
+(z_{1, i}, p_{i, 1}) \} \cup or\_false_{i, 0} \cup or\_true_{i, 1}$
 
 
 \begin{lemma}
@@ -430,6 +430,69 @@ Lemma~\ref{cover_clauses_solution}.
 
 This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 
+
+\begin{lemma}
+\label{choose_variables_no_less}
+For any $1 \le i \le n$, points $variable_i$
+can not be covered with less than 3 segments.
+\end{lemma}
+
+\paragraph{Proof.}
+There is independent set if size 3 -- $d_i, f_i, c_i$, therefore it can
+not be covered with less than 3 sets (segments).
+
+
+\begin{lemma}
+\label{choose_variables_both}
+If both segments $\xTrueSegment$ and $\xFalseSegment$ are chosen, then
+the remaining points from $variable_i$ must be covered with 2 different
+segments
+\end{lemma}
+\paragraph{Proof.}
+There is independent set if size 2 -- $a_i, e_i$, therefore it can
+not be covered with less than 2 sets (segments).
+
+
+\begin{lemma}
+\label{cover_clauses_segments_no_less}
+For any $1 \le i \le n$, points $clause_i$
+can be covered using 11 segments if at least one of the $\xTrueSegment$
+or $\xFalseSegment$ on which points $x_{0, i}, y_{0, i}$ or $z_{0, i}$
+doesn't have to be covered with segments from $clause_i$ (is covered by
+segments from $variable_i$).
+
+They can not be covered with less than 12 segments if all of the points
+in $clause_i$ have to be covered with segments from $clause_i$.
+\end{lemma}
+
+
+\paragraph{Proof of no cover with less than 12 segments.}
+There is independent set of 12 points in $cover_i$ -- 
+$\{ x_{0, i}, y_{0, i}, z_{0, i}, l_{i, 0}, p_{i, 0}, q_{i, 0}, u_{i, 0}, v_{i, 0} = l_{i, 1},
+ p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$
+
+\paragraph{Proof of no cover with less than 11 segments.}
+
+We can choose disjoint sets $X, Y, Z$ such that
+$X \cup Z \cup Z \subseteq cover_i - \{x_{0, i}, y_{0, i}, z_{0, i}\}$.
+and there are no segments covering points from different sets.
+And we will prove lower bounds for each of these sets.
+
+$$X = \{x_{1, i}, y_{1, i}, z_{1, i}\}$$
+
+Set $X$ is an indendent set, so it must be covered with 3 segment.
+
+$$Y = or\_gadget_{i, 0} - \{l_{i, 1}, p_{i, 0}\}$$
+$$Z = or\_gadget_{i, 1} - \{l_{i, 1}, p_{i, 0}\}$$
+
+
+For both $Y$ and $Z$ we can check all of the subsets of 3 segments and
+check with brutforce that both of them must use at leaast 4 segments.
+
+TODO: Funny fact, neither Y nor Z doesn't have independent set of size 4.
+
+Therefore $cover_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
+
 \begin{lemma}
 	\label{construction_completness}
 	Given an instance of MAX-(3,3)-SAT of size $n$,
@@ -440,13 +503,15 @@ This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 \paragraph{Proof.}
 Among the segments responsible for choosing the value of variable $x_i$,
 we need to use at least 3 segments (Lemma~\ref{choose_variables_no_less}).
-If we have chosen segments responsible for both $x_i$ and $\neg x_i$,
-then we have used at least 4 segments (Lemma~\ref{choose_variables_both}).
+If we have chosen segments both $\xTrueSegment$ and $\xFalseSegment$,
+then we have used at least 4 segments (Lemma~\ref{choose_variables_both})
+from $variable_i$.
 
-If we chose at most one of the variables $x_i$ and $\neg x_i$,
-choose that value to the solution. If we chose both values,
+If we chose at most one of the segments $\xTrueSegment$ and $\xFalseSegment$,
+choose the corresponding variable value to the solution.
+If we chose both segments,
 choose the value that appears in most (at least 2) clauses.
-If we have chosen none of the values, choose any value.
+If we have chosen none of the segments, choose any value.
 
 To cover these segments we have used at least $3n + a$ segments,
 where $a$ is the number of variables that we have chosen both
@@ -457,25 +522,26 @@ we need to use at least 11 segments
 (Lemma~\ref{cover_clauses_segments_no_less})
 and if we can cover it with 11 segments, then we have 
 earlier chosen
-one of the variables $x$, $y$ or $z$.
+segment responsible for correct value of variable $x$, $y$ or $z$.
 
-So we have 11 segments for satisfied clauses and 12 segments
+So we have at least 11 segments for satisfied clauses
+and at least 12 segments
 for unsatisfied clauses, so we cover it with 
 at least $11n + b$ segments, where $b$ is number of clauses
 where none of the variables $x, y, z$ were chosen.
-If the segment responsible for $x$ was taken,
-but this variable is set to have this value,
-then we have chosen both $x$ and $\neg x$ for this variable,
+If the segment responsible for value of $x$ was taken,
+but this variable is set to have different value,
+then we have chosen segments for both $x$ and $\neg x$ for this variable,
 so "we cheated" and this maybe clause is not met,
 but we assigned the value for this $x_i$ that meets
-the most clauses, so for each of this variables,
+the most clauses, so for each of such "cheated" variables,
 at most one of the clauses isn't met.
 
 So there are at most $a+b$ unsatsfied clauses in this instance,
-so we have shown the resultwith result at least $n-(a+b)$.
+so we have shown the assignment with at least  $n-(a+b)$ satisfied clauses.
 
 $$w > 3n + a + 11n + b = 14n + a + b$$
-$$15n - w < n - (a+b)$$
+$$15n - w  < 15n - 14 n - a - b = n - (a+b)$$
 
 \subsubsection{Proof of Lemma \ref{apxconstruction}}
 Given an instance of MAX-(3,3)-SAT of size $n$

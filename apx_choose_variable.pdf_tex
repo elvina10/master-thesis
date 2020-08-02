@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{595.27559055bp}%
+    \setlength{\unitlength}{480.65709993bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,19 +50,18 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,1.41428571)%
+  \begin{picture}(1,0.3373734)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{apx_choose_variable.pdf}}%
-    \put(0.02927237,0.98507908){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$a_i$\end{tabular}}}}%
-    \put(0.19146162,0.98649256){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$b_i$\end{tabular}}}}%
+    \put(0.08315634,0.25930151){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$a_i$\end{tabular}}}}%
+    \put(0.26007948,0.25930151){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$b_i$\end{tabular}}}}%
+    \put(0.43700266,0.25930151){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$c_i$\end{tabular}}}}%
+    \put(0.08315634,0.14807982){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$d_i$\end{tabular}}}}%
+    \put(0.26007948,0.14135274){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$e_i$\end{tabular}}}}%
+    \put(0.26007948,0.02340401){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$f_i$\end{tabular}}}}%
+    \put(0.84982331,0.26154846){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$g_i$\end{tabular}}}}%
+    \put(0.84982331,0.02340401){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$h_i$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{apx_choose_variable.pdf}}%
-    \put(0.35249329,0.98588776){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$c_i$\end{tabular}}}}%
-    \put(0.00819109,0.87194846){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$d_i$\end{tabular}}}}%
-    \put(0.16218925,0.87194846){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$e_i$\end{tabular}}}}%
-    \put(0.15964383,0.78285857){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$f_i$\end{tabular}}}}%
-    \put(0.68497213,0.97952419){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$g_i$\end{tabular}}}}%
-    \put(0.68624478,0.79116284){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$h_i$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{apx_choose_variable.pdf}}%
   \end{picture}%
 \endgroup%

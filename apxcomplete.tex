@@ -146,8 +146,12 @@ Define points:
 	$$u_0 = (2, 3)$$
 	$$v_0 = (3, 2)$$
 	
-	$$l_{i, j} = l_0 + vec_{i, j}$$
 	
+	Define 
+	$\{ l_{i, j}, m_{i, j} \ldots v_{i, j} \}$
+	as $\{l_0, m_0 \ldots v_0\}$ shifted by $vec_{i, j}$
+
+Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
 
 Let's define $$variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$	
  
@@ -180,8 +184,10 @@ $$x\_false_i \{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
 
 $$variable_i = x\_true_i \cup x\_false_i$$
 
-$$or\_false_{i, j} = \{ (q_{i, j}, t_{i, j}), (s_{i, j}, u_{i, j})\}$$
+$$or\_false_{i, j} = \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
 $$or\_true_{i, j} = \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),(t_{i, j}, v_{i, j}) \}$$
+
+$$or\_move\_variable_{i, j} = \{ \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
 
 $$clause_i = \{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
 (z_{0, i}, z_{0, i}),
@@ -190,7 +196,7 @@ $$clause_i = \{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
 (z_{1, i}, p_{i, 1}),
 (t_{i, 0}, l_{i, 1}),
 \}
-\cup \{ \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}
+\cup or\_move\_variable_{i, 0} \cup or\_move\_variable_{i, 1}
 \cup  or\_true_{i, 0} \cup or\_true_{i, 1}
 \cup or\_false_{i, 0} \cup or\_false_{i, 1}\}
 $$
@@ -200,19 +206,24 @@ $$\sets := \bigcup_{1 \le i \le n} variable_i \cup clause_i $$
 \begin{lemma}
 \label{choose_variables_solution}
 For any $1 \le i \le n$, points $variable_i$
-can be covered using 3 segments -- set $x\_true_i$ or $x\_false_i$
+can be covered using 3 segments.
 \end{lemma}
+
+\paragraph{Proof.}
+We can use set $x\_true_i$ or $x\_false_i$.
 
 \begin{lemma}
 \label{cover_or_true}
-For any $1 \le i \le n, j \in \{0, 1\}$, we can cover points in
-$or\_gadget_{i, j} - \{l_{i, j} (p_{i, j})\} \cup \{v_{i, j}\}$
+For any $1 \le i \le n, j \in \{0, 1\}$ and 
+ $x \in \{l_{i, j}, p_{i, j}\}$ we can cover points in
+$or\_gadget_{i, j} - \{ x\} \cup \{v_{i, j}\}$
 with 4 segments.
 \end{lemma}
 
 \paragraph{Proof.}
-We can do that using  $(n_{i, j}, p_{i, j}) ((l_{i, j}, n_{i, j})) $
-and $or\_true_{i, j}$.
+We can do that using one segment from $or\_move\_variable_{i, j}$
+(chosen depending on the value of $x$)
+and all segments from $or\_true_{i, j}$.
 
 \begin{lemma}
 \label{cover_or_false}
@@ -220,43 +231,45 @@ For any $1 \le i \le n, j \in \{0, 1\}$, we can cover points in $or\_gadget_{i, 
 with 4 segments.
 \end{lemma}
 \paragraph{Proof.}
-We can do that using  $\{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$
+We can do that using  $or\_move\_variable_{i, j}$
 and $or\_false_{i, j}$.
 
 
 \begin{lemma}
 \label{cover_clauses_solution}
-For any $1 \le i \le n$, points $clause_i$
-can be covered using 11 segments if at least one of the $\xTrueSegment$
-or $\xFalseSegment$ on which points $x_{0, i}, y_{0, i}$ or $z_{0, i}$
-doesn't have to be covered with segments from $clause_i$ (is covered by
-segments from $variable_i$).
-
-They can be covered with 12 segments if all of the points in $clause_i$
-have to be covered with segments from $covered_i$. 
+For any $1 \le i \le n$ and $a \in \{ x_{0, i}, y_{0, i}, z_{0, i}\}$,
+points $clause_i - \{a\}$ can be covered using 11 segments.
 \end{lemma}
 
-\paragraph{Proof of cover with 12 segments.}
-Using Lemma \ref{cover_or_false}
-We use 
-$\{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
-(z_{0, i}, z_{0, i}) \} \cup or\_false_{i, 0} \cup or\_false_{i, 1} \cup \{ (t_{i, 1}, v_{i, 1}) \}$
-
-\paragraph{Proof of cover with 11 segments.}
-Assumming $x_{0, i}$ is already covered:
-Using Lemma\ref{cover_or_true} twice with $l_{i, 0}$  and $l_{i, 1} = v_{i, 0}$ already covered by other segment:
+\paragraph{Proof.}
+For $a = x_{0, i}$ (analogous proof for $y_{0, i}$):
+Using Lemma~\ref{cover_or_true} twice with excluded $x = l_{i, 0}$ and
+$x = l_{i, 1} = v_{i, 0}$:
 
 We use 
 $\{ (x_{1, i}, l_{i, 0}), (y_{0, i}, y_{1, i}),
 (z_{0, i}, z_{1, i}) \} \cup or\_true_{i, 0} \cup or\_true_{i, 1}$
 
-Assumming $z_{0, i}$ is already covered:
-Using Lemma\ref{cover_or_false} and Lemma\ref{cover_or_true} with $p_{i, 1}$ already covered by other segment:
+For $a = z_{0, i}$:
+Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with $x = p_{i, 1}$:
 
 We use 
 $\{ (x_{0, 1}, x_{0, 1}), (y_{0, i}, y_{1, i}),
 (z_{1, i}, p_{i, 1}) \} \cup or\_false_{i, 0} \cup or\_true_{i, 1}$
 
+
+\begin{lemma}
+ Points $clause_i$ can be covered with 12 segments.
+\end{lemma}
+
+\paragraph{Proof.}
+Using Lemma \ref{cover_or_false} twice we can
+cover $or\_gadget_{i,0}$ and  $or\_gadget_{i,1}$
+with 8 segments.
+
+To cover the remaining points we additionally use:
+$\{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
+(z_{0, i}, z_{1, i}), (t_{i, 1}, v_{i, 1}) \}$
 
 \begin{lemma}
 \textbf{Robustness to 1/2-extensions}. For every segment $s \in \sets$,
@@ -276,9 +289,11 @@ $s$ and $s^{+\delta}$ cover the same points from $\points$.
 Let's name the assignments of the variables in MAX-(3,3)-SAT instance,
 that achieve the optimal solution,
 $y_1$,~$y_2$~$\ldots$~$y_n$,
-Let's cover every clause with solution described in
+Let's cover every variable gadget with solution described in
 Lemma~\ref{choose_variables_solution},
-in the $i$-th segment choosing the segment responsible for value $y_i$.
+in the $i$-th gadget choosing the segment responsible for the
+value of $y_i$
+(true--$\xTrueSegment$ or false--$\xFalseSegment$).
 
 Cover every clause gadget with solution described in
 Lemma~\ref{cover_clauses_solution}.

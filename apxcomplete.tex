@@ -179,13 +179,13 @@ $$\points := \bigcup_{1 \le i \le n} variable_i \cup clause_i $$
 
 Let's define 
 
-$$x^true_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
-$$x^false_i \{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
+$$x^{true}_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
+$$x^{false}_i \{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
 
-$$variable_i = x^true_i \cup x^false_i$$
+$$variable_i = x^{true}_i \cup x^{false}_i$$
 
-$$or^false_{i, j} = \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
-$$or^true_{i, j} = \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),(t_{i, j}, v_{i, j}) \}$$
+$$or^{false}_{i, j} = \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
+$$or^{true}_{i, j} = \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),(t_{i, j}, v_{i, j}) \}$$
 
 $$or\_move\_variable_{i, j} = \{ \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
 
@@ -197,8 +197,8 @@ $$clause_i = \{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
 (t_{i, 0}, l_{i, 1}),
 \}
 \cup or\_move\_variable_{i, 0} \cup or\_move\_variable_{i, 1}
-\cup  or^true_{i, 0} \cup or^true_{i, 1}
-\cup or^false_{i, 0} \cup or^false_{i, 1}\}
+\cup  or^{true}_{i, 0} \cup or^{true}_{i, 1}
+\cup or^{false}_{i, 0} \cup or^{false}_{i, 1}\}
 $$
 
 $$\sets := \bigcup_{1 \le i \le n} variable_i \cup clause_i $$
@@ -210,7 +210,7 @@ can be covered using 3 segments.
 \end{lemma}
 
 \paragraph{Proof.}
-We can use set $x^true_i$ or $x^false_i$.
+We can use set $x^{true}_i$ or $x^{false}_i$.
 
 \begin{lemma}
 \label{cover_or_true}
@@ -223,7 +223,7 @@ with 4 segments.
 \paragraph{Proof.}
 We can do that using one segment from $or\_move\_variable_{i, j}$
 (chosen depending on the value of $x$)
-and all segments from $or^true_{i, j}$.
+and all segments from $or^{true}_{i, j}$.
 
 \begin{lemma}
 \label{cover_or_false}
@@ -232,7 +232,7 @@ with 4 segments.
 \end{lemma}
 \paragraph{Proof.}
 We can do that using  $or\_move\_variable_{i, j}$
-and $or^false_{i, j}$.
+and $or^{false}_{i, j}$.
 
 
 \begin{lemma}
@@ -248,14 +248,14 @@ $x = l_{i, 1} = v_{i, 0}$:
 
 We use 
 $\{ (x_{1, i}, l_{i, 0}), (y_{0, i}, y_{1, i}),
-(z_{0, i}, z_{1, i}) \} \cup or^true_{i, 0} \cup or^true_{i, 1}$
+(z_{0, i}, z_{1, i}) \} \cup or^{true}_{i, 0} \cup or^{true}_{i, 1}$
 
 For $a = z_{0, i}$:
 Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with $x = p_{i, 1}$:
 
 We use 
 $\{ (x_{0, 1}, x_{0, 1}), (y_{0, i}, y_{1, i}),
-(z_{1, i}, p_{i, 1}) \} \cup or^false_{i, 0} \cup or^true_{i, 1}$
+(z_{1, i}, p_{i, 1}) \} \cup or^{false}_{i, 0} \cup or^{true}_{i, 1}$
 
 
 \begin{lemma}

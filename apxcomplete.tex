@@ -117,12 +117,12 @@ blue segments are set $x^{true}_i$.}
 	
 	
 	
-	$$x_{0, i} = (10i+1, 4\cdot idx(x_i) + 2\cdot val(x_i))$$
-	$$x_{1, i} = (10i+1, 4n)$$
-	$$y_{0, i} = (10i+2, 4\cdot idx(y_i) + 2\cdot val(y_i))$$
-	$$y_{1, i} = (10i+2, 4n + 4)$$	
-	$$z_{0, i} = (10i+3, 4\cdot idx(z_i) + 2\cdot val(z_i))$$
-	$$z_{1, i} = (10i+3, 4n + 6)$$
+	$$x_{i, 0} = (10i+1, 4\cdot idx(x_i) + 2\cdot val(x_i))$$
+	$$x_{i, 1} = (10i+1, 4n)$$
+	$$y_{i, 0} = (10i+2, 4\cdot idx(y_i) + 2\cdot val(y_i))$$
+	$$y_{i, 1} = (10i+2, 4n + 4)$$	
+	$$z_{i, 0} = (10i+3, 4\cdot idx(z_i) + 2\cdot val(z_i))$$
+	$$z_{i, 1} = (10i+3, 4n + 6)$$
 	
 	
 	
@@ -195,7 +195,8 @@ Let's define $$variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$
  $$
  
  $$clause_i = 
- move\_variable_i \cup or\_gadget_{i, 0} \cup or\_gadget_{i, 1} \cup \{v_{i, 1} \} 
+ move\_variable_i \cup or\_gadget_{i, 0}
+ \cup or\_gadget_{i, 1} \cup \{v_{i, 1} \} 
  $$
  
 
@@ -212,19 +213,24 @@ $$x^{false}_i \{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
 
 $$variable_i = x^{true}_i \cup x^{false}_i$$
 
-$$or^{false}_{i, j} = \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
-$$or^{true}_{i, j} = \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),(t_{i, j}, v_{i, j}) \}$$
+$$or^{false}_{i, j} =
+\{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
+$$or^{true}_{i, j} =
+\{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),
+(t_{i, j}, v_{i, j}) \}$$
 
-$$or\_move\_variable_{i, j} = \{ \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
+$$or\_move\_variable_{i, j} =
+\{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
 
-$$clause_i = \{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
-(z_{0, i}, z_{0, i}),
-(x_{1, i}, l_{i, 0}),
-(y_{1, i}, p_{i, 0}),
-(z_{1, i}, p_{i, 1}),
-(t_{i, 0}, l_{i, 1}),
+$$clause_i = \{ (x_{i, 0}, x_{i, 1}),
+(y_{i, 0}, y_{i, 1}),
+(z_{i, 0}, z_{i, 1}),
+(x_{i, 1}, l_{i, 0}),
+(y_{i, 1}, p_{i, 0}),
+(z_{i, 1}, p_{i, 1}),
 \}
-\cup or\_move\_variable_{i, 0} \cup or\_move\_variable_{i, 1}
+\cup or\_move\_variable_{i, 0}
+\cup or\_move\_variable_{i, 1}
 \cup  or^{true}_{i, 0} \cup or^{true}_{i, 1}
 \cup or^{false}_{i, 0} \cup or^{false}_{i, 1}\}
 $$
@@ -249,7 +255,8 @@ with 4 segments.
 \end{lemma}
 
 \paragraph{Proof.}
-We can do that using one segment from $or\_move\_variable_{i, j}$
+We can do that using one segment from
+$or\_move\_variable_{i, j}$
 (chosen depending on the value of $x$)
 and all segments from $or^{true}_{i, j}$.
 
@@ -265,25 +272,26 @@ and $or^{false}_{i, j}$.
 
 \begin{lemma}
 \label{cover_clauses_solution}
-For any $1 \le i \le n$ and $a \in \{ x_{0, i}, y_{0, i}, z_{0, i}\}$,
+For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
 points $clause_i - \{a\}$ can be covered using 11 segments.
 \end{lemma}
 
 \paragraph{Proof.}
-For $a = x_{0, i}$ (analogous proof for $y_{0, i}$):
+For $a = x_{i, 0}$ (analogous proof for $y_{i, 0}$):
 Using Lemma~\ref{cover_or_true} twice with excluded $x = l_{i, 0}$ and
 $x = l_{i, 1} = v_{i, 0}$:
 
 We use 
-$\{ (x_{1, i}, l_{i, 0}), (y_{0, i}, y_{1, i}),
-(z_{0, i}, z_{1, i}) \} \cup or^{true}_{i, 0} \cup or^{true}_{i, 1}$
+$\{ (x_{i, 1}, l_{i, 0}), (y_{i, 1}, y_{i, 1}),
+(z_{i, 1}, z_{i, 1}) \} \cup or^{true}_{i, 0} \cup or^{true}_{i, 1}$
 
 For $a = z_{0, i}$:
-Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with $x = p_{i, 1}$:
+Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with
+$x = p_{i, 1}$:
 
 We use 
-$\{ (x_{0, 1}, x_{0, 1}), (y_{0, i}, y_{1, i}),
-(z_{1, i}, p_{i, 1}) \} \cup or^{false}_{i, 0} \cup or^{true}_{i, 1}$
+$\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
+(z_{i, 1}, p_{i, 1}) \} \cup or^{false}_{i, 0} \cup or^{true}_{i, 1}$
 
 
 \begin{lemma}
@@ -296,8 +304,8 @@ cover $or\_gadget_{i,0}$ and  $or\_gadget_{i,1}$
 with 8 segments.
 
 To cover the remaining points we additionally use:
-$\{ (x_{0, i}, x_{1, i}), (y_{0, i}, y_{1, i}),
-(z_{0, i}, z_{1, i}), (t_{i, 1}, v_{i, 1}) \}$
+$\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
+(z_{i, 0}, z_{i, 1}), (t_{i, 1}, v_{i, 1}) \}$
 
 \begin{lemma}
 \textbf{Robustness to 1/2-extensions}. For every segment $s \in \sets$,
@@ -355,7 +363,7 @@ not be covered with less than 2 sets (segments).
 \label{cover_clauses_segments_no_less}
 For any $1 \le i \le n$, points $clause_i$
 can be covered using 11 segments if at least one of the $\xTrueSegment$
-or $\xFalseSegment$ on which points $x_{0, i}, y_{0, i}$ or $z_{0, i}$
+or $\xFalseSegment$ on which points $x_{i, 0}, y_{i, 0}$ or $z_{i, 0}$
 doesn't have to be covered with segments from $clause_i$ (is covered by
 segments from $variable_i$).
 
@@ -366,22 +374,22 @@ in $clause_i$ have to be covered with segments from $clause_i$.
 
 \paragraph{Proof of no cover with less than 12 segments.}
 There is independent set of 12 points in $cover_i$ -- 
-$\{ x_{0, i}, y_{0, i}, z_{0, i}, l_{i, 0}, p_{i, 0}, q_{i, 0}, u_{i, 0}, v_{i, 0} = l_{i, 1},
- p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$
+$\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
+u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$
 
 \paragraph{Proof of no cover with less than 11 segments.}
 
 We can choose disjoint sets $X, Y, Z$ such that
-$X \cup Z \cup Z \subseteq cover_i - \{x_{0, i}, y_{0, i}, z_{0, i}\}$.
+$X \cup Z \cup Z \subseteq cover_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$.
 and there are no segments covering points from different sets.
 And we will prove lower bounds for each of these sets.
 
-$$X = \{x_{1, i}, y_{1, i}, z_{1, i}\}$$
+$$X = \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}$$
 
 Set $X$ is an indendent set, so it must be covered with 3 segment.
 
-$$Y = or\_gadget_{i, 0} - \{l_{i, 1}, p_{i, 0}\}$$
-$$Z = or\_gadget_{i, 1} - \{l_{i, 1}, p_{i, 0}\}$$
+$$Y = or\_gadget_{i, 0} - \{l_{i, 0}, p_{i, 0}\}$$
+$$Z = or\_gadget_{i, 1} - \{l_{i, 1}, p_{i, 1}\}$$
 
 
 For both $Y$ and $Z$ we can check all of the subsets of 3 segments and

@@ -117,6 +117,11 @@ and set of blue segments as $x^{true}_i$.}
 \end{tabular}
 \end{center}
 
+TODO: Rephrase it
+Assuming clause $C_i = x_i \lor y_i \lor z_i$,
+function $idx(w)$ is returning index of the variable $w$,
+function $neg(w)$ is returning whether variable $w$ is negated
+in a clause.
 
 \begin{center}
 \begin{tabular}{ l l }
@@ -152,8 +157,8 @@ green and yellow segments as $or\_move\_variable_{i, j}$.
 \caption{\textbf{Clause gadget.}
 We denote set of these points as $P\_clause_i$.
 Every green rectangle is an or gadget.
-$y$-coordinate of $x_{i, 0}$, $y_{i, 0}$ and $x_{i,0}$
-depends on the values of variables in $i$-th clause.
+$y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
+depend on the values of variables in the $i$-th clause.
 }
 \label{fig:apx_clause}
 \end{figure}
@@ -211,8 +216,8 @@ $$\points := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
 
 Let's define 
 
-$$x^{true}_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
-$$x^{false}_i \{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
+$$x^{true}_i =\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
+$$x^{false}_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
 
 $$S\_variable_i = x^{true}_i \cup x^{false}_i$$
 
@@ -225,18 +230,18 @@ $$or^{true}_{i, j} =
 $$or\_move\_variable_{i, j} =
 \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
 
-$$S\_clause_i = \{ (x_{i, 0}, x_{i, 1}),
+\begin{eqnarray*}
+S\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 (y_{i, 0}, y_{i, 1}),
 (z_{i, 0}, z_{i, 1}),
 (x_{i, 1}, l_{i, 0}),
 (y_{i, 1}, p_{i, 0}),
 (z_{i, 1}, p_{i, 1}),
-\}
-\cup or\_move\_variable_{i, 0}
-\cup or\_move\_variable_{i, 1}
-\cup or^{true}_{i, 0} \cup or^{true}_{i, 1}
-\cup or^{false}_{i, 0} \cup or^{false}_{i, 1}\}
-$$
+\} \cup \\
+& & \cup \ or\_move\_variable_{i, 0} \cup or\_move\_variable_{i, 1} \cup \\
+& & \cup \ or^{true}_{i, 0} \cup or^{true}_{i, 1} 
+\cup or^{false}_{i, 0} \cup or^{false}_{i, 1}
+\end{eqnarray*}
 
 $$\sets := \bigcup_{1 \le i \le n} S\_variable_i \cup S\_clause_i $$
 
@@ -281,21 +286,24 @@ points $P\_clause_i - \{a\}$ can be covered using 11 segments.
 
 \paragraph{Proof.}
 For $a = x_{i, 0}$ (analogous proof for $y_{i, 0}$):
-Using Lemma~\ref{cover_or_true} twice with excluded $x = l_{i, 0}$ and
-$x = l_{i, 1} = v_{i, 0}$:
-
-We use 
-$\{ (x_{i, 1}, l_{i, 0}), (y_{i, 1}, y_{i, 1}),
-(z_{i, 1}, z_{i, 1}) \} \cup or^{true}_{i, 0} \cup or^{true}_{i, 1}$
+First we use Lemma~\ref{cover_or_true} twice with excluded $x = l_{i, 0}$ and
+$x = l_{i, 1} = v_{i, 0}$,
+resulting with 8 segments $or^{true}_{i, 0} \cup or^{true}_{i, 1}$
+which cover all required points apart from
+$x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 0}, z_{i, 1}, l_{i, 0}$.
+We cover those using additional 3 segments:
+$\{ (x_{i, 1}, l_{i, 0}), (y_{i, 0}, y_{i, 1}),
+(z_{i, 0}, z_{i, 1}) \}$
 
 For $a = z_{0, i}$:
 Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with
-$x = p_{i, 1}$:
-
-We use 
+$x = p_{i, 1}$,
+resulting with 8 segments $or^{false}_{i, 0} \cup or^{true}_{i, 1}$
+which cover all required points apart from
+$x_{i, 0}, x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 1}, p_{i, 1}$.
+We cover those using additional 3 segments:
 $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
-(z_{i, 1}, p_{i, 1}) \} \cup or^{false}_{i, 0} \cup or^{true}_{i, 1}$
-
+(z_{i, 1}, p_{i, 1}) \}$.
 
 \begin{lemma}
  Points $P\_clause_i$ can be covered with 12 segments.

@@ -360,7 +360,7 @@ can not be covered with less than 3 segments.
 \end{lemma}
 
 \paragraph{Proof.}
-There is independent set of size 3 -- $d_i, f_i, c_i$, therefore it can
+There is independent set $\{d_i, f_i, c_i\}$ of size 3, therefore it can
 not be covered with less than 3 sets (segments).
 
 
@@ -371,26 +371,23 @@ the remaining points from $P\_variable_i$ must be covered with 2 different
 segments
 \end{lemma}
 \paragraph{Proof.}
-There is independent set of size 2 -- $a_i, e_i$, therefore it can
+There is independent set $\{a_i, e_i\}$ of size 2, therefore it can
 not be covered with less than 2 sets (segments).
 
 
 \begin{lemma}
 \label{cover_clauses_segments_no_less}
-For any $1 \le i \le n$, points $P\_clause_i$
-can be covered using 11 segments if at least one of the $\xTrueSegment$
-or $\xFalseSegment$ on which points $x_{i, 0}, y_{i, 0}$ or $z_{i, 0}$
-doesn't have to be covered with segments from $S\_clause_i$ (is covered by
-segments from $S\_variable_i$).
+For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
+points $P\_clause_i - \{a\}$
+can not be covered using less than 11 segments.
 
-They can not be covered with less than 12 segments if all of the points
-in $P\_clause_i$ have to be covered with segments from $P\_clause_i$.
+All points $P\_clause_i$ can not be covered with less than 12 segments.
 \end{lemma}
 
 
 \paragraph{Proof of no cover with less than 12 segments.}
-There is independent set of 12 points in $P\_clause_i$ -- 
-$\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
+There is independent set of 12 points in $P\_clause_i \supseteq
+\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
 u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$
 
 \paragraph{Proof of no cover with less than 11 segments.}

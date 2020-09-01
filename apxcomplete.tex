@@ -281,7 +281,7 @@ and $or^{false}_{i, j}$.
 
 
 \begin{lemma}
-\label{cover_clauses_solution}
+\label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
 points $P\_clause_i - \{a\}$ can be covered using 11 segments.
 \end{lemma}
@@ -308,6 +308,7 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 (z_{i, 1}, p_{i, 1}) \}$.
 
 \begin{lemma}
+\label{cover_clauses_solution_false}
  Points $P\_clause_i$ can be covered with 12 segments.
 \end{lemma}
 
@@ -331,7 +332,7 @@ $s$ and $s^{+\delta}$ cover the same points from $\points$.
 	Given an instance of MAX-(3,3)-SAT of size $n$
 	with optimal solution $k$.
 	For instance of geometric cover, constructed
-	in the aforementioned manner, 
+	according to Lemma~\ref{apxconstruction}, 
 	there exists a solution of weight $15n - k$.
 \end{lemma}
 \paragraph{Proof.}
@@ -340,12 +341,14 @@ that achieve the optimal solution,
 $y_1$,~$y_2$~$\ldots$~$y_n$,
 Let's cover every variable gadget with solution described in
 Lemma~\ref{choose_variables_solution},
-in the $i$-th gadget choosing the segment responsible for the
+in the $i$-th gadget choosing the set of segments responsible for the
 value of $y_i$
-(true--$\xTrueSegment$ or false--$\xFalseSegment$).
+(true -- $x_i^{true}$ or false -- $x_i^{false}$).
 
-Cover every clause gadget with solution described in
-Lemma~\ref{cover_clauses_solution}.
+Cover every satisfied clause gadget with solution described in
+Lemma~\ref{cover_clauses_solution_true}
+and unsatisfied clause gadget with solution from
+Lemma~\ref{cover_clauses_solution_false}.
 
 This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 
@@ -357,7 +360,7 @@ can not be covered with less than 3 segments.
 \end{lemma}
 
 \paragraph{Proof.}
-There is independent set if size 3 -- $d_i, f_i, c_i$, therefore it can
+There is independent set of size 3 -- $d_i, f_i, c_i$, therefore it can
 not be covered with less than 3 sets (segments).
 
 
@@ -368,7 +371,7 @@ the remaining points from $P\_variable_i$ must be covered with 2 different
 segments
 \end{lemma}
 \paragraph{Proof.}
-There is independent set if size 2 -- $a_i, e_i$, therefore it can
+There is independent set of size 2 -- $a_i, e_i$, therefore it can
 not be covered with less than 2 sets (segments).
 
 

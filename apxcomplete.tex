@@ -95,7 +95,7 @@ Define points:
 \def\svgwidth{0.5\columnwidth}
 \input{apx_choose_variable.pdf_tex}
 \caption{\textbf{Choose variable value gadget.}
-We denote set of points marked with black circle as $P\_variable_i$
+We denote set of points marked with black circle as $C\_variable_i$
 and need to be covered (are part of set $\points$).
 We denote set of red segments as $x^{false}_i$
 and set of blue segments as $x^{true}_i$.}
@@ -157,7 +157,7 @@ green and yellow segments as $or\_move\_variable_{i, j}$.
 \def\svgwidth{0.8\columnwidth}
 \input{apx_clause.pdf_tex}
 \caption{\textbf{Clause gadget.}
-We denote set of these points as $P\_clause_i$.
+We denote set of these points as $C\_clause_i$.
 Every green rectangle is an or gadget.
 $y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
 depend on the values of variables in the $i$-th clause.
@@ -191,7 +191,7 @@ depend on the values of variables in the $i$-th clause.
 
 Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
 
-Let's define $$P\_variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$	
+Let's define $$C\_variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$	
  
  $$move\_variable_i = 
  \{x_{i, j} : j \in \{0, 1\}\} \cup
@@ -204,14 +204,14 @@ Let's define $$P\_variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$
  p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
  $$
  
- $$P\_clause_i = 
+ $$C\_clause_i = 
  move\_variable_i \cup or\_gadget_{i, 0}
  \cup or\_gadget_{i, 1} \cup \{v_{i, 1} \} 
  $$
  
 
 Then we define:
-$$\points := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
+$$\points := \bigcup_{1 \le i \le n} C\_variable_i \cup C\_clause_i $$
 
 
 \paragraph{Segments.}
@@ -221,7 +221,7 @@ Let's define
 $$x^{true}_i =\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
 $$x^{false}_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
 
-$$S\_variable_i = x^{true}_i \cup x^{false}_i$$
+$$P\_variable_i = x^{true}_i \cup x^{false}_i$$
 
 $$or^{false}_{i, j} =
 \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
@@ -233,7 +233,7 @@ $$or\_move\_variable_{i, j} =
 \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
 
 \begin{eqnarray*}
-S\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
+P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 (y_{i, 0}, y_{i, 1}),
 (z_{i, 0}, z_{i, 1}),
 (x_{i, 1}, l_{i, 0}),
@@ -245,11 +245,11 @@ S\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 \cup or^{false}_{i, 0} \cup or^{false}_{i, 1}
 \end{eqnarray*}
 
-$$\sets := \bigcup_{1 \le i \le n} S\_variable_i \cup S\_clause_i $$
+$$\sets := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
 
 \begin{lemma}
 \label{choose_variables_solution}
-For any $1 \le i \le n$, points $P\_variable_i$
+For any $1 \le i \le n$, points $C\_variable_i$
 can be covered using 3 segments.
 \end{lemma}
 
@@ -283,7 +283,7 @@ and $or^{false}_{i, j}$.
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-points $P\_clause_i - \{a\}$ can be covered using 11 segments.
+points $C\_clause_i - \{a\}$ can be covered using 11 segments.
 \end{lemma}
 
 \paragraph{Proof.}
@@ -309,7 +309,7 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 
 \begin{lemma}
 \label{cover_clauses_solution_false}
- Points $P\_clause_i$ can be covered with 12 segments.
+ Points $C\_clause_i$ can be covered with 12 segments.
 \end{lemma}
 
 \paragraph{Proof.}
@@ -355,7 +355,7 @@ This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 
 \begin{lemma}
 \label{choose_variables_no_less}
-For any $1 \le i \le n$, points $P\_variable_i$
+For any $1 \le i \le n$, points $C\_variable_i$
 can not be covered with less than 3 segments.
 \end{lemma}
 
@@ -367,7 +367,7 @@ not be covered with less than 3 sets (segments).
 \begin{lemma}
 \label{choose_variables_both}
 If both segments $\xTrueSegment$ and $\xFalseSegment$ are chosen, then
-the remaining points from $P\_variable_i$ must be covered with 2 different
+the remaining points from $C\_variable_i$ must be covered with 2 different
 segments
 \end{lemma}
 \paragraph{Proof.}
@@ -378,45 +378,46 @@ not be covered with less than 2 sets (segments).
 \begin{lemma}
 \label{cover_clauses_segments_no_less}
 For any $1 \le i \le n$,
-points $P\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
+points $C\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
 can not be covered using less than 11 segments.
 
-All points $P\_clause_i$ can not be covered with less than 12 segments.
+All points $C\_clause_i$ can not be covered with less than 12 segments.
 \end{lemma}
 
 
 \paragraph{Proof of no cover with less than 12 segments.}
-There is independent set of 12 points in $P\_clause_i \supseteq
+There is independent set of 12 points in $C\_clause_i \supseteq
 \{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
-u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$
+u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$.
 
 \paragraph{Proof of no cover with less than 11 segments.}
 
 We can choose disjoint sets $X, Y, Z$ such that
-$X \cup Z \cup Z \subseteq P\_clause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$.
+$X \cup Y \cup Z \subseteq C\_clause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$.
 and there are no segments covering points from different sets.
 And we will prove lower bounds for each of these sets.
 
 $$X = \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}$$
 
-Set $X$ is an indendent set, so it must be covered with 3 segment.
+Set $X$ is an indendent set, so it must be covered with 3 segments.
 
 $$Y = or\_gadget_{i, 0} - \{l_{i, 0}, p_{i, 0}\}$$
 $$Z = or\_gadget_{i, 1} - \{l_{i, 1}, p_{i, 1}\}$$
 
 
-For both $Y$ and $Z$ we can check all of the subsets of 3 segments and
-check with brutforce that both of them must use at least 4 segments.
+For both $Y$ and $Z$ we can check all of the subsets of 3 segments
+with brutforce that none of them cover, so they have to be covered with
+4 segments.
 
 TODO: Funny fact, neither Y nor Z doesn't have independent set of size 4.
 
-Therefore $P\_clause_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
+Therefore $C\_clause_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
 
 \begin{lemma}
 	\label{construction_completness}
 	Given an instance of MAX-(3,3)-SAT of size $n$,
 	and solution of size $w$ to the instance of geometric cover,
-	constructed in the aforementioned manner, 
+	constructed	according to Lemma~\ref{apxconstruction},  
 	there exists a solution to MAX-(3,3)-SAT of size at least $15n - w$.
 \end{lemma}
 \paragraph{Proof.}
@@ -424,7 +425,7 @@ Among the segments responsible for choosing the value of variable $x_i$,
 we need to use at least 3 segments (Lemma~\ref{choose_variables_no_less}).
 If we have chosen segments both $\xTrueSegment$ and $\xFalseSegment$,
 then we have used at least 4 segments (Lemma~\ref{choose_variables_both})
-from $S\_variable_i$.
+from $P\_variable_i$.
 
 If we chose at most one of the segments $\xTrueSegment$ and $\xFalseSegment$,
 choose the corresponding variable value to the solution.

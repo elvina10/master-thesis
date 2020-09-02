@@ -421,11 +421,10 @@ Therefore $C\_clause_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
 	there exists a solution to MAX-(3,3)-SAT of size at least $15n - w$.
 \end{lemma}
 \paragraph{Proof.}
-Among the segments responsible for choosing the value of variable $x_i$,
+Among $x_i^{true} \cup x_i^{false}$,
 we need to use at least 3 segments (Lemma~\ref{choose_variables_no_less}).
-If we have chosen segments both $\xTrueSegment$ and $\xFalseSegment$,
-then we have used at least 4 segments (Lemma~\ref{choose_variables_both})
-from $P\_variable_i$.
+If we have chosen both segments $\xTrueSegment$ and $\xFalseSegment$,
+then we have used at least 4 segments (Lemma~\ref{choose_variables_both}).
 
 If we chose at most one of the segments $\xTrueSegment$ and $\xFalseSegment$,
 choose the corresponding variable value to the solution.
@@ -433,16 +432,18 @@ If we chose both segments,
 choose the value that appears in most (at least 2) clauses.
 If we have chosen none of the segments, choose any value.
 
-To cover these segments we have used at least $3n + a$ segments,
-where $a$ is the number of variables that we have chosen both
-values for.
+To cover $\bigcup_{1 \le i \le n} C\_variable_i$
+we have used at least $3n + a$ segments,
+where $a$ is the number of $i$ such that we have chosen both
+values $\xTrueSegment$ and $\xFalseSegment$.
 
 Among the segments responsible for the clause $C_i = x \lor y \lor z$
 we need to use at least 11 segments
 (Lemma~\ref{cover_clauses_segments_no_less})
 and if we can cover it with 11 segments, then we have 
 earlier chosen
-segment responsible for correct value of variable $x$, $y$ or $z$.
+segment responsible for the value of variable $x$, $y$ or $z$
+that satisfies $C_i$.
 
 So we have at least 11 segments for satisfied clauses
 and at least 12 segments
@@ -460,8 +461,8 @@ at most one of the clauses isn't met.
 So there are at most $a+b$ unsatsfied clauses in this instance,
 so we have shown the assignment with at least  $n-(a+b)$ satisfied clauses.
 
-$$w > 3n + a + 11n + b = 14n + a + b$$
-$$15n - w  < 15n - 14 n - a - b = n - (a+b)$$
+$$w \ge 3n + a + 11n + b = 14n + a + b$$
+$$15n - w  \le 15n - 14 n - a - b = n - (a+b)$$
 
 \subsubsection{Proof of Lemma \ref{apxconstruction}}
 Given an instance of MAX-(3,3)-SAT of size $n$
@@ -473,4 +474,4 @@ Given the Lemma~\ref{construction_correctness}, we know
 the optimal solution for the constructed geometric cover is
 at most $15n - k$ and since the $k$ is optimal solution
 for MAX-(3,3)-SAT, then according to Lemma~\ref{construction_completness}
-there doesn't exist a solution with cost lesser than $15n - k$.
+there doesn't exist a solution with cost less than $15n - k$.

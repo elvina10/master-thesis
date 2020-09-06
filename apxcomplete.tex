@@ -82,10 +82,30 @@ for $I_1$ than for $I_2$. This is a contradiction,
 hence the approximation scheme cannot exist.
 
 \subsection{Reduction construction}
-\subsubsection{Definition of points and segments}
+We will show reduction from MAX-(3,3)-SAT problem
+to geometric set cover with segments
+parallel to axis. Moreover the instance
+of geometric set cover will be robust
+to 1/2-extensions (have the same optimal solution
+after 1/2-extension).
+
+The construction will be composed of 3 types of gadgets:
+variable gadgets, or gadgets, clause gadgets.
+
+We define:
+$$\points := \bigcup_{1 \le i \le n} C\_variable_i \cup C\_clause_i $$
+$$\sets := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
+
+We will prove some properties of different gadgets.
+Every segment for gadget will only cover points 
+in this gadget (won't interact with any diferent gadget),
+so we can prove lemmas \textit{locally}.
+
 
 TODO: $y$ axis is increasing values downward on figures
 (not upwards like in normal).
+
+\subsubsection{Variable gadget}
 
 \paragraph{Points.}
 
@@ -102,7 +122,7 @@ and set of blue segments as $x^{true}_i$.}
 \label{fig:apx_choose_variable}
 \end{figure}
 
-	$$L = 12n$$
+TODO: inline $L = 12n$ after finishing these formulas
 
 \begin{center}
 \begin{tabular}{ l l l l}
@@ -113,12 +133,167 @@ and set of blue segments as $x^{true}_i$.}
 	$e_{i} = (-\frac{2}{3}L, 4i+1)$ & 
 	$f_{i} = (-\frac{2}{3}L, 4i+2)$ &
 	$g_i = (L, 4i)$ &
-	$h_j = (L, 4i+2)$
+	$h_i = (L, 4i+2)$
 \end{tabular}
 \end{center}
 
-TODO: Rephrase it
+Let's define $$C\_variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$	
 
+
+\paragraph{Segments.}
+
+Let's define 
+
+$$x^{true}_i =\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
+$$x^{false}_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
+
+$$P\_variable_i = x^{true}_i \cup x^{false}_i$$
+
+
+\begin{lemma}
+\label{choose_variables_solution}
+For any $1 \le i \le n$, points $C\_variable_i$
+can be covered using 3 segments from $P\_variable_i$.
+\end{lemma}
+
+\paragraph{Proof.}
+We can use set $x^{true}_i$ or $x^{false}_i$.
+
+
+\begin{lemma}
+\label{choose_variables_no_less}
+For any $1 \le i \le n$, points $C\_variable_i$
+can not be covered with less than 3 segments from $P\_variable_i$.
+\end{lemma}
+
+\paragraph{Proof.}
+There is independent set $\{d_i, f_i, c_i\}$ of size 3, therefore it can
+not be covered with less than 3 sets (segments).
+
+
+\begin{lemma}
+\label{choose_variables_both}
+If both segments $\xTrueSegment$ and $\xFalseSegment$ are chosen, then
+the remaining points from $C\_variable_i$ must be covered with 2 different
+segments from $P\_variable_i$.
+\end{lemma}
+\paragraph{Proof.}
+There is an independent set $\{a_i, e_i\}$ of size 2
+in $P\_variable_i$ - \{ $\xTrueSegment$, $\xFalseSegment$ \},
+therefore it can not be covered with less than 2 sets (segments).
+
+
+\subsubsection{Or gadget}
+
+\paragraph{Points.}
+
+\begin{figure}[h]
+\centering
+\def\svgwidth{0.5\columnwidth}
+\input{apx_or_gadget.pdf_tex}
+\caption{
+\textbf{Or gadget.} We denote these point as $or\_gadget_{i, j}$. 
+We denote set of red segments as $or^{false}_{i, j}$,
+set of blue segments as $or^{true}_{i, j}$,
+green and yellow segments as $or\_move\_variable_{i, j}$.
+}
+\label{fig:apx_or_gadget}
+\end{figure}
+
+	\begin{center}
+\begin{tabular}{ l l l l}
+
+	$l_0 = (0, 0)$ &
+	$m_0 = (0, 1)$ &
+	$n_0 = (0, 2)$ &
+	$o_0 = (0, 3)$ \\
+	$p_0 = (0, 4)$ &
+	$q_0 = (1, 1)$ &
+	$r_0 = (1, 3)$ &
+	$s_0 = (2, 1)$ \\
+	$t_0 = (2, 2)$ &
+	$u_0 = (2, 3)$ &
+	$v_0 = (3, 2)$ &
+\end{tabular}
+\end{center}
+
+
+	$$vec_{i, j} = (10i + 3 + 3j, 4n + 2j)$$
+	
+	Define 
+	$\{ l_{i, j}, m_{i, j} \ldots v_{i, j} \}$
+	as $\{l_0, m_0 \ldots v_0\}$ shifted by $vec_{i, j}$
+
+Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
+ 
+  $$C\_or\_gadget_{i, j} = 
+ \{l_{i, j}, m_{i, j}, n_{i, j}, o_{i, j},
+ p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
+ $$
+ 
+\paragraph{Segments.}
+
+We define names subsets of segments, to refer to them in lemmas.
+ 
+$$or^{false}_{i, j} =
+\{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
+$$or^{true}_{i, j} =
+\{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),
+(t_{i, j}, v_{i, j}) \}$$
+
+$$or\_move\_variable_{i, j} =
+\{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
+
+Segments in or gadget:
+
+$$P\_or\_gadget_{i, j} = 
+  or^{false}_{i, j} \cup or^{true}_{i, j} \cup or\_move\_variable_{i, j}
+  $$
+
+
+\begin{lemma}
+\label{cover_or_true}
+For any $1 \le i \le n, j \in \{0, 1\}$ and 
+ $x \in \{l_{i, j}, p_{i, j}\}$ we can cover points in
+$C\_or\_gadget_{i, j} - \{ x\} \cup \{v_{i, j}\}$
+with 4 segments.
+\end{lemma}
+
+\paragraph{Proof.}
+We can do that using one segment from
+$or\_move\_variable_{i, j}$
+(chosen depending on the value of $x$)
+and all segments from $or^{true}_{i, j}$.
+
+\begin{lemma}
+\label{cover_or_false}
+For any $1 \le i \le n, j \in \{0, 1\}$, we can cover points in
+$C\_or\_gadget_{i, j}$ with 4 segments from $P\_or\_gadget_{i,j}$.
+\end{lemma}
+\paragraph{Proof.}
+We can do that using  $or\_move\_variable_{i, j}$
+and $or^{false}_{i, j}$.
+
+
+\subsubsection{Clause gadget}
+
+\paragraph{Points.}
+
+
+\begin{figure}[h]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{apx_clause.pdf_tex}
+\caption{\textbf{Clause gadget.}
+We denote set of these points as $C\_clause_i$.
+Every green rectangle is an or gadget.
+$y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
+depend on the values of variables in the $i$-th clause.
+}
+\label{fig:apx_clause}
+\end{figure}
+
+TODO: Rephrase it
 
 Assuming clause $C_i = x_i \lor y_i \lor z_i$,
 function $idx(w)$ is returning index of the variable $w$,
@@ -136,62 +311,6 @@ in a clause.
 \end{tabular}
 \end{center}
 	
-	
-	
-\begin{figure}[h]
-\centering
-\def\svgwidth{0.5\columnwidth}
-\input{apx_or_gadget.pdf_tex}
-\caption{
-\textbf{Or gadget.} We denote these point as $or\_gadget_{i, j}$. 
-We denote set of red segments as $or^{false}_{i, j}$,
-set of blue segments as $or^{true}_{i, j}$,
-green and yellow segments as $or\_move\_variable_{i, j}$.
-}
-\label{fig:apx_or_gadget}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-\def\svgwidth{0.8\columnwidth}
-\input{apx_clause.pdf_tex}
-\caption{\textbf{Clause gadget.}
-We denote set of these points as $C\_clause_i$.
-Every green rectangle is an or gadget.
-$y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
-depend on the values of variables in the $i$-th clause.
-}
-\label{fig:apx_clause}
-\end{figure}
-	$$vec_{i, j} = (10i + 3 + 3j, 4n + 2j)$$
-	
-	\begin{center}
-\begin{tabular}{ l l l l}
-
-	$l_0 = (0, 0)$ &
-	$m_0 = (0, 1)$ &
-	$n_0 = (0, 2)$ &
-	$o_0 = (0, 3)$ \\
-	$p_0 = (0, 4)$ &
-	$q_0 = (1, 1)$ &
-	$r_0 = (1, 3)$ &
-	$s_0 = (2, 1)$ \\
-	$t_0 = (2, 2)$ &
-	$u_0 = (2, 3)$ &
-	$v_0 = (3, 2)$ &
-\end{tabular}
-\end{center}
-	
-	
-	
-	Define 
-	$\{ l_{i, j}, m_{i, j} \ldots v_{i, j} \}$
-	as $\{l_0, m_0 \ldots v_0\}$ shifted by $vec_{i, j}$
-
-Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
-
-Let's define $$C\_variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$	
  
  $$move\_variable_i = 
  \{x_{i, j} : j \in \{0, 1\}\} \cup
@@ -199,38 +318,12 @@ Let's define $$C\_variable_i =  \{a_i, b_i, c_i, d_i, e_i, f_i\}$$
  \{z_{i, j} : j \in \{0, 1\}\} 
  $$
  
- $$or\_gadget_{i, j} = 
- \{l_{i, j}, m_{i, j}, n_{i, j}, o_{i, j},
- p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
- $$
- 
  $$C\_clause_i = 
- move\_variable_i \cup or\_gadget_{i, 0}
- \cup or\_gadget_{i, 1} \cup \{v_{i, 1} \} 
+ move\_variable_i \cup C\_or\_gadget_{i, 0}
+ \cup C\_or\_gadget_{i, 1} \cup \{v_{i, 1} \} 
  $$
- 
-
-Then we define:
-$$\points := \bigcup_{1 \le i \le n} C\_variable_i \cup C\_clause_i $$
-
 
 \paragraph{Segments.}
-
-Let's define 
-
-$$x^{true}_i =\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
-$$x^{false}_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
-
-$$P\_variable_i = x^{true}_i \cup x^{false}_i$$
-
-$$or^{false}_{i, j} =
-\{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
-$$or^{true}_{i, j} =
-\{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),
-(t_{i, j}, v_{i, j}) \}$$
-
-$$or\_move\_variable_{i, j} =
-\{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
 
 \begin{eqnarray*}
 P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
@@ -240,50 +333,14 @@ P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 (y_{i, 1}, p_{i, 0}),
 (z_{i, 1}, p_{i, 1}),
 \} \cup \\
-& & \cup \ or\_move\_variable_{i, 0} \cup or\_move\_variable_{i, 1} \cup \\
-& & \cup \ or^{true}_{i, 0} \cup or^{true}_{i, 1} 
-\cup or^{false}_{i, 0} \cup or^{false}_{i, 1}
+& & \cup \ P\_or\_gadget_{i, 0} \cup P\_or\_gadget_{i, 1}
 \end{eqnarray*}
-
-$$\sets := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
-
-\begin{lemma}
-\label{choose_variables_solution}
-For any $1 \le i \le n$, points $C\_variable_i$
-can be covered using 3 segments.
-\end{lemma}
-
-\paragraph{Proof.}
-We can use set $x^{true}_i$ or $x^{false}_i$.
-
-\begin{lemma}
-\label{cover_or_true}
-For any $1 \le i \le n, j \in \{0, 1\}$ and 
- $x \in \{l_{i, j}, p_{i, j}\}$ we can cover points in
-$or\_gadget_{i, j} - \{ x\} \cup \{v_{i, j}\}$
-with 4 segments.
-\end{lemma}
-
-\paragraph{Proof.}
-We can do that using one segment from
-$or\_move\_variable_{i, j}$
-(chosen depending on the value of $x$)
-and all segments from $or^{true}_{i, j}$.
-
-\begin{lemma}
-\label{cover_or_false}
-For any $1 \le i \le n, j \in \{0, 1\}$, we can cover points in $or\_gadget_{i, j}$
-with 4 segments.
-\end{lemma}
-\paragraph{Proof.}
-We can do that using  $or\_move\_variable_{i, j}$
-and $or^{false}_{i, j}$.
-
 
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-points $C\_clause_i - \{a\}$ can be covered using 11 segments.
+points $C\_clause_i - \{a\}$ can be covered using 11 segments
+from $P\_clause_i$.
 \end{lemma}
 
 \paragraph{Proof.}
@@ -309,7 +366,7 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 
 \begin{lemma}
 \label{cover_clauses_solution_false}
- Points $C\_clause_i$ can be covered with 12 segments.
+ Points $C\_clause_i$ can be covered with 12 segments from $P\_clause_i$.
 \end{lemma}
 
 \paragraph{Proof.}
@@ -320,6 +377,50 @@ with 8 segments.
 To cover the remaining points we additionally use:
 $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 (z_{i, 0}, z_{i, 1}), (t_{i, 1}, v_{i, 1}) \}$
+
+
+\begin{lemma}
+\label{cover_clauses_segments_no_less}
+For any $1 \le i \le n$,
+points $C\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
+can not be covered using less than 11 segments from $P\_clause_i$.
+
+All points $C\_clause_i$ can not be covered with less than 12 segments
+from $P\_clause_i$.
+\end{lemma}
+
+
+\paragraph{Proof of no cover with less than 12 segments.}
+There is independent set of 12 points in $C\_clause_i \supseteq
+\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
+u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$.
+
+\paragraph{Proof of no cover with less than 11 segments.}
+
+We can choose disjoint sets $X, Y, Z$ such that
+$X \cup Y \cup Z \subseteq C\_clause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
+and there are no segments covering points from different sets.
+And we will prove lower bounds for each of these sets.
+
+$$X = \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}$$
+
+Set $X$ is an indendent set, so it must be covered with 3 segments.
+
+$$Y = or\_gadget_{i, 0} - \{l_{i, 0}, p_{i, 0}\}$$
+$$Z = or\_gadget_{i, 1} - \{l_{i, 1}, p_{i, 1}\}$$
+
+
+For both $Y$ and $Z$ we can check all of the subsets of 3 segments
+with brutforce that none of them cover, so they have to be covered with
+4 segments.
+
+TODO: Funny fact, neither Y nor Z doesn't have independent set of size 4.
+
+Therefore $C\_clause_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
+
+\subsubsection{Summary}
+
+Add some smart lemmas that sets will be exclusive to each other.
 
 \begin{lemma}
 \textbf{Robustness to 1/2-extensions}. For every segment $s \in \sets$,
@@ -351,67 +452,6 @@ and unsatisfied clause gadget with solution from
 Lemma~\ref{cover_clauses_solution_false}.
 
 This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
-
-
-\begin{lemma}
-\label{choose_variables_no_less}
-For any $1 \le i \le n$, points $C\_variable_i$
-can not be covered with less than 3 segments.
-\end{lemma}
-
-\paragraph{Proof.}
-There is independent set $\{d_i, f_i, c_i\}$ of size 3, therefore it can
-not be covered with less than 3 sets (segments).
-
-
-\begin{lemma}
-\label{choose_variables_both}
-If both segments $\xTrueSegment$ and $\xFalseSegment$ are chosen, then
-the remaining points from $C\_variable_i$ must be covered with 2 different
-segments
-\end{lemma}
-\paragraph{Proof.}
-There is independent set $\{a_i, e_i\}$ of size 2, therefore it can
-not be covered with less than 2 sets (segments).
-
-
-\begin{lemma}
-\label{cover_clauses_segments_no_less}
-For any $1 \le i \le n$,
-points $C\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-can not be covered using less than 11 segments.
-
-All points $C\_clause_i$ can not be covered with less than 12 segments.
-\end{lemma}
-
-
-\paragraph{Proof of no cover with less than 12 segments.}
-There is independent set of 12 points in $C\_clause_i \supseteq
-\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
-u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$.
-
-\paragraph{Proof of no cover with less than 11 segments.}
-
-We can choose disjoint sets $X, Y, Z$ such that
-$X \cup Y \cup Z \subseteq C\_clause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-and there are no segments covering points from different sets.
-And we will prove lower bounds for each of these sets.
-
-$$X = \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}$$
-
-Set $X$ is an indendent set, so it must be covered with 3 segments.
-
-$$Y = or\_gadget_{i, 0} - \{l_{i, 0}, p_{i, 0}\}$$
-$$Z = or\_gadget_{i, 1} - \{l_{i, 1}, p_{i, 1}\}$$
-
-
-For both $Y$ and $Z$ we can check all of the subsets of 3 segments
-with brutforce that none of them cover, so they have to be covered with
-4 segments.
-
-TODO: Funny fact, neither Y nor Z doesn't have independent set of size 4.
-
-Therefore $C\_clause_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
 
 \begin{lemma}
 	\label{construction_completness}

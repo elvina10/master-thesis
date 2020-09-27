@@ -13,6 +13,7 @@ Segments are basically degenerated rectangles with one side very narrow.
 
 
 \begin{tw}{
+\label{segment_cover_apx_hard}
 	\textbf{(axis-parallel segment set cover with 1/2-extension is APX-hard)}.	
 	For sufficiently small $\epsilon > 0$,
 	there does not exist an $(1+\epsilon)$-approximation scheme
@@ -75,7 +76,12 @@ Here we define MAXSAT problem.
 	which optimal result (even with 1/2-extension) is exactly $15n - k$.
 }\end{lemma}
 
-\paragraph{Proof.}
+We will provide a proof for Lemma\label{apxconstruction} in
+subsequent sections, but meanwhile let's prove
+Theorem\ref{segment_cover_apx_hard} using Lemma\label{apxconstruction}
+and Theorem\label{hastad}.
+
+\paragraph{Proof of Theorem \ref{segment_cover_apx_hard}}
 Take any $0 < \epsilon < 1/(15 \cdot 8)$.
 Choose $n$ sufficiently large, so that $\epsilon'(n)$ from
 Theorem \ref{hastadtheorem}

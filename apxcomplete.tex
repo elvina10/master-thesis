@@ -57,13 +57,14 @@ Here we define MAXSAT problem.
 \begin{tw}{
 	\label{hastadtheorem}
 	\textbf{\cite{hastad}}
-	Assume NP $\not\subseteq$ $DTIME(2^{O(\log n \log \log n)})$.
-	Then, there exists a constant $c > 0$, such that for
-	$$\epsilon'(n) = \frac{c \log \log \log n}{\log \log n}$$ 
-	fully satifiable 3-SAT formulas cannot be distinguished 
-	in polynomial time from
-	3-SAT formulas where no more than $(7/8+\epsilon'(n))n$ clauses
-	can be satisfied in polynomial time.
+	
+	For any $\epsilon > 0$, it is NP-hard to distinguish satisfiable
+	(3,3)-SAT formulas from
+	%This broke x-satisfiable
+	\linebreak\mbox{$(7/8 + \epsilon)$-satisfiable}
+	(3,3)-SAT formulas. Said equivalently, MAX-(3,3)-SAT
+	is nonapproximable beyond the random assignment threshold
+	on satisfiable instances.
 }\end{tw}
 
 \begin{lemma}{

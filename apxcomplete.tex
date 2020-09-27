@@ -79,12 +79,12 @@ Here we define MAXSAT problem.
 We will provide a proof for Lemma\label{apxconstruction} in
 subsequent sections, but meanwhile let's prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
-and Theorem \ref{hastad}.
+and Theorem \ref{hastadtheorem}.
 
 \paragraph{Proof of Theorem \ref{segment_cover_apx_hard}}
 Take any $0 < \epsilon < 1/(15 \cdot 8)$.
 Choose $n$ sufficiently large, so that $\epsilon'(n)$ from
-Theorem \ref{hastad}
+Theorem \ref{hastadtheorem}
 is not greater than $\epsilon$.
 
 Let's assume that there exists an $(1+\epsilon)$-approximation scheme
@@ -92,42 +92,50 @@ for unweighted geometric set cover with axis-pararell segments in 2D.
 We will construct an algorithm distinguishing instances of
 MAX-(3,3)-SAT
 in Theorem \ref{hastadtheorem}.
-Take two instances to be distinguished and using
-Lemma \ref{apxconstruction}
-and name them satisfiable -- $S_1$ and unsatisfiable -- $S_2$.
-Let's construct two instances of geometric set cover
-and name them respectively $I_1$ and $I_2$.
+Take an instance $S$ of (3,3)-SAT to be distinguished
+and construct an instance of geometric set cover
+using Lemma \ref{apxconstruction}, name it $I$.
 
 Use $(1+\epsilon)$-approximation scheme for instances of geometric
 set cover, let's name the result of this approximation
 for an instance of problem $I$ as $approx(I)$.
 
-From defintion of $S_1$ and $S_2$ we have:
-$$OPT(S_1) = n$$
-$$OPT(S_2) \le (\frac{7}{8} + \epsilon'(n))n$$
+We will prove that 
+if $approx(I) \ge 15n - (\frac{7}{8} + \epsilon)n$ then $S$
+satisfied at most $(\frac{7}{8}+\epsilon)n$ clauses
+and if $approx(I) < 15n - (\frac{7}{8} + \epsilon)n$ then $S$ was
+satisfiable.
+
+\subparagraph{Assume $S$ satisfiable}
+From defintion of satisfiable $S$ we have:
+$$OPT(S) = n$$
 
 From Lemmma \ref{apxconstruction} we have:
 
-$$OPT(I_1) = 14n$$
-$$OPT(I_2) = 15n - (\frac{7}{8} + \epsilon'(n))n$$
+$$OPT(I) = 14n$$
 
-Let's prove that $approx(I_2) > approx(I_1)$:
+$$approx(I) \le OPT(I)(1+\epsilon) = 14n(1+\epsilon)
+	= 14n + (14\epsilon)n = 14n + (15\epsilon - \epsilon)n < $$
+$$ < 14n + (\frac{1}{8} - \epsilon)n >
+14n + (\frac{1}{8} - \epsilon'(n))n = 15n - (\frac{7}{8} + \epsilon)n$$
 
-$$approx(I_2) \ge OPT(I_2) = 15n - (\frac{7}{8} + \epsilon'(n))n
-	= 14n + (\frac{1}{8} - \epsilon'(n))n
-	> 14n + (\frac{1}{8} - \epsilon)n > $$
-$$	> 14n + (15\epsilon - \epsilon)n
-	= 14n + (14\epsilon)n
-	= 14n(1+\epsilon)
-	= OPT(I_1)(1+\epsilon) \ge approx(I_1)$$ 
+\subparagraph{Assume $S$ at most $(\frac{7}{8} + \epsilon)n$ satisfiable}
+From defintion of satisfiable $S$ we have:
+$$OPT(S) \le (\frac{7}{8} + \epsilon'(n))n$$
+
+From Lemmma \ref{apxconstruction} we have:
+$$OPT(I) = 15n - (\frac{7}{8} + \epsilon)n$$
+
+$$approx(I) \ge OPT(I) = 15n - (\frac{7}{8} + \epsilon)n$$
 
 
-
-Therefore, by using out supposed $(1+\epsilon)$ approximation,
-it’s possible to distinguish $S_1$ from $S_2$, since
-the approximation scheme will always return a smaller value
-for $I_1$ than for $I_2$. This is a contradiction,
-hence the approximation scheme cannot exist.
+Therefore, by using assumed to exist $(1+\epsilon)$ approximation
+for segment set cover,
+it’s possible to distinguish $S$ from
+being satisfiable and at most $(\frac{7}{8} + \epsilon)n$ satisfiable,
+since there exists result threshold distinguishing
+approximation result in segment set cover for these two cases.
+This is a contradiction, hence the approximation scheme cannot exist.
 
 \subsection{Reduction construction}
 We will show reduction from MAX-(3,3)-SAT problem

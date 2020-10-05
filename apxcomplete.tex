@@ -3,9 +3,26 @@
 
 Let's analyze approximation of set cover with rectangles.
 
-The question on the table is
-if there exists $(1+\epsilon)$-approximation scheme
-for set cover with rectangles.
+
+\begin{defi}
+A \textbf{polynomial-time approximation scheme (PTAS)}
+is an algorithm that takes an instance $I$ of parametrization problem
+and a parameter $\epsilon > 0$ and,
+in polynomial time, finds a solution that is within a factor
+$1+\epsilon$ of being optimal. That means
+it has weight at most
+$(1+\epsilon)opt(I)$, where $opt(I)$ is a weight
+of the optimal solution for $I$.
+\end{defi}
+
+\begin{defi}
+Problem is \textbf{APX-hard} iff assuming $P\neq NP$
+there doesn't exist a PTAS for this problem.
+\end{defi}
+
+
+We would like to analyze if there exists $(1+\epsilon)$-approximation
+scheme for set cover with rectangles.
 
 Let's restrict this problem to some very easy setting:
 segments parallel to axes and allow (1/2)-extension.
@@ -15,47 +32,38 @@ Segments are basically degenerated rectangles with one side very narrow.
 \begin{tw}{
 \label{segment_cover_apx_hard}
 	\textbf{(axis-parallel segment set cover with 1/2-extension is APX-hard)}.	
-	For sufficiently small $\epsilon > 0$,
-	there does not exist an $(1+\epsilon)$-approximation scheme
-	for unweighted geometric set cover
+	Unweighted geometric set cover
 	with axis-parallel segments in 2D (even with 1/2-extension)
-	(problem is APX-hard).
+	is APX-hard.
 }\end{tw}
 
 
 \begin{tw}{
 \label{rectangle_cover_apx_hard}
 	\textbf{(rectangle set cover is APX-hard)}.	
-	For sufficiently small $\epsilon > 0$,
-	there does not exist an $(1+\epsilon)$-approximation scheme
-	for unweighted geometric set cover
-	with rectangles (even with 1/2-extension)
-	(problem is APX-hard).
+	Unweighted geometric set cover
+	with rectangles (even with 1/2-extension) is APX-hard.
 }\end{tw}
 
+\paragraph{Proof of Theorem \ref{rectangle_cover_apx_hard}.}
+It follows from Theorem \ref{segment_cover_apx_hard}.
+This is a special case of that theorem.
 
-The problem of rectangle set cover doesn't have 
-$(1+\epsilon)$-approximation scheme even in the setting
-with segments pararell to axis with 1/2-extensions.
-Theorem \ref{segment_cover_apx_hard} implies
-Theorem \ref{rectangle_cover_apx_hard}.
-
-
-We will prove it by taking a problem that is APX-complete
-(doesn't have $(1+\epsilon)$-approximation scheme). Such problem 
-in this section will be is
-MAX-(3,3)-SAT that we will define in detail below.
+We will prove Theorem \ref{segment_cover_apx_hard}
+by taking a problem that is APX-hard
+and reduction. Such problem 
+for the proof is
+MAX-(3,3)-SAT that we define in detail below.
 
 Given an instance $I$ of MAX-(3,3)-SAT,
 we will construct an instance $J$ of 
 axis-parallel segment set cover problem,
 such that $(1+c\cdot\epsilon)$-approximation of $J$ will approximate
 an $I$ with $(1+\epsilon)$ scheme for some constant $c > 1$.
-Therefore if there would exist general approximation scheme of
+Therefore if there would exist PTAS of
 the axis-parallel segment set cover problem,
-we would produce a general approximation scheme for MAX-(3,3)-SAT
-(that doesn't exist).
-
+we would produce a PTAS for MAX-(3,3)-SAT
+(that doesn't exist assuming $P\neq NP$).
 
 
 \subsection{Definition of  MAX-(3,3)-SAT problem}
@@ -86,13 +94,14 @@ Theorem \ref{hastadtheorem}.
 
 \begin{lemma}{
 	\label{apxconstruction}
+	(TODO: This needs to be rewritten to two implications, not done yet).
 	Given an instance of  MAX-(3,3)-SAT 
 	with $n$ variables and optimal result $k$,
 	we can construct an instance of axis-parallel segments in 2D,
 	which optimal result (even with 1/2-extension) is exactly $15n - k$.
 }\end{lemma}
 
-We will provide a proof for Lemma\label{apxconstruction} in
+We prove Lemma\label{apxconstruction} in
 subsequent sections, but meanwhile let's prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
 and Theorem \ref{hastadtheorem}.
@@ -159,41 +168,70 @@ to 1/2-extensions (have the same optimal solution
 after 1/2-extension).
 
 The construction will be composed of 2 types of gadgets:
-\textbf{variable gadgets} and \textbf{clause gadgets}.
-Clause gadgets would be constructed using two \textbf{or gadgets}
+\textbf{VARIABLE-gadgets} and \textbf{CLAUSE-gadgets}.
+CLAUSE-gadgets would be constructed using two \textbf{OR-gadgets}
 connected together.
 
-Variable gadget is responsible for choosing a value of variable
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{segment_apx_sketch.jpg}
+\caption{\textbf{General schema.}}
+General layout of VARIABLE-gadget and CLAUSE-gadget and how they
+interact with each other.
+
+TODO: Rename Choose X to VARIABLE-gadget and Clause C to CLAUSE-gadget.
+\label{fig:segment_apx_sketch}
+\end{figure}
+
+VARIABLE-gadget is responsible for choosing a value of variable
 in CNF formula. It allows two minimal solution
 and every minimal solution must use exactly one of the $a$ and $b$
-segments, so you can assign variable a binary value.
+segments, so you can assign  a binary value to the variable.
 
-Clause gadget is respoinsible for calculating if choice of the
-variable values meets the clauses in formula.
-It has minimal solution of $w$ if at least one variable
+CLAUSE-gadget is responsible for calculating if choice of the
+variable values meets the clause in formula.
+It has minimal solution of weight $w$ if at least one variable
 in the clause has a correct value.
 Otherwise it has minimal solution $w+1$.
 This way by the minimal solution for the whole problem, we can tell
 how many clauses were satisfiable.
 
-The clause gadgets consist of smaller or gadgets that have similar
-property for 2 variables (input segments).
-There exists an output segment and minimal solution can
-use the output segments only when at least one of the input
-segments was chosen for a solution.
+The CLAUSE-gadgets consist of smaller OR-gadgets that have similar
+property as CLAUSE-gadget, but for 2 variables.
+OR-gadget has 3 important segments
+-- $x, y, result$. $x$ and $y$ don't count to the weight of solution
+of OR-gadget (they are part of different gadgets).
+It has a minimal solution of weight $w$
+and $result$ can be chosen only if $x$ or $y$ are also chosen
+for the solution.
+If none of them are chosen, then solution
+choosing $result$ segment has weight at least $w+1$.
+Therefore the following formula holds for a solution $R$
+assuming that $R$ uses only $w$ from this OR-gadget:
 
-We also don't want the clause gadgets to be crammed inbetween
+$$ (x \in R) \lor (y \in R) \iff result \in R  $$
+
+
+We also don't want the CLAUSE-gadgets to be crammed 
+somewhere inbetween
 the very long variable segments. That's why we have a simple
 gadget to \textit{pass} the value of the segment, ie. segments
-$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$
+$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$.
+Two segments and one of them is chosen if $x$ was chosen
+in the solution and the other one if $x$ wasn't.
 
+
+\subsubsection{Construction}
 
 We define:
 $$\points := \bigcup_{1 \le i \le n} C\_variable_i \cup C\_clause_i $$
 $$\sets := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
 
+The subsequent sections define these sets.
+
 We will prove some properties of different gadgets.
-Every segment for gadget will only cover points 
+Every segment fOR-gadget will only cover points 
 in this gadget (won't interact with any diferent gadget),
 so we can prove lemmas \textit{locally}.
 
@@ -201,7 +239,7 @@ so we can prove lemmas \textit{locally}.
 TODO: $y$ axis is increasing values downward on figures
 (not upwards like in normal).
 
-\subsubsection{Variable gadget}
+\subsubsection{VARIABLE-gadget}
 
 \paragraph{Points.}
 
@@ -280,7 +318,7 @@ in $C\_variable_i$ - $\{c, f, g, h\}$,
 therefore it can not be covered with less than 2 sets (segments).
 
 
-\subsubsection{Or gadget}
+\subsubsection{OR-gadget}
 
 \paragraph{Points.}
 
@@ -289,7 +327,7 @@ therefore it can not be covered with less than 2 sets (segments).
 \def\svgwidth{0.5\columnwidth}
 \input{apx_or_gadget.pdf_tex}
 \caption{
-\textbf{Or gadget.} We denote these point as $or\_gadget_{i, j}$. 
+\textbf{OR-gadget.} We denote these point as $or\_gadget_{i, j}$. 
 We denote set of red segments as $or^{false}_{i, j}$,
 set of blue segments as $or^{true}_{i, j}$,
 green and yellow segments as $or\_move\_variable_{i, j}$.
@@ -341,7 +379,7 @@ $$or^{true}_{i, j} =
 $$or\_move\_variable_{i, j} =
 \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
 
-Segments in or gadget:
+Segments in OR-gadget:
 
 $$P\_or\_gadget_{i, j} = 
   or^{false}_{i, j} \cup or^{true}_{i, j} \cup or\_move\_variable_{i, j}
@@ -372,7 +410,7 @@ We can do that using  $or\_move\_variable_{i, j}$
 and $or^{false}_{i, j}$.
 
 
-\subsubsection{Clause gadget}
+\subsubsection{CLAUSE-gadget}
 
 \paragraph{Points.}
 
@@ -381,9 +419,9 @@ and $or^{false}_{i, j}$.
 \centering
 \def\svgwidth{0.8\columnwidth}
 \input{apx_clause.pdf_tex}
-\caption{\textbf{Clause gadget.}
+\caption{\textbf{CLAUSE-gadget.}
 We denote set of these points as $C\_clause_i$.
-Every green rectangle is an or gadget.
+Every green rectangle is an OR-gadget.
 $y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
 depend on the values of variables in the $i$-th clause.
 }
@@ -537,15 +575,15 @@ $s$ and $s^{+1/2}$ cover the same points from $\points$.
 Let's name the assignments of the variables in MAX-(3,3)-SAT instance,
 that achieve the optimal solution,
 $y_1$,~$y_2$~$\ldots$~$y_n$,
-Let's cover every variable gadget with solution described in
+Let's cover every VARIABLE-gadget with solution described in
 Lemma~\ref{choose_variables_solution},
 in the $i$-th gadget choosing the set of segments responsible for the
 value of $y_i$
 (true -- $x_i^{true}$ or false -- $x_i^{false}$).
 
-Cover every satisfied clause gadget with solution described in
+Cover every satisfied CLAUSE-gadget with solution described in
 Lemma~\ref{cover_clauses_solution_true}
-and unsatisfied clause gadget with solution from
+and unsatisfied CLAUSE-gadget with solution from
 Lemma~\ref{cover_clauses_solution_false}.
 
 This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.

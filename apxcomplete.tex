@@ -7,7 +7,7 @@ The question on the table is
 if there exists $(1+\epsilon)$-approximation scheme
 for set cover with rectangles.
 
-Let's restict this problem to some very easy setting:
+Let's restrict this problem to some very easy setting:
 segments parallel to axes and allow (1/2)-extension.
 Segments are basically degenerated rectangles with one side very narrow.
 
@@ -22,11 +22,9 @@ Segments are basically degenerated rectangles with one side very narrow.
 	(problem is APX-hard).
 }\end{tw}
 
-The problem of rectangle set cover doesn't have 
-$(1+\epsilon)$-approximation scheme even in the above setting
-(so every less restriced setting also doesn't have apporixmation scheme).
 
 \begin{tw}{
+\label{rectangle_cover_apx_hard}
 	\textbf{(rectangle set cover is APX-hard)}.	
 	For sufficiently small $\epsilon > 0$,
 	there does not exist an $(1+\epsilon)$-approximation scheme
@@ -34,6 +32,14 @@ $(1+\epsilon)$-approximation scheme even in the above setting
 	with rectangles (even with 1/2-extension)
 	(problem is APX-hard).
 }\end{tw}
+
+
+The problem of rectangle set cover doesn't have 
+$(1+\epsilon)$-approximation scheme even in the setting
+with segments pararell to axis with 1/2-extensions.
+Theorem \ref{segment_cover_apx_hard} implies
+Theorem \ref{rectangle_cover_apx_hard}.
+
 
 We will prove it by taking a problem that is APX-complete
 (doesn't have $(1+\epsilon)$-approximation scheme). Such problem 
@@ -43,17 +49,23 @@ MAX-(3,3)-SAT that we will define in detail below.
 Given an instance $I$ of MAX-(3,3)-SAT,
 we will construct an instance $J$ of 
 axis-parallel segment set cover problem,
-such that $(1+c\epsilon)$-approximation of $J$ will approximate
+such that $(1+c\cdot\epsilon)$-approximation of $J$ will approximate
 an $I$ with $(1+\epsilon)$ scheme for some constant $c > 1$.
 Therefore if there would exist general approximation scheme of
 the axis-parallel segment set cover problem,
-we would produce a general approximation scheme of MAX-(3,3)-SAT
+we would produce a general approximation scheme for MAX-(3,3)-SAT
 (that doesn't exist).
 
 
 
 \subsection{Definition of  MAX-(3,3)-SAT problem}
-Here we define MAXSAT problem.
+MAXSAT problem is an optimization problem. We are given 3-CNF
+formula and we find assignment that satisfies the most
+clauses in a formula.
+
+MAX-(3,3)-SAT problem is a MAXSAT problem with additional
+restriction, that every variable appears in exactly 3 clauses,
+so the number of clauses is equal to number of variables.
 
 \begin{tw}{
 	\label{hastadtheorem}
@@ -83,9 +95,6 @@ and Theorem \ref{hastadtheorem}.
 
 \paragraph{Proof of Theorem \ref{segment_cover_apx_hard}}
 Take any $0 < \epsilon < 1/(15 \cdot 8)$.
-Choose $n$ sufficiently large, so that $\epsilon'(n)$ from
-Theorem \ref{hastadtheorem}
-is not greater than $\epsilon$.
 
 Let's assume that there exists an $(1+\epsilon)$-approximation scheme
 for unweighted geometric set cover with axis-pararell segments in 2D.
@@ -115,13 +124,13 @@ From Lemmma \ref{apxconstruction} we have:
 $$OPT(I) = 14n$$
 
 $$approx(I) \le OPT(I)(1+\epsilon) = 14n(1+\epsilon)
-	= 14n + (14\epsilon)n = 14n + (15\epsilon - \epsilon)n < $$
+	= 14n + 14\epsilon\cdot n = 14n + (15\epsilon - \epsilon)n < $$
 $$ < 14n + (\frac{1}{8} - \epsilon)n >
-14n + (\frac{1}{8} - \epsilon'(n))n = 15n - (\frac{7}{8} + \epsilon)n$$
+14n + (\frac{1}{8} - \epsilon)n = 15n - (\frac{7}{8} + \epsilon)n$$
 
 \subparagraph{Assume $S$ at most $(\frac{7}{8} + \epsilon)n$ satisfiable}
 From defintion of satisfiable $S$ we have:
-$$OPT(S) \le (\frac{7}{8} + \epsilon'(n))n$$
+$$OPT(S) \le (\frac{7}{8} + \epsilon)n$$
 
 From Lemmma \ref{apxconstruction} we have:
 $$OPT(I) = 15n - (\frac{7}{8} + \epsilon)n$$
@@ -145,8 +154,35 @@ of geometric set cover will be robust
 to 1/2-extensions (have the same optimal solution
 after 1/2-extension).
 
-The construction will be composed of 3 types of gadgets:
-variable gadgets, or gadgets, clause gadgets.
+The construction will be composed of 2 types of gadgets:
+\textbf{variable gadgets} and \textbf{clause gadgets}.
+Clause gadgets would be constructed using two \textbf{or gadgets}
+connected together.
+
+Variable gadget is responsible for choosing a value of variable
+in CNF formula. It allows two minimal solution
+and every minimal solution must use exactly one of the $a$ and $b$
+segments, so you can assign variable a binary value.
+
+Clause gadget is respoinsible for calculating if choice of the
+variable values meets the clauses in formula.
+It has minimal solution of $w$ if at least one variable
+in the clause has a correct value.
+Otherwise it has minimal solution $w+1$.
+This way by the minimal solution for the whole problem, we can tell
+how many clauses were satisfiable.
+
+The clause gadgets consist of smaller or gadgets that have similar
+quality for 2 variables (input segments).
+There exists an output segment and minimal solution can
+use the output segments only when at least one of the input
+segments was chosen for a solution.
+
+We also don't want the clause gadgets to be crammed inbetween
+the very long variable segments. That's why we have a simple
+gadget to \textit{pass} the value of the segment, ie. segments
+$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$
+
 
 We define:
 $$\points := \bigcup_{1 \le i \le n} C\_variable_i \cup C\_clause_i $$
@@ -213,7 +249,7 @@ can be covered using 3 segments from $P\_variable_i$.
 \end{lemma}
 
 \paragraph{Proof.}
-We can use set $x^{true}_i$ or $x^{false}_i$.
+We can use either set $x^{true}_i$ or $x^{false}_i$.
 
 
 \begin{lemma}
@@ -230,12 +266,13 @@ not be covered with less than 3 sets (segments).
 \begin{lemma}
 \label{choose_variables_both}
 If both segments $\xTrueSegment$ and $\xFalseSegment$ are chosen, then
-the remaining points from $C\_variable_i$ must be covered with 2 different
+the covering the remaining points from $C\_variable_i$
+requires at least 2 different
 segments from $P\_variable_i$.
 \end{lemma}
 \paragraph{Proof.}
 There is an independent set $\{a_i, e_i\}$ of size 2
-in $P\_variable_i$ - \{ $\xTrueSegment$, $\xFalseSegment$ \},
+in $C\_variable_i$ - $\{c, f, g, h\}$,
 therefore it can not be covered with less than 2 sets (segments).
 
 

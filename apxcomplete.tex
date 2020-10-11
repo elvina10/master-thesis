@@ -1,12 +1,15 @@
 \section{APX-completeness for segments parallel to axis}
 \label{section:segment_apx}
 
-In this section we analyze if there exists $(1+\epsilon)$-approximation
+In this section we analyze if there exists an
+$(1+\epsilon)$-approximation
 scheme for set cover with rectangles.
-We can restrict this problem to some very easy setting:
-segments parallel to axes and allow (1/2)-extension
+We will show that we can restrict this problem
+to a very easy setting:
+segments parallel to axes and allow (1/2)-extension,
 and the problem is still APX-hard.
-Segments are just degenerated rectangles with one side being very narrow.
+Note that segments are just degenerated rectangles
+with one side being very narrow.
 
 
 Our results can be summarized in the following
@@ -18,7 +21,8 @@ theorem and this section aims to prove it.
 	Unweighted geometric set cover
 	with axis-parallel segments in 2D (even with 1/2-extension)
 	is APX-hard,
-	ie. assuming $P\neq NP$, there doesn't exist a PTAS for this problem.
+	i.e. assuming $P\neq NP$, there does not exist a PTAS
+	for this problem.
 }\end{tw}
  
 Theorem \ref{segment_cover_apx_hard} implies the following.
@@ -33,32 +37,37 @@ Theorem \ref{segment_cover_apx_hard} implies the following.
 
 We will prove Theorem \ref{segment_cover_apx_hard}
 by taking a problem that is APX-hard
-and reduction. Such problem 
-for the proof is
-MAX-(3,3)-SAT that we define in detail below.
+and showing a reduction.
+For this problem we choose
+MAX-(3,3)-SAT which we define in detail below.
 
 Given an instance $I$ of MAX-(3,3)-SAT,
 we will construct an instance $J$ of 
 axis-parallel segment set cover problem,
-such that $(1+c\cdot\epsilon)$-approximation of $J$ will approximate
-an $I$ with $(1+\epsilon)$ scheme for some constant $c > 1$.
-Therefore if there would exist PTAS of
+such that an $(1+c\cdot\epsilon)$-approximation for $J$
+will yield a $(1+\epsilon)$-approximation for $I$,
+for any constant $c > 1$.
+Therefore if there would exist a PTAS for
 the axis-parallel segment set cover problem,
-we would produce a PTAS for MAX-(3,3)-SAT
-(that doesn't exist assuming $P\neq NP$).
+we would produce a PTAS for MAX-(3,3)-SAT, which 
+does not exist assuming $P\neq NP$.
 
 
-\subsection{Definition of  MAX-(3,3)-SAT problem}
-MAXSAT problem is an optimization problem. We are given 3-CNF
-formula and we find assignment that satisfies the most
-clauses in a formula.
+\subsection{MAX-(3,3)-SAT problem}
+\begin{defi}
+\textbf{MAX-3SAT} is an optimization problem. We are given a 3-CNF
+formula, and need to find an assignment of variables
+that satisfies the most clauses.
+\end{defi}
 
-MAX-(3,3)-SAT problem is a MAXSAT problem with additional
-restriction, that every variable appears in exactly 3 clauses,
-so the number of clauses is equal to number of variables.
+\begin{defi}
+\textbf{MAX-(3,3)-SAT} is a MAX-3SAT with an additional
+restriction that every variable appears in exactly 3 clauses,
+so that the number of clauses is equal to number of variables.
+\end{defi}
 
 In the lemmas above we use
-a property of this problem proved in \cite{hastad} and desribed in
+a property of MAX-(3,3)-SAT proved in \cite{hastad} and described in
 Theorem \ref{hastadtheorem}.
 
 \begin{tw}{
@@ -74,20 +83,19 @@ Theorem \ref{hastadtheorem}.
 	on satisfiable instances.
 }\end{tw}
 
-The following lemma encapsulated the properties of reduction described
-in this section and it allows to prove the
-Theorem \ref{segment_cover_apx_hard}.
+The following lemma encapsulates the properties
+of the reduction described in this section,
+and it allows to prove Theorem \ref{segment_cover_apx_hard}.
 
 \begin{lemma}{
 	\label{apxconstruction}
 	Given an instance $S$ of  MAX-(3,3)-SAT 
 	with $n$ variables and optimal result~$OPT(S)$,
 	we can construct an instance $I$ of axis-parallel segments in 2D
-	such that:
+	with $\delta$-extensions, such that:
 	\begin{enumerate}
-	\item for every solution $X$ of problem $I$
-	with $\delta$-extensions,
-	there exists a solution of $S$ of size at most $15n - |X|$;
+	\item for every solution $X$ of problem $I$,
+	there exists a solution of $S$ of size at least  $15n - |X|$;
 	
 	\item for every solution $X$ of problem $S$,
 	there exists a solution of $I$ of size $15n - |X|$;
@@ -97,7 +105,7 @@ Theorem \ref{segment_cover_apx_hard}.
 	
 }\end{lemma}
 
-We prove Lemma\label{apxconstruction} in
+We prove Lemma \ref{apxconstruction} in
 subsequent sections, but meanwhile let's prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
 and Theorem \ref{hastadtheorem}.
@@ -111,49 +119,54 @@ with (1/2)-extensions.
 We will construct an algorithm distinguishing instances of
 MAX-(3,3)-SAT
 in Theorem \ref{hastadtheorem}.
-Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
-and construct an instance of geometric set cover
-using Lemma \ref{apxconstruction}, name it $I$.
 
-Use $(1+\epsilon)$-approximation scheme for instances of geometric
-set cover, let's name the result of this approximation
-for an instance of problem $I$ as $approx(I)$.
+Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
+and construct an instance of geometric set cover $I$
+using Lemma \ref{apxconstruction}.
+
+We now use the $(1+\epsilon)$-approximation scheme
+for instances of geometric set cover on $I$,
+denote the cost of the result of this approximation as $approx(I)$.
 
 We will prove that 
 if $approx(I) \ge 15n - (\frac{7}{8} + \epsilon)n$ then $S$
-satisfied at most $(\frac{7}{8}+\epsilon)n$ clauses
+satisfied at most $(\frac{7}{8}+\epsilon)n$ clauses,
 and if $approx(I) < 15n - (\frac{7}{8} + \epsilon)n$ then $S$ was
 satisfiable.
 
 \subparagraph{Assume $S$ satisfiable}
-From defintion of satisfiable $S$ we have:
+From the definition of $S$ being satisfiable, we have:
 $$OPT(S) = n$$
 
 From Lemmma \ref{apxconstruction} we have:
 
 $$OPT(I) = 14n$$
 
-$$approx(I) \le OPT(I)(1+\epsilon) = 14n(1+\epsilon)
-	= 14n + 14\epsilon\cdot n = 14n + (15\epsilon - \epsilon)n < $$
-$$ < 14n + (\frac{1}{8} - \epsilon)n >
-14n + (\frac{1}{8} - \epsilon)n = 15n - (\frac{7}{8} + \epsilon)n$$
+$$approx(I) \le (1+\epsilon)OPT(I) = 14n(1+\epsilon)
+	= 14n + 14\epsilon\cdot n =$$ 
+	$$= 14n + (15\epsilon - \epsilon)n < 
+  14n + \left(\frac{1}{8} - \epsilon\right)n 
+= 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
-\subparagraph{Assume $S$ at most $(\frac{7}{8} + \epsilon)n$ satisfiable}
-From defintion of satisfiable $S$ we have:
-$$OPT(S) \le (\frac{7}{8} + \epsilon)n$$
+\subparagraph{Assume $S$ at most
+$\left(\frac{7}{8} + \epsilon\right)n$ satisfiable}
+From defintion of $S$ being at most 
+$\left(\frac{7}{8} + \epsilon\right)n$ satisfiable, we have:
+$$OPT(S) \le \left(\frac{7}{8} + \epsilon\right)n$$
 
 From Lemmma \ref{apxconstruction} we have:
-$$OPT(I) = 15n - (\frac{7}{8} + \epsilon)n$$
+$$OPT(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
-$$approx(I) \ge OPT(I) = 15n - (\frac{7}{8} + \epsilon)n$$
+$$approx(I) \ge OPT(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
 
-Therefore, by using assumed to exist $(1+\epsilon)$ approximation
-for segment set cover,
-it’s possible to distinguish $S$ from
+Therefore, by using the assumed to exist $(1+\epsilon)$-approximation
+scheme for segment set cover,
+it is possible to distinguish $S$ from
 being satisfiable and at most $(\frac{7}{8} + \epsilon)n$ satisfiable,
-since there exists result threshold distinguishing
-approximation result in segment set cover for these two cases.
+since there exists a threshold on the
+approximation result in segment set cover that distinguishes
+these two cases.
 This is a contradiction, hence the approximation scheme cannot exist.
 
 \subsection{Reduction construction}

@@ -196,20 +196,28 @@ Most of such problems (like vertex cover or [wiecej przykladow])
 are equally hard in both weighted and unweighted settings.
 
 \chapter{Definitions}
-Some definitions what geometric set cover is.
-$\sets$ -- set of objects, $\points$ -- set of points.
+
+\section{Geometric Set Cover}
+TODO: this section (2.1) is pretty sad.
+
+$\sets$ -- set of objects, $\points$ -- set of points
+
 Choose $\sol \subset \sets$ such that
 every point in $\points$ is inside some element from $\sol$
 and $|\sol|$ is minimal.
 
-In parametrized setting we only look among $|\sol| \le k$.
-In weighted settings there is some $f : \sets -> \mathbb{R}$
+In parametrized setting for given $k$,
+we only look among $|\sol| \le k$.
+
+
+In weighted settings there is some given function
+$f : \sets -> \mathbb{R}$,
 and we minimize $\sum_{R \in \sol} f(R)$.
 
 \section{Approximation}
 
 Let's recall some of the definitions related to approximation problems
-that will be used in following sections.
+that will be used in the following sections.
 
 \begin{defi}
 A \textbf{polynomial-time approximation scheme (PTAS)}
@@ -234,7 +242,7 @@ so that $(1+\epsilon)$-approximation problem is NP-hard.
 \begin{defi}\textbf{$\delta$-extensions for segments}
 For any $\delta > 0$ and segment $L = \{(x_a, y_a), (x_b, y_b)\}$
 of length $d = \sqrt{(x_a - x_b)^2 + (y_a - y_b)^2}$,
-a $\delta$-extension of this segment, $L^{+\delta}$, is a segment
+a $\delta$-extension of this segment, $L^{+\delta}$, is an open segment
 parallel to $L$, but with both ends extended by $\delta d$,
 i.e. if we denote vector $t = (x_b - x_a, y_b - y_a)$,
 $ L^{+\delta}
@@ -256,7 +264,7 @@ objects after $\delta$-extensions.
 Let $\mathcal{P}$ be an optimization cover problem 
 that takes as an input instance $I$
 and outputs a minimal solution $\mathcal{R}^{opt}$, such that
-$\mathcal{R}$ covers $I$.
+$\mathcal{R}^{opt}$ covers $I$.
 
 We define an optimization cover problem $\mathcal{P}$
 with $\delta$-extensions as a problem which
@@ -272,7 +280,7 @@ extensions, i.e. $|\mathcal{R}| \le |\mathcal{R}^{opt}|$.
 Let $\mathcal{P}$ be an optimization cover problem 
 that takes as an input instance $I$
 and outputs a minimal solution $\mathcal{R}^{opt}$, such that
-$\mathcal{R}$ covers $I$.
+$\mathcal{R}^{opt}$ covers $I$.
 
 
 We define a PTAS for cover problem $\mathcal{P}$

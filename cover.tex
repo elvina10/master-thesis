@@ -106,6 +106,7 @@ APX-completeness, PCP theorem, NP-completeness}
 \newtheorem{defi}{Definition}[section]
 \newtheorem{tw}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
@@ -204,6 +205,85 @@ and $|\sol|$ is minimal.
 In parametrized setting we only look among $|\sol| \le k$.
 In weighted settings there is some $f : \sets -> \mathbb{R}$
 and we minimize $\sum_{R \in \sol} f(R)$.
+
+\section{Approximation}
+
+Let's recall some of the definitions for the approximation problems,
+that will be used in following sections.
+
+\begin{defi}
+A \textbf{polynomial-time approximation scheme (PTAS)}
+is a family of algorithms $A_\epsilon$ for
+every $\epsilon > 0$,
+that takes an instance $I$ of parametrization problem
+and in polynomial time,
+finds a solution that is within a factor
+($1+\epsilon$) of being optimal. That means
+it has weight at most
+$(1+\epsilon)opt(I)$, where $opt(I)$ is a weight
+of the optimal solution for $I$.
+\end{defi}
+
+\begin{defi}
+Problem is \textbf{APX-hard} if there exists such $\epsilon > 0$
+that $(1+\epsilon)$-approximation scheme is NP-hard.
+\end{defi}
+
+\section{$\delta$-extensions}
+
+\begin{defi}\textbf{$\delta$-extensions for segments}
+For any $\delta > 0$ and segment $L = \{(x_a, y_a), (x_b, y_b)\}$
+%of length $d = \sqrt{(x_a - x_b)^2 + (y_a - y_b)^2}$,
+$\delta$-extension of this segment, $L^{+\delta}$ is a segment
+parallel to $L$, but both ends extended by $\delta d$,
+ie. if we denote vector $t = (x_b - x_a, y_b - y_a)$,
+$ L^{+\delta}
+= \{ (x_a, y_a) - \delta\cdot t, (x_b, y_b) + \delta\cdot t \}$
+\end{defi}
+
+Relaxed cover problem with $\delta$-extensions allows
+the objects to cover all the points in $\points$
+after the $\delta$-extensions, and the found solution
+doesn't have to be optimal for cover problem with $\delta$-extensions,
+it must be not larger than
+optimal solution for the problem without $\delta$-extensions.
+
+Note that the found solution
+for $\delta$-extensions can be smaller than optimal solution.
+and there can be multiple correct solutions with different sizes
+for cover problem with $\delta$-extensions.
+
+\begin{defi}\textbf{Cover problem with $\delta$-extensions}
+Optimization cover problem $\mathcal{P}$
+that takes as an input instance $I$
+and outputs a minimal solution $\mathcal{R}^{opt}$, such that
+$\mathcal{R}$ covers $I$.
+
+Optimization cover problem $\mathcal{P}$ with $\delta$-extensions,
+takes as an input instance $I$
+and output a solution $\mathcal{R}$, such that $\delta$-extended set
+$\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $I$
+and is no worse than minimal solution for this provlem without
+extensions, ie. $|\mathcal{R}| \le |\mathcal{R}^{opt}|$.
+\end{defi}
+
+
+\begin{defi}\textbf{PTAS with $\delta$-extensions}
+Optimization cover problem $\mathcal{P}$
+that takes as an input instance $I$
+and outputs a minimal solution $\mathcal{R}^{opt}$, such that
+$\mathcal{R}$ covers $I$.
+
+
+PTAS for cover problem $\mathcal{P}$ with $\delta$-extensions,
+takes as an input instance $I$
+and output a solution $\mathcal{R}$, such that $\delta$-extended set
+$\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $I$
+and is within $(1+\epsilon)$ optimization factor for
+minimal solution for this provlem without
+extensions, ie. $(1+\epsilon)|\mathcal{R}| \le |\mathcal{R}^{opt}|$.
+
+\end{defi}
 
 \input{segments.tex}
 \input{apxcomplete.tex}

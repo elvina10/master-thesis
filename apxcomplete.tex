@@ -1,53 +1,35 @@
 \section{APX-completeness for segments parallel to axis}
 \label{section:segment_apx}
 
-Let's analyze approximation of set cover with rectangles.
-
-
-\begin{defi}
-A \textbf{polynomial-time approximation scheme (PTAS)}
-is an algorithm that takes an instance $I$ of parametrization problem
-and a parameter $\epsilon > 0$ and,
-in polynomial time, finds a solution that is within a factor
-$1+\epsilon$ of being optimal. That means
-it has weight at most
-$(1+\epsilon)opt(I)$, where $opt(I)$ is a weight
-of the optimal solution for $I$.
-\end{defi}
-
-\begin{defi}
-Problem is \textbf{APX-hard} iff assuming $P\neq NP$
-there doesn't exist a PTAS for this problem.
-\end{defi}
-
-
-We would like to analyze if there exists $(1+\epsilon)$-approximation
+In this section we analyze if there exists $(1+\epsilon)$-approximation
 scheme for set cover with rectangles.
+We can restrict this problem to some very easy setting:
+segments parallel to axes and allow (1/2)-extension
+and the problem is still APX-hard.
+Segments are just degenerated rectangles with one side being very narrow.
 
-Let's restrict this problem to some very easy setting:
-segments parallel to axes and allow (1/2)-extension.
-Segments are basically degenerated rectangles with one side very narrow.
 
+Our results can be summarized in the following
+theorem and this section aims to prove it.
 
 \begin{tw}{
 \label{segment_cover_apx_hard}
 	\textbf{(axis-parallel segment set cover with 1/2-extension is APX-hard)}.	
 	Unweighted geometric set cover
 	with axis-parallel segments in 2D (even with 1/2-extension)
-	is APX-hard.
+	is APX-hard,
+	ie. assuming $P\neq NP$, there doesn't exist a PTAS for this problem.
 }\end{tw}
+ 
+Theorem \ref{segment_cover_apx_hard} implies the following.
 
-
-\begin{tw}{
+\begin{corollary}{
 \label{rectangle_cover_apx_hard}
 	\textbf{(rectangle set cover is APX-hard)}.	
 	Unweighted geometric set cover
 	with rectangles (even with 1/2-extension) is APX-hard.
-}\end{tw}
+}\end{corollary}
 
-\paragraph{Proof of Theorem \ref{rectangle_cover_apx_hard}.}
-It follows from Theorem \ref{segment_cover_apx_hard}.
-This is a special case of that theorem.
 
 We will prove Theorem \ref{segment_cover_apx_hard}
 by taking a problem that is APX-hard
@@ -92,13 +74,27 @@ Theorem \ref{hastadtheorem}.
 	on satisfiable instances.
 }\end{tw}
 
+The following lemma encapsulated the properties of reduction described
+in this section and it allows to prove the
+Theorem \ref{segment_cover_apx_hard}.
+
 \begin{lemma}{
 	\label{apxconstruction}
-	(TODO: This needs to be rewritten to two implications, not done yet).
-	Given an instance of  MAX-(3,3)-SAT 
-	with $n$ variables and optimal result $k$,
-	we can construct an instance of axis-parallel segments in 2D,
-	which optimal result (even with 1/2-extension) is exactly $15n - k$.
+	Given an instance $S$ of  MAX-(3,3)-SAT 
+	with $n$ variables and optimal result~$OPT(S)$,
+	we can construct an instance $I$ of axis-parallel segments in 2D
+	such that:
+	\begin{enumerate}
+	\item for every solution $X$ of problem $I$
+	with $\delta$-extensions,
+	there exists a solution of $S$ of size at most $15n - |X|$;
+	
+	\item for every solution $X$ of problem $S$,
+	there exists a solution of $I$ of size $15n - |X|$;
+	
+	Therefore optimal solution of $I$ is $OPT(I) = 15n - OPT(S)$. 
+	\end{enumerate}
+	
 }\end{lemma}
 
 We prove Lemma\label{apxconstruction} in
@@ -110,11 +106,12 @@ and Theorem \ref{hastadtheorem}.
 Take any $0 < \epsilon < 1/(15 \cdot 8)$.
 
 Let's assume that there exists an $(1+\epsilon)$-approximation scheme
-for unweighted geometric set cover with axis-pararell segments in 2D.
+for unweighted geometric set cover with axis-pararell segments in 2D
+with (1/2)-extensions.
 We will construct an algorithm distinguishing instances of
 MAX-(3,3)-SAT
 in Theorem \ref{hastadtheorem}.
-Take an instance $S$ of (3,3)-SAT to be distinguished
+Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
 and construct an instance of geometric set cover
 using Lemma \ref{apxconstruction}, name it $I$.
 
@@ -173,16 +170,6 @@ CLAUSE-gadgets would be constructed using two \textbf{OR-gadgets}
 connected together.
 
 
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{segment_apx_sketch.jpg}
-\caption{\textbf{General schema.}}
-General layout of VARIABLE-gadget and CLAUSE-gadget and how they
-interact with each other.
-
-TODO: Rename Choose X to VARIABLE-gadget and Clause C to CLAUSE-gadget.
-\label{fig:segment_apx_sketch}
-\end{figure}
 
 VARIABLE-gadget is responsible for choosing a value of variable
 in CNF formula. It allows two minimal solution
@@ -561,6 +548,20 @@ Add some smart lemmas that sets will be exclusive to each other.
 \textbf{Robustness to 1/2-extensions}. For every segment $s \in \sets$,
 $s$ and $s^{+1/2}$ cover the same points from $\points$.
 \end{lemma}
+
+
+\subsection{Summary of contruction}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{segment_apx_sketch.jpg}
+\caption{\textbf{General schema.}}
+General layout of VARIABLE-gadget and CLAUSE-gadget and how they
+interact with each other.
+
+TODO: Rename Choose X to VARIABLE-gadget and Clause C to CLAUSE-gadget.
+\label{fig:segment_apx_sketch}
+\end{figure}
 
 \subsection{Proofs of construction Lemma \ref{apxconstruction}}
 \begin{lemma}

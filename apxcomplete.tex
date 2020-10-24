@@ -183,63 +183,12 @@ CLAUSE-gadgets would be constructed using two \textbf{OR-gadgets}
 connected together.
 
 
+\subsubsection{VARIABLE-gadget}
 
 VARIABLE-gadget is responsible for choosing a value of variable
 in CNF formula. It allows two minimal solution
 and every minimal solution must use exactly one of the $a$ and $b$
 segments, so you can assign  a binary value to the variable.
-
-CLAUSE-gadget is responsible for calculating if choice of the
-variable values meets the clause in formula.
-It has minimal solution of weight $w$ if at least one variable
-in the clause has a correct value.
-Otherwise it has minimal solution $w+1$.
-This way by the minimal solution for the whole problem, we can tell
-how many clauses were satisfiable.
-
-The CLAUSE-gadgets consist of smaller OR-gadgets that have similar
-property as CLAUSE-gadget, but for 2 variables.
-OR-gadget has 3 important segments
--- $x, y, result$. $x$ and $y$ don't count to the weight of solution
-of OR-gadget (they are part of different gadgets).
-It has a minimal solution of weight $w$
-and $result$ can be chosen only if $x$ or $y$ are also chosen
-for the solution.
-If none of them are chosen, then solution
-choosing $result$ segment has weight at least $w+1$.
-Therefore the following formula holds for a solution $R$
-assuming that $R$ uses only $w$ from this OR-gadget:
-
-$$ (x \in R) \lor (y \in R) \iff result \in R  $$
-
-
-We also don't want the CLAUSE-gadgets to be crammed 
-somewhere inbetween
-the very long variable segments. That's why we have a simple
-gadget to \textit{pass} the value of the segment, ie. segments
-$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$.
-Two segments and one of them is chosen if $x$ was chosen
-in the solution and the other one if $x$ wasn't.
-
-
-\subsubsection{Construction}
-
-We define:
-$$\points := \bigcup_{1 \le i \le n} C\_variable_i \cup C\_clause_i $$
-$$\sets := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
-
-The subsequent sections define these sets.
-
-We will prove some properties of different gadgets.
-Every segment for a gadget will only cover points 
-in this gadget (won't interact with any diferent gadget),
-so we can prove lemmas \textit{locally}.
-
-
-TODO: $y$ axis is increasing values downward on figures
-(not upwards like in normal).
-
-\subsubsection{VARIABLE-gadget}
 
 \paragraph{Points.}
 
@@ -319,6 +268,19 @@ therefore it can not be covered with less than 2 sets (segments).
 
 
 \subsubsection{OR-gadget}
+
+OR-gadget has 3 important segments
+-- $x, y, result$. $x$ and $y$ don't count to the weight of solution
+of OR-gadget (they are part of different gadgets).
+It has a minimal solution of weight $w$
+and $result$ can be chosen only if $x$ or $y$ are also chosen
+for the solution.
+If none of them are chosen, then solution
+choosing $result$ segment has weight at least $w+1$.
+Therefore the following formula holds for a solution $R$
+assuming that $R$ uses only $w$ from this OR-gadget:
+
+$$ (x \in R) \lor (y \in R) \iff result \in R  $$
 
 \paragraph{Points.}
 
@@ -411,6 +373,24 @@ and $or^{false}_{i, j}$.
 
 
 \subsubsection{CLAUSE-gadget}
+
+
+CLAUSE-gadget is responsible for calculating if choice of the
+variable values meets the clause in formula.
+It has minimal solution of weight $w$ if at least one variable
+in the clause has a correct value.
+Otherwise it has minimal solution $w+1$.
+This way by the minimal solution for the whole problem, we can tell
+how many clauses were satisfiable.
+
+The CLAUSE-gadgets consist of two OR-gadgets.
+We don't want the CLAUSE-gadgets to be crammed 
+somewhere between
+the very long variable segments. That's why we have a simple
+gadget to \textit{pass} the value of the segment, ie. segments
+$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$.
+Two segments and one of them is chosen if $x$ was chosen
+in the solution and the other one if $x$ wasn't.
 
 \paragraph{Points.}
 
@@ -575,6 +555,21 @@ interact with each other.
 TODO: Rename Choose X to VARIABLE-gadget and Clause C to CLAUSE-gadget.
 \label{fig:segment_apx_sketch}
 \end{figure}
+
+We define:
+$$\points := \bigcup_{1 \le i \le n} C\_variable_i \cup C\_clause_i $$
+$$\sets := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
+
+The subsequent sections define these sets.
+
+We will prove some properties of different gadgets.
+Every segment for a gadget will only cover points 
+in this gadget (won't interact with any diferent gadget),
+so we can prove lemmas \textit{locally}.
+
+
+TODO: $y$ axis is increasing values downward on figures
+(not upwards like in normal).
 
 \subsection{Proofs of construction Lemma \ref{apxconstruction}}
 \begin{lemma}

@@ -44,14 +44,12 @@ MAX-(3,3)-SAT which we define in detail below.
 Given an instance $I$ of MAX-(3,3)-SAT,
 we will construct an instance $J$ of 
 axis-parallel segment set cover problem,
-such that an $(1+c\cdot\epsilon)$-approximation for $J$
-will yield a $(1+\epsilon)$-approximation for $I$,
-for any constant $c > 1$.
-Therefore if there would exist a PTAS for
-the axis-parallel segment set cover problem,
-we would produce a PTAS for MAX-(3,3)-SAT, which 
-does not exist assuming $P\neq NP$.
-
+such that for an sufficiently small $\epsilon > 0$,
+$(1+\epsilon)$-approximation for $J$
+will yield distinguishing  whether an instance $I$ of MAX-(3,3)-SAT
+is fully satisfiable
+or $(7/8 + \epsilon)$-satisfiable (\textbf{Theorem 3.2.2}), which 
+is nonapproximable boyond the random assignment assuming $P\neq NP$.
 
 \subsection{MAX-(3,3)-SAT problem}
 \begin{defi}

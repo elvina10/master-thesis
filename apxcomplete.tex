@@ -90,7 +90,7 @@ and it allows to prove Theorem \ref{segment_cover_apx_hard}.
 	Given an instance $S$ of  MAX-(3,3)-SAT 
 	with $n$ variables and optimal result~$OPT(S)$,
 	we can construct an instance $I$ of axis-parallel segments in 2D
-	with $\delta$-extensions, such that:
+	with $1/2$-extensions, such that:
 	\begin{enumerate}
 	\item for every solution $X$ of problem $I$,
 	there exists a solution of $S$ of size at least  $15n - |X|$;
@@ -98,6 +98,9 @@ and it allows to prove Theorem \ref{segment_cover_apx_hard}.
 	\item for every solution $X$ of problem $S$,
 	there exists a solution of $I$ of size $15n - |X|$;
 	
+	\item every solution with $1/2$-extensions for $I$
+	is also an solution to the original problem $I$.
+		
 	Therefore optimal solution of $I$ is $OPT(I) = 15n - OPT(S)$. 
 	\end{enumerate}
 	
@@ -154,6 +157,10 @@ $$OPT(S) \le \left(\frac{7}{8} + \epsilon\right)n$$
 
 From Lemmma \ref{apxconstruction} we have:
 $$OPT(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
+
+Since approximation of problem with extensions is
+also approximation without extentions
+from Lemmma \ref{apxconstruction} 3., we have:
 
 $$approx(I) \ge OPT(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 

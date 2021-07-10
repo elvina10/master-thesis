@@ -29,27 +29,24 @@ The same algorithm as before but in complexity $\mathcal{O}(d^k)$.
 	and a parameter $k$,
 	runs in time $f(k) \cdot (nm)^c$ for some computable function f and constant c,
 	and outputs a subfamily $\sol \subseteq \sets$
-	such that $|\sol| \le k$ and $\sol$ covers all points in $\points$.
+	such that $|\sol| \le k$ and $\sol$ covers all points in $\points$
+	or determins that the solution of size at most $k$ doesn't exist.
 }\end{tw}
 
 This theorem is proved by following lemmas.
 
-\paragraph{Proof.} Assuming Lemma \ref{kernel_definition}.
-
-Since any segment covers a set of colinear points,
-for such a kernel $k$ segments can cover only at most $k^2$ points.
-Therefore, for the answer to be positive,
-the number of points has to be at most $k^2$.
-The number of segments is now bounded by $k^4$,
-since if we consider two \textit{extreme} points
-covered by a given segment,
-then these pairs must be distinct,
-otherwise two segments would contain the same set of points.
-Since both the number of points and the number of segments
-is bounded by a function of $k$,
-this instance can be easily solved in time $O(f(k))$.
-Since there are $O(k^k)$ possible kernels, the final algotihm
-work in $f(k) \cdot (nm)$.
+\begin{lemma}
+   \label{fpt_reduction}
+   \textbf{(Reduction)}.
+   Given a family $\sets$ of
+	$n$ segments (in any direction),
+	a set of $m$ points $\points$
+	for segment cover problem,
+   without a loss of generality we can assume that
+   no two segments cover the same set of points.
+\end{lemma}   
+   
+\paragraph{Proof.} Trivial.
 
 \begin{lemma}
 	\label{kernel_definition}
@@ -67,14 +64,6 @@ work in $f(k) \cdot (nm)$.
 
 \paragraph{Proof.}
 
-First, we perform a simple reduction.
-
-If there exist two segments $a$ and $b$ in $\sets$,
-such that any point covered by $a$ is also covered by $b$,
-then without loss of generality we can remove segment $a$ from $\sets$.
-We repeat this process until no such $(a, b)$ pair exists.
-
-
 %As long as there is a line with more than $k$ points, do branching.
 %Let's name points on this line $x_1, x_2, \ldots x_t$
 %in order they appear on the line.
@@ -87,6 +76,7 @@ We repeat this process until no such $(a, b)$ pair exists.
 %exactly $k+1$ segments (any of them can't contain more than
 %one point from this line).
 
+First we use Lemma \ref{fpt_reduction}.
 
 Assume there exists a line $l$ containing points $x_1$, \ldots $x_t$,
 where $t \geq k + 1$.
@@ -103,3 +93,21 @@ Since we have at most $k + 1$ choices to branch over
 and each choice adds a segment to the constructed solution,
 we obtain an algorithm with complexity $O(k^k)$.
 
+\paragraph{Proof of theorem \ref{segment_cover_fpt}.} Assuming Lemma \ref{kernel_definition}.
+
+First we use Lemma \ref{fpt_reduction}.
+
+Since any segment covers a set of colinear points,
+for such a kernel $k$ segments can cover only at most $k^2$ points.
+Therefore, for the answer to be positive,
+the number of points has to be at most $k^2$.
+The number of segments is now bounded by $k^4$,
+since if we consider two \textit{extreme} points
+covered by a given segment,
+then these pairs must be distinct,
+otherwise two segments would contain the same set of points.
+Since both the number of points and the number of segments
+is bounded by a function of $k$,
+this instance can be easily solved in time $O(f(k))$.
+Since there are $O(k^k)$ possible kernels, the final algotihm
+work in $f(k) \cdot (nm)$.

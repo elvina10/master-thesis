@@ -21,6 +21,7 @@ The same algorithm as before but in complexity $\mathcal{O}(d^k)$.
 
 \subsection{Segments in arbitrary direction}
 \begin{tw}{
+	\label{segment_cover_fpt}
 	\textbf{(FPT for segment cover)}.
 	There exists an algorithm that given a family $\sets$ of
 	$n$ segments (in any direction),
@@ -30,17 +31,10 @@ The same algorithm as before but in complexity $\mathcal{O}(d^k)$.
 	and outputs a subfamily $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol$ covers all points in $\points$.
 }\end{tw}
-\paragraph{Proof.}
-We will show such algorithm in FPT.
 
-If there exist two segments $a$ and $b$ in $\sets$,
-such that any point covered by $a$ is also covered by $b$,
-then without loss of generality we can remove segment $a$ from $\sets$.
-We repeat this process until no such $(a, b)$ pair exists.
+This theorem is proved by following lemmas.
 
-
-Let us first assume that we reduced our instance to a kernel,
-where \textit{any line} contains no more than $k$ points.
+\paragraph{Proof.} Assuming Lemma \ref{kernel_definition}.
 
 Since any segment covers a set of colinear points,
 for such a kernel $k$ segments can cover only at most $k^2$ points.
@@ -54,8 +48,32 @@ otherwise two segments would contain the same set of points.
 Since both the number of points and the number of segments
 is bounded by a function of $k$,
 this instance can be easily solved in time $O(f(k))$.
+Since there are $O(k^k)$ possible kernels, the final algotihm
+work in $f(k) \cdot (nm)$.
 
-In remains to show how to construct the kernel.
+\begin{lemma}
+	\label{kernel_definition}
+	\textbf{(Kernel for segment cover)}.
+	For a problem of segment cover that given a family $\sets$ of
+	$n$ segments (in any direction),
+	a set of $m$ points $\points$
+	and a parameter $k$, there exists a family of
+	kernels $K \subset \sets$,
+	where \textit{any line} contains no more than $k$ points
+	and there exists optimal solution, that is subset of $K$.
+	We can find all such kernels in complexity $O(k^k)$
+	and there are $O(k^k)$ of them.
+\end{lemma}
+
+\paragraph{Proof.}
+
+First, we perform a simple reduction.
+
+If there exist two segments $a$ and $b$ in $\sets$,
+such that any point covered by $a$ is also covered by $b$,
+then without loss of generality we can remove segment $a$ from $\sets$.
+We repeat this process until no such $(a, b)$ pair exists.
+
 
 %As long as there is a line with more than $k$ points, do branching.
 %Let's name points on this line $x_1, x_2, \ldots x_t$
@@ -84,3 +102,4 @@ and also covers the largest number of points $x_j$ for $j > i$.
 Since we have at most $k + 1$ choices to branch over
 and each choice adds a segment to the constructed solution,
 we obtain an algorithm with complexity $O(k^k)$.
+

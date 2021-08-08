@@ -58,7 +58,7 @@ This theorem is proved by following lemmas.
 	kernels $K \subset \sets$,
 	where \textit{any line} contains no more than $k$ points
 	and there exists optimal solution, that is subset of $K$.
-	We can find all such kernels in complexity $O(k^k)$
+	We can find all such kernels in complexity $O(k^k)$ using branching technique
 	and there are $O(k^k)$ of them.
 \end{lemma}
 
@@ -84,7 +84,7 @@ Note that a segment that does not lie on $l$ can cover only at most one
 of the points $x_i$.
 Therefore, out of points $x_1$, ..., $x_{k+1}$,
 at least one has to be covered by a segment that lies on $l$,
-let us fix $x_i$ to be the first such point.
+let us fix $x_i$ to be the first such point (We branch over $i \in \{1 \dots k+1\}$.
 Then, we can greedily choose a segment that lies on $l$,
 covers $x_i$,
 and also covers the largest number of points $x_j$ for $j > i$.

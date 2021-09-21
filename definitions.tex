@@ -2,64 +2,71 @@
 
 \section{Geometric Set Cover}
 
-Define geometric set cover problem where you
-are given
-$\sets$ -- set of objects, $\points$ -- set of points
-and you need to choose $\sol \subset \sets$ such that
+In the geometric set cover problem we are are given
+$\sets$ -- set of objects, $\points$ -- set of points.
+The task is to choose $\sol \subseteq \sets$ such that
 every point in $\points$ is inside some element from $\sol$
 and $|\sol|$ is minimal.
 
-In parametrized setting for given $k$,
-we only look among such $\sol$, that $|\sol| \le k$.
+In the parametrized setting for a given $k$,
+we only look for a solution $\sol$ such that $|\sol| \le k$.
 
 
-In weighted setting, there is some given function
+In the weighted setting, there is some given weight function
 $f : \sets \rightarrow \mathbb{R^+}$,
-and we minimize $\sum_{R \in \sol} f(R)$.
+and we would like to minimize $\sum_{R \in \sol} f(R)$.
 
 \section{Approximation}
 
-Let's recall some of the definitions related to approximation problems
+Let us recall some of the definitions related to approximation problems
 that will be used in the following sections.
 
 \begin{defi}
 A \textbf{polynomial-time approximation scheme (PTAS)}
-is a family of algorithms $A_\epsilon$ for
+for a minimization problem $\Pi$
+is a family of algorithms $\cal{A}_\epsilon$ for
 every $\epsilon > 0$,
-that takes an instance $I$ of a minimization problem
-and in polynomial time,
+such that $\cal{A}_\epsilon$ takes an instance $I$ of $\Pi$
+and in polynomial time
 finds a solution that is within a factor
-($1+\epsilon$) of being optimal. That means
-it has weight at most
-$(1+\epsilon)opt(I)$, where $opt(I)$ is a weight
-of the optimal solution for $I$.
+($1+\epsilon$) of being optimal.
+That means the reported solution has weight at most
+$(1+\epsilon)opt(I)$, where $opt(I)$ is the weight
+of an optimal solution for $I$.
 \end{defi}
 
 \begin{defi}
-Problem is \textbf{APX-hard} if there exists such $\epsilon > 0$
-so that $(1+\epsilon)$-approximation problem is NP-hard.
+Problem is \textbf{APX-hard} if assuming P $\neq$ NP,
+there exists such $\epsilon > 0$
+such that there is no polynomial time $(1+\epsilon)$-approximation algorithm.
 \end{defi}
 
 \section{$\delta$-extensions}
 
+TODO PLACEHOLDER for introductory text
+
+$\delta$-extensions is one of the
+modifications to a problem, that makes geometric set cover problem easier,
+it has been already used in literature (place some refrence here).
+
 \begin{defi}\textbf{$\delta$-extensions for segments}
-For any $\delta > 0$ and segment $L = \{(x_a, y_a), (x_b, y_b)\}$
-of length $d = \sqrt{(x_a - x_b)^2 + (y_a - y_b)^2}$,
-a $\delta$-extension of this segment, $L^{+\delta}$, is an open segment
-parallel to $L$, but with both ends extended by $\delta d$,
-i.e. if we denote vector $t = (x_b - x_a, y_b - y_a)$,
-$ L^{+\delta}
-= \{ (x_a, y_a) - \delta\cdot t, (x_b, y_b) + \delta\cdot t \}$
+For any $\delta > 0$ and center-symmetric gemetric object $L$ with
+centre of symmetry $S = (x_s, y_s)$,
+a $\delta$-extension of this object, $L^{+\delta}$,
+is an object without border, but with all vertices extended by $\delta d$,
+i.e. $ L^{+\delta} =
+\{ (x, y) \in L : (1 - \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s)\}$.
 \end{defi}
+
 
 A relaxed cover problem with $\delta$-extensions
 requires to cover all the points in $\points$
-with objects with $\delta$-extensions (which always 
+with $\delta$-extended objects (which always 
 include no less points than the objects
 before $\delta$-extensions). 
 We also look for solution not larger than
 optimal solution for the original problem,
-so it doesn't have to be optimal for cover problem with 
+so it does not have to be optimal for cover problem with 
 objects after $\delta$-extensions.
 
 

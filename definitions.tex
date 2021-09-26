@@ -55,44 +55,35 @@ centre of symmetry $S = (x_s, y_s)$,
 a $\delta$-extension of this object, $L^{+\delta}$,
 is an object without border, but with all vertices extended by $\delta d$,
 i.e. $ L^{+\delta} =
-\{ (x, y) \in L : (1 - \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s)\}$.
+\{ (x, y) \in L : (1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s)\}$.
 \end{defi}
 
 
 A relaxed cover problem with $\delta$-extensions
-requires to cover all the points in $\points$
-with $\delta$-extended objects (which always 
+is a modified version of a problem where:
+\begin{itemize}
+\item We need to cover all the points in $\points$
+with objects from $\{P \in \sets : P^{+\delta}\}$ (which always 
 include no less points than the objects
-before $\delta$-extensions). 
-We also look for solution not larger than
-optimal solution for the original problem,
-so it does not have to be optimal for cover problem with 
-objects after $\delta$-extensions.
+before $\delta$-extensions);
+\item We look for a solution that is no larger than the optimal solution
+of the original problem. It doesn't need to be an optimal solution in
+a modified problem.
+\end{itemize}
 
 
-\begin{defi}\textbf{Cover problem with $\delta$-extensions}
-Let $\mathcal{P}$ be an optimization cover problem 
-that takes as an input instance $I$
-and outputs a minimal solution $\mathcal{R}^{opt}$, such that
-$\mathcal{R}^{opt}$ covers $I$.
-
+\begin{defi}\textbf{Geometric set cover problem with $\delta$-extensions}
 We define an optimization cover problem $\mathcal{P}$
-with $\delta$-extensions as a problem which
-takes an input instance $I$,
-and outputs a solution $\mathcal{R}$, such that $\delta$-extended set
+with $\delta$-extensions as the problem where for an input instance $I$,
+the task is to output a solution $\mathcal{R}$,
+such that $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $I$
 and is no worse than the optimal solution for the problem without
 extensions, i.e. $|\mathcal{R}| \le |\mathcal{R}^{opt}|$.
 \end{defi}
 
 
-\begin{defi}\textbf{PTAS with $\delta$-extensions}
-Let $\mathcal{P}$ be an optimization cover problem 
-that takes as an input instance $I$
-and outputs a minimal solution $\mathcal{R}^{opt}$, such that
-$\mathcal{R}^{opt}$ covers $I$.
-
-
+\begin{defi}\textbf{Geometric set cover PTAS with $\delta$-extensions}
 We define a PTAS for cover problem $\mathcal{P}$
 with $\delta$-extensions as a problem which
 takes as an input instance $I$,

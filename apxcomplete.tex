@@ -1,11 +1,11 @@
-\section{APX-completeness for segments parallel to axis}
+\section{APX-completeness for segments parallel to axes}
 \label{section:segment_apx}
 
-In this section we analyze if there exists an
+In this section we analyze whether there exists an
 $(1+\epsilon)$-approximation
-scheme for set cover with rectangles.
+scheme for geometric set cover for rectangles.
 We will show that we can restrict this problem
-to a very easy setting:
+to a very simple setting:
 segments parallel to axes and allow (1/2)-extension,
 and the problem is still APX-hard.
 Note that segments are just degenerated rectangles
@@ -21,7 +21,7 @@ theorem and this section aims to prove it.
 	Unweighted geometric set cover
 	with axis-parallel segments in 2D (even with 1/2-extension)
 	is APX-hard,
-	i.e. assuming $P\neq NP$, there does not exist a PTAS
+	that is, assuming $P\neq NP$, there does not exist a PTAS
 	for this problem.
 }\end{tw}
  
@@ -35,33 +35,35 @@ Theorem \ref{segment_cover_apx_hard} implies the following.
 }\end{corollary}
 
 
-We will prove Theorem \ref{segment_cover_apx_hard}
+We prove Theorem \ref{segment_cover_apx_hard}
 by taking a problem that is APX-hard
 and showing a reduction.
 For this problem we choose
-MAX-(3,3)-SAT which we define in detail below.
+MAX-(3,3)-SAT which we define below.
 
 Given an instance $I$ of MAX-(3,3)-SAT,
 we will construct an instance $J$ of 
 axis-parallel segment set cover problem,
-such that for an sufficiently small $\epsilon > 0$,
-$(1+\epsilon)$-approximation for $J$
-will yield distinguishing  whether an instance $I$ of MAX-(3,3)-SAT
+such that for a sufficiently small $\epsilon > 0$,
+a polynomial $(1+\epsilon)$-approximation algorithm for $J$
+would be able to distinguish  whether an instance $I$ of MAX-(3,3)-SAT
 is fully satisfiable
-or $(7/8 + \epsilon)$-satisfiable (Theorem \ref{hastadtheorem}), which 
-is nonapproximable boyond the random assignment assuming $P\neq NP$.
+or $(7/8 + \epsilon)$-satisfiable.
+However according to (Theorem \ref{hastadtheorem}) that problem
+is NP-hard.
+Then it proves that P = NP.
 
 \subsection{MAX-(3,3)-SAT problem}
 \begin{defi}
-\textbf{MAX-3SAT} is an optimization problem. We are given a 3-CNF
+\textbf{MAX-3SAT} is a maximization problem. We are given a 3-CNF
 formula, and need to find an assignment of variables
 that satisfies the most clauses.
 \end{defi}
 
 \begin{defi}
-\textbf{MAX-(3,3)-SAT} is a MAX-3SAT with an additional
-restriction that every variable appears in exactly 3 clauses,
-so that the number of clauses is equal to number of variables.
+\textbf{MAX-(3,3)-SAT} is  MAX-3SAT with an additional
+restriction that every variable appears in exactly 3 clauses.
+Note that thus, the number of clauses is equal to number of variables.
 \end{defi}
 
 In the lemmas above we use
@@ -77,103 +79,105 @@ Theorem \ref{hastadtheorem}.
 	%This broke x-satisfiable to next line
 	at most
 	\linebreak\mbox{$(7/8 + \epsilon)$-satisfiable}
-	(3,3)-SAT formulas. Said equivalently, MAX-(3,3)-SAT
-	is nonapproximable beyond the random assignment threshold
-	on satisfiable instances.
+	(3,3)-SAT formulas.
 }\end{tw}
 
 The following lemma encapsulates the properties
 of the reduction described in this section,
-and it allows to prove Theorem \ref{segment_cover_apx_hard}.
+and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 
 \begin{lemma}{
 	\label{apxconstruction}
 	Given an instance $S$ of  MAX-(3,3)-SAT 
-	with $n$ variables and optimal result~$OPT(S)$,
-	we can construct an instance $I$ of axis-parallel segments in 2D
+	with $n$ variables and optimum value $OPT(S)$,
+	we can construct an instance $I$ of geometric set cover with
+	axis-parallel segments in 2D
 	with $1/2$-extensions, such that:
-	\begin{enumerate}
-	\item for every solution $X$ of problem $I$,
+	\begin{enumerate}[label={(\arabic*)}]
+	\item For every solution $X$ of instance $I$,
 	there exists a solution of $S$ of size at least  $15n - |X|$;
 	
-	\item for every solution $X$ of problem $S$,
+	\item For every solution $X$ of instance $S$,
 	there exists a solution of $I$ of size $15n - |X|$;
 	
-	\item every solution with $1/2$-extensions for $I$
-	is also an solution to the original problem $I$.
+	\item Every solution with $1/2$-extensions for $I$
+	is also a solution to the original instance $I$.
 		
-	Therefore optimal solution of $I$ is $OPT(I) = 15n - OPT(S)$. 
+	Therefore, the optimal solution of $I$ is $OPT(I) = 15n - OPT(S)$. 
 	\end{enumerate}
 	
 }\end{lemma}
 
 We prove Lemma \ref{apxconstruction} in
-subsequent sections, but meanwhile let's prove
+subsequent sections, but meanwhile let us prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
 and Theorem \ref{hastadtheorem}.
 
 \paragraph{Proof of Theorem \ref{segment_cover_apx_hard}}
-Take any $0 < \epsilon < 1/(15 \cdot 8)$.
+Consider any $0 < \epsilon < 1/(15 \cdot 8)$.
 
-Let's assume that there exists an $(1+\epsilon)$-approximation scheme
-for unweighted geometric set cover with axis-pararell segments in 2D
+Let us assume that there exists a plynomial-time
+$(1+\epsilon)$-approximation scheme
+for unweighted geometric set cover with axis-parallel segments in 2D
 with (1/2)-extensions.
-We will construct an algorithm distinguishing instances of
-MAX-(3,3)-SAT
-in Theorem \ref{hastadtheorem}.
+We will construct an algorithm that solves the problem stated in 
+Theorem \ref{hastadtheorem}, thereby proving that P = NP.
 
 Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
 and construct an instance of geometric set cover $I$
 using Lemma \ref{apxconstruction}.
 
-We now use the $(1+\epsilon)$-approximation scheme
-for instances of geometric set cover on $I$,
-denote the cost of the result of this approximation as $approx(I)$.
+We now use the $(1+\epsilon)$-approximation algorithm
+for geometric set cover on $I$,
+denote the cost of the result of applying this algorithm as $approx(I)$.
 
-We will prove that 
-if $approx(I) \ge 15n - (\frac{7}{8} + \epsilon)n$ then $S$
-satisfied at most $(\frac{7}{8}+\epsilon)n$ clauses,
-and if $approx(I) < 15n - (\frac{7}{8} + \epsilon)n$ then $S$ was
-satisfiable.
+We prove that 
+if in $S$
+one can satisfy at most $(\frac{7}{8}+\epsilon)n$ clauses,
+then $approx(I) \ge 15n - (\frac{7}{8} + \epsilon)n$
+and if $S$ is
+satisfiable , then $approx(I) < 15n - (\frac{7}{8} + \epsilon)n$.
 
 \subparagraph{Assume $S$ satisfiable}
 From the definition of $S$ being satisfiable, we have:
-$$OPT(S) = n$$
+$$OPT(S) = n$$.
 
-From Lemmma \ref{apxconstruction} we have:
+From Lemma \ref{apxconstruction} we have:
 
-$$OPT(I) = 14n$$
+$$OPT(I) = 14n$$.
 
+Therefore,
 $$approx(I) \le (1+\epsilon)OPT(I) = 14n(1+\epsilon)
 	= 14n + 14\epsilon\cdot n =$$ 
 	$$= 14n + (15\epsilon - \epsilon)n < 
   14n + \left(\frac{1}{8} - \epsilon\right)n 
 = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
-\subparagraph{Assume $S$ at most
-$\left(\frac{7}{8} + \epsilon\right)n$ satisfiable}
-From defintion of $S$ being at most 
+\subparagraph{Assume $S$ is at most
+$\left(\frac{7}{8} + \epsilon\right)$ satisfiable}.
+From th defintion of $S$ being at most 
 $\left(\frac{7}{8} + \epsilon\right)n$ satisfiable, we have:
 $$OPT(S) \le \left(\frac{7}{8} + \epsilon\right)n$$
 
 From Lemmma \ref{apxconstruction} we have:
 $$OPT(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
-Since approximation of problem with extensions is
-also approximation without extentions
-from Lemmma \ref{apxconstruction} 3., we have:
+Since a solution to $I$ with extensions is
+also a solution without extentions, by 
+Lemmma \ref{apxconstruction} (3.), we have:
 
 $$approx(I) \ge OPT(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
 
-Therefore, by using the assumed to exist $(1+\epsilon)$-approximation
-scheme for segment set cover,
-it is possible to distinguish $S$ from
-being satisfiable and at most $(\frac{7}{8} + \epsilon)n$ satisfiable,
+Therefore, by using the assumed $(1+\epsilon)$-approximation
+algorithm,
+it is possible to distinguish the case when
+$S$ is satisfiable from the case when it is
+at most $(\frac{7}{8} + \epsilon)n$ satisfiable,
 since there exists a threshold on the
 approximation result in segment set cover that distinguishes
 these two cases.
-This is a contradiction, hence the approximation scheme cannot exist.
+Hence, the assumed approximation algorithm cannot exist, unless P = NP.
 
 \subsection{Reduction construction}
 We will show reduction from MAX-(3,3)-SAT problem
@@ -191,11 +195,11 @@ connected together.
 
 \subsubsection{VARIABLE-gadget}
 
-VARIABLE-gadget is responsible for choosing a value of variable
-in CNF formula. It allows two minimal solution
+VARIABLE-gadget is responsible for choosing the value of a variable
+in a CNF formula. It allows two minimal solution
 and every minimal solution must use exactly one of the
 $\xTrueSegment$ and $\xFalseSegment$
-segments, so you can assign a binary value to the variable.
+segments. These two choices correspond to the two Boolean values of the variable.
 
 \paragraph{Points.}
 
@@ -204,17 +208,17 @@ Define points:
 \centering
 \def\svgwidth{0.5\columnwidth}
 \input{apx_choose_variable.pdf_tex}
-\caption{\textbf{Choose variable value gadget.}
-We denote set of points marked with black circle as $C\_variable_i$
-and need to be covered (are part of set $\points$).
+\caption{\textbf{VARIABLE-gadget.}
+We denote the set of points marked with black circles as $C\_variable_i$,
+and they need to be covered (are part of the set $\points$).
 Note that some of the points are not marked as black dots
 and exists only to name segments for further reference.
-We denote set of red segments as $x^{false}_i$
-and set of blue segments as $x^{true}_i$.}
+We denote the set of red segments as $x^{false}_i$
+and the set of green segments as $x^{true}_i$.}
 \label{fig:apx_choose_variable}
 \end{figure}
 
-TODO: inline $L = 12n$ after finishing these formulas
+With $L = 12n$:
 
 \begin{center}
 \begin{tabular}{ l l l l}

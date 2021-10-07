@@ -49,13 +49,13 @@ $\delta$-extensions is one of the
 modifications to a problem, that makes geometric set cover problem easier,
 it has been already used in literature (place some refrence here).
 
-\begin{defi}\textbf{$\delta$-extensions for segments}
+\begin{defi}\textbf{$\delta$-extensions for center-symmetric objects}
 For any $\delta > 0$ and center-symmetric gemetric object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
-a $\delta$-extension of this object, $L^{+\delta}$,
+a \textbf{$\delta$-extension} of this object, $L^{+\delta}$,
 is an object without border, but with all vertices extended by $\delta d$,
 i.e. $ L^{+\delta} =
-\{ (x, y) \in L : (1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s)\}$.
+\{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}$.
 \end{defi}
 
 
@@ -63,12 +63,12 @@ A relaxed cover problem with $\delta$-extensions
 is a modified version of a problem where:
 \begin{itemize}
 \item We need to cover all the points in $\points$
-with objects from $\{P \in \sets : P^{+\delta}\}$ (which always 
+with objects from $\{P^{+\delta} : P \in \sets\}$ (which always 
 include no less points than the objects
 before $\delta$-extensions);
 \item We look for a solution that is no larger than the optimal solution
 of the original problem. It doesn't need to be an optimal solution in
-a modified problem.
+the modified problem.
 \end{itemize}
 
 
@@ -76,7 +76,7 @@ a modified problem.
 We define an optimization cover problem $\mathcal{P}$
 with $\delta$-extensions as the problem where for an input instance $I$,
 the task is to output a solution $\mathcal{R}$,
-such that $\delta$-extended set
+such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $I$
 and is no worse than the optimal solution for the problem without
 extensions, i.e. $|\mathcal{R}| \le |\mathcal{R}^{opt}|$.
@@ -85,9 +85,9 @@ extensions, i.e. $|\mathcal{R}| \le |\mathcal{R}^{opt}|$.
 
 \begin{defi}\textbf{Geometric set cover PTAS with $\delta$-extensions}
 We define a PTAS for cover problem $\mathcal{P}$
-with $\delta$-extensions as a problem which
+with $\delta$-extensions as an algorithm that
 takes as an input instance $I$,
-and outputs a solution $\mathcal{R}$, such that $\delta$-extended set
+and outputs a solution $\mathcal{R}$, such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $I$
 and is within a $(1+\epsilon)$ factor of the optimal
 solution for this problem without

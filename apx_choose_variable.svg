@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.6102772"
-     inkscape:cx="294.76012"
-     inkscape:cy="150.90277"
+     inkscape:cx="123.32239"
+     inkscape:cy="181.55086"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -59,8 +59,8 @@
      id="layer1"
      transform="translate(-2.6197123,-81.79323)">
     <path
-       style="fill:none;stroke:#2af2ba;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 80.529167,96.927541 H 150.52917"
+       style="fill:none;stroke:#2af2ba;stroke-width:0.98025668;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 80.529167,96.927541 H 147.79239"
        id="path54"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -133,23 +133,23 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'TeX Gyre Termes';-inkscape-font-specification:'TeX Gyre Termes';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="146.72012"
-       y="94.650497"
+       x="151.72012"
+       y="92.650497"
        id="text98-29-2"><tspan
          sodipodi:role="line"
          id="tspan96-0-8"
-         x="146.72012"
-         y="94.650497"
+         x="151.72012"
+         y="92.650497"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'TeX Gyre DejaVu Math';-inkscape-font-specification:'TeX Gyre DejaVu Math';stroke-width:0.26458332">$g_i$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'TeX Gyre Termes';-inkscape-font-specification:'TeX Gyre Termes';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="146.72012"
+       x="151.72012"
        y="135.03149"
        id="text98-29-3"><tspan
          sodipodi:role="line"
          id="tspan96-0-80"
-         x="146.72012"
+         x="151.72012"
          y="135.03149"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'TeX Gyre DejaVu Math';-inkscape-font-specification:'TeX Gyre DejaVu Math';stroke-width:0.26458332">$h_i$</tspan></text>
     <path
@@ -173,8 +173,8 @@
        id="path4125-7"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:#da1900;fill-opacity:1;stroke:#f60000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 49.993775,136.99965 150.9789,136.92785"
+       style="fill:#da1900;fill-opacity:1;stroke:#f60000;stroke-width:0.98752832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 49.993934,136.99966 98.450756,-0.0718"
        id="path4125-0"
        inkscape:connector-curvature="0" />
   </g>
@@ -223,6 +223,18 @@
        cx="80"
        cy="97"
        style="stroke-width:0.26458332"
+       r="2" />
+    <circle
+       id="path61-2"
+       cx="147.07649"
+       cy="15.074477"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-opacity:1"
+       r="2" />
+    <circle
+       id="path61-2-9"
+       cx="147.68466"
+       cy="55.074478"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-opacity:1"
        r="2" />
   </g>
 </svg>

@@ -4,7 +4,7 @@
 In this section we analyze whether there exists an
 $(1+\epsilon)$-approximation
 scheme for geometric set cover for rectangles.
-We will show that we can restrict this problem
+We show that we can restrict this problem
 to a very simple setting:
 segments parallel to axes and allow (1/2)-extension,
 and the problem is still APX-hard.
@@ -42,7 +42,7 @@ For this problem we choose
 MAX-(3,3)-SAT which we define below.
 
 Given an instance $I$ of MAX-(3,3)-SAT,
-we will construct an instance $J$ of 
+we construct an instance $J$ of 
 axis-parallel segment set cover problem,
 such that for a sufficiently small $\epsilon > 0$,
 a polynomial $(1+\epsilon)$-approximation algorithm for $J$
@@ -51,7 +51,7 @@ is fully satisfiable
 or $(7/8 + \epsilon)$-satisfiable.
 However according to (Theorem \ref{hastadtheorem}) that problem
 is NP-hard.
-Then it proves that P = NP.
+Then it concludes that P = NP, which is a contradiction with assumption.
 
 \subsection{MAX-(3,3)-SAT problem}
 \begin{defi}
@@ -95,10 +95,10 @@ and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 	with $1/2$-extensions, such that:
 	\begin{enumerate}[label={(\arabic*)}]
 	\item For every solution $X$ of instance $I$,
-	there exists a solution of $S$ of size at least  $15n - |X|$;
+	there exists a solution of $S$ of size at least  $15n - |X|$.
 	
 	\item For every solution $X$ of instance $S$,
-	there exists a solution of $I$ of size $15n - |X|$;
+	there exists a solution of $I$ of size $15n - |X|$.
 	
 	\item Every solution with $1/2$-extensions for $I$
 	is also a solution to the original instance $I$.
@@ -113,14 +113,16 @@ subsequent sections, but meanwhile let us prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
 and Theorem \ref{hastadtheorem}.
 
-\paragraph{Proof of Theorem \ref{segment_cover_apx_hard}}
+TODO: This below can't use current template
+
+\paragraph{Proof of Theorem \ref{segment_cover_apx_hard}}.
 Consider any $0 < \epsilon < 1/(15 \cdot 8)$.
 
-Let us assume that there exists a plynomial-time
+Let us assume that there exists a polynomial-time
 $(1+\epsilon)$-approximation scheme
 for unweighted geometric set cover with axis-parallel segments in 2D
 with (1/2)-extensions.
-We will construct an algorithm that solves the problem stated in 
+We construct an algorithm that solves the problem stated in 
 Theorem \ref{hastadtheorem}, thereby proving that P = NP.
 
 Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
@@ -136,15 +138,15 @@ if in $S$
 one can satisfy at most $(\frac{7}{8}+\epsilon)n$ clauses,
 then $approx(I) \ge 15n - (\frac{7}{8} + \epsilon)n$
 and if $S$ is
-satisfiable , then $approx(I) < 15n - (\frac{7}{8} + \epsilon)n$.
+satisfiable, then $approx(I) < 15n - (\frac{7}{8} + \epsilon)n$.
 
-\subparagraph{Assume $S$ satisfiable}
+\subparagraph{Assume $S$ satisfiable.}
 From the definition of $S$ being satisfiable, we have:
-$$OPT(S) = n$$.
+$$OPT(S) = n.$$
 
 From Lemma \ref{apxconstruction} we have:
 
-$$OPT(I) = 14n$$.
+$$OPT(I) = 14n.$$
 
 Therefore,
 $$approx(I) \le (1+\epsilon)OPT(I) = 14n(1+\epsilon)
@@ -155,16 +157,16 @@ $$approx(I) \le (1+\epsilon)OPT(I) = 14n(1+\epsilon)
 
 \subparagraph{Assume $S$ is at most
 $\left(\frac{7}{8} + \epsilon\right)$ satisfiable}.
-From th defintion of $S$ being at most 
+From the defintion of $S$ being at most 
 $\left(\frac{7}{8} + \epsilon\right)n$ satisfiable, we have:
 $$OPT(S) \le \left(\frac{7}{8} + \epsilon\right)n$$
 
-From Lemmma \ref{apxconstruction} we have:
-$$OPT(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
+From Lemma \ref{apxconstruction} we have:
+$$OPT(I) \ge 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
 Since a solution to $I$ with extensions is
 also a solution without extentions, by 
-Lemmma \ref{apxconstruction} (3.), we have:
+Lemma \ref{apxconstruction} (3.), we have:
 
 $$approx(I) \ge OPT(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
@@ -180,7 +182,7 @@ these two cases.
 Hence, the assumed approximation algorithm cannot exist, unless P = NP.
 
 \subsection{Reduction construction}
-We will show reduction from MAX-(3,3)-SAT problem
+We show reduction from MAX-(3,3)-SAT problem
 to geometric set cover with segments
 parallel to axis. Moreover the instance
 of geometric set cover will be robust
@@ -196,7 +198,7 @@ connected together.
 \subsubsection{VARIABLE-gadget}
 
 VARIABLE-gadget is responsible for choosing the value of a variable
-in a CNF formula. It allows two minimal solution
+in a CNF formula. It allows two minimal solutions
 and every minimal solution must use exactly one of the
 $\xTrueSegment$ and $\xFalseSegment$
 segments. These two choices correspond to the two Boolean values of the variable.
@@ -533,7 +535,7 @@ u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$.
 We can choose disjoint sets $X, Y, Z$ such that
 $X \cup Y \cup Z \subseteq C\_clause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
 and there are no segments covering points from different sets.
-And we will prove lower bounds for each of these sets.
+And we prove lower bounds for each of these sets.
 
 $$X = \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}$$
 
@@ -580,7 +582,7 @@ $$\sets := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
 
 The subsequent sections define these sets.
 
-We will prove some properties of different gadgets.
+We prove some properties of different gadgets.
 Every segment for a gadget will only cover points 
 in this gadget (won't interact with any diferent gadget),
 so we can prove lemmas \textit{locally}.

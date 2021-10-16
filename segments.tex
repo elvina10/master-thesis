@@ -43,26 +43,42 @@ This theorem is proved by following lemmas.
 	a set of $m$ points $\points$
 	for segment cover problem,
    without a loss of generality we can assume that
-   no two segments cover the same set of points.
+   any segment does not cover the superset
+   of what some other segment covers, $A, B \in \sets A \not \subseteq B$
 \end{lemma}   
    
-\paragraph{Proof.} Trivial.
+\begin{proof} Trivial. \end{proof}
 
 \begin{lemma}
-	\label{kernel_definition}
-	\textbf{(Kernel for segment cover)}.
-	For a problem of segment cover that given a family $\sets$ of
-	$n$ segments (in any direction),
-	a set of $m$ points $\points$
-	and a parameter $k$, there exists a family of
-	kernels $K \subset \sets$,
-	where \textit{any line} contains no more than $k$ points
-	and there exists optimal solution, that is subset of $K$.
-	We can find all such kernels in complexity $O(k^k)$ using branching technique
-	and there are $O(k^k)$ of them.
+	\label{fpt_long_lines}
+	Given an instance of a problem, if there exists a line $L$ with at least
+	$k+1$ points on it, there exists a subset $\mathcal{A} \subseteq \sets$,
+	$|\mathcal{A}| \le k$ and there exists an optimal solution
+	$OPT$, such that $\mathcal{A} \cap OPT \ge 1$.
 \end{lemma}
 
-\paragraph{Proof.}
+\begin{proof}
+
+First we use Lemma \ref{fpt_reduction}.
+
+Let us name points from $\points$ that lay on $L$, $x_1, x_2, \ldots x_t$
+in the order they appear on the line.
+
+Every segment that is not colinear with $L$ can cover at most one of these
+points. Therefore in any solution of size not larger thann $k$,
+among any $k$ of these points at least one must
+be covered with segment colinear with $L$.
+
+Therefore we need to take one of the segments colinear
+with $L$ that covers any of the points
+$x_1, x_2, \ldots x_k$. After using reduction from Lemma \ref{fpt_reduction},
+there are at most $k$ such segments that are distinct.
+
+\end{proof}
+
+
+
+\begin{proof}[Proof of theorem \ref{segment_cover_fpt}.]\leavevmode
 
 %As long as there is a line with more than $k$ points, do branching.
 %Let's name points on this line $x_1, x_2, \ldots x_t$
@@ -76,38 +92,55 @@ This theorem is proved by following lemmas.
 %exactly $k+1$ segments (any of them can't contain more than
 %one point from this line).
 
+\textbf{Algorithm}
 First we use Lemma \ref{fpt_reduction}.
 
-Assume there exists a line $l$ containing points $x_1$, \ldots $x_t$,
-where $t \geq k + 1$.
-Note that a segment that does not lie on $l$ can cover only at most one
-of the points $x_i$.
-Therefore, out of points $x_1$, ..., $x_{k+1}$,
-at least one has to be covered by a segment that lies on $l$,
-let us fix $x_i$ to be the first such point (We branch over $i \in \{1 \dots k+1\}$.
-Then, we can greedily choose a segment that lies on $l$,
-covers $x_i$,
-and also covers the largest number of points $x_j$ for $j > i$.
+We present a recursive algorithm. Given an instance of the problem:
 
-Since we have at most $k + 1$ choices to branch over
-and each choice adds a segment to the constructed solution,
-we obtain an algorithm with complexity $O(k^k)$.
+\begin{enumerate}[label={(\arabic*)}]
+\item If there exist a line with at least $k+1$ points, we branch over
+adding to a solution one of at most $k$ possible segments
+from Lemma \ref{fpt_long_lines}, name this segment $S$.
+Then we find a solution $\sol$
+for problem for points $\points - S$, segments $\sets$
+and parameter $k-1$ and return $\sol \cup \{S\}$
+\item If every line has at most $k$ points on it and $\points > k^2$,
+then answer \texttt{NO}.
+\item If $\points \le k^2$, solve the problem by brute force algorithm.
+\end{enumerate}
 
-\paragraph{Proof of theorem \ref{segment_cover_fpt}.} Assuming Lemma \ref{kernel_definition}.
+\textbf{Correctness}
 
-First we use Lemma \ref{fpt_reduction}.
+Lemma \ref{fpt_long_lines} proves that at least one segment that we
+branch over in (1) must be present in some optimal solution $OPT$,
+therefore the recursive call can find this solution.
 
-Since any segment covers a set of colinear points,
-for such a kernel $k$ segments can cover only at most $k^2$ points.
-Therefore, for the answer to be positive,
-the number of points has to be at most $k^2$.
-The number of segments is now bounded by $k^4$,
-since if we consider two \textit{extreme} points
-covered by a given segment,
-then these pairs must be distinct,
-otherwise two segments would contain the same set of points.
-Since both the number of points and the number of segments
-is bounded by a function of $k$,
-this instance can be easily solved in time $O(f(k))$.
-Since there are $O(k^k)$ possible kernels, the final algotihm
-work in $f(k) \cdot (nm)$.
+In (2) answer is no, because every line covers no more than $k$ points
+from $\points$, which implies that every segment from $\sets$ covers at most
+$k$. Under this assumption
+we can cover only $k^2$ points with solution of size $k$, which is less
+than $|\points|$.
+
+Checking all possible solutions in (3) is trivially correct.
+
+
+\textbf{Complexity}
+
+In leaves of branching (3) $\points < k^2$, so $\sets < k^4$, because
+every segments can be uniquely identified by 2 extreme points it covers
+(by Lemma \ref{fpt_reduction}). Therefore there are $\binom{k^4}{k}$
+possible solutions to check, each in time $O(k\points)$.
+Therefore (3) is checked in time $O(f(k))$.
+
+
+In this branching algorithm our parameter $k$ is decreased with every
+recursive call, so we have at most $k$ levels of recursion with
+branching over $k$ possibilites. Candidates to branch over
+can be found on each level in time $O(n)$.
+
+Reduction from Lemma \ref{fpt_reduction} can be implemented in $O(nm)$.
+
+Overall complexity is $O(mn + n \cdot f(k))$
+
+\end{proof}
+

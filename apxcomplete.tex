@@ -115,7 +115,7 @@ and Theorem \ref{hastadtheorem}.
 
 TODO: This below can't use current template
 
-\paragraph{Proof of Theorem \ref{segment_cover_apx_hard}}.
+\begin{proof}[Proof of Theorem \ref{segment_cover_apx_hard}].
 Consider any $0 < \epsilon < 1/(15 \cdot 8)$.
 
 Let us assume that there exists a polynomial-time
@@ -180,6 +180,8 @@ since there exists a threshold on the
 approximation result in segment set cover that distinguishes
 these two cases.
 Hence, the assumed approximation algorithm cannot exist, unless P = NP.
+
+\end{proof}
 
 \subsection{Reduction construction}
 We show reduction from MAX-(3,3)-SAT problem
@@ -376,20 +378,23 @@ $C\_or\_gadget_{i, j} - \{ x\} \cup \{v_{i, j}\}$
 with 4 segments.
 \end{lemma}
 
-\paragraph{Proof.}
+\begin{proof}
 We can do that using one segment from
 $or\_move\_variable_{i, j}$
 (chosen depending on the value of $x$)
 and all segments from $or^{true}_{i, j}$.
+\end{proof}
 
 \begin{lemma}
 \label{cover_or_false}
 For any $1 \le i \le n, j \in \{0, 1\}$, we can cover points in
 $C\_or\_gadget_{i, j}$ with 4 segments from $P\_or\_gadget_{i,j}$.
 \end{lemma}
-\paragraph{Proof.}
+
+\begin{proof}
 We can do that using  $or\_move\_variable_{i, j}$
 and $or^{false}_{i, j}$.
+\end{proof}
 
 
 \subsubsection{CLAUSE-gadget}
@@ -478,7 +483,7 @@ points $C\_clause_i - \{a\}$ can be covered using 11 segments
 from $P\_clause_i$.
 \end{lemma}
 
-\paragraph{Proof.}
+\begin{proof}
 For $a = x_{i, 0}$ (analogous proof for $y_{i, 0}$):
 First we use Lemma~\ref{cover_or_true} twice with excluded $x = l_{i, 0}$ and
 $x = l_{i, 1} = v_{i, 0}$,
@@ -498,13 +503,14 @@ $x_{i, 0}, x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 1}, p_{i, 1}$.
 We cover those using additional 3 segments:
 $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 (z_{i, 1}, p_{i, 1}) \}$.
+\end{proof}
 
 \begin{lemma}
 \label{cover_clauses_solution_false}
  Points $C\_clause_i$ can be covered with 12 segments from $P\_clause_i$.
 \end{lemma}
 
-\paragraph{Proof.}
+\begin{proof}
 Using Lemma \ref{cover_or_false} twice we can
 cover $or\_gadget_{i,0}$ and  $or\_gadget_{i,1}$
 with 8 segments.
@@ -513,6 +519,7 @@ To cover the remaining points we additionally use:
 $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 (z_{i, 0}, z_{i, 1}), (t_{i, 1}, v_{i, 1}) \}$
 
+\end{proof}
 
 \begin{lemma}
 \label{cover_clauses_segments_no_less}
@@ -525,12 +532,13 @@ from $P\_clause_i$.
 \end{lemma}
 
 
-\paragraph{Proof of no cover with less than 12 segments.}
+\begin{proof}[Proof of no cover with less than 12 segments.]
 There is independent set of 12 points in $C\_clause_i \supseteq
 \{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
 u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$.
+\end{proof}
 
-\paragraph{Proof of no cover with less than 11 segments.}
+\begin{proof}[Proof of no cover with less than 11 segments.]
 
 We can choose disjoint sets $X, Y, Z$ such that
 $X \cup Y \cup Z \subseteq C\_clause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
@@ -552,6 +560,7 @@ with brutforce that none of them cover, so they have to be covered with
 TODO: Funny fact, neither Y nor Z doesn't have independent set of size 4.
 
 Therefore $C\_clause_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
+\end{proof}
 
 \subsubsection{Summary}
 
@@ -600,7 +609,8 @@ TODO: $y$ axis is increasing values downward on figures
 	according to Lemma~\ref{apxconstruction}, 
 	there exists a solution of weight $15n - k$.
 \end{lemma}
-\paragraph{Proof.}
+
+\begin{proof}
 Let's name the assignments of the variables in MAX-(3,3)-SAT instance,
 that achieve the optimal solution,
 $y_1$,~$y_2$~$\ldots$~$y_n$,
@@ -617,6 +627,7 @@ Lemma~\ref{cover_clauses_solution_false}.
 
 This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 
+\end{proof}
 \begin{lemma}
 	\label{construction_completness}
 	Given an instance of MAX-(3,3)-SAT of size $n$,
@@ -624,7 +635,7 @@ This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 	constructed	according to Lemma~\ref{apxconstruction},  
 	there exists a solution to MAX-(3,3)-SAT of size at least $15n - w$.
 \end{lemma}
-\paragraph{Proof.}
+\begin{proof}
 Among $x_i^{true} \cup x_i^{false}$,
 we need to use at least 3 segments (Lemma~\ref{choose_variables_no_less}).
 If we have chosen both segments $\xTrueSegment$ and $\xFalseSegment$,
@@ -668,7 +679,10 @@ so we have shown the assignment with at least  $n-(a+b)$ satisfied clauses.
 $$w \ge 3n + a + 11n + b = 14n + a + b$$
 $$15n - w  \le 15n - 14 n - a - b = n - (a+b)$$
 
-\subsubsection{Proof of Lemma \ref{apxconstruction}}
+\end{proof}
+
+
+\begin{proof}[Proof of Lemma \ref{apxconstruction}]
 Given an instance of MAX-(3,3)-SAT of size $n$
 with optimal result $k$.
 Let's construct an instance of geometric cover,
@@ -679,3 +693,4 @@ the optimal solution for the constructed geometric cover is
 at most $15n - k$ and since the $k$ is optimal solution
 for MAX-(3,3)-SAT, then according to Lemma~\ref{construction_completness}
 there doesn't exist a solution with cost less than $15n - k$.
+\end{proof}

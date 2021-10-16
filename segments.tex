@@ -92,7 +92,7 @@ there are at most $k$ such segments that are distinct.
 %exactly $k+1$ segments (any of them can't contain more than
 %one point from this line).
 
-\textbf{Algorithm}
+\subparagraph{Algorithm.}
 First we use Lemma \ref{fpt_reduction}.
 
 We present a recursive algorithm. Given an instance of the problem:
@@ -109,7 +109,7 @@ then answer \texttt{NO}.
 \item If $\points \le k^2$, solve the problem by brute force algorithm.
 \end{enumerate}
 
-\textbf{Correctness}
+\subparagraph{Correctness.}
 
 Lemma \ref{fpt_long_lines} proves that at least one segment that we
 branch over in (1) must be present in some optimal solution $OPT$,
@@ -124,7 +124,7 @@ than $|\points|$.
 Checking all possible solutions in (3) is trivially correct.
 
 
-\textbf{Complexity}
+\subparagraph{Complexity.}
 
 In leaves of branching (3) $\points < k^2$, so $\sets < k^4$, because
 every segments can be uniquely identified by 2 extreme points it covers

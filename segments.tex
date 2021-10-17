@@ -43,8 +43,9 @@ This theorem is proved by following lemmas.
 	a set of $m$ points $\points$
 	for segment cover problem,
    without a loss of generality we can assume that
-   any segment does not cover the superset
-   of what some other segment covers, $A, B \in \sets A \not \subseteq B$
+   no segment covers a superset of what another segment covers
+   That is, for any $A, B \in \sets$, we have
+   $A \neq B \Rightarrow A \not \subseteq B$.
 \end{lemma}   
    
 \begin{proof} Trivial. \end{proof}
@@ -53,8 +54,9 @@ This theorem is proved by following lemmas.
 	\label{fpt_long_lines}
 	Given an instance of a problem, if there exists a line $L$ with at least
 	$k+1$ points on it, there exists a subset $\mathcal{A} \subseteq \sets$,
-	$|\mathcal{A}| \le k$ and there exists an optimal solution
-	$OPT$, such that $\mathcal{A} \cap OPT \ge 1$.
+	$|\mathcal{A}| \le k$,
+	such that every solution $\sol$ with $|\sol| \le k$
+	satisfies $\mathcal{A} \cap \sol \ge 1$.
 \end{lemma}
 
 \begin{proof}
@@ -65,7 +67,7 @@ Let us name points from $\points$ that lay on $L$, $x_1, x_2, \ldots x_t$
 in the order they appear on the line.
 
 Every segment that is not colinear with $L$ can cover at most one of these
-points. Therefore in any solution of size not larger thann $k$,
+points. Therefore in any solution of size not larger than $k$,
 among any $k$ of these points at least one must
 be covered with segment colinear with $L$.
 
@@ -102,23 +104,23 @@ We present a recursive algorithm. Given an instance of the problem:
 adding to a solution one of at most $k$ possible segments
 from Lemma \ref{fpt_long_lines}, name this segment $S$.
 Then we find a solution $\sol$
-for problem for points $\points - S$, segments $\sets$
-and parameter $k-1$ and return $\sol \cup \{S\}$
-\item If every line has at most $k$ points on it and $\points > k^2$,
+for problem for points $\points - S$, segments $\sets - \{S\}$
+and parameter $k-1$ and return $\sol \cup \{S\}$.
+\item If every line has at most $k$ points on it and $|\points| > k^2$,
 then answer \texttt{NO}.
-\item If $\points \le k^2$, solve the problem by brute force algorithm.
+\item If $|\points| \le k^2$, solve the problem by brute force algorithm.
 \end{enumerate}
 
 \subparagraph{Correctness.}
 
 Lemma \ref{fpt_long_lines} proves that at least one segment that we
-branch over in (1) must be present in some optimal solution $OPT$,
-therefore the recursive call can find this solution.
+branch over in (1) must be present in every solution $\sol$ with $|\sol| \le k$,
+therefore the recursive call can find the optimal solution.
 
-In (2) answer is no, because every line covers no more than $k$ points
+In (2) the answer is no, because every line covers no more than $k$ points
 from $\points$, which implies that every segment from $\sets$ covers at most
 $k$. Under this assumption
-we can cover only $k^2$ points with solution of size $k$, which is less
+we can cover only $k^2$ points with a solution of size $k$, which is less
 than $|\points|$.
 
 Checking all possible solutions in (3) is trivially correct.
@@ -126,21 +128,21 @@ Checking all possible solutions in (3) is trivially correct.
 
 \subparagraph{Complexity.}
 
-In leaves of branching (3) $\points < k^2$, so $\sets < k^4$, because
+In leaves of branching (3) $|\points| < k^2$, so $|\sets| < k^4$, because
 every segments can be uniquely identified by 2 extreme points it covers
 (by Lemma \ref{fpt_reduction}). Therefore there are $\binom{k^4}{k}$
-possible solutions to check, each in time $O(k\points)$.
-Therefore (3) is checked in time $O(f(k))$.
+possible solutions to check, each can be checked in time $O(k\points)$.
+Therefore (3) takes time $O(f(k))$.
 
 
 In this branching algorithm our parameter $k$ is decreased with every
 recursive call, so we have at most $k$ levels of recursion with
 branching over $k$ possibilites. Candidates to branch over
-can be found on each level in time $O(n)$.
+can be found on each level in time $O(nm \log(nm))$.
 
-Reduction from Lemma \ref{fpt_reduction} can be implemented in $O(nm)$.
+Reduction from Lemma \ref{fpt_reduction} can be implemented in $O(n^2m)$.
 
-Overall complexity is $O(mn + n \cdot f(k))$
+Overall complexity is $O(n^2m + nm \log(nm) \cdot f(k))$
 
 \end{proof}
 

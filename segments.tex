@@ -5,14 +5,14 @@
 You can find this in Platypus book. (TODO add referece)
 
 We show $\mathcal{O}(2^k)$ branching algorithm.
-Let us take the point $K$ with
-the smallest coordinate in lexicographical order
+Let us take
+the point $K$ which is the smallest under a lexicographic ordering on coordinates
 among points that are not covered yet.
 We need to cover $K$ with some of the remaining segments.
 
 We branch over choice of direction among the 2 axis-parallel directions.
 In this direction we greedly take the segment that covers
-the most points. Hence $K$ was the smallest
+the most points. As $K$ was the smallest
 in lexicographical order, all points in $\points$ colinear with $K$
 in both axis-parallel directions 
 are only on one side of $K$, because their coordinates are larger.
@@ -50,8 +50,8 @@ This theorem is proved by following lemmas.
    \label{fpt_reduction}
    \textbf{(Reduction)}.
    Given a family $\sets$ of
-	$n$ segments (in any direction),
-	a set of $m$ points $\points$
+	$n$ segments (in any direction)
+	and a set of $m$ points $\points$
 	for segment cover problem,
    without a loss of generality we can assume that
    no segment covers a superset of what another segment covers
@@ -67,7 +67,7 @@ This theorem is proved by following lemmas.
 	$k+1$ points on it, there exists a subset $\mathcal{A} \subseteq \sets$,
 	$|\mathcal{A}| \le k$,
 	such that every solution $\sol$ with $|\sol| \le k$
-	satisfies $\mathcal{A} \cap \sol \ge 1$.
+	satisfies $|\mathcal{A} \cap \sol| \ge 1$.
 \end{lemma}
 
 \begin{proof}
@@ -112,7 +112,7 @@ We present a recursive algorithm. Given an instance of the problem:
 
 \begin{enumerate}[label={(\arabic*)}]
 \item If there exist a line with at least $k+1$ points, we branch over
-adding to a solution one of at most $k$ possible segments
+adding to the solution one of at most $k$ possible segments
 from Lemma \ref{fpt_long_lines}, name this segment $S$.
 Then we find a solution $\sol$
 for problem for points $\points - S$, segments $\sets - \{S\}$
@@ -142,7 +142,7 @@ Checking all possible solutions in (3) is trivially correct.
 In leaves of branching (3) $|\points| < k^2$, so $|\sets| < k^4$, because
 every segments can be uniquely identified by 2 extreme points it covers
 (by Lemma \ref{fpt_reduction}). Therefore there are $\binom{k^4}{k}$
-possible solutions to check, each can be checked in time $O(k\points)$.
+possible solutions to check, each can be checked in time $O(k|\points|)$.
 Therefore (3) takes time $O(f(k))$.
 
 

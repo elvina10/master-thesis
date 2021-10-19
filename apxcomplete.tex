@@ -605,18 +605,18 @@ so we can prove lemmas \textit{locally}.
 TODO: $y$ axis is increasing values downward on figures
 (not upwards like in normal).
 
-\subsection{Proofs of construction Lemma \ref{apxconstruction}}
+\subsection{Construction lemmas and proof of Lemma \ref{apxconstruction}}
 \begin{lemma}
 	\label{construction_correctness}
-	Given an instance of MAX-(3,3)-SAT of size $n$
-	with optimal solution $k$.
-	For instance of geometric cover, constructed
+	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
+	with optimum solution satisfying $k$ clauses.
+	Instance of geometric cover, constructed for $S$
 	according to Lemma~\ref{apxconstruction}, 
-	there exists a solution of weight $15n - k$.
+	can be solved with a solution of weight $15n - k$.
 \end{lemma}
 
 \begin{proof}
-Let's name the assignments of the variables in MAX-(3,3)-SAT instance,
+Let us name the assignments of the variables in MAX-(3,3)-SAT instance,
 that achieve the optimal solution,
 $y_1$,~$y_2$~$\ldots$~$y_n$,
 Let's cover every VARIABLE-gadget with solution described in
@@ -635,10 +635,10 @@ This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 \end{proof}
 \begin{lemma}
 	\label{construction_completness}
-	Given an instance of MAX-(3,3)-SAT of size $n$,
-	and solution of size $w$ to the instance of geometric cover,
-	constructed	according to Lemma~\ref{apxconstruction},  
-	there exists a solution to MAX-(3,3)-SAT of size at least $15n - w$.
+	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
+	and a solution of size $w$ to the instance of geometric cover,
+	constructed	for $S$ according to Lemma~\ref{apxconstruction}.
+	There exists a solution to MAX-(3,3)-SAT of size at least $15n - w$.
 \end{lemma}
 \begin{proof}
 Among $x_i^{true} \cup x_i^{false}$,
@@ -688,14 +688,16 @@ $$15n - w  \le 15n - 14 n - a - b = n - (a+b)$$
 
 
 \begin{proof}[Proof of Lemma \ref{apxconstruction}]
-Given an instance of MAX-(3,3)-SAT of size $n$
-with optimal result $k$.
-Let's construct an instance of geometric cover,
-constructed in aforementioned manner.
+Given an instance $S$ of MAX-(3,3)-SAT of size $n$
+with optimum solution satisfying $k$ clauses.
+Let us construct an instance of geometric cover for $S$,
+constructed in aforementioned manner and name it $I$.
 
 Given the Lemma~\ref{construction_correctness}, we know
-the optimal solution for the constructed geometric cover is
-at most $15n - k$ and since the $k$ is optimal solution
-for MAX-(3,3)-SAT, then according to Lemma~\ref{construction_completness}
-there doesn't exist a solution with cost less than $15n - k$.
+the optimum solution for $I$ has size
+at most $15n - k$. Since $k$ is the optimum solution
+for $S$, then according to Lemma~\ref{construction_completness}
+there does not exist any solution 
+for $I$
+with size less than $15n - k$.
 \end{proof}

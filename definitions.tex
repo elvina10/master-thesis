@@ -3,10 +3,11 @@
 \section{Geometric Set Cover}
 
 In the geometric set cover problem we are are given
-$\sets$ -- set of objects, $\points$ -- set of points.
+$\sets$ -- a set of objects, which are connected
+subsets of the plane, $\points$ -- a set of points in the plane.
 The task is to choose $\sol \subseteq \sets$ such that
 every point in $\points$ is inside some element from $\sol$
-and $|\sol|$ is minimal.
+and $|\sol|$ is minimized.
 
 In the parametrized setting for a given $k$,
 we only look for a solution $\sol$ such that $|\sol| \le k$.
@@ -14,18 +15,19 @@ we only look for a solution $\sol$ such that $|\sol| \le k$.
 
 In the weighted setting, there is some given weight function
 $f : \sets \rightarrow \mathbb{R^+}$,
-and we would like to minimize $\sum_{R \in \sol} f(R)$.
+and we would like to find a solution $\sol$
+that minimizes $\sum_{R \in \sol} f(R)$.
 
 \section{Approximation}
 
-Let us recall some of the definitions related to approximation problems
-that will be used in the following sections.
+Let us recall some definitions related to optimization problems
+that are used in the following sections.
 
 \begin{defi}
 A \textbf{polynomial-time approximation scheme (PTAS)}
 for a minimization problem $\Pi$
 is a family of algorithms $\cal{A}_\epsilon$ for
-every $\epsilon > 0$,
+every $\epsilon > 0$
 such that $\cal{A}_\epsilon$ takes an instance $I$ of $\Pi$
 and in polynomial time
 finds a solution that is within a factor
@@ -36,9 +38,10 @@ of an optimal solution for $I$.
 \end{defi}
 
 \begin{defi}
-Problem is \textbf{APX-hard} if assuming P $\neq$ NP,
-there exists such $\epsilon > 0$
-such that there is no polynomial time $(1+\epsilon)$-approximation algorithm.
+A problem $\Pi$ is \textbf{APX-hard} if assuming P $\neq$ NP,
+there exists $\epsilon > 0$
+such that there is no polynomial-time $(1+\epsilon)$-approximation algorithm
+for $\Pi$.
 \end{defi}
 
 \section{$\delta$-extensions}
@@ -49,48 +52,54 @@ $\delta$-extensions is one of the
 modifications to a problem, that makes geometric set cover problem easier,
 it has been already used in literature (place some refrence here).
 
-\begin{defi}\textbf{$\delta$-extensions for center-symmetric objects}
-For any $\delta > 0$ and center-symmetric gemetric object $L$ with
+\begin{defi}[$\delta$-extensions for center-symmetric objects]
+For any $\delta > 0$ and a center-symmetric object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
-a \textbf{$\delta$-extension} of this object, $L^{+\delta}$,
-is an object without border, but with all vertices extended by $\delta d$,
-i.e. $ L^{+\delta} =
-\{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}$.
+the \textbf{$\delta$-extension} of $L$ is the object $L^{+\delta} =
+\{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}$,
+that is, $L^{+\delta}$ is the image of $L$ under homothety centered
+at $S$ which scale $(1+\delta)$
 \end{defi}
 
 
-A relaxed cover problem with $\delta$-extensions
-is a modified version of a problem where:
+The geometric set cover problem with $\delta$-extensions
+is a modified version of geometric set cover where:
 \begin{itemize}
 \item We need to cover all the points in $\points$
 with objects from $\{P^{+\delta} : P \in \sets\}$ (which always 
-include no less points than the objects
+include no fewer points than the objects
 before $\delta$-extensions);
-\item We look for a solution that is no larger than the optimal solution
-of the original problem. It doesn't need to be an optimal solution in
+\item We look for a solution that is no larger than the optimum solution
+for the original problem.
+Note that it does not need to be an optimal solution in
 the modified problem.
 \end{itemize}
 
+Formally we have the following.
 
-\begin{defi}\textbf{Geometric set cover problem with $\delta$-extensions}
-We define an optimization cover problem $\mathcal{P}$
-with $\delta$-extensions as the problem where for an input instance $I$,
-the task is to output a solution $\mathcal{R}$,
+\begin{defi}[Geometric set cover problem with $\delta$-extensions]
+The geometric set cover problem
+with $\delta$-extensions is the problem where for an input instance
+$I=(\sets, \points)$,
+the task is to output a solution $\mathcal{R} \subseteq \sets$,
 such that the $\delta$-extended set
-$\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $I$
-and is no worse than the optimal solution for the problem without
-extensions, i.e. $|\mathcal{R}| \le |\mathcal{R}^{opt}|$.
+$\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
+and is no larger than the optimal solution for the problem without
+extensions, i.e. $|\mathcal{R}| \le |opt(I)|$.
 \end{defi}
 
+TODO: Some text
 
-\begin{defi}\textbf{Geometric set cover PTAS with $\delta$-extensions}
-We define a PTAS for cover problem $\mathcal{P}$
-with $\delta$-extensions as an algorithm that
-takes as an input instance $I$,
-and outputs a solution $\mathcal{R}$, such that the $\delta$-extended set
-$\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $I$
+\begin{defi}[Geometric set cover PTAS with $\delta$-extensions]
+We define a PTAS for geometric set cover 
+with $\delta$-extensions as a family of algorithms
+$\{\mathcal{A}_{\delta, \epsilon}\}_{\delta, \epsilon > 0}$ that
+each take as an input instance $I=(\sets, \points)$,
+and in polynomial time outputs a solution $\mathcal{R} \subseteq \sets$
+such that the $\delta$-extended set
+$\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
 and is within a $(1+\epsilon)$ factor of the optimal
 solution for this problem without
-extensions, i.e. $(1+\epsilon)|\mathcal{R}| \le |\mathcal{R}^{opt}|$.
+extensions, i.e. $(1+\epsilon)|\mathcal{R}| \le |opt(I)|$.
 
 \end{defi}

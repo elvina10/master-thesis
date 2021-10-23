@@ -605,32 +605,57 @@ so we can prove lemmas \textit{locally}.
 TODO: $y$ axis is increasing values downward on figures
 (not upwards like in normal).
 
+
+
 \subsection{Construction lemmas and proof of Lemma \ref{apxconstruction}}
 \begin{lemma}
 	\label{construction_correctness}
 	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
-	with optimum solution satisfying $k$ clauses.
+	with optimum solution satisfying $k$ clauses $opt(S) = k$.
 	Instance of geometric cover, constructed for $S$
 	according to Lemma~\ref{apxconstruction}, 
-	can be solved with a solution of weight $15n - k$.
+	can be solved with a solution of size $15n - k$.
 \end{lemma}
 
 \begin{proof}
-Let us name the assignments of the variables in MAX-(3,3)-SAT instance,
-that achieve the optimal solution,
-$y_1$,~$y_2$~$\ldots$~$y_n$,
-Let's cover every VARIABLE-gadget with solution described in
-Lemma~\ref{choose_variables_solution},
-in the $i$-th gadget choosing the set of segments responsible for the
-value of $y_i$
-(true -- $x_i^{true}$ or false -- $x_i^{false}$).
+Let us name the assignments of the variables in
+the optimum solution of MAX-(3,3)-SAT instance
+$y_1$,~$y_2$~$\ldots$~$y_n$ and clauses
+$c_1$,~$c_2$~$\ldots$~$c_n$.
 
-Cover every satisfied CLAUSE-gadget with solution described in
+
+We cover every VARIABLE-gadget with solution described in
+Lemma~\ref{choose_variables_solution},
+in the $i$-th gadget choosing the set of segments corresponding to the
+value of $y_i$. 
+CLAUSE-gadgets that are satisfied are covered with set $clause_i^{true}$ described in
 Lemma~\ref{cover_clauses_solution_true}
-and unsatisfied CLAUSE-gadget with solution from
+and unsatisfied with set $clause_i^{false}$ described in
 Lemma~\ref{cover_clauses_solution_false}.
 
-This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
+
+\begin{align}
+	\begin{split}
+	& R_i = \begin{cases}
+		x_i^{true} & \text{if}\ y_i \\
+		x_i^{false} & \text{if}\ \neg y_i
+		\end{cases} \\
+	& C_i = \begin{cases}
+		clause_i^{true} & \text{if}\ c_i \text{ satisfied} \\
+		caluse_i^{false} & \text{if}\ c_i \text{ not satisfied}
+		\end{cases} \\
+	& \sol = \bigcup\limits_{i=1}^{n} \{R_i \cup C_i : 1 \le i \le n\}
+    \end{split}
+\end{align}
+
+
+This set covers all points form $\points$, because
+the smaller sets individually cover their corresponding gadgets
+(proved in respective lemmas).
+
+All of these sets are disjoint, so the size of the solution is:
+
+$$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k$$.
 
 \end{proof}
 \begin{lemma}
@@ -640,6 +665,7 @@ This solution uses $3n + (11m + (m-k)) = 15n - k$ segments.
 	constructed	for $S$ according to Lemma~\ref{apxconstruction}.
 	There exists a solution to MAX-(3,3)-SAT of size at least $15n - w$.
 \end{lemma}
+
 \begin{proof}
 Among $x_i^{true} \cup x_i^{false}$,
 we need to use at least 3 segments (Lemma~\ref{choose_variables_no_less}).

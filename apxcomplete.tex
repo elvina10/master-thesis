@@ -780,13 +780,15 @@ $$15n - w  \le 15n - 14n - a - b = n - (a+b)$$
 Given an instance $S$ of MAX-(3,3)-SAT of size $n$
 with optimum solution satisfying $k$ clauses.
 Let us construct an instance of geometric cover for $S$,
-constructed in aforementioned manner and name it $I$.
+constructed in afrementioned manner and name it $I$.
 
 Given the Lemma~\ref{construction_correctness}, we know
-the optimum solution for $I$ has size
-at most $15n - k$. Since $k$ is the optimum solution
+that there exists a solution for instance $I$ of size $15n - k$.
+This is an upper bound for optimum solution for $I$.
+Since $k$ is the optimum solution
 for $S$, then according to Lemma~\ref{construction_completness}
-there does not exist any solution 
-for $I$
-with size less than $15n - k$.
+there is no solution 
+for instance $I$
+of size less than $15n - k$.
+Therefore $15 - k$ is an optimum solution for instance $I$.
 \end{proof}

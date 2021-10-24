@@ -740,19 +740,29 @@ Let us look at such equation and cases of choosing variable value in
 equation \eqref{eqn:variable_assignment}.
 
 If only one of the segments $\xTrueSegment$ and $\xFalseSegment$
-are chosen in $P_var^{j}$, then every clause where segment 
-using variable $x_j$ is used with the
+are chosen in $P_var^{i}$, then every clause that uses variable $x_i$ 
+with value that we chose is satisfied.
 
-If the segment responsible for value of $x$ was taken,
-but this variable is set to have different value,
-then we have chosen segments for both $x$ and $\neg x$ for this variable,
-so "we cheated" and this maybe clause is not met,
-but we assigned the value for this $x_i$ that meets
-the most clauses, so for each of such "cheated" variables,
-at most one of the clauses isn't met.
+If we chose neither $\xTrueSegment$ or $\xFalseSegment$,
+then every clause that uses variable $x_i$ as $false$
+is satisfied. If the CLAUSE-gadget was covered by 11 segments
+instead of 12, then some other variable had to have its
+variable value segment covered.
 
-So there are at most $a+b$ unsatsfied clauses in this instance,
-so we have shown the assignment with at least  $n-(a+b)$ satisfied clauses.
+If we chose both $\xTrueSegment$ and $\xFalseSegment$,
+then there might exist one clause that was covered by 11 segments
+instead of 12, but the clause is not satisfied with the value
+that we set to $x_i$. This happens because adding both
+$\xTrueSegment$ and $\xFalseSegment$ to the solution makes 
+CLAUSE-gadgets, that use $x_i$ with both values, possible
+to cover with 11 segments instead of 12, but we set value
+of $x_i$ to the one used in majority of clauses, so there exists
+at most one that is covered with 11 segments and not satisfied.
+We had $a$ such variables, so there are at most $a$ clauses that
+are covered with 11 segments and not satisfied.
+
+So in the solution to this MAX-(3,3)-SAT instance that we have shown,
+there are at most $a+b$ unsatsfied clauses.
 
 \subparagraph{Conclusions}
 

@@ -58,7 +58,7 @@ centre of symmetry $S = (x_s, y_s)$,
 the \textbf{$\delta$-extension} of $L$ is the object $L^{+\delta} =
 \{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}$,
 that is, $L^{+\delta}$ is the image of $L$ under homothety centered
-at $S$ which scale $(1+\delta)$
+at $S$ with scale $(1+\delta)$
 \end{defi}
 
 
@@ -75,13 +75,13 @@ Note that it does not need to be an optimal solution in
 the modified problem.
 \end{itemize}
 
-Formally we have the following.
+Formally, we have the following.
 
 \begin{defi}[Geometric set cover problem with $\delta$-extensions]
 The geometric set cover problem
 with $\delta$-extensions is the problem where for an input instance
 $I=(\sets, \points)$,
-the task is to output a solution $\mathcal{R} \subseteq \sets$,
+the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
 and is no larger than the optimal solution for the problem without
@@ -94,8 +94,8 @@ TODO: Some text
 We define a PTAS for geometric set cover 
 with $\delta$-extensions as a family of algorithms
 $\{\mathcal{A}_{\delta, \epsilon}\}_{\delta, \epsilon > 0}$ that
-each take as an input instance $I=(\sets, \points)$,
-and in polynomial time outputs a solution $\mathcal{R} \subseteq \sets$
+each takes as an input instance $I=(\sets, \points)$,
+and in polynomial-time outputs a solution $\mathcal{R} \subseteq \sets$
 such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
 and is within a $(1+\epsilon)$ factor of the optimal

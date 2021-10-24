@@ -484,8 +484,8 @@ P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-points $C\_clause_i - \{a\}$ can be covered using 11 segments
-from $P\_clause_i$.
+points $C\_clause_i - \{a\}$ can be covered with $P\_true_a^i \subset P\_clause_i$,
+such that $|P\_true_a^i| = 11$.
 \end{lemma}
 
 \begin{proof}
@@ -512,7 +512,9 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 
 \begin{lemma}
 \label{cover_clauses_solution_false}
- Points $C\_clause_i$ can be covered with 12 segments from $P\_clause_i$.
+For any $1 \le i \le n$,
+points $C\_clause_i$ can be covered with $P\_false^i \subset P\_clause_i$,
+such that $|P\_false^i| = 12$.
 \end{lemma}
 
 \begin{proof}
@@ -528,12 +530,13 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 
 \begin{lemma}
 \label{cover_clauses_segments_no_less}
-For any $1 \le i \le n$,
-points $C\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-can not be covered using less than 11 segments from $P\_clause_i$.
-
-All points $C\_clause_i$ can not be covered with less than 12 segments
-from $P\_clause_i$.
+For any $1 \le i \le n$:
+\begin{enumerate}[label={(\arabic*)}]
+	\item points $C\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
+	can not be covered using less than 11 segments from $P\_clause_i$;
+	\item points $C\_clause_i$ can not be covered with less than
+	12 segments from $P\_clause_i$.
+\end{enumerate}
 \end{lemma}
 
 
@@ -576,8 +579,14 @@ Add some smart lemmas that sets will be exclusive to each other.
 $s$ and $s^{+1/2}$ cover the same points from $\points$.
 \end{lemma}
 
+\begin{proof}
+We can just check every segment. Most of them are not colinear.
+The only colinear segments are gadget segments that are sufficiently far
+away from each other.
+\end{proof}
 
-\subsection{Summary of contruction}
+
+\subsection{Summary of construction}
 
 \begin{figure}
 \centering
@@ -729,7 +738,7 @@ where $b$ is the number of clauses
 where none of the segments covering the points $x, y, z$ were chosen
 in $P_{var}^j$.
 
-\subparagraph{Satisfied clauses in chosen variables assignment}
+\subparagraph{Satisfied clauses with chosen variables assignment}
 
 Clauses for which none of the segments covering
 the points $x, y, z$ were chosen in $P_{var}^j$,

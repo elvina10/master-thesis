@@ -280,13 +280,12 @@ not be covered with less than 3 segments.
 
 \begin{lemma}
 \label{choose_variables_both}
-If both segments $\xTrueSegment$ and $\xFalseSegment$ are chosen, then
-the covering the remaining points from $C_{var}^i$
-requires at least 2 different
-segments from $P_{var}^i$.
+For every set $A \subseteq P_{var}^i$, such that $A$ covers $C_{var}^i$
+and $\xTrueSegment \in A, \xFalseSegment \in A$,
+it holds that $|A| \ge 4$.
 \end{lemma}
 \begin{proof}
-No segment of $P_{var}^i$ covers more than one point from
+No segment from $P_{var}^i$ covers more than one point from
 $\{a_i, e_i\}$,
 therefore 
 $C_{var}^i$ - $\{c_i, f_i, g_i, h_i\}$
@@ -380,7 +379,7 @@ $$P\_or\_gadget_{i, j} =
 For any $1 \le i \le n, j \in \{0, 1\}$ and 
  $x \in \{l_{i, j}, p_{i, j}\}$ we can cover points in
 $C\_or\_gadget_{i, j} - \{ x\} \cup \{v_{i, j}\}$
-with 4 segments.
+with 4 segments from $P\_or\_gadget_{i,j}$.
 \end{lemma}
 
 \begin{proof}

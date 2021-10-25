@@ -189,6 +189,7 @@ Hence, the assumed approximation algorithm cannot exist, unless P = NP.
 \end{proof}
 
 \subsection{Reduction construction}
+\label{construction_description}
 We show reduction from MAX-(3,3)-SAT problem
 to geometric set cover with segments
 parallel to axis. Moreover the instance
@@ -483,8 +484,8 @@ P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-points $C\_clause_i - \{a\}$ can be covered with $P\_true_a^i \subset P\_clause_i$,
-such that $|P\_true_a^i| = 11$.
+points $C\_clause_i - \{a\}$ can be covered with $P\_true^a_i \subset P\_clause_i$,
+such that $|P\_true^a_i| = 11$.
 \end{lemma}
 
 \begin{proof}
@@ -512,8 +513,8 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 \begin{lemma}
 \label{cover_clauses_solution_false}
 For any $1 \le i \le n$,
-points $C\_clause_i$ can be covered with $P\_false^i \subset P\_clause_i$,
-such that $|P\_false^i| = 12$.
+points $C\_clause_i$ can be covered with $P\_false_i \subset P\_clause_i$,
+such that $|P\_false_i| = 12$.
 \end{lemma}
 
 \begin{proof}
@@ -579,13 +580,15 @@ $s$ and $s^{+1/2}$ cover the same points from $\points$.
 \end{lemma}
 
 \begin{proof}
-We can just check every segment. Most of them are not colinear.
-The only colinear segments are gadget segments that are sufficiently far
-away from each other.
+We can just check every segment. Most of the segments $s$
+are colinear only with points that lay on $s$,
+so trivially $s^{+1/2}$ cannot cover more points than $s$ does.
+
+TODO: list problematic segments here
 \end{proof}
 
 
-\subsection{Summary of construction}
+\subsubsection{Summary of construction}
 
 \begin{figure}
 \centering
@@ -621,14 +624,14 @@ TODO: $y$ axis is increasing values downward on figures
 	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
 	with optimum solution satisfying $k$ clauses $opt(S) = k$.
 	Instance of geometric cover, constructed for $S$
-	according to Lemma~\ref{apxconstruction}, 
+	as described in Section~\ref{construction_description}, 
 	can be solved with a solution of size $15n - k$.
 \end{lemma}
 
 \begin{proof}
 Let us name the assignments of the variables in
-the optimum solution of MAX-(3,3)-SAT instance
-$y_1$,~$y_2$~$\ldots$~$y_n$ and clauses
+the optimum solution of an instance $S$ as
+$y_1$,~$y_2$~$\ldots$~$y_n$ and clauses as
 $c_1$,~$c_2$~$\ldots$~$c_n$.
 
 
@@ -636,21 +639,23 @@ We cover every VARIABLE-gadget with solution described in
 Lemma~\ref{choose_variables_solution},
 in the $i$-th gadget choosing the set of segments corresponding to the
 value of $y_i$. 
-CLAUSE-gadgets that are satisfied are covered with set $clause_i^{true}$ described in
+CLAUSE-gadgets that are satisfied,
+let us name the variable that is true in them $a$,
+are covered with set $P\_true_i^a$ described in
 Lemma~\ref{cover_clauses_solution_true}
-and unsatisfied with set $clause_i^{false}$ described in
+and unsatisfied with set $P\_false_i$ described in
 Lemma~\ref{cover_clauses_solution_false}.
 
 
 \begin{align}
 	\begin{split}
 	& R_i = \begin{cases}
-		x_i^{true} & \text{if}\ y_i \\
-		x_i^{false} & \text{if}\ \neg y_i
+		X_i^{true} & \text{if}\ y_i \\
+		X_i^{false} & \text{if}\ \neg y_i
 		\end{cases} \\
 	& C_i = \begin{cases}
-		clause_i^{true} & \text{if}\ c_i \text{ satisfied} \\
-		caluse_i^{false} & \text{if}\ c_i \text{ not satisfied}
+		P\_true_i^a & \text{if}\ c_i \text{ satisfied} \\
+		P\_false_i & \text{if}\ c_i \text{ not satisfied}
 		\end{cases} \\
 	& \sol = \bigcup\limits_{i=1}^{n} \{R_i \cup C_i : 1 \le i \le n\}
     \end{split}
@@ -663,15 +668,15 @@ the smaller sets individually cover their corresponding gadgets
 
 All of these sets are disjoint, so the size of the solution is:
 
-$$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k$$.
+$$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.$$
 
 \end{proof}
 \begin{lemma}
 	\label{construction_completness}
 	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
 	and a solution of size $w$ to the instance of geometric cover,
-	constructed	for $S$ according to Lemma~\ref{apxconstruction}.
-	There exists a solution to MAX-(3,3)-SAT of size at least $15n - w$.
+	as described in Section~\ref{construction_description}.
+	There exists a solution to an instance $S$ of size at least $15n - w$.
 \end{lemma}
 
 \begin{proof}\leavevmode
@@ -732,7 +737,7 @@ by Lemma~\ref{cover_clauses_segments_no_less}.
 
 
 We covered CLAUSE-gadget with at least 11 or at least 12 segments:
-$|\bigcap\limits_{i=1}^n P\_clause_i \cap \sol| \ge 11n + b$,
+$|\bigcup\limits_{i=1}^n P\_clause_i \cap \sol| \ge 11n + b$,
 where $b$ is the number of clauses
 where none of the segments covering the points $x, y, z$ were chosen
 in $P_{var}^j$.
@@ -787,16 +792,18 @@ $$15n - w  \le 15n - 14n - a - b = n - (a+b)$$
 \begin{proof}[Proof of Lemma \ref{apxconstruction}]
 Given an instance $S$ of MAX-(3,3)-SAT of size $n$
 with optimum solution satisfying $k$ clauses.
-Let us construct an instance of geometric cover for $S$,
-constructed in afrementioned manner and name it $I$.
+Let us construct an instance of geometric set cover for $S$
+as described in Section~\ref{construction_description}
+and name it $I$.
 
 Given the Lemma~\ref{construction_correctness}, we know
-that there exists a solution for instance $I$ of size $15n - k$.
-This is an upper bound for optimum solution for $I$.
+that there exists a solution of $I$ of size $15n-k$, so: 
+$$opt(I) \le 15n - k.$$
+
 Since $k$ is the optimum solution
-for $S$, then according to Lemma~\ref{construction_completness}
-there is no solution 
-for instance $I$
-of size less than $15n - k$.
-Therefore $15 - k$ is an optimum solution for instance $I$.
+for $S$, then according to Lemma~\ref{construction_completness}:
+$$opt(I) \ge 15n -k.$$
+
+Therefore solution from Lemma~\ref{construction_correctness} 
+of size $15n - k$ is an optimum solution for instance $I$.
 \end{proof}

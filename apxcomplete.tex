@@ -187,11 +187,12 @@ it suffices to compute $approx(I)$ with $15n - (\frac{7}{8}+\epsilon)n$.
 Hence, the assumed approximation algorithm cannot exist, unless P = NP.
 \end{proof}
 
-\subsection{Reduction construction}
+\subsection{Reduction}
 \label{construction_description}
-We show reduction from MAX-(3,3)-SAT problem
+We proceed to the proof of Lemma \ref{apxconstruction}.
+That is, we show a reduction from MAX-(3,3)-SAT problem
 to geometric set cover with segments
-parallel to axis. Moreover the instance
+parallel to axis. Moreover, the obtained instance
 of geometric set cover will be robust
 to 1/2-extensions (have the same optimal solution
 after 1/2-extension).
@@ -200,19 +201,19 @@ The construction will be composed of 2 types of gadgets:
 \textbf{VARIABLE-gadgets} and \textbf{CLAUSE-gadgets}.
 CLAUSE-gadgets would be constructed using two \textbf{OR-gadgets}
 connected together.
+Every gadget consists of a point set and a segment set.
 
 
 \subsubsection{VARIABLE-gadget}
 
 VARIABLE-gadget is responsible for choosing the value of a variable
-in a CNF formula. It allows two minimal solutions
-and every minimal solution must use exactly one of the
-$\xTrueSegment$ and $\xFalseSegment$
-segments. These two choices correspond to the two Boolean values of the variable.
+in a CNF formula. It allows two minimum solutions of size 3.
+These two choices correspond to the two Boolean values of the variable.
 
 \paragraph{Points.}
 
-Define points:
+Define points $a,b,c,d,e,f,g,h$ as follows, where $L = 12n$:
+
 \begin{figure}[h]
 \centering
 \def\svgwidth{0.5\columnwidth}
@@ -223,11 +224,9 @@ and they need to be covered (are part of the set $\points$).
 Note that some of the points are not marked as black dots
 and exists only to name segments for further reference.
 We denote the set of red segments as $X_{false}^i$
-and the set of green segments as $X_{true}^i$.}
+and the set of blue segments as $X_{true}^i$.}
 \label{fig:apx_choose_variable}
 \end{figure}
-
-With $L = 12n$:
 
 \begin{center}
 \begin{tabular}{ l l l l}
@@ -245,6 +244,7 @@ With $L = 12n$:
 Let us define: $$C_{var} =  \{a, b, c, d, e, f\}$$
 and $$C_{var}^i = C_{var} + (0, 4i)$$
 
+We denote $a_i = a + (0,4i)$ etc.
 
 \paragraph{Segments.}
 
@@ -258,7 +258,7 @@ $$P_{var}^i = X_{true}^i \cup X_{false}^i$$
 
 \begin{lemma}
 \label{choose_variables_solution}
-For any $1 \le i \le n$, points $C_{var}^i$
+For any $1 \le i \le n$, points in $C_{var}^i$
 can be covered using 3 segments from $P_{var}^i$.
 \end{lemma}
 
@@ -268,20 +268,20 @@ We can use either set $X_{true}^i$ or $X_{false}^i$.
 
 \begin{lemma}
 \label{choose_variables_no_less}
-For any $1 \le i \le n$, points $C_{var}^i$
-can not be covered with less than 3 segments from $P_{var}^i$.
+For any $1 \le i \le n$, points in $C_{var}^i$
+can not be covered with fewer than 3 segments from $P_{var}^i$.
 \end{lemma}
 
 \begin{proof}
 No segment of $P_{var}^i$ covers more than one point from
 $\{d_i, f_i, c_i\}$, therefore $C_{var}^i$ can
-not be covered with less than 3 segments.
+not be covered with fewer than 3 segments.
 \end{proof}
 
 \begin{lemma}
 \label{choose_variables_both}
-For every set $A \subseteq P_{var}^i$, such that $A$ covers $C_{var}^i$
-and $\xTrueSegment \in A, \xFalseSegment \in A$,
+For every set $A \subseteq P_{var}^i$ such that $A$ covers $C_{var}^i$
+and $\xTrueSegment, \xFalseSegment \in A$,
 it holds that $|A| \ge 4$.
 \end{lemma}
 \begin{proof}
@@ -289,7 +289,7 @@ No segment from $P_{var}^i$ covers more than one point from
 $\{a_i, e_i\}$,
 therefore 
 $C_{var}^i$ - $\{c_i, f_i, g_i, h_i\}$
-can not be covered with less than 2 segments.
+can not be covered with fewer than 2 segments.
 \end{proof}
 
 
@@ -483,7 +483,7 @@ P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-points $C\_clause_i - \{a\}$ can be covered with 
+points in $C\_clause_i - \{a\}$ can be covered with 
 a set of segments $P\_true^a_i$, a subset of $P\_clause_i$
 such that $|P\_true^a_i| = 11$.
 \end{lemma}
@@ -513,7 +513,7 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 \begin{lemma}
 \label{cover_clauses_solution_false}
 For any $1 \le i \le n$,
-points $C\_clause_i$ can be covered with
+points in $C\_clause_i$ can be covered with
 a set of segments $P\_false^a_i$, a subset of $P\_clause_i$
 such that $|P\_false^a_i| = 12$.
 \end{lemma}
@@ -532,21 +532,21 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 \label{cover_clauses_segments_no_less}
 For any $1 \le i \le n$:
 \begin{enumerate}[label={(\arabic*)}]
-	\item points $C\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
+	\item points in $C\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
 	can not be covered using any subset of segments from $P\_clause_i$ of size less than 11;
-	\item points $C\_clause_i$ can not be covered 
+	\item points in $C\_clause_i$ can not be covered 
 	using any subset of segments from $P\_clause_i$ of size less than 12.
 \end{enumerate}
 \end{lemma}
 
 
-\begin{proof}[Proof of no cover with less than 12 segments.]
+\begin{proof}[Proof of no cover with fewer than 12 segments.]
 There is independent set of 12 points in $C\_clause_i \supseteq
 \{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
 u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$.
 \end{proof}
 
-\begin{proof}[Proof of no cover with less than 11 segments.]
+\begin{proof}[Proof of no cover with fewer than 11 segments.]
 
 We can choose disjoint sets $X, Y, Z$ such that
 $X \cup Y \cup Z \subseteq C\_clause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$

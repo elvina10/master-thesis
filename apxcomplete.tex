@@ -674,13 +674,18 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 \begin{lemma}
 	\label{construction_completness}
 	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
-	and a solution of the instance of geometric cover,
+	and a solution of an instance of geometric set cover,
 	as described in Section~\ref{construction_description},
 	that is of size $w$.
-	There exists a solution of an instance $S$ of size at least $15n - w$.
+	There exists a solution of an instance $S$
+	that satisfied at least $15n - w$ clauses.
 \end{lemma}
 
 \begin{proof}\leavevmode
+
+Given a solution $\sol$ of the instance of geometric set cover,
+we construct a solution of the instance $S$ by constructing an
+assigment of variables that satisfies at least $15n-w$ clauses in $S$.
 
 \subparagraph{Variables}
 We need to use at least 3 segments to cover VARIABLE-gadget
@@ -705,6 +710,7 @@ choose the value that appears in most clauses.
 Every variable is in exactly 3 clauses, so one value 
 appears in at least 2 of them.
 If we have chosen none of the segments, set value to false.
+Formally, we define the value of the $x_i$ variable as follows:
 
 \begin{align}
 	\begin{split}
@@ -759,7 +765,7 @@ Consider the cases of choosing variable value in
 equation \eqref{eqn:variable_assignment}.
 
 If only one of the segments $\xTrueSegment$ and $\xFalseSegment$
-are chosen in $P_var^{j}$, then the value of $x_j$
+are chosen in $P_{var}^{j}$, then the value of $x_j$
 is the same as the one satisfying $C_i$ and clause is satisfied.
 
 If we chose neither $\xTrueSegment$ or $\xFalseSegment$,
@@ -798,8 +804,8 @@ Given the Lemma~\ref{construction_correctness}, we know
 that there exists a solution of $I$ of size $15n-k$, so: 
 $$opt(I) \le 15n - k.$$
 
-Since $k$ is the optimum solution
-of $S$, then according to Lemma~\ref{construction_completness}:
+Since the optimum solution of $S$ satisfies $k$ clauses,
+then according to Lemma~\ref{construction_completness}:
 $$opt(I) \ge 15n -k.$$
 
 Therefore solution from Lemma~\ref{construction_correctness} 

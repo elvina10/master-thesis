@@ -674,9 +674,10 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 \begin{lemma}
 	\label{construction_completness}
 	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
-	and a solution of size $w$ to the instance of geometric cover,
-	as described in Section~\ref{construction_description}.
-	There exists a solution to an instance $S$ of size at least $15n - w$.
+	and a solution of the instance of geometric cover,
+	as described in Section~\ref{construction_description},
+	that is of size $w$.
+	There exists a solution of an instance $S$ of size at least $15n - w$.
 \end{lemma}
 
 \begin{proof}\leavevmode
@@ -717,6 +718,7 @@ If we have chosen none of the segments, set value to false.
 	\end{split}
 \end{align}
 
+TODO: Maybe remove section below, because we do this calculation at the end anyway
 To cover $\bigcup_{1 \le i \le n} C_{var}^i$
 we have used at least $3n + a$ segments,
 where $a$ is the number of $i$ such that we have chosen both
@@ -730,49 +732,45 @@ in CLAUSE-gadget (Lemma~\ref{cover_clauses_segments_no_less}).
 
 TODO: maybe put something with cases and names of sets as above
 
-Moreover, if all of the points $\{x, y, z\}$
+Moreover, if all of the points $\{x_{i,0}, y_{i,0}, z_{i,0}\}$
 are not covered by the segments from $P_{var}^i$,
+then we need to cover $C\_clause_i$
 with at least 12 segments
 by Lemma~\ref{cover_clauses_segments_no_less}.
 
 
+TODO: Maybe remove section below, because we do this calculation at the end anyway
 We covered CLAUSE-gadget with at least 11 or at least 12 segments:
 $|\bigcup\limits_{i=1}^n P\_clause_i \cap \sol| \ge 11n + b$,
 where $b$ is the number of clauses
-where none of the segments covering the points $x, y, z$ were chosen
+where none of the segments covering the points $x_{i,0}, y_{i,0}, z_{i,0}$ were chosen
 in $P_{var}^j$.
 
 \subparagraph{Satisfied clauses with chosen variables assignment}
 
-Clauses for which none of the segments covering
-the points $x, y, z$ were chosen in $P_{var}^j$,
+Clauses for which none of
+the points $x_{i,0}, y_{i,0}, z_{i,0}$ were covered by segments in $P_{var}^j$,
 are not satisfied in our variables assignment, but not all clauses
 that cover one of these points with segment in $P_{var}^j$ are satisfied.
 
-Let us look at such equation and cases of choosing variable value in
+Let us look at such clause $C_i$ and of points $x_{i,0}, y_{i,0}, z_{i,0}$
+that are covered in $P_{var}^j$.
+Consider the cases of choosing variable value in
 equation \eqref{eqn:variable_assignment}.
 
 If only one of the segments $\xTrueSegment$ and $\xFalseSegment$
-are chosen in $P_var^{i}$, then every clause that uses variable $x_i$ 
-with value that we chose is satisfied.
+are chosen in $P_var^{j}$, then the value of $x_j$
+is the same as the one satisfying $C_i$ and clause is satisfied.
 
 If we chose neither $\xTrueSegment$ or $\xFalseSegment$,
-then every clause that uses variable $x_i$ as $false$
-is satisfied. If the CLAUSE-gadget was covered by 11 segments
-instead of 12, then some other variable had to have its
-variable value segment covered.
+then it is impossible that this point is covered in $P_{var}^j$.
 
 If we chose both $\xTrueSegment$ and $\xFalseSegment$,
-then there might exist one clause that was covered by 11 segments
-instead of 12, but the clause is not satisfied with the value
-that we set to $x_i$. This happens because adding both
-$\xTrueSegment$ and $\xFalseSegment$ to the solution makes 
-CLAUSE-gadgets, that use $x_i$ with both values, possible
-to cover with 11 segments instead of 12, but we set value
-of $x_i$ to the one used in majority of clauses, so there exists
-at most one that is covered with 11 segments and not satisfied.
-We had $a$ such variables, so there are at most $a$ clauses that
-are covered with 11 segments and not satisfied.
+then there are 3 clauses for which this point
+is covered by $P_{var}^j$. We chose variable value in a way
+that only one clause using $x_j$ is not satisfied by the value of $x_j$.
+Therefore there are at most $a$ clauses that are covered with
+11 segments from CLAUSE-gadget, but are not satisfied.
 
 So in the solution to this MAX-(3,3)-SAT instance that we have shown,
 there are at most $a+b$ unsatsfied clauses.
@@ -801,7 +799,7 @@ that there exists a solution of $I$ of size $15n-k$, so:
 $$opt(I) \le 15n - k.$$
 
 Since $k$ is the optimum solution
-for $S$, then according to Lemma~\ref{construction_completness}:
+of $S$, then according to Lemma~\ref{construction_completness}:
 $$opt(I) \ge 15n -k.$$
 
 Therefore solution from Lemma~\ref{construction_correctness} 

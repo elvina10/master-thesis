@@ -484,7 +484,8 @@ P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-points $C\_clause_i - \{a\}$ can be covered with $P\_true^a_i \subset P\_clause_i$,
+points $C\_clause_i - \{a\}$ can be covered with 
+a set of segments $P\_true^a_i$, a subset of $P\_clause_i$
 such that $|P\_true^a_i| = 11$.
 \end{lemma}
 
@@ -513,8 +514,9 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 \begin{lemma}
 \label{cover_clauses_solution_false}
 For any $1 \le i \le n$,
-points $C\_clause_i$ can be covered with $P\_false_i \subset P\_clause_i$,
-such that $|P\_false_i| = 12$.
+points $C\_clause_i$ can be covered with
+a set of segments $P\_false^a_i$, a subset of $P\_clause_i$
+such that $|P\_false^a_i| = 12$.
 \end{lemma}
 
 \begin{proof}
@@ -533,9 +535,9 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 For any $1 \le i \le n$:
 \begin{enumerate}[label={(\arabic*)}]
 	\item points $C\_clause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-	can not be covered using less than 11 segments from $P\_clause_i$;
-	\item points $C\_clause_i$ can not be covered with less than
-	12 segments from $P\_clause_i$.
+	can not be covered using any subset of segments from $P\_clause_i$ of size less than 11;
+	\item points $C\_clause_i$ can not be covered 
+	using any subset of segments from $P\_clause_i$ of size less than 12.
 \end{enumerate}
 \end{lemma}
 

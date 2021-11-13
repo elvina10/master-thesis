@@ -26,19 +26,83 @@ To solve this problem we will introduce a lemma about choosing
 	\label{good_set_exists}
 	For any segment $s$, set of points $C$, $\delta > 0$ and $k \ge 1$,
 	there exists a $(k,\delta)$-good set of size at most $f(k, \delta)$
-	for some cumputable function $f$.
+	for some computable function $f$.
 \end{lemma}
 
 \begin{proof}
-We prove this by induction over $k$.
+We prove this for a fixed $\delta < 1$
+by induction over $k$ for any segment $s$ and set of points $C$.
 
 \subparagraph{Inductive hypothesis}
-For any segment $s$ and a set of points  there exists a set $A$ every $l \le k$
+For any segment $s$ and a set of points $C$ that lay on $s$,
+there exists a set $A$,
+that is $(l, \delta)-good$ for every $1 \le l \le k$ and $|A| < f(\delta, k)$
+for some computable function $f$.
+
+Set $A$ also includes ends of segment $s$ for convinience.
 
 \subparagraph{Base case for $k = 1$}
+It is sufficient that $A$ consists of 2 points, end of segment $s$.
+
+If they are covered with one segment, it must be a segment 
+that includes $s$, so it covers set $C$.
 
 \subparagraph{Inductive step}
+Assuming inductive hypothesis for any $s$ and any set of points $C$
+that lay on $s$ and for $k$, we will prove hypothesis for $k+1$.
 
+
+We define $\lceil3/\delta\rceil$ subsegments of $s$ in the following way.
+We split $s$ into $\lceil3/\delta\rceil$ segments $v_i$
+such that $|v_i| = \frac{|s|\delta}{3}$. (pewnie sufit tutaj)
+
+$C_i$ is a subset of $C$ such that they lay on $v_i$.
+
+$t_i$ is a segment connecting leftmost and rightmost point in $C_i$
+(it might by degenerated segment if $|C_i| = 1$ or it might be empty
+if $C_i$ is empty).
+
+TODO: Add a picture with $v_i$ and $t_i$ here
+
+We use inductive hypothesis to choose $(k, \delta)$-good sets $A_i$
+for segments $t_i$ and sets $C_i$. If $|C_i| \le 1$, then $A_i = C_i$
+and it's still a $(k, \delta)$-good set.
+
+Then we define $A = \bigcup_i=1^\lceil3/\delta\rceil A_i$.
+It includes ends of $s$, because they are in sets $A_1$ and $A_\lceil3/\delta\rceil$.
+
+\subparagraph{Proof that $A$ is $(k, \delta)$-good for $s$ and $C$}
+Let us take any cover of $A$ with $k+1$ segments and name it $\sol$.
+
+For every segment $t_i$, if there exists a segment $x$ from $\sol$ 
+such that it is disjoint with $t_i$,
+then we have a cover of $A_i$ with at most $k$
+segments using $\sol - \{x\}$.
+Since $A_i$ is $(k, \delta)$-good for $t_i$ and $C_i$,
+then $(\sol - \{x\})^{+\delta}$ covers $C_i$.
+
+If there doesn't exist such segment, then
+there exists a segments $t_i$ such that all $k+1$ segments that cover
+$A_i$ intersect with $t_i$. (Note: There exists only one such segment $t_i$).
+By definition ends of $s$ are in $A_i$, so there must exist
+segments starting in the ends of $s$ and ending somewhere in $t_i$.
+Let us name these two segments $y$ and $z$. It follows that:
+$|y| + |z| + |t_i| \le |s|$.
+Since $|t_i| \le |v_i| = \frac{|s|\delta}{3}$,
+therefore $max(|y|, |z|) > |s|(1-\frac{\delta}{3})/2$.
+
+
+TODO: Add a picture with such segments here
+
+After $\delta$-extension, the longer of these segments will
+lengthen both ways by at least:
+$$|s|(1-\frac{\delta}{3})/2\delta = |s|\delta(1/2 - \delta/6) > |s|\delta(1/2 - 1/6) = \frac{|s|\delta}{3}$$.
+
+Therefore the longer of segments $y$ and $z$ will cover all segments $t_i$
+after $\delta$-extension, therefore $\sol^{+\delta}$ covers $C_i$.
+
+Since $C = \bigcup_{i=1}^\lceil3/\delta\rceil C_i$,
+then $\sol^{+\delta}$ covers $C$.
 
 \end{proof}
 

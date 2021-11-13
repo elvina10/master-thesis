@@ -1,6 +1,7 @@
 \section{Weighted segments}
 \subsection{FPT for weighted segments with $\delta$-extensions}
 \begin{tw}[FPT for weighted segment cover with $\delta$-extensions]{
+	\label{fpt_weighted_segment}
 	There exists an algorithm $\mathcal{A}$ that given a family $\sets$ of
 	$n$ weighted segments (in any direction),
 	a set of $m$ points $\points$
@@ -106,119 +107,47 @@ then $\sol^{+\delta}$ covers $C$.
 
 \end{proof}
 
-\begin{lemma}
-	\label{kernel_wscps}
-	\textbf{Kernel in WSCPS}.
-	TODO: formulate it properly
-	
-	For segment cover, there is a kernel of size $f(k)$
-	in WSCPS.
-\end{lemma}
+\begin{proof}[Proof of Theorem \ref{fpt_weighted_segment}]
+
+To construct an algorithm for this problem let us formulate
+some claims about the problem first.
 
 \begin{claim}
 If there are more than $k$ lines with
-at least $k+1$ points on them, then 
-they can't be covered with $k$ segments.
+at least $k+1$ points from $\points$ on them, then 
+they can not be covered with $k$ segments.
 \end{claim}
 
 \begin{claim}
-If there is more than $k^2$ points
-that don't lie on any line with more than $k$
-points on it, then they can't be covered with $k$ segments.
+If there is more than $k^2$ points from $\points$
+that do not lie on any line with more than $k$
+points on it, then they can not be covered with $k$ segments.
 \end{claim}
 
-\begin{claim}
-For every long line $L$ (with more than $k$ points on them)
-we can choose $f(k)$ points on them,
-that if we cover all of these points with at most $k$
-segments, then the rest of the points
-with $\delta$-extensions will be covered by
-segments in the direction of line $L$.
-\end{claim}
+Applying the above claims, if we have more than $k$ lines
+with at least $k+1$ points from $\points$
+or more than $k^2$ points form $\points$, then we answer that
+there is no solution of size at most $k$.
 
+Otherwise, we can split $\points$ into at most $k+1$ sets:
+$D$, at most $k^2$ points that do not lie on any line with
+more than $k$ points on it and $C_i$ -- points
+that lay on $i$-th line with at least $k+1$ points.
+Sets $C_i$ do not need to be disjoined.
 
-\paragraph{Proof of Lemma \ref{kernel_wscps}.}
-After applying the previous lemmas,
-we have at most $k^2 + k\cdot f(k)$
-points that can be covered in any direction
-and for the rest of the points we can draw 
-at most $k\cdot f(k)$ segments along
-their respective long lines that have to be covered
-by segments after $\delta$-extensions.
+Then for every set $C_i$, we can use \ref{good_set_exists}
+to get $(k,\delta)$-good set $A_i$
+for set of points $C_i$ and segment between two extreme points from $C_i$.
 
-Then we extend every available segment by $\delta$-extension
-and we achieve the kernel in WSCPS for this instance of problem.
+Then we have set $D \cup \bigcup A_i$ of size at most $f(k, \delta)$
+for some computable function $f$, that if we have a solution $\sol$ of size at most $k$
+that covers $D \cup \bigcup A_i$, then $\sol^{+\delta}$ covers $\points$.
 
+$\sol$ already covers points $D$, they cover $C_i$, because
+they cover $(k,\delta)$-good set $A_i$ with at most $k$ segments,
+so $\sol^{+\delta}$ covers $C_i$.
 
-\begin{lemma}
-	\label{covered_spaces_lemma}
-	If all the points are covered with $k$ segments and
-	the biggest $2(1 + 1/\delta)^{k+1}$ spaces between points
-	are filled, the whole segment is filled after
-	$\delta$-extensions of these segments.
-\end{lemma}
-\paragraph{Proof.}
-	Let's name the $2(1 + 1/\delta)^{k+1}$-st biggest space
-	between points as $y$.
-	We have guarantee that all segements of length $x > y$
-	are covered without $\delta$-extensions.
-	
-	Let's take one space between points that is not covered
-	before $\delta$-extension and we will prove
-	it will be covered after $\delta$-extensions.
-	Let's assume it isn't.
-	
-	This space has length $x$. Since it's uncovered, $x \le y$.
-	
-	Let's take side where the sum of lengths of segments
-	covering the points is greater (left or right).
-	Without loss of generality, let us assume it's right.
-	
-	There are at most $k$ segments to the right of this space
-	between points. Name their lengths $l_1, l_2 \ldots l_k$.
-	If the point is covered in the other direction,
-	the segment is degenerated to the point and $l_i = 0$.
-	Name the space between endpoints of $l_i$ and $l_{i+1}$ -- $x_i$.
-	Of course, $x_i$ is uncovered space between two points,
-	therefore $x_i \le y$.
-	
-	TUTAJ BEDZIE PEWNIE RYSUNEK Z TYMI SUPER RZECZAMI DO PRZERW
-	
-	Let's write equations meaning that $i$-th segment
-	doesn't cover space $x$ after $\delta$-expansion.
-	
-	$$l_1\delta < x \le y \then l_1 < y/\delta$$
-	$$l_2\delta < x + l_1 + x_1 < 2y + y/\delta \then l_2 < 2y/\delta + y/\delta^2$$
-	$$l_3\delta < x + l_1 + x_1 + l_2 + x_2 < 3y + 3y/\delta + y/\delta^2 \then l_3 < 3y/\delta +  3y/\delta^2 + y/\delta^3$$
-	
-	From this we can "guess" induction $l_i < y((1+1/\delta)^i - 1)$
-	
-	Trivailly for $l_1 < y/\delta$.
-	
-	Assume that for all $j < i$: $$l_j < y((1+1/\delta)^j - 1)$$.
-	
-	$l_i\delta < x + \sum_{j = 1}^{i-1}(l_j + x_j)
-	< iy \sum_{j = 1}^{i-1}l_j
-	< iy + \sum{j=1}^{i-1}y((1+1/\delta)^j - 1)
-	= iy - (i-1)y + \sum{j=1}^{i-1}y(1+1/\delta)^j
-	= y(1 + \sum_{j = 1}^{i-1}(1+1/\delta)^j)
-	= y(2 + \sum_{j = 1}^{i-1}(1+1/\delta)^j - 1)
-	= y(\sum_{j = 0}^{i-1}(1+1/\delta)^j - 1)
-	= y((1+1/\delta)^i / (1 - (1+1/\delta)) - 1)
-	= y((1+1/\delta)^i\delta - 1)
-	< y((1+1/\delta)^i\delta - \delta)$
-	
-	Of course we also know that (since we have chosen the side with greater sum of the width of segments):
-	$$\sum_{i=1}^{k} l_i \ge 1/2 \cdot y \cdot 2(1 + 1/\delta)^{k+1} =  y \cdot (1 + 1/\delta)^{k+1}$$
-	
-	But 
-	$\sum_{i=1}^{k} l_i
-	< \sum_{i=1}^{k} y((1+1/\delta)^i - 1)
-	= y((1+1/\delta)^{k+1} / (1-(1+1/\delta)) - k)
-	= y((1+1/\delta)^{k+1}\delta - k)
-	< y(1+1/\delta)^{k+1}$
-	
-	Therefore the space must have been covered after $\delta$-expansions.
+\end{proof}
 
 \subsection{W[1]-completeness for weighted segments in 3 directions}
 

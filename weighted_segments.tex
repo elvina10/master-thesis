@@ -129,30 +129,32 @@ O(|C|f(k, \delta)) + O((\sum_i^M |C_i|)f(k, \delta)) \le O(|C|f(k, \delta)).$$
 To construct an algorithm for this problem let us formulate
 some claims about the problem first.
 
+\begin{defi}
+Line is \textbf{long} if there are at least $k+1$ points from $\points$ on it.
+\end{defi}
+
 \begin{claim}
-If there are more than $k$ lines with
-at least $k+1$ points from $\points$ on them, then 
+If there are more than $k$ long lines, then 
 they can not be covered with $k$ segments.
 \end{claim}
 
 \begin{claim}
 If there is more than $k^2$ points from $\points$
-that do not lie on any line with more than $k$
-points on it, then they can not be covered with $k$ segments.
+that do not lie on any long line, then they can not be covered with $k$ segments.
 \end{claim}
 
-Applying the above claims, if we have more than $k$ lines
-with at least $k+1$ points from $\points$
-or more than $k^2$ points form $\points$, then we answer that
+Applying the above claims, if we have more than $k$ long lines
+or more than $k^2$ points form $\points$
+that do not lie on any long line, then we answer that
 there is no solution of size at most $k$.
 
 Otherwise, we can split $\points$ into at most $k+1$ sets:
-$D$, at most $k^2$ points that do not lie on any line with
-more than $k$ points on it and $C_i$ -- points
-that lay on $i$-th line with at least $k+1$ points.
-Sets $C_i$ do not need to be disjoined.
+$D$, at most $k^2$ points that do not lie on any long line
+and $C_i$ -- points
+that lay on $i$-th long line.
+Sets $C_i$ do not need to be disjoint.
 
-Then for every set $C_i$, we can use \ref{good_set_exists}
+Then for every set $C_i$, we can use Lemma \ref{good_set_exists}
 to get $(k,\delta)$-good set $A_i$
 for set of points $C_i$ and segment between two extreme points from $C_i$.
 

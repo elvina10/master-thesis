@@ -5,8 +5,8 @@
 	There exists an algorithm $\mathcal{A}$ that given a family $\sets$ of
 	$n$ weighted segments (in any direction),
 	a set of $m$ points $\points$
-	and a parameter $k$,
-	runs in time $f(k) \cdot (nm)^c$ for some computable function $f$ and a constant $c$,
+	parameters $k$ and $\delta$,
+	runs in time $f(k, \delta) \cdot (nm)^c$ for some computable function $f$ and a constant $c$,
 	and outputs a set $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$.
 }\end{tw}
@@ -24,9 +24,11 @@ To solve this problem we will introduce a lemma about choosing
 
 \begin{lemma}
 	\label{good_set_exists}
-	For any set of colinear points $C$, $\delta > 0$ and $k \ge 1$,
+	There exists an algorithm that
+	for any set of colinear points $C$, $\delta > 0$ and $k \ge 1$,
 	there exists a $(k,\delta)$-good set of size at most $f(k, \delta)$
-	for some computable function $f$.
+	for some computable function $f$. This algorithm runs in time
+	$O(|C| \cdot f(k, \delta))$.
 \end{lemma}
 
 \begin{proof}
@@ -35,10 +37,12 @@ by induction over $k$ for any set of colinear points $C$.
 
 \subparagraph{Inductive hypothesis}
 For any set of colinear points $C$,
-there exists a set $A$,
+there exists an algorithm
+that finds a set $A$,
 that is $(l, \delta)-good$ for every $1 \le l \le k$ and $|A| < f(\delta, k)$
 for some computable function $f$
-and extreme points from $C$ are in $A$.
+and extreme points from $C$ are in $A$. This algorithm runs in time
+$O(|C| \cdot f(k, \delta)$.
 
 \subparagraph{Base case for $k = 1$}
 It is sufficient that $A$ consists of 2 points, extreme points from $C$.
@@ -82,7 +86,7 @@ segments using $\sol - \{x\}$.
 Since $A_i$ is $(k, \delta)$-good for $t_i$ and $C_i$,
 then $(\sol - \{x\})^{+\delta}$ covers $C_i$.
 
-If there does not exist such segment, then
+If there does not exist such segment, then0
 there exists a segments $t_i$ such that all $k+1$ segments that cover
 $A_i$ intersect with $t_i$. (Note: There exists only one such segment $t_i$).
 From the inductive hypothesis ends of $s$ are
@@ -93,7 +97,6 @@ Let us name these two segments $y$ and $z$. It follows that:
 $|y| + |z| + |t_i| \ge |s|$.
 Since $|t_i| \le |v_i| = \frac{|s|}{M} \le \frac{|s|}{1+\frac{2}{\delta}} = \frac{|s|(\delta)}{\delta+2}$,
 therefore $max(|y|, |z|) > |s|(1-\frac{\delta}{\delta+2})/2 = \frac{|s|}{\delta+2}$.
-
 
 TODO: Add a picture with such segments here
 
@@ -106,6 +109,18 @@ after $\delta$-extension, therefore $\sol^{+\delta}$ covers $C_i$.
 
 Since $C = \bigcup_{i=1}^M C_i$,
 then $\sol^{+\delta}$ covers $C$.
+
+\subparagraph{Complexity}
+
+We use the recursive algorithm for subsets $C_i$. Every point
+from $C$ belongs to at most 2 sets $C_i$.
+
+Apart from recursive algorithm we perform operations linear in
+size of $|C| + M$ to calculate the sets $C_i$.
+
+Therefore it has complexity:
+$$O(|C|+M) + \sum_i^M O(|C_i|f(k, \delta)) = 
+O(|C|f(k, \delta)) + O((\sum_i^M |C_i|)f(k, \delta)) \le O(|C|f(k, \delta)).$$
 
 \end{proof}
 
@@ -148,6 +163,24 @@ that covers $D \cup \bigcup A_i$, then $\sol^{+\delta}$ covers $\points$.
 $\sol$ already covers points $D$, they cover $C_i$, because
 they cover $(k,\delta)$-good set $A_i$ with at most $k$ segments,
 so $\sol^{+\delta}$ covers $C_i$.
+
+After that we shrunk down size of $\points$ to size of $f(k, \delta)$
+for some computable function $f$.
+Then we would like to shrink down size of $\sets$.
+For every colinear subset of $D$, we can choose one segment from
+$\sets$ that covers these points and have the lowest weight
+or decide there is no segment that cover them.
+There are at most $|D|^2$ different segments, because
+we can distnguish these colinear sets by their extreme points.
+
+This has complexity $O(|D|^2|\sets|)$ and produce shrunk down
+set $\sets$ of size $f(k, \delta)$ for some computable functions $f$.
+
+Then we can iterate over all subsets of shrunk down set $\sets$ and
+choose the set with the lowest sum of weights that cover $D$. This solution
+would have weight not larger than optimal solution
+for the problem without extension, because we iterate
+over all posibilities of covering the subset of $\points$.
 
 \end{proof}
 

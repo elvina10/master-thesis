@@ -47,22 +47,21 @@ TODO: lead text
 	runs in time $f(k) \cdot (nm)^c$ for some computable function f and constant c,
 	and outputs a subfamily $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol$ covers all points in $\points$,
-	or determine that such a set $\sol$ does not exist.
+	or determines that such a set $\sol$ does not exist.
 }\end{tw}
 
 We will need the following lemmas.
 
 \begin{lemma}
    \label{fpt_reduction}
-   \textbf{(Reduction)}.
    Given a family $\sets$ of
 	$n$ segments (in any direction)
 	and a set of $m$ points $\points$
 	for segment cover problem,
    without a loss of generality we can assume that
-   no segment covers a superset of what another segment covers
-   That is, for any $A, B \in \sets$, we have
-   $A \neq B \Rightarrow A \not \subseteq B$.
+   no segment covers a superset of what another segment covers.
+   That is, for any distinct $A, B \in \sets$, we have
+   $A \cap C \not \subseteq B \cap C$ and $A \cap C \not \supseteq B \cap C$.
 \end{lemma}   
    
 \begin{proof} Trivial. \end{proof}

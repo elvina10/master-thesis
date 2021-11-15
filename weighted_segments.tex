@@ -3,29 +3,29 @@
 	\label{fpt_weighted_segment}
 	There exists an algorithm $\mathcal{A}$ that given a family $\sets$ of
 	$n$ weighted segments (in any direction),
-	a set of $m$ points $\points$
-	parameters $k$ and $\delta$,
+	a set of $m$ points $\points$, and parameters $k$ and $\delta$,
 	runs in time $f(k, \delta) \cdot (nm)^c$ for some computable function $f$ and a constant $c$,
 	and outputs a set $\sol \subseteq \sets$
-	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$.
+	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$
+	or determines that such a set $\sol$ does not exist.
 }\end{tw}
 
 
 To solve this problem we will introduce a lemma about choosing
-\textit{good} subset of points.
+\textit{good} subsets of points.
 
 \begin{defi}
 	For a set of colinear points $C$,
 	a subset $A \subseteq C$ is \textbf{$(k,\delta)$-good} 
 	if for any set of segments $R$ that covers set $A$
-	such that $|R| \le k$, it holds $R^{+\delta}$ covers $C$.
+	such that $|R| \le k$, it holds that $R^{+\delta}$ covers $C$.
 \end{defi}
 
 \begin{lemma}
 	\label{good_set_exists}
 	There exists an algorithm that
 	for any set of colinear points $C$, $\delta > 0$ and $k \ge 1$,
-	there exists a $(k,\delta)$-good set of size at most $f(k, \delta)$
+	outputs a $(k,\delta)$-good set of size at most $f(k, \delta)$
 	for some computable function $f$. This algorithm runs in time
 	$O(|C| \cdot f(k, \delta))$.
 \end{lemma}
@@ -36,12 +36,13 @@ by induction over $k$ for any set of colinear points $C$.
 
 \subparagraph{Inductive hypothesis}
 For any set of colinear points $C$,
-there exists an algorithm that:
+there exists an algorithm that 
+runs in time $O(|C|k(1+\frac{1/\delta}))$
+and finds a set $A$ such that:
 \begin{itemize}
-\item finds a set $A$ that is $(l, \delta)-good$ for every $1 \le l \le k$,
+\item $A$ is $(l, \delta)-good$ for every $1 \le l \le k$,
 \item $A$ has size $|A| < f(\delta, k)$ for some computable function $f$,
-\item extreme points from $C$ are in $A$,
-\item runs in time $O(|C| f(k, \delta))$ for some computable function $f$.
+\item extreme points from $C$ are in $A$.
 \end{itemize}
 
 \subparagraph{Base case for $k = 1$}
@@ -64,7 +65,7 @@ $v_i$ of equal length, that is $|v_i| = \frac{|s|}{M}$ for any $1 \le i \le M$.
 $C_i$ is a subset of $C$ such that they lay on $v_i$.
 
 $t_i$ is a segment connecting leftmost and rightmost point in $C_i$
-(it might by degenerated segment if $|C_i| = 1$ or it might be empty
+(it might be degenerated segment if $|C_i| = 1$ or it might be empty
 if $C_i$ is empty).
 
 TODO: Add a picture with $v_i$ and $t_i$ here
@@ -76,7 +77,7 @@ and it's still a $(k, \delta)$-good set.
 Then we define $A = \bigcup_{i=1}^{M} A_i$.
 It includes ends of $s$, because they are in sets $A_1$ and $A_M$.
 
-\subparagraph{Proof that $A$ is $(k, \delta)$-good for $s$ and $C$}
+\subparagraph{Proof that $A$ is $(k, \delta)$-good for $C$}
 Let us take any cover of $A$ with $k+1$ segments and name it $\sol$.
 
 For every segment $t_i$, if there exists a segment $x$ from $\sol$ 
@@ -95,7 +96,7 @@ Hence there must exist
 segments starting in the ends of $s$ and ending somewhere in $t_i$.
 Let us name these two segments $y$ and $z$. It follows that:
 $|y| + |z| + |t_i| \ge |s|$.
-Since $|t_i| \le |v_i| = \frac{|s|}{M} \le \frac{|s|}{1+\frac{2}{\delta}} = \frac{|s|(\delta)}{\delta+2}$,
+Since $|t_i| \le |v_i| = \frac{|s|}{M} \le \frac{|s|}{1+\frac{2}{\delta}} = \frac{|s|\delta}{\delta+2}$,
 therefore $max(|y|, |z|) > |s|(1-\frac{\delta}{\delta+2})/2 = \frac{|s|}{\delta+2}$.
 
 TODO: Add a picture with such segments here
@@ -119,8 +120,8 @@ Apart from recursive algorithm we perform operations linear in
 size of $|C| + M$ to calculate the sets $C_i$.
 
 Therefore it has complexity:
-$$O(|C|+M) + \sum_i^M O(|C_i|f(k, \delta)) = 
-O(|C|f(k, \delta)) + O((\sum_i^M |C_i|)f(k, \delta)) \le O(|C|f(k, \delta)).$$
+$$O(|C|+M) + \sum_i^M O(|C_i|k(1+\frac{1/\delta})) = 
+O(|C| + (1+\frac{1/\delta})) + O((\sum_i^M |C_i|)k(1+\frac{1/\delta})) \le O(|C|k(1+\frac{1/\delta})).$$
 
 \end{proof}
 
@@ -135,12 +136,12 @@ Line is \textbf{long} if there are at least $k+1$ points from $\points$ on it.
 
 \begin{claim}
 If there are more than $k$ long lines, then 
-they can not be covered with $k$ segments.
+$\points$ can not be covered with $k$ segments.
 \end{claim}
 
 \begin{claim}
 If there is more than $k^2$ points from $\points$
-that do not lie on any long line, then they can not be covered with $k$ segments.
+that do not lie on any long line, then $\points$ can not be covered with $k$ segments.
 \end{claim}
 
 Applying the above claims, if we have more than $k$ long lines
@@ -156,12 +157,12 @@ Sets $C_i$ do not need to be disjoint.
 
 Then for every set $C_i$, we can use Lemma \ref{good_set_exists}
 to get $(k,\delta)$-good set $A_i$
-for set of points $C_i$ and segment between two extreme points from $C_i$.
+for $C_i$.
 
 Then we have set $D \cup \bigcup A_i$ of size at most $f(k, \delta)$
 for some computable function $f$, that if we have a solution $\sol$ of size at most $k$
 that covers $D \cup \bigcup A_i$, then $\sol^{+\delta}$ covers $\points$.
-
+This is because
 $\sol$ already covers points $D$, they cover $C_i$, because
 they cover $(k,\delta)$-good set $A_i$ with at most $k$ segments,
 so $\sol^{+\delta}$ covers $C_i$.
@@ -176,7 +177,7 @@ There are at most $|D|^2$ different segments, because
 we can distnguish these colinear sets by their extreme points.
 
 This has complexity $O(|D|^2|\sets|)$ and produce shrunk down
-set $\sets$ of size $f(k, \delta)$ for some computable functions $f$.
+set $\sets$ of size $f(k, \delta)$ for some computable function $f$.
 
 Then we can iterate over all subsets of shrunk down set $\sets$ and
 choose the set with the lowest sum of weights that cover $D$. This solution

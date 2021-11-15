@@ -37,7 +37,7 @@ by induction over $k$ for any set of colinear points $C$.
 \subparagraph{Inductive hypothesis}
 For any set of colinear points $C$,
 there exists an algorithm that 
-runs in time $O(|C|k(1+\frac{1/\delta}))$
+runs in time $O(|C|k(1+\frac{1}{\delta}))$
 and finds a set $A$ such that:
 \begin{itemize}
 \item $A$ is $(l, \delta)-good$ for every $1 \le l \le k$,
@@ -120,8 +120,8 @@ Apart from recursive algorithm we perform operations linear in
 size of $|C| + M$ to calculate the sets $C_i$.
 
 Therefore it has complexity:
-$$O(|C|+M) + \sum_i^M O(|C_i|k(1+\frac{1/\delta})) = 
-O(|C| + (1+\frac{1/\delta})) + O((\sum_i^M |C_i|)k(1+\frac{1/\delta})) \le O(|C|k(1+\frac{1/\delta})).$$
+$$O(|C|+M) + \sum_i^M O(|C_i|k(1+\frac{1}{\delta})) = 
+O(|C| + (1+\frac{1}{\delta})) + O((\sum_i^M |C_i|)k(1+\frac{1}{\delta})) \le O(|C|k(1+\frac{1}{\delta})).$$
 
 \end{proof}
 

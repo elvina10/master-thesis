@@ -114,7 +114,7 @@ Next, we present a recursive algorithm. Given an instance of the problem:
 
 \begin{enumerate}[label={(\arabic*)}]
 \item If there exist a line with at least $k+1$ points from $\points$, we branch over
-adding to the solution one of at most $k$ possible segments
+adding to the solution one of the at most $k$ possible segments
 provided by Lemma \ref{fpt_long_lines}: name this segment $S$.
 Then we find a solution $\sol$
 for the problem for points $\points - S$, segments $\sets - \{S\}$,
@@ -128,12 +128,12 @@ check all subsets of $\sets$ of size at most $k$.
 \subparagraph{Correctness.}
 
 Lemma \ref{fpt_long_lines} proves that at least one segment that we
-branch over in (1) must be present in every solution $\sol$ with $|\sol| \le k$,
-therefore the recursive call can find the optimal solution.
+branch over in (1) must be present in every solution $\sol$ with $|\sol| \le k$.
+Therefore, the recursive call can find a solution, provided there exists one.
 
 In (2) the answer is no, because every line covers no more than $k$ points
-from $\points$, which implies that every segment from $\sets$ covers at most
-$k$. Under this assumption
+from $\points$, which implies the same about every segment from $\sets$.
+Under this assumption
 we can cover only $k^2$ points with a solution of size $k$, which is less
 than $|\points|$.
 
@@ -142,11 +142,11 @@ Checking all possible solutions in (3) is trivially correct.
 
 \subparagraph{Complexity.}
 
-In leaves of branching (3) $|\points| < k^2$, so $|\sets| < k^4$, because
-every segments can be uniquely identified by 2 extreme points it covers
-(by Lemma \ref{fpt_reduction}). Therefore there are $\binom{k^4}{k}$
+In the leaves of recursion we have $|\points| \le k^2$, so $|\sets| \le k^4$, because
+every segments can be uniquely identified by the two extreme points it covers
+(by Lemma \ref{fpt_reduction}). Therefore, there are $\binom{k^4}{k}$
 possible solutions to check, each can be checked in time $O(k|\points|)$.
-Therefore (3) takes time $O(f(k))$.
+Therefore, (3) takes time $k^{O(k)}$.
 
 
 In this branching algorithm our parameter $k$ is decreased with every
@@ -154,8 +154,8 @@ recursive call, so we have at most $k$ levels of recursion with
 branching over $k$ possibilites. Candidates to branch over
 can be found on each level in time $O(nm \log(nm))$.
 
-Reduction from Lemma \ref{fpt_reduction} can be implemented in $O(n^2m)$.
+Reduction from Lemma \ref{fpt_reduction} can be implemented in time $O(n^2m)$.
 
-Overall complexity is $O(n^2m + nm \log(nm) \cdot f(k))$
+It follows that the overall complexity is $O(n^2m + nm \log(nm) \cdot f(k))$
 \end{proof}
 

@@ -17,7 +17,7 @@ We need to cover $d$ with some of the remaining segments.
 We branch over choice of direction among the 2 axis-parallel directions.
 In this direction we greedly take the segment that covers
 the most points. As $d$ was the smallest
-in lexicographical order, all points in $\points$ colinear with $d$
+in lexicographical order, all points in $\points$ collinear with $d$
 in both axis-parallel directions 
 are only on one side of $d$, because their coordinates are larger.
 Therefore
@@ -54,10 +54,7 @@ We will need the following lemmas.
 
 \begin{lemma}
    \label{fpt_reduction}
-   Given a family $\sets$ of
-	$n$ segments (in any direction)
-	and a set of $m$ points $\points$
-	for segment cover problem,
+   Given an instance $(\sets, \points)$ of the segment cover problem,
    without a loss of generality we can assume that
    no segment covers a superset of what another segment covers.
    That is, for any distinct $A, B \in \sets$, we have
@@ -68,34 +65,35 @@ We will need the following lemmas.
 
 \begin{lemma}
 	\label{fpt_long_lines}
-	Given an instance of a problem, if there exists a line $L$ with at least
-	$k+1$ points on it, there exists a subset $\mathcal{A} \subseteq \sets$,
+	Given an instance $(\sets, \points)$ of the segment cover problem,
+	if there exists a line $L$ with at least
+	$k+1$ points on it, then there exists a subset $\mathcal{A} \subseteq \sets$,
 	$|\mathcal{A}| \le k$,
 	such that every solution $\sol$ with $|\sol| \le k$
 	satisfies $|\mathcal{A} \cap \sol| \ge 1$.
+	Moreover, such a subset can be found in polynomial time.
 \end{lemma}
 
 \begin{proof}
 
 First we use Lemma \ref{fpt_reduction}.
 
-Let us name points from $\points$ that lay on $L$, $x_1, x_2, \ldots x_t$
-in the order they appear on the line.
-
-Every segment that is not colinear with $L$ can cover at most one of these
-points. Therefore in any solution of size not larger than $k$,
+Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots x_t$
+in the order in which they appear on $L$.
+Every segment that is not collinear with $L$ can cover at most one of these
+points. Therefore, in any solution of size not larger than $k$,
 among any $k$ of these points at least one must
-be covered with segment colinear with $L$.
+be covered with segment collinear with $L$.
 
-Therefore we need to take one of the segments colinear
+Therefore, every solution needs to take one of the segments collinear
 with $L$ that covers any of the points
 $x_1, x_2, \ldots x_k$. After using reduction from Lemma \ref{fpt_reduction},
 there are at most $k$ such segments that are distinct.
 \end{proof}
 
+We are ready to prove Theorem \ref{segment_cover_fpt}.
 
-
-\begin{proof}[Proof of theorem \ref{segment_cover_fpt}.]\leavevmode
+\begin{proof}[Proof of Theorem \ref{segment_cover_fpt}.]\leavevmode
 
 %As long as there is a line with more than $k$ points, do branching.
 %Let's name points on this line $x_1, x_2, \ldots x_t$
@@ -112,18 +110,19 @@ there are at most $k$ such segments that are distinct.
 \subparagraph{Algorithm.}
 First we use Lemma \ref{fpt_reduction}.
 
-We present a recursive algorithm. Given an instance of the problem:
+Next, we present a recursive algorithm. Given an instance of the problem:
 
 \begin{enumerate}[label={(\arabic*)}]
-\item If there exist a line with at least $k+1$ points, we branch over
+\item If there exist a line with at least $k+1$ points from $\points$, we branch over
 adding to the solution one of at most $k$ possible segments
-from Lemma \ref{fpt_long_lines}, name this segment $S$.
+provided by Lemma \ref{fpt_long_lines}: name this segment $S$.
 Then we find a solution $\sol$
-for problem for points $\points - S$, segments $\sets - \{S\}$
-and parameter $k-1$ and return $\sol \cup \{S\}$.
+for the problem for points $\points - S$, segments $\sets - \{S\}$,
+and parameter $k-1$. We return $\sol \cup \{S\}$.
 \item If every line has at most $k$ points on it and $|\points| > k^2$,
 then answer \texttt{NO}.
-\item If $|\points| \le k^2$, solve the problem by brute force algorithm.
+\item If $|\points| \le k^2$, solve the problem by brute force:
+check all subsets of $\sets$ of size at most $k$.
 \end{enumerate}
 
 \subparagraph{Correctness.}

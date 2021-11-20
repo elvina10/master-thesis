@@ -13,42 +13,41 @@ with segments, where segments are in arbitrary directions.
 You can find this in Platypus book. (TODO add referece)
 
 We show an $\mathcal{O}(2^k)$-time branching algorithm.
-The algorithm covers one of the points with
-a segment in one of the directions greedily until
-it covers all points or decide the is no solution of size $k$.
+In each step, the algorithm selects a point $a$ which is not yet covered,
+branches to choose one of the two directions, and greedily chooses
+a segment in that direction to cover $a$.
+This proceeds until either all points are covered or $k$ segments are chosen.
 
 Let us take
-the point $a$ which is the smallest 
+the point $a=(x_a,y_a)$ which is the smallest 
 among points that are not yet covered
 in the lexicographic ordering
 of points in $\mathbb{R}^2$.
 We need to cover $a$ with some of the remaining segments.
 
-Branch over choice of one of the coordinates $x$ or $y$.
-Among segments that share this coordinate with $a$,
-we greedily choose the segment that covers the most points.
+Branch over the choice of one of the coordinates ($x$ or $y$);
+without loss of generality, let us assume we chose $x$.
+Among the segments lying on line $x = x_a$,
+we greedily add to the solution the one that covers the most points.
 As $a$ was the smallest in the lexicographical order,
-then all points that one of the coordinates with $a$,
-they have larger second coordinate. Therefore
-if we choose the segment that covers the most
-points $s$, it would
-be the segment that have the end with highest second coordinate.
-It also hold that every other segment covering $a$
-in this direction does not cover any point that
-is not covered by $s$. Therefore greedy choice
-of this segments is optimal.
+then all points on line $x = x_a$ have the $y$-coordinate larger than $y_a$.
+Therefore, if we denote the greedily chosen segment as $s$,
+then any other segment on $x = x_a$ that covers $a$ can only
+cover a (possibly improper) subset of points covered by $s$.
+Thus, greedily choosing $s$ is optimal.
 
-If after $k$ steps we do not cover all of the points, there is no solution
-of size at most $k$.
+In each step of the algorithm we add one segment to the solution,
+thus each branch can stop at depth $k$.
+If no branch finds a solution, then that means a solution of size at most $k$ does not exist.
 
 TODO: Maybe split it into theorem + algorithm + explanation like in 
 section
 \ref{segments_in_arbitrary_direction}
 
-TODO: Should it use Remark template?
-
+\begin{remark}
 The same algorithm can be used for segments in $d$ directions,
 where we branch over $d$ directions and it runs in complexity $\mathcal{O}(d^k)$.
+\end{remark}
 
 \subsection{Segments in arbitrary directions}
 In this section we consider setting where segments are not constrained

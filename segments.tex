@@ -4,32 +4,41 @@
 \subsection{Axis-parallel segments}
 You can find this in Platypus book. (TODO add referece)
 
-We show on $\mathcal{O}(2^k)$-time branching algorithm.
-TODO some introductory text
+We show an $\mathcal{O}(2^k)$-time branching algorithm.
+The algorithm covers one of the points with
+a segment in one of the directions greedily until
+it covers all points or decide the is no solution of size $k$.
 
 Let us take
-the point $d$ which is the smallest 
+the point $a$ which is the smallest 
 among points that are not yet covered
 in the lexicographic ordering
 of points in $\mathbb{R}^2$.
-We need to cover $d$ with some of the remaining segments.
+We need to cover $a$ with some of the remaining segments.
 
-We branch over choice of direction among the 2 axis-parallel directions.
-In this direction we greedly take the segment that covers
-the most points. As $d$ was the smallest
-in lexicographical order, all points in $\points$ collinear with $d$
-in both axis-parallel directions 
-are only on one side of $d$, because their coordinates are larger.
-Therefore
-segments covering $d$ in this direction create monotone sequence
-of sets and we can greedily take one segment that covers
-superset of all of these segments.
+Branch over choice of one of the coordinates $x$ or $y$.
+Among segments that share this coordinate with $a$,
+we greedily choose the segment that covers the most points.
+As $a$ was the smallest in the lexicographical order,
+then all points that one of the coordinates with $a$,
+they have larger second coordinate. Therefore
+if we choose the segment that covers the most
+points $s$, it would
+be the segment that have the end with highest second coordinate.
+It also hold that every other segment covering $a$
+in this direction does not cover any point that
+is not covered by $s$. Therefore greedy choice
+of this segments is optimal.
+
+If after $k$ steps we do not cover all of the points, there is no solution
+of size at most $k$.
 
 TODO: Maybe split it into theorem + algorithm + explanation like in 
 section
 \ref{segments_in_arbitrary_direction}
 
 TODO: Should it use Remark template?
+
 The same algorithm can be used for segments in $d$ directions,
 where we branch over $d$ directions and it runs in complexity $\mathcal{O}(d^k)$.
 
@@ -115,7 +124,7 @@ Next, we present a recursive algorithm. Given an instance of the problem:
 \begin{enumerate}[label={(\arabic*)}]
 \item If there exist a line with at least $k+1$ points from $\points$, we branch over
 adding to the solution one of the at most $k$ possible segments
-provided by Lemma \ref{fpt_long_lines}: name this segment $S$.
+provided by Lemma \ref{fpt_long_lines}; name this segment $S$.
 Then we find a solution $\sol$
 for the problem for points $\points - S$, segments $\sets - \{S\}$,
 and parameter $k-1$. We return $\sol \cup \{S\}$.

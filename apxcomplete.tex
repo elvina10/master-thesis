@@ -382,8 +382,9 @@ $$\mathsf{segmentsOrGadget}_{i, j} =
 \begin{lemma}
 \label{cover_or_true}
 For any $1 \le i \le n, j \in \{0, 1\}$ and 
- $x \in \{l_{i, j}, p_{i, j}\}$ we can cover points in
+ $x \in \{l_{i, j}, p_{i, j}\}$ points in
 $\mathsf{pointsOrGadget}_{i, j} - \{ x\} \cup \{v_{i, j}\}$
+can be covered
 with 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
 \end{lemma}
 
@@ -396,13 +397,39 @@ and all segments from $or^{true}_{i, j}$.
 
 \begin{lemma}
 \label{cover_or_false}
-For any $1 \le i \le n, j \in \{0, 1\}$, we can cover points in
-$\mathsf{pointsOrGadget}_{i, j}$ with 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
+For any $1 \le i \le n, j \in \{0, 1\}$, points in
+$\mathsf{pointsOrGadget}_{i, j}$ can be covered
+with 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
 \end{lemma}
 
 \begin{proof}
 We can do that using  $\mathsf{orMoveVariable}_{i, j}$
 and $or^{false}_{i, j}$.
+\end{proof}
+
+\begin{lemma}
+\label{cover_no_less_true}
+For any $1 \le i \le n, j \in \{0, 1\}$ and 
+ $x \in \{l_{i, j}, p_{i, j}\}$ points in
+$\mathsf{pointsOrGadget}_{i, j} - \{ x\} \cup \{v_{i, j}\}$
+can not be covered with
+with less than 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
+\end{lemma}
+
+\begin{proof}
+TODO
+\end{proof}
+
+
+\begin{lemma}
+\label{cover_no_less_false}
+For any $1 \le i \le n, j \in \{0, 1\}$, points in
+$\mathsf{pointsOrGadget}_{i, j}$ can not be covered
+with less than 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
+\end{lemma}
+
+\begin{proof}
+TODO
 \end{proof}
 
 
@@ -486,12 +513,15 @@ in a clause.
 & & \cup \ \mathsf{segmentsOrGadget}_{i, 0} \cup \mathsf{segmentsOrGadget}_{i, 1}
 \end{eqnarray*}
 
+\newcommand{\segmentsClauseSolTrue}[1]{\mathsf{solClause}^{true,#1}}
+\newcommand{\segmentsClauseSolFalse}{\mathsf{solClause}^{false}}
+
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-points in $\mathsf{pointsClause}_i - \{a\}$ can be covered with 
-a set of segments $P\_true^a_i$, a subset of $\segmentsClause_i$
-such that $|P\_true^a_i| = 11$.
+there is $\segmentsClauseSolTrue{a}_i \subset \segmentsClause_i$
+with $|\segmentsClauseSolTrue{a}_i| = 11$
+that covers points in $\mathsf{pointsClause}_i - \{a\}$.
 \end{lemma}
 
 \begin{proof}
@@ -518,10 +548,10 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 
 \begin{lemma}
 \label{cover_clauses_solution_false}
-For any $1 \le i \le n$,
-points in $\mathsf{pointsClause}_i$ can be covered with
-a set of segments $P\_false^a_i$, a subset of $\segmentsClause_i$
-such that $|P\_false^a_i| = 12$.
+For any $1 \le i \le n$ there is
+$\segmentsClauseSolFalse_i \subset \segmentsClause_i$
+with $|\segmentsClauseSolFalse_i| = 12$
+that covers points in $\mathsf{pointsClause}_i$.
 \end{lemma}
 
 \begin{proof}
@@ -539,9 +569,11 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 For any $1 \le i \le n$:
 \begin{enumerate}[label={(\arabic*)}]
 	\item points in $\mathsf{pointsClause}_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-	can not be covered using any subset of segments from $\segmentsClause_i$ of size less than 11;
+	can not be covered using any subset of segments
+	from $\segmentsClause_i$ of size smaller than 11;
 	\item points in $\mathsf{pointsClause}_i$ can not be covered 
-	using any subset of segments from $\segmentsClause_i$ of size less than 12.
+	using any subset of segments
+	from $\segmentsClause_i$ of size smaller than 12.
 \end{enumerate}
 \end{lemma}
 
@@ -647,9 +679,9 @@ in the $i$-th gadget choosing the set of segments corresponding to the
 value of $y_i$. 
 CLAUSE-gadgets that are satisfied,
 let us name the variable that is true in them $a$,
-are covered with set $P\_true_i^a$ described in
+are covered with set $\segmentsClauseSolTrue{a}_i$ described in
 Lemma~\ref{cover_clauses_solution_true}
-and unsatisfied with set $P\_false_i$ described in
+and unsatisfied with set $\segmentsClauseSolFalse_i$ described in
 Lemma~\ref{cover_clauses_solution_false}.
 
 
@@ -660,8 +692,8 @@ Lemma~\ref{cover_clauses_solution_false}.
 		X_i^{false} & \text{if}\ \neg y_i
 		\end{cases} \\
 	& C_i = \begin{cases}
-		P\_true_i^a & \text{if}\ c_i \text{ satisfied} \\
-		P\_false_i & \text{if}\ c_i \text{ not satisfied}
+		\segmentsClauseSolTrue{a}_i & \text{if}\ c_i \text{ satisfied} \\
+		\segmentsClauseSolFalse_i & \text{if}\ c_i \text{ not satisfied}
 		\end{cases} \\
 	& \sol = \bigcup\limits_{i=1}^{n} \{R_i \cup C_i : 1 \le i \le n\}
     \end{split}

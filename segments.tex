@@ -64,7 +64,7 @@ where parameter is the size of the solution.
 	$n$ segments (in any direction),
 	a set of $m$ points $\points$
 	and a parameter $k$,
-	runs in time $f(k) \cdot (nm)^c$ for some computable function f and constant c,
+	runs in time $k^{O(k)} \cdot (nm)^2$,
 	and outputs a subfamily $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol$ covers all points in $\points$,
 	or determines that such a set $\sol$ does not exist.
@@ -91,7 +91,7 @@ We will need the following lemmas.
 	$|\mathcal{A}| \le k$,
 	such that every solution $\sol$ with $|\sol| \le k$
 	satisfies $|\mathcal{A} \cap \sol| \ge 1$.
-	Moreover, such a subset can be found in polynomial time.
+	Moreover, such a subset can be found in polunomial time.
 \end{lemma}
 
 \begin{proof}
@@ -115,17 +115,11 @@ We are ready to prove Theorem \ref{segment_cover_fpt}.
 
 \begin{proof}[Proof of Theorem \ref{segment_cover_fpt}.]\leavevmode
 
-%As long as there is a line with more than $k$ points, do branching.
-%Let's name points on this line $x_1, x_2, \ldots x_t$
-%in order they appear on the line.
-
-%So we choose on which point the chosen segment on this line
-%will start. Of course we have to take at least one segment
-%covering at least one point among first $k+1$ points,
-%because covering all of them with only segments
-%on different lines we would use
-%exactly $k+1$ segments (any of them can't contain more than
-%one point from this line).
+We will prove this theorem by presenting a branching algorithm that
+works in desired complexity. It branches over the
+choice of segments to cover lines with \textit{a lot} of points,
+then finally solving the small instance, where
+every line has at most $k$ points by checking all possible solutions.
 
 \subparagraph{Algorithm.}
 First we use Lemma \ref{fpt_reduction}.
@@ -172,10 +166,10 @@ Therefore, (3) takes time $k^{O(k)}$.
 In this branching algorithm our parameter $k$ is decreased with every
 recursive call, so we have at most $k$ levels of recursion with
 branching over $k$ possibilites. Candidates to branch over
-can be found on each level in time $O(nm \log(nm))$.
+can be found on each level in time $O((nm)^2)$.
 
 Reduction from Lemma \ref{fpt_reduction} can be implemented in time $O(n^2m)$.
 
-It follows that the overall complexity is $O(n^2m + nm \log(nm) \cdot f(k))$
+It follows that the overall complexity is $O((nm)^2 \cdot k^O(k))$
 \end{proof}
 

@@ -655,15 +655,22 @@ TODO: $y$ axis is increasing values downward on figures
 (not upwards like in normal).
 
 
-
 \subsection{Construction lemmas and proof of Lemma \ref{apxconstruction}}
+
+In order to prove Lemma \ref{apxconstruction} we introduce some
+auxiliary lemmas proving properties of the construction
+described in the previous section.
+
+Consider an instance $S$ of MAX-(3,3)-SAT of size $n$
+with optimum solution satisfying $k$ clauses.
+Let us construct an instance $(\points, \sets)$ of geometric set cover
+as described in Section~\ref{construction_description}
+for instance $S$ of MAX-(3,3)-SAT.
+
 \begin{lemma}
 	\label{construction_correctness}
-	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
-	with optimum solution satisfying $k$ clauses $opt(S) = k$.
-	Instance of geometric set cover, constructed for $S$
-	as described in Section~\ref{construction_description}, 
-	can be solved with a solution of size $15n - k$.
+	Instance $(\points, \sets)$ of geometric set cover
+	admits a solution of size $15n - k$.
 \end{lemma}
 
 \begin{proof}
@@ -688,8 +695,8 @@ Lemma~\ref{cover_clauses_solution_false}.
 \begin{align}
 	\begin{split}
 	& R_i = \begin{cases}
-		X_i^{true} & \text{if}\ y_i \\
-		X_i^{false} & \text{if}\ \neg y_i
+		\chooseVar_i^{true} & \text{if}\ y_i = \texttt{true} \\
+		\chooseVar_i^{false} & \text{if}\ y_i = \texttt{false} \\
 		\end{cases} \\
 	& C_i = \begin{cases}
 		\segmentsClauseSolTrue{a}_i & \text{if}\ c_i \text{ satisfied} \\
@@ -710,12 +717,10 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 \end{proof}
 \begin{lemma}
 	\label{construction_completness}
-	Given an instance $S$ of MAX-(3,3)-SAT of size $n$
-	and a solution of an instance of geometric set cover,
-	as described in Section~\ref{construction_description},
-	that is of size $w$.
-	There exists a solution of an instance $S$
-	that satisfied at least $15n - w$ clauses.
+	Suppose we have a solution $\sol$ of the instance $(\points, \sets)$
+	of geometric set cover that is of size $w$.
+	Then there exists a solution of $S$
+	that satisfies at least $15n - w$ clauses.
 \end{lemma}
 
 \begin{proof}\leavevmode

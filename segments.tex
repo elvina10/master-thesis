@@ -1,6 +1,14 @@
 \chapter{Geometric Set Cover with segments}
 
 \section{FPT for segments}
+In this section we consider the fixed-parameter tractable
+algorithms for unweighted geometric set cover with segments.
+Setting where segments are limited to be axis-parallel
+(or limited to constant number of directions) has an FPT
+algorithm already present in literature.
+We present an FPT algorithm for unweighted geometric set cover
+with segments, where segments are in arbitrary directions.
+
 \subsection{Axis-parallel segments}
 You can find this in Platypus book. (TODO add referece)
 
@@ -43,7 +51,10 @@ The same algorithm can be used for segments in $d$ directions,
 where we branch over $d$ directions and it runs in complexity $\mathcal{O}(d^k)$.
 
 \subsection{Segments in arbitrary directions}
-TODO: lead text
+In this section we consider setting where segments are not constrained
+to only $d$ directions. 
+We present a fixed-parameter tractable algorithm,
+where parameter is the size of the solution.
 
 \label{segments_in_arbitrary_direction}
 \begin{tw}{

@@ -459,7 +459,8 @@ in a clause.
 	$z_{i, 1} = (10i+3, 4n + 6)$
 \end{tabular}
 \end{center}
-	
+
+\newcommand{\segmentsClause}{\mathsf{segmentsClause}}	
  
  $$\mathsf{moveVariable}_i = 
  \{x_{i, j} : j \in \{0, 1\}\} \cup
@@ -475,7 +476,7 @@ in a clause.
 \paragraph{Segments.}
 
 \begin{eqnarray*}
-P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
+\segmentsClause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 (y_{i, 0}, y_{i, 1}),
 (z_{i, 0}, z_{i, 1}),
 (x_{i, 1}, l_{i, 0}),
@@ -489,7 +490,7 @@ P\_clause_i & = & \{ (x_{i, 0}, x_{i, 1}),
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
 points in $\mathsf{pointsClause}_i - \{a\}$ can be covered with 
-a set of segments $P\_true^a_i$, a subset of $P\_clause_i$
+a set of segments $P\_true^a_i$, a subset of $\segmentsClause_i$
 such that $|P\_true^a_i| = 11$.
 \end{lemma}
 
@@ -519,7 +520,7 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 \label{cover_clauses_solution_false}
 For any $1 \le i \le n$,
 points in $\mathsf{pointsClause}_i$ can be covered with
-a set of segments $P\_false^a_i$, a subset of $P\_clause_i$
+a set of segments $P\_false^a_i$, a subset of $\segmentsClause_i$
 such that $|P\_false^a_i| = 12$.
 \end{lemma}
 
@@ -538,9 +539,9 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 For any $1 \le i \le n$:
 \begin{enumerate}[label={(\arabic*)}]
 	\item points in $\mathsf{pointsClause}_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-	can not be covered using any subset of segments from $P\_clause_i$ of size less than 11;
+	can not be covered using any subset of segments from $\segmentsClause_i$ of size less than 11;
 	\item points in $\mathsf{pointsClause}_i$ can not be covered 
-	using any subset of segments from $P\_clause_i$ of size less than 12.
+	using any subset of segments from $\segmentsClause_i$ of size less than 12.
 \end{enumerate}
 \end{lemma}
 
@@ -607,8 +608,8 @@ TODO: Rename Choose X to VARIABLE-gadget and Clause C to CLAUSE-gadget.
 \end{figure}
 
 We define:
-$$\points := \bigcup_{1 \le i \le n} C\_variable_i \cup \mathsf{pointsClause}_i $$
-$$\sets := \bigcup_{1 \le i \le n} P\_variable_i \cup P\_clause_i $$
+$$\points := \bigcup_{1 \le i \le n} \pointsVar_i \cup \mathsf{pointsClause}_i $$
+$$\sets := \bigcup_{1 \le i \le n} \segmentsVar_i \cup \segmentsClause_i $$
 
 The subsequent sections define these sets.
 
@@ -751,7 +752,7 @@ by Lemma~\ref{cover_clauses_segments_no_less}.
 
 TODO: Maybe remove section below, because we do this calculation at the end anyway
 We covered CLAUSE-gadget with at least 11 or at least 12 segments:
-$|\bigcup\limits_{i=1}^n P\_clause_i \cap \sol| \ge 11n + b$,
+$|\bigcup\limits_{i=1}^n \segmentsClause_i \cap \sol| \ge 11n + b$,
 where $b$ is the number of clauses
 where none of the segments covering the points $x_{i,0}, y_{i,0}, z_{i,0}$ were chosen
 in $P_{var}^j$.

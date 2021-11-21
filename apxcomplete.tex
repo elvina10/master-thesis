@@ -692,8 +692,9 @@ in the $i$-th gadget choosing the set of segments corresponding to the
 value of $\phi(x_i)$.
 
 For every clause that is satisfied, say $c_i$, 
-let us name the variable that is true in them $a$,
-points in $\pointsClause_i$ 
+let us name the variable that is \texttt{true} in it $x_i$
+and point corresponding to $x_i$ in $\pointsClause_i$ as $a$.
+Points in $\pointsClause_i$ 
 are covered with set $\segmentsClauseSolTrue{a}_i$ described in
 Lemma~\ref{cover_clauses_solution_true}.
 For every clause that is not satisfied, say $c_j$,
@@ -720,9 +721,9 @@ TODO: Some text about what we define here
 
 This set covers all the points from $\points$, because
 the sets $R_i$, $C_i$ individually cover their corresponding gadgets,
-proved in respective lemmas.
+as proved in respective lemmas.
 
-All of these sets are disjoint, so the size of the solution is:
+All of these sets are disjoint, so the size of the obtained solution is:
 
 $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.$$
 \end{proof}
@@ -771,16 +772,16 @@ assign the value $\phi(x_i)$ that satisfies most clauses,
 in which $x_i$ occurs.
 Every variable is in exactly 3 clauses,
 so one assignment satisfies at least 2 of them.
-If $\sol$ contains none of these segments, set value to false.
+If $\sol$ contains none of these segments, set value to \texttt{false}.
 Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 
 \begin{align}
 	\begin{split}
 	\label{eqn:variable_assignment}
 	& \begin{cases}
-	\phi(x_i) = majority(X_i) & \text{if}\ \xTrueSegment \in \sol \land \xFalseSegment \in \sol \\
-	\phi(x_i) = true & \text{if}\ \xTrueSegment \in \sol \\
-	\phi(x_i) = false & \text{if}\ \xFalseSegment \in \sol \\
+	\phi(x_i) = majority(X_i) & \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \\
+	\phi(x_i) = true & \text{if}\ \xTrueSegment{i} \in \sol \\
+	\phi(x_i) = false & \text{if}\ \xFalseSegment{i} \in \sol \\
 	\phi(x_i) = false & \text{otherwise}
 	\end{cases}
 	\end{split}

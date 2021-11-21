@@ -253,6 +253,9 @@ We denote $a_i = a + (0,4i)$ etc.
 
 \paragraph{Segments.}
 
+\newcommand{\xTrueSegment}[1]{(c_{#1}, g_{#1})}
+\newcommand{\xFalseSegment}[1]{(f_{#1}, h_{#1})}
+
 Let us define:
 
 $$\chooseVar^{true}_i =\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
@@ -746,20 +749,20 @@ that satisfies at least $15n-w$ clauses in $S$.
 The solution $\sol$ needs to use at least 3 segments
 to cover points $\pointsVar_i$
 for each VARIABLE-gadget (Lemma~\ref{choose_variables_no_less}).
-If $\sol$ contains both segments $\xTrueSegment$ and $\xFalseSegment$,
+If $\sol$ contains both segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$,
 then it have used at least 4 segments (Lemma~\ref{choose_variables_both}).
 
 
 \begin{align}
 	\begin{split}
 	& \begin{cases}
-	|\mathsf{pointsVar}_i \cap \sol| \ge 4 & \text{if}\ \xTrueSegment \in \sol \land \xFalseSegment \in \sol \\
+	|\mathsf{pointsVar}_i \cap \sol| \ge 4 & \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \\
 	|\mathsf{pointsVar}_i \cap \sol| \ge 3 & \text{otherwise}
 	\end{cases}
 	\end{split}
 \end{align}
 
-If $\sol$ contains at most one of the segments $\xTrueSegment$ and $\xFalseSegment$,
+If $\sol$ contains at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$,
 choose the corresponding variable value to the constructed assignment $\phi$.
 If $\sol$ contains both segments,
 assign the value $\phi(x_i)$ that satisfies most clauses,
@@ -785,7 +788,7 @@ TODO: Maybe remove section below, because we do this calculation at the end anyw
 To cover $\bigcup_{1 \le i \le n} \mathsf{pointsVar}^i$
 we have used at least $3n + a$ segments,
 where $a$ is the number of $i$ such that we have chosen both
-values $\xTrueSegment$ and $\xFalseSegment$.
+values $\xTrueSegment{i}$ and $\xFalseSegment{i}$.
 
 \subparagraph{Clauses}
 
@@ -811,32 +814,31 @@ in $P_{var}^j$.
 
 \subparagraph{Satisfied clauses with chosen variable assignment.}
 
-Clauses for which none of
-the points $x_{i,0}, y_{i,0}, z_{i,0}$ were covered by
+Consider clause, say $c_i$, if none of
+the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause_i$ were covered by
 segments from $\sol \cap \segmentsVar_j$,
-are not satisfied in $\phi$, but not all clauses
-that cover one of these points with segment in $P_{var}^j$ are satisfied.
+this clause is not satisfied by assignment $\phi$.
 
-Let us look at such a $c_i$ and on points $x_{i,0}, y_{i,0}, z_{i,0}$
-that are covered by $P_{var}^j$.
-Consider the cases of choosing variable value in
-equation \eqref{eqn:variable_assignment}.
+If one of these points is covered by $\sol \cap \segmentsVar_j$,
+say this point is $t$ and this point corresponds to variable $x_j$.
+Consider the cases of choosing value of $\phi(x_j)$
+in equation \eqref{eqn:variable_assignment}.
 
-If $\sol$ contains only one of the segments $\xTrueSegment$ and $\xFalseSegment$,
+If $\sol$ contains only one of the segments $\xTrueSegment{j}$ and $\xFalseSegment{j}$,
 then the value $\phi(x_j)$ satisfies $c_i$.
 
-If $\sol$ contains neither $\xTrueSegment$ nor $\xFalseSegment$,
-then it is impossible that this point is covered in $P_{var}^j$.
+If $\sol$ contains neither $\xTrueSegment{j}$ nor $\xFalseSegment{j}$,
+then it is impossible that $t$ is covered by segments in $\sol \cap \segmentsVar_j$.
 
-If we chose both $\xTrueSegment$ and $\xFalseSegment$,
-then there are 3 clauses for which this point
-is covered by $P_{var}^j$. We chose variable value in a way
+If we chose both $\xTrueSegment{j}$ and $\xFalseSegment{j}$,
+then there are 3 clauses for which $t$
+is covered by $\sol \cap \segmentsVar_j$.
+We chose the variable value $\phi(x_j)$ in a way
 that only one clause using $x_j$ is not satisfied by the value of $x_j$.
 Therefore there are at most $a$ clauses that are covered with
-11 segments from CLAUSE-gadget, but are not satisfied.
+11 segments from $\segmentsClause_i$, but are not satisfied by $\phi$.
 
-So in the solution to this MAX-(3,3)-SAT instance that we have shown,
-there are at most $a+b$ unsatsfied clauses.
+This means that $\phi$ satisfies all but at most $a+b$ clauses in $S$.
 
 \subparagraph{Conclusions}
 

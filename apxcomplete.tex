@@ -289,7 +289,7 @@ not be covered with fewer than 3 segments.
 \begin{lemma}
 \label{choose_variables_both}
 For every set $A \subseteq \segmentsVar_i$ such that $A$ covers $\pointsVar_i$
-and $\xTrueSegment, \xFalseSegment \in A$,
+and $\xTrueSegment{i}, \xFalseSegment{i} \in A$,
 it holds that $|A| \ge 4$.
 \end{lemma}
 \begin{proof}
@@ -661,6 +661,8 @@ TODO: $y$ axis is increasing values downward on figures
 
 \subsection{Construction lemmas and proof of Lemma \ref{apxconstruction}}
 \newcommand{\setCoverInstance}{(\points, \sets)}
+\newcommand{\true}{\texttt{true}}
+\newcommand{\false}{\texttt{false}}
 
 In order to prove Lemma \ref{apxconstruction} we introduce some
 auxiliary lemmas proving properties of the construction
@@ -683,7 +685,7 @@ Let the clauses in $S$ be $c_1$,~$c_2$~$\ldots$~$c_n$
 and variables be $x_1$,~$x_2$~$\ldots$~$x_n$.
 Let the assignment of the variables in
 the optimum solution to $S$ be
-$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\texttt{true}, \texttt{false}\}$.
+$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$.
 
 
 We cover every VARIABLE-gadget with solution described in
@@ -692,7 +694,7 @@ in the $i$-th gadget choosing the set of segments corresponding to the
 value of $\phi(x_i)$.
 
 For every clause that is satisfied, say $c_i$, 
-let us name the variable that is \texttt{true} in it $x_i$
+let us name the variable that is \true in it $x_i$
 and point corresponding to $x_i$ in $\pointsClause_i$ as $a$.
 Points in $\pointsClause_i$ 
 are covered with set $\segmentsClauseSolTrue{a}_i$ described in
@@ -707,8 +709,8 @@ TODO: Some text about what we define here
 \begin{align}
 	\begin{split}
 	& R_i = \begin{cases}
-		\chooseVar_i^{true} & \text{if}\ \phi(x_i) = \texttt{true} \\
-		\chooseVar_i^{false} & \text{if}\ \phi(x_i) = \texttt{false} \\
+		\chooseVar_i^{true} & \text{if}\ \phi(x_i) = \true \\
+		\chooseVar_i^{false} & \text{if}\ \phi(x_i) = \false \\
 		\end{cases} \\
 	& C_i = \begin{cases}
 		\segmentsClauseSolTrue{a}_i & \text{if}\ c_i \text{ satisfied} \\
@@ -745,15 +747,15 @@ Given a solution $\sol$
 of the instance $\setCoverInstance$ of geometric set cover,
 we construct a solution of $S$ by constructing an
 assigment of variables 
-$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\texttt{true}, \texttt{false}\}$
+$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$
 that satisfies at least $15n-w$ clauses in $S$.
 
 \subparagraph{Variables}
 The solution $\sol$ needs to use at least 3 segments
-to cover points $\pointsVar_i$
+to cover $\pointsVar_i$
 for each VARIABLE-gadget (Lemma~\ref{choose_variables_no_less}).
 If $\sol$ contains both segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$,
-then it have used at least 4 segments (Lemma~\ref{choose_variables_both}).
+then it has used at least 4 segments (Lemma~\ref{choose_variables_both}).
 
 
 \begin{align}
@@ -768,11 +770,11 @@ then it have used at least 4 segments (Lemma~\ref{choose_variables_both}).
 If $\sol$ contains at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$,
 choose the corresponding variable value to the constructed assignment $\phi$.
 If $\sol$ contains both segments,
-assign the value $\phi(x_i)$ that satisfies most clauses,
+assign the value $\phi(x_i)$ that satisfies most clauses
 in which $x_i$ occurs.
 Every variable is in exactly 3 clauses,
 so one assignment satisfies at least 2 of them.
-If $\sol$ contains none of these segments, set value to \texttt{false}.
+If $\sol$ contains none of these segments, set value to \false.
 Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 
 \begin{align}
@@ -780,9 +782,9 @@ Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 	\label{eqn:variable_assignment}
 	& \begin{cases}
 	\phi(x_i) = majority(X_i) & \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \\
-	\phi(x_i) = true & \text{if}\ \xTrueSegment{i} \in \sol \\
-	\phi(x_i) = false & \text{if}\ \xFalseSegment{i} \in \sol \\
-	\phi(x_i) = false & \text{otherwise}
+	\phi(x_i) = \true & \text{if}\ \xTrueSegment{i} \in \sol \\
+	\phi(x_i) = \false & \text{if}\ \xFalseSegment{i} \in \sol \\
+	\phi(x_i) = \false & \text{otherwise}
 	\end{cases}
 	\end{split}
 \end{align}

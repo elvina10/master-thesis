@@ -255,6 +255,7 @@ We denote $a_i = a + (0,4i)$ etc.
 
 \newcommand{\xTrueSegment}[1]{(c_{#1}, g_{#1})}
 \newcommand{\xFalseSegment}[1]{(f_{#1}, h_{#1})}
+\newcommand{\orTrueSegment}[2]{(t_{#1, #2}, v_{#1, #2})}
 
 Let us define:
 
@@ -365,6 +366,7 @@ Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
 \paragraph{Segments.}
 
 We define names subsets of segments, to refer to them in lemmas.
+ 
  
 $$or^{false}_{i, j} =
 \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
@@ -767,16 +769,24 @@ then it has used at least 4 segments (Lemma~\ref{choose_variables_both}).
 	\end{split}
 \end{align}
 
+We also create modified solution $\sol'$ such that $|\sol'|=|\sol|$
+and $\sol'$ is still a correct solution for $\setCoverInstance$.
+
 If $\sol$ contains at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$,
 choose the corresponding variable value to the constructed assignment $\phi$.
+If $\sol$ contains none of these segments, set value to \false.
 If $\sol$ contains both segments,
 assign the value $\phi(x_i)$ that satisfies most clauses
 in which $x_i$ occurs.
 Every variable is in exactly 3 clauses,
 so one assignment satisfies at least 2 of them.
-If $\sol$ contains none of these segments, set value to \false.
-Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
+In this case we remove one of the segments $\xTrueSegment{i}$
+or $\xFalseSegment{i}$ (depending on the value of $\phi(x_i)$)
+from $\sol'$ and replace it
+with a segment that covers the point $v_{j,1}$
+for a CLAUSE-gadget for a clause $c_j$ that uses $x_i$ with value $\not\phi(x_i)$
 
+Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 \begin{align}
 	\begin{split}
 	\label{eqn:variable_assignment}
@@ -789,30 +799,48 @@ Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 	\end{split}
 \end{align}
 
+and $\sol'$ as:
+
+\begin{align}
+\sol' = \sol 
+	\begin{split}
+	& \begin{cases}
+	- \{ \xFalseSegment{i} \} \cup \{ \orTrueSegment{j}{1} \}
+	& \phi(x_i) = \true \land \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \land \\
+	& \text{clause } c_j \text{ is satisfied by } \phi(x_i) = \false \\
+	- \{ \xTrueSegment{i} \} \cup \{ \orTrueSegment{j}{1} \}
+	& \phi(x_i) = \false \land \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \land \\
+	& \text{clause } c_j \text{ is satisfied by } \phi(x_i) = \true, \\
+	\end{cases}
+	\end{split}
+\end{align}
+
+therefore $|\mathsf{pointsVar}_i \cap \sol'| \ge 3$.
+
 TODO: Maybe remove section below, because we do this calculation at the end anyway
 To cover $\bigcup_{1 \le i \le n} \mathsf{pointsVar}^i$
 we have used at least $3n + a$ segments,
-where $a$ is the number of $i$ such that we have chosen both
+where $a$ is the number of $i$ such that $\sol$ consists of
 values $\xTrueSegment{i}$ and $\xFalseSegment{i}$.
 
 \subparagraph{Clauses}
 
 For a clause $C_i = x \lor y \lor z$,
-$\sol$ needs to use at least 11 segments to cover $\pointsClause_i - \{x, y, z\}$
+$\sol'$ needs to use at least 11 segments to cover $\pointsClause_i - \{x, y, z\}$
 in CLAUSE-gadget (Lemma~\ref{cover_clauses_segments_no_less}).
 
 TODO: maybe put something with cases and names of sets as above
 
 Moreover, if all of the points $\{x_{i,0}, y_{i,0}, z_{i,0}\}$
-are not covered by the segments from $\pointsVar_i$,
-then $\sol$ needs to cover $\pointsClause_i$
+are not covered by the segments from $\sol' \cap \pointsVar_i$,
+then $\sol'$ needs to cover $\pointsClause_i$
 with at least 12 segments
 by Lemma~\ref{cover_clauses_segments_no_less}.
 
 
 TODO: Maybe remove section below, because we do this calculation at the end anyway
 We covered CLAUSE-gadget with at least 11 or at least 12 segments:
-$$|\bigcup\limits_{i=1}^n \segmentsClause_i \cap \sol| \ge 11n + b$$
+$$|\bigcup\limits_{i=1}^n \segmentsClause_i \cap \sol'| \ge 11n + b$$
 where $b$ is the number of clauses
 where none of the segments covering the points $x_{i,0}, y_{i,0}, z_{i,0}$ were chosen
 in $P_{var}^j$.
@@ -821,40 +849,35 @@ in $P_{var}^j$.
 
 Consider a clause, say $c_i$. If none of
 the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause_i$ were covered by
-segments from $\sol \cap \segmentsVar_j$,
+segments from $\sol' \cap \segmentsVar_j$,
 this clause is not satisfied by assignment $\phi$.
 
 If one of these points is covered by 
-segments from VARIBALE-gadget (TODO better this or $\sol \cap \segmentsVar_j$),
+segments from VARIBALE-gadget (TODO better this or $\sol' \cap \segmentsVar_j$),
 then denote this point as $t$ and say it corresponds to variable $x_j$.
 Consider the cases of choosing value of $\phi(x_j)$
 in equation \eqref{eqn:variable_assignment}.
 
-If $\sol$ contains only one of the segments $\xTrueSegment{j}$ and $\xFalseSegment{j}$,
+If $\sol'$ contains only one of the segments $\xTrueSegment{j}$ and $\xFalseSegment{j}$,
 then the value $\phi(x_j)$ satisfies $c_i$.
 
-If $\sol$ contains neither $\xTrueSegment{j}$ nor $\xFalseSegment{j}$,
+If $\sol'$ contains neither $\xTrueSegment{j}$ nor $\xFalseSegment{j}$,
 then it is impossible that $t$ is covered by segments in $\sol \cap \segmentsVar_j$.
 
-If we chose both $\xTrueSegment{j}$ and $\xFalseSegment{j}$,
-then there are 3 clauses for which $t$
-is covered by $\sol \cap \segmentsVar_j$.
-We chose the variable value $\phi(x_j)$ in a way
-that only one clause using $x_j$ is not satisfied by the value of $x_j$.
-Therefore there are at most $a$ clauses that are covered with
-11 segments from $\segmentsClause_i$, but are not satisfied by $\phi$.
+$\sol'$ was chosen in a way, that it is impossible that it contains
+both $\xTrueSegment{i}$ and $\xFalseSegment{i}$ for some variable $i$.
 
-This means that $\phi$ satisfies all but at most $a+b$ clauses in $S$.
+This means that $\phi$ satisfies all but at most $a$ clauses in $S$.
 
 
 To conclude, we proved that given a solution to $\setCoverInstance$ of size $w$,
 we have constructed a variables assignment $\phi$
-that satisfies at least $n-(a+b)$ clauses of $S$.
+that satisfies at least $n-a$ clauses of $S$.
 Finally, note that
 
-$$w \ge 3(n-a) + 4a + 11(n-b) + 12b = 3n + a + 11n + b = 14n + a + b,$$
+$$w \ge 3n + 11(n-a) + 12a = 3n + 11n + a = 14n + a,$$
 hence
-$$15n - w  \le 15n - 14n - a - b = n - (a+b).$$
+$$15n - w  \le 15n - 14n - a = n - a.$$
 
 So $\phi$ satisfies at least $15n-w$ clauses of $S$.
 \end{proof}

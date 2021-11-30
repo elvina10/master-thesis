@@ -1,23 +1,28 @@
 \section{FPT for weighted segments with $\delta$-extensions}
+
+TODO: Some intro
+
 \begin{tw}[FPT for weighted segment cover with $\delta$-extensions]{
 	\label{fpt_weighted_segment}
-	There exists an algorithm $\mathcal{A}$ that given a family $\sets$ of
+	There exists an algorithm that given a family $\sets$ of
 	$n$ weighted segments (in any direction),
-	a set of $m$ points $\points$, and parameters $k$ and $\delta$,
+	a set of $m$ points $\points$, and parameters $k$ and $\delta > 0$,
 	runs in time $f(k, \delta) \cdot (nm)^c$ for some computable function $f$ and a constant $c$,
 	and outputs a set $\sol \subseteq \sets$
-	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$
+	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$,
 	or determines that such a set $\sol$ does not exist.
 }\end{tw}
 
 
 To solve this problem we will introduce a lemma about choosing
-\textit{good} subsets of points.
+a \textit{good} subset of points.
+
+TODO: Some intuition
 
 \begin{defi}
 	For a set of collinear points $C$,
 	a subset $A \subseteq C$ is \textbf{$(k,\delta)$-good} 
-	if for any set of segments $R$ that covers set $A$
+	if for any set of segments $R$ that covers $A$ and
 	such that $|R| \le k$, it holds that $R^{+\delta}$ covers $C$.
 \end{defi}
 
@@ -25,79 +30,81 @@ To solve this problem we will introduce a lemma about choosing
 	\label{good_set_exists}
 	There exists an algorithm that
 	for any set of collinear points $C$, $\delta > 0$ and $k \ge 1$,
-	outputs a $(k,\delta)$-good set of size at most $f(k, \delta)$
+	outputs a $(k,\delta)$-good set $A \subseteq C$ of size at most $f(k, \delta)$
 	for some computable function $f$. This algorithm runs in time
 	$O(|C| \cdot f(k, \delta))$.
 \end{lemma}
 
 \begin{proof}
-We prove this for a fixed $\delta$
-by induction over $k$ for any set of collinear points $C$.
+We prove this for a fixed $\delta$ by induction over $k$.
 
-\subparagraph{Inductive hypothesis}
+\subparagraph{Inductive hypothesis.}
 For any set of collinear points $C$,
 there exists an algorithm that 
 runs in time $O(|C|k(1+\frac{1}{\delta}))$
 and finds a set $A$ such that:
 \begin{itemize}
-\item $A$ is $(l, \delta)-good$ for every $1 \le l \le k$,
+\item $A$ is $(\ell, \delta)$-good for every $1 \le \ell \le k$,
 \item $A$ has size $|A| < f(\delta, k)$ for some computable function $f$,
 \item extreme points from $C$ are in $A$.
 \end{itemize}
 
-\subparagraph{Base case for $k = 1$}
+\subparagraph{Base case for $k = 1$.}
 It is sufficient that $A$ consists of 2 points: extreme points from $C$
 or a single point if $|C| = 1$.
 
 If they are covered with one segment, it must be a segment 
-that includes the extreme points from $C$, so it covers whole set $C$.
+that includes the extreme points from $C$, so it covers the whole set $C$.
 
-\subparagraph{Inductive step}
+\subparagraph{Inductive step.}
 Assuming inductive hypothesis for any set of collinear points $C$
-and for $k$, we will prove hypothesis for $k+1$.
+and for parameter $k$, we will prove hypothesis for $k+1$.
 
-Let us name $s$ the minimal segment that includes all points from $C$.
+Let be $s$ the minimal segment that includes all points from $C$.
+That is, the extreme points of $C$ are endpoints of $s$.
 
 We define $M = \lceil1+\frac{2}{\delta}\rceil$ subsegments of $s$ in the following way.
 We split $s$ into $M$ parts 
-$v_i$ of equal length, that is $|v_i| = \frac{|s|}{M}$ for any $1 \le i \le M$.
+$v_i$ of equal length, that is $|v_i| = \frac{|s|}{M}$ for each $1 \le i \le M$.
 
-$C_i$ is a subset of $C$ such that they lay on $v_i$.
+Let $C_i$ be the subset of $C$ consisting of points laying on $v_i$.
 
-$t_i$ is a segment connecting leftmost and rightmost point in $C_i$
+Let $t_i$ be the segment with endpoints being the extreme points of $C_i$
 (it might be degenerated segment if $|C_i| = 1$ or it might be empty
 if $C_i$ is empty).
 
 TODO: Add a picture with $v_i$ and $t_i$ here
 
-We use inductive hypothesis to choose $(k, \delta)$-good sets $A_i$
-for sets $C_i$. If $|C_i| \le 1$, then $A_i = C_i$
-and it's still a $(k, \delta)$-good set.
+We use the inductive hypothesis to choose $(k, \delta)$-good sets $A_i$
+for sets $C_i$. Note that if $|C_i| \le 1$, then $A_i = C_i$
+and it's still a $(k, \delta)$-good set for $C_i$.
 
 Then we define $A = \bigcup_{i=1}^{M} A_i$.
-It includes ends of $s$, because they are in sets $A_1$ and $A_M$.
+Thus $A$ includes the extreme points of $C$,
+because they are included in the sets $A_1$ and $A_M$.
 
-\subparagraph{Proof that $A$ is $(k, \delta)$-good for $C$}
-Let us take any cover of $A$ with $k+1$ segments and name it $\sol$.
+\subparagraph{Proof that $A$ is $(k, \delta)$-good for $C$.}
+Let us take any cover of $A$ with $k+1$ segments and call it $\sol$.
 
-For every segment $t_i$, if there exists a segment $x$ from $\sol$ 
-such that it is disjoint with $t_i$,
+For every segment $t_i$, if there exists a segment $x$ in $\sol$ 
+that is disjoint with $t_i$,
 then we have a cover of $A_i$ with at most $k$
 segments using $\sol - \{x\}$.
 Since $A_i$ is $(k, \delta)$-good for $t_i$ and $C_i$,
 then $(\sol - \{x\})^{+\delta}$ covers $C_i$.
+So $\sol^{+\delta}$ covers $C_i$ as well.
 
 If there exists a segment $t_i$ for which a segment $x$ as defined above
 does not exist, then all $k+1$ segments that cover
-$A_i$ intersect with $t_i$. (Note: There exists only one such segment $t_i$).
-From the inductive hypothesis ends of $s$ are
+$A_i$ intersect with $t_i$. (Note: There may exist only one such segment $t_i$).
+From the inductive hypothesis end points of $s$ are
 in $A_1$ and $A_M$ respectively, so $\sol$ must cover them.
 Hence there must exist
 segments starting in the ends of $s$ and ending somewhere in $t_i$.
-Let us name these two segments $y$ and $z$. It follows that:
+Let us call these two segments $y$ and $z$. It follows that:
 $|y| + |z| + |t_i| \ge |s|$.
 Since $|t_i| \le |v_i| = \frac{|s|}{M} \le \frac{|s|}{1+\frac{2}{\delta}} = \frac{|s|\delta}{\delta+2}$,
-therefore $max(|y|, |z|) > |s|(1-\frac{\delta}{\delta+2})/2 = \frac{|s|}{\delta+2}$.
+we have $\max(|y|, |z|) \ge |s|(1-\frac{\delta}{\delta+2})/2 = \frac{|s|}{\delta+2}$.
 
 TODO: Add a picture with such segments here
 

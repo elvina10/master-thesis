@@ -784,7 +784,7 @@ In this case we remove one of the segments $\xTrueSegment{i}$
 or $\xFalseSegment{i}$ (depending on the value of $\phi(x_i)$)
 from $\sol'$ and replace it
 with a segment that covers the point $v_{j,1}$
-for a CLAUSE-gadget for a clause $c_j$ that uses $x_i$ with value $\not\phi(x_i)$
+for a CLAUSE-gadget for a clause $c_j$ that uses $x_i$ with value $\neg\phi(x_i)$
 
 Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 \begin{align}
@@ -815,7 +815,7 @@ and $\sol'$ as:
 	\end{split}
 \end{align}
 
-therefore $|\mathsf{pointsVar}_i \cap \sol'| \ge 3$.
+therefore $|\mathsf{pointsVar}_i \cap \sol'| \ge 3$ for every $i$.
 
 TODO: Maybe remove section below, because we do this calculation at the end anyway
 To cover $\bigcup_{1 \le i \le n} \mathsf{pointsVar}^i$

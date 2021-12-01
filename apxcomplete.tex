@@ -696,7 +696,7 @@ in the $i$-th gadget choosing the set of segments corresponding to the
 value of $\phi(x_i)$.
 
 For every clause that is satisfied, say $c_i$, 
-let us name the variable that is \true in it $x_i$
+let us name the variable that is $\true$ in it $x_i$
 and point corresponding to $x_i$ in $\pointsClause_i$ as $a$.
 Points in $\pointsClause_i$ 
 are covered with set $\segmentsClauseSolTrue{a}_i$ described in
@@ -706,7 +706,9 @@ points in $\pointsClause_j$ are covered
 with set $\segmentsClauseSolFalse_i$ described in
 Lemma~\ref{cover_clauses_solution_false}.
 
-TODO: Some text about what we define here
+Formally we define 
+sets responsible for choosing variable and satisfing the variable,
+$R_i$ and $C_i$ respectively, as following:
 
 \begin{align}
 	\begin{split}
@@ -718,7 +720,7 @@ TODO: Some text about what we define here
 		\segmentsClauseSolTrue{a}_i & \text{if}\ c_i \text{ satisfied} \\
 		\segmentsClauseSolFalse_i & \text{if}\ c_i \text{ not satisfied}
 		\end{cases} \\
-	& \sol = \bigcup\limits_{i=1}^{n} \{R_i \cup C_i : 1 \le i \le n\}
+	& \sol = \bigcup\limits_{i=1}^{n} \{R_i \cup C_i : 1 \le i \le n\}.
     \end{split}
 \end{align}
 
@@ -741,8 +743,6 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 
 
 \begin{proof}\leavevmode
-
-
 Let the clauses in $S$ be $c_1$,~$c_2$~$\ldots$~$c_n$
 and variables be $x_1$,~$x_2$~$\ldots$~$x_n$.
 Given a solution $\sol$
@@ -769,7 +769,7 @@ then it has used at least 4 segments (Lemma~\ref{choose_variables_both}).
 	\end{split}
 \end{align}
 
-We also create modified solution $\sol'$ such that $|\sol'|=|\sol|$
+We will now create modified solution $\sol'$ such that $|\sol'|=|\sol|$
 and $\sol'$ is still a correct solution for $\setCoverInstance$.
 
 If $\sol$ contains at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$,
@@ -801,27 +801,24 @@ Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 
 and $\sol'$ as:
 
+TODO: This is not a correct mathematical notation, but I am not sure
+how to define it clearly
+
 \begin{align}
 \sol' = \sol 
 	\begin{split}
 	& \begin{cases}
 	- \{ \xFalseSegment{i} \} \cup \{ \orTrueSegment{j}{1} \}
-	& \phi(x_i) = \true \land \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \land \\
+	& \phi(x_i) = \true \land \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \land \\
 	& \text{clause } c_j \text{ is satisfied by } \phi(x_i) = \false \\
 	- \{ \xTrueSegment{i} \} \cup \{ \orTrueSegment{j}{1} \}
-	& \phi(x_i) = \false \land \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \land \\
+	& \phi(x_i) = \false \land \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \land \\
 	& \text{clause } c_j \text{ is satisfied by } \phi(x_i) = \true, \\
 	\end{cases}
 	\end{split}
 \end{align}
 
 therefore $|\mathsf{pointsVar}_i \cap \sol'| \ge 3$ for every $i$.
-
-TODO: Maybe remove section below, because we do this calculation at the end anyway
-To cover $\bigcup_{1 \le i \le n} \mathsf{pointsVar}^i$
-we have used at least $3n + a$ segments,
-where $a$ is the number of $i$ such that $\sol$ consists of
-values $\xTrueSegment{i}$ and $\xFalseSegment{i}$.
 
 \subparagraph{Clauses}
 
@@ -864,7 +861,7 @@ then the value $\phi(x_j)$ satisfies $c_i$.
 If $\sol'$ contains neither $\xTrueSegment{j}$ nor $\xFalseSegment{j}$,
 then it is impossible that $t$ is covered by segments in $\sol \cap \segmentsVar_j$.
 
-$\sol'$ was chosen in a way, that it is impossible that it contains
+$\sol'$ was chosen in such a way, that it is impossible that it contains
 both $\xTrueSegment{i}$ and $\xFalseSegment{i}$ for some variable $i$.
 
 This means that $\phi$ satisfies all but at most $a$ clauses in $S$.

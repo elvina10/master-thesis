@@ -307,11 +307,14 @@ can not be covered with fewer than 2 segments.
 
 \subsubsection{OR-gadget}
 
+TODO: expand the figure to include x, y and maybe name (t,v) as result
+
 OR-gadget has 3 important segments
--- $x, y, result$. $x$ and $y$ don't count to the weight of solution
-of OR-gadget (they are part of different gadgets).
-It has a minimal solution of weight $w$
-and $result$ can be chosen only if $x$ or $y$ are also chosen
+-- $x, y, result$, where $x$ and $y$ are inputs and part of different gadgets.
+
+Gadget has a minimal solution of weight $w$
+and $result$ can be part of minimal solution
+only if $x$ or $y$ are also chosen
 for the solution.
 If none of them are chosen, then solution
 choosing $result$ segment has weight at least $w+1$.
@@ -320,36 +323,44 @@ assuming that $R$ uses only $w$ from this OR-gadget:
 
 $$ (x \in R) \lor (y \in R) \iff result \in R  $$
 
+Only 3 points that belong to this segment ($l_{i,j}, p_{i,j}, v_{i,j}$)
+can be covered by seg
+
 \paragraph{Points.}
+
+\newcommand{\chooseOr}[3]{\mathsf{chooseOr}^{#1}_{#2,#3}}
+\newcommand{\orMoveVariable}[2]{\mathsf{orMoveVariable}_{#1,#2}}
+\newcommand{\pointsOr}[2]{\mathsf{pointsOr}_{#1,#2}}
+\newcommand{\segmentsOr}[2]{\mathsf{segmentsOr}_{#1,#2}}
 
 \begin{figure}[h]
 \centering
 \def\svgwidth{0.5\columnwidth}
 \input{apx_or_gadget.pdf_tex}
 \caption{
-\textbf{OR-gadget.} Figure presenting $\mathsf{orGadget}_{i, j}$:
-segments from $or^{false}_{i, j}$ are red,
-segments from $or^{true}_{i, j}$ are blue,
-segments from $\mathsf{orMoveVariable}_{i, j}$ are yellow and green.
+	\textbf{OR-gadget.} Figure presenting OR-gadget:
+	segments from $\chooseOr{false}{i}{j}$ are red,
+	segments from $\chooseOr{true}{i}{j}$ are blue,
+	segments from $\orMoveVariable{i}{j}$ are yellow and green.
 }
 \label{fig:apx_or_gadget}
 \end{figure}
 
-	\begin{center}
-\begin{tabular}{ l l l l}
+\begin{center}
+	\begin{tabular}{ l l l l}
 
-	$l_0 = (0, 0)$ &
-	$m_0 = (0, 1)$ &
-	$n_0 = (0, 2)$ &
-	$o_0 = (0, 3)$ \\
-	$p_0 = (0, 4)$ &
-	$q_0 = (1, 1)$ &
-	$r_0 = (1, 3)$ &
-	$s_0 = (2, 1)$ \\
-	$t_0 = (2, 2)$ &
-	$u_0 = (2, 3)$ &
-	$v_0 = (3, 2)$ &
-\end{tabular}
+		$l_0 = (0, 0)$ &
+		$m_0 = (0, 1)$ &
+		$n_0 = (0, 2)$ &
+		$o_0 = (0, 3)$ \\
+		$p_0 = (0, 4)$ &
+		$q_0 = (1, 1)$ &
+		$r_0 = (1, 3)$ &
+		$s_0 = (2, 1)$ \\
+		$t_0 = (2, 2)$ &
+		$u_0 = (2, 3)$ &
+		$v_0 = (3, 2)$ &
+	\end{tabular}
 \end{center}
 
 
@@ -361,7 +372,7 @@ segments from $\mathsf{orMoveVariable}_{i, j}$ are yellow and green.
 
 Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
  
-  $$\mathsf{pointsOrGadget}_{i, j} = 
+  $$\pointsOr{i}{j} = 
  \{l_{i, j}, m_{i, j}, n_{i, j}, o_{i, j},
  p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
  $$
@@ -371,57 +382,60 @@ Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
 We define names subsets of segments, to refer to them in lemmas.
  
  
-$$or^{false}_{i, j} =
+$$\chooseOr{false}{i}{j} =
 \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
-$$or^{true}_{i, j} =
+$$\chooseOr{true}{i}{j} =
 \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),
 (t_{i, j}, v_{i, j}) \}$$
 
-$$\mathsf{orMoveVariable}_{i, j} =
+$$\orMoveVariable{i}{j} =
 \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
 
 Segments in OR-gadget:
 
-$$\mathsf{segmentsOrGadget}_{i, j} = 
-  or^{false}_{i, j} \cup or^{true}_{i, j} \cup \mathsf{orMoveVariable}_{i, j}
-  $$
+$$\segmentsOr{i}{j} = 
+  \chooseOr{false}{i}{j} \cup \chooseOr{true}{i}{j} \cup \orMoveVariable{i}{j}
+$$
 
 
 \begin{lemma}
 \label{cover_or_true}
 For any $1 \le i \le n, j \in \{0, 1\}$ and 
  $x \in \{l_{i, j}, p_{i, j}\}$ points in
-$\mathsf{pointsOrGadget}_{i, j} - \{ x\} \cup \{v_{i, j}\}$
+$\pointsOr_{i, j} - \{ x\} \cup \{v_{i, j}\}$
 can be covered
-with 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
+with 4 segments from $\segmentsOr{i}{j}$.
 \end{lemma}
 
 \begin{proof}
 We can do that using one segment from
-$\mathsf{orMoveVariable}_{i, j}$
+$\orMoveVariable{i}{j}$
 (chosen depending on the value of $x$)
-and all segments from $or^{true}_{i, j}$.
+and all segments from $\chooseOr{true}{i}{j}$.
 \end{proof}
 
 \begin{lemma}
 \label{cover_or_false}
 For any $1 \le i \le n, j \in \{0, 1\}$, points in
-$\mathsf{pointsOrGadget}_{i, j}$ can be covered
-with 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
+$\pointsOr{i}{j}$ can be covered
+with 4 segments from $\segmentsOr{i}{j}$.
 \end{lemma}
 
 \begin{proof}
-We can do that using  $\mathsf{orMoveVariable}_{i, j}$
-and $or^{false}_{i, j}$.
+We can do that using  $\orMoveVariable{i}{j}$
+and $\chooseOr{false}{i}{j}$.
 \end{proof}
+
+TODO: I don't think we need these, we can just show independent set
+on CLAUSE-gadget and it's less confusing
 
 \begin{lemma}
 \label{cover_no_less_true}
 For any $1 \le i \le n, j \in \{0, 1\}$ and 
  $x \in \{l_{i, j}, p_{i, j}\}$ points in
-$\mathsf{pointsOrGadget}_{i, j} - \{ x\} \cup \{v_{i, j}\}$
+$\pointsOr{i}{j} - \{ x\} \cup \{v_{i, j}\}$
 can not be covered with
-with less than 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
+with less than 4 segments from $\segmentsOr{i}{j}$.
 \end{lemma}
 
 \begin{proof}
@@ -432,8 +446,8 @@ TODO
 \begin{lemma}
 \label{cover_no_less_false}
 For any $1 \le i \le n, j \in \{0, 1\}$, points in
-$\mathsf{pointsOrGadget}_{i, j}$ can not be covered
-with less than 4 segments from $\mathsf{segmentsOrGadget}_{i,j}$.
+$\pointsOr{i}{j}$ can not be covered
+with less than 4 segments from $\segmentsOr{i}{j}$.
 \end{lemma}
 
 \begin{proof}
@@ -505,8 +519,8 @@ in a clause.
  $$
  
  $$\pointsClause_i = 
- \mathsf{moveVariable}_i \cup \mathsf{pointsOrGadget}_{i, 0}
- \cup \mathsf{pointsOrGadget}_{i, 1} \cup \{v_{i, 1} \} 
+ \mathsf{moveVariable}_i \cup \pointsOr{i}{0}
+ \cup \pointsOr{i}{1} \cup \{v_{i, 1} \} 
  $$
 
 \paragraph{Segments.}
@@ -519,7 +533,7 @@ in a clause.
 (y_{i, 1}, p_{i, 0}),
 (z_{i, 1}, p_{i, 1}),
 \} \cup \\
-& & \cup \ \mathsf{segmentsOrGadget}_{i, 0} \cup \mathsf{segmentsOrGadget}_{i, 1}
+& & \cup \ \segmentsOr{i}{0} \cup \segmentsOr{i}{1}
 \end{eqnarray*}
 
 \newcommand{\segmentsClauseSolTrue}[1]{\mathsf{solClause}^{true,#1}}
@@ -537,7 +551,7 @@ that covers points in $\pointsClause_i - \{a\}$.
 For $a = x_{i, 0}$ (analogous proof for $y_{i, 0}$):
 First we use Lemma~\ref{cover_or_true} twice with excluded $x = l_{i, 0}$ and
 $x = l_{i, 1} = v_{i, 0}$,
-resulting with 8 segments $or^{true}_{i, 0} \cup or^{true}_{i, 1}$
+resulting with 8 segments $\chooseOr{true}{i}{0} \cup \chooseOr{true}{i}{1}$
 which cover all required points apart from
 $x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 0}, z_{i, 1}, l_{i, 0}$.
 We cover those using additional 3 segments:
@@ -547,7 +561,7 @@ $\{ (x_{i, 1}, l_{i, 0}), (y_{i, 0}, y_{i, 1}),
 For $a = z_{0, i}$:
 Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with
 $x = p_{i, 1}$,
-resulting with 8 segments $or^{false}_{i, 0} \cup or^{true}_{i, 1}$
+resulting with 8 segments $\chooseOr{false}{i}{0} \cup \chooseOr{true}{i}{1}$
 which cover all required points apart from
 $x_{i, 0}, x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 1}, p_{i, 1}$.
 We cover those using additional 3 segments:
@@ -565,7 +579,7 @@ that covers points in $\pointsClause_i$.
 
 \begin{proof}
 Using Lemma \ref{cover_or_false} twice we can
-cover $\mathsf{orGadget}_{i,0}$ and  $\mathsf{orGadget}_{i,1}$
+cover $\pointsOr{i}{0}$ and  $\pointsOr{i}{1}$
 with 8 segments.
 
 To cover the remaining points we additionally use:
@@ -604,8 +618,8 @@ $$X = \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}$$
 
 Set $X$ is an indendent set, so it must be covered with 3 segments.
 
-$$Y = \mathsf{orGadget}_{i, 0} - \{l_{i, 0}, p_{i, 0}\}$$
-$$Z = \mathsf{orGadget}_{i, 1} - \{l_{i, 1}, p_{i, 1}\}$$
+$$Y = \pointsOr{i}{0} - \{l_{i, 0}, p_{i, 0}\}$$
+$$Z = \pointsOr{i}{1} - \{l_{i, 1}, p_{i, 1}\}$$
 
 
 For both $Y$ and $Z$ we can check all of the subsets of 3 segments

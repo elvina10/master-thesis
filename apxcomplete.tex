@@ -377,6 +377,8 @@ Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
  p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
  $$
  
+Note that $\pointsOr{i}{j}$ does not include point $v_{i,j}$
+ 
 \paragraph{Segments.}
 
 We define names subsets of segments, to refer to them in lemmas.
@@ -401,7 +403,7 @@ $$
 \begin{lemma}
 \label{cover_or_true}
 For any $1 \le i \le n, j \in \{0, 1\}$ and 
- $x \in \{l_{i, j}, p_{i, j}\}$ points in
+ $x \in \{l_{i, j}, p_{i, j}\}$, points in
 $\pointsOr_{i, j} - \{ x\} \cup \{v_{i, j}\}$
 can be covered
 with 4 segments from $\segmentsOr{i}{j}$.
@@ -409,8 +411,7 @@ with 4 segments from $\segmentsOr{i}{j}$.
 
 \begin{proof}
 We can do that using one segment from
-$\orMoveVariable{i}{j}$
-(chosen depending on the value of $x$)
+$\orMoveVariable{i}{j}$, the one that does not cover $x$,
 and all segments from $\chooseOr{true}{i}{j}$.
 \end{proof}
 
@@ -422,7 +423,7 @@ with 4 segments from $\segmentsOr{i}{j}$.
 \end{lemma}
 
 \begin{proof}
-We can do that using  $\orMoveVariable{i}{j}$
+We can do that using segments from $\orMoveVariable{i}{j}$
 and $\chooseOr{false}{i}{j}$.
 \end{proof}
 
@@ -458,22 +459,34 @@ TODO
 \subsubsection{CLAUSE-gadget}
 
 
-CLAUSE-gadget is responsible for calculating if choice of the
-variable values meets the clause in formula.
-It has minimal solution of weight $w$ if at least one variable
-in the clause has a correct value.
+CLAUSE-gadget is responsible for calculating if
+variables values assigned in variable gadgets
+satisfies the respective clause in CNF.
+It has minimal solution of weight $w$
+the clause is satisfied, ie. at least one
+of the respective variables is assigned a correct value.
 Otherwise it has minimal solution $w+1$.
 This way by the minimal solution for the whole problem, we can tell
-how many clauses were satisfiable.
+how many clauses were possible to satisfy in the optimum solution of CNF.
 
 The CLAUSE-gadgets consist of two OR-gadgets.
-We don't want the CLAUSE-gadgets to be crammed 
+We do not want the CLAUSE-gadgets to be crammed 
 somewhere between
-the very long variable segments. That's why we have a simple
-gadget to \textit{pass} the value of the segment, ie. segments
+the very long variable segments. That is why we have a simple
+gadget to \textit{transfer} whether the segment
+is in a solution, ie. segments
 $(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$.
-Two segments and one of them is chosen if $x$ was chosen
-in the solution and the other one if $x$ wasn't.
+These consist of two segments
+that share point $x_{i, 1}$
+and these are the only segments that can cover $x_{i,1}$.
+If $x_{i,0}$ is already covered by some other gadget,
+we can cover $x_{i,1}$ by the other segment covering another point
+from the gadget, say $a$.
+If $x_{i,0}$ is not covered, then the only way to cover $x_{i,0}$
+is to use segment $(x_{i, 0}, x_{i, 1})$.
+This emulates the situation as if $a$ was placed on the segment that
+$x_{i,0}$ lays on, but uses one extra segment compared to
+as $a = x_{i,0}$ and $x_{i, 1}$ did not existed.
 
 \paragraph{Points.}
 
@@ -484,7 +497,7 @@ in the solution and the other one if $x$ wasn't.
 \def\svgwidth{0.8\columnwidth}
 \input{apx_clause.pdf_tex}
 \caption{\textbf{CLAUSE-gadget.}
-We denote set of these points as $\pointsClause_i$.
+This figure presents CLAUSE-gadget.
 Every green rectangle is an OR-gadget.
 $y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
 depend on the values of variables in the $i$-th clause.
@@ -492,11 +505,13 @@ depend on the values of variables in the $i$-th clause.
 \label{fig:apx_clause}
 \end{figure}
 
+TODO: maybe add segments choosing value of x, y, z to the figure with less opacity
+
 TODO: Rephrase it
 
 Assuming clause $C_i = x_i \lor y_i \lor z_i$,
-function $idx(w)$ is returning index of the variable $w$,
-function $neg(w)$ is returning whether variable $w$ is negated
+function $idx(w)$ returns index of the variable $w$,
+function $neg(w)$ returns whether variable $w$ is negated
 in a clause.
 
 \begin{center}

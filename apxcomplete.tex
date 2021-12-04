@@ -215,17 +215,23 @@ These two choices correspond to the two Boolean values of the variable.
 
 Define points $a,b,c,d,e,f,g,h$ as follows, where $L = 12n$:
 
+
+\newcommand{\pointsVarNoArg}{\mathsf{pointsVariable} }
+\newcommand{\pointsVar}[1]{\mathsf{pointsVariable}_{#1} }
+\newcommand{\chooseVar}[2]{\mathsf{chooseVariable}^{#1}_{#2} }
+\newcommand{\segmentsVar}[1]{\mathsf{segmentsVariable}_{#1} }
+
 \begin{figure}[h]
 \centering
 \def\svgwidth{0.5\columnwidth}
 \input{apx_choose_variable.pdf_tex}
 \caption{\textbf{VARIABLE-gadget.}
-We denote the set of points marked with black circles as $\mathsf{pointsVar}^i$,
+We denote the set of points marked with black circles as $\pointsVar{i}$,
 and they need to be covered (are part of the set $\points$).
 Note that some of the points are not marked as black dots
 and exists only to name segments for further reference.
-We denote the set of red segments as $X_{false}^i$
-and the set of blue segments as $X_{true}^i$.}
+We denote the set of red segments as $\chooseVar{false}{i}$
+and the set of blue segments as $\chooseVar{true}{i}$.}
 \label{fig:apx_choose_variable}
 \end{figure}
 
@@ -242,12 +248,9 @@ and the set of blue segments as $X_{true}^i$.}
 \end{tabular}
 \end{center}
 
-\newcommand{\pointsVar}{\mathsf{pointsVariable} }
-\newcommand{\chooseVar}{\mathsf{chooseVariable} }
-\newcommand{\segmentsVar}{\mathsf{segmentsVariable} }
 
-Let us define: $$\pointsVar =  \{a, b, c, d, e, f\}$$
-and $$\pointsVar_i = \pointsVar + (0, 4i)$$
+Let us define: $$\pointsVarNoArg =  \{a, b, c, d, e, f\}$$
+and $$\pointsVar{i} = \pointsVarNoArg + (0, 4i)$$
 
 We denote $a_i = a + (0,4i)$ etc.
 
@@ -259,45 +262,45 @@ We denote $a_i = a + (0,4i)$ etc.
 
 Let us define:
 
-$$\chooseVar^{true}_i =\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
-$$\chooseVar^{false}_i = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
+$$\chooseVar{true}{i} =\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
+$$\chooseVar{false}{i} = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
 
-$$\segmentsVar_i = \chooseVar^{true}_i \cup \chooseVar^{false}_i$$
+$$\segmentsVar{i} = \chooseVar{true}{i} \cup \chooseVar{false}{i}$$
 
 
 \begin{lemma}
 \label{choose_variables_solution}
-For any $1 \le i \le n$, points in $\pointsVar_i$
-can be covered using 3 segments from $\segmentsVar_i$.
+For any $1 \le i \le n$, points in $\pointsVar{i}$
+can be covered using 3 segments from $\segmentsVar{i}$.
 \end{lemma}
 
 \begin{proof}
-We can use either set $\chooseVar^{true}_i$ or $\chooseVar^{false}_i$.
+We can use either set $\chooseVar{true}{i}$ or $\chooseVar{false}{i}$.
 \end{proof}
 
 \begin{lemma}
 \label{choose_variables_no_less}
-For any $1 \le i \le n$, points in $\pointsVar_i$
-can not be covered with fewer than 3 segments from $\segmentsVar_i$.
+For any $1 \le i \le n$, points in $\pointsVar{i}$
+can not be covered with fewer than 3 segments from $\segmentsVar{i}$.
 \end{lemma}
 
 \begin{proof}
-No segment of $\segmentsVar_i$ covers more than one point from
-$\{d_i, f_i, c_i\}$, therefore $\pointsVar_i$ can
+No segment of $\segmentsVar{i}$ covers more than one point from
+$\{d_i, f_i, c_i\}$, therefore $\pointsVar{i}$ can
 not be covered with fewer than 3 segments.
 \end{proof}
 
 \begin{lemma}
 \label{choose_variables_both}
-For every set $A \subseteq \segmentsVar_i$ such that $A$ covers $\pointsVar_i$
+For every set $A \subseteq \segmentsVar{i}$ such that $A$ covers $\pointsVar{i}$
 and $\xTrueSegment{i}, \xFalseSegment{i} \in A$,
 it holds that $|A| \ge 4$.
 \end{lemma}
 \begin{proof}
-No segment from $\segmentsVar_i$ covers more than one point from
+No segment from $\segmentsVar{i}$ covers more than one point from
 $\{a_i, e_i\}$,
 therefore 
-$\pointsVar_i$ - $\{c_i, f_i, g_i, h_i\}$
+$\pointsVar{i}$ - $\{c_i, f_i, g_i, h_i\}$
 can not be covered with fewer than 2 segments.
 \end{proof}
 
@@ -646,8 +649,8 @@ TODO: Rename Choose X to VARIABLE-gadget and Clause C to CLAUSE-gadget.
 \end{figure}
 
 We define:
-$$\points := \bigcup_{1 \le i \le n} \pointsVar_i \cup \pointsClause_i $$
-$$\sets := \bigcup_{1 \le i \le n} \segmentsVar_i \cup \segmentsClause_i $$
+$$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause_i $$
+$$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i $$
 
 The subsequent sections define these sets.
 
@@ -713,8 +716,8 @@ $R_i$ and $C_i$ respectively, as following:
 \begin{align}
 	\begin{split}
 	& R_i = \begin{cases}
-		\chooseVar_i^{true} & \text{if}\ \phi(x_i) = \true \\
-		\chooseVar_i^{false} & \text{if}\ \phi(x_i) = \false \\
+		\chooseVar{true}{i} & \text{if}\ \phi(x_i) = \true \\
+		\chooseVar{false}{i} & \text{if}\ \phi(x_i) = \false \\
 		\end{cases} \\
 	& C_i = \begin{cases}
 		\segmentsClauseSolTrue{a}_i & \text{if}\ c_i \text{ satisfied} \\
@@ -754,7 +757,7 @@ that satisfies at least $15n-w$ clauses in $S$.
 
 \subparagraph{Variables}
 The solution $\sol$ needs to use at least 3 segments
-to cover $\pointsVar_i$
+to cover $\pointsVar{i}$
 for each VARIABLE-gadget (Lemma~\ref{choose_variables_no_less}).
 If $\sol$ contains both segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$,
 then it has used at least 4 segments (Lemma~\ref{choose_variables_both}).
@@ -763,8 +766,8 @@ then it has used at least 4 segments (Lemma~\ref{choose_variables_both}).
 \begin{align}
 	\begin{split}
 	& \begin{cases}
-	|\mathsf{pointsVar}_i \cap \sol| \ge 4 & \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \\
-	|\mathsf{pointsVar}_i \cap \sol| \ge 3 & \text{otherwise}
+	|\pointsVar{i} \cap \sol| \ge 4 & \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \\
+	|\pointsVar{i} \cap \sol| \ge 3 & \text{otherwise}
 	\end{cases}
 	\end{split}
 \end{align}
@@ -818,7 +821,7 @@ how to define it clearly
 	\end{split}
 \end{align}
 
-therefore $|\mathsf{pointsVar}_i \cap \sol'| \ge 3$ for every $i$.
+therefore $|\pointsVar{i} \cap \sol'| \ge 3$ for every $i$.
 
 \subparagraph{Clauses}
 
@@ -829,7 +832,7 @@ in CLAUSE-gadget (Lemma~\ref{cover_clauses_segments_no_less}).
 TODO: maybe put something with cases and names of sets as above
 
 Moreover, if all of the points $\{x_{i,0}, y_{i,0}, z_{i,0}\}$
-are not covered by the segments from $\sol'~\cap~\pointsVar_i$,
+are not covered by the segments from $\sol'~\cap~\pointsVar{i}$,
 then $\sol'$ needs to cover $\pointsClause_i$
 with at least 12 segments
 by Lemma~\ref{cover_clauses_segments_no_less}.
@@ -840,18 +843,18 @@ We covered CLAUSE-gadget with at least 11 or at least 12 segments:
 $$|\bigcup\limits_{i=1}^n \segmentsClause_i \cap \sol'| \ge 11n + a$$
 where $a$ is the number of clauses
 where none of the points $x_{i,0}, y_{i,0}, z_{i,0}$
-were covered by $\sol' \cap \segmentsVar_j$ for their respective
+were covered by $\sol' \cap \segmentsVar{j}$ for their respective
 varibale $x_j$.
 
 \subparagraph{Satisfied clauses with chosen variable assignment.}
 
 Consider a clause, say $c_i$. If none of
 the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause_i$ were covered by
-segments from $\sol'~\cap~\segmentsVar_j$,
+segments from $\sol'~\cap~\segmentsVar{j}$,
 this clause is not satisfied by assignment $\phi$.
 
 If one of these points is covered by 
-segments from VARIBALE-gadget (TODO better this or $\sol' \cap \segmentsVar_j$),
+segments from VARIBALE-gadget (TODO better this or $\sol' \cap \segmentsVar{j}$),
 then denote this point as $t$ and say it corresponds to variable $x_j$.
 Consider the cases of choosing value of $\phi(x_j)$
 in equation \eqref{eqn:variable_assignment}.
@@ -860,7 +863,7 @@ If $\sol'$ contains only one of the segments $\xTrueSegment{j}$ and $\xFalseSegm
 then the value $\phi(x_j)$ satisfies $c_i$.
 
 If $\sol'$ contains neither $\xTrueSegment{j}$ nor $\xFalseSegment{j}$,
-then it is impossible that $t$ is covered by segments in $\sol \cap \segmentsVar_j$.
+then it is impossible that $t$ is covered by segments in $\sol \cap \segmentsVar{j}$.
 
 $\sol'$ was chosen in such a way, that it is impossible that it contains
 both $\xTrueSegment{i}$ and $\xFalseSegment{i}$ for some variable $i$.

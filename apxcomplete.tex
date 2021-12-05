@@ -633,15 +633,18 @@ And we prove lower bounds for each of these sets.
 
 $$X = \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}$$
 
-Set $X$ is an indendent set, so it must be covered with 3 segments.
+No two points in $X$ are covered with one segment
+of $\segmentsClause_i$, so it must be covered with 3 different segments.
 
 $$Y = \pointsOr{i}{0} - \{l_{i, 0}, p_{i, 0}\}$$
 $$Z = \pointsOr{i}{1} - \{l_{i, 1}, p_{i, 1}\}$$
 
 
 For both $Y$ and $Z$ we can check all of the subsets of 3 segments
-with brutforce that none of them cover, so they have to be covered with
-4 segments.
+of $\segmentsClause_i$
+with brutforce that none of them cover the set of points,
+so both $Y$ and $Z$ have to be covered with 
+disjoined sets of 4 segments.
 
 TODO: Funny fact, neither Y nor Z doesn't have independent set of size 4.
 

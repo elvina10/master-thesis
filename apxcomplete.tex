@@ -312,8 +312,8 @@ TODO: expand the figure to include x, y and maybe name (t,v) as result
 OR-gadget has 3 important segments
 -- $x, y, result$, where $x$ and $y$ are inputs and part of different gadgets.
 
-Gadget has a minimal solution of weight $w$
-and $result$ can be part of minimal solution
+Gadget has a minimum solution of weight $w$
+and $result$ can be part of minimum solution
 only if $x$ or $y$ are also chosen
 for the solution.
 If none of them are chosen, then solution
@@ -461,32 +461,32 @@ TODO
 
 CLAUSE-gadget is responsible for calculating if
 variables values assigned in variable gadgets
-satisfies the respective clause in CNF.
-It has minimal solution of weight $w$
-the clause is satisfied, ie. at least one
+satisfy the respective clause in CNF.
+It has minimum solution of weight $w$
+if and only if the clause is satisfied, i.e. at least one
 of the respective variables is assigned a correct value.
-Otherwise it has minimal solution $w+1$.
-This way by the minimal solution for the whole problem, we can tell
-how many clauses were possible to satisfy in the optimum solution of CNF.
+Otherwise it has minimum solution of weight $w+1$.
+This way, by analyzing the minimum solution for the whole problem,
+we can tell how many clauses were possible to satisfy
+in the optimum solution of CNF.
 
 The CLAUSE-gadgets consist of two OR-gadgets.
-We do not want the CLAUSE-gadgets to be crammed 
-somewhere between
-the very long variable segments. That is why we have a simple
-gadget to \textit{transfer} whether the segment
-is in a solution, ie. segments
+It would be inconvenient to position the CLAUSE-gadents
+in between the very long variable segments.
+Instead, we use a simple auxiliary gadget to
+\textit{transfer} whether the segment
+is in a solution, i.e. segments
 $(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$.
-These consist of two segments
-that share point $x_{i, 1}$
-and these are the only segments that can cover $x_{i,1}$.
+Each gadget consists of two segments $(x_{i, 0}, x_{i, 1}), (x_{i, 1}, a)$.
+These are the only segments that can cover $x_{i,1}$.
 If $x_{i,0}$ is already covered by some other gadget,
 we can cover $x_{i,1}$ by the other segment covering another point
 from the gadget, say $a$.
 If $x_{i,0}$ is not covered, then the only way to cover $x_{i,0}$
 is to use segment $(x_{i, 0}, x_{i, 1})$.
-This emulates the situation as if $a$ was placed on the segment that
-$x_{i,0}$ lays on, but uses one extra segment compared to
-as $a = x_{i,0}$ and $x_{i, 1}$ did not existed.
+Intuitively, the two segments \textit{transfer} the state of $x_{i,0}$
+onto $a$, but there are less restrictions on where a can be placed,
+simplifying the construction.
 
 \paragraph{Points.}
 

@@ -500,7 +500,7 @@ as $a = x_{i,0}$ and $x_{i, 1}$ did not existed.
 This figure presents CLAUSE-gadget.
 Every green rectangle is an OR-gadget.
 $y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
-depend on the values of variables in the $i$-th clause.
+depend on the variables in the $i$-th clause.
 }
 \label{fig:apx_clause}
 \end{figure}
@@ -509,18 +509,18 @@ TODO: maybe add segments choosing value of x, y, z to the figure with less opaci
 
 TODO: Rephrase it
 
-Assuming clause $C_i = x_i \lor y_i \lor z_i$,
+Assuming clause $C_i = a \lor b \lor c$,
 function $idx(w)$ returns index of the variable $w$,
 function $neg(w)$ returns whether variable $w$ is negated
 in a clause.
 
 \begin{center}
 \begin{tabular}{ l l }
-	$x_{i, 0} = (10i+1, 4\cdot idx(x_i) + 2\cdot neg(x_i))$ &
+	$x_{i, 0} = (10i+1, 4\cdot idx(a) + 2\cdot neg(c))$ &
 	$x_{i, 1} = (10i+1, 4n)$ \\
-	$y_{i, 0} = (10i+2, 4\cdot idx(y_i) + 2\cdot neg(y_i))$ &
+	$y_{i, 0} = (10i+2, 4\cdot idx(b) + 2\cdot neg(b))$ &
 	$y_{i, 1} = (10i+2, 4n + 4)$ \\
-	$z_{i, 0} = (10i+3, 4\cdot idx(z_i) + 2\cdot neg(z_i))$ &
+	$z_{i, 0} = (10i+3, 4\cdot idx(c) + 2\cdot neg(c))$ &
 	$z_{i, 1} = (10i+3, 4n + 6)$
 \end{tabular}
 \end{center}
@@ -557,7 +557,7 @@ in a clause.
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-there is $\segmentsClauseSolTrue{a}_i \subset \segmentsClause_i$
+there is a $\segmentsClauseSolTrue{a}_i \subset \segmentsClause_i$
 with $|\segmentsClauseSolTrue{a}_i| = 11$
 that covers points in $\pointsClause_i - \{a\}$.
 \end{lemma}
@@ -606,23 +606,25 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 \label{cover_clauses_segments_no_less}
 For any $1 \le i \le n$:
 \begin{enumerate}[label={(\arabic*)}]
-	\item points in $\pointsClause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-	can not be covered using any subset of segments
-	from $\segmentsClause_i$ of size smaller than 11;
 	\item points in $\pointsClause_i$ can not be covered 
 	using any subset of segments
-	from $\segmentsClause_i$ of size smaller than 12.
+	from $\segmentsClause_i$ of size smaller than 12;
+	\item points in $\pointsClause_i - \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
+	can not be covered using any subset of segments
+	from $\segmentsClause_i$ of size smaller than 11.
 \end{enumerate}
 \end{lemma}
 
 
-\begin{proof}[Proof of no cover with fewer than 12 segments.]
-There is independent set of 12 points in $\pointsClause_i \supseteq
-\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
+\begin{proof}[Proof of (1).]
+No segment in $\segmentsClause_i$ covers more than 2 points from
+$\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
 u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$.
+
+Therefore we need to use at least 12 segments.
 \end{proof}
 
-\begin{proof}[Proof of no cover with fewer than 11 segments.]
+\begin{proof}[Proof of (2).]
 
 We can choose disjoint sets $X, Y, Z$ such that
 $X \cup Y \cup Z \subseteq \pointsClause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$

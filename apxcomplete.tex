@@ -122,8 +122,6 @@ subsequent sections, but meanwhile let us prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
 and Theorem \ref{hastadtheorem}.
 
-TODO: This below can't use current template
-
 \begin{proof}[Proof of Theorem \ref{segment_cover_apx_hard}]\leavevmode
 
 Consider any $0 < \epsilon < 1/(15 \cdot 8)$.
@@ -133,7 +131,7 @@ $(1+\epsilon)$-approximation algorithm
 for unweighted geometric set cover with axis-parallel segments in 2D
 with (1/2)-extensions.
 We construct an algorithm that solves the problem stated in 
-Theorem \ref{hastadtheorem}, thereby proving that P = NP.
+Theorem \ref{hastadtheorem}, thereby proving that P~=~NP.
 
 Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
 and construct an instance of geometric set cover $I$
@@ -202,14 +200,13 @@ The construction will be composed of 2 types of gadgets:
 \textbf{VARIABLE-gadgets} and \textbf{CLAUSE-gadgets}.
 CLAUSE-gadgets would be constructed using two \textbf{OR-gadgets}
 connected together.
-Every gadget consists of a point set and a segment set.
-
 
 \subsubsection{VARIABLE-gadget}
 
 VARIABLE-gadget is responsible for choosing the value of a variable
 in a CNF formula. It allows two minimum solutions of size 3 each.
-These two choices correspond to the two Boolean values of the variable.
+These two choices correspond to the two Boolean values of the variable
+corresponding to this gadget.
 
 \paragraph{Points.}
 
@@ -307,24 +304,25 @@ can not be covered with fewer than 2 segments.
 
 \subsubsection{OR-gadget}
 
-TODO: expand the figure to include x, y and maybe name (t,v) as result
+OR-segment connects input and output segments
+that are connected to other parts of
+constructions.
 
-OR-gadget has 3 important segments
--- $x, y, result$, where $x$ and $y$ are inputs and part of different gadgets.
+Output segment is part of OR-segment, but iunput is not.
 
-Gadget has a minimum solution of weight $w$
-and $result$ can be part of minimum solution
-only if $x$ or $y$ are also chosen
-for the solution.
+For every solution $\sol$ of the whole construction.
+Define $\sol'$ as intersection of $\sol$ and the gadget segments.
+Minimum solution of OR-gadget has size $w$, i.e. $\sol' \le w$.
+$output$ segments can be part of $\sol'$ only 
+if $input_x$ or $input_y$ are part of the chosen solution $\sol$.
 If none of them are chosen, then solution
-choosing $result$ segment has weight at least $w+1$.
-Therefore the following formula holds for a solution $R$
-assuming that $R$ uses only $w$ from this OR-gadget:
+containing $output$ segment has weight at least $w+1$.
+Therefore the following formula holds:
 
-$$ (x \in R) \lor (y \in R) \iff result \in R  $$
+$$output \in \sol' \land |\sol'| = w \Rightarrow (x \in R) \lor (y \in R) $$
 
-Only 3 points that belong to this segment ($l_{i,j}, p_{i,j}, v_{i,j}$)
-can be covered by seg
+Only 3 points that belong to this segment: $l_{i,j}, p_{i,j}, v_{i,j}$
+can be covered by segment not from the OR-gadget.
 
 \paragraph{Points.}
 
@@ -342,6 +340,9 @@ can be covered by seg
 	segments from $\chooseOr{false}{i}{j}$ are red,
 	segments from $\chooseOr{true}{i}{j}$ are blue,
 	segments from $\orMoveVariable{i}{j}$ are yellow and green.
+	Dark blue segment is an $output$ segment.
+	Grey segments $input_x$ and $input_y$ are input segments that
+	are not part of $\segmentsOr{i}{j}$.
 }
 \label{fig:apx_or_gadget}
 \end{figure}
@@ -427,34 +428,6 @@ We can do that using segments from $\orMoveVariable{i}{j}$
 and $\chooseOr{false}{i}{j}$.
 \end{proof}
 
-TODO: I don't think we need these, we can just show independent set
-on CLAUSE-gadget and it's less confusing
-
-\begin{lemma}
-\label{cover_no_less_true}
-For any $1 \le i \le n, j \in \{0, 1\}$ and 
- $x \in \{l_{i, j}, p_{i, j}\}$ points in
-$\pointsOr{i}{j} - \{ x\} \cup \{v_{i, j}\}$
-can not be covered with
-with less than 4 segments from $\segmentsOr{i}{j}$.
-\end{lemma}
-
-\begin{proof}
-TODO
-\end{proof}
-
-
-\begin{lemma}
-\label{cover_no_less_false}
-For any $1 \le i \le n, j \in \{0, 1\}$, points in
-$\pointsOr{i}{j}$ can not be covered
-with less than 4 segments from $\segmentsOr{i}{j}$.
-\end{lemma}
-
-\begin{proof}
-TODO
-\end{proof}
-
 
 \subsubsection{CLAUSE-gadget}
 
@@ -501,11 +474,11 @@ This figure presents CLAUSE-gadget.
 Every green rectangle is an OR-gadget.
 $y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
 depend on the variables in the $i$-th clause.
+Grey segments corresponds to the values of variables
+satistying the $i$-th clause.
 }
 \label{fig:apx_clause}
 \end{figure}
-
-TODO: maybe add segments choosing value of x, y, z to the figure with less opacity
 
 TODO: Rephrase it
 
@@ -663,9 +636,26 @@ $s$ and $s^{+1/2}$ cover the same points from $\points$.
 \begin{proof}
 We can just check every segment. Most of the segments $s$
 are collinear only with points that lay on $s$,
-so trivially $s^{+1/2}$ cannot cover more points than $s$ does.
+so trivially $s^{+\frac{1}{2}}$ cannot cover more points than $s$ does.
 
 TODO: list problematic segments here
+
+In the same gadget:
+$(n_{i,j}, p_{i,j})$ does not cover $m_{i,j}$ and symmetrically.
+$(t_{i,j}, v_{i,j})$ does not cover $n_{i,j}$.
+$(o_{i,0}, u_{i,0})$ does not cover $m_{i,1}$ and symmetrically.
+$(y_{i,1}, p_{i,0})$ does not cover $n_{i,j}$.
+
+
+
+From different gadgets:
+$(b_i, f_i)$ after $\frac{1}{2}$-extensions does not
+cover $b_{i+1}$ point.
+
+VARIABLE-gadget's $(a_i, c_i)$ after $\frac{1}{2}$-extensions does not
+cover any points $x_{i,0}, y_{i,0}$ or $z_{i,0}$ from CLAUSE-gadget.
+
+
 \end{proof}
 
 

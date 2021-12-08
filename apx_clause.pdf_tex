@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{317.48031496bp}%
+    \setlength{\unitlength}{351.11298586bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,27 +50,31 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.83054325)%
+  \begin{picture}(1,0.66701656)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{apx_clause.pdf}}%
-    \put(0.43854707,0.19861854){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16503663\unitlength}\raggedright or\end{minipage}}}%
-    \put(0.70892279,0.13049984){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}or\end{tabular}}}}%
+    \put(0.47284455,0.13826658){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14922798\unitlength}\raggedright or\end{minipage}}}%
+    \put(0.71731978,0.07667287){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}or\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{apx_clause.pdf}}%
-    \put(0.07719345,0.54677883){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.0622272\unitlength}\raggedright \end{minipage}}}%
-    \put(1.10996001,-2.66328976){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.48320729\unitlength}\raggedright \end{minipage}}}%
-    \put(0.03736439,0.52488062){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $x_{i,0}$\end{minipage}}}%
-    \put(0.04606361,0.27494062){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $x_{i,1}$\end{minipage}}}%
-    \put(0.13235755,0.7580087){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $y_{i,0}$\end{minipage}}}%
-    \put(0.22843741,0.62990224){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $z_{i,0}$\end{minipage}}}%
-    \put(0.1403642,0.13793777){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $y_{i,1}$\end{minipage}}}%
-    \put(0.25779513,0.08456018){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $z_{i,1}$\end{minipage}}}%
-    \put(0.34142018,0.28116795){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $l_{i,0}$\end{minipage}}}%
-    \put(0.3512061,0.13082089){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $p_{i,0}$\end{minipage}}}%
-    \put(0.54603468,0.23312795){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $t_{i,0}$\end{minipage}}}%
-    \put(0.6323286,0.23668661){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.50352952\unitlength}\raggedright $v_{i,0} = l_{i,1}$\end{minipage}}}%
-    \put(0.61097753,0.08100161){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $p_{i,1}$\end{minipage}}}%
-    \put(0.82004012,0.19131553){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $t_{i,1}$\end{minipage}}}%
-    \put(0.87074896,0.12815187){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21795885\unitlength}\raggedright $v_{i,1}$\end{minipage}}}%
+    \put(-0.04614135,0.45307703){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05626654\unitlength}\raggedright \end{minipage}}}%
+    \put(0.88769781,-2.44950313){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.43692148\unitlength}\raggedright \end{minipage}}}%
+    \put(0.11009066,0.43327642){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $x_{i,0}$\end{minipage}}}%
+    \put(0.11795659,0.20727786){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $x_{i,1}$\end{minipage}}}%
+    \put(0.19598454,0.64407345){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $y_{i,0}$\end{minipage}}}%
+    \put(0.28286103,0.52823815){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $z_{i,0}$\end{minipage}}}%
+    \put(0.20322425,0.08339834){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $y_{i,1}$\end{minipage}}}%
+    \put(0.30940661,0.03513372){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $z_{i,1}$\end{minipage}}}%
+    \put(0.3850216,0.21290868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $l_{i,0}$\end{minipage}}}%
+    \put(0.39387012,0.07696318){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $p_{i,0}$\end{minipage}}}%
+    \put(0.57003671,0.16947037){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $t_{i,0}$\end{minipage}}}%
+    \put(0.64806465,0.17268815){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.45529706\unitlength}\raggedright $v_{i,0} = l_{i,1}$\end{minipage}}}%
+    \put(0.62875877,0.03191602){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $p_{i,1}$\end{minipage}}}%
+    \put(0.81779552,0.13166312){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $t_{i,1}$\end{minipage}}}%
+    \put(0.86364702,0.07454982){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19708085\unitlength}\raggedright $v_{i,1}$\end{minipage}}}%
+    \put(0.01759184,0.66253383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22876466\unitlength}\raggedright \end{minipage}}}%
+    \put(0.00391684,0.67057795){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.42794709\unitlength}\raggedright $variable_b^{true}$\end{minipage}}}%
+    \put(-0.00236418,0.55237154){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.42794709\unitlength}\raggedright $variable_c^{false}$\end{minipage}}}%
+    \put(0.34594616,0.4486024){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.42794709\unitlength}\raggedright $variable_a^{true}$\end{minipage}}}%
   \end{picture}%
 \endgroup%

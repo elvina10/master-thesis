@@ -174,13 +174,14 @@ w(s) =
 \begin{lemma}
 	If there exists solution  of instance $(\points, \sets)$
 	of geometric set cover
-	with weight at most $2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1)+ k^2\delta)$,
-	then there exists a solution for grid tiling
+	with weight at most $\solWeight$,
+	then there exists a solution for grid tiling.
 \end{lemma}
 
 \paragraph{Proof.}
-This follows from Lemma $\ref{main_soundness_construction}$,
-because we just take which points are covered with $DIAG$.
+1. Solution has to have $2k^2$ gaps for points covered in DIAG
+
+2. Solution has to have at most one DIAG segment in every square
 
 \begin{claim}
 \label{guards}

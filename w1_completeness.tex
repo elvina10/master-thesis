@@ -79,7 +79,7 @@ Let's define sets $H$ and $V$ as:
 $$H = \{h_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\}$$
 $$V = \{v_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\}$$
 	
-Let us define $\epsilon = 0.1$.
+Let us define $\epsilon = \frac{1}{2k^2}$.
 For a point $p = \{x, y\}$ we define points:
 $$p^{L} = \{x - \epsilon, y\},$$
 $$p^{R} = \{x + \epsilon, y\},$$
@@ -134,8 +134,15 @@ TODO: explain that these segments are in fact diagonal
 $$\sets := HOR \cup VER \cup DIAG$$
 
 Weight function is equal to length of the segment for $HOR$ and $VER$
-and equal to $\delta$ for $DIAG$.
+and equal to $\delta = \frac{1}{4k^4}$ for $DIAG$.
 
+\begin{equation}
+w(s) =
+	\begin{cases*}
+	  |s| 			& if $s \in HOR \cup VER$ \\
+	  \delta        & if $s \in DIAG$
+	\end{cases*}
+\end{equation}
 
 \begin{lemma}
 	If there exists solution for grid tiling,

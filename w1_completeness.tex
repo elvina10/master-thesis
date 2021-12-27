@@ -36,17 +36,19 @@ $g,h : \{1, \ldots k\} \rightarrow \{1, \ldots n\}$,
 such that $(g(i), h(j)) \in f(i, j)$.
 \end{defi}
 
-Let's have an instance of grid tiling problem -- size of the
-gird $k$, number of elements available $n$
-and $k^2$ sets of available pairs in every tile
-$S_{i, j} \subseteq \{1,n\} \times \{1,n\}$.
+Let us have an instance of grid tiling problem -- size of the
+grid $k$, number of colors $n$
+and function of allowed tiles
+$f : \{1, \ldots k\} \times \{1, \ldots k\} \rightarrow \{1, \ldots n\} \times \{1, \ldots n\}$.
 
 \paragraph{Construction.}
 We construct a set $\sets$ of segments and a set $\points$
 of points.
 
-First let's choose any ordering of $n^2$ elements
+First let us choose any ordering of $n^2$ elements
 $\{1,n\} \times \{1,n\}$ and name this sequence $a_1 \ldots a_{n^2}$.
+Define $match_v(i, j)$ and $match_h(i, j)$
+as functions denoting whether two points share x or y coordinate.
 
 $$match_v(i, j) \iff
 a_i = \{x_i, y_i\} \land a_j = \{x_j, y_j\} \land x_i = x_j$$

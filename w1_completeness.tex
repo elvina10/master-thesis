@@ -2,7 +2,7 @@
 
 \begin{tw}
 \label{w1_hard}
-	\textbf{Weighted geometric set cover in 3 directions is W[1]-hard}.
+	\textbf{Weighted geometric set cover with segments in 3 directions is W[1]-hard}.
 	Consider the problem of covering a set $\points$ of points
 	by selecting $k$ axis-pararell or right-diagonal weighted segments
 	with weights
@@ -25,11 +25,15 @@
 Trivial from Theorem \ref{w1_hard}. 
 \end{proof}
 
-We will show reduction from grid tiling problem.
+In order to prove theorem \ref{w1_hard} we will show reduction from grid tiling problem.
 
 \begin{defi}
-\textbf{Grid tiling} problem is 
-
+In \textbf{grid tiling} we are given inetgers $n, k > 0$
+and function of allowed tiles on $k^2$ grid
+$f : \{1, \ldots k\} \times \{1, \ldots k\} \rightarrow \{1, \ldots n\} \times \{1, \ldots n\}$.
+Task is to find any functions that assign numbers to rows and columns
+$g,h : \{1, \ldots k\} \rightarrow \{1, \ldots n\}$,
+such that $(g(i), h(j)) \in f(i, j)$.
 \end{defi}
 
 Let's have an instance of grid tiling problem -- size of the

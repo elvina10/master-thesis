@@ -760,6 +760,21 @@ All of these sets are disjoint, so the size of the obtained solution is:
 
 $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.$$
 \end{proof}
+
+\begin{lemma}
+	\label{at_most_one_var_segment}
+	Suppose we have a solution $\sol$ of the instance $\setCoverInstance$
+	of geometric set cover.
+	Then there exists a solution $\sol'$, such that $|\sol'| \le |\sol|$, and for each VARIABLE-gadget $\sol'$ contains at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$.
+\end{lemma}
+\begin{proof}\leavevmode
+Assume that we have $\{\xTrueSegment{i}, \xFalseSegment{i}\} \subseteq \sol$ for some $i$. We will show how to modify $\sol$ into $\sol'$, such that the number of such $i$ decreases, while $\sol'$ is still a valid solution of $\setCoverInstance$, and $|\sol'| \le |\sol|$. Then, by repeating this procedure, we can eventually construct a solution satisfying the property from the Lemma.
+
+To construct $\sol'$, we remove either $\xTrueSegment{i}$ or $\xFalseSegment{i}$ from $\sol$, and then add one extra segment to make $\sol'$ valid. Recall that the $i$-th VARIABLE-gadget corresponds to variable $x_i$ in $S$. As every variable in $S$ is used in exactly 3 clauses, one of the ways of setting $x_i$ (to either $\true$ or $\false$) must satisfy at least 2 clauses. If that setting is $x_i = \true$, then we remove $\xFalseSegment{i}$, otherwise we remove $\xTrueSegment{i}$. Now, there exists at most one CLAUSE-gadget which needs adjustment to make $\sol'$ valid; we do that by adding $\orTrueSegment{j}{1}$ to $\sol'$.
+
+TODO: Can we really just remove one segment and add another one? I'd think we need to "restructure" $\sol$ around $\pointsVar{i}$ (saving one segment due to Lemma~\ref{choose_variables_no_less} and Lemma~\ref{choose_variables_both}) and then again restructure $\sol$ around the clause that we need to fix?
+\end{proof}
+
 \begin{lemma}
 	\label{construction_completness}
 	Suppose we have a solution $\sol$ of the instance $\setCoverInstance$
@@ -773,52 +788,21 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 Let the clauses in $S$ be $c_1$,~$c_2$~$\ldots$~$c_n$
 and the variables be $x_1$,~$x_2$~$\ldots$~$x_n$.
 Given a solution $\sol$
-of the instance $\setCoverInstance$ of geometric set cover,
-we construct a solution of $S$ by constructing an
+of the instance $\setCoverInstance$ of geometric set cover, we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$ such that for any $i$ it contains at most one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$; this may decrease the cost of $\sol$, but that does not matter in the subsequent construction. To simplify notation, in the remainder of this proof we use $\sol$ to refer to the modified solution.
+
+Given $\sol$, we construct a solution of $S$ by constructing an
 assigment of variables 
 $\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$
 that satisfies at least $15n-w$ clauses in $S$.
 
 \subparagraph{Variables}
-The solution $\sol$ needs to use at least 3 segments
-to cover $\pointsVar{i}$
-for each VARIABLE-gadget (Lemma~\ref{choose_variables_no_less}).
-If $\sol$ contains both segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$,
-then it has used at least 4 segments (Lemma~\ref{choose_variables_both}).
+Recall that due to Lemma~\ref{at_most_one_var_segment}, $\sol$ contains at most one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$.
 
-
-\begin{align}
-	\begin{split}
-	& \begin{cases}
-	|\pointsVar{i} \cap \sol| \ge 4 & \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \\
-	|\pointsVar{i} \cap \sol| \ge 3 & \text{otherwise}
-	\end{cases}
-	\end{split}
-\end{align}
-
-We will now create a modified solution $\sol'$ such that $|\sol'|=|\sol|$
-and $\sol'$ is still a correct solution for $\setCoverInstance$.
-
-If $\sol$ contains exactly one of the segments $\xTrueSegment{i}$ or $\xFalseSegment{i}$,
-choose the corresponding variable value to the constructed assignment $\phi$.
-If $\sol$ contains none of these segments, set the value to \false.
-If $\sol$ contains both segments,
-assign the value $\phi(x_i)$ that satisfies most clauses
-in which $x_i$ occurs.
-Every variable is used by exactly 3 clauses,
-so one assignment satisfies at least 2 of them.
-In this case we remove one of the segments $\xTrueSegment{i}$
-or $\xFalseSegment{i}$, depending on the value of $\phi(x_i)$,
-from $\sol'$ and replace it
-with a segment that covers the point $v_{j,1}$
-of a CLAUSE-gadget for a clause $c_j$ that uses $x_i$ with value $\neg\phi(x_i)$
-
-Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
+We define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 \begin{align}
 	\begin{split}
 	\label{eqn:variable_assignment}
 	& \begin{cases}
-	\phi(x_i) = majority(X_i) & \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \\
 	\phi(x_i) = \true & \text{if}\ \xTrueSegment{i} \in \sol \\
 	\phi(x_i) = \false & \text{if}\ \xFalseSegment{i} \in \sol \\
 	\phi(x_i) = \false & \text{otherwise}
@@ -826,71 +810,49 @@ Formally, we define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 	\end{split}
 \end{align}
 
-and $\sol'$ as:
-
-TODO: This is not a correct mathematical notation, but I am not sure
-how to define it clearly
-
-\begin{align}
-\sol' = \sol 
-	\begin{split}
-	& \begin{cases}
-	- \{ \xFalseSegment{i} \} \cup \{ \orTrueSegment{j}{1} \}
-	& \phi(x_i) = \true \land \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \land \\
-	& \text{clause } c_j \text{ is satisfied by } \phi(x_i) = \false \\
-	- \{ \xTrueSegment{i} \} \cup \{ \orTrueSegment{j}{1} \}
-	& \phi(x_i) = \false \land \text{if}\ \xTrueSegment{i} \in \sol \land \xFalseSegment{i} \in \sol \land \\
-	& \text{clause } c_j \text{ is satisfied by } \phi(x_i) = \true, \\
-	\end{cases}
-	\end{split}
-\end{align}
-
-therefore $|\pointsVar{i} \cap \sol'| \ge 3$ for every $i$.
+Moreover, from Lemma~\ref{choose_variables_no_less} we get $|\pointsVar{i} \cap \sol| \ge 3$ for every $i$.
 
 \subparagraph{Clauses}
 
 For a clause $C_i = x \lor y \lor z$,
-$\sol'$ needs to use at least 11 segments to cover $\pointsClause_i - \{x, y, z\}$
+$\sol$ needs to use at least 11 segments to cover $\pointsClause_i - \{x, y, z\}$
 in CLAUSE-gadget (Lemma~\ref{cover_clauses_segments_no_less}).
 
 TODO: maybe put something with cases and names of sets as above
 
 Moreover, if all of the points $\{x_{i,0}, y_{i,0}, z_{i,0}\}$
-are not covered by the segments from $\sol'~\cap~\pointsVar{i}$,
-then $\sol'$ needs to cover $\pointsClause_i$
+are not covered by the segments from $\sol~\cap~\pointsVar{i}$,
+then $\sol$ needs to cover $\pointsClause_i$
 with at least 12 segments
 by Lemma~\ref{cover_clauses_segments_no_less}.
 
 
 TODO: Maybe remove section below, because we do this calculation at the end anyway
 We covered CLAUSE-gadget with at least 11 or at least 12 segments:
-$$|\bigcup\limits_{i=1}^n \segmentsClause_i \cap \sol'| \ge 11n + a$$
+$$|\bigcup\limits_{i=1}^n \segmentsClause_i \cap \sol| \ge 11n + a$$
 where $a$ is the number of clauses
 where none of the points $x_{i,0}, y_{i,0}, z_{i,0}$
-were covered by $\sol' \cap \segmentsVar{j}$ for their respective
-varibale $x_j$.
+were covered by $\sol \cap \segmentsVar{j}$ for their respective
+variable $x_j$.
 
 \subparagraph{Satisfied clauses with chosen variable assignment.}
 
 Consider a clause, say $c_i$. If none of
 the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause_i$ were covered by
-segments from $\sol'~\cap~\segmentsVar{j}$,
+segments from $\sol~\cap~\segmentsVar{j}$,
 this clause is not satisfied by assignment $\phi$.
 
 If one of these points is covered by 
-segments from VARIBALE-gadget (TODO better this or $\sol' \cap \segmentsVar{j}$),
+segments from VARIBALE-gadget (TODO better this or $\sol \cap \segmentsVar{j}$),
 then denote this point as $t$ and say it corresponds to variable $x_j$.
 Consider the cases of choosing value of $\phi(x_j)$
 in equation \eqref{eqn:variable_assignment}.
 
-If $\sol'$ contains only one of the segments $\xTrueSegment{j}$ and $\xFalseSegment{j}$,
+If $\sol$ contains exactly one of the segments $\xTrueSegment{j}$ and $\xFalseSegment{j}$,
 then the value $\phi(x_j)$ satisfies $c_i$.
 
-If $\sol'$ contains neither $\xTrueSegment{j}$ nor $\xFalseSegment{j}$,
+If $\sol$ contains neither $\xTrueSegment{j}$ nor $\xFalseSegment{j}$,
 then it is impossible that $t$ is covered by segments in $\sol \cap \segmentsVar{j}$.
-
-$\sol'$ was chosen in such a way, that it is impossible that it contains
-both $\xTrueSegment{i}$ and $\xFalseSegment{i}$ for some variable $i$.
 
 This means that $\phi$ satisfies all but at most $a$ clauses in $S$.
 

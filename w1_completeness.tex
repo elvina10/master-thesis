@@ -10,7 +10,7 @@
 	with minimal weight.
 	Assuming ETH, there is no algorithm for this
 	problem with running time
-	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt(k))}$
+	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
 	for any computable function $f$.
 \end{tw}
 
@@ -18,7 +18,7 @@
 	\textbf{Weighted geometric set cover is W[1]-hard}.
 	Assuming ETH, there is no algorithm for weighted geometric set cover
 	with running time
-	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt(k))}$
+	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
 	for any computable function $f$.
 \end{corollary}
 
@@ -29,12 +29,10 @@ Trivial from Theorem \ref{w1_hard}.
 In order to prove theorem \ref{w1_hard} we will show reduction from grid tiling problem.
 
 \begin{defi}
-In \textbf{grid tiling} we are given inetgers $n, k > 0$
-and function of allowed tiles on $k^2$ grid
-$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n\} \times \{1 \ldots n\}$.
-Task is to find any functions that assign numbers to rows and columns
-$g,h : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$,
-such that $(g(i), h(j)) \in f(i, j)$ or conclude that such function
+In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
+and a function $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \mathcal{P}(\{1 \ldots n\} \times \{1 \ldots n\})$ specifying the set of allowed tiles for each cell of a $k \times k$ grid.
+The task is to find functions $g,h : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$ that assign numbers from $\{1 \ldots n\}$ to respectively rows and columns of the grid,
+so that $(g(i), h(j)) \in f(i, j)$ for all valid $i$ and $j$, or conclude that such assignment
 does not exist.
 \end{defi}
 
@@ -42,7 +40,7 @@ does not exist.
 \begin{tw}
 \label{grid_tiling_w1_hard}
 Assuming ETH, there is no algorithm for grid tiling problem
-$f(k)\cdot n^{o(\sqrt(k))}$
+$f(k)\cdot n^{o(\sqrt{k})}$
 for any computable function $f$.
 \end{tw}
 
@@ -105,13 +103,13 @@ $$\hor{i}{j}{t_1}{t_2} = (h^R_{i,j,t_1}, h^L_{i+1, j, t_2})$$
 $$\ver{i}{j}{t_1}{t_2} = (v^D_{i,j,t_1}, v^U_{i, j+1, t_2})$$
 
 $$\horbeg{i}{t} = (h^L_{1, i, 1}, h^L_{1, i, t})$$
-$$\horend{i}{t} = (h^R_{n, i, t}, h^R_{n, i, n^2})$$
+$$\horend{i}{t} = (h^R_{k, i, t}, h^R_{k, i, n^2})$$
 
 $$\verbeg{i}{t} = (v^U_{i, 1, 1}, v^U_{i, 1, t})$$
-$$\verend{i}{t} = (v^D_{i, n, t}, v^D_{i, n, n^2})$$
+$$\verend{i}{t} = (v^D_{i, k, t}, v^D_{i, k, n^2})$$
 
 \begin{eqnarray*}
-HOR &= &\{\hor{i}{j}{t_1}{t_2} : 1 \le i \le k, 1 \le j < k,
+HOR &= &\{\hor{i}{j}{t_1}{t_2} : 1 \le i < k, 1 \le j \le k,
 1 \le t_1, t_2 \le n^2, match_h(t_1, t_2)\} \\
 &\cup &\{\horbeg{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}
 \\
@@ -127,7 +125,7 @@ VER &= &\{\ver{i}{j}{t_1}{t_2} : 1 \le i \le k, 1 \le j < k,
 \end{eqnarray*}
 
 $$DIAG := \{ (h_{i, j, t}, v_{i, j, t}) :
-	1 \le i, j \le k, 1 \le t \le n^2, a_t \in S_{i, j}\}$$
+	1 \le i, j \le k, 1 \le t \le n^2, a_t \in f(i, j)\}$$
 
 TODO: explain that these segments are in fact diagonal
 

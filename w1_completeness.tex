@@ -33,7 +33,8 @@ and function of allowed tiles on $k^2$ grid
 $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n\} \times \{1 \ldots n\}$.
 Task is to find any functions that assign numbers to rows and columns
 $g,h : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$,
-such that $(g(i), h(j)) \in f(i, j)$.
+such that $(g(i), h(j)) \in f(i, j)$ or conclude that such function
+does not exist.
 \end{defi}
 
 
@@ -129,9 +130,9 @@ $$\sets := HOR \cup VER \cup DIAG$$
 
 \begin{lemma}
 	If there exists solution for grid tiling,
-	then there exists solution for our construction
-	using $2(k+1)k + k^2$ segments
-	with weight exactly $2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1))$.
+	then there exists solution of instance $(\points, \sets)$
+	of geometric set cover
+	with weight $2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1) + k^2\delta)$.
 \end{lemma}
 
 \begin{claim}
@@ -151,9 +152,9 @@ $$\sets := HOR \cup VER \cup DIAG$$
 TODO: jakiś prosty z definicji
 
 \begin{lemma}
-	If there exists solution for our construction
-	using $2(k+1)k + k^2$ segments
-	with weight exactly $2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1))$,
+	If there exists solution  of instance $(\points, \sets)$
+	of geometric set cover
+	with weight at most $2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1)+ k^2\delta)$,
 	then there exists a solution for grid tiling
 \end{lemma}
 
@@ -193,32 +194,6 @@ Point $v^L_{i, j, t_2}$ had to be covered with $VER$
 from Claims $\ref{guards}$ and $\ref{hor_ver_sound}$.
 And every segment in $VER$ covering $v^L_{i, j, t_2}$,
 covers also $v^L_{i, j, t_1}$.
-
-\begin{lemma}
-	\label{main_soundness_construction}
-	If there exists solution for our construction
-	with weight at most (exactly)
-	$2k \cdot (k(n^2+1) - 2 - 2\epsilon(k-1))$,
-	then for every $i, j$
-	there must be exactly one $t$ such that $h_{i, j, t}$
-	($v_{i, j, t}$) 
-	is covered with $DIAG$
-	and moreover if $h_{i, j, t_1}$ and $h_{i, j+1, t_2}$
-	are uncovered, then $math_h(t_1, t_2)$.
-	Analogically for $v$.
-\end{lemma}
-\paragraph{Proof.}
-Only $k^2$ points can be covered only in $DIAG$, the rest
-has to be covered with $VER \cup HOR$.
-Therefore every result must be at least $ALL\_LINES$ - $2k^2\epsilon$,
-because only $2k^2$ spaces of length $\epsilon$
-can be uncovered in this axis.
-
-Of course if $h_{i, j, t_1}$ and $h_{i, j+1, t_2}$
-are uncovered, then there must exist
-a segment in $HOR$ between $h^R_{i, j, t_1}$ and $h^L_{i, j+1, t_2}$,
-so $math_h(t_1, t_2)$ must be true.
-
 
 
 \section{What is missing}

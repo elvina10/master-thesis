@@ -5,8 +5,9 @@
 	\textbf{Weighted geometric set cover with segments in 3 directions is W[1]-hard}.
 	Consider the problem of covering a set $\points$ of points
 	by selecting $k$ axis-parallel or right-diagonal weighted segments
-	with weights
-	from a set $\sets$ with minimal weight.
+	from a set $\sets$ 
+	with weights $w : \sets \rightarrow \mathbb{R}$
+	with minimal weight.
 	Assuming ETH, there is no algorithm for this
 	problem with running time
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt(k))}$
@@ -132,6 +133,8 @@ TODO: explain that these segments are in fact diagonal
 
 $$\sets := HOR \cup VER \cup DIAG$$
 
+Weight function is equal to length of the segment for $HOR$ and $VER$
+and equal to $\delta$ for $DIAG$.
 
 
 \begin{lemma}

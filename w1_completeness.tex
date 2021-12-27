@@ -1,7 +1,8 @@
 \section{W[1]-completeness for weighted segments in 3 directions}
 
 \begin{tw}
-	\textbf{W[1]-completeness for weighted segments in 3 directions}.
+\label{w1_hard}
+	\textbf{Weighted geometric set cover in 3 directions is W[1]-hard}.
 	Consider the problem of covering a set $\points$ of points
 	by selecting $k$ axis-pararell or right-diagonal weighted segments
 	with weights
@@ -12,8 +13,24 @@
 	for any computable function $f$.
 \end{tw}
 
+\begin{corollary}
+	\textbf{Weighted geometric set cover is W[1]-hard}.
+	Assuming ETH, there is no algorithm for weighted geometric set cover
+	with running time
+	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt(k))}$
+	for any computable function $f$.
+\end{corollary}
+
+\begin{proof}
+Trivial from Theorem \ref{w1_hard}. 
+\end{proof}
+
 We will show reduction from grid tiling problem.
 
+\begin{defi}
+\textbf{Grid tiling} problem is 
+
+\end{defi}
 
 Let's have an instance of grid tiling problem -- size of the
 gird $k$, number of elements available $n$

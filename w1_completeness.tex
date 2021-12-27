@@ -4,7 +4,7 @@
 \label{w1_hard}
 	\textbf{Weighted geometric set cover with segments in 3 directions is W[1]-hard}.
 	Consider the problem of covering a set $\points$ of points
-	by selecting $k$ axis-pararell or right-diagonal weighted segments
+	by selecting $k$ axis-parallel or right-diagonal weighted segments
 	with weights
 	from a set $\sets$ with minimal weight.
 	Assuming ETH, there is no algorithm for this
@@ -30,9 +30,9 @@ In order to prove theorem \ref{w1_hard} we will show reduction from grid tiling 
 \begin{defi}
 In \textbf{grid tiling} we are given inetgers $n, k > 0$
 and function of allowed tiles on $k^2$ grid
-$f : \{1, \ldots k\} \times \{1, \ldots k\} \rightarrow \{1, \ldots n\} \times \{1, \ldots n\}$.
+$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n\} \times \{1 \ldots n\}$.
 Task is to find any functions that assign numbers to rows and columns
-$g,h : \{1, \ldots k\} \rightarrow \{1, \ldots n\}$,
+$g,h : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$,
 such that $(g(i), h(j)) \in f(i, j)$.
 \end{defi}
 
@@ -49,7 +49,7 @@ TODO: proof from reference in literature
 Let us have an instance of grid tiling problem -- size of the
 grid $k$, number of colors $n$
 and function of allowed tiles
-$f : \{1, \ldots k\} \times \{1, \ldots k\} \rightarrow \{1, \ldots n\} \times \{1, \ldots n\}$.
+$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n\} \times \{1 \ldots n\}$.
 
 \paragraph{Construction.}
 We construct a set $\sets$ of segments and a set $\points$
@@ -222,4 +222,4 @@ so $math_h(t_1, t_2)$ must be true.
 
 
 \section{What is missing}
-We don't know FPT for axis-pararell segments without $\delta$-extensions.
+We don't know FPT for axis-parallel segments without $\delta$-extensions.

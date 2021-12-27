@@ -103,13 +103,13 @@ $$\hor{i}{j}{t_1}{t_2} = (h^R_{i,j,t_1}, h^L_{i+1, j, t_2})$$
 $$\ver{i}{j}{t_1}{t_2} = (v^D_{i,j,t_1}, v^U_{i, j+1, t_2})$$
 
 $$\horbeg{i}{t} = (h^L_{1, i, 1}, h^L_{1, i, t})$$
-$$\horend{i}{t} = (h^R_{n, i, t}, h^R_{n, i, n^2})$$
+$$\horend{i}{t} = (h^R_{k, i, t}, h^R_{k, i, n^2})$$
 
 $$\verbeg{i}{t} = (v^U_{i, 1, 1}, v^U_{i, 1, t})$$
-$$\verend{i}{t} = (v^D_{i, n, t}, v^D_{i, n, n^2})$$
+$$\verend{i}{t} = (v^D_{i, k, t}, v^D_{i, k, n^2})$$
 
 \begin{eqnarray*}
-HOR &= &\{\hor{i}{j}{t_1}{t_2} : 1 \le i \le k, 1 \le j < k,
+HOR &= &\{\hor{i}{j}{t_1}{t_2} : 1 \le i < k, 1 \le j \le k,
 1 \le t_1, t_2 \le n^2, match_h(t_1, t_2)\} \\
 &\cup &\{\horbeg{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}
 \\
@@ -125,7 +125,7 @@ VER &= &\{\ver{i}{j}{t_1}{t_2} : 1 \le i \le k, 1 \le j < k,
 \end{eqnarray*}
 
 $$DIAG := \{ (h_{i, j, t}, v_{i, j, t}) :
-	1 \le i, j \le k, 1 \le t \le n^2, a_t \in S_{i, j}\}$$
+	1 \le i, j \le k, 1 \le t \le n^2, a_t \in f(i, j)\}$$
 
 TODO: explain that these segments are in fact diagonal
 

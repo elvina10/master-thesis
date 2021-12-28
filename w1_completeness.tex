@@ -179,20 +179,44 @@ w(s) =
 \end{lemma}
 
 \begin{proof}
-1. Solution has to have $2k^2$ gaps for points covered in DIAG
+1. Any solution has to have sum of weights from HOR and VER at least
+$2k^2(n^2+1) -2k^2\epsilon -4(k-\epsilon)$
 \begin{itemize}
-\item I guess I don't need that if I use 2.
+\item We know that for every $i,j$ only one $v_{i,j,t}$ and $h_{i,j,t}$
+can be uncovered by HOR and VER (Claim \ref{one_diag_in_square}),
+the guards have to bo covered in HOR and VER (Claim \ref{guards}),
+therefore sum of these segments are
+$2k^2(n^2+1) -2k^2\epsilon -4(k-\epsilon)$
 \end{itemize}
 
 2. Solution has to have at most one DIAG segment in every square
 \begin{itemize}
-\item One h and v points are covered with DIAG for i,j
+\item At least one h and v points are covered with DIAG for i,j
 	(Claim \ref{one_diag_in_square})
-\item This points are covered with the same segment from DIAG
-\item Therefore $t_x$ and $t_y$ are allowed tile for i,j
+\item Exactly one $h$ and $v$ points are covered with DIAG for every $i,j$,
+because if one of them were not, then we would use too much weight
+$$2k^2(n^2+1) -2k^2\epsilon -4(k-\epsilon) + \epsilon > \solWeight$$
+\item This points are covered with the same segment from DIAG,
+because we need to use at least $k^2$ of them to use
+exactly one DIAG segment for every $i,j$, if we used 2 DIAGs
+for one of $(i,j)$, then we would have used too much weight by $\delta$
+\item Therefore $t_x$ and $t_y$ are allowed tile for i,j,
+because respective segment was in DIAG
 \end{itemize}
 
 3. Points from previous point are synchronized in one row/column
+$match_h(t_1,t_2)$ and $match_v(t_1,t_2)$ must be true
+\begin{itemize}
+\item Every space between points in H and V covered by HOR/VER
+has to be covered by only one segment, because otherwise it would
+use $\epsilon > k^2\delta$ additional weight, which is larger than
+weight of solution
+\item Therefore for every $t_1$ and $t_2$ that are consecutive
+uncovered points, there must be a segment connecting
+$h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$, because these points
+have to be covered in HOR (Claim \ref{guards}),
+therefore $match_h(t_1,t_2)$ must be true
+\end{itemize}
 \end{proof}
 
 \begin{claim}

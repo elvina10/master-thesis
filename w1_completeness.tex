@@ -255,24 +255,35 @@ $$2k(k(n^2+1) -2\epsilon -2(1-\epsilon)) =2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsil
 
 \begin{lemma}
 \label{diag_correct}
-Solution has to have at most one DIAG segment in every square
-and it is a correct tile in grid tiling.
+For a constructed instance $(\points, \sets, w)$
+for any solution for every $1 \le i,j \le k$
+has to have at most one segment $DIAG$
+connecting $v_{i,j,t}$ and $h_{i,j,t}$
+such that $order^{-1}(t) \in f(i, j)$,
+ie. it is a correct tile for $(i,j)$.
 \end{lemma}
 
 \begin{proof}
-\begin{itemize}
-\item At most one h and v points are covered with DIAG for i,j
-	(Claim \ref{one_diag_in_square})
-\item Exactly one $h$ and $v$ points are covered with DIAG for every $i,j$,
+At most one $h_{i,j,t_x}$ and $v_{i,j,t_y}$
+points are covered with $DIAG$
+(Claim \ref{one_diag_in_square}).
+	
+Exactly one $h_{i,j,t_x}$ and $v_{i,j,t_y}$
+points are covered with $DIAG$,
 because if one of them were not, then we would use too much weight
-$$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon) + 2\epsilon > \solWeight$$
-\item This points are covered with the same segment from DIAG,
+$$W_hv + 2\epsilon > \solWeight$$
+
+This points are covered with the same segment from $DIAG$,
 because we need to use at least $k^2$ of them to use
-exactly one DIAG segment for every $i,j$, if we used 2 DIAGs
-for one of $(i,j)$, then we would have used too much weight by $\delta$
-\item Therefore $t_x$ and $t_y$ are allowed tile for i,j,
-because respective segment was in DIAG
-\end{itemize}
+exactly one DIAG segment for every pair of $1 \le i,j \le n$,
+if we used 2 segments from $DIAG$
+for one paur $(i,j)$,
+then we would have used too much weight by $\delta$.
+
+
+Therefore $t$ is allowed tile for $(i,j)$
+because respective segment is in $DIAG$.
+
 \end{proof}
 
 \begin{lemma}

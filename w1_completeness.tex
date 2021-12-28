@@ -180,7 +180,7 @@ w(s) =
 
 \begin{proof}
 1. Any solution has to have sum of weights from HOR and VER at least
-$2k^2(n^2+1) -2k^2\epsilon -4(k-\epsilon)$
+$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$
 \begin{itemize}
 \item We know that for every $i,j$ only one $v_{i,j,t}$ and $h_{i,j,t}$
 can be uncovered by HOR and VER (Claim \ref{one_diag_in_square}),
@@ -203,12 +203,13 @@ $2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$
 \end{itemize}
 
 2. Solution has to have at most one DIAG segment in every square
+and it is a correct tile in grid tiling
 \begin{itemize}
-\item At least one h and v points are covered with DIAG for i,j
+\item At most one h and v points are covered with DIAG for i,j
 	(Claim \ref{one_diag_in_square})
 \item Exactly one $h$ and $v$ points are covered with DIAG for every $i,j$,
 because if one of them were not, then we would use too much weight
-$$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon) + \epsilon > \solWeight$$
+$$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon) + 2\epsilon > \solWeight$$
 \item This points are covered with the same segment from DIAG,
 because we need to use at least $k^2$ of them to use
 exactly one DIAG segment for every $i,j$, if we used 2 DIAGs

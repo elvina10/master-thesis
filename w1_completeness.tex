@@ -149,7 +149,7 @@ w(s) =
 	\end{cases*}
 \end{equation}
 
-\newcommand{\solWeight}{2k^2(n^2+1) - 2k^2\epsilon +k^2\delta -4(k-\epsilon)}
+\newcommand{\solWeight}{2k^2(n^2+1) - 2k^2\epsilon +k^2\delta -4k(1-\epsilon)}
 
 \begin{lemma}
 	If there exists solution for grid tiling,
@@ -184,9 +184,22 @@ $2k^2(n^2+1) -2k^2\epsilon -4(k-\epsilon)$
 \begin{itemize}
 \item We know that for every $i,j$ only one $v_{i,j,t}$ and $h_{i,j,t}$
 can be uncovered by HOR and VER (Claim \ref{one_diag_in_square}),
-the guards have to bo covered in HOR and VER (Claim \ref{guards}),
+\item We sum the lower bound for sum of length for horizontal/vertical
+lines for a single vertical line and:
+
+1. it is $k$ sections, each
+of length $(n^2+1)$, one $v_{i,j,t}$ is not covered for each of $k$ segments,
+
+2. its guards $v^U_{i,j,t}$ and $v^D_{i,j,t}$
+have to be covered in VER (Claim \ref{guards}), so it leaves $2\epsilon$
+free space
+
+3. Length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$
+is $$(k-2)(n^2+1) + 2(n^2 + \epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
+
+\item
 therefore sum of these segments are
-$2k^2(n^2+1) -2k^2\epsilon -4(k-\epsilon)$
+$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$
 \end{itemize}
 
 2. Solution has to have at most one DIAG segment in every square
@@ -195,7 +208,7 @@ $2k^2(n^2+1) -2k^2\epsilon -4(k-\epsilon)$
 	(Claim \ref{one_diag_in_square})
 \item Exactly one $h$ and $v$ points are covered with DIAG for every $i,j$,
 because if one of them were not, then we would use too much weight
-$$2k^2(n^2+1) -2k^2\epsilon -4(k-\epsilon) + \epsilon > \solWeight$$
+$$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon) + \epsilon > \solWeight$$
 \item This points are covered with the same segment from DIAG,
 because we need to use at least $k^2$ of them to use
 exactly one DIAG segment for every $i,j$, if we used 2 DIAGs

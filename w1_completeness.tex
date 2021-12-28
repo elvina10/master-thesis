@@ -152,8 +152,9 @@ w(s) =
 \newcommand{\solWeight}{2k^2(n^2+1) - 2k^2\epsilon +k^2\delta -4k(1-\epsilon)}
 
 \begin{lemma}
+\label{set_cover_solution_exists}
 	If there exists solution for grid tiling,
-	then there exists solution of instance $(\points, \sets)$
+	then there exists solution of instance $(\points, \sets, w)$
 	of geometric set cover
 	with weight $\solWeight$.
 \end{lemma}
@@ -169,75 +170,6 @@ w(s) =
 	with $k^2$ segments from $DIAG$
 	and the rest in $VER$ or $HOR$.
 	This solution has weight $\solWeight$.
-\end{proof}
-
-\begin{lemma}
-	If there exists solution  of instance $(\points, \sets)$
-	of geometric set cover
-	with weight at most $\solWeight$,
-	then there exists a solution for grid tiling.
-\end{lemma}
-
-\begin{proof}
-1. Any solution has to have sum of weights from HOR and VER at least
-$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$
-\begin{itemize}
-\item We know that for every $i,j$ only one $v_{i,j,t}$ and $h_{i,j,t}$
-can be uncovered by HOR and VER (Claim \ref{one_diag_in_square}),
-\item We sum the lower bound for sum of length for horizontal/vertical
-lines for a single vertical line and:
-
-1. it is $k$ sections, each
-of length $(n^2+1)$, one $v_{i,j,t}$ is not covered for each of $k$ segments,
-
-2. its guards $v^U_{i,j,t}$ and $v^D_{i,j,t}$
-have to be covered in VER (Claim \ref{guards}), so it leaves $2\epsilon$
-free space
-
-3. Length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$
-is $$(k-2)(n^2+1) + 2(n^2 + \epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
-
-\item
-therefore sum of these segments are
-$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$
-\end{itemize}
-
-2. Solution has to have at most one DIAG segment in every square
-and it is a correct tile in grid tiling
-\begin{itemize}
-\item At most one h and v points are covered with DIAG for i,j
-	(Claim \ref{one_diag_in_square})
-\item Exactly one $h$ and $v$ points are covered with DIAG for every $i,j$,
-because if one of them were not, then we would use too much weight
-$$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon) + 2\epsilon > \solWeight$$
-\item This points are covered with the same segment from DIAG,
-because we need to use at least $k^2$ of them to use
-exactly one DIAG segment for every $i,j$, if we used 2 DIAGs
-for one of $(i,j)$, then we would have used too much weight by $\delta$
-\item Therefore $t_x$ and $t_y$ are allowed tile for i,j,
-because respective segment was in DIAG
-\end{itemize}
-
-3. Points from previous point are synchronized in one row/column
-$match_h(t_1,t_2)$ and $match_v(t_1,t_2)$ must be true
-\begin{itemize}
-\item Every space between points in H and V covered by HOR/VER
-has to be covered by only one segment, because otherwise it would
-use $\epsilon > k^2\delta$ additional weight, which is larger than
-weight of solution
-\item Therefore for every $t_1$ and $t_2$ that are consecutive
-uncovered points, there must be a segment connecting
-$h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$, because these points
-have to be covered in HOR (Claim \ref{guards}),
-therefore $match_h(t_1,t_2)$ must be true
-\end{itemize}
-
-4. Therefore we take the points that are not covered in the solution
-that we have and we know that for each row and colum
-$order^{-1}(v_{i,*}) = x_i$ and we set $x(i) = x_i$,
-$order^{-1}(h_{*,i}) = y_i$ and we set $y(i) = y_i$.
-This is a solution to grid tiling problem.
-
 \end{proof}
 
 \begin{claim}
@@ -273,6 +205,99 @@ Point $h^R_{i, j, t_1}$ has to be covered with $HOR$
 from Claim $\ref{hor_ver_sound}$.
 And every segment in $HOR$ covering $h^R_{i, j, t_1}$,
 covers also $h_{i, j, t_2}$.
+\end{proof}
+
+\begin{lemma}
+\label{vertical_horizontal_sum}
+Any solution has to have sum of weights from HOR and VER at least
+$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$.
+Denote this weight as $W_{hv}$.
+\end{lemma}
+
+\begin{proof}
+\begin{itemize}
+\item We know that for every $i,j$ only one $v_{i,j,t}$ and $h_{i,j,t}$
+can be uncovered by HOR and VER (Claim \ref{one_diag_in_square}),
+\item We sum the lower bound for sum of length for horizontal/vertical
+lines for a single vertical line and:
+
+1. it is $k$ sections, each
+of length $(n^2+1)$, one $v_{i,j,t}$ is not covered for each of $k$ segments,
+
+2. its guards $v^U_{i,j,t}$ and $v^D_{i,j,t}$
+have to be covered in VER (Claim \ref{guards}), so it leaves $2\epsilon$
+free space
+
+3. Length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$
+is $$(k-2)(n^2+1) + 2(n^2 + \epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
+
+\item
+therefore sum of these segments are
+$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$
+\end{itemize}
+\end{proof}
+
+\begin{lemma}
+\label{diag_correct}
+Solution has to have at most one DIAG segment in every square
+and it is a correct tile in grid tiling.
+\end{lemma}
+
+\begin{proof}
+\begin{itemize}
+\item At most one h and v points are covered with DIAG for i,j
+	(Claim \ref{one_diag_in_square})
+\item Exactly one $h$ and $v$ points are covered with DIAG for every $i,j$,
+because if one of them were not, then we would use too much weight
+$$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon) + 2\epsilon > \solWeight$$
+\item This points are covered with the same segment from DIAG,
+because we need to use at least $k^2$ of them to use
+exactly one DIAG segment for every $i,j$, if we used 2 DIAGs
+for one of $(i,j)$, then we would have used too much weight by $\delta$
+\item Therefore $t_x$ and $t_y$ are allowed tile for i,j,
+because respective segment was in DIAG
+\end{itemize}
+\end{proof}
+
+\begin{lemma}
+\label{vertical_horizontal_synchronized}
+Points from previous point are synchronized in one row/column
+$match_h(t_1,t_2)$ and $match_v(t_1,t_2)$ must be true
+\end{lemma}
+
+\begin{proof}
+\begin{itemize}
+\item Every space between points in H and V covered by HOR/VER
+has to be covered by only one segment, because otherwise it would
+use $\epsilon > k^2\delta$ additional weight, which is larger than
+weight of solution
+\item Therefore for every $t_1$ and $t_2$ that are consecutive
+uncovered points, there must be a segment connecting
+$h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$, because these points
+have to be covered in HOR (Claim \ref{guards}),
+therefore $match_h(t_1,t_2)$ must be true
+\end{itemize}
+\end{proof}
+
+\begin{lemma}
+\label{grid_tiling_exists}
+	If there exists solution  of instance $(\points, \sets, w)$
+	of geometric set cover
+	with weight at most $\solWeight$,
+	then there exists a solution for grid tiling.
+\end{lemma}
+
+\begin{proof}
+Therefore we take the points that are not covered in the solution
+that we have and we know that for each row and colum
+$order^{-1}(v_{i,*}) = x_i$ and we set $x(i) = x_i$,
+$order^{-1}(h_{*,i}) = y_i$ and we set $y(i) = y_i$.
+This is a solution to grid tiling problem.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{w1_hard}]
+Based on Lemmas \ref{set_cover_solution_exists} and \ref{grid_tiling_exists}
+this is true.
 \end{proof}
 
 

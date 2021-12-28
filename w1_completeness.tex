@@ -185,16 +185,28 @@ w(s) =
 
 \begin{claim}
 \label{guards}
-Points $p^{L}, p^R, p^U, p^D$ cannot be covered with $DIAG$.
+Points $p^{L}, p^R, p^U, p^D$ cannot be covered with
+any segments from $DIAG$.
 \end{claim}
 
 \begin{claim}
 \label{hor_ver_sound}
 Points in $H \cup \{p^L : p \in H\} \cup \{p^R : p \in H\}$
-cannot be covered with $VER$.
+cannot be covered with any segments from $VER$.
 
 Points in $V \cup \{p^U : p \in V\} \cup \{p^D : p \in V\} $
-cannot be covered with $HOR$.
+cannot be covered with any segments from $HOR$.
+\end{claim}
+
+
+\begin{claim}
+\label{guards_covered}
+(Follows from two previous claims, I guess this might be enough?).
+Points in $H \cup \{p^L : p \in H\} \cup \{p^R : p \in H\}$
+have to be covered with sgements from $HOR$.
+
+Points in $V \cup \{p^U : p \in V\} \cup \{p^D : p \in V\} $
+have to be covered with segments from $VER$.
 \end{claim}
 
 \begin{claim}
@@ -203,6 +215,7 @@ for $1 \le t \le n^2$ are covered with $DIAG$,
 then some spaces between neighbouring points were covered twice.
 \end{claim}
 
+
 \begin{claim}
 For given $i, j$ two points $h_{i, j, t_1}, h_{i, j, t_2}$
 ($v_{i, j, t_1}, v_{i, j, t_2}$)
@@ -210,11 +223,14 @@ for $1 \le t_1 < t_2 \le n^2$ are covered with $DIAG$,
 then one of them had to be also covered with a segment from $HOR$
 ($VER$).
 \end{claim}
-\paragraph{Proof.}
-Point $v^L_{i, j, t_2}$ had to be covered with $VER$
-from Claims $\ref{guards}$ and $\ref{hor_ver_sound}$.
-And every segment in $VER$ covering $v^L_{i, j, t_2}$,
-covers also $v^L_{i, j, t_1}$.
+\begin{proof}
+Assume point $h_{i, j, t_1}$ is not covered with
+segments from $HOR$.
+Point $h^R_{i, j, t_1}$ has to be covered with $HOR$
+from Claim $\ref{guards_covered}$.
+And every segment in $HOR$ covering $h^R_{i, j, t_1}$,
+covers also $h_{i, j, t_2}$.
+\end{proof}
 
 
 \section{What is missing}

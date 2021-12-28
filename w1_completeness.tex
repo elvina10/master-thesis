@@ -1,4 +1,4 @@
-\section{W[1]-completeness for weighted segments in 3 directions}
+TODO: some introduction
 
 \begin{tw}
 \label{w1_hard}
@@ -56,12 +56,14 @@ grid $k$, number of colors $n$
 and function of allowed tiles
 $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n\} \times \{1 \ldots n\}$.
 
+TODO: nice picture of instance of grid tiling with solution
+
 \paragraph{Construction.}
-We construct a set $\sets$ of segments and a set $\points$
-of points.
+We construct an instance of Geometric Set Cover with segments in 3 directions
+with weights $(\points, \sets, w)$.
 
 First let us choose any ordering of $n^2$ elements
-and denote it with bijective function
+and denote it as bijective function
 $order : \{1 \ldots n\} \times \{1 \ldots n\} \rightarrow \{1 \ldots n^2\}$.
 
 Define $match_v(i, j)$ and $match_h(i, j)$
@@ -141,6 +143,8 @@ $$\sets := HOR \cup VER \cup DIAG$$
 Weight function is equal to length of the segment for $HOR$ and $VER$
 and equal to $\delta = \frac{1}{4k^4}$ for $DIAG$.
 
+TODO: Put a picture of small instance like 3x3 with n=2
+
 \begin{equation}
 w(s) =
 	\begin{cases*}
@@ -149,7 +153,7 @@ w(s) =
 	\end{cases*}
 \end{equation}
 
-\newcommand{\solWeight}{2k^2(n^2+1) - 2k^2\epsilon +k^2\delta -4k(1-\epsilon)}
+\newcommand{\solWeight}{2k^2(n^2+1) - 4k^2\epsilon -4k(1-\epsilon) +k^2\delta }
 
 \begin{lemma}
 \label{set_cover_solution_exists}
@@ -191,14 +195,17 @@ have to be covered with segments from $VER$.
 
 \begin{claim}
 \label{one_diag_in_square}
-For given $i, j$ two points $h_{i, j, t_1}, h_{i, j, t_2}$
+For given $1 \le i, j \le n$
+and any solution of an instance instance $(\points, \sets, w)$
+no two points $h_{i, j, t_1}, h_{i, j, t_2}$
 ($v_{i, j, t_1}, v_{i, j, t_2}$)
-for $1 \le t_1 < t_2 \le n^2$ are covered with $DIAG$,
-then one of them had to be also covered with a segment from $HOR$
-($VER$).
+for $1 \le t_1 < t_2 \le n^2$
+can be not covered with segments from $HOR$ ($VER$).
 \end{claim}
 
 \begin{proof}
+Proof for horizontal segments. Proof for vertical is analoguous.
+
 Assume point $h_{i, j, t_1}$ is not covered with
 segments from $HOR$.
 Point $h^R_{i, j, t_1}$ has to be covered with $HOR$
@@ -209,32 +216,41 @@ covers also $h_{i, j, t_2}$.
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
-Any solution has to have sum of weights from HOR and VER at least
-$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$.
+For a constructed instance $(\points, \sets, w)$
+any solution has to have sum of weights from sets $HOR$ and $VER$ at least
+$2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon))$.
 Denote this weight as $W_{hv}$.
 \end{lemma}
 
 \begin{proof}
-\begin{itemize}
-\item We know that for every $i,j$ only one $v_{i,j,t}$ and $h_{i,j,t}$
-can be uncovered by HOR and VER (Claim \ref{one_diag_in_square}),
-\item We sum the lower bound for sum of length for horizontal/vertical
-lines for a single vertical line and:
+We know that for every $1 \le i,j \le k$
+only one there exists only one $t_x$ and $t_y$ such that
+$v_{i,j,t_x}$ and $h_{i,j,y}$
+can be not covered by
+segments from $HOR$ and $VER$ (Claim \ref{one_diag_in_square}),
 
-1. it is $k$ sections, each
-of length $(n^2+1)$, one $v_{i,j,t}$ is not covered for each of $k$ segments,
 
-2. its guards $v^U_{i,j,t}$ and $v^D_{i,j,t}$
-have to be covered in VER (Claim \ref{guards}), so it leaves $2\epsilon$
-free space
+We sum the lower bound for sum of length for horizontal/vertical
+lines for a single vertical line
+(the bound is the same for every horizontal line).
 
-3. Length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$
-is $$(k-2)(n^2+1) + 2(n^2 + \epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
+Let us fix $1 \le i \le k$.
 
-\item
-therefore sum of these segments are
-$2k^2(n^2+1) -2k^2\epsilon -4k(1-\epsilon))$
-\end{itemize}
+\begin{enumerate}
+\item Length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$ is:
+$$(k-2)(n^2+1) + 2(n^2 + \epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
+
+\item For every $1 \le j \le k$ there exists only one $1 \le t \le n$
+such that $v_{i,j,t}$ is not covered by segments from $VER$
+(Claim \ref{one_diag_in_square}).
+Its guards $v^U_{i,j,t}$ and $v^D_{i,j,t}$
+have to be covered in $VER$ (Claim \ref{guards}),
+so only $k$ spaces of length $2\epsilon$ can be left
+not covered by segments from $VER$.
+
+\end{enumerate}
+Therefore sum of these lower bounds for vertical and horizontal lines are:
+$$2k(k(n^2+1) -2\epsilon -2(1-\epsilon)) =2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon))$$
 \end{proof}
 
 \begin{lemma}

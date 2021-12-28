@@ -178,10 +178,22 @@ w(s) =
 	then there exists a solution for grid tiling.
 \end{lemma}
 
-\paragraph{Proof.}
+\begin{proof}
 1. Solution has to have $2k^2$ gaps for points covered in DIAG
+\begin{itemize}
+\item I guess I don't need that if I use 2.
+\end{itemize}
 
 2. Solution has to have at most one DIAG segment in every square
+\begin{itemize}
+\item One h and v points are covered with DIAG for i,j
+	(Claim \ref{one_diag_in_square})
+\item This points are covered with the same segment from DIAG
+\item Therefore $t_x$ and $t_y$ are allowed tile for i,j
+\end{itemize}
+
+3. Points from previous point are synchronized in one row/column
+\end{proof}
 
 \begin{claim}
 \label{guards}
@@ -217,6 +229,7 @@ then some spaces between neighbouring points were covered twice.
 
 
 \begin{claim}
+\label{one_diag_in_square}
 For given $i, j$ two points $h_{i, j, t_1}, h_{i, j, t_2}$
 ($v_{i, j, t_1}, v_{i, j, t_2}$)
 for $1 \le t_1 < t_2 \le n^2$ are covered with $DIAG$,

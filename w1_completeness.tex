@@ -217,6 +217,13 @@ $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$, because these points
 have to be covered in HOR (Claim \ref{guards}),
 therefore $match_h(t_1,t_2)$ must be true
 \end{itemize}
+
+4. Therefore we take the points that are not covered in the solution
+that we have and we know that for each row and colum
+$order^{-1}(v_{i,*}) = x_i$ and we set $x(i) = x_i$,
+$order^{-1}(h_{*,i}) = y_i$ and we set $y(i) = y_i$.
+This is a solution to grid tiling problem.
+
 \end{proof}
 
 \begin{claim}

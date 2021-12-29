@@ -317,27 +317,24 @@ $h_{i,j,diagonal(i, j)}$ and $h_{i+1,j,diagonal(i+1, j)}$
 are not covered by segments from $HOR$,
 $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 have to be covered by segments from $HOR$ (Claim \ref{guards}).
-If $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
-would be covered by different segments,
-then these segments would have to
-have non-empty intersection,
-because every segment from $HOR$ starts at $h^R_{i,z,x_1}$
-segment and finishes at $h^L_{i,z+1,x_2}$ segment for some
-$1 \le z < k$ and $1 \le x_1, x_2 \le n^2$.
+Every segment from $HOR$ starts at $h^R_{x,y,z_1}$
+segment and finishes at $h^L_{x,y+1,z_2}$ segment for some
+$1 \le x \le k$,$1 \le z < k$ and $1 \le z_1, z_2 \le n^2$.
 Since all of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 are covered by segments in $HOR$,
 and there are two different segments covering
 these points, one of them must begin
-at $h^R_{i,j,t_1}$ and end at $h^L_{i,j+1,x_2}$
-and the other one begin at $h^R_{i,j,x_1}$
+at $h^R_{i,j,t_1}$ and end at $h^L_{i,j+1,z_2}$
+and the other one begin at $h^R_{i,j,z_1}$
 and end at $h^L_{i+1,j,t_2}$
-for some $1 \le x_1, x_2 \le n^2$.
-Therefore space between $h^R_{i,j,x_1}$ and $h^L_{i,j+1,x_2}$
+for some $1 \le z_1, z_2 \le n^2$.
+Therefore space between $h^R_{i,j,z_1}$ and $h^L_{i,j+1,z_2}$
 is covered twice and is longer than $\epsilon$.
-They must be covered by one segment,
-because otherwise there is contradiction
-for lower bound of the solution:
-$W_{hv} + \epsilon > \solWeight$
+By Lemma \ref{vertical_horizontal_sum}
+lower bound for weight of such solution is $W_{hv} + \epsilon$
+which contradicts that the given solution has size $\solWeight < W_{hv} + \epsilon$
+Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$ must be covered
+by one segment from $HOR$ and these points are ends of this segment.
 
 $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 are ends of a segment from $HOR$,

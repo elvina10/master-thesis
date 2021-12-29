@@ -292,7 +292,7 @@ because the respective segment is in $DIAG$.
 \begin{lemma}
 \label{vertical_horizontal_synchronized}
 For a constructed instance $(\points, \sets, w)$
-for any solution it holds that $diagonal$ function
+for any solution of weight $\solWeight$ it holds that $diagonal$ function
 from Lemma \ref{diag_correct}:
 \begin{enumerate}
 \item 
@@ -310,10 +310,37 @@ has to be covered by only one segment, because otherwise it would
 use $W_{hv} + \epsilon > \solWeight$,
 therefore such solution would be too costly.
 
-Therefore for every $h_{i,j,t_1}$ and $h_{i+1,j,t_2}$ that are consecutive
-uncovered points, there must be a segment connecting
-$h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$, because these points
-have to be covered in $HOR$ (Claim \ref{guards}),
+Proof for vertical (2), proof for horizontal is analogous.
+
+Therefore for every $1 \le i < k, 1 \le j \le k$,
+$h_{i,j,diagonal(i, j)}$ and $h_{i+1,j,diagonal(i+1, j)}$
+are not covered by segments from $HOR$,
+$h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
+have to be covered by segments from $HOR$ (Claim \ref{guards}).
+If $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
+would be covered by different segments,
+then these segments would have to
+have non-empty intersection,
+because every segment from $HOR$ starts at $h^R_{i,z,x_1}$
+segment and finishes at $h^L_{i,z+1,x_2}$ segment for some
+$1 \le z < k$ and $1 \le x_1, x_2 \le n^2$.
+Since all of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
+are covered by segments in $HOR$,
+and there are two different segments covering
+these points, one of them must begin
+at $h^R_{i,j,t_1}$ and end at $h^L_{i,j+1,x_2}$
+and the other one begin at $h^R_{i,j,x_1}$
+and end at $h^L_{i+1,j,t_2}$
+for some $1 \le x_1, x_2 \le n^2$.
+Therefore space between $h^R_{i,j,x_1}$ and $h^L_{i,j+1,x_2}$
+is covered twice and is longer than $\epsilon$.
+They must be covered by one segment,
+because otherwise there is contradiction
+for lower bound of the solution:
+$W_{hv} + \epsilon > \solWeight$
+
+Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
+are ends of a segment from $HOR$ (Claim \ref{guards}),
 therefore $match_h(t_1,t_2)$ must be true.
 \end{proof}
 

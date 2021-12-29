@@ -64,16 +64,16 @@ with weights $(\points, \sets, w)$.
 
 First let us choose any ordering of $n^2$ elements
 and denote it as bijective function
-$order : \{1 \ldots n\} \times \{1 \ldots n\} \rightarrow \{1 \ldots n^2\}$.
+$order : \{1 \ldots n^2\} \rightarrow \{1 \ldots n\} \times \{1 \ldots n\}$.
 
 Define $match_v(i, j)$ and $match_h(i, j)$
 as functions denoting whether two points share x or y coordinate.
 
 $$match_v(i, j) \iff
-order^{-1}(i) = \{x_i, y_i\} \land order^{-1}(j) = \{x_j, y_j\} \land x_i = x_j$$
+order(i) = \{x_i, y_i\} \land order(j) = \{x_j, y_j\} \land x_i = x_j$$
 
 $$match_h(i, j) \iff
-order^{-1}(i) = \{x_i, y_i\} \land order^{-1}(j) = \{x_j, y_j\} \land y_i = y_j$$
+order(i) = \{x_i, y_i\} \land order(j) = \{x_j, y_j\} \land y_i = y_j$$
 
 
 \subparagraph{Points.}
@@ -134,7 +134,7 @@ VER &= &\{\ver{i}{j}{t_1}{t_2} : 1 \le i \le k, 1 \le j < k,
 \end{eqnarray*}
 
 $$DIAG := \{ (h_{i, j, t}, v_{i, j, t}) :
-	1 \le i, j \le k, 1 \le t \le n^2, a_t \in f(i, j)\}$$
+	1 \le i, j \le k, 1 \le t \le n^2, order(t) \in f(i, j)\}$$
 
 TODO: explain that these segments are in fact diagonal
 
@@ -168,8 +168,8 @@ w(s) =
 	$x, y$,
 	then there exists a solution that covers
 	all points
-	$$\{h_{i, j, t} : 1 \le i, j \le k, t=order(x(i), y(j))\}
-	\cup \{v_{i, j, t} : 1 \le i, j \le k, t=order(x(i), y(j))\}$$
+	$$\{h_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}
+	\cup \{v_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}$$
 	
 	with $k^2$ segments from $DIAG$
 	and the rest in $VER$ or $HOR$.
@@ -250,7 +250,7 @@ not covered by segments from $VER$.
 
 \end{enumerate}
 Therefore sum of these lower bounds for vertical and horizontal lines are:
-$$2k(k(n^2+1) -2\epsilon -2(1-\epsilon)) =2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon))$$
+$$2k(k(n^2+1) -2\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon))$$
 \end{proof}
 
 \begin{lemma}
@@ -259,7 +259,7 @@ For a constructed instance $(\points, \sets, w)$
 for any solution for every $1 \le i,j \le k$
 has to have at most one segment $DIAG$
 connecting $v_{i,j,t}$ and $h_{i,j,t}$
-such that $order^{-1}(t) \in f(i, j)$,
+such that $order(t) \in f(i, j)$,
 ie. it is a correct tile for $(i,j)$.
 \end{lemma}
 
@@ -317,8 +317,8 @@ therefore $match_h(t_1,t_2)$ must be true
 \begin{proof}
 Therefore we take the points that are not covered in the solution
 that we have and we know that for each row and colum
-$order^{-1}(v_{i,*}) = x_i$ and we set $x(i) = x_i$,
-$order^{-1}(h_{*,i}) = y_i$ and we set $y(i) = y_i$.
+$order(v_{i,*}) = (x_i, *)$ and we set $x(i) = x_i$,
+$order(h_{*,i}) = (*, y_i)$ and we set $y(i) = y_i$.
 This is a solution to grid tiling problem.
 \end{proof}
 

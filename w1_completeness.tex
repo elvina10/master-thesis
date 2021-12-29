@@ -339,25 +339,62 @@ because otherwise there is contradiction
 for lower bound of the solution:
 $W_{hv} + \epsilon > \solWeight$
 
-Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
-are ends of a segment from $HOR$ (Claim \ref{guards}),
+$h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
+are ends of a segment from $HOR$,
 therefore $match_h(t_1,t_2)$ must be true.
+\end{proof}
+
+\begin{corollary}
+\label{vertical_horizontal_synchronized_inductive}
+For a constructed instance $(\points, \sets, w)$
+for any solution of weight $\solWeight$ it holds that $diagonal$ function
+from Lemma \ref{diag_correct}:
+\begin{enumerate}
+\item 
+for any $1 \le i, j \le k$,
+$match_h(diagonal(1, j),diagonal(i, j))$ must be true;
+\item 
+for any $1 \le i, j \le k$,
+$match_v(diagonal(i, 1),diagonal(i, j))$ must be true.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+Simple inductive proof based on Lemma \ref{vertical_horizontal_synchronized}.
 \end{proof}
 
 \begin{lemma}
 \label{grid_tiling_exists}
-	If there exists solution  of instance $(\points, \sets, w)$
-	of geometric set cover
+	If there exists solution of instance $(\points, \sets, w)$
 	with weight at most $\solWeight$,
-	then there exists a solution for grid tiling.
+	then there exists a solution for grid tiling instance.
 \end{lemma}
 
 \begin{proof}
-Therefore we take the points that are not covered in the solution
-that we have and we know that for each row and colum
-$order(v_{i,*}) = (x_i, *)$ and we set $x(i) = x_i$,
-$order(h_{*,i}) = (*, y_i)$ and we set $y(i) = y_i$.
-This is a solution to grid tiling problem.
+Take $diagonal$ function from Lemma \ref{diag_correct}.
+
+To define $x$ funtion 
+for every $1 \le i \le k$ as $x(i) = x_i$
+where $(x_i, a) = order(v_{i,1})$
+and $y$ function 
+for every $1 \le i \le k$ as $y(i) = y_i$
+where $(b, y_i) = order(h_{1,i})$
+
+To prove that it is a correct solution for grid tiling,
+we need to prove that 
+for every $1 \le i,j \le k$ $(x(i), y(j))$ is in
+allowed tiles set $f(i,j)$.
+
+Let us take any $1 \le i,j \le k$,
+By Lemma \ref{vertical_horizontal_synchronized_inductive}
+we know that $match_h(diagonal(1, j),diagonal(i, j))$ and
+$match_v(diagonal(i, 1),diagonal(i, j))$ are true.
+Therefore $order(diagonal(i,j)) = (x(i), y(i))$.
+By Lemma \ref{diag_correct} we know that 
+$order(diagonal(i,j))$ is in $f(i,j)$.
+Therefore 
+$(x(i), y(i))$
+is in $f(i,j)$.
+
 \end{proof}
 
 \begin{proof}[Proof of Theorem \ref{w1_hard}]

@@ -218,14 +218,13 @@ covers also $h_{i, j, t_2}$.
 \label{vertical_horizontal_sum}
 For a constructed instance $(\points, \sets, w)$
 any solution has to have sum of weights from sets $HOR$ and $VER$ at least
-$2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon))$.
-Denote this weight as $W_{hv}$.
+$W_{hv} = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon))$.
 \end{lemma}
 
 \begin{proof}
 We know that for every $1 \le i,j \le k$
 only one there exists only one $t_x$ and $t_y$ such that
-$v_{i,j,t_x}$ and $h_{i,j,y}$
+$v_{i,j,t_x}$ and $h_{i,j,t_y}$
 can be not covered by
 segments from $HOR$ and $VER$ (Claim \ref{one_diag_in_square}),
 
@@ -261,6 +260,8 @@ has to have at most one segment $DIAG$
 connecting $v_{i,j,t}$ and $h_{i,j,t}$
 such that $order(t) \in f(i, j)$,
 ie. it is a correct tile for $(i,j)$.
+Name the function of this $t$ as
+$diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
 \end{lemma}
 
 \begin{proof}
@@ -275,35 +276,45 @@ $$W_hv + 2\epsilon > \solWeight$$
 
 This points are covered with the same segment from $DIAG$,
 because we need to use at least $k^2$ of them to use
-exactly one DIAG segment for every pair of $1 \le i,j \le n$,
+exactly one DIAG segment for every pair of $1 \le i,j \le k$,
 if we used 2 segments from $DIAG$
-for one paur $(i,j)$,
+for one pair $(i,j)$,
 then we would have used too much weight by $\delta$.
+Since these points $h_{i,j,t_x}$ and $v_{i,j,t_y}$ are covered by
+segment from $DIAG$, therefore $t_x = t_y$.
 
-
-Therefore $t$ is allowed tile for $(i,j)$
-because respective segment is in $DIAG$.
+Therefore $diagonal(i,j) = t_x = t_y$
+and $order(t_x)$ is an allowed tile for $(i,j)$
+because the respective segment is in $DIAG$.
 
 \end{proof}
 
 \begin{lemma}
 \label{vertical_horizontal_synchronized}
-Points from previous point are synchronized in one row/column
-$match_h(t_1,t_2)$ and $match_v(t_1,t_2)$ must be true
+For a constructed instance $(\points, \sets, w)$
+for any solution it holds that $diagonal$ function
+from Lemma \ref{diag_correct}:
+\begin{enumerate}
+\item 
+for any $1 \le i < k, 1 \le j \le k$,
+$match_h(diagonal(i, j),diagonal(i+1, j))$ must be true;
+\item 
+for any $1 \le i \le k, 1 \le j < k$,
+$match_v(diagonal(i, j),diagonal(i, j+1))$ must be true.
+\end{enumerate}
 \end{lemma}
 
 \begin{proof}
-\begin{itemize}
-\item Every space between points in H and V covered by HOR/VER
+Every space between points in $H$ and $V$ covered by $HOR$/$VER$
 has to be covered by only one segment, because otherwise it would
-use $\epsilon > k^2\delta$ additional weight, which is larger than
-weight of solution
-\item Therefore for every $t_1$ and $t_2$ that are consecutive
+use $W_{hv} + \epsilon > \solWeight$,
+therefore such solution would be too costly.
+
+Therefore for every $h_{i,j,t_1}$ and $h_{i+1,j,t_2}$ that are consecutive
 uncovered points, there must be a segment connecting
 $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$, because these points
-have to be covered in HOR (Claim \ref{guards}),
-therefore $match_h(t_1,t_2)$ must be true
-\end{itemize}
+have to be covered in $HOR$ (Claim \ref{guards}),
+therefore $match_h(t_1,t_2)$ must be true.
 \end{proof}
 
 \begin{lemma}

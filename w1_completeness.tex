@@ -31,12 +31,12 @@ In order to prove theorem \ref{w1_hard} we will show reduction from grid tiling 
 \begin{defi}
 In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
 and a function
-$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \mathcal{P}(\{1 \ldots n\} \times \{1 \ldots n\})$
+$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \wp(\{1 \ldots n\} \times \{1 \ldots n\})$
 specifying the set of allowed tiles for each cell of a $k \times k$ grid.
 The task is to find functions
 $x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
 that assign numbers from $\{1 \ldots n\}$
-to respectively rows and columns of the grid,
+to respectively columns and rows of the grid,
 so that $(x(i), y(j)) \in f(i, j)$ for all valid $i$ and $j$,
 or conclude that such assignment does not exist.
 \end{defi}
@@ -44,17 +44,17 @@ or conclude that such assignment does not exist.
 
 \begin{tw}
 \label{grid_tiling_w1_hard}
-Assuming ETH, there is no algorithm for grid tiling problem
-$f(k)\cdot n^{o(\sqrt{k})}$
+Assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
+algorithm for grid tiling problem
 for any computable function $f$.
 \end{tw}
 
-TODO: proof from reference in literature
+TODO: proof from reference in literature (platypus book page 490)
 
 Let us have an instance of grid tiling problem -- size of the
 grid $k$, number of colors $n$
 and function of allowed tiles
-$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n\} \times \{1 \ldots n\}$.
+$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \wp\{1 \ldots n\} \times \{1 \ldots n\}$.
 
 TODO: nice picture of instance of grid tiling with solution
 
@@ -109,13 +109,13 @@ Define horizontal segments.
 \newcommand{\verend}[2]{\mathsf{verEnd}_{#1,#2}}
 
 $$\hor{i}{j}{t_1}{t_2} = (h^R_{i,j,t_1}, h^L_{i+1, j, t_2})$$
-$$\ver{i}{j}{t_1}{t_2} = (v^D_{i,j,t_1}, v^U_{i, j+1, t_2})$$
+$$\ver{i}{j}{t_1}{t_2} = (v^U_{i,j,t_1}, v^D_{i, j+1, t_2})$$
 
 $$\horbeg{i}{t} = (h^L_{1, i, 1}, h^L_{1, i, t})$$
 $$\horend{i}{t} = (h^R_{k, i, t}, h^R_{k, i, n^2})$$
 
-$$\verbeg{i}{t} = (v^U_{i, 1, 1}, v^U_{i, 1, t})$$
-$$\verend{i}{t} = (v^D_{i, k, t}, v^D_{i, k, n^2})$$
+$$\verbeg{i}{t} = (v^D_{i, 1, 1}, v^D_{i, 1, t})$$
+$$\verend{i}{t} = (v^U_{i, k, t}, v^U_{i, k, n^2})$$
 
 \begin{eqnarray*}
 HOR &= &\{\hor{i}{j}{t_1}{t_2} : 1 \le i < k, 1 \le j \le k,
@@ -176,19 +176,13 @@ w(s) =
 	This solution has weight $\solWeight$.
 \end{proof}
 
+
 \begin{claim}
 \label{guards}
-Points $p^{L}, p^R, p^U, p^D$ cannot be covered with
-any segments from $DIAG$.
-\end{claim}
-
-
-\begin{claim}
-\label{hor_ver_sound}
-Points in $H \cup \{p^L : p \in H\} \cup \{p^R : p \in H\}$
+Points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$
 have to be covered with sgements from $HOR$.
 
-Points in $V \cup \{p^U : p \in V\} \cup \{p^D : p \in V\} $
+Points in $\{p^U : p \in V\} \cup \{p^D : p \in V\} $
 have to be covered with segments from $VER$.
 \end{claim}
 
@@ -196,7 +190,7 @@ have to be covered with segments from $VER$.
 \begin{claim}
 \label{one_diag_in_square}
 For given $1 \le i, j \le n$
-and any solution of an instance instance $(\points, \sets, w)$
+and any solution of an instance $(\points, \sets, w)$
 no two points $h_{i, j, t_1}, h_{i, j, t_2}$
 ($v_{i, j, t_1}, v_{i, j, t_2}$)
 for $1 \le t_1 < t_2 \le n^2$
@@ -209,16 +203,16 @@ Proof for horizontal segments. Proof for vertical is analoguous.
 Assume point $h_{i, j, t_1}$ is not covered with
 segments from $HOR$.
 Point $h^R_{i, j, t_1}$ has to be covered with $HOR$
-from Claim $\ref{hor_ver_sound}$.
+from Claim $\ref{guards}$.
 And every segment in $HOR$ covering $h^R_{i, j, t_1}$,
-covers also $h_{i, j, t_2}$.
+but not $h_{i,j,t_1}$ covers also $h_{i, j, t_2}$.
 \end{proof}
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
 For a constructed instance $(\points, \sets, w)$
 any solution has to have sum of weights from sets $HOR$ and $VER$ at least
-$W_{hv} = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon))$.
+$W_{hv} = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
 \end{lemma}
 
 \begin{proof}
@@ -235,31 +229,36 @@ lines for a single vertical line
 
 Let us fix $1 \le i \le k$.
 
-\begin{enumerate}
+\begin{enumerate}[label={(\arabic*)}]
 \item Length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$ is:
-$$(k-2)(n^2+1) + 2(n^2 + \epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
+$$(k(n^2+1) + n^2 +\epsilon) - ((n^2+1)+1 -\epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
 
-\item For every $1 \le j \le k$ there exists only one $1 \le t \le n$
+\item For every $1 \le j \le k$ there exists at most one $1 \le t \le n^2$
 such that $v_{i,j,t}$ is not covered by segments from $VER$
 (Claim \ref{one_diag_in_square}).
 Its guards $v^U_{i,j,t}$ and $v^D_{i,j,t}$
-have to be covered in $VER$ (Claim \ref{guards}),
-so only $k$ spaces of length $2\epsilon$ can be left
+have to be covered in $VER$ (Claim \ref{guards}).
+Therefore at most $k$ spaces of length $2\epsilon$ can be left
 not covered by segments from $VER$.
 
 \end{enumerate}
 Therefore sum of these lower bounds for vertical and horizontal lines are:
-$$2k(k(n^2+1) -2\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon))$$
+$$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$$
 \end{proof}
 
 \begin{lemma}
 \label{diag_correct}
 For a constructed instance $(\points, \sets, w)$
-for any solution for every $1 \le i,j \le k$
-has to have at most one segment $DIAG$
-connecting $v_{i,j,t}$ and $h_{i,j,t}$
-such that $order(t) \in f(i, j)$,
-ie. it is a correct tile for $(i,j)$.
+for any solution $\sol$ with weight equal to $\solWeight$,
+for every $1 \le i,j \le k$
+there exists such $1 \le t \le n^2$ that:
+\begin{enumerate}[label={(\arabic*)}]
+\item $v_{i,j,t}, h_{i,j,t}$ are not covered by segments from $VER$ or $HOR$;
+\item segment $(v_{i,j,t}, h_{i,j,t})$ is in solution $\sol$;
+\item $order(t) \in f(i,j)$, ie. it is an allowed tile for $(i,j)$;
+\item for every $1 \le s\le n^2$, $s \neq t$, $v_{i,j,s}$ is covered in $VER$;
+\item for every $1 \le s\le n^2$, $s \neq t$, $h_{i,j,s}$ is covered in $HOR$.
+\end{enumerate}
 Name the function of this $t$ as
 $diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
 \end{lemma}
@@ -272,7 +271,7 @@ points are covered with $DIAG$
 Exactly one $h_{i,j,t_x}$ and $v_{i,j,t_y}$
 points are covered with $DIAG$,
 because if one of them were not, then we would use too much weight
-$$W_hv + 2\epsilon > \solWeight$$
+$$W_{hv} + 2\epsilon > \solWeight$$
 
 This points are covered with the same segment from $DIAG$,
 because we need to use at least $k^2$ of them to use
@@ -312,8 +311,9 @@ therefore such solution would be too costly.
 
 Proof for vertical (2), proof for horizontal is analogous.
 
-Therefore for every $1 \le i < k, 1 \le j \le k$,
-$h_{i,j,diagonal(i, j)}$ and $h_{i+1,j,diagonal(i+1, j)}$
+Let us take any $1 \le i < k, 1 \le j \le k$
+and name $t_1 = diagonal(i, j)$ and $t_2 = diagonal(i+1, j)$.
+Therefore $h_{i,j,t_1}$ and $h_{i+1,j,t_2}$
 are not covered by segments from $HOR$,
 $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 have to be covered by segments from $HOR$ (Claim \ref{guards}).

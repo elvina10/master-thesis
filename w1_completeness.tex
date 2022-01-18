@@ -1,32 +1,34 @@
 TODO: some introduction
 
+\begin{defi}
+	Line is \textbf{right-diagonal} if it is
+	described by linear function $y = x + d$ for any $d \in \mathbb{R}$.
+	Segment is \textbf{right-diagonal} if its
+	direction is a right-diagonal line.
+\end{defi}
+
 \begin{tw}
 \label{w1_hard}
-	\textbf{Weighted geometric set cover with segments in 3 directions is W[1]-hard}.
 	Consider the problem of covering a set $\points$ of points
-	by selecting $k$ axis-parallel or right-diagonal weighted segments
-	from a set $\sets$ 
-	with weights $w : \sets \rightarrow \mathbb{R}$
-	with minimal weight.
-	Assuming ETH, there is no algorithm for this
+	by selecting at most $k$ segments
+	from a set of segments $\sets$ 
+	with non-negative weights $w : \sets \rightarrow \mathbb{R^*}$
+	so that the weight of the cover is minimal.
+	Then this problem is W[1]-hard parameterized by $k$ and
+	assuming ETH, there is no algorithm for this
 	problem with running time
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
 	for any computable function $f$.
+	Moreover, this holds even if all segments in $\sets$
+	are axis-parallel or right-diagonal.
 \end{tw}
 
-\begin{corollary}
-	\textbf{Weighted geometric set cover is W[1]-hard}.
-	Assuming ETH, there is no algorithm for weighted geometric set cover
-	with running time
-	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
-	for any computable function $f$.
-\end{corollary}
+Theorem \ref{w1_hard} is also true for less
+restricted problem where segments have any direction.
+We prove more tight setting in this section.
 
-\begin{proof}
-Trivial from Theorem \ref{w1_hard}. 
-\end{proof}
-
-In order to prove theorem \ref{w1_hard} we will show reduction from grid tiling problem.
+In order to prove Theorem \ref{w1_hard}
+we will show reduction from the grid tiling problem.
 
 \begin{defi}
 In the \textbf{grid tiling} problem we are given integers $n$ and $k$,

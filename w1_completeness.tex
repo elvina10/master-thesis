@@ -28,7 +28,9 @@ restricted problem where segments have any direction.
 We prove more tight setting in this section.
 
 In order to prove Theorem \ref{w1_hard}
-we will show reduction from the grid tiling problem.
+we will show reduction from an W[1]-hard problem.
+We introduce grid tiling problem, which is proven
+to be W[1]-complete in literature.
 
 \begin{defi}
 In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
@@ -40,20 +42,33 @@ $x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
 that assign numbers from $\{1 \ldots n\}$
 to respectively columns and rows of the grid,
 so that $(x(i), y(j)) \in f(i, j)$ for all valid $i$ and $j$,
-or conclude that such assignment does not exist.
+or conclude that such an assignment does not exist.
 \end{defi}
 
+The next theorem is describing complexity of grid tiling problem.
 
 \begin{tw}
 \label{grid_tiling_w1_hard}
-Assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
-algorithm for grid tiling problem
+Grid tiling is W[1]-hard parametrized by $k$ and
+assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
+algorithm solving this problem
 for any computable function $f$.
 \end{tw}
 
 TODO: proof from reference in literature (platypus book page 490)
 
-Let us have an instance of grid tiling problem -- size of the
+The reminder of this section is proving Theorem \ref{w1_hard}
+by reduction of grid tiling problem to geometric set cover.
+That would prove that geometric set cover is W[1]-hard,
+because if we could solve it with an FPT algorithm,
+then we could also solve grid tiling problem
+(which we reduced to geometric set cover).
+Therefore geometric set cover with setting
+described in Theorem \ref{w1_hard}
+is at least as hard as grid tiling problem.
+
+We start with an instance of the grid tiling problem $(n, k, f)$
+size of the
 grid $k$, number of colors $n$
 and function of allowed tiles
 $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \wp\{1 \ldots n\} \times \{1 \ldots n\}$.
@@ -61,7 +76,7 @@ $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \wp\{1 \ldots n\} \times \
 TODO: nice picture of instance of grid tiling with solution
 
 \paragraph{Construction.}
-We construct an instance of Geometric Set Cover with segments in 3 directions
+We construct an instance of geometric set cover with segments in 3 directions
 with weights $(\points, \sets, w)$.
 
 First let us choose any ordering of $n^2$ elements

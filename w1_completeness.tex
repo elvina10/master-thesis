@@ -76,12 +76,10 @@ $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \wp\{1 \ldots n\} \times \
 TODO: nice picture of instance of grid tiling with solution
 
 \paragraph{Construction.}
-We construct an instance of geometric set cover with segments in 3 directions
-with weights $(\points, \sets, w)$.
+We construct an instance $(\points, \sets, w)$ of geometric set cover as follows.
 
-First let us choose any ordering of $n^2$ elements
-and denote it as bijective function
-$order : \{1 \ldots n^2\} \rightarrow \{1 \ldots n\} \times \{1 \ldots n\}$.
+First let us choose any bijection
+$order : \{1, \ldots, n^2\} \rightarrow \{1, \ldots, n\} \times \{1, \ldots, n\}$.
 
 Define $match_v(i, j)$ and $match_h(i, j)$
 as functions denoting whether two points share x or y coordinate.

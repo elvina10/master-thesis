@@ -132,39 +132,46 @@ $$\horend{i}{t} = (h^R_{k, i, t}, h^R_{k, i, n^2})$$
 $$\verbeg{i}{t} = (v^D_{i, 1, 1}, v^D_{i, 1, t})$$
 $$\verend{i}{t} = (v^U_{i, k, t}, v^U_{i, k, n^2})$$
 
+\newcommand{\allhor}{\mathsf{HOR}}
+\newcommand{\allver}{\mathsf{VER}}
+\newcommand{\alldiag}{\mathsf{DIAG}}
+
+Next we define sets of vertical and horizontal segments:
 \begin{eqnarray*}
-HOR &= &\{\hor{i}{j}{t_1}{t_2} : 1 \le i < k, 1 \le j \le k,
-1 \le t_1, t_2 \le n^2, match_h(t_1, t_2)\} \\
+\allhor &= &\{\hor{i}{j}{t_1}{t_2} : 1 \le i < k, 1 \le j \le k,
+1 \le t_1, t_2 \le n^2, match_h(t_1, t_2) holds\} \\
 &\cup &\{\horbeg{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}
 \\
 &\cup &\{\horend{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}
 \end{eqnarray*}
 
 \begin{eqnarray*}
-VER &= &\{\ver{i}{j}{t_1}{t_2} : 1 \le i \le k, 1 \le j < k,
+\allver &= &\{\ver{i}{j}{t_1}{t_2} : 1 \le i \le k, 1 \le j < k,
 1 \le t_1, t_2 \le n^2, match_v(t_1, t_2)\} \\
 &\cup &\{\verbeg{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}
 \\
 &\cup &\{\verend{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}
 \end{eqnarray*}
 
-$$DIAG := \{ (h_{i, j, t}, v_{i, j, t}) :
+Finally we also define set of right-diagonal segments:
+$$\alldiag := \{ (h_{i, j, t}, v_{i, j, t}) :
 	1 \le i, j \le k, 1 \le t \le n^2, order(t) \in f(i, j)\}$$
 
 TODO: explain that these segments are in fact diagonal
 
-$$\sets := HOR \cup VER \cup DIAG$$
+$$\sets := \allhor \cup \allver \cup \alldiag$$
 
-Weight function is equal to length of the segment for $HOR$ and $VER$
-and equal to $\delta = \frac{1}{4k^4}$ for $DIAG$.
+The weight of each segment in $\allhor \cup \allver$,
+while every segment in $\alldiag$ has wieght
+$\delta = \frac{1}{4k^4}$.
 
 TODO: Put a picture of small instance like 3x3 with n=2
 
 \begin{equation}
 w(s) =
 	\begin{cases*}
-	  |s| 			& if $s \in HOR \cup VER$ \\
-	  \delta        & if $s \in DIAG$
+	  lenghth(s) 			& if $s \in \allhor \cup \allver$ \\
+	  \delta        & if $s \in \alldiag$
 	\end{cases*}
 \end{equation}
 
@@ -186,8 +193,8 @@ w(s) =
 	$$\{h_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}
 	\cup \{v_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}$$
 	
-	with $k^2$ segments from $DIAG$
-	and the rest in $VER$ or $HOR$.
+	with $k^2$ segments from $\alldiag$
+	and the rest in $\allver$ or $\allhor$.
 	This solution has weight $\solWeight$.
 \end{proof}
 
@@ -195,10 +202,10 @@ w(s) =
 \begin{claim}
 \label{guards}
 Points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$
-have to be covered with sgements from $HOR$.
+have to be covered with sgements from $\allhor$.
 
 Points in $\{p^U : p \in V\} \cup \{p^D : p \in V\} $
-have to be covered with segments from $VER$.
+have to be covered with segments from $\allver$.
 \end{claim}
 
 
@@ -209,24 +216,24 @@ and any solution of an instance $(\points, \sets, w)$
 no two points $h_{i, j, t_1}, h_{i, j, t_2}$
 ($v_{i, j, t_1}, v_{i, j, t_2}$)
 for $1 \le t_1 < t_2 \le n^2$
-can be not covered with segments from $HOR$ ($VER$).
+can be not covered with segments from $\allhor$ ($\allver$).
 \end{claim}
 
 \begin{proof}
 Proof for horizontal segments. Proof for vertical is analoguous.
 
 Assume point $h_{i, j, t_1}$ is not covered with
-segments from $HOR$.
-Point $h^R_{i, j, t_1}$ has to be covered with $HOR$
+segments from $\allhor$.
+Point $h^R_{i, j, t_1}$ has to be covered with $\allhor$
 from Claim $\ref{guards}$.
-And every segment in $HOR$ covering $h^R_{i, j, t_1}$,
+And every segment in $\allhor$ covering $h^R_{i, j, t_1}$,
 but not $h_{i,j,t_1}$ covers also $h_{i, j, t_2}$.
 \end{proof}
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
 For a constructed instance $(\points, \sets, w)$
-any solution has to have sum of weights from sets $HOR$ and $VER$ at least
+any solution has to have sum of weights from sets $\allhor$ and $\allver$ at least
 $W_{hv} = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
 \end{lemma}
 
@@ -235,7 +242,7 @@ We know that for every $1 \le i,j \le k$
 only one there exists only one $t_x$ and $t_y$ such that
 $v_{i,j,t_x}$ and $h_{i,j,t_y}$
 can be not covered by
-segments from $HOR$ and $VER$ (Claim \ref{one_diag_in_square}),
+segments from $\allhor$ and $\allver$ (Claim \ref{one_diag_in_square}),
 
 
 We sum the lower bound for sum of length for horizontal/vertical
@@ -249,12 +256,12 @@ Let us fix $1 \le i \le k$.
 $$(k(n^2+1) + n^2 +\epsilon) - ((n^2+1)+1 -\epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
 
 \item For every $1 \le j \le k$ there exists at most one $1 \le t \le n^2$
-such that $v_{i,j,t}$ is not covered by segments from $VER$
+such that $v_{i,j,t}$ is not covered by segments from $\allver$
 (Claim \ref{one_diag_in_square}).
 Its guards $v^U_{i,j,t}$ and $v^D_{i,j,t}$
-have to be covered in $VER$ (Claim \ref{guards}).
+have to be covered in $\allver$ (Claim \ref{guards}).
 Therefore at most $k$ spaces of length $2\epsilon$ can be left
-not covered by segments from $VER$.
+not covered by segments from $\allver$.
 
 \end{enumerate}
 Therefore sum of these lower bounds for vertical and horizontal lines are:
@@ -268,11 +275,11 @@ for any solution $\sol$ with weight equal to $\solWeight$,
 for every $1 \le i,j \le k$
 there exists such $1 \le t \le n^2$ that:
 \begin{enumerate}[label={(\arabic*)}]
-\item $v_{i,j,t}, h_{i,j,t}$ are not covered by segments from $VER$ or $HOR$;
+\item $v_{i,j,t}, h_{i,j,t}$ are not covered by segments from $\allver$ or $\allhor$;
 \item segment $(v_{i,j,t}, h_{i,j,t})$ is in solution $\sol$;
 \item $order(t) \in f(i,j)$, ie. it is an allowed tile for $(i,j)$;
-\item for every $1 \le s\le n^2$, $s \neq t$, $v_{i,j,s}$ is covered in $VER$;
-\item for every $1 \le s\le n^2$, $s \neq t$, $h_{i,j,s}$ is covered in $HOR$.
+\item for every $1 \le s\le n^2$, $s \neq t$, $v_{i,j,s}$ is covered in $\allver$;
+\item for every $1 \le s\le n^2$, $s \neq t$, $h_{i,j,s}$ is covered in $\allhor$.
 \end{enumerate}
 Name the function of this $t$ as
 $diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
@@ -280,26 +287,26 @@ $diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
 
 \begin{proof}
 At most one $h_{i,j,t_x}$ and $v_{i,j,t_y}$
-points are covered with $DIAG$
+points are covered with $\alldiag$
 (Claim \ref{one_diag_in_square}).
 	
 Exactly one $h_{i,j,t_x}$ and $v_{i,j,t_y}$
-points are covered with $DIAG$,
+points are covered with $\alldiag$,
 because if one of them were not, then we would use too much weight
 $$W_{hv} + 2\epsilon > \solWeight$$
 
-This points are covered with the same segment from $DIAG$,
+This points are covered with the same segment from $\alldiag$,
 because we need to use at least $k^2$ of them to use
 exactly one DIAG segment for every pair of $1 \le i,j \le k$,
-if we used 2 segments from $DIAG$
+if we used 2 segments from $\alldiag$
 for one pair $(i,j)$,
 then we would have used too much weight by $\delta$.
 Since these points $h_{i,j,t_x}$ and $v_{i,j,t_y}$ are covered by
-segment from $DIAG$, therefore $t_x = t_y$.
+segment from $\alldiag$, therefore $t_x = t_y$.
 
 Therefore $diagonal(i,j) = t_x = t_y$
 and $order(t_x)$ is an allowed tile for $(i,j)$
-because the respective segment is in $DIAG$.
+because the respective segment is in $\alldiag$.
 
 \end{proof}
 
@@ -319,7 +326,7 @@ $match_v(diagonal(i, j),diagonal(i, j+1))$ must be true.
 \end{lemma}
 
 \begin{proof}
-Every space between points in $H$ and $V$ covered by $HOR$/$VER$
+Every space between points in $H$ and $V$ covered by $\allhor$/$\allver$
 has to be covered by only one segment, because otherwise it would
 use $W_{hv} + \epsilon > \solWeight$,
 therefore such solution would be too costly.
@@ -329,14 +336,14 @@ Proof for vertical (2), proof for horizontal is analogous.
 Let us take any $1 \le i < k, 1 \le j \le k$
 and name $t_1 = diagonal(i, j)$ and $t_2 = diagonal(i+1, j)$.
 Therefore $h_{i,j,t_1}$ and $h_{i+1,j,t_2}$
-are not covered by segments from $HOR$,
+are not covered by segments from $\allhor$,
 $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
-have to be covered by segments from $HOR$ (Claim \ref{guards}).
-Every segment from $HOR$ starts at $h^R_{x,y,z_1}$
+have to be covered by segments from $\allhor$ (Claim \ref{guards}).
+Every segment from $\allhor$ starts at $h^R_{x,y,z_1}$
 segment and finishes at $h^L_{x,y+1,z_2}$ segment for some
 $1 \le x \le k$,$1 \le z < k$ and $1 \le z_1, z_2 \le n^2$.
 Since all of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
-are covered by segments in $HOR$,
+are covered by segments in $\allhor$,
 and there are two different segments covering
 these points, one of them must begin
 at $h^R_{i,j,t_1}$ and end at $h^L_{i,j+1,z_2}$
@@ -349,10 +356,10 @@ By Lemma \ref{vertical_horizontal_sum}
 lower bound for weight of such solution is $W_{hv} + \epsilon$
 which contradicts that the given solution has size $\solWeight < W_{hv} + \epsilon$
 Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$ must be covered
-by one segment from $HOR$ and these points are ends of this segment.
+by one segment from $\allhor$ and these points are ends of this segment.
 
 $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
-are ends of a segment from $HOR$,
+are ends of a segment from $\allhor$,
 therefore $match_h(t_1,t_2)$ must be true.
 \end{proof}
 

@@ -44,9 +44,9 @@ for our orginal problem.
 	\label{good_set_exists}
 	There exists an algorithm that
 	for any set of collinear points $C$, $\delta > 0$ and $k \ge 1$,
-	outputs a $(k,\delta)$-good set $A \subseteq C$ of size at most $f(k, \delta)$
-	for some computable function $f$. Moreover it can be computed in time
-	$O(|C| \cdot f(k, \delta))$.
+	outputs a $(k,\delta)$-good set $A \subseteq C$ of size
+	at most $(2+\frac{2}{\delta})^k$.
+	Moreover it can be computed in time $O(|C| \cdot (2+\frac{2}{\delta}))$.
 \end{lemma}
 
 To prove this theorem we also define \textit{extreme points}
@@ -54,47 +54,50 @@ for a set of colinear points.
 
 \begin{defi}
 	For a set of collinear points $C$,
-	\textbf{extreme points} are the points at the ends
+	\textbf{extreme points} are the ends
 	of the smallest segment that covers all points from set $C$.
+	
+	If $C$ consists of one point or is empty, then
+	there exists 1 or 0 extreme points respectively.
 \end{defi}
 
-\begin{proof}
+\begin{proof}[Proof of Lemma \ref{good_set_exists}]
 We prove this for a fixed $\delta$ by induction over $k$.
 
 \subparagraph{Inductive hypothesis.}
-For any set of collinear points $C$,
-there exists an algorithm that 
-runs in time $O(|C|k(1+\frac{1}{\delta}))$
-and finds a set $A$ such that:
+For any set of collinear points $C$, there exists a set $A$ such that:
 \begin{itemize}
+\item $A$ is subset of $C$,
 \item $A$ is $(\ell, \delta)$-good for every $1 \le \ell \le k$,
-\item $|A| < f(\delta, k)$ for some computable function $f$,
+\item $|A| \le (2+\frac{2}{\delta})^k$,
 \item extreme points from $C$ are in $A$.
 \end{itemize}
 
 \subparagraph{Base case for $k = 1$.}
-It is sufficient that $A$ consists of 2 points: extreme points from $C$
-or a single point if $|C| = 1$.
+It is sufficient that $A$ consists of extreme points of $C$.
 
 If they are covered with one segment, it must be a segment 
 that includes the extreme points from $C$, so it covers the whole set $C$.
+
+There are at most 2 extreme points in $C$ and $2 < 2+\frac{2}{\delta}$.
 
 \subparagraph{Inductive step.}
 Assuming inductive hypothesis for any set of collinear points $C$
 and for parameter $k$, we will prove hypothesis for $k+1$.
 
-Let be $s$ the minimal segment that includes all points from $C$.
+Let $s$ be the minimal segment that includes all points from $C$.
 That is, the extreme points of $C$ are endpoints of $s$.
 
 We define $M = \lceil1+\frac{2}{\delta}\rceil$ subsegments of $s$ in the following way.
-We split $s$ into $M$ parts 
-$v_i$ of equal length, that is $|v_i| = \frac{|s|}{M}$ for each $1 \le i \le M$.
+We split $s$ into $M$ closed segments of equal length.
+We name these as segments $v_i$ and
+$|v_i| = \frac{|s|}{M}$ for each $1 \le i \le M$.
 
 Let $C_i$ be the subset of $C$ consisting of points laying on $v_i$.
 
-Let $t_i$ be the segment with endpoints being the extreme points of $C_i$
-(it might be degenerated segment if $|C_i| = 1$ or it might be empty
-if $C_i$ is empty).
+Let $t_i$ be the segment with endpoints being the extreme points of $C_i$.
+It might be degenerated segment if $C_i$ consists of one point
+or empty if $C_i$ is empty.
 
 TODO: Add a picture with $v_i$ and $t_i$ here
 
@@ -105,6 +108,13 @@ and it's still a $(k, \delta)$-good set for $C_i$.
 Then we define $A = \bigcup_{i=1}^{M} A_i$.
 Thus $A$ includes the extreme points of $C$,
 because they are included in the sets $A_1$ and $A_M$.
+
+Size of each $A_i$ is at most $(2+\frac{2}{\delta})^(k-1)$ from inductive
+hypothesis, therefore size of $A$ is at most:
+$$M(2+\frac{2}{\delta})^{(k-1)} =
+\lceil1+\frac{2}{\delta}\rceil\cdot(2+\frac{2}{\delta})^{(k-1)}
+\le (2+\frac{2}{\delta})^k$$
+
 
 \subparagraph{Proof that $A$ is $(k, \delta)$-good for $C$.}
 Let us take any cover of $A$ with $k+1$ segments and call it $\sol$.
@@ -119,11 +129,12 @@ So $\sol^{+\delta}$ covers $C_i$ as well.
 
 If there exists a segment $t_i$ for which a segment $x$ as defined above
 does not exist, then all $k+1$ segments that cover
-$A_i$ intersect with $t_i$. (Note: There may exist only one such segment $t_i$).
-From the inductive hypothesis end points of $s$ are
+$A_i$ intersect with $t_i$.
+Note that there may exist only one such segment $t_i$.
+From the inductive hypothesis endpoints of $s$ are
 in $A_1$ and $A_M$ respectively, so $\sol$ must cover them.
-Hence there must exist
-segments starting in the ends of $s$ and ending somewhere in $t_i$.
+For each endpoint of $s$, there exists
+a segment that starts in this endpoint and ends somewhere in $t_i$.
 Let us call these two segments $y$ and $z$. It follows that:
 $|y| + |z| + |t_i| \ge |s|$.
 Since $|t_i| \le |v_i| = \frac{|s|}{M} \le \frac{|s|}{1+\frac{2}{\delta}} = \frac{|s|\delta}{\delta+2}$,
@@ -132,14 +143,15 @@ we have $\max(|y|, |z|) \ge |s|(1-\frac{\delta}{\delta+2})/2 = \frac{|s|}{\delta
 TODO: Add a picture with such segments here
 
 After $\delta$-extension, the longer of these segments will
-lengthen both ways by at least:
-$$\frac{|s|\delta}{\delta+2} = \frac{|s|}{1+\frac{2}{\delta}} > \frac{|s|}{M} = v_i > t_i.$$
+expand at both ends by at least:
+$$\frac{|s|\delta}{\delta+2} = \frac{|s|}{1+\frac{2}{\delta}} \ge \frac{|s|}{M} = v_i \ge t_i.$$
 
-Therefore the longer of segments $y$ and $z$ will cover the segment $t_i$
-after $\delta$-extension, therefore $\sol^{+\delta}$ covers $C_i$.
+Therefore the longer of segments $y$ and $z$ will cover the whole segment $t_i$
+after $\delta$-extension. We conclude that $\sol^{+\delta}$ covers $C_i$.
 
 Since $C = \bigcup_{i=1}^M C_i$,
-then $\sol^{+\delta}$ covers $C$.
+it follows that $\sol^{+\delta}$ covers $C$.
+
 
 \subparagraph{Complexity}
 

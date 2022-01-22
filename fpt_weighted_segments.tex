@@ -1,6 +1,14 @@
 \section{FPT for weighted segments with $\delta$-extensions}
 
-TODO: Some intro
+In this section we consider a geometric set cover problem
+for weighted segments relaxed with $\delta$-extensions.
+We show that this problem
+admits an FPT algorithm when parametrized with size
+of solution and $\delta$.
+Assumption about the problem being relaxed with $\delta$-extensions is relevant.
+In next chapter we show that geometric set cover problem
+for weighted segments is W[1]-hard, that means
+there does not exist an FPT algorithm parametrized by solution size for it.
 
 \begin{tw}[FPT for weighted segment cover with $\delta$-extensions]{
 	\label{fpt_weighted_segment}
@@ -15,9 +23,15 @@ TODO: Some intro
 
 
 To solve this problem we will introduce a lemma about choosing
-a \textit{good} subset of points.
+a \textit{good} subset of points. Good subset of points
+for a set of collinear points $C$ and parameters $k$ and $\delta$
+is a subset of $C$, such that
+if we cover good subset of $C$ with at most $k$ segments,
+these segments after $\delta$-extensions will cover all of the points from $C$.
 
-TODO: Some intuition
+Such set of size bounded by some function $f(k, \delta)$ always exists.
+In later part of the section this lemma will allow us to find a kernel
+for our orginal problem.
 
 \begin{defi}
 	For a set of collinear points $C$,
@@ -31,9 +45,18 @@ TODO: Some intuition
 	There exists an algorithm that
 	for any set of collinear points $C$, $\delta > 0$ and $k \ge 1$,
 	outputs a $(k,\delta)$-good set $A \subseteq C$ of size at most $f(k, \delta)$
-	for some computable function $f$. This algorithm runs in time
+	for some computable function $f$. Moreover it can be computed in time
 	$O(|C| \cdot f(k, \delta))$.
 \end{lemma}
+
+To prove this theorem we also define \textit{extreme points}
+for a set of colinear points.
+
+\begin{defi}
+	For a set of collinear points $C$,
+	\textbf{extreme points} are the points at the ends
+	of the smallest segment that covers all points from set $C$.
+\end{defi}
 
 \begin{proof}
 We prove this for a fixed $\delta$ by induction over $k$.
@@ -45,7 +68,7 @@ runs in time $O(|C|k(1+\frac{1}{\delta}))$
 and finds a set $A$ such that:
 \begin{itemize}
 \item $A$ is $(\ell, \delta)$-good for every $1 \le \ell \le k$,
-\item $A$ has size $|A| < f(\delta, k)$ for some computable function $f$,
+\item $|A| < f(\delta, k)$ for some computable function $f$,
 \item extreme points from $C$ are in $A$.
 \end{itemize}
 

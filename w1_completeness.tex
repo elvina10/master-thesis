@@ -179,16 +179,15 @@ w(s) =
 
 \begin{lemma}
 \label{set_cover_solution_exists}
-	If there exists solution for grid tiling,
-	then there exists solution of instance $(\points, \sets, w)$
+	If there exists a solution for the grid tiling instance $f_{i,j}$,
+	then there exists a solution for the instance $(\points, \sets, w)$
 	of geometric set cover
 	with weight $\solWeight$.
 \end{lemma}
 
 \begin{proof}
-	If there exists a solution to the grid tiling problem
-	$x, y$,
-	then there exists a solution that covers
+	Suppose there exists a solution $x,y$ to the grid tiling problem.
+	Then consider a solution that covers
 	all points
 	$$\{h_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}
 	\cup \{v_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}$$

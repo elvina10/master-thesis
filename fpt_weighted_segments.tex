@@ -167,8 +167,8 @@ $|C| + M$ to calculate the sets $C_i$.
 
 Therefore the algorithm has complexity:
 $$O(|C|+M) + \sum_i^M O(|C_i|k(1+\frac{1}{\delta})) = 
-O(|C| + (1+\frac{1}{\delta})) + O(2^k(\sum_i^M |C_i|)k(1+\frac{1}{\delta}))
-\le O(2^k|C|k(1+\frac{1}{\delta})).$$
+O(|C| + (1+\frac{1}{\delta})) + O((\sum_i^M |C_i|)k(1+\frac{1}{\delta}))
+\le O(|C|k(1+\frac{1}{\delta})).$$
 
 \end{proof}
 
@@ -261,33 +261,51 @@ for $C_i$ with $|A_i| \le (2+\frac{2}{\delta})^k$.
 Then we have a set $\points' = D \cup \bigcup A_i$ of size at most $f(k, \delta)$
 for some computable function $f$.
 Observe that if we have a solution $\sol$ of size at most $k$
-that covers $D \cup \bigcup A_i$, then $\sol^{+\delta}$ covers $\points$.
+that covers $\points'$, then $\sol^{+\delta}$ covers $\points$.
 
-TODO: Rewrite sentence below
-This is because
-$\sol$ already covers points from $D$, they cover $C_i$, because
-they cover $(k,\delta)$-good set $A_i$ with at most $k$ segments,
-so $\sol^{+\delta}$ covers $C_i$.
+$\points$ is separated into several parts -- sets $D$ and $C_i$.
+Points from $D$ are covered by $\sol$, because $D$ is part of $\points'$.
+Each $A_i$ is covered, because $A_i$ is part of $\points'$;
+$A_i$ is a $(k,\delta)$-good set for $C_i$, therefore $\sol^{+\delta}$ covers $C_i$.
 
 TODO: Rewrite
-After that we shrunk down size of $\points$ to size of $f(k, \delta)$
+After that we shrunk down $\points$ to $\points'$ of size $f(k, \delta)$
 for some computable function $f$.
-Then we would like to shrink down size of $\sets$.
-For every collinear subset of $D$, we can choose one segment from
-$\sets$ that covers these points and have the lowest weight
+Then we would like to shrink down $\sets$ to some set of
+interesting segments of bounded size as well.
+
+For every pair of points $\points'$, we can choose one segment from
+$\sets$ that have the lowest weight
+among segments that cover these points 
 or decide there is no segment that cover them.
-There are at most $|D|^2$ different segments, because
-we can distnguish these collinear sets by their extreme points.
+Call this set $\sets'$ and name these segments \textbf{interesting}.
+There are at most $|\points'|^2$ different segments in $\sets'$.
 
-This has complexity $O(|D|^2|\sets|)$ and produce shrunk down
-set $\sets$ of size $f(k, \delta)$ for some computable function $f$.
+We need to show that when we cover $\points'$
+with segments from $\sets'$ we achieve the same minimal
+solution as when we cover them with segments from $\sets$. 
+In order to prove this,
+consider a minimal solution $\sol$ that covers $\points'$
+with segments from $\sets'$
+and take any segment $s$ from $\sol$.
+Let us look at the points from $\points'$ that lie on $s$
+and call this set of points $F$.
+$F$ is a set of collinear points for course.
+We can cover $F$ with any segment that covers extreme points of $F$,
+because all other points lay on the segment between these points.
+Therefore we can change $s$ to an interesting segment $s'$
+and interesting segments are defined in such a way, that $s'$
+has weight no larger than weight of $s$.
 
-Then we can iterate over all subsets of shrunk down set $\sets$ and
-choose the set with the lowest sum of weights that cover $D$. This solution
+This has complexity $O(|\points'|^2|\sets|)$ and produce shrunk down
+set of segments $\sets'$ of size $f(k, \delta)$
+for some computable function $f$.
+
+Then we can iterate over all subsets of $\sets'$ and
+choose the set with the lowest sum of weights that cover $\points'$.
+This solution
 would have weight not larger than optimal solution
 for the problem without extension, because we iterate
-over all posibilities of covering the subset of $\points$.
-
-TODO: Formal proof of correctness
+over all posibilities of covering the subset of $\points'$.
 \end{proof}
 

@@ -153,40 +153,96 @@ Since $C = \bigcup_{i=1}^M C_i$,
 it follows that $\sol^{+\delta}$ covers $C$.
 
 
-\subparagraph{Complexity}
+\subparagraph{Algorithm.}
 
-We use the recursive algorithm for subsets $C_i$. Every point
+We can simulate the inductive proof by a recursive algorithm.
+
+TODO: Maybe just say "it's easy to implement"?
+
+We apply recursion for each subset $C_i$. Every point
 from $C$ belongs to at most 2 sets $C_i$.
 
 Apart from recursive algorithm we perform operations linear in
-size of $|C| + M$ to calculate the sets $C_i$.
+$|C| + M$ to calculate the sets $C_i$.
 
-Therefore it has complexity:
+Therefore the algorithm has complexity:
 $$O(|C|+M) + \sum_i^M O(|C_i|k(1+\frac{1}{\delta})) = 
-O(|C| + (1+\frac{1}{\delta})) + O((\sum_i^M |C_i|)k(1+\frac{1}{\delta})) \le O(|C|k(1+\frac{1}{\delta})).$$
+O(|C| + (1+\frac{1}{\delta})) + O(2^k(\sum_i^M |C_i|)k(1+\frac{1}{\delta}))
+\le O(2^k|C|k(1+\frac{1}{\delta})).$$
 
 \end{proof}
 
-\begin{proof}[Proof of Theorem \ref{fpt_weighted_segment}]
-
-To construct an algorithm for this problem let us formulate
-some claims about the problem first.
+Let us now formulate some claims about the
+properties for the problem parametrized by the solution size.
+These properties provide bounds for different
+objects in the problem instance,
+that help us to find small kernel of the problem
+or claim that the minimal
+solution of this instance must be above some treshold.
 
 \begin{defi}
-Line is \textbf{long} if there are at least $k+1$ points from $\points$ on it.
+A line in $\mathbb{R}$ is \textbf{long} if there are at least $k+1$ points from $\points$ on it.
 \end{defi}
 
 \begin{claim}
-If there are more than $k$ long lines, then 
+\label{few_long_lines}
+If there are more than $k$ different long lines, then 
 $\points$ can not be covered with $k$ segments.
 \end{claim}
 
+\begin{proof}
+We prove the claim by contradiction.
+Let us assume that we have at least $k+1$ different
+long lines in our instance of the problem
+and solution $\sol$ of size at most $k$
+covering points $\points$.
+
+Choose any long line $L$.
+Every segment from $\sol$, which is not collinear with $L$,
+covers at most one point that lays on $L$.
+
+$L$ is long, so there are at least $k+1$ points from $\points$ that lay on $L$.
+That implies that there must be a segment in $\sol$ that is
+collinear with $L$.
+
+Since we have at least $k+1$ different long lines,
+then there are at least $k+1$
+segments in $\sol$ collinear with different lines.
+It contradicts with the assumption that $|\sol| \le k$.
+\end{proof}
+
 \begin{claim}
-If there is more than $k^2$ points from $\points$
-that do not lie on any long line, then $\points$ can not be covered with $k$ segments.
+\ref{few_points}
+If there are more than $k^2$ points from $\points$
+that do not lie on any long line,
+then $\points$ can not be covered with $k$ segments.
 \end{claim}
 
-Applying the above claims, if we have more than $k$ long lines
+\begin{proof}
+We prove the claim by contradiction.
+Let us assume that we have at least $k^2+1$ points
+from $\points$ that do not lie on any long line, call this set $A$,
+and a solution $\sol$ of size at most $k$ covering points $\points$.
+
+For every segment $s$ from $\sol$ it covers at most $k$
+points from $A$.
+It holds because if $s$ covered at least $k+1$ points from $A$,
+then the line in the direction of $s$ would be a long line
+and that contradicts of definiton of $A$.
+
+If every segment from $\sol$ covers at most $k$ points from $A$
+and $|\sol| \le k$, then at most $k^2$ points from $A$ are covered by $\sol$
+and that contradicts the fact that $\sol$ is a solution of given
+geometric set cover instance.
+\end{proof}
+
+We are now ready to give a proof of Theorem \ref{fpt_weighted_segment}
+algorithm.
+
+\begin{proof}[Proof of Theorem \ref{fpt_weighted_segment}]
+
+Applying the claims \ref{few_long_lines} and \ref{few_points},
+if we have more than $k$ long lines
 or more than $k^2$ points form $\points$
 that do not lie on any long line, then we answer that
 there is no solution of size at most $k$.

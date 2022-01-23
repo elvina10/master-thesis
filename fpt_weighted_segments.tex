@@ -101,6 +101,21 @@ or empty if $C_i$ is empty.
 
 TODO: Add a picture with $v_i$ and $t_i$ here
 
+\begin{figure}[h]
+\centering
+\def\svgwidth{0.5\columnwidth}
+\input{fpt_v_t_def.pdf_tex}
+\caption{\textbf{Example of segments $v_i$ and $t_i$.}}
+Example for $M = 8$ and some set of points.
+Red segments denote split into $M$ segments of equal length $v_i$.
+Blue segments denote segments $t_i$. $t_3$ and $t_5$ are empty segments,
+because there are no points that lie on segments $v_3$ or $v_5$.
+Segments $t_4$ and $t_8$ are degenerated to one point --
+$c$ and $d$ respectively.
+Segments $t_1$ and $t_2$ share one point $b$.
+\label{fig:fpt_v_f_def}
+\end{figure}
+
 We use the inductive hypothesis to choose $(k, \delta)$-good sets $A_i$
 for sets $C_i$. Note that if $|C_i| \le 1$, then $A_i = C_i$
 and it's still a $(k, \delta)$-good set for $C_i$.

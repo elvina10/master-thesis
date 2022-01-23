@@ -199,9 +199,9 @@ covering points $\points$.
 
 Choose any long line $L$.
 Every segment from $\sol$, which is not collinear with $L$,
-covers at most one point that lays on $L$.
+covers at most one point that lies on $L$.
 
-$L$ is long, so there are at least $k+1$ points from $\points$ that lay on $L$.
+$L$ is long, so there are at least $k+1$ points from $\points$ that lie on $L$.
 That implies that there must be a segment in $\sol$ that is
 collinear with $L$.
 
@@ -212,7 +212,7 @@ It contradicts with the assumption that $|\sol| \le k$.
 \end{proof}
 
 \begin{claim}
-\ref{few_points}
+\label{few_points}
 If there are more than $k^2$ points from $\points$
 that do not lie on any long line,
 then $\points$ can not be covered with $k$ segments.
@@ -242,29 +242,34 @@ algorithm.
 \begin{proof}[Proof of Theorem \ref{fpt_weighted_segment}]
 
 Applying the claims \ref{few_long_lines} and \ref{few_points},
-if we have more than $k$ long lines
-or more than $k^2$ points form $\points$
+if we have more than $k$ different long lines
+or more than $k^2$ points from $\points$
 that do not lie on any long line, then we answer that
 there is no solution of size at most $k$.
 
 Otherwise, we can split $\points$ into at most $k+1$ sets:
-$D$, at most $k^2$ points that do not lie on any long line
-and $C_i$ -- points
-that lay on $i$-th long line.
+\begin{itemize}
+\item $D$, at most $k^2$ points that do not lie on any long line;
+\item $C_i$, points that lie on $i$-th long line.
+\end{itemize}
 Sets $C_i$ do not need to be disjoint.
 
-Then for every set $C_i$, we can use Lemma \ref{good_set_exists}
-to get $(k,\delta)$-good set $A_i$
-for $C_i$.
+Then for every set $C_i$ we can use Lemma \ref{good_set_exists}
+to obtain a $(k,\delta)$-good set $A_i$
+for $C_i$ with $|A_i| \le (2+\frac{2}{\delta})^k$.
 
-Then we have set $D \cup \bigcup A_i$ of size at most $f(k, \delta)$
-for some computable function $f$, that if we have a solution $\sol$ of size at most $k$
+Then we have a set $\points' = D \cup \bigcup A_i$ of size at most $f(k, \delta)$
+for some computable function $f$.
+Observe that if we have a solution $\sol$ of size at most $k$
 that covers $D \cup \bigcup A_i$, then $\sol^{+\delta}$ covers $\points$.
+
+TODO: Rewrite sentence below
 This is because
-$\sol$ already covers points $D$, they cover $C_i$, because
+$\sol$ already covers points from $D$, they cover $C_i$, because
 they cover $(k,\delta)$-good set $A_i$ with at most $k$ segments,
 so $\sol^{+\delta}$ covers $C_i$.
 
+TODO: Rewrite
 After that we shrunk down size of $\points$ to size of $f(k, \delta)$
 for some computable function $f$.
 Then we would like to shrink down size of $\sets$.
@@ -283,5 +288,6 @@ would have weight not larger than optimal solution
 for the problem without extension, because we iterate
 over all posibilities of covering the subset of $\points$.
 
+TODO: Formal proof of correctness
 \end{proof}
 

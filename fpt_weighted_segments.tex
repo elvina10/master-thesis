@@ -101,7 +101,7 @@ or empty if $C_i$ is empty.
 
 \begin{figure}[h]
 \centering
-\def\svgwidth{0.5\columnwidth}
+\def\svgwidth{\columnwidth}
 \input{fpt_v_t_def.pdf_tex}
 \caption{\textbf{Example of segments $v_i$ and $t_i$.}}
 Example for $M = 8$ and some set of points.
@@ -153,7 +153,14 @@ $|y| + |z| + |t_i| \ge |s|$.
 Since $|t_i| \le |v_i| = \frac{|s|}{M} \le \frac{|s|}{1+\frac{2}{\delta}} = \frac{|s|\delta}{\delta+2}$,
 we have $\max(|y|, |z|) \ge |s|(1-\frac{\delta}{\delta+2})/2 = \frac{|s|}{\delta+2}$.
 
-TODO: Add a picture with such segments here
+\begin{figure}[h]
+\centering
+\def\svgwidth{\columnwidth}
+\input{fpt_tricky_case.pdf_tex}
+\caption{\textbf{Example of a tricky case.}}
+This shows an example.
+\label{fig:fpt_tricky_case}
+\end{figure}
 
 After $\delta$-extension, the longer of these segments will
 expand at both ends by at least:

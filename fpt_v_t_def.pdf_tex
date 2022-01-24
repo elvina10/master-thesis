@@ -60,15 +60,15 @@
     \put(0.31547895,0.35655499){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_3$\\\end{tabular}}}}%
     \put(0.44777104,0.35018699){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_4$\\\end{tabular}}}}%
     \put(0.57895141,0.35018736){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_5$\\\end{tabular}}}}%
-    \put(0.71346693,0.35407815){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_7$\\\end{tabular}}}}%
-    \put(0.83853296,0.35518991){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_8$\\\end{tabular}}}}%
+    \put(0.71346693,0.35407815){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_6$\\\end{tabular}}}}%
+    \put(0.83853296,0.35518991){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_7$\\\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{fpt_v_t_def.pdf}}%
     \put(0.05676393,0.1109335){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_1$\\\end{tabular}}}}%
     \put(0.18596608,0.11302848){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_2$\\\end{tabular}}}}%
     \put(0.36028601,0.10925646){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_3$\\\end{tabular}}}}%
     \put(0.44541273,0.10917716){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_4$\\\end{tabular}}}}%
-    \put(0.72525824,0.10913769){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_7$\\\end{tabular}}}}%
-    \put(0.90770882,0.11182163){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_8$\\\end{tabular}}}}%
+    \put(0.72525824,0.10913769){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
+    \put(0.90770882,0.11182163){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_7$\\\end{tabular}}}}%
     \put(-0.00009628,0.02974401){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.13127692\unitlength}\raggedright \end{minipage}}}%
     \put(-0.0034246,0.05189237){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08980518\unitlength}\raggedright $a$\end{minipage}}}%
     \put(0.14024268,0.04801037){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08980518\unitlength}\raggedright $b$\end{minipage}}}%

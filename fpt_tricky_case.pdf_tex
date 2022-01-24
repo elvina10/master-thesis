@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{123.7227979bp}%
+    \setlength{\unitlength}{123.69192998bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,18 +50,18 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.30308055)%
+  \begin{picture}(1,0.30104812)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{fpt_tricky_case.pdf}}%
-    \put(0.03507997,0.27603868){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_1$\\\end{tabular}}}}%
-    \put(0.17091904,0.27824127){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_2$\\\end{tabular}}}}%
-    \put(0.35419341,0.2742755){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_3$\\\end{tabular}}}}%
-    \put(0.44369299,0.27419212){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_4$\\\end{tabular}}}}%
-    \put(0.73791365,0.27415063){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
-    \put(0.92973642,0.27697243){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_7$\\\end{tabular}}}}%
+    \put(0.03508873,0.2739995){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_1$\\\end{tabular}}}}%
+    \put(0.17096169,0.27620264){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_2$\\\end{tabular}}}}%
+    \put(0.3542818,0.27223587){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_3$\\\end{tabular}}}}%
+    \put(0.44380372,0.27215248){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_4$\\\end{tabular}}}}%
+    \put(0.7380978,0.27211097){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
+    \put(0.92996844,0.27493348){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_7$\\\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{fpt_tricky_case.pdf}}%
-    \put(0.15975684,0.08048592){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1113036\unitlength}\raggedright $y$\end{minipage}}}%
-    \put(0.72735454,0.07738807){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.13923666\unitlength}\raggedright $z$\\ \end{minipage}}}%
+    \put(0.15979671,0.06627102){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11133138\unitlength}\raggedright $y$\end{minipage}}}%
+    \put(0.72753606,0.0757236){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.13927141\unitlength}\raggedright $z$\\ \end{minipage}}}%
   \end{picture}%
 \endgroup%

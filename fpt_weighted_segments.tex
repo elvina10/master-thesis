@@ -104,7 +104,9 @@ or empty if $C_i$ is empty.
 \def\svgwidth{\columnwidth}
 \input{fpt_v_t_def.pdf_tex}
 \caption{\textbf{Example of segments $v_i$ and $t_i$.}}
-Example for $M = 7$ and some set of points.
+Example for $M = 7$ and some set of points (marked with black circles).
+Upper picture shows segments $v_i$ and lower picture shows segments $t_i$
+on the same set of points.
 $a$ and $b$ are extreme points and therefore segment $s$
 ends in $a$ and $b$.
 Red segments denote split into $M$ segments of equal length $v_i$.
@@ -177,20 +179,9 @@ it follows that $\sol^{+\delta}$ covers $C$.
 
 \subparagraph{Algorithm.}
 
-We can simulate the inductive proof by a recursive algorithm.
-
-TODO: Maybe just say "it's easy to implement"?
-
-We apply recursion for each subset $C_i$. Every point
-from $C$ belongs to at most 2 sets $C_i$.
-
-Apart from recursive algorithm we perform operations linear in
-$|C| + M$ to calculate the sets $C_i$.
-
-Therefore the algorithm has complexity:
-$$O(|C|+M) + \sum_i^M O(|C_i|k(1+\frac{1}{\delta})) = 
-O(|C| + (1+\frac{1}{\delta})) + O((\sum_i^M |C_i|)k(1+\frac{1}{\delta}))
-\le O(|C|k(1+\frac{1}{\delta})).$$
+We can simulate the inductive proof by a recursive algorithm with
+the following complexity:
+$$O(|C|+\frac{1}{\delta}) + O(k(2+\frac{1}{\delta})^k)$$
 
 \end{proof}
 

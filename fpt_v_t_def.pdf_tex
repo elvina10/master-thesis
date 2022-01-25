@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{130.07824201bp}%
+    \setlength{\unitlength}{139.12081357bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,29 +50,31 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.3815946)%
+  \begin{picture}(1,0.35713973)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{fpt_v_t_def.pdf}}%
-    \put(0.27446687,5.23448355){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.88025498\unitlength}\raggedright \end{minipage}}}%
-    \put(0.05676398,0.35587395){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_1$\\\end{tabular}}}}%
-    \put(0.1859661,0.35796893){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_2$\\\end{tabular}}}}%
-    \put(0.31547895,0.35655499){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_3$\\\end{tabular}}}}%
-    \put(0.44777104,0.35018699){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_4$\\\end{tabular}}}}%
-    \put(0.57895141,0.35018736){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_5$\\\end{tabular}}}}%
-    \put(0.71346693,0.35407815){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_6$\\\end{tabular}}}}%
-    \put(0.83853296,0.35518991){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_7$\\\end{tabular}}}}%
+    \put(0.23697794,4.89460071){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.82304019\unitlength}\raggedright \end{minipage}}}%
+    \put(0.03342531,0.33309088){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_1$\\\end{tabular}}}}%
+    \put(0.15422955,0.33504969){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_2$\\\end{tabular}}}}%
+    \put(0.27532432,0.33372765){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_3$\\\end{tabular}}}}%
+    \put(0.39901769,0.32777355){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_4$\\\end{tabular}}}}%
+    \put(0.52167161,0.32777391){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_5$\\\end{tabular}}}}%
+    \put(0.64744389,0.3314118){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_6$\\\end{tabular}}}}%
+    \put(0.76438088,0.33245129){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$v_7$\\\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{fpt_v_t_def.pdf}}%
-    \put(0.05676393,0.1109335){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_1$\\\end{tabular}}}}%
-    \put(0.18596608,0.11302848){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_2$\\\end{tabular}}}}%
-    \put(0.36028601,0.10925646){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_3$\\\end{tabular}}}}%
-    \put(0.44541273,0.10917716){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_4$\\\end{tabular}}}}%
-    \put(0.72525824,0.10913769){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
-    \put(0.90770882,0.11182163){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_7$\\\end{tabular}}}}%
-    \put(-0.00009628,0.02974401){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.13127692\unitlength}\raggedright \end{minipage}}}%
-    \put(-0.0034246,0.05189237){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08980518\unitlength}\raggedright $a$\end{minipage}}}%
-    \put(0.14024268,0.04801037){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08980518\unitlength}\raggedright $b$\end{minipage}}}%
-    \put(0.39808,0.05036847){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08980518\unitlength}\raggedright $c$\end{minipage}}}%
-    \put(0.92475988,0.05901569){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08980518\unitlength}\raggedright $d$\end{minipage}}}%
+    \put(0.03342525,0.10407106){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_1$\\\end{tabular}}}}%
+    \put(0.15422953,0.10602987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_2$\\\end{tabular}}}}%
+    \put(0.39681267,0.10242888){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_4$\\\end{tabular}}}}%
+    \put(0.65846879,0.10239198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
+    \put(-0.01973915,0.02815872){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12274418\unitlength}\raggedright \end{minipage}}}%
+    \put(-0.00128715,0.04488979){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08396803\unitlength}\raggedright $a$\end{minipage}}}%
+    \put(0.12226005,0.04488979){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08396803\unitlength}\raggedright $b$\end{minipage}}}%
+    \put(0.3488815,0.04875644){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.29417665\unitlength}\raggedright $c=t_3$ \end{minipage}}}%
+    \put(0.83838826,0.04875644){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22582211\unitlength}\raggedright $d=t_7$\end{minipage}}}%
+    \put(-0.00320201,0.26901946){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08396803\unitlength}\raggedright $a$\end{minipage}}}%
+    \put(0.12034519,0.26901946){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08396803\unitlength}\raggedright $b$\end{minipage}}}%
+    \put(0.36853064,0.27288611){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.29417665\unitlength}\raggedright $c$ \end{minipage}}}%
+    \put(0.85803739,0.27288611){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22582211\unitlength}\raggedright $d$\end{minipage}}}%
   \end{picture}%
 \endgroup%

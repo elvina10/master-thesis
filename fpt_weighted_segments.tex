@@ -99,8 +99,9 @@ Let $t_i$ be the segment with endpoints being the extreme points of $C_i$.
 It might be degenerated segment if $C_i$ consists of one point
 or empty if $C_i$ is empty.
 
+You can see example of such segments $v_i$ and $t_i$ in Figure $\ref{fig:fpt_v_f_def}$.
+
 \begin{figure}[h]
-\centering
 \def\svgwidth{\columnwidth}
 \input{fpt_v_t_def.pdf_tex}
 \caption{\textbf{Example of segments $v_i$ and $t_i$.}}
@@ -147,6 +148,7 @@ So $\sol^{+\delta}$ covers $C_i$ as well.
 If there exists a segment $t_i$ for which a segment $x$ as defined above
 does not exist, then all $k+1$ segments that cover
 $A_i$ intersect with $t_i$.
+You can see an example of such segments in Figure \ref{fig:fpt_tricky_case}.
 Note that there may exist only one such segment $t_i$.
 From the inductive hypothesis endpoints of $s$ are
 in $A_1$ and $A_M$ respectively, so $\sol$ must cover them.
@@ -158,11 +160,14 @@ Since $|t_i| \le |v_i| = \frac{|s|}{M} \le \frac{|s|}{1+\frac{2}{\delta}} = \fra
 we have $\max(|y|, |z|) \ge |s|(1-\frac{\delta}{\delta+2})/2 = \frac{|s|}{\delta+2}$.
 
 \begin{figure}[h]
-\centering
 \def\svgwidth{\columnwidth}
 \input{fpt_tricky_case.pdf_tex}
-\caption{\textbf{Example of a tricky case.}}
-This shows an example.
+\caption{\textbf{Example of all $k+1$ segments intersecting with one segment $t_i$.}}
+Both pictures show the same set $\points$ (black circles), the same as Figure $\ref{fig:fpt_v_f_def}$.
+The upper picture shows blue segments $t_i$ for $M=7$.
+The lower picture shows green segments -- solution $\sol$ of size 4.
+All segments from $\sol$ segments intersect with $t_4$.
+Segments $z$ and $y$ are marked.
 \label{fig:fpt_tricky_case}
 \end{figure}
 

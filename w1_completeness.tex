@@ -4,7 +4,7 @@ W[1]-hard when parametrized by the size of the solution.
 We additionally restrict problem to only use segments
 in three directions to achieve a stronger result.
 W[1]-hardness is proved by redution to a grid tiling problem,
-which is introduced in \cite{platypus_book}.
+which was introduced in \cite{platypus_book}.
 
 \begin{defi}
 	Line is \textbf{right-diagonal} if it is
@@ -34,14 +34,21 @@ restricted problem where segments have any direction.
 We prove more tight setting in this section.
 
 In order to prove Theorem \ref{w1_hard}
-we will show reduction from an W[1]-hard problem.
+we will show reduction from a W[1]-hard problem.
 We introduce grid tiling problem, which is proven
 to be W[1]-complete in literature.
+
+\newcommand{\pow}{\mathsf{Pow}}
+
+\begin{defi}
+We define \textbf{powerset} of some set $A$, denoted as $\pow(A)$,
+as a set of all subsets of $A$.
+\end{defi}
 
 \begin{defi}
 In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
 and a function
-$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \wp(\{1 \ldots n\} \times \{1 \ldots n\})$
+$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \pow(\{1 \ldots n\} \times \{1 \ldots n\})$
 specifying the set of allowed tiles for each cell of a $k \times k$ grid.
 The task is to find functions
 $x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
@@ -61,7 +68,7 @@ algorithm solving this problem
 for any computable function $f$.
 \end{tw}
 
-TODO: proof from reference in literature (platypus book page 490)
+This theorem is proved in \cite{platypus_book}, page 490.
 
 The reminder of this section is proving Theorem \ref{w1_hard}
 by reduction of grid tiling problem to geometric set cover.
@@ -77,7 +84,7 @@ We start with an instance of the grid tiling problem $(n, k, f)$
 size of the
 grid $k$, number of colors $n$
 and function of allowed tiles
-$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \wp\{1 \ldots n\} \times \{1 \ldots n\}$.
+$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \pow\{1 \ldots n\} \times \{1 \ldots n\}$.
 
 TODO: nice picture of instance of grid tiling with solution
 

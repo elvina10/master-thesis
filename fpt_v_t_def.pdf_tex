@@ -66,7 +66,7 @@
     \put(0.03342525,0.10407106){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_1$\\\end{tabular}}}}%
     \put(0.15422953,0.10602987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_2$\\\end{tabular}}}}%
     \put(0.39681267,0.10242888){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_4$\\\end{tabular}}}}%
-    \put(0.65846879,0.10239198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
+    \put(0.68003284,0.10239198){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
     \put(-0.01973915,0.02815872){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12274418\unitlength}\raggedright \end{minipage}}}%
     \put(-0.00128715,0.04488979){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08396803\unitlength}\raggedright $a$\end{minipage}}}%
     \put(0.12226005,0.04488979){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08396803\unitlength}\raggedright $b$\end{minipage}}}%

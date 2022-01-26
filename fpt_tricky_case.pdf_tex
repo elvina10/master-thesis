@@ -58,7 +58,7 @@
     \put(0.16832025,0.27193517){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_2$\\\end{tabular}}}}%
     \put(0.38765758,0.19116597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_3$\\\end{tabular}}}}%
     \put(0.43694673,0.26794759){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_4$\\\end{tabular}}}}%
-    \put(0.72669382,0.26790673){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
+    \put(0.75057281,0.26790673){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_6$\\\end{tabular}}}}%
     \put(0.93147401,0.1946574){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$t_7$\\\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{fpt_tricky_case.pdf}}%
     \put(0.17004574,0.05821212){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.07876624\unitlength}\raggedright $y$\end{minipage}}}%

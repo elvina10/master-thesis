@@ -42,7 +42,7 @@ to be W[1]-complete in literature.
 
 \begin{defi}
 We define \textbf{powerset} of some set $A$, denoted as $\pow(A)$,
-as a set of all subsets of $A$.
+as a set of all subsets of $A$, ie. $\pow(A) = \{B : B \subseteq A\}$.
 \end{defi}
 
 \begin{defi}
@@ -58,13 +58,19 @@ so that $(x(i), y(j)) \in f(i, j)$ for all valid $i$ and $j$,
 or conclude that such an assignment does not exist.
 \end{defi}
 
-The next theorem is describing complexity of grid tiling problem.
+In short, in grid tiling problem you need to assign numbers
+to rows and columns in such a way,
+that for every pair row, column, the pair of numbers assigned
+to the row and column belongs to allowed set
+for this row and column intersection.
+The next theorem is describing complexity of the problem,
+it is W[1]-hard parametrized by size of the grid.
 
 \begin{tw}
 \label{grid_tiling_w1_hard}
 Grid tiling is W[1]-hard parametrized by $k$ and
 assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
-algorithm solving this problem
+algorithm solving the grid tiling problem
 for any computable function $f$.
 \end{tw}
 
@@ -80,11 +86,14 @@ Therefore geometric set cover with setting
 described in Theorem \ref{w1_hard}
 is at least as hard as grid tiling problem.
 
-We start with an instance of the grid tiling problem $(n, k, f)$
-size of the
-grid $k$, number of colors $n$
-and function of allowed tiles
+We start with an instance of the grid tiling problem $(n, k, f)$.
+The instance cosists of:
+\begin{itemize}
+\item size of the grid $k$,
+\item number of colors $n$,
+\item function of allowed tiles
 $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \pow\{1 \ldots n\} \times \{1 \ldots n\}$.
+\end{itemize}
 
 TODO: nice picture of instance of grid tiling with solution
 

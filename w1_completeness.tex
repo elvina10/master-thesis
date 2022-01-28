@@ -116,8 +116,8 @@ order(i) \text{ and } order(j) \text{ have the same y coordinate.}$$
 \subparagraph{Points.}
 
 For $1 \le i,j \le k$ and $1 \le t \le n^2$ define points:
-	$$h_{i, j, t} = (i \cdot (n^2+1) + t, j \cdot (n^2+1)),$$
-	$$v_{i, j, t} = (i \cdot (n^2+1), j \cdot (n^2+1) + t).$$
+	$$h_{i, j, t} := (i \cdot (n^2+1) + t, j \cdot (n^2+1)),$$
+	$$v_{i, j, t} := (i \cdot (n^2+1), j \cdot (n^2+1) + t).$$
 	
 Let us define sets $H$ and $V$ as:
 $$H := \{h_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\},$$
@@ -216,7 +216,7 @@ then there exists a solution to the original grid tiling instance.
 \label{set_cover_solution_exists}
 	If there exists a solution of the grid tiling instance $(f_{i,j})$,
 	then there exists a solution for the instance $(\points, \sets, w)$
-	of geometric set cover of size at most $3k^2$
+	of geometric set cover of size at most $3k^2+2k$
 	with weight $\solWeight$.
 \end{lemma}
 
@@ -226,19 +226,34 @@ Suppose there exists a solution $x,y$ to the grid tiling problem.
 We define subset of $\sets$ -- a proposed solution $\sol$
 in three parts $D \subset \alldiag$, $A \subset \allhor$ and $B \subset \allver$:
 \begin{eqnarray*}
-	D & := & \{(v_{i, j, t}, h_{i, j, t}) : 1 \le i, j \le k, t = order^{-1}(x(i), y(j))\} \\
+	D & := & \{(v_{i, j, t}, h_{i, j, t}) : 1 \le i, j \le k, t = order^{-1}(x(i), y(j))\}, \\
 	A & := & \{\horbeg{i}{order^{-1}(x(1), y(i))} : 1 \le i \le k\} \\
 	& \cup & \{\horend{i}{order^{-1}(x(k), y(i))} : 1 \le i \le k\} \\
-	& \cup & \{\hor{i}{j}{order^{-1}(x(i), y(j))}{order^{-1}(x(i+1), y(j))} : 1 \le i < k, 1 \le j \le k\} \\
+	& \cup & \{\hor{i}{j}{order^{-1}(x(i), y(j))}{order^{-1}(x(i+1), y(j))} : 1 \le i < k, 1 \le j \le k\}, \\
 	B & := & \{\verbeg{i}{order^{-1}(x(i), y(1))} : 1 \le i \le k\} \\
 	& \cup & \{\verend{i}{order^{-1}(x(i), y(k))} : 1 \le i \le k\} \\
-	& \cup & \{\ver{i}{j}{order^{-1}(x(i), y(j))}{order^{-1}(x(i), y(j+1))} : 1 \le i \le k, 1 \le j < k\} 
+	& \cup & \{\ver{i}{j}{order^{-1}(x(i), y(j))}{order^{-1}(x(i), y(j+1))} : 1 \le i \le k, 1 \le j < k\},
 \end{eqnarray*}
-	$$\sol := D \cup A \cup B$$
+	$$\sol := D \cup A \cup B.$$
 
-TODO: Explain how $\points$ are covered with $\sol$
+Since $\points = H \cup V$, we show that this covers the whole set $H$,
+proof for $V$ is analogical.
+
+Take any $1 \le j \le k$ and define $t_{i,j} := order^{-1}(x(i), y(j)$:
+$\horbeg{j}{t_1} = (h_{1,j,1}^L, h_{1, j, t_1}^L)$ and next segment
+$\hor{1}{j}{t_1}{t_2} = (h_{1,j, t_1}^R, h_{2,j,t_2}^L)$.
+Therefore points $h_{1,j,x}, h_{1,j,x}^L$ and $h_{1,j,x}^R$
+for all $1 \le x \le n^2$ ale covered by $\horbeg{j}{t_1} and \hor{1}{j}{t_1}{t_2}$,
+excluding point $h_{1,j,t_i}$.
+
+$D$ covers all points $h_{i,j, t_{i,j}}$ and $v_{i,j, t_{i,j}}$, therefore
+all points are covered.
+
+Size of this proposed solution is:
+$$|\sol| = |D| + |A| + |B| = k^2 + (k+1)k + (k+1)k = 3k^+2k.$$
 
 TODO: Calculate weight of $\sol$
+Whatevs, przeciez widac
 	
 Then consider a solution that covers
 all points
@@ -248,25 +263,34 @@ $$\{h_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}
 with $k^2$ segments from $\alldiag$
 and the rest in $\allver$ or $\allhor$.
 This solution has weight $\solWeight$.
-	
-	
 \end{proof}
 
 
 \begin{claim}
 \label{guards}
-Points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$
-have to be covered with sgements from $\allhor$.
-
-Points in $\{p^U : p \in V\} \cup \{p^D : p \in V\} $
+In any solution of the instance $(\points, \sets, w)$:
+\begin{itemize}
+\item points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$
+have to be covered with sgements from $\allhor$,
+\item points in $\{p^U : p \in V\} \cup \{p^D : p \in V\}$
 have to be covered with segments from $\allver$.
+\end{itemize}
 \end{claim}
 
+\begin{proof}
+Because I say so.
+TODO: Real argument
+
+Because $\allver$ segments are vertical and have different $y$
+coordinate.
+
+Simple argument why $\alldiag$ segments do not cross guards.
+\end{proof}
 
 \begin{claim}
 \label{one_diag_in_square}
-For given $1 \le i, j \le n$
-and any solution of an instance $(\points, \sets, w)$
+For any $1 \le i, j \le n$
+and any solution of the instance $(\points, \sets, w)$
 no two points $h_{i, j, t_1}, h_{i, j, t_2}$
 ($v_{i, j, t_1}, v_{i, j, t_2}$)
 for $1 \le t_1 < t_2 \le n^2$
@@ -274,20 +298,22 @@ can be not covered with segments from $\allhor$ ($\allver$).
 \end{claim}
 
 \begin{proof}
-Proof for horizontal segments. Proof for vertical is analoguous.
+We prove the claim for horizontal segments,
+as the proof for vertical segments is analoguous.
 
 Assume point $h_{i, j, t_1}$ is not covered with
 segments from $\allhor$.
 Point $h^R_{i, j, t_1}$ has to be covered with $\allhor$
-from Claim $\ref{guards}$.
-And every segment in $\allhor$ covering $h^R_{i, j, t_1}$,
+by Claim $\ref{guards}$.
+Every segment in $\allhor$ covering $h^R_{i, j, t_1}$,
 but not $h_{i,j,t_1}$ covers also $h_{i, j, t_2}$.
 \end{proof}
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
-For a constructed instance $(\points, \sets, w)$
-any solution has to have sum of weights from sets $\allhor$ and $\allver$ at least
+For every solution of the instance $(\points, \sets, w)$
+has to have sum of weights of segments chosen
+from sets $\allhor$ and $\allver$ at least
 $W_{hv} = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
 \end{lemma}
 

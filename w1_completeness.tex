@@ -201,24 +201,55 @@ w(s) =
 
 \newcommand{\solWeight}{2k^2(n^2+1) - 4k^2\epsilon -4k(1-\epsilon) +k^2\delta }
 
+Now, we prove that the constructed instance of geometric set cover
+with weighted segments is indeed correct and sound reduction
+of the grid tiling problem. Lemma \ref{set_cover_solution_exists}
+proves that if the solution of the grid tiling instance exists,
+then there exists a solution with bounded size and weight
+of construced geometric set cover instance exists.
+
+Then Lemma \ref{grid_tiling_exists} proves that if the solution
+of the geometric set cover instance with bounded weight exists,
+then there exists a solution to the original grid tiling instance.
+
 \begin{lemma}
 \label{set_cover_solution_exists}
-	If there exists a solution for the grid tiling instance $(f_{i,j})$,
+	If there exists a solution of the grid tiling instance $(f_{i,j})$,
 	then there exists a solution for the instance $(\points, \sets, w)$
 	of geometric set cover of size at most $3k^2$
 	with weight $\solWeight$.
 \end{lemma}
 
 \begin{proof}
-	Suppose there exists a solution $x,y$ to the grid tiling problem.
-	Then consider a solution that covers
-	all points
-	$$\{h_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}
-	\cup \{v_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}$$
+Suppose there exists a solution $x,y$ to the grid tiling problem.
 	
-	with $k^2$ segments from $\alldiag$
-	and the rest in $\allver$ or $\allhor$.
-	This solution has weight $\solWeight$.
+We define subset of $\sets$ -- a proposed solution $\sol$
+in three parts $D \subset \alldiag$, $A \subset \allhor$ and $B \subset \allver$:
+\begin{eqnarray*}
+	D & := & \{(v_{i, j, t}, h_{i, j, t}) : 1 \le i, j \le k, t = order^{-1}(x(i), y(j))\} \\
+	A & := & \{\horbeg{i}{order^{-1}(x(1), y(i))} : 1 \le i \le k\} \\
+	& \cup & \{\horend{i}{order^{-1}(x(k), y(i))} : 1 \le i \le k\} \\
+	& \cup & \{\hor{i}{j}{order^{-1}(x(i), y(j))}{order^{-1}(x(i+1), y(j))} : 1 \le i < k, 1 \le j \le k\} \\
+	B & := & \{\verbeg{i}{order^{-1}(x(i), y(1))} : 1 \le i \le k\} \\
+	& \cup & \{\verend{i}{order^{-1}(x(i), y(k))} : 1 \le i \le k\} \\
+	& \cup & \{\ver{i}{j}{order^{-1}(x(i), y(j))}{order^{-1}(x(i), y(j+1))} : 1 \le i \le k, 1 \le j < k\} 
+\end{eqnarray*}
+	$$\sol := D \cup A \cup B$$
+
+TODO: Explain how $\points$ are covered with $\sol$
+
+TODO: Calculate weight of $\sol$
+	
+Then consider a solution that covers
+all points
+$$\{h_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}
+\cup \{v_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}$$
+
+with $k^2$ segments from $\alldiag$
+and the rest in $\allver$ or $\allhor$.
+This solution has weight $\solWeight$.
+	
+	
 \end{proof}
 
 

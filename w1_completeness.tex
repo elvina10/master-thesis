@@ -1,10 +1,10 @@
-In this chapter we consider geometric set cover problem with weighted segment.
+In this chapter we consider geometric set cover problem with weighted segments.
 Theorem \ref{w1_hard} proves that this problem is 
 W[1]-hard when parametrized by the size of the solution.
-We additionally restrict problem to only use segments
+We additionally restrict the problem to only use segments
 in three directions to achieve a stronger result.
-W[1]-hardness is proved by redution to a grid tiling problem,
-which was introduced in \cite{platypus_book}.
+W[1]-hardness is proved by reduction to a grid tiling problem,
+which was introduced in \cite{marx_grid_tiling}.
 
 \begin{defi}
 	Line is \textbf{right-diagonal} if it is
@@ -18,7 +18,7 @@ which was introduced in \cite{platypus_book}.
 	Consider the problem of covering a set $\points$ of points
 	by selecting at most $k$ segments
 	from a set of segments $\sets$ 
-	with non-negative weights $w : \sets \rightarrow \mathbb{R^*}$
+	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
 	so that the weight of the cover is minimal.
 	Then this problem is W[1]-hard parametrized by $k$ and
 	assuming ETH, there is no algorithm for this
@@ -35,7 +35,7 @@ We prove more tight setting in this section.
 
 In order to prove Theorem \ref{w1_hard}
 we will show reduction from a W[1]-hard problem.
-We introduce grid tiling problem, which is proven
+We introduce the grid tiling problem, which is proven
 to be W[1]-complete in literature.
 
 \newcommand{\pow}{\mathsf{Pow}}
@@ -60,21 +60,22 @@ or conclude that such an assignment does not exist.
 
 In short, in grid tiling problem you need to assign numbers
 to rows and columns in such a way,
-that for every pair row, column, the pair of numbers assigned
-to the row and column belongs to allowed set
-for this row and column intersection.
-The next theorem is describing complexity of the problem,
-it is W[1]-hard parametrized by size of the grid.
+that for every pair of a row and a column,
+the pair of numbers assigned
+to the row and column 
+belongs to the allowed set corresponding to the intersection
+of the row and column in question.
+The next theorem describes the complexity of this problem,
+which is W[1]-hard when parametrized by the size of the grid.
 
 \begin{tw}
 \label{grid_tiling_w1_hard}
+\textbf{\cite{marx_grid_tiling}}
 Grid tiling is W[1]-hard parametrized by $k$ and
 assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
 algorithm solving the grid tiling problem
 for any computable function $f$.
 \end{tw}
-
-This theorem is proved in \cite{platypus_book}, page 490.
 
 The reminder of this section is proving Theorem \ref{w1_hard}
 by reduction of grid tiling problem to geometric set cover.
@@ -84,10 +85,10 @@ then we could also solve grid tiling problem
 (which we reduced to geometric set cover).
 Therefore geometric set cover with setting
 described in Theorem \ref{w1_hard}
-is at least as hard as grid tiling problem.
+is at least as hard as the grid tiling problem.
 
 We start with an instance of the grid tiling problem $(n, k, f)$.
-The instance cosists of:
+The instance consists of:
 \begin{itemize}
 \item size of the grid $k$,
 \item number of colors $n$,

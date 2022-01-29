@@ -343,23 +343,25 @@ but not $h_{i,j,t_1}$ covers also $h_{i, j, t_2}$.
 For every solution of the instance $\instanceSetCover$,
 the sum of weights of segments chosen
 from sets $\allhor$ and $\allver$ at least
-$W_{hv} = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
+$2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
 \end{lemma}
 
 \begin{proof}
+We prove the lemma for vertical lines,
+as the proof for horizontal segments is analogous.
+
 We know that for all $1 \le i,j \le k$
-there exists at most one $t_x$ and at most one $t_y$ such that
-$v_{i,j,t_x}$ and $h_{i,j,t_y}$
-are not covered by
-segments from $\allhor$ and $\allver$ (Claim \ref{one_diag_in_square}),
-
-TODO: Rephrase the sentence below
-
-We sum the lower bound for sum of length for horizontal/vertical
-lines for a single vertical line
-(the bound is the same for every horizontal line).
+there exists at most one $t_x$ such that
+$v_{i,j,t_x}$ is not covered by
+segments from $\allver$ (Claim \ref{one_diag_in_square}),
 
 Let us fix $1 \le i \le k$.
+
+We provide the lower bound for the sum of length
+of vertical segments between points $v_{i,j_1,t_1}^L$ and $v_{i,j_2,t_2}^R$
+for any $1\le j_1, j_2 \le k$ and $1 \le t_1, t_2 \le n^2$.
+This bound is the same for each $i$ and is the same
+for horizontal lines, thus we need to multiply such bound by $2k$.
 
 \begin{enumerate}[label={(\arabic*)}]
 \item The total length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$ is:
@@ -373,12 +375,14 @@ have to be covered in $\allver$ (Claim \ref{guards}).
 Therefore at most $k$ spaces of length $2\epsilon$ can be left
 not covered by segments from $\allver$ between $v_{i,1,1}^D$ and $v_{i,k,n^2}^U$.
 
-Proof for horizontal segments is analogous.
-
 \end{enumerate}
 The sum of these lower bounds for vertical and horizontal lines is:
 $$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$$
 \end{proof}
+
+Let us name the bound from the previous lemma
+as $W_{hv} := 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$
+for the further reference.
 
 \begin{lemma}
 \label{diag_correct}

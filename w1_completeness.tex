@@ -383,7 +383,7 @@ $$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\eps
 \begin{lemma}
 \label{diag_correct}
 Let $\sol$ be a solution 
-to a constructed instance $\instanceSetCover$
+of a constructed instance $\instanceSetCover$
 with weight at most  $\solWeight$.
 Then for every $1 \le i,j \le k$
 there exists such $1 \le t \le n^2$ that:
@@ -425,43 +425,38 @@ because the corresponding segment is in $\alldiag$.
 
 \newcommand{\diagonal}{\mathsf{diagonal}}
 
-Name the function of the sequence $t_i$ from Lemma \ref{diag_correct}
-$\diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
-
-TODO: Adjust the lemma statement below
+We refer to the function of the sequence $t_x$ from Lemma \ref{diag_correct}
+as $\diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
 
 \begin{lemma}
 \label{vertical_horizontal_synchronized}
-For a constructed instance $\instanceSetCover$
-for any solution of weight $\solWeight$ it holds that $diagonal$ function
-from Lemma \ref{diag_correct}:
+For any solution $\sol$
+of a constructed instance $\instanceSetCover$
+with weight at most $\solWeight$:
 \begin{enumerate}
 \item 
 for any $1 \le i < k, 1 \le j \le k$,
-$\matchh(diagonal(i, j),diagonal(i+1, j))$ must be true;
+$\matchh(\diagonal(i, j),\diagonal(i+1, j))$ must be \true;
 \item 
 for any $1 \le i \le k, 1 \le j < k$,
-$\matchv(diagonal(i, j),diagonal(i, j+1))$ must be true.
+$\matchv(\diagonal(i, j),\diagonal(i, j+1))$ must be \true.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-Every space between points in $H$ and $V$ covered by $\allhor$/$\allver$
-has to be covered by only one segment, because otherwise it would
-use $W_{hv} + \epsilon > \solWeight$,
-therefore such solution would be too costly.
+TODO: There is something wrong with the proof below, read
 
-Proof for vertical (2), proof for horizontal is analogous.
+We prove (1), the proof of (2) is analogous.
 
 Let us take any $1 \le i < k, 1 \le j \le k$
 and name $t_1 = diagonal(i, j)$ and $t_2 = diagonal(i+1, j)$.
 Therefore $h_{i,j,t_1}$ and $h_{i+1,j,t_2}$
 are not covered by segments from $\allhor$,
-$h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
+while $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 have to be covered by segments from $\allhor$ (Claim \ref{guards}).
 Every segment from $\allhor$ starts at $h^R_{x,y,z_1}$
 segment and finishes at $h^L_{x,y+1,z_2}$ segment for some
-$1 \le x \le k$,$1 \le z < k$ and $1 \le z_1, z_2 \le n^2$.
+$1 \le x \le k$,$1 \le y < k$ and $1 \le z_1, z_2 \le n^2$.
 Since all of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 are covered by segments in $\allhor$,
 and there are two different segments covering
@@ -470,16 +465,16 @@ at $h^R_{i,j,t_1}$ and end at $h^L_{i,j+1,z_2}$
 and the other one begin at $h^R_{i,j,z_1}$
 and end at $h^L_{i+1,j,t_2}$
 for some $1 \le z_1, z_2 \le n^2$.
-Therefore space between $h^R_{i,j,z_1}$ and $h^L_{i,j+1,z_2}$
-is covered twice and is longer than $\epsilon$.
-By Lemma \ref{vertical_horizontal_sum}
-lower bound for weight of such solution is $W_{hv} + \epsilon$
-which contradicts that the given solution has size $\solWeight < W_{hv} + \epsilon$
+Therefore, the space between $h^R_{i,j,z_1}$ and $h^L_{i,j+1,z_2}$
+would be covered twice and is longer than $\epsilon$.
+By Lemma \ref{vertical_horizontal_sum},
+the lower bound for weight of such a solution is $W_{hv} + \epsilon$
+which contradicts that the given solution has weight $\solWeight < W_{hv} + \epsilon$
 Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$ must be covered
-by one segment from $\allhor$ and these points are ends of this segment.
+by one segment from $\allhor$ and these points are endpoints of this segment.
 
-$h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
-are ends of a segment from $\allhor$,
+So $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
+are endpoints of a segment from $\allhor$,
 therefore $\matchh(t_1,t_2)$ must be true.
 \end{proof}
 

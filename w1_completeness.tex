@@ -8,7 +8,7 @@ which was introduced in \cite{marx_grid_tiling}.
 
 \begin{defi}
 	Line is \textbf{right-diagonal} if it is
-	described by linear function $y = x + d$ for any $d \in \mathbb{R}$.
+	described by linear function $y = -x + d$ for any $d \in \mathbb{R}$.
 	Segment is \textbf{right-diagonal} if its
 	direction is a right-diagonal line.
 \end{defi}
@@ -191,7 +191,12 @@ Finally, we also define a set of right-diagonal segments:
 $$\alldiag := \{ (h_{i, j, t}, v_{i, j, t}) :
 	1 \le i, j \le k, 1 \le t \le n^2, \order(t) \in f(i, j)\}$$
 
-TODO: explain that these segments are in fact diagonal
+Every segment in $\alldiag$
+connects points $(i(n^2+1) + t, j \cdot (n^2+1))$
+and $(i \cdot (n^2+1), j(n^2+1) + t)$
+for some $1 \le i,j \le k, 1 \le t \le n^2$.
+The line on which it lies can be described by $y=-x+(t+(i+j)(n^2+1))$
+and these segments are in fact right-diagonal.
 
 The constructed segment set is:
 
@@ -200,7 +205,7 @@ $$\sets := \allhor \cup \allver \cup \alldiag.$$
 The weight of each segment in $\allhor \cup \allver$
 is equal to the segment,
 while every segment in $\alldiag$ has weight
-$\delta = \frac{1}{4k^4}$.
+$\delta := \frac{1}{4k^4}$.
 
 TODO: Put a picture of small instance like 3x3 with n=2
 

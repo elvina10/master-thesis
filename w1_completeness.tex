@@ -219,7 +219,7 @@ with weighted segments is indeed a correct and sound reduction
 of the grid tiling problem. Lemma \ref{set_cover_solution_exists}
 proves that if the solution of the grid tiling instance exists,
 then there exists a solution with bounded size and weight
-of constructed geometric set cover instance exists.
+of constructed geometric set cover instance.
 
 Then Lemma \ref{grid_tiling_exists} proves that if the solution
 of the geometric set cover instance with bounded weight exists,
@@ -382,45 +382,53 @@ $$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\eps
 
 \begin{lemma}
 \label{diag_correct}
-For a constructed instance $\instanceSetCover$
-for any solution $\sol$ with weight equal to $\solWeight$,
-for every $1 \le i,j \le k$
+Let $\sol$ be a solution 
+to a constructed instance $\instanceSetCover$
+with weight at most  $\solWeight$.
+Then for every $1 \le i,j \le k$
 there exists such $1 \le t \le n^2$ that:
 \begin{enumerate}[label={(\arabic*)}]
 \item $v_{i,j,t}, h_{i,j,t}$ are not covered by segments from $\allver$ or $\allhor$;
 \item segment $(v_{i,j,t}, h_{i,j,t})$ is in solution $\sol$;
-\item $\order(t) \in f(i,j)$, ie. it is an allowed tile for $(i,j)$;
+\item $\order(t) \in f(i,j)$ that is, $\order(t)$ is an allowed tile for $(i,j)$;
 \item for every $1 \le s\le n^2$, $s \neq t$, $v_{i,j,s}$ is covered in $\allver$;
 \item for every $1 \le s\le n^2$, $s \neq t$, $h_{i,j,s}$ is covered in $\allhor$.
 \end{enumerate}
-Name the function of this $t$ as
-$diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
 \end{lemma}
 
 \begin{proof}
-At most one $h_{i,j,t_x}$ and $v_{i,j,t_y}$
-points are covered with $\alldiag$
+At most one of points $\{h_{i,j,t_x} : 1 \le t_x \le n^2\}$
+and one of points $\{v_{i,j,t_y} : 1 \le t_y \le n^2\}$
+is covered with $\alldiag$
 (Claim \ref{one_diag_in_square}).
 	
-Exactly one $h_{i,j,t_x}$ and $v_{i,j,t_y}$
-points are covered with $\alldiag$,
-because if one of them were not, then we would use too much weight
-$$W_{hv} + 2\epsilon > \solWeight$$
+Moreover exactly one such point $h_{i,j,t_x}$ and one such point $v_{i,j,t_y}$
+is covered with $\alldiag$,
+because if none of them were covered, then the solution would have to
+have weight at least $W_{hv} + 2\epsilon$, which is more than $\solWeight$.
 
-This points are covered with the same segment from $\alldiag$,
-because we need to use at least $k^2$ of them to use
+We observe that points $h_{i,j,t_x}$ and $v_{i,j,t_y}$
+have to be covered with the same segment from $\alldiag$.
+Indeed we need to use at least $k^2$ of them to use
 exactly one DIAG segment for every pair of $1 \le i,j \le k$,
 if we used 2 segments from $\alldiag$
 for one pair $(i,j)$,
-then we would have used too much weight by $\delta$.
-Since these points $h_{i,j,t_x}$ and $v_{i,j,t_y}$ are covered by
-segment from $\alldiag$, therefore $t_x = t_y$.
+then we would have used $W_{hv} + k^2\delta + \delta$,
+which if more than $\solWeight$.
+Since points $h_{i,j,t_x}$ and $v_{i,j,t_y}$ are covered by
+a single segment from $\alldiag$, we have $t_x = t_y$.
 
-Therefore $diagonal(i,j) = t_x = t_y$
+Therefore $t_x = t_y$
 and $\order(t_x)$ is an allowed tile for $(i,j)$
-because the respective segment is in $\alldiag$.
-
+because the corresponding segment is in $\alldiag$.
 \end{proof}
+
+\newcommand{\diagonal}{\mathsf{diagonal}}
+
+Name the function of the sequence $t_i$ from Lemma \ref{diag_correct}
+$\diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
+
+TODO: Adjust the lemma statement below
 
 \begin{lemma}
 \label{vertical_horizontal_synchronized}

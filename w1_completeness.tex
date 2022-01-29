@@ -255,14 +255,26 @@ in three parts $D \subset \alldiag$, $A \subset \allhor$ and $B \subset \allver$
 	$$\sol := D \cup A \cup B.$$
 
 Since $\points = H \cup V$, we show that this covers the whole set $H$,
-proof for $V$ is analogical.
+proof for $V$ is analogous.
 
-Take any $1 \le j \le k$ and define $t_{i,j} := \order^{-1}(x(i), y(j)$:
+Take any $1 \le j \le k$ and define $t_{i} := \order^{-1}(x(i), y(j)$:
 $\horbeg{j}{t_1} = (h_{1,j,1}^L, h_{1, j, t_1}^L)$ and next segment
 $\hor{1}{j}{t_1}{t_2} = (h_{1,j, t_1}^R, h_{2,j,t_2}^L)$.
 Therefore points $h_{1,j,x}, h_{1,j,x}^L$ and $h_{1,j,x}^R$
-for all $1 \le x \le n^2$ ale covered by $\horbeg{j}{t_1} and \hor{1}{j}{t_1}{t_2}$,
-excluding point $h_{1,j,t_i}$.
+for all $1 \le x \le n^2$ ale covered by $\horbeg{j}{t_1}$ and $\hor{1}{j}{t_1}{t_2}$,
+excluding point $h_{1,j,t_1}$.
+
+Analogically for $1 \le i \le k-2$
+for two consequtive segments $\hor{i}{j}{t_i}{t_{i+1}}$
+and $\hor{i+1}{j}{t_{i+1}}{t_{i+2}}$ we prove that 
+all points $h_{i,j,x}, h_{i,j,x}^L$ and $h_{i,j,x}^R$
+for all $1 \le x \le n^2$ ale covered by these segments
+excluding point $h_{i,j,t_{i+1}}$.
+
+Finally $\hor{k-1}{j}{t_{k-1}}{t_k}$ and $\horend{j}{t_k}$
+cover all points $h_{k,j,x}, h_{k,j,x}^L$ and $h_{k,j,x}^R$
+for all $1 \le x \le n^2$ ale covered by these segments
+excluding point $h_{k,j,t_k}$.
 
 $D$ covers all points $h_{i,j, t_{i,j}}$ and $v_{i,j, t_{i,j}}$, therefore
 all points are covered.
@@ -270,17 +282,21 @@ all points are covered.
 Size of this proposed solution is:
 $$|\sol| = |D| + |A| + |B| = k^2 + (k+1)k + (k+1)k = 3k^+2k.$$
 
-TODO: Calculate weight of $\sol$
-Whatevs, przeciez widac
-	
-Then consider a solution that covers
-all points
-$$\{h_{i, j, t} : 1 \le i, j \le k, \order(t)=(x(i), y(j))\}
-\cup \{v_{i, j, t} : 1 \le i, j \le k, \order(t)=(x(i), y(j))\}$$
+First, we compute the sum of weights of segments in $A$.
+Fix $1 \le j \le k$, all points $h_{i,j,t}$, $h_{i,j,t}^L$ and $h_{i,j,t}^R$
+for every $1 \le i \le k$ and $1 \le t \le n^2$ are covered by $A$
+excluding points $h_{i,j,\order^{-1}(x(i),y(j))}$ for each $1 \le i \le k$.
+Every such point leaves a gap of length $2\epsilon$ between
+$h_{i,j,\order^{-1}(x(i),y(j))}^L$ and $h_{i,j,\order^{-1}(x(i),y(j))}^R$
+Therefore they have weight of segment $(h_{i,1,1}^L, h_{i,k,n^2}^R)$
+minus $2\epsilon k$, which is $k(n^2+1) -2k\epsilon -2(1-\epsilon)$.
+We need to multiply it by $k$, because this weight if equal for each $i$.
 
-with $k^2$ segments from $\alldiag$
-and the rest in $\allver$ or $\allhor$.
-This solution has weight $\solWeight$.
+Calculation for vertical segments is analogous and has the same result.
+Every segment in $D$ has weight $\delta$, therefore the sum of all weights
+is equal to:
+
+$$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) + 2k^2\delta= \solWeight$$
 \end{proof}
 
 
@@ -299,7 +315,7 @@ have to be covered with segments from $\allver$.
 
 \begin{proof}
 We prove the claim for the points from $H$
-as the proof for points from $V$ is analogical.
+as the proof for points from $V$ is analogous.
 
 Every segment in $\allver$ is vertical and 
 their x-coordinate is equal to $i(n^2+1)$ for some $1\le i \le k$,

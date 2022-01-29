@@ -79,7 +79,7 @@ for any computable function $f$.
 
 The reminder of this section is proving Theorem \ref{w1_hard}
 by reduction of grid tiling problem to geometric set cover.
-That would prove that geometric set cover is W[1]-hard,
+That proves the W[1]-hardness of geometric set cover,
 because if we could solve it with an FPT algorithm,
 then we could also solve grid tiling problem
 (which we reduced to geometric set cover).
@@ -93,24 +93,28 @@ The instance consists of:
 \item size of the grid $k$,
 \item number of colors $n$,
 \item function of allowed tiles
-$f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow\{1, \ldots, n\} \times \{1, \ldots, n\}$.
+$f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
 \end{itemize}
 
 TODO: nice picture of instance of grid tiling with solution
 
 \paragraph{Construction.}
-We construct an instance $(\points, \sets, w)$ of geometric set cover as follows.
+\newcommand{\order}{\mathsf{order}}
+\newcommand{\matchv}{\mathsf{match}_v}
+\newcommand{\matchh}{\mathsf{match}_h}
+\newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
+We construct an instance $\instanceSetCover$ of geometric set cover as follows.
 
 First let us choose any bijection
-$order : \{1, \ldots, n^2\} \rightarrow \{1, \ldots, n\} \times \{1, \ldots, n\}$.
+$\order : \{1, \ldots, n^2\} \rightarrow \{1, \ldots, n\} \times \{1, \ldots, n\}$.
 
 
-Define $match_v(i, j)$ and $match_h(i, j)$
+Define $\matchv(i, j)$ and $\matchh(i, j)$
 as boolean functions denoting whether two points share x or y coordinate:
-$$match_v(i, j) \text{ is } \texttt{true} \iff
-order(i) \text{ and } order(j) \text{ have the same x coordinate,}$$
-$$match_h(i, j) \text{ is } \texttt{true} \iff
-order(i) \text{ and } order(j) \text{ have the same y coordinate.}$$
+$$\matchv(i, j) \text{ is } \texttt{true} \iff
+\order(i) \text{ and } \order(j) \text{ have the same x coordinate,}$$
+$$\matchh(i, j) \text{ is } \texttt{true} \iff
+\order(i) \text{ and } \order(j) \text{ have the same y coordinate.}$$
 
 
 \subparagraph{Points.}
@@ -166,10 +170,10 @@ $$\verend{i}{t} := (v^U_{i, k, t}, v^U_{i, k, n^2}).$$
 \newcommand{\allver}{\mathsf{VER}}
 \newcommand{\alldiag}{\mathsf{DIAG}}
 
-Next we define sets of vertical and horizontal segments:
+Next, we define sets of vertical and horizontal segments:
 \begin{eqnarray*}
 \allhor &:= &\{\hor{i}{j}{t_1}{t_2} : 1 \le i < k, 1 \le j \le k,
-1 \le t_1, t_2 \le n^2, match_h(t_1, t_2) \text{ holds}\} \\
+1 \le t_1, t_2 \le n^2, \matchh(t_1, t_2) \text{ holds}\} \\
 &\cup &\{\horbeg{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}
 \\
 &\cup &\{\horend{i}{t} : 1 \le i \le k, 1 \le t \le n^2\},
@@ -177,15 +181,15 @@ Next we define sets of vertical and horizontal segments:
 
 \begin{eqnarray*}
 \allver &:= &\{\ver{i}{j}{t_1}{t_2} : 1 \le i \le k, 1 \le j < k,
-1 \le t_1, t_2 \le n^2, match_v(t_1, t_2) \text{ holds}\} \\
+1 \le t_1, t_2 \le n^2, \matchv(t_1, t_2) \text{ holds}\} \\
 &\cup &\{\verbeg{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}
 \\
 &\cup &\{\verend{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}.
 \end{eqnarray*}
 
-Finally we also define a set of right-diagonal segments:
+Finally, we also define a set of right-diagonal segments:
 $$\alldiag := \{ (h_{i, j, t}, v_{i, j, t}) :
-	1 \le i, j \le k, 1 \le t \le n^2, order(t) \in f(i, j)\}$$
+	1 \le i, j \le k, 1 \le t \le n^2, \order(t) \in f(i, j)\}$$
 
 TODO: explain that these segments are in fact diagonal
 
@@ -193,8 +197,9 @@ The constructed segment set is:
 
 $$\sets := \allhor \cup \allver \cup \alldiag.$$
 
-The weight of each segment in $\allhor \cup \allver$,
-while every segment in $\alldiag$ has wieght
+The weight of each segment in $\allhor \cup \allver$
+is equal to the segment,
+while every segment in $\alldiag$ has weight
 $\delta = \frac{1}{4k^4}$.
 
 TODO: Put a picture of small instance like 3x3 with n=2
@@ -210,11 +215,11 @@ w(s) =
 \newcommand{\solWeight}{2k^2(n^2+1) - 4k^2\epsilon -4k(1-\epsilon) +k^2\delta }
 
 Now, we prove that the constructed instance of geometric set cover
-with weighted segments is indeed correct and sound reduction
+with weighted segments is indeed a correct and sound reduction
 of the grid tiling problem. Lemma \ref{set_cover_solution_exists}
 proves that if the solution of the grid tiling instance exists,
 then there exists a solution with bounded size and weight
-of construced geometric set cover instance exists.
+of constructed geometric set cover instance exists.
 
 Then Lemma \ref{grid_tiling_exists} proves that if the solution
 of the geometric set cover instance with bounded weight exists,
@@ -223,7 +228,7 @@ then there exists a solution to the original grid tiling instance.
 \begin{lemma}
 \label{set_cover_solution_exists}
 	If there exists a solution of the grid tiling instance $(f_{i,j})$,
-	then there exists a solution for the instance $(\points, \sets, w)$
+	then there exists a solution for the instance $\instanceSetCover$
 	of geometric set cover of size at most $3k^2+2k$
 	with weight $\solWeight$.
 \end{lemma}
@@ -234,20 +239,20 @@ Suppose there exists a solution $x,y$ to the grid tiling problem.
 We define subset of $\sets$ -- a proposed solution $\sol$
 in three parts $D \subset \alldiag$, $A \subset \allhor$ and $B \subset \allver$:
 \begin{eqnarray*}
-	D & := & \{(v_{i, j, t}, h_{i, j, t}) : 1 \le i, j \le k, t = order^{-1}(x(i), y(j))\}, \\
-	A & := & \{\horbeg{i}{order^{-1}(x(1), y(i))} : 1 \le i \le k\} \\
-	& \cup & \{\horend{i}{order^{-1}(x(k), y(i))} : 1 \le i \le k\} \\
-	& \cup & \{\hor{i}{j}{order^{-1}(x(i), y(j))}{order^{-1}(x(i+1), y(j))} : 1 \le i < k, 1 \le j \le k\}, \\
-	B & := & \{\verbeg{i}{order^{-1}(x(i), y(1))} : 1 \le i \le k\} \\
-	& \cup & \{\verend{i}{order^{-1}(x(i), y(k))} : 1 \le i \le k\} \\
-	& \cup & \{\ver{i}{j}{order^{-1}(x(i), y(j))}{order^{-1}(x(i), y(j+1))} : 1 \le i \le k, 1 \le j < k\},
+	D & := & \{(v_{i, j, t}, h_{i, j, t}) : 1 \le i, j \le k, t = \order^{-1}(x(i), y(j))\}, \\
+	A & := & \{\horbeg{i}{\order^{-1}(x(1), y(i))} : 1 \le i \le k\} \\
+	& \cup & \{\horend{i}{\order^{-1}(x(k), y(i))} : 1 \le i \le k\} \\
+	& \cup & \{\hor{i}{j}{\order^{-1}(x(i), y(j))}{\order^{-1}(x(i+1), y(j))} : 1 \le i < k, 1 \le j \le k\}, \\
+	B & := & \{\verbeg{i}{\order^{-1}(x(i), y(1))} : 1 \le i \le k\} \\
+	& \cup & \{\verend{i}{\order^{-1}(x(i), y(k))} : 1 \le i \le k\} \\
+	& \cup & \{\ver{i}{j}{\order^{-1}(x(i), y(j))}{\order^{-1}(x(i), y(j+1))} : 1 \le i \le k, 1 \le j < k\},
 \end{eqnarray*}
 	$$\sol := D \cup A \cup B.$$
 
 Since $\points = H \cup V$, we show that this covers the whole set $H$,
 proof for $V$ is analogical.
 
-Take any $1 \le j \le k$ and define $t_{i,j} := order^{-1}(x(i), y(j)$:
+Take any $1 \le j \le k$ and define $t_{i,j} := \order^{-1}(x(i), y(j)$:
 $\horbeg{j}{t_1} = (h_{1,j,1}^L, h_{1, j, t_1}^L)$ and next segment
 $\hor{1}{j}{t_1}{t_2} = (h_{1,j, t_1}^R, h_{2,j,t_2}^L)$.
 Therefore points $h_{1,j,x}, h_{1,j,x}^L$ and $h_{1,j,x}^R$
@@ -265,8 +270,8 @@ Whatevs, przeciez widac
 	
 Then consider a solution that covers
 all points
-$$\{h_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}
-\cup \{v_{i, j, t} : 1 \le i, j \le k, order(t)=(x(i), y(j))\}$$
+$$\{h_{i, j, t} : 1 \le i, j \le k, \order(t)=(x(i), y(j))\}
+\cup \{v_{i, j, t} : 1 \le i, j \le k, \order(t)=(x(i), y(j))\}$$
 
 with $k^2$ segments from $\alldiag$
 and the rest in $\allver$ or $\allhor$.
@@ -276,7 +281,7 @@ This solution has weight $\solWeight$.
 
 \begin{claim}
 \label{guards}
-In any solution of the instance $(\points, \sets, w)$:
+In any solution of the instance $\instanceSetCover$:
 \begin{itemize}
 \item left and right guards of points in $H$
 (points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$)
@@ -313,7 +318,7 @@ the Lemma \ref{grid_tiling_exists}.
 \begin{claim}
 \label{one_diag_in_square}
 For any $1 \le i, j \le n$
-and any solution of the instance $(\points, \sets, w)$
+and any solution of the instance $\instanceSetCover$
 all but at most one points $h_{i, j, t_1}, h_{i, j, t_2}$
 ($v_{i, j, t_1}, v_{i, j, t_2}$)
 for $1 \le t_1 < t_2 \le n^2$
@@ -335,7 +340,7 @@ but not $h_{i,j,t_1}$ covers also $h_{i, j, t_2}$.
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
-For every solution of the instance $(\points, \sets, w)$,
+For every solution of the instance $\instanceSetCover$,
 the sum of weights of segments chosen
 from sets $\allhor$ and $\allver$ at least
 $W_{hv} = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
@@ -377,14 +382,14 @@ $$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\eps
 
 \begin{lemma}
 \label{diag_correct}
-For a constructed instance $(\points, \sets, w)$
+For a constructed instance $\instanceSetCover$
 for any solution $\sol$ with weight equal to $\solWeight$,
 for every $1 \le i,j \le k$
 there exists such $1 \le t \le n^2$ that:
 \begin{enumerate}[label={(\arabic*)}]
 \item $v_{i,j,t}, h_{i,j,t}$ are not covered by segments from $\allver$ or $\allhor$;
 \item segment $(v_{i,j,t}, h_{i,j,t})$ is in solution $\sol$;
-\item $order(t) \in f(i,j)$, ie. it is an allowed tile for $(i,j)$;
+\item $\order(t) \in f(i,j)$, ie. it is an allowed tile for $(i,j)$;
 \item for every $1 \le s\le n^2$, $s \neq t$, $v_{i,j,s}$ is covered in $\allver$;
 \item for every $1 \le s\le n^2$, $s \neq t$, $h_{i,j,s}$ is covered in $\allhor$.
 \end{enumerate}
@@ -412,23 +417,23 @@ Since these points $h_{i,j,t_x}$ and $v_{i,j,t_y}$ are covered by
 segment from $\alldiag$, therefore $t_x = t_y$.
 
 Therefore $diagonal(i,j) = t_x = t_y$
-and $order(t_x)$ is an allowed tile for $(i,j)$
+and $\order(t_x)$ is an allowed tile for $(i,j)$
 because the respective segment is in $\alldiag$.
 
 \end{proof}
 
 \begin{lemma}
 \label{vertical_horizontal_synchronized}
-For a constructed instance $(\points, \sets, w)$
+For a constructed instance $\instanceSetCover$
 for any solution of weight $\solWeight$ it holds that $diagonal$ function
 from Lemma \ref{diag_correct}:
 \begin{enumerate}
 \item 
 for any $1 \le i < k, 1 \le j \le k$,
-$match_h(diagonal(i, j),diagonal(i+1, j))$ must be true;
+$\matchh(diagonal(i, j),diagonal(i+1, j))$ must be true;
 \item 
 for any $1 \le i \le k, 1 \le j < k$,
-$match_v(diagonal(i, j),diagonal(i, j+1))$ must be true.
+$\matchv(diagonal(i, j),diagonal(i, j+1))$ must be true.
 \end{enumerate}
 \end{lemma}
 
@@ -467,21 +472,21 @@ by one segment from $\allhor$ and these points are ends of this segment.
 
 $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 are ends of a segment from $\allhor$,
-therefore $match_h(t_1,t_2)$ must be true.
+therefore $\matchh(t_1,t_2)$ must be true.
 \end{proof}
 
 \begin{corollary}
 \label{vertical_horizontal_synchronized_inductive}
-For a constructed instance $(\points, \sets, w)$
+For a constructed instance $\instanceSetCover$
 for any solution of weight $\solWeight$ it holds that $diagonal$ function
 from Lemma \ref{diag_correct}:
 \begin{enumerate}
 \item 
 for any $1 \le i, j \le k$,
-$match_h(diagonal(1, j),diagonal(i, j))$ must be true;
+$\matchh(diagonal(1, j),diagonal(i, j))$ must be true;
 \item 
 for any $1 \le i, j \le k$,
-$match_v(diagonal(i, 1),diagonal(i, j))$ must be true.
+$\matchv(diagonal(i, 1),diagonal(i, j))$ must be true.
 \end{enumerate}
 \end{corollary}
 \begin{proof}
@@ -490,7 +495,7 @@ Simple inductive proof based on Lemma \ref{vertical_horizontal_synchronized}.
 
 \begin{lemma}
 \label{grid_tiling_exists}
-	If there exists solution of instance $(\points, \sets, w)$
+	If there exists solution of instance $\instanceSetCover$
 	with weight at most $\solWeight$,
 	then there exists a solution for grid tiling instance.
 \end{lemma}
@@ -500,10 +505,10 @@ Take $diagonal$ function from Lemma \ref{diag_correct}.
 
 To define $x$ funtion 
 for every $1 \le i \le k$ as $x(i) = x_i$
-where $(x_i, a) = order(v_{i,1})$
+where $(x_i, a) = \order(v_{i,1})$
 and $y$ function 
 for every $1 \le i \le k$ as $y(i) = y_i$
-where $(b, y_i) = order(h_{1,i})$
+where $(b, y_i) = \order(h_{1,i})$
 
 To prove that it is a correct solution for grid tiling,
 we need to prove that 
@@ -512,11 +517,11 @@ allowed tiles set $f(i,j)$.
 
 Let us take any $1 \le i,j \le k$,
 By Corollary \ref{vertical_horizontal_synchronized_inductive}
-we know that $match_h(diagonal(1, j),diagonal(i, j))$ and
-$match_v(diagonal(i, 1),diagonal(i, j))$ are true.
-Therefore $order(diagonal(i,j)) = (x(i), y(i))$.
+we know that $\matchh(diagonal(1, j),diagonal(i, j))$ and
+$\matchv(diagonal(i, 1),diagonal(i, j))$ are true.
+Therefore $\order(diagonal(i,j)) = (x(i), y(i))$.
 By Lemma \ref{diag_correct} we know that 
-$order(diagonal(i,j))$ is in $f(i,j)$.
+$\order(diagonal(i,j))$ is in $f(i,j)$.
 Therefore 
 $(x(i), y(i))$
 is in $f(i,j)$.

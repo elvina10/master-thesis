@@ -478,23 +478,6 @@ are endpoints of a segment from $\allhor$,
 therefore $\matchh(t_1,t_2)$ must be true.
 \end{proof}
 
-\begin{corollary}
-\label{vertical_horizontal_synchronized_inductive}
-For a constructed instance $\instanceSetCover$
-for any solution of weight $\solWeight$ it holds that $diagonal$ function
-from Lemma \ref{diag_correct}:
-\begin{enumerate}
-\item 
-for any $1 \le i, j \le k$,
-$\matchh(\diagonal(1, j),\diagonal(i, j))$ must be true;
-\item 
-for any $1 \le i, j \le k$,
-$\matchv(\diagonal(i, 1),\diagonal(i, j))$ must be true.
-\end{enumerate}
-\end{corollary}
-\begin{proof}
-Simple inductive proof based on Lemma \ref{vertical_horizontal_synchronized}.
-\end{proof}
 
 \begin{lemma}
 \label{grid_tiling_exists}
@@ -519,12 +502,13 @@ for every $1 \le i,j \le k$ $(x(i), y(j))$ is in
 allowed tiles set $f(i,j)$.
 
 Let us take any $1 \le i,j \le k$.
-By Corollary \ref{vertical_horizontal_synchronized_inductive},
-we know that $\matchh(diagonal(1, j),diagonal(i, j))$ and
-$\matchv(diagonal(i, 1),diagonal(i, j))$ are true.
-Therefore $\order(diagonal(i,j)) = (x(i), y(i))$.
+By Lemma \ref{vertical_horizontal_synchronized}
+and simple induction,
+we know that $\matchh(\diagonal(1, j),\diagonal(i, j))$ and
+$\matchv(\diagonal(i, 1),\diagonal(i, j))$ are $\true$.
+Therefore $\order(\diagonal(i,j)) = (x(i), y(i))$.
 By Lemma \ref{diag_correct} we know that 
-$\order(diagonal(i,j))$ is in $f(i,j)$.
+$\order(\diagonal(i,j))$ is in $f(i,j)$.
 Therefore 
 $(x(i), y(i))$
 is in $f(i,j)$.

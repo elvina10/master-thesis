@@ -132,8 +132,16 @@ $$p^{D} := (x, y - \epsilon).$$
 
 Then we define the point set as follows:
 $$\points := H \cup \{p^L : p \in H\} \cup \{p^R : p \in H\}
-\cup V \cup \{p^U : p \in V\} \cup \{p^D : p \in V\} $$
+\cup V \cup \{p^U : p \in V\} \cup \{p^D : p \in V\}.$$
 
+\begin{defi}
+	\label{guard_def}
+	For every point $p \in H$, we name point $p^L$ its \textbf{left guard}
+	and point $p^R$ its \textbf{right guard}.
+	
+	Similarily for every points $p \in V$, we name point $p^D$ its \textbf{lower guard}
+	and point $p^U$ its \textbf{upper guard}.
+\end{defi}
 
 \subparagraph{Segments.}
 \newcommand{\hor}[4]{\mathsf{hor}_{#1,#2,#3,#4}}
@@ -270,9 +278,11 @@ This solution has weight $\solWeight$.
 \label{guards}
 In any solution of the instance $(\points, \sets, w)$:
 \begin{itemize}
-\item points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$
+\item left and right guards of points in $H$
+(points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$)
 have to be covered with sgements from $\allhor$,
-\item points in $\{p^U : p \in V\} \cup \{p^D : p \in V\}$
+\item lower and upper guard of points in $V$
+(points in $\{p^D : p \in V\} \cup \{p^U : p \in V\}$)
 have to be covered with segments from $\allver$.
 \end{itemize}
 \end{claim}
@@ -281,27 +291,34 @@ have to be covered with segments from $\allver$.
 We prove the claim for the points from $H$
 as the proof for points from $V$ is analogical.
 
-Every segment in $\allver$ is vertical and have different x-coordinate
-than any $\{p^L : p \in H\} \cup \{p^R : p \in H\}$ points.
+Every segment in $\allver$ is vertical and 
+their x-coordinate is equal to $i(n^2+1)$ for some $1\le i \le k$,
+so they all have different x-coordinate
+than any left or right guard of points in $H$.
 
-Every point $x$ from $\{p^L : p \in H\} \cup \{p^R : p \in H\}$
+Every point $x$, which is a left or right guard of points in $H$
 have $kn^2$ segments from $\alldiag$ that intersect with the horizontal
 line that goes through $x$. All of these segments intersect with
 this line in points from set $H$, therefore none of them
-cover the points in question.
+cover any of the guards.
 
 Therefore none of the segments from $\allver$ or $\alldiag$ cover any
-of the considered points.
+of the guards of the points in $H$.
 \end{proof}
+
+Now we present a few additional properties of the constructed instance
+of the geometric set cover that help us to prove
+the Lemma \ref{grid_tiling_exists}.
 
 \begin{claim}
 \label{one_diag_in_square}
 For any $1 \le i, j \le n$
 and any solution of the instance $(\points, \sets, w)$
-no two points $h_{i, j, t_1}, h_{i, j, t_2}$
+all but at most one points $h_{i, j, t_1}, h_{i, j, t_2}$
 ($v_{i, j, t_1}, v_{i, j, t_2}$)
 for $1 \le t_1 < t_2 \le n^2$
-can be not covered with segments from $\allhor$ ($\allver$).
+must be
+covered with segments from $\allhor$ ($\allver$).
 \end{claim}
 
 \begin{proof}
@@ -318,19 +335,20 @@ but not $h_{i,j,t_1}$ covers also $h_{i, j, t_2}$.
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
-For every solution of the instance $(\points, \sets, w)$
-has to have sum of weights of segments chosen
+For every solution of the instance $(\points, \sets, w)$,
+the sum of weights of segments chosen
 from sets $\allhor$ and $\allver$ at least
 $W_{hv} = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
 \end{lemma}
 
 \begin{proof}
-We know that for every $1 \le i,j \le k$
-only one there exists only one $t_x$ and $t_y$ such that
+We know that for all $1 \le i,j \le k$
+there exists at most one $t_x$ and at most one $t_y$ such that
 $v_{i,j,t_x}$ and $h_{i,j,t_y}$
-can be not covered by
+are not covered by
 segments from $\allhor$ and $\allver$ (Claim \ref{one_diag_in_square}),
 
+TODO: Rephrase the sentence below
 
 We sum the lower bound for sum of length for horizontal/vertical
 lines for a single vertical line
@@ -339,19 +357,21 @@ lines for a single vertical line
 Let us fix $1 \le i \le k$.
 
 \begin{enumerate}[label={(\arabic*)}]
-\item Length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$ is:
+\item The total length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$ is:
 $$(k(n^2+1) + n^2 +\epsilon) - ((n^2+1)+1 -\epsilon) = k(n^2+1) - 2(1 - \epsilon).$$
 
 \item For every $1 \le j \le k$ there exists at most one $1 \le t \le n^2$
 such that $v_{i,j,t}$ is not covered by segments from $\allver$
 (Claim \ref{one_diag_in_square}).
-Its guards $v^U_{i,j,t}$ and $v^D_{i,j,t}$
+Its guards (see Definition \ref{guard_def}) $v^U_{i,j,t}$ and $v^D_{i,j,t}$
 have to be covered in $\allver$ (Claim \ref{guards}).
 Therefore at most $k$ spaces of length $2\epsilon$ can be left
-not covered by segments from $\allver$.
+not covered by segments from $\allver$ between $v_{i,1,1}^D$ and $v_{i,k,n^2}^U$.
+
+Proof for horizontal segments is analogous.
 
 \end{enumerate}
-Therefore sum of these lower bounds for vertical and horizontal lines are:
+The sum of these lower bounds for vertical and horizontal lines is:
 $$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$$
 \end{proof}
 

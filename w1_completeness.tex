@@ -436,46 +436,51 @@ with weight at most $\solWeight$:
 \begin{enumerate}
 \item 
 for any $1 \le i < k, 1 \le j \le k$,
-$\matchh(\diagonal(i, j),\diagonal(i+1, j))$ must be \true;
+$\matchh(\diagonal(i, j),\diagonal(i+1, j))$ is \true;
 \item 
 for any $1 \le i \le k, 1 \le j < k$,
-$\matchv(\diagonal(i, j),\diagonal(i, j+1))$ must be \true.
+$\matchv(\diagonal(i, j),\diagonal(i, j+1))$ is \true.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-TODO: There is something wrong with the proof below, read
-
-We prove (1), the proof of (2) is analogous.
+We prove (1) by contradiction, the proof of (2) is analogous.
 
 Let us take any $1 \le i < k, 1 \le j \le k$
 and name $t_1 = \diagonal(i, j)$ and $t_2 = \diagonal(i+1, j)$.
+We also assume that $\matchh(t_1,t_2)$ is \false,
+which is equivalent to the fact that
+segment $(h_{i,j,t_1}^R, h{i+1,j,t_2}^L)$
+is not in set $\allhor$.
+
 Therefore $h_{i,j,t_1}$ and $h_{i+1,j,t_2}$
-are not covered by segments from $\allhor$,
+are not covered by segments from $\allhor$ (Lemma \ref{diag_correct}),
 while $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 have to be covered by segments from $\allhor$ (Claim \ref{guards}).
+
 Every segment from $\allhor$ starts at $h^R_{x,y,z_1}$
-segment and finishes at $h^L_{x,y+1,z_2}$ segment for some
+segment and ends at $h^L_{x+1,y,z_2}$ segment for some
 $1 \le x \le k$,$1 \le y < k$ and $1 \le z_1, z_2 \le n^2$.
-Since all of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
-are covered by segments in $\allhor$,
-and there are two different segments covering
-these points, one of them must begin
-at $h^R_{i,j,t_1}$ and end at $h^L_{i,j+1,z_2}$
-and the other one begin at $h^R_{i,j,z_1}$
-and end at $h^L_{i+1,j,t_2}$
+All of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
+are covered by segments in $\allhor$ 
+and there is no segment $(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$ in $\allhor$.
+Hence, there are at least two different segments covering them.
+One of them must begin
+at $h^R_{i,j,t_1}$ and end at $h^L_{i+1,j,z_2}$
+and there must be other one that begins at $h^R_{i,j,z_1}$
+and ends at $h^L_{i+1,j,t_2}$
 for some $1 \le z_1, z_2 \le n^2$.
-Therefore, the space between $h^R_{i,j,z_1}$ and $h^L_{i,j+1,z_2}$
+
+Thus, the space between $h^R_{i,j,z_1}$ and $h^L_{i,j+1,z_2}$
 would be covered twice and is longer than $\epsilon$.
 By Lemma \ref{vertical_horizontal_sum},
 the lower bound for weight of such a solution is $W_{hv} + \epsilon$
-which contradicts that the given solution has weight $\solWeight < W_{hv} + \epsilon$
-Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$ must be covered
-by one segment from $\allhor$ and these points are endpoints of this segment.
+which is more than $\solWeight$.
 
-So $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
-are endpoints of a segment from $\allhor$,
-therefore $\matchh(t_1,t_2)$ must be true.
+Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$ must be covered
+by one segment from $\allhor$,
+$(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$ is a segment in $\allhor$
+and $\matchh(t_1,t_2)$ is $\true$.
 \end{proof}
 
 

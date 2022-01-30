@@ -232,34 +232,102 @@ Finally, we also define a set of right-diagonal segments:
 $$\alldiag := \{ (h_{i, j, t}, v_{i, j, t}) :
 	1 \le i, j \le k, 1 \le t \le n^2, \order(t) \in f(i, j)\}$$
 	
+\definecolor{guards_color}{RGB}{80, 120, 255}
+
+{\tikzset{guard_h/.style={
+    circle, draw=guards_color, fill, fill=guards_color, minimum size=2pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,rotate=90,text=guards_color,font=\footnotesize}}}}
+    }
+}
+{\tikzset{node_h/.style={
+    circle, draw=black, fill, fill=black, minimum size=4pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,rotate=90,text=black}}}}
+    }
+}
+{\tikzset{guard_v/.style={
+    circle, draw=guards_color, fill, fill=guards_color, minimum size=2pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,text=guards_color,font=\footnotesize}}}}
+    }
+}
+{\tikzset{node_v/.style={
+    circle, draw=black, fill, fill=black, minimum size=4pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,text=black}}}}
+    }
+}
 
 \begin{figure}
 \begin{center}
 \begin{tikzpicture}[main/.style = {draw, circle}]
+\tikzmath{
+	\step=2;
+	\eps=0.5;
+	\x1=\step;
+	\x2=\x1+\step;
+	\x3=\x2+\step;
+	\x4=\x3+\step;
+	\x5=\x4+\step;
+	\x6=\x5+\step;
+	\l1=\x1-\eps;
+	\r1=\x1+\eps;
+	\l2=\x2-\eps;
+	\r2=\x2+\eps;
+	\l3=\x3-\eps;
+	\r3=\x3+\eps;
+	\l4=\x4-\eps;
+	\r4=\x4+\eps;
+	\l5=\x5-\eps;
+	\r5=\x5+\eps;
+	\l6=\x6-\eps;
+	\r6=\x6+\eps;
+}
 
-\filldraw[black] (0,1.5) circle (2pt) node[anchor=east] {$v_{i,j,1}$};
-\filldraw[black] (0,3) circle (2pt) node[anchor=east] {$v_{i,j,2}$};
-\filldraw[black] (0,4.5) circle (2pt) node[anchor=east] {$v_{i,j,3}$};
-\filldraw[black] (0,6) circle (2pt) node[anchor=east] {$v_{i,j,4}$};
-\filldraw[black] (0,7.5) circle (0pt) node[anchor=east] {$\ldots$};
-\filldraw[black] (0,9) circle (2pt) node[anchor=east] {$v_{i,j,n^2-1}$};
-\filldraw[black] (0,10.5) circle (2pt) node[anchor=east] {$v_{i,j,n^2}$};
-\filldraw[black] (1.5,0) circle (2pt) node[anchor=north] {$h_{i,j,1}$};
-\filldraw[black] (3,0) circle (2pt) node[anchor=north] {$h_{i,j,2}$};
-\filldraw[black] (4.5,0) circle (2pt) node[anchor=north] {$h_{i,j,3}$};
-\filldraw[black] (6,0) circle (2pt) node[anchor=north] {$h_{i,j,4}$};
-\filldraw[black] (7.5,0) circle (0pt) node[anchor=north] {$\ldots$};
-\filldraw[black] (9,0) circle (2pt) node[anchor=north] {$h_{i,j,n^2-1}$};
-\filldraw[black] (10.5,0) circle (2pt) node[anchor=north] {$h_{i,j,n^2}$};
-\draw (0,1.5) -- (1.5,0) node[midway, above] {$\delta$};
-\draw (0,3) -- (3,0) node[midway, above] {$\delta$};
-\draw (0,4.5) -- (4.5,0) node[midway, above] {$\delta$};
-\draw (0,6) -- (6,0) node[midway, above] {$\delta$};
-\draw (0,9) -- (9,0) node[midway, above] {$\delta$};
-\draw (0,10.5) -- (10.5,0) node[midway, above] {$\delta$};
+\node[guard_v, label={left:$v_{i,j,1}^D$}] at (0, \l1) {};
+\node[node_v, label={left:$v_{i,j,1}$}] at (0,\x1) {};
+\node[guard_v, label={left:$v_{i,j,1}^U$}] at (0, \r1) {};
+\node[guard_v, label={left:$v_{i,j,2}^D$}] at (0, \l2) {};
+\node[node_v, label={left:$v_{i,j,2}$}] at (0,\x2) {};
+\node[guard_v, label={left:$v_{i,j,2}^U$}] at (0, \r2) {};
+\node[guard_v, label={left:$v_{i,j,3}^D$}] at (0, \l3) {};
+\node[node_v, label={left:$v_{i,j,3}$}] at (0,\x3) {};
+\node[guard_v, label={left:$v_{i,j,3}^U$}] at (0, \r3) {};
+\filldraw[black] (0,\x4) circle (0pt) node[anchor=east] {$\ldots$};
+\node[guard_v, label={left:$v_{i,j,n^2-1}^D$}] at (0, \l5) {};
+\node[node_v, label={left:$v_{i,j,n^2-1}$}] at (0,\x5) {};
+\node[guard_v, label={left:$v_{i,j,n^2-1}^U$}] at (0, \r5) {};
+\node[guard_v, label={left:$v_{i,j,n^2}^D$}] at (0, \l6) {};
+\node[node_v, label={left:$v_{i,j,n^2}$}] at (0,\x6) {};
+\node[guard_v, label={left:$v_{i,j,n^2}^U$}] at (0, \r6) {};
+
+\node[guard_h, label={left:$h_{i,j,1}^L$}] at (\l1,0) {};
+\node[node_h, label={left:$h_{i,j,1}$}] at (\x1,0) {};
+\node[guard_h, label={left:$h_{i,j,1}^R$}] at (\r1,0) {};
+\node[guard_h, label={left:$h_{i,j,2}^L$}] at (\l2,0) {};
+\node[node_h, label={left:$h_{i,j,2}$}] at (\x2,0) {};
+\node[guard_h, label={left:$h_{i,j,2}^R$}] at (\r2,0) {};
+\node[guard_h, label={left:$h_{i,j,3}^L$}] at (\l3,0) {};
+\node[node_h, label={left:$h_{i,j,3}$}] at (\x3,0) {};
+\node[guard_h, label={left:$h_{i,j,3}^R$}] at (\r3,0) {};
+\filldraw[black] (\x4,0) circle (0pt) node[anchor=north] {$\ldots$};
+\node[guard_h, label={left:$h_{i,j,n^2-1}^L$}] at (\l5,0) {};
+\node[node_h, label={left:$h_{i,j,n^2-1}$}] at (\x5,0) {};
+\node[guard_h, label={left:$h_{i,j,n^2-1}^R$}] at (\r5,0) {};
+\node[guard_h, label={left:$h_{i,j,n^2}^L$}] at (\l6,0) {};
+\node[node_h, label={left:$h_{i,j,n^2}$}] at (\x6,0) {};
+\node[guard_h, label={left:$h_{i,j,n^2}^R$}] at (\r6,0) {};
+\draw (0,\x1) -- (\x1,0) node[midway, above] {$\delta$};
+\draw (0,\x2) -- (\x2,0) node[midway, above] {$\delta$};
+\draw (0,\x3) -- (\x3,0) node[midway, above] {$\delta$};
+\draw (0,\x5) -- (\x5,0) node[midway, above] {$\delta$};
+\draw (0,\x6) -- (\x6,0) node[midway, above] {$\delta$};
 \end{tikzpicture} 
 \end{center}
-\caption{\textbf{Set $\alldiag$ with weights for a fixed pair of indices $1 \le i,j \le k$.}}
+\caption{\textbf{Vertices and segments from $\alldiag$ for fixed $1 \le i,j \le k$.}}
+Nodes from $H$ and $V$ are marked in black, their guards are marked in blue.
+You can see segments from $\alldiag$ with their weights (equal to $\delta$).
 \label{fig:diag_def}
 \end{figure}
 

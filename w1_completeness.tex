@@ -320,7 +320,8 @@ You can see an example of such segments in Figure \ref{fig:diag_def}.
 \end{tikzpicture} 
 \end{center}
 \caption{\textbf{Vertices and segments in $\alldiag$.}}
-Nodes from $H$ and $V$ are marked in black, their guards are marked in blue.
+Nodes from $H$ and $V$ are marked in black,
+their guards are marked in \textcolor{guards_color}{blue}.
 You can see segments in $\alldiag$ with their weights (equal to $\delta$).
 This is an example for any $1 \le i,j \le k$.
 \label{fig:diag_def}
@@ -355,6 +356,7 @@ $\delta := \frac{1}{4k^4}$.
 }
 
 \begin{figure}
+\hspace*{-1.5cm}
 \begin{tikzpicture}[main/.style = {draw, circle}]
 \tikzmath{
 \step=2;
@@ -398,6 +400,7 @@ $\delta := \frac{1}{4k^4}$.
 \addNode{2}{2}{1}{8}
 \addNode{2}{2}{2}{9}
 
+\draw [beg_color] (\l1,0) to[out=150,in=30, looseness=200] (1.49,0);
 \draw [beg_color] (\l1,0) to[out=40,in=140] (\l2,0);
 \draw [beg_color] (\l1,0) to[out=40,in=140] (\l3,0);
 \draw [beg_color] (\l1,0) to[out=40,in=140] (\l4,0);
@@ -415,9 +418,11 @@ $\delta := \frac{1}{4k^4}$.
 \end{tikzpicture} 
 \caption{\textbf{Vertices and segments in $HOR$.}}
 Nodes from $H$ are marked in black, their guards are marked in blue.
-You can see $\horbeg_{i}$ segments in \textcolor{beg_color}{red}
-and segments $\hor_{i}{j}{t_{x,y_2}}{t_{x,y_2}}$
-in \textcolor{seg_color1}{blue} and \textcolor{seg_color2}{green}.
+Segments are represented as angles between endpoints.
+You can see $\horbeg_{j,t}$ segments in \textcolor{beg_color}{red}.
+$\horbeg_{j,1}$ is degenerated to a single point at $h_{1,1,1}^L$.
+Segments $\hor_{i}{j}{t_{x,y_2}}{t_{x,y_2}}$
+are marked in \textcolor{seg_color1}{blue} and \textcolor{seg_color2}{green}.
 \textcolor{seg_color1}{Blue} segments connect $t_x$
 such that they share y-coordinate equal to 1,
 for \textcolor{seg_color2}{green} it is equal to 2.

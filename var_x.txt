@@ -1,0 +1,10 @@
+\l1=\x1-\eps;
+\r1=\x1+\eps;
+\l2=\x2-\eps;
+\r2=\x2+\eps;
+\l3=\x3-\eps;
+\r3=\x3+\eps;
+\l4=\x4-\eps;
+\r4=\x4+\eps;
+\l5=\x5-\eps;
+\r5=\x5+\eps;

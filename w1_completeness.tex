@@ -154,9 +154,9 @@ $\order : \{1, \ldots, n^2\} \rightarrow \{1, \ldots, n\} \times \{1, \ldots, n\
 
 Define $\matchv(i, j)$ and $\matchh(i, j)$
 as boolean functions denoting whether two points share x or y coordinate:
-$$\matchv(i, j) \text{ is } \texttt{true} \iff
+$$\matchv(i, j) \text{ is } \true \iff
 \order(i) \text{ and } \order(j) \text{ have the same x coordinate,}$$
-$$\matchh(i, j) \text{ is } \texttt{true} \iff
+$$\matchh(i, j) \text{ is } \true \iff
 \order(i) \text{ and } \order(j) \text{ have the same y coordinate.}$$
 
 
@@ -639,7 +639,7 @@ there exists such $1 \le t \le n^2$ that:
 \begin{enumerate}[label={(\arabic*)}]
 \item $v_{i,j,t}, h_{i,j,t}$ are not covered by segments from $\allver$ or $\allhor$;
 \item segment $(v_{i,j,t}, h_{i,j,t})$ is in solution $\sol$;
-\item $\order(t) \in f(i,j)$ that is, $\order(t)$ is an allowed tile for $(i,j)$;
+\item $\order(t) \in f(i,j)$, that is, $\order(t)$ is an allowed tile for $(i,j)$;
 \item for every $1 \le s\le n^2$, $s \neq t$, $v_{i,j,s}$ is covered in $\allver$;
 \item for every $1 \le s\le n^2$, $s \neq t$, $h_{i,j,s}$ is covered in $\allhor$.
 \end{enumerate}
@@ -651,10 +651,11 @@ and one of points $\{v_{i,j,t_y} : 1 \le t_y \le n^2\}$
 is covered with $\alldiag$
 (Claim \ref{one_diag_in_square}).
 	
-Moreover exactly one such point $h_{i,j,t_x}$ and one such point $v_{i,j,t_y}$
+Moreover, exactly one such point $h_{i,j,t_x}$ and one such point $v_{i,j,t_y}$
 is covered with $\alldiag$,
 because if none of them were covered, then the solution would have to
-have weight at least $W_{hv} + 2\epsilon$, which is more than $\solWeight$.
+have weight at least $W_{hv} + 2\epsilon$ (Lemma \ref{vertical_horizontal_sum}),
+which is more than $\solWeight$.
 
 We observe that points $h_{i,j,t_x}$ and $v_{i,j,t_y}$
 have to be covered with the same segment from $\alldiag$.
@@ -662,7 +663,7 @@ Indeed we need to use at least $k^2$ of them to use
 exactly one DIAG segment for every pair of $1 \le i,j \le k$,
 if we used 2 segments from $\alldiag$
 for one pair $(i,j)$,
-then we would have used $W_{hv} + k^2\delta + \delta$,
+then we would have used $W_{hv} + k^2\delta + \delta$ (Lemma \ref{vertical_horizontal_sum}),
 which if more than $\solWeight$.
 Since points $h_{i,j,t_x}$ and $v_{i,j,t_y}$ are covered by
 a single segment from $\alldiag$, we have $t_x = t_y$.
@@ -673,8 +674,7 @@ because the corresponding segment is in $\alldiag$.
 \end{proof}
 
 \newcommand{\diagonal}{\mathsf{diagonal}}
-
-We refer to the function of the sequence $t_x$ from Lemma \ref{diag_correct}
+We refer to the function mapping $1 \le x \le k$ to $t_x$ from Lemma \ref{diag_correct}
 as $\diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
 
 \begin{lemma}
@@ -685,10 +685,10 @@ with weight at most $\solWeight$:
 \begin{enumerate}
 \item 
 for any $1 \le i < k, 1 \le j \le k$,
-$\matchh(\diagonal(i, j),\diagonal(i+1, j))$ is \true;
+$\matchh(\diagonal(i, j),\diagonal(i+1, j))$ is $\true$;
 \item 
 for any $1 \le i \le k, 1 \le j < k$,
-$\matchv(\diagonal(i, j),\diagonal(i, j+1))$ is \true.
+$\matchv(\diagonal(i, j),\diagonal(i, j+1))$ is $\true$.
 \end{enumerate}
 \end{lemma}
 
@@ -699,7 +699,7 @@ Let us take any $1 \le i < k, 1 \le j \le k$
 and name $t_1 = \diagonal(i, j)$ and $t_2 = \diagonal(i+1, j)$.
 We also assume that $\matchh(t_1,t_2)$ is \false,
 which is equivalent to the fact that
-segment $(h_{i,j,t_1}^R, h{i+1,j,t_2}^L)$
+segment $(h_{i,j,t_1}^R, h_{i+1,j,t_2}^L)$
 is not in set $\allhor$.
 
 Therefore $h_{i,j,t_1}$ and $h_{i+1,j,t_2}$
@@ -707,9 +707,9 @@ are not covered by segments from $\allhor$ (Lemma \ref{diag_correct}),
 while $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 have to be covered by segments from $\allhor$ (Claim \ref{guards}).
 
-Every segment from $\allhor$ starts at $h^R_{x,y,z_1}$
-segment and ends at $h^L_{x+1,y,z_2}$ segment for some
-$1 \le x \le k$,$1 \le y < k$ and $1 \le z_1, z_2 \le n^2$.
+Every segment from $\allhor$ starts at point $h^R_{x,y,z_1}$
+and ends at point $h^L_{x+1,y,z_2}$ for some
+$1 \le x < k$,$1 \le y \le k$ and $1 \le z_1, z_2 \le n^2$.
 All of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 are covered by segments in $\allhor$ 
 and there is no segment $(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$ in $\allhor$.

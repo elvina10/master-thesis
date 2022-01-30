@@ -20,7 +20,7 @@ which was introduced in \cite{marx_grid_tiling}.
 	from a set of segments $\sets$ 
 	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
 	so that the weight of the cover is minimal.
-	Then this problem is W[1]-hard then parametrized by $\sqrt k$ and
+	Then this problem is W[1]-hard when parametrized by $\sqrt k$ and
 	assuming ETH, there is no algorithm for this
 	problem with running time
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
@@ -39,7 +39,7 @@ to be W[1]-complete in literature.
 \newcommand{\pow}{\mathsf{Pow}}
 
 \begin{defi}
-We define \textbf{powerset} of any set $A$, denoted as $\pow(A)$,
+We define \textbf{powerset} of a set $A$, denoted as $\pow(A)$,
 as the set of all subsets of $A$, ie. $\pow(A) = \{B : B \subseteq A\}$.
 \end{defi}
 
@@ -103,9 +103,12 @@ which is W[1]-hard when parametrized by the size of the grid.
 In the first row and column of the table you can see the solution:
 functions $x$ and $y$.
 The~tiles used in this solution are marked in \textbf{bold}.
-Change marked in \textcolor{alternative_sol}{blue} $x(1)=2$ would be still a~corect solution
-of this instance without any other changes.
-Change marked in \textcolor{bad_sol}{red} ${y(1)=9}$ and $x(4)=2$ is not a correct solution.
+If we instead chose the tiles marked in \textcolor{alternative_sol}{blue}
+(whenever there is one, taking the tile marked in \textbf{bold} otherwise),
+then that corresponds to setting $x(1)=2$, and would also form a correct solution.
+On the other hand, if we instead chose the tiles marked in \textcolor{bad_sol}{red}
+(as before), then that corresponds to setting ${y(1)=9}$ and $x(4)=2$
+and that would $\textbf{not}$ form a correct solution.
 Even though the first row is correct,
 tile with coordinates (3,4) requires tile (2,1), not (2,2).
 \label{fig:grid_tiling_exmample}
@@ -535,10 +538,10 @@ In any solution of the instance $\instanceSetCover$:
 \begin{itemize}
 \item left and right guards of points in $H$
 (points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$)
-have to be covered with segments from $\allhor$,
-\item lower and upper guard of points in $V$
+have to~be~covered with segments from $\allhor$,
+\item lower and upper guards of points in $V$
 (points in $\{p^D : p \in V\} \cup \{p^U : p \in V\}$)
-have to be covered with segments from $\allver$.
+have to~be~covered with segments from $\allver$.
 \end{itemize}
 \end{claim}
 

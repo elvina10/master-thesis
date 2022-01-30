@@ -68,34 +68,6 @@ of the row and column in question.
 The next theorem describes the complexity of this problem,
 which is W[1]-hard when parametrized by the size of the grid.
 
-\begin{tw}
-\label{grid_tiling_w1_hard}
-\textbf{\cite{marx_grid_tiling}}
-Grid tiling is W[1]-hard parametrized by $k$ and
-assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
-algorithm solving the grid tiling problem
-for any computable function $f$.
-\end{tw}
-
-The reminder of this section is proving Theorem \ref{w1_hard}
-by reduction of grid tiling problem to geometric set cover.
-That proves the W[1]-hardness of geometric set cover,
-because if we could solve it with an FPT algorithm,
-then we could also solve grid tiling problem
-(which we reduced to geometric set cover).
-Therefore geometric set cover with setting
-described in Theorem \ref{w1_hard}
-is at least as hard as the grid tiling problem.
-
-We start with an instance of the grid tiling problem $(n, k, f)$.
-The instance consists of:
-\begin{itemize}
-\item size of the grid $k$,
-\item number of colors $n$,
-\item function of allowed tiles
-$f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
-\end{itemize}
-
 \definecolor{alternative_sol}{RGB}{48, 48, 255}
 \definecolor{bad_sol}{RGB}{255, 48, 48}
 
@@ -140,6 +112,34 @@ Even though the first row is correct,
 tile with coordinates (3,4) should have value (2,1), not (2,2).
 \label{fig:grid_tiling_exmample}
 \end{figure}
+
+\begin{tw}
+\label{grid_tiling_w1_hard}
+\textbf{\cite{marx_grid_tiling}}
+Grid tiling is W[1]-hard parametrized by $k$ and
+assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
+algorithm solving the grid tiling problem
+for any computable function $f$.
+\end{tw}
+
+The reminder of this section is proving Theorem \ref{w1_hard}
+by reduction of grid tiling problem to geometric set cover.
+That proves the W[1]-hardness of geometric set cover,
+because if we could solve it with an FPT algorithm,
+then we could also solve grid tiling problem
+(which we reduced to geometric set cover).
+Therefore geometric set cover with setting
+described in Theorem \ref{w1_hard}
+is at least as hard as the grid tiling problem.
+
+We start with an instance of the grid tiling problem $(n, k, f)$.
+The instance consists of:
+\begin{itemize}
+\item size of the grid $k$,
+\item number of colors $n$,
+\item function of allowed tiles
+$f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
+\end{itemize}
 
 \paragraph{Construction.}
 \newcommand{\order}{\mathsf{order}}

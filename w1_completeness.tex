@@ -259,6 +259,18 @@ $$\alldiag := \{ (h_{i, j, t}, v_{i, j, t}) :
     }
 }
 
+\newcommand{\addNodeV}[2]{
+	\node[guard_v, label={left:$v_{i,j,#2}^D$}] at (0, \l#1) {};
+	\node[node_v, label={left:$v_{i,j,#2}$}] at (0,\x#1) {};
+	\node[guard_v, label={left:$v_{i,j,#2}^U$}] at (0, \r#1) {};
+}
+
+\newcommand{\addNodeH}[2]{
+	\node[guard_h, label={left:$h_{i,j,#2}^L$}] at (\l#1,0) {};
+	\node[node_h, label={left:$h_{i,j,#2}$}] at (\x#1,0) {};
+	\node[guard_h, label={left:$h_{i,j,#2}^R$}] at (\r#1,0) {};
+}
+
 \begin{figure}
 \begin{center}
 \begin{tikzpicture}[main/.style = {draw, circle}]
@@ -285,39 +297,19 @@ $$\alldiag := \{ (h_{i, j, t}, v_{i, j, t}) :
 	\r6=\x6+\eps;
 }
 
-\node[guard_v, label={left:$v_{i,j,1}^D$}] at (0, \l1) {};
-\node[node_v, label={left:$v_{i,j,1}$}] at (0,\x1) {};
-\node[guard_v, label={left:$v_{i,j,1}^U$}] at (0, \r1) {};
-\node[guard_v, label={left:$v_{i,j,2}^D$}] at (0, \l2) {};
-\node[node_v, label={left:$v_{i,j,2}$}] at (0,\x2) {};
-\node[guard_v, label={left:$v_{i,j,2}^U$}] at (0, \r2) {};
-\node[guard_v, label={left:$v_{i,j,3}^D$}] at (0, \l3) {};
-\node[node_v, label={left:$v_{i,j,3}$}] at (0,\x3) {};
-\node[guard_v, label={left:$v_{i,j,3}^U$}] at (0, \r3) {};
+\addNodeV{1}{1}
+\addNodeV{2}{2}
+\addNodeV{3}{3}
 \filldraw[black] (0,\x4) circle (0pt) node[anchor=east] {$\ldots$};
-\node[guard_v, label={left:$v_{i,j,n^2-1}^D$}] at (0, \l5) {};
-\node[node_v, label={left:$v_{i,j,n^2-1}$}] at (0,\x5) {};
-\node[guard_v, label={left:$v_{i,j,n^2-1}^U$}] at (0, \r5) {};
-\node[guard_v, label={left:$v_{i,j,n^2}^D$}] at (0, \l6) {};
-\node[node_v, label={left:$v_{i,j,n^2}$}] at (0,\x6) {};
-\node[guard_v, label={left:$v_{i,j,n^2}^U$}] at (0, \r6) {};
+\addNodeV{5}{n^2-1}
+\addNodeV{6}{n^2}
 
-\node[guard_h, label={left:$h_{i,j,1}^L$}] at (\l1,0) {};
-\node[node_h, label={left:$h_{i,j,1}$}] at (\x1,0) {};
-\node[guard_h, label={left:$h_{i,j,1}^R$}] at (\r1,0) {};
-\node[guard_h, label={left:$h_{i,j,2}^L$}] at (\l2,0) {};
-\node[node_h, label={left:$h_{i,j,2}$}] at (\x2,0) {};
-\node[guard_h, label={left:$h_{i,j,2}^R$}] at (\r2,0) {};
-\node[guard_h, label={left:$h_{i,j,3}^L$}] at (\l3,0) {};
-\node[node_h, label={left:$h_{i,j,3}$}] at (\x3,0) {};
-\node[guard_h, label={left:$h_{i,j,3}^R$}] at (\r3,0) {};
+\addNodeH{1}{1}
+\addNodeH{2}{2}
+\addNodeH{3}{3}
 \filldraw[black] (\x4,0) circle (0pt) node[anchor=north] {$\ldots$};
-\node[guard_h, label={left:$h_{i,j,n^2-1}^L$}] at (\l5,0) {};
-\node[node_h, label={left:$h_{i,j,n^2-1}$}] at (\x5,0) {};
-\node[guard_h, label={left:$h_{i,j,n^2-1}^R$}] at (\r5,0) {};
-\node[guard_h, label={left:$h_{i,j,n^2}^L$}] at (\l6,0) {};
-\node[node_h, label={left:$h_{i,j,n^2}$}] at (\x6,0) {};
-\node[guard_h, label={left:$h_{i,j,n^2}^R$}] at (\r6,0) {};
+\addNodeH{5}{n^2-1}
+\addNodeH{6}{n^2}
 \draw (0,\x1) -- (\x1,0) node[midway, above] {$\delta$};
 \draw (0,\x2) -- (\x2,0) node[midway, above] {$\delta$};
 \draw (0,\x3) -- (\x3,0) node[midway, above] {$\delta$};
@@ -347,6 +339,41 @@ The weight of each segment in $\allhor \cup \allver$
 is equal to the segment,
 while every segment in $\alldiag$ has weight
 $\delta := \frac{1}{4k^4}$.
+
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[main/.style = {draw, circle}]
+\tikzmath{
+	\step=2;
+	\eps=0.5;
+	\x1=\step;
+	\x2=\x1+\step;
+	\x3=\x2+\step;
+	\x4=\x3+\step;
+	\x5=\x4+\step;
+	\x6=\x5+\step;
+	\l1=\x1-\eps;
+	\r1=\x1+\eps;
+	\l2=\x2-\eps;
+	\r2=\x2+\eps;
+	\l3=\x3-\eps;
+	\r3=\x3+\eps;
+	\l4=\x4-\eps;
+	\r4=\x4+\eps;
+	\l5=\x5-\eps;
+	\r5=\x5+\eps;
+	\l6=\x6-\eps;
+	\r6=\x6+\eps;
+}
+
+$\addNodeH{1}{1}$
+\end{tikzpicture} 
+\end{center}
+\caption{\textbf{Vertices and segments from $HOR$.}}
+Nodes from $H$ and $V$ are marked in black, their guards are marked in blue.
+\label{fig:segments_def}
+\end{figure}
 
 TODO: Put a picture of small instance like 3x3 with n=2
 

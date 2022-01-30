@@ -559,36 +559,41 @@ of the guards of the points in $H$.
 
 Now we present a few additional properties of the constructed instance
 of the geometric set cover that help us to prove
-the Lemma \ref{grid_tiling_exists}.
+Lemma \ref{grid_tiling_exists}.
 
 \begin{claim}
 \label{one_diag_in_square}
 For any $1 \le i, j \le n$
 and any solution of the instance $\instanceSetCover$
-all but at most one points $h_{i, j, t_1}, h_{i, j, t_2}$
-($v_{i, j, t_1}, v_{i, j, t_2}$)
-for $1 \le t_1 < t_2 \le n^2$
+all, but at most one point $h_{i, j, t}$
+and at most one point $v_{i, j, t}$
+for $1 \le t \le n^2$
 must be
-covered with segments from $\allhor$ ($\allver$).
+covered with segments from $\allhor$ or $\allver$.
 \end{claim}
 
 \begin{proof}
 We prove the claim for horizontal segments,
 as the proof for vertical segments is analoguous.
 
-Assume point $h_{i, j, t_1}$ is not covered with
-segments from $\allhor$.
+We prove this by contradiction. Assume that we
+have two points $h_{i,j,t_1}, h_{i,j,t_2}$
+such that they are not covered with segments from $\allhor$
+for any $1 \le t_1 < t2 \le n^2$.
+
 Point $h^R_{i, j, t_1}$ has to be covered with $\allhor$
 by Claim $\ref{guards}$.
 Every segment in $\allhor$ covering $h^R_{i, j, t_1}$,
-but not $h_{i,j,t_1}$ covers also $h_{i, j, t_2}$.
+but not $h_{i,j,t_1}$ must start at $h^R_{i, j, t_1}$
+and all such segments cover also $h_{i, j, t_2}$.
+This contradicts the assumption, which concludes the proof.
 \end{proof}
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
 For every solution of the instance $\instanceSetCover$,
 the sum of weights of segments chosen
-from sets $\allhor$ and $\allver$ at least
+from sets $\allhor$ and $\allver$ is at least
 $2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
 \end{lemma}
 
@@ -596,16 +601,10 @@ $2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
 We prove the lemma for vertical lines,
 as the proof for horizontal segments is analogous.
 
-We know that for all $1 \le i,j \le k$
-there exists at most one $t_x$ such that
-$v_{i,j,t_x}$ is not covered by
-segments from $\allver$ (Claim \ref{one_diag_in_square}),
-
 Let us fix $1 \le i \le k$.
 
-We provide the lower bound for the sum of length
-of vertical segments between points $v_{i,j_1,t_1}^L$ and $v_{i,j_2,t_2}^R$
-for any $1\le j_1, j_2 \le k$ and $1 \le t_1, t_2 \le n^2$.
+We provide a lower bound for the sum of lengths
+of vertical segments from $\sol \cap \allver$.
 This bound is the same for each $i$ and is the same
 for horizontal lines, thus we need to multiply such bound by $2k$.
 
@@ -618,7 +617,7 @@ such that $v_{i,j,t}$ is not covered by segments from $\allver$
 (Claim \ref{one_diag_in_square}).
 Its guards (see Definition \ref{guard_def}) $v^U_{i,j,t}$ and $v^D_{i,j,t}$
 have to be covered in $\allver$ (Claim \ref{guards}).
-Therefore at most $k$ spaces of length $2\epsilon$ can be left
+Therefore, at most $k$ spaces of length $2\epsilon$ can be left
 not covered by segments from $\allver$ between $v_{i,1,1}^D$ and $v_{i,k,n^2}^U$.
 
 \end{enumerate}
@@ -628,7 +627,7 @@ $$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\eps
 
 Let us name the bound from the previous lemma
 as $W_{hv} := 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$
-for the further reference.
+for future reference.
 
 \begin{lemma}
 \label{diag_correct}

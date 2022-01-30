@@ -1,7 +1,7 @@
 In this chapter we consider geometric set cover problem with weighted segments.
-Theorem \ref{w1_hard} proves that this problem is 
+Theorem~\ref{w1_hard} proves that this problem is 
 W[1]-hard when parametrized by the size of the solution.
-We additionally restrict the problem to only use segments
+We~additionally restrict the problem to only use segments
 in three directions to achieve a stronger result.
 W[1]-hardness is proved by reduction to a grid tiling problem,
 which was introduced in \cite{marx_grid_tiling}.
@@ -20,7 +20,7 @@ which was introduced in \cite{marx_grid_tiling}.
 	from a set of segments $\sets$ 
 	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
 	so that the weight of the cover is minimal.
-	Then this problem is W[1]-hard parametrized by $k$ and
+	Then this problem is W[1]-hard then parametrized by $\sqrt k$ and
 	assuming ETH, there is no algorithm for this
 	problem with running time
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
@@ -31,9 +31,7 @@ which was introduced in \cite{marx_grid_tiling}.
 
 Theorem \ref{w1_hard} is also true for less
 restricted problem where segments have any direction.
-We prove more tight setting in this section.
-
-In order to prove Theorem \ref{w1_hard}
+In~order to prove Theorem \ref{w1_hard}
 we will show reduction from a W[1]-hard problem.
 We introduce the grid tiling problem, which is proven
 to be W[1]-complete in literature.
@@ -41,8 +39,8 @@ to be W[1]-complete in literature.
 \newcommand{\pow}{\mathsf{Pow}}
 
 \begin{defi}
-We define \textbf{powerset} of some set $A$, denoted as $\pow(A)$,
-as a set of all subsets of $A$, ie. $\pow(A) = \{B : B \subseteq A\}$.
+We define \textbf{powerset} of any set $A$, denoted as $\pow(A)$,
+as the set of all subsets of $A$, ie. $\pow(A) = \{B : B \subseteq A\}$.
 \end{defi}
 
 \begin{defi}
@@ -52,7 +50,7 @@ $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \pow(\{1 \ldots n\} \times
 specifying the set of allowed tiles for each cell of a $k \times k$ grid.
 The task is to find functions
 $x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
-that assign numbers from $\{1 \ldots n\}$
+that assign colors from $\{1 \ldots n\}$
 to respectively columns and rows of the grid,
 so that $(x(i), y(j)) \in f(i, j)$ for all valid $i$ and $j$,
 or conclude that such an assignment does not exist.
@@ -61,10 +59,9 @@ or conclude that such an assignment does not exist.
 In short, in grid tiling problem you need to assign numbers
 to rows and columns in such a way,
 that for every pair of a row and a column,
-the pair of numbers assigned
+the pair of colors assigned
 to the row and column 
-belongs to the allowed set corresponding to the intersection
-of the row and column in question.
+belongs to the allowed set tiles for this pair.
 The next theorem describes the complexity of this problem,
 which is W[1]-hard when parametrized by the size of the grid.
 
@@ -102,35 +99,43 @@ which is W[1]-hard when parametrized by the size of the grid.
  \hline
 \end{tabular}
 \end{center}
-\caption{\textbf{Example of a grid tiling instance with solution.}}
-In the first row and column of the table you can see the solution $x$ and $y$.
-The tiles used in this solution are marked in \textbf{bold}.
-Change marked in \textcolor{alternative_sol}{blue} $x(1)=2$ would be still a corect solution
+\caption{\textbf{Example of a grid tiling instance with its solution.}}
+In the first row and column of the table you can see the solution:
+functions $x$ and $y$.
+The~tiles used in this solution are marked in \textbf{bold}.
+Change marked in \textcolor{alternative_sol}{blue} $x(1)=2$ would be still a~corect solution
 of this instance without any other changes.
-Change marked in \textcolor{bad_sol}{red} $y(1)=9$ and $x(4)=2$ is not a correct solution.
+Change marked in \textcolor{bad_sol}{red} ${y(1)=9}$ and $x(4)=2$ is not a correct solution.
 Even though the first row is correct,
-tile with coordinates (3,4) should have value (2,1), not (2,2).
+tile with coordinates (3,4) requires tile (2,1), not (2,2).
 \label{fig:grid_tiling_exmample}
 \end{figure}
 
 \begin{tw}
 \label{grid_tiling_w1_hard}
 \textbf{\cite{marx_grid_tiling}}
-Grid tiling is W[1]-hard parametrized by $k$ and
+Grid tiling is W[1]-hard when parametrized by $k$ and
 assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
 algorithm solving the grid tiling problem
 for any computable function $f$.
 \end{tw}
 
 The reminder of this section is proving Theorem \ref{w1_hard}
-by reduction of grid tiling problem to geometric set cover.
-That proves the W[1]-hardness of geometric set cover,
+by reduction of a grid tiling problem instance
+to a geometric set cover instance.
+That proves the W[1]-hardness of the geometric set cover problem,
 because if we could solve it with an FPT algorithm,
-then we could also solve grid tiling problem
-(which we reduced to geometric set cover).
+then we could also solve the grid tiling problem
+(which we reduced to the geometric set cover).
 Therefore geometric set cover with setting
 described in Theorem \ref{w1_hard}
 is at least as hard as the grid tiling problem.
+
+\paragraph{Construction.}
+\newcommand{\order}{\mathsf{order}}
+\newcommand{\matchv}{\mathsf{match}_v}
+\newcommand{\matchh}{\mathsf{match}_h}
+\newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
 
 We start with an instance of the grid tiling problem $(n, k, f)$.
 The instance consists of:
@@ -141,14 +146,9 @@ The instance consists of:
 $f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
 \end{itemize}
 
-\paragraph{Construction.}
-\newcommand{\order}{\mathsf{order}}
-\newcommand{\matchv}{\mathsf{match}_v}
-\newcommand{\matchh}{\mathsf{match}_h}
-\newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
 We construct an instance $\instanceSetCover$ of geometric set cover as follows.
 
-First let us choose any bijection
+First, let us choose any bijection
 $\order : \{1, \ldots, n^2\} \rightarrow \{1, \ldots, n\} \times \{1, \ldots, n\}$.
 
 
@@ -320,27 +320,28 @@ You can see an example of such segments in Figure \ref{fig:diag_def}.
 \end{tikzpicture} 
 \end{center}
 \caption{\textbf{Vertices and segments in $\alldiag$.}}
-Nodes from $H$ and $V$ are marked in black,
+This is an example of constructed points any $1 \le i,j \le k$.
+Points from $H$ and $V$ are marked in black,
 their guards are marked in \textcolor{guards_color}{blue}.
-You can see segments in $\alldiag$ with their weights (equal to $\delta$).
-This is an example for any $1 \le i,j \le k$.
+You can also see segments from $\alldiag$ with their weights (equal to $\delta$).
 \label{fig:diag_def}
 \end{figure}
 
 
 Every segment in $\alldiag$
 connects points $(i(n^2+1) + t, j \cdot (n^2+1))$
-and $(i \cdot (n^2+1), j(n^2+1) + t)$
+and ${(i \cdot (n^2+1), j(n^2+1) + t)}$
 for some $1 \le i,j \le k, 1 \le t \le n^2$.
-The line on which it lies can be described by $y=-x+(t+(i+j)(n^2+1))$
-and these segments are in fact right-diagonal.
+The line on which it lies can be described
+by linear equation ${y=-x+(t+(i+j)(n^2+1))}$,
+thus these segments are in fact right-diagonal.
 
-The constructed segment set is:
+The constructed segment set is defined as:
 
 $$\sets := \allhor \cup \allver \cup \alldiag.$$
 
 The weight of each segment in $\allhor \cup \allver$
-is equal to the segment,
+is equal to its length,
 while every segment in $\alldiag$ has weight
 $\delta := \frac{1}{4k^4}$.
 
@@ -417,17 +418,17 @@ $\delta := \frac{1}{4k^4}$.
 
 \end{tikzpicture} 
 \caption{\textbf{Vertices and segments in $HOR$.}}
-Nodes from $H$ are marked in black, their guards are marked in blue.
+This is an example for $n=2$ and any $1 \le j \le k$.
+Points from $H$ are marked in black, their guards are marked in \textcolor{guards_color}{blue}.
 $t_{i,j}$ is a notation that we use for $\order^{-1}(i,j)$.
-Segments are represented as angles between endpoints.
-You can see $\horbeg_{j,t}$ segments in \textcolor{beg_color}{red}.
-$\horbeg_{j,1}$ is degenerated to a single point at $h_{1,1,1}^L$.
-Segments $\hor_{i}{j}{t_{x,y_2}}{t_{x,y_2}}$
+Segments are represented as arcs between endpoints.
+You can see $\horbeg{j}{t}$ segments in \textcolor{beg_color}{red}.
+$\horbeg{j}{1}$ is degenerated to a single point at $h_{1,1,t_{1,1}}^L$.
+Segments $\hor{i}{j}{t_{x_1,y}}{t_{x_2,y}}$
 are marked in \textcolor{seg_color1}{blue} and \textcolor{seg_color2}{green}.
-\textcolor{seg_color1}{Blue} segments connect $t_x$
+\textcolor{seg_color1}{Blue} segments connect $t_{x_1,y}$ and $t_{x_2,y}$
 such that they share y-coordinate equal to 1,
-for \textcolor{seg_color2}{green} it is equal to 2.
-This is an example for any $1 \le j \le k$.
+for~\textcolor{seg_color2}{green} segments it is equal to 2.
 
 \label{fig:segments_def}
 \end{figure}
@@ -445,9 +446,9 @@ w(s) =
 Now, we prove that the constructed instance of geometric set cover
 with weighted segments is indeed a correct and sound reduction
 of the grid tiling problem. Lemma \ref{set_cover_solution_exists}
-proves that if the solution of the grid tiling instance exists,
+proves that if the solution of the instance of the grid tiling instance exists,
 then there exists a solution with bounded size and weight
-of constructed geometric set cover instance.
+of the constructed instance of geometric set cover problem.
 
 Then Lemma \ref{grid_tiling_exists} proves that if the solution
 of the geometric set cover instance with bounded weight exists,

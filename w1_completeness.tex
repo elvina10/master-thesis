@@ -231,6 +231,38 @@ Next, we define sets of vertical and horizontal segments:
 Finally, we also define a set of right-diagonal segments:
 $$\alldiag := \{ (h_{i, j, t}, v_{i, j, t}) :
 	1 \le i, j \le k, 1 \le t \le n^2, \order(t) \in f(i, j)\}$$
+	
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[main/.style = {draw, circle}]
+
+\filldraw[black] (0,1.5) circle (2pt) node[anchor=east] {$v_{i,j,1}$};
+\filldraw[black] (0,3) circle (2pt) node[anchor=east] {$v_{i,j,2}$};
+\filldraw[black] (0,4.5) circle (2pt) node[anchor=east] {$v_{i,j,3}$};
+\filldraw[black] (0,6) circle (2pt) node[anchor=east] {$v_{i,j,4}$};
+\filldraw[black] (0,7.5) circle (0pt) node[anchor=east] {$\ldots$};
+\filldraw[black] (0,9) circle (2pt) node[anchor=east] {$v_{i,j,n^2-1}$};
+\filldraw[black] (0,10.5) circle (2pt) node[anchor=east] {$v_{i,j,n^2}$};
+\filldraw[black] (1.5,0) circle (2pt) node[anchor=north] {$h_{i,j,1}$};
+\filldraw[black] (3,0) circle (2pt) node[anchor=north] {$h_{i,j,2}$};
+\filldraw[black] (4.5,0) circle (2pt) node[anchor=north] {$h_{i,j,3}$};
+\filldraw[black] (6,0) circle (2pt) node[anchor=north] {$h_{i,j,4}$};
+\filldraw[black] (7.5,0) circle (0pt) node[anchor=north] {$\ldots$};
+\filldraw[black] (9,0) circle (2pt) node[anchor=north] {$h_{i,j,n^2-1}$};
+\filldraw[black] (10.5,0) circle (2pt) node[anchor=north] {$h_{i,j,n^2}$};
+\draw (0,1.5) -- (1.5,0) node[midway, above] {$\delta$};
+\draw (0,3) -- (3,0) node[midway, above] {$\delta$};
+\draw (0,4.5) -- (4.5,0) node[midway, above] {$\delta$};
+\draw (0,6) -- (6,0) node[midway, above] {$\delta$};
+\draw (0,9) -- (9,0) node[midway, above] {$\delta$};
+\draw (0,10.5) -- (10.5,0) node[midway, above] {$\delta$};
+\end{tikzpicture} 
+\end{center}
+\caption{\textbf{Set $\alldiag$ with weights for a fixed pair of indices $1 \le i,j \le k$.}}
+\label{fig:diag_def}
+\end{figure}
+
 
 Every segment in $\alldiag$
 connects points $(i(n^2+1) + t, j \cdot (n^2+1))$

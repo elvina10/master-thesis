@@ -1,5 +1,5 @@
 In this chapter we show two fixed-parameter algorithms
-for geometric set cover problem in two different settings.
+for geometric set cover problem in~two different settings.
 Section \ref{section:fpt_unweighted} shows 
 a fixed-parameter algorithm for geometric set cover with unweighted segments.
 
@@ -10,7 +10,7 @@ because the original problem with weights is W[1]-hard,
 what we show in Chapter $\ref{chapter:w1_hard}$.
 
 We start with shared definition for this problem.
-We define \textit{extreme points} for a set of collinear points.
+We define \textit{extreme points} for a set of~collinear points.
 
 \begin{defi}
 	For a set of collinear points $C$,
@@ -45,15 +45,15 @@ the point $a=(x_a,y_a)$ which is the smallest
 among points that are not yet covered
 in the lexicographic ordering
 of points in $\mathbb{R}^2$.
-We need to cover $a$ with some of the remaining segments.
+We need to cover $a$ with some of~the~remaining segments.
 
 Branch over the choice of one of the coordinates ($x$ or $y$);
 without loss of generality, let us assume we chose $x$.
 Among the segments lying on line $x = x_a$,
-we greedily add to the solution the one that covers the most points.
+we greedily add to~the~solution the~one that covers the most points.
 As $a$ was the smallest in the lexicographical order,
 then all points on line $x = x_a$ have the $y$-coordinate larger than $y_a$.
-Therefore, if we denote the greedily chosen segment as $s$,
+Therefore, if we denote the~greedily chosen segment as $s$,
 then any other segment on $x = x_a$ that covers $a$ can only
 cover a (possibly improper) subset of points covered by $s$.
 Thus, greedily choosing $s$ is optimal.
@@ -84,7 +84,7 @@ where parameter is the size of the solution.
 	and a parameter $k$,
 	runs in time $k^{O(k)} \cdot (nm)^2$,
 	and outputs a subfamily $\sol \subseteq \sets$
-	such that $|\sol| \le k$ and $\sol$ covers all points in $\points$,
+	such that $|\sol| \le k$ and $\sol$ covers all points in~$\points$,
 	or determines that such a set $\sol$ does not exist.
 }\end{tw}
 
@@ -95,7 +95,7 @@ We will need the following lemmas.
    Given an instance $(\sets, \points)$ of the segment cover problem,
    without a loss of generality we can assume that
    no segment covers a superset of what another segment covers.
-   That is, for any distinct $A, B \in \sets$, we have
+   That~is, for any distinct $A, B \in \sets$, we have
    $A \cap C \not \subseteq B \cap C$ and $A \cap C \not \supseteq B \cap C$.
 \end{lemma}   
    
@@ -109,7 +109,7 @@ We will need the following lemmas.
 	$|\mathcal{A}| \le k$,
 	such that every solution $\sol$ with $|\sol| \le k$
 	satisfies $|\mathcal{A} \cap \sol| \ge 1$.
-	Moreover, such a subset can be found in polunomial time.
+	Moreover, such a subset can be found in~polynomial time.
 \end{lemma}
 
 \begin{proof}
@@ -118,9 +118,9 @@ First we use Lemma \ref{fpt_reduction}.
 
 Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots x_t$
 in the order in which they appear on $L$.
-Every segment that is not collinear with $L$ can cover at most one of these
+Every segment that is not collinear with $L$ can cover at~most one of these
 points. Therefore, in any solution of size not larger than $k$,
-among any $k$ of these points at least one must
+among any $k$ of these points at~least one must
 be covered with segment collinear with $L$.
 
 Therefore, every solution needs to take one of the segments collinear
@@ -145,8 +145,8 @@ First we use Lemma \ref{fpt_reduction}.
 Next, we present a recursive algorithm. Given an instance of the problem:
 
 \begin{enumerate}[label={(\arabic*)}]
-\item If there exist a line with at least $k+1$ points from $\points$, we branch over
-adding to the solution one of the at most $k$ possible segments
+\item If there exist a line with at least $k+1$ points from $\points$,
+we branch over choice of adding to~the~solution one of~the~at~most $k$ possible segments
 provided by Lemma \ref{fpt_long_lines}; name this segment $S$.
 Then we find a solution $\sol$
 for the problem for points $\points - S$, segments $\sets - \{S\}$,
@@ -161,7 +161,7 @@ check all subsets of $\sets$ of size at most $k$.
 
 Lemma \ref{fpt_long_lines} proves that at least one segment that we
 branch over in (1) must be present in every solution $\sol$ with $|\sol| \le k$.
-Therefore, the recursive call can find a solution, provided there exists one.
+Therefore, the recursive call can find a~solution, provided there exists one.
 
 In (2) the answer is no, because every line covers no more than $k$ points
 from $\points$, which implies the same about every segment from $\sets$.
@@ -178,7 +178,7 @@ In the leaves of recursion we have $|\points| \le k^2$, so $|\sets| \le k^4$, be
 every segments can be uniquely identified by the two extreme points it covers
 (by Lemma \ref{fpt_reduction}). Therefore, there are $\binom{k^4}{k}$
 possible solutions to check, each can be checked in time $O(k|\points|)$.
-Therefore, (3) takes time $k^{O(k)}$.
+Thus, (3) takes time $k^{O(k)}$.
 
 
 In this branching algorithm our parameter $k$ is decreased with every

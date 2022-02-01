@@ -37,7 +37,7 @@ You can find this simple algorithm in Patemetrized Algorithms book \cite{platypu
 We show an $\mathcal{O}(2^k)$-time branching algorithm.
 In each step, the algorithm selects a point $a$ which is not yet covered,
 branches to choose one of the two directions, and greedily chooses
-a segment in that direction to cover $a$.
+a segment $a$ in that direction to cover.
 This proceeds until either all points are covered or $k$ segments are chosen.
 
 Let us take
@@ -52,9 +52,9 @@ without loss of generality, let us assume we chose $x$.
 Among the segments lying on line $x = x_a$,
 we greedily add to~the~solution the~one that covers the most points.
 As $a$ was the smallest in the lexicographical order,
-then all points on line $x = x_a$ have the $y$-coordinate larger than $y_a$.
+then all points on the line $x = x_a$ have the $y$-coordinate larger than $y_a$.
 Therefore, if we denote the~greedily chosen segment as $s$,
-then any other segment on $x = x_a$ that covers $a$ can only
+then any other segment on the line $x = x_a$ that covers $a$ can only
 cover a (possibly improper) subset of points covered by $s$.
 Thus, greedily choosing $s$ is optimal.
 
@@ -65,7 +65,7 @@ If no branch finds a solution, then that means a solution of size at most $k$ do
 
 \begin{remark}
 The same algorithm can be used for segments in $d$ directions,
-where we branch over $d$ directions and it runs in complexity $\mathcal{O}(d^k)$.
+where we branch over $d$ choices of directions and it runs in complexity $\mathcal{O}(d^k)$.
 \end{remark}
 
 \subsection{Segments in arbitrary directions}
@@ -79,16 +79,17 @@ where parameter is the size of the solution.
 	\label{segment_cover_fpt}
 	\textbf{(FPT for segment cover)}.
 	There exists an algorithm that given a family $\sets$ of
-	$n$ segments (in any direction),
-	a set of $m$ points $\points$
+	segments (in any direction),
+	a set of points $\points$
 	and a parameter $k$,
-	runs in time $k^{O(k)} \cdot (nm)^2$,
-	and outputs a subfamily $\sol \subseteq \sets$
+	runs in time $k^{O(k)} \cdot (|\points|\cdot|\sets|)^2$,
+	and outputs a solution $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol$ covers all points in~$\points$,
 	or determines that such a set $\sol$ does not exist.
 }\end{tw}
 
-We will need the following lemmas.
+We will need the following lemmas proving properties of any
+instance of the problem.
 
 \begin{lemma}
    \label{fpt_reduction}
@@ -105,10 +106,10 @@ We will need the following lemmas.
 	\label{fpt_long_lines}
 	Given an instance $(\sets, \points)$ of the segment cover problem,
 	if there exists a line $L$ with at least
-	$k+1$ points on it, then there exists a subset $\mathcal{A} \subseteq \sets$,
-	$|\mathcal{A}| \le k$,
+	$k+1$ points on it, then there exists a subset $A \subseteq \sets$,
+	of size at most $k$,
 	such that every solution $\sol$ with $|\sol| \le k$
-	satisfies $|\mathcal{A} \cap \sol| \ge 1$.
+	satisfies $|A \cap \sol| \ge 1$.
 	Moreover, such a subset can be found in~polynomial time.
 \end{lemma}
 
@@ -118,15 +119,16 @@ First we use Lemma \ref{fpt_reduction}.
 
 Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots x_t$
 in the order in which they appear on $L$.
-Every segment that is not collinear with $L$ can cover at~most one of these
-points. Therefore, in any solution of size not larger than $k$,
-among any $k$ of these points at~least one must
-be covered with segment collinear with $L$.
+Our proposed set is defined as: $A := \{ x_1, x_2, \ldots x_k\}$.
+We prove this by contradition. Let us assume that there
+exists a solution $\sol$ of size at most $k$, such that $\sol \cap A = \emptyset$.
 
-Therefore, every solution needs to take one of the segments collinear
-with $L$ that covers any of the points
-$x_1, x_2, \ldots x_k$. After using reduction from Lemma \ref{fpt_reduction},
-there are at most $k$ such segments that are distinct.
+Every segment that is not collinear with $L$ can cover at~most one of
+the points that lie on this line.
+Therefore, solution $\sol$ covers at most $k$ points on line $L$,
+but $L$ had at least $k+1$ different points from $\points$ on it.
+This contradiction concludes the proof that $|A \cap \sol| \ge 1$
+for any solution $\sol$ of size at most $k$.
 \end{proof}
 
 We are ready to prove Theorem \ref{segment_cover_fpt}.
@@ -184,10 +186,10 @@ Thus, (3) takes time $k^{O(k)}$.
 In this branching algorithm our parameter $k$ is decreased with every
 recursive call, so we have at most $k$ levels of recursion with
 branching over $k$ possibilites. Candidates to branch over
-can be found on each level in time $O((nm)^2)$.
+can be found on each level in time $O((|\points|\cdot|\sets|)^2)$.
 
-Reduction from Lemma \ref{fpt_reduction} can be implemented in time $O(n^2m)$.
+Reduction from Lemma \ref{fpt_reduction} can be implemented in time $O(|\points|^2|\sets|)$.
 
-It follows that the overall complexity is $O((nm)^2 \cdot k^{O(k)})$
+It follows that the overall complexity is $O((|\points|\cdot|\sets|)^2 \cdot k^{O(k)})$
 \end{proof}
 

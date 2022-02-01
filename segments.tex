@@ -1,6 +1,6 @@
 In this chapter we show two fixed-parameter algorithms
 for geometric set cover problem in two different settings.
-First section \ref{section:fpt_unweighted} shows 
+Section \ref{section:fpt_unweighted} shows 
 a fixed-parameter algorithm for geometric set cover with unweighted segments.
 
 The reminder of the chapter presents
@@ -9,6 +9,17 @@ with $\delta$-extensions. We show algorithm for setting with $\delta$-extensions
 because the original problem with weights is W[1]-hard,
 what we show in Chapter $\ref{chapter:w1_hard}$.
 
+We start with shared definition for this problem.
+We define \textit{extreme points} for a set of collinear points.
+
+\begin{defi}
+	For a set of collinear points $C$,
+	\textbf{extreme points} are the ends
+	of the smallest segment that covers all points from set $C$.
+	
+	If $C$ consists of one point or is empty, then
+	there exists 1 or 0 extreme points respectively.
+\end{defi}
 
 \section{Fixed-parameter tractable algorithm for unweighted segments}
 \label{section:fpt_unweighted}
@@ -21,7 +32,7 @@ We present an FPT algorithm for geometric set cover
 with unweighted segments, where segments are in arbitrary directions.
 
 \subsection{Axis-parallel segments}
-You can find this algorithm in Patemetrized Algorithms book \cite{platypus_book}.
+You can find this simple algorithm in Patemetrized Algorithms book \cite{platypus_book}.
 
 We show an $\mathcal{O}(2^k)$-time branching algorithm.
 In each step, the algorithm selects a point $a$ which is not yet covered,
@@ -51,8 +62,6 @@ In each step of the algorithm we add one segment to the solution,
 thus each branch can stop at depth $k$.
 If no branch finds a solution, then that means a solution of size at most $k$ does not exist.
 
-TODO: Maybe split it into theorem + algorithm + explanation like in 
-section
 
 \begin{remark}
 The same algorithm can be used for segments in $d$ directions,
@@ -60,7 +69,7 @@ where we branch over $d$ directions and it runs in complexity $\mathcal{O}(d^k)$
 \end{remark}
 
 \subsection{Segments in arbitrary directions}
-\ref{segments_in_arbitrary_direction}
+\label{segments_in_arbitrary_direction}
 In this section we consider setting where segments are not constrained
 to only $d$ directions. 
 We present a fixed-parameter tractable algorithm,
@@ -179,6 +188,6 @@ can be found on each level in time $O((nm)^2)$.
 
 Reduction from Lemma \ref{fpt_reduction} can be implemented in time $O(n^2m)$.
 
-It follows that the overall complexity is $O((nm)^2 \cdot k^{O(k}))$
+It follows that the overall complexity is $O((nm)^2 \cdot k^{O(k)})$
 \end{proof}
 

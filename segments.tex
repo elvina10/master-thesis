@@ -104,7 +104,9 @@ instance of the problem.
 
 \begin{lemma}
 	\label{fpt_long_lines}
-	Given an instance $(\sets, \points)$ of the segment cover problem,
+	Given an instance $(\sets, \points)$
+	of the segment cover problem 
+	transformed by Lemma \ref{fpt_reduction},
 	if there exists a line $L$ with at least
 	$k+1$ points on it, then there exists a subset $A \subseteq \sets$,
 	of size at most $k$,
@@ -115,31 +117,44 @@ instance of the problem.
 
 \begin{proof}
 
-First we use Lemma \ref{fpt_reduction}.
-
 Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots x_t$
 in the order in which they appear on $L$.
-Our proposed set is defined as: $A := \{ x_1, x_2, \ldots x_k\}$.
-We prove this by contradition. Let us assume that there
+Our proposed set is defined as:
+$$A := \{ \text{segment that have the leftmost point in } x : x \in x_1, x_2, \ldots x_k\}.$$
+If such segment does not exist for any of these points,
+then set $A$ has smaller size.
+We prove the lemma by contradition. Let us assume that there
 exists a solution $\sol$ of size at most $k$, such that $\sol \cap A = \emptyset$.
 
 Every segment that is not collinear with $L$ can cover at~most one of
 the points that lie on this line.
 Therefore, solution $\sol$ covers at most $k$ points on line $L$,
 but $L$ had at least $k+1$ different points from $\points$ on it.
+
+Therefore we know that one of the segments from $\sol$ must be collinear with $L$
+and at most $k-1$ can be not collinear with $L$.
+Segments from $\sol$, that are not collinear with $L$ can cover at most $k-1$
+points among $\{x_1, x_2, \ldots x_k\}$, therefore at least
+one of these points must be covered by segments from $\sol$.
+We take leftmost point from $\{x_1, x_2, \ldots x_k\}$ that is
+covered in $\sol$ by segment collinear with $L$ and name it $a$.
+After transformation from Lemma \ref{fpt_reduction}
+there is only one segment that starts in $a$, therefore
+this segment must be in both $\sol$ and $A$.
+
 This contradiction concludes the proof that $|A \cap \sol| \ge 1$
 for any solution $\sol$ of size at most $k$.
 \end{proof}
 
-We are ready to prove Theorem \ref{segment_cover_fpt}.
+We are now ready to prove Theorem \ref{segment_cover_fpt}.
 
 \begin{proof}[Proof of Theorem \ref{segment_cover_fpt}.]\leavevmode
 
 We will prove this theorem by presenting a branching algorithm that
 works in desired complexity. It branches over the
-choice of segments to cover lines with \textit{a lot} of points,
-then finally solving the small instance, where
-every line has at most $k$ points by checking all possible solutions.
+choice of segments to cover the lines with \textit{a lot} of points,
+then solves a small instance (where every line has at most $k$ points)
+by checking all possible solutions.
 
 \subparagraph{Algorithm.}
 First we use Lemma \ref{fpt_reduction}.

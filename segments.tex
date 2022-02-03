@@ -23,22 +23,22 @@ We define \textit{extreme points} for a set of~collinear points.
 
 \section{Fixed-parameter tractable algorithm for unweighted segments}
 \label{section:fpt_unweighted}
-In this section we consider the fixed-parameter tractable
+In this section we consider fixed-parameter tractable
 algorithms for unweighted geometric set cover with segments.
-Setting where segments are limited to be axis-parallel
-(or limited to constant number of directions) has an FPT
+The setting where segments are limited to be axis-parallel
+(or limited to a constant number of directions) has an FPT
 algorithm already present in literature.
 We present an FPT algorithm for geometric set cover
 with unweighted segments, where segments are in arbitrary directions.
 
 \subsection{Axis-parallel segments}
-You can find this simple algorithm in Patemetrized Algorithms book \cite{platypus_book}.
+You can find this simple algorithm in Parametrized Algorithms book \cite{platypus_book}.
 
 We show an $\mathcal{O}(2^k)$-time branching algorithm.
 In each step, the algorithm selects a point $a$ which is not yet covered,
 branches to choose one of the two directions, and greedily chooses
 a segment $a$ in that direction to cover.
-This proceeds until either all points are covered or $k$ segments are chosen.
+This proceeds until either all points are covered or $k$~segments are chosen.
 
 Let us take
 the point $a=(x_a,y_a)$ which is the smallest 
@@ -52,7 +52,7 @@ without loss of generality, let us assume we chose $x$.
 Among the segments lying on line $x = x_a$,
 we greedily add to~the~solution the~one that covers the most points.
 As $a$ was the smallest in the lexicographical order,
-then all points on the line $x = x_a$ have the $y$-coordinate larger than $y_a$.
+all points on the line $x = x_a$ have the $y$-coordinate larger than $y_a$.
 Therefore, if we denote the~greedily chosen segment as $s$,
 then any other segment on the line $x = x_a$ that covers $a$ can only
 cover a (possibly improper) subset of points covered by $s$.
@@ -65,15 +65,15 @@ If no branch finds a solution, then that means a solution of size at most $k$ do
 
 \begin{remark}
 The same algorithm can be used for segments in $d$ directions,
-where we branch over $d$ choices of directions and it runs in complexity $\mathcal{O}(d^k)$.
+where we branch over $d$ choices of directions, and it runs in complexity $\mathcal{O}(d^k)$.
 \end{remark}
 
 \subsection{Segments in arbitrary directions}
 \label{segments_in_arbitrary_direction}
-In this section we consider setting where segments are not constrained
-to only $d$ directions. 
+In this section we consider the setting where segments are not constrained
+to a constant number of directions. 
 We present a fixed-parameter tractable algorithm,
-where parameter is the size of the solution.
+parametrized by the size of the solution.
 
 \begin{tw}{
 	\label{segment_cover_fpt}

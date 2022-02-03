@@ -164,10 +164,11 @@ Next, we present a recursive algorithm. Given an instance of the problem:
 \begin{enumerate}[label={(\arabic*)}]
 \item If there exist a line with at least $k+1$ points from $\points$,
 we branch over choice of adding to~the~solution one of~the~at~most $k$ possible segments
-provided by Lemma \ref{fpt_long_lines}; name this segment $S$.
+provided by Lemma \ref{fpt_long_lines}; name this segment $s$
+and name set of points from $\points$ that lie on $s$ as $S$.
 Then we find a solution $\sol$
-for the problem for points $\points - S$, segments $\sets - \{S\}$,
-and parameter $k-1$. We return $\sol \cup \{S\}$.
+for the instance $(\points - S, \sets - \{s\})$,
+and parameter $k-1$. We return $\sol \cup \{s\}$.
 \item If every line has at most $k$ points on it and $|\points| > k^2$,
 then answer \texttt{NO}.
 \item If $|\points| \le k^2$, solve the problem by brute force:
@@ -191,8 +192,8 @@ Checking all possible solutions in (3) is trivially correct.
 
 \subparagraph{Complexity.}
 
-In the leaves of recursion we have $|\points| \le k^2$, so $|\sets| \le k^4$, because
-every segments can be uniquely identified by the two extreme points it covers
+In the leaves of the recursion we have $|\points| \le k^2$, so $|\sets| \le k^4$,
+because every segment can be uniquely identified by the two extreme points it covers
 (by Lemma \ref{fpt_reduction}). Therefore, there are $\binom{k^4}{k}$
 possible solutions to check, each can be checked in time $O(k|\points|)$.
 Thus, (3) takes time $k^{O(k)}$.

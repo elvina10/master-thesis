@@ -4,10 +4,11 @@
 In this section we consider a geometric set cover problem
 for weighted segments relaxed with $\delta$-extensions.
 We show that this problem
-admits an FPT algorithm when parametrized with size
-of solution and $\delta$.
-Assumption about the problem being relaxed with $\delta$-extensions is necessary.
-In the next chapter we show that geometric set cover problem
+admits an FPT algorithm when parametrized with the size
+of the solution and $\delta$.
+In the next chapter we show that the assumption
+about the problem being relaxed with $\delta$-extensions is necessary:
+we prove that geometric set cover problem
 for weighted segments is W[1]-hard, which means
 there does not exist an FPT algorithm parametrized by solution size for it.
 
@@ -18,7 +19,10 @@ there does not exist an FPT algorithm parametrized by solution size for it.
 	a set of $m$ points $\points$, and parameters $k$ and $\delta > 0$,
 	runs in time $f(k, \delta) \cdot (nm)^c$ for some computable function $f$ and a constant $c$,
 	and outputs a set $\sol \subseteq \sets$
-	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$,
+	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$
+	and weight of $\sol$ is not greater than weight
+	of optimum solution of size at most $k$
+	for this problem without $\delta$-extensions,
 	or determines that such a set $\sol$ does not exist.
 }\end{tw}
 
@@ -33,7 +37,7 @@ these segments after $\delta$-extensions will cover all of the points from $C$.
 We will prove that such set 
 of size bounded by some function $f(k, \delta)$ always exists.
 In later part of the section Lemma \ref{good_set_exists} will allow us to find a kernel
-for our orginal problem.
+for our original problem.
 
 \begin{defi}
 	For a set of collinear points $C$,
@@ -47,7 +51,7 @@ for our orginal problem.
 	For any set of collinear points $C$, $\delta > 0$ and $k \ge 1$,
 	there exists a $(k,\delta)$-good set $A \subseteq C$ of size
 	at most $(2+\frac{2}{\delta})^k$.
-	Moreover there exists an algorithm that computes the $(k,\delta)$-good set
+	Moreover, there exists an algorithm that computes the $(k,\delta)$-good set
 	in time $O(|C| \cdot (2+\frac{2}{\delta}))$.
 \end{lemma}
 
@@ -73,20 +77,20 @@ There are at most 2 extreme points in $C$ and $2 < 2+\frac{2}{\delta}$.
 
 \subparagraph{Inductive step.}
 Assuming inductive hypothesis for any set of collinear points $C$
-and for parameter $k$, we will prove hypothesis for $k+1$.
+and for parameter $k$, we will prove it for $k+1$.
 
 Let $s$ be the minimal segment that includes all points from $C$.
 That is, the extreme points of $C$ are endpoints of $s$.
 
-We define $M = \lceil1+\frac{2}{\delta}\rceil$ subsegments of $s$ in the following way.
-We split $s$ into $M$ closed segments of equal length.
-We name these as segments $v_i$ and
+We define $M = \lceil1+\frac{2}{\delta}\rceil$ subsegments of $s$
+by splitting $s$ into $M$ closed segments of equal length.
+We name these segments $v_i$ and
 $|v_i| = \frac{|s|}{M}$ for each $1 \le i \le M$.
 
 Let $C_i$ be the subset of $C$ consisting of points laying on $v_i$.
 
 Let $t_i$ be the segment with endpoints being the extreme points of $C_i$.
-It might be degenerated segment if $C_i$ consists of one point
+It might be a degenerate segment if $C_i$ consists of one point
 or empty if $C_i$ is empty.
 
 You can see an example of such segments $v_i$ and $t_i$ in Figure $\ref{fig:fpt_v_f_def}$.
@@ -111,17 +115,17 @@ Segments $t_1$ and $t_2$ share one point $b$.
 
 We use the inductive hypothesis to choose $(k, \delta)$-good sets $A_i$
 for sets $C_i$. Note that if $|C_i| \le 1$, then $A_i = C_i$
-and it's still a $(k, \delta)$-good set for $C_i$.
+and it is still a $(k, \delta)$-good set for $C_i$.
 
 Then we define $A = \bigcup_{i=1}^{M} A_i$.
 Thus $A$ includes the extreme points of $C$,
 because they are included in the sets $A_1$ and $A_M$.
 
-Size of each $A_i$ is at most $(2+\frac{2}{\delta})^{(k-1)}$ from inductive
+Size of each $A_i$ is at most $(2+\frac{2}{\delta})^{k}$ from the inductive
 hypothesis, therefore size of $A$ is at most:
-$$M\left(2+\frac{2}{\delta}\right)^{k-1} =
-\left\lceil1+\frac{2}{\delta}\right\rceil\cdot\left(2+\frac{2}{\delta}\right)^{k-1}
-\le \left(2+\frac{2}{\delta}\right)^k.$$
+$$M\left(2+\frac{2}{\delta}\right)^{k} =
+\left\lceil1+\frac{2}{\delta}\right\rceil\cdot\left(2+\frac{2}{\delta}\right)^{k}
+\le \left(2+\frac{2}{\delta}\right)^{k+1}.$$
 
 
 \subparagraph{Proof that $A$ is $(k, \delta)$-good for $C$.}

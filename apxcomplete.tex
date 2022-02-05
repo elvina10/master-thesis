@@ -83,7 +83,7 @@ clauses.
 
 Given an instance $I$ of MAX-(3,3)-SAT,
 we construct an instance $J$ of 
-axis-parallel segment set cover problem,
+axis-parallel segment set cover problem
 such that for a sufficiently small $\epsilon > 0$,
 a polynomial time $(1+\epsilon)$-approximation algorithm for $J$
 would be able to distinguish  whether an instance $I$ of MAX-(3,3)-SAT
@@ -102,7 +102,7 @@ and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 	Given an instance $S$ of  MAX-(3,3)-SAT 
 	with $n$ variables and optimum value $opt(S)$,
 	we can construct an instance $I$ of geometric set cover with
-	axis-parallel segments in 2D, such that:
+	axis-parallel segments in 2D such that:
 	\begin{enumerate}[label={(\arabic*)}]
 	\item For every solution $X$ of instance $I$,
 	there exists a solution of $S$ that satisfies at least  $15n - |X|$
@@ -182,7 +182,7 @@ $$approx(I) \ge opt(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 Therefore, by using the assumed $(1+\epsilon)$-approximation
 algorithm,
 it is possible to distinguish the case when
-$S$ is satisfiable from the case when it is
+$S$ is satisfiable: from the case when it is
 at most $(\frac{7}{8} + \epsilon)n$ satisfiable,
 it suffices to compare $approx(I)$ with $15n - (\frac{7}{8}+\epsilon)n$.
 Hence, the assumed approximation algorithm cannot exist, unless P = NP.
@@ -583,9 +583,7 @@ to conclude that none of them cover the considered,
 so both $Y$ and $Z$ have to be covered with 
 disjoint sets of 4 segments each.
 
-TODO: Funny fact, neither Y nor Z does not have independent set of size 4.
-
-Therefore $\pointsClause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
+Therefore, $\pointsClause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
 must be covered with at least 3 + 4 + 4 = 11 segments from $\segmentsClause_i$.
 \end{proof}
 
@@ -730,7 +728,7 @@ and the variables be $x_1$,~$x_2$~$\ldots$~$x_n$.
 Given a solution $\sol$
 of the instance $\setCoverInstance$ of geometric set cover, we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$ such that for any $i$ it contains at most one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$; this may decrease the cost of $\sol$, but that does not matter in the subsequent construction. To simplify notation, in the remainder of this proof we use $\sol$ to refer to the modified solution.
 
-Given $\sol$, we construct a solution of $S$ by constructing an
+Given $\sol$, we construct a solution of $S$ by defining an
 assignment of variables 
 $\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$
 that satisfies at least $15n-w$ clauses in $S$.
@@ -744,7 +742,6 @@ We define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 	\label{eqn:variable_assignment}
 	& \begin{cases}
 	\phi(x_i) = \true & \text{if}\ \xTrueSegment{i} \in \sol \\
-	\phi(x_i) = \false & \text{if}\ \xFalseSegment{i} \in \sol \\
 	\phi(x_i) = \false & \text{otherwise}
 	\end{cases}
 	\end{split}

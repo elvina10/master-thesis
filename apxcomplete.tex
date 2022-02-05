@@ -1,8 +1,7 @@
-\section{APX-completeness for segments parallel to axes}
-\label{section:segment_apx}
+\label{chapter:segment_apx}
 
 In this section we analyze whether there exists 
-PTAS for geometric set cover for rectangles.
+a PTAS for geometric set cover for rectangles.
 We show that we can restrict this problem
 to a very simple setting:
 segments parallel to axes and allow (1/2)-extension,
@@ -30,7 +29,7 @@ Theorem \ref{segment_cover_apx_hard} implies the following.
 \label{rectangle_cover_apx_hard}
 	\textbf{(rectangle set cover is APX-hard)}.	
 	Unweighted geometric set cover
-	with rectangles (even with 1/2-extension) is APX-hard.
+	with axis-parallel rectangles (even with 1/2-extension) is APX-hard.
 }\end{corollary}
 
 
@@ -41,7 +40,7 @@ For this problem we choose
 MAX-(3,3)-SAT which we define below.
 
 
-\subsection{MAX-(3,3)-SAT and statement of reduction}
+\section{MAX-(3,3)-SAT and statement of reduction}
 \begin{defi}
 \textbf{MAX-3SAT} is the following maximization problem. We are given a 3-CNF
 formula, and need to find an assignment of variables
@@ -50,7 +49,8 @@ that satisfies the most clauses.
 
 \begin{defi}
 \textbf{MAX-(3,3)-SAT} is a variant of MAX-3SAT with an additional
-restriction that every variable appears in exactly 3 clauses.
+restriction that every variable appears in exactly 3 clauses
+and every clause contains exactly 3 literals of 3 different variables.
 Note that thus, the number of clauses is equal to the number of variables.
 \end{defi}
 
@@ -60,20 +60,19 @@ in \cite{hastad} and described in
 Theorem \ref{hastadtheorem} below.
 
 \begin{defi}[$\alpha$-satisfiable MAX-3SAT formula]
-MAX-3SAT formula of size $n$ is at most $\alpha$-satisfiable, if
-every assignment of variables satisfies no more than $\alpha n$
+MAX-3SAT formula with $m$ clauses is at most $\alpha$-satisfiable, if
+every assignment of variables satisfies no more than $\alpha m$
 clauses. 
 \end{defi}
 
 \begin{tw}{
 	\label{hastadtheorem}
 	\textbf{\cite{hastad}}
-	
 	For any $\epsilon > 0$, it is NP-hard to distinguish satisfiable
+	\linebreak
 	(3,3)-SAT formulas from
-	%This broke x-satisfiable to next line
 	at most
-	\linebreak\mbox{$(7/8 + \epsilon)$-satisfiable}
+	\mbox{$(7/8 + \epsilon)$-satisfiable}
 	(3,3)-SAT formulas.
 }\end{tw}
 
@@ -86,7 +85,7 @@ a polynomial time $(1+\epsilon)$-approximation algorithm for $J$
 would be able to distinguish  whether an instance $I$ of MAX-(3,3)-SAT
 is fully satisfiable
 or is at most $(7/8 + \epsilon)$-satisfiable.
-However, according to (Theorem \ref{hastadtheorem}) the latter problem
+However, according to Theorem \ref{hastadtheorem} the latter problem
 is NP-hard.
 This would imply P = NP, contradicting the assumption.
 
@@ -108,12 +107,12 @@ and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 	\item For every solution of instance $S$ that satisfies $w$ clauses,
 	there exists a solution of $I$ of size $15n - w$.
 	
-	\item Every solution with $1/2$-extensions of $I$
+	\item \label{lemma:apxconstruction:enumerate:extensions}
+	Every solution with $1/2$-extensions of $I$
 	is also a solution to the original instance $I$.
-		
-	Therefore, the optimum size of a solution of $I$
-	is $opt(I) = 15n - opt(S)$. 
-	\end{enumerate}
+\end{enumerate}
+Therefore, the optimum size of a solution of $I$
+is $opt(I) = 15n - opt(S)$. 
 	
 }\end{lemma}
 
@@ -122,8 +121,7 @@ subsequent sections, but meanwhile let us prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
 and Theorem \ref{hastadtheorem}.
 
-\begin{proof}[Proof of Theorem \ref{segment_cover_apx_hard}]\leavevmode
-
+\begin{proof}[Proof of Theorem \ref{segment_cover_apx_hard}]
 Consider any $0 < \epsilon < 1/(15 \cdot 8)$.
 
 Let us assume that there exists a polynomial-time
@@ -146,7 +144,8 @@ then $approx(I) \ge 15n - (\frac{7}{8} + \epsilon)n$
 and if $S$ is
 satisfiable, then $approx(I) < 15n - (\frac{7}{8} + \epsilon)n$.
 
-\subparagraph{Assume $S$ satisfiable.}
+
+\textbf{Assume $S$ satisfiable.}
 From the definition of $S$ being satisfiable, we have:
 $$opt(S) = n.$$
 
@@ -159,9 +158,8 @@ $$approx(I) \le (1+\epsilon)opt(I) = 14n(1+\epsilon)
 	= 14n + 14\epsilon\cdot n =$$ 
 	$$= 14n + (15\epsilon - \epsilon)n < 
   14n + \left(\frac{1}{8} - \epsilon\right)n 
-= 15n - \left(\frac{7}{8} + \epsilon\right)n$$
-
-\subparagraph{Assume $S$ is at most 
+= 15n - \left(\frac{7}{8} + \epsilon\right)n.$$
+\textbf{Assume $S$ is at most 
 $\left(\frac{7}{8} + \epsilon\right)$ satisfiable.}
 From the defintion of $S$ being at most 
 $\left(\frac{7}{8} + \epsilon\right)n$ satisfiable, we have:
@@ -170,9 +168,9 @@ $$opt(S) \le \left(\frac{7}{8} + \epsilon\right)n$$
 From Lemma \ref{apxconstruction} we have:
 $$opt(I) \ge 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
-Since a solution to $I$ with $\frac{1}{2}$-extensions is
-also a solution without extentions, by 
-Lemma \ref{apxconstruction} (3.), we have:
+Since a solution to $I$ with $\frac{1}{2}$-extension is
+also a solution without any extention, by 
+Lemma \ref{apxconstruction} \ref{lemma:apxconstruction:enumerate:extensions}, we have:
 
 $$approx(I) \ge opt(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
@@ -182,14 +180,14 @@ algorithm,
 it is possible to distinguish the case when
 $S$ is satisfiable from the case when it is
 at most $(\frac{7}{8} + \epsilon)n$ satisfiable,
-it suffices to compute $approx(I)$ with $15n - (\frac{7}{8}+\epsilon)n$.
+it suffices to compare $approx(I)$ with $15n - (\frac{7}{8}+\epsilon)n$.
 Hence, the assumed approximation algorithm cannot exist, unless P = NP.
 \end{proof}
 
-\subsection{Reduction}
+\section{Reduction}
 \label{construction_description}
 We proceed to the proof of Lemma \ref{apxconstruction}.
-That is, we show a reduction from MAX-(3,3)-SAT problem
+That is, we show a reduction from the MAX-(3,3)-SAT problem
 to geometric set cover with segments
 parallel to axis. Moreover, the obtained instance
 of geometric set cover will be robust
@@ -198,10 +196,10 @@ after 1/2-extension).
 
 The construction will be composed of 2 types of gadgets:
 \textbf{VARIABLE-gadgets} and \textbf{CLAUSE-gadgets}.
-CLAUSE-gadgets would be constructed using two \textbf{OR-gadgets}
+CLAUSE-gadgets will be constructed using two \textbf{OR-gadgets}
 connected together.
 
-\subsubsection{VARIABLE-gadget}
+\subsection{VARIABLE-gadget}
 
 VARIABLE-gadget is responsible for choosing the value of a variable
 in a CNF formula. It allows two minimum solutions of size 3 each.
@@ -246,8 +244,10 @@ and the set of blue segments as $\chooseVar{true}{i}$.}
 \end{center}
 
 
-Let us define: $$\pointsVarNoArg =  \{a, b, c, d, e, f\}$$
-and $$\pointsVar{i} = \pointsVarNoArg + (0, 4i)$$
+Let us define:
+$$\pointsVarNoArg =  \{a, b, c, d, e, f\}$$
+and, for any $1 \le i \le n$,
+$$\pointsVar{i} = \pointsVarNoArg + (0, 4i).$$
 
 We denote $a_i = a + (0,4i)$ etc.
 
@@ -297,12 +297,12 @@ it holds that $|A| \ge 4$.
 No segment from $\segmentsVar{i}$ covers more than one point from
 $\{a_i, e_i\}$,
 therefore 
-$\pointsVar{i}$ - $\{c_i, f_i, g_i, h_i\}$
+$\pointsVar{i} - \{c_i, f_i, g_i, h_i\}$
 can not be covered with fewer than 2 segments.
 \end{proof}
 
 
-\subsubsection{OR-gadget}
+\subsection{OR-gadget}
 
 OR-segment connects input and output segments
 that are connected to other parts of
@@ -429,7 +429,7 @@ and $\chooseOr{false}{i}{j}$.
 \end{proof}
 
 
-\subsubsection{CLAUSE-gadget}
+\subsection{CLAUSE-gadget}
 
 
 CLAUSE-gadget is responsible for calculating if
@@ -624,7 +624,7 @@ TODO: Funny fact, neither Y nor Z does not have independent set of size 4.
 Therefore $\pointsClause_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
 \end{proof}
 
-\subsubsection{Summary}
+\subsection{Summary}
 
 Add some smart lemmas that sets will be exclusive to each other.
 
@@ -659,7 +659,7 @@ cover any points $x_{i,0}, y_{i,0}$ or $z_{i,0}$ from CLAUSE-gadget.
 \end{proof}
 
 
-\subsubsection{Summary of construction}
+\subsection{Summary of construction}
 
 \begin{figure}
 \centering
@@ -688,7 +688,7 @@ TODO: $y$ axis is increasing values downward on figures
 (not upwards like in normal).
 
 
-\subsection{Construction lemmas and proof of Lemma \ref{apxconstruction}}
+\section{Construction lemmas and proof of Lemma \ref{apxconstruction}}
 \newcommand{\setCoverInstance}{(\points, \sets)}
 \newcommand{\true}{\texttt{true}}
 \newcommand{\false}{\texttt{false}}

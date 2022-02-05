@@ -1,13 +1,68 @@
+%https://davidmathlogic.com/colorblind/#%23646464-%2389DA6D-%23FFCF3C-%2338D1F1-%23FF0909-%23238CD2
+\definecolor{environment}{RGB}{100,100,100}
+\definecolor{move_variable1}{RGB}{137, 218, 109}
+\definecolor{move_variable2}{RGB}{255, 207, 60}
+\definecolor{choose_true1}{RGB}{56, 209, 241}
+\definecolor{choose_true2}{RGB}{35, 140, 210}
+\definecolor{choose_false}{RGB}{255, 9, 9}
+
+{\tikzset{point/.style={
+    circle, draw=black, fill, fill=black, minimum size=4pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.05cm,text=black}}}}
+    }
+}
+
 \begin{figure}[h]
 \centering
 \def\svgwidth{0.5\columnwidth}
-\input{apx_or_gadget.pdf_tex}
+\begin{tikzpicture}
+\tikzmath{
+\stepx=1.5;
+\stepy=1.5;
+\xbeg=0;
+\x1=\xbeg+3*\stepx;
+\x2=\x1+\stepx;
+\x3=\x2+\stepx;
+\xend=\x3+\stepx;
+\y1=0;
+\y2=\y1+\stepy;
+\y3=\y2+\stepy;
+\y4=\y3+\stepy;
+\y5=\y4+\stepy;
+}
+
+\draw[environment,ultra thick] (\xbeg,\y1) -- (\x1,\y1) node[pos=0.15, above] {$input_x$};
+\draw[environment,ultra thick] (\xbeg,\y5) -- (\x1,\y5) node[pos=0.15, above] {$input_y$};
+\draw[move_variable1, ultra thick] (\x1,\y1) -- (\x1,\y3);
+\draw[move_variable2, ultra thick] (\x1,\y5) -- (\x1,\y3);
+\draw[choose_true1, ultra thick] (\x1,\y2) -- (\x3,\y2);
+\draw[choose_true1, ultra thick] (\x1,\y4) -- (\x3,\y4);
+\draw[choose_true2, ultra thick] (\x3,\y3) -- (\xend,\y3);
+\draw[choose_false, ultra thick] (\x2,\y2) -- (\x2,\y4);
+\draw[choose_false, ultra thick] (\x3,\y2) -- (\x3,\y4);
+
+\node[point,label={above left:$l_{i,j}$}] at (\x1,\y1) {};
+\node[point,label={left:$m_{i,j}$}] at (\x1,\y2) {};
+\node[point,label={left:$n_{i,j}$}] at (\x1,\y3) {};
+\node[point,label={left:$o_{i,j}$}] at (\x1,\y4) {};
+\node[point,label={above left:$p_{i,j}$}] at (\x1,\y5) {};
+
+\node[point,label={below:$q_{i,j}$}] at (\x2,\y2) {};
+\node[point,label={above:$r_{i,j}$}] at (\x2,\y4) {};
+\node[point,label={below:$s_{i,j}$}] at (\x3,\y2) {};
+\node[point,label={left:$t_{i,j}$}] at (\x3,\y3) {};
+\node[point,label={above:$u_{i,j}$}] at (\x3,\y4) {};
+\node[point,label={above:$v_{i,j}$}] at (\xend,\y3) {};
+
+\end{tikzpicture}
 \caption{
-	\textbf{OR-gadget.} Segments from $\chooseOr{false}{i}{j}$ are red,
-	segments from $\chooseOr{true}{i}{j}$ are blue (both light blue and dark blue),
-	segments from $\orMoveVariable{i}{j}$ are yellow and green.
-	Dark blue segment is the $output$ segment.
-	Grey segments $input_x$ and $input_y$ are input segments that
+	\textbf{OR-gadget.} Segments from $\chooseOr{false}{i}{j}$ are \textcolor{choose_false}{red},
+	segments from $\chooseOr{true}{i}{j}$ are blue
+	(both \textcolor{choose_true1}{light blue} and \textcolor{choose_true2}{dark blue}),
+	segments from $\orMoveVariable{i}{j}$ are \textcolor{move_variable1}{green} and \textcolor{move_variable2}{yellow}.
+	\textcolor{choose_true2}{Dark blue} segment is the $output$ segment.
+	\textcolor{environment}{Grey segments} $input_x$ and $input_y$ are input segments that
 	are not part of $\segmentsOr{i}{j}$.
 }
 \label{fig:apx_or_gadget}

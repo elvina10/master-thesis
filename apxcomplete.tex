@@ -327,23 +327,22 @@ can be covered by segment not from the OR-gadget.
 
 \begin{center}
 	\begin{tabular}{ l l l l}
-
-		$l_0 = (0, 0)$ &
-		$m_0 = (0, 1)$ &
-		$n_0 = (0, 2)$ &
-		$o_0 = (0, 3)$ \\
-		$p_0 = (0, 4)$ &
-		$q_0 = (1, 1)$ &
-		$r_0 = (1, 3)$ &
-		$s_0 = (2, 1)$ \\
-		$t_0 = (2, 2)$ &
-		$u_0 = (2, 3)$ &
-		$v_0 = (3, 2)$ &
+		$l_0 := (0, 0)$ &
+		$m_0 := (0, 1)$ &
+		$n_0 := (0, 2)$ &
+		$o_0 := (0, 3)$ \\
+		$p_0 := (0, 4)$ &
+		$q_0 := (1, 1)$ &
+		$r_0 := (1, 3)$ &
+		$s_0 := (2, 1)$ \\
+		$t_0 := (2, 2)$ &
+		$u_0 := (2, 3)$ &
+		$v_0 := (3, 2)$ &
 	\end{tabular}
 \end{center}
 
 
-$$x_{i, j} = (10i + 3 + 3j, 4n + 2j)$$
+$$x_{i, j} := (10i + 3 + 3j, 4n + 2j)$$
 
 For integers $i,j$,
 define 
@@ -353,7 +352,7 @@ ie. $l_{i,j} = l_0 + x_{i,j}$ etc.
 
 Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
  
-  $$\pointsOr{i}{j} = 
+$$\pointsOr{i}{j} := 
  \{l_{i, j}, m_{i, j}, n_{i, j}, o_{i, j},
  p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
  $$
@@ -362,21 +361,20 @@ Note that $\pointsOr{i}{j}$ does not include the point $v_{i,j}$
  
 \paragraph{Segments.}
 
-We define names subsets of segments, to refer to them in lemmas.
+We define subset of segments in several parts:
  
- 
-$$\chooseOr{false}{i}{j} =
-\{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}$$
-$$\chooseOr{true}{i}{j} =
+$$\chooseOr{false}{i}{j} :=
+\{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\},$$
+$$\chooseOr{true}{i}{j} :=
 \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),
-(t_{i, j}, v_{i, j}) \}$$
+(t_{i, j}, v_{i, j}) \},$$
 
-$$\orMoveVariable{i}{j} =
-\{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}$$
+$$\orMoveVariable{i}{j} :=
+\{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}.$$
 
-Segments in OR-gadget:
+Finally all segments in OR-gadget are defined as:
 
-$$\segmentsOr{i}{j} = 
+$$\segmentsOr{i}{j} := 
   \chooseOr{false}{i}{j} \cup \chooseOr{true}{i}{j} \cup \orMoveVariable{i}{j}
 $$
 

@@ -1,13 +1,60 @@
+\definecolor{x_true_colour}{RGB}{40, 40, 255}
+\definecolor{x_false_colour}{RGB}{255, 40, 40}
+
+{\tikzset{point/.style={
+    circle, draw=black, fill, fill=black, minimum size=4pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,text=black}}}}
+    }
+}
+
+{\tikzset{point_not_cover/.style={
+    circle, draw=black, fill, fill=white, minimum size=4pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,text=black}}}}
+    }
+}
+
 \begin{figure}[h]
 \centering
-\def\svgwidth{0.5\columnwidth}
-\input{apx_choose_variable.pdf_tex}
+\begin{tikzpicture}
+\tikzmath{
+\stepx=3;
+\stepy=2;
+\y1=0;
+\y2=\y1+\stepy;
+\y3=\y2+\stepy;
+\x1=0;
+\x2=\x1+\stepx;
+\x3=\x2+\stepx;
+\xend=4*\stepx;
+}
+
+
+\draw[x_false_colour,very thick] (\x1,\y1) -- (\x3,\y1);
+\draw[x_false_colour,very thick] (\x1,\y2) -- (\x2,\y2);
+\draw[x_false_colour,very thick] (\x2,\y3) -- (\xend,\y3);
+\draw[x_true_colour,very thick] (\x1,\y1) -- (\x1,\y2);
+\draw[x_true_colour,very thick] (\x2,\y1) -- (\x2,\y3);
+\draw[x_true_colour,very thick] (\x3,\y1) -- (\xend,\y1);
+
+\node[point,label={below:$a_i$}] at (\x1,\y1) {};
+\node[point,label={below:$b_i$}] at (\x2,\y1) {};
+\node[point,label={below:$c_i$}] at (\x3,\y1) {};
+\node[point,label={left:$d_i$}] at (\x1,\y2) {};
+\node[point,label={above left:$e_i$}] at (\x2,\y2) {};
+\node[point,label={left:$f_i$}] at (\x2,\y3) {};
+\node[point_not_cover,label={right:$g_i$}] at (\xend,\y1) {};
+\node[point_not_cover,label={right:$h_i$}] at (\xend,\y3) {};
+
+
+\end{tikzpicture}
 \caption{\textbf{VARIABLE-gadget.}
 We denote the set of points marked with black circles as $\pointsVar{i}$,
 and they need to be covered (are part of the set $\points$).
 Note that some of the points are not marked as black dots
 and exists only to name segments for further reference.
-We denote the set of red segments as $\chooseVar{false}{i}$
-and the set of blue segments as $\chooseVar{true}{i}$.}
+We denote the set of \textcolor{x_false_colour}{red} segments as $\chooseVar{false}{i}$
+and the set of \textcolor{x_true_colour}{blue} segments as $\chooseVar{true}{i}$.}
 \label{fig:apx_choose_variable}
 \end{figure}

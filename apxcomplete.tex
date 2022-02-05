@@ -323,20 +323,7 @@ can be covered by segment not from the OR-gadget.
 \newcommand{\pointsOr}[2]{\mathsf{pointsOr}_{#1,#2}}
 \newcommand{\segmentsOr}[2]{\mathsf{segmentsOr}_{#1,#2}}
 
-\begin{figure}[h]
-\centering
-\def\svgwidth{0.5\columnwidth}
-\input{apx_or_gadget.pdf_tex}
-\caption{
-	\textbf{OR-gadget.} Segments from $\chooseOr{false}{i}{j}$ are red,
-	segments from $\chooseOr{true}{i}{j}$ are blue (both light blue and dark blue),
-	segments from $\orMoveVariable{i}{j}$ are yellow and green.
-	Dark blue segment is the $output$ segment.
-	Grey segments $input_x$ and $input_y$ are input segments that
-	are not part of $\segmentsOr{i}{j}$.
-}
-\label{fig:apx_or_gadget}
-\end{figure}
+\input{fig_apx_or_gadget.tex}
 
 \begin{center}
 	\begin{tabular}{ l l l l}

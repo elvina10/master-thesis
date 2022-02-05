@@ -1,7 +1,67 @@
+\definecolor{environment}{RGB}{150,150,150}
+
+{\tikzset{point/.style={
+    circle, draw=black, fill, fill=black, minimum size=4pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.05cm,text=black,font=\footnotesize}}}}
+    }
+}
+
 \begin{figure}[h]
 \centering
-\def\svgwidth{0.8\columnwidth}
-\input{apx_clause.pdf_tex}
+\begin{tikzpicture}
+\tikzmath{
+\stepx=1.7;
+\stepy=1.5;
+\boxsize=1.2*\stepx;
+\xbeg=0;
+\x1=\xbeg+2*\stepx;
+\x2=\x1+\stepx;
+\x3=\x2+\stepx;
+\x4=\x3+\stepx;
+\x5=\x4+\boxsize;
+\x6=\x5+\stepx;
+\x7=\x6+\boxsize;
+\x8=\x7+\stepx;
+\y1=0;
+\y2=\y1+\stepy;
+\y3=\y2+\stepy;
+\y4=\y3+2*\stepy;
+\y5=\y4+0.5*\stepy;
+\y6=\y5+0.5*\stepy;
+\y7=\y6+0.5*\stepy;
+}
+
+\draw[thick] (\x1,\y3) -- (\x1,\y4);
+\draw[thick] (\x2,\y1) -- (\x2,\y6);
+\draw[thick] (\x3,\y2) -- (\x3,\y7);
+\draw[thick] (\x1,\y4) -- (\x4,\y4);
+\draw[thick] (\x2,\y6) -- (\x4,\y6);
+\draw[thick] (\x3,\y7) -- (\x6,\y7);
+\draw[thick] (\x5,\y5) -- (\x6,\y5);
+\draw[thick] (\x7,\y6) -- (\x8,\y6);
+\draw [fill=green!50, draw=green!50] (\x4,\y6) rectangle (\x5,\y4) node[pos=0.5] {\scriptsize OR-gadget};
+\draw [fill=green!50, draw=green!50] (\x6,\y5) rectangle (\x7,\y7) node[pos=0.5] {\scriptsize OR-gadget};
+
+\draw[environment,thick] (\xbeg, \y1) -- (\x8, \y1) node[black,pos=0.7, below] {$variable_b^{true}$};
+\draw[environment,thick] (\xbeg, \y2) -- (\x8, \y2) node[black,pos=0.7, below] {$variable_c^{false}$};
+\draw[environment,thick] (\xbeg, \y3) -- (\x8, \y3) node[black,pos=0.7, above] {$variable_a^{true}$};
+
+\node[point,label={above left:$x_{i,0}$}] at (\x1,\y3) {};
+\node[point,label={above left:$y_{i,0}$}] at (\x2,\y1) {};
+\node[point,label={above left:$z_{i,0}$}] at (\x3,\y2) {};
+\node[point,label={above left:$x_{i,1}$}] at (\x1,\y4) {};
+\node[point,label={above left:$y_{i,1}$}] at (\x2,\y6) {};
+\node[point,label={above left:$z_{i,1}$}] at (\x3,\y7) {};
+\node[point,label={above left:$l_{i,0}$}] at (\x4,\y4) {};
+\node[point,label={above left:$p_{i,0}$}] at (\x4,\y6) {};
+\node[point,label={above right:$t_{i,0}$}] at (\x5,\y5) {};
+\node[point,label={below:$v_{i,0}=l_{i,1}$}] at (\x6,\y5) {};
+\node[point,label={above:$p_{i,1}$}] at (\x6,\y7) {};
+\node[point,label={above right:$t_{i,1}$}] at (\x7,\y6) {};
+\node[point,label={above right:$v_{i,1}$}] at (\x8,\y6) {};
+\end{tikzpicture}
+
 \caption{\textbf{CLAUSE-gadget for a clause $a \lor b \lor \neg c$.}
 Every green rectangle is an OR-gadget.
 $y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$

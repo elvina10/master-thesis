@@ -430,18 +430,16 @@ We can do that using segments from $\orMoveVariable{i}{j} \cup \chooseOr{false}{
 
 
 \subsection{CLAUSE-gadget}
-
-
-CLAUSE-gadget is responsible for calculating if
-variables values assigned in variable gadgets
-satisfy the respective clause in CNF.
-It has minimum solution of weight $w$
+A CLAUSE-gadget is responsible for determining whether
+variable values assigned in variable gadgets
+satisfy the corresponding clause in the input formula $\rho$.
+It has a minimum solution of weight $w$
 if and only if the clause is satisfied, i.e. at least one
 of the respective variables is assigned a correct value.
-Otherwise it has minimum solution of weight $w+1$.
+Otherwise, a minimum solution of weight $w+1$.
 This way, by analyzing the minimum solution for the whole problem,
-we can tell how many clauses were possible to satisfy
-in the optimum solution of CNF.
+we can tell how many clauses it was possible to satisfy
+in the optimum solution of $\phi$.
 
 The CLAUSE-gadgets consist of two OR-gadgets.
 It would be inconvenient to position the CLAUSE-gadents
@@ -469,8 +467,7 @@ simplifying the construction.
 \centering
 \def\svgwidth{0.8\columnwidth}
 \input{apx_clause.pdf_tex}
-\caption{\textbf{CLAUSE-gadget.}
-This figure presents CLAUSE-gadget.
+\caption{\textbf{CLAUSE-gadget for a clause $a \lor b \lor \neg c$.}
 Every green rectangle is an OR-gadget.
 $y$-coordinates of $x_{i, 0}$, $y_{i, 0}$ and $z_{i,0}$
 depend on the variables in the $i$-th clause.
@@ -482,19 +479,19 @@ satistying the $i$-th clause.
 
 TODO: Rephrase it
 
-Assuming clause $C_i = a \lor b \lor c$,
-function $idx(w)$ returns index of the variable $w$,
-function $neg(w)$ returns whether variable $w$ is negated
-in a clause.
+Assuming clause $C_i = a \lor b \lor c$.
+For a literal $w$, let $idx(w)$ be the index of the variable in $w$,
+and $neg(w)$ be the Boolean value whether the variable is negated in $w$
+or not.
 
 \begin{center}
 \begin{tabular}{ l l }
 	$x_{i, 0} = (10i+1, 4\cdot idx(a) + 2\cdot neg(c))$ &
-	$x_{i, 1} = (10i+1, 4n)$ \\
+	$x_{i, 1} = (10i+1, 4(n+1))$ \\
 	$y_{i, 0} = (10i+2, 4\cdot idx(b) + 2\cdot neg(b))$ &
-	$y_{i, 1} = (10i+2, 4n + 4)$ \\
+	$y_{i, 1} = (10i+2, 4(n+1) + 4)$ \\
 	$z_{i, 0} = (10i+3, 4\cdot idx(c) + 2\cdot neg(c))$ &
-	$z_{i, 1} = (10i+3, 4n + 6)$
+	$z_{i, 1} = (10i+3, 4(n+1) + 6)$
 \end{tabular}
 \end{center}
 
@@ -510,6 +507,8 @@ in a clause.
  \mathsf{moveVariable}_i \cup \pointsOr{i}{0}
  \cup \pointsOr{i}{1} \cup \{v_{i, 1} \} 
  $$
+ 
+Note that $v_{i,0} = l_{i,1}$.
 
 \paragraph{Segments.}
 
@@ -530,16 +529,16 @@ in a clause.
 \begin{lemma}
 \label{cover_clauses_solution_true}
 For any $1 \le i \le n$ and $a \in \{ x_{i, 0}, y_{i, 0}, z_{i, 0}\}$,
-there is a $\segmentsClauseSolTrue{a}_i \subset \segmentsClause_i$
+there is a set $\segmentsClauseSolTrue{a}_i \subseteq \segmentsClause_i$
 with $|\segmentsClauseSolTrue{a}_i| = 11$
-that covers points in $\pointsClause_i - \{a\}$.
+that covers all points in $\pointsClause_i - \{a\}$.
 \end{lemma}
 
 \begin{proof}
 For $a = x_{i, 0}$ (analogous proof for $y_{i, 0}$):
 First we use Lemma~\ref{cover_or_true} twice with excluded $x = l_{i, 0}$ and
 $x = l_{i, 1} = v_{i, 0}$,
-resulting with 8 segments $\chooseOr{true}{i}{0} \cup \chooseOr{true}{i}{1}$
+resulting with 8 segments in $\chooseOr{true}{i}{0} \cup \chooseOr{true}{i}{1}$
 which cover all required points apart from
 $x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 0}, z_{i, 1}, l_{i, 0}$.
 We cover those using additional 3 segments:
@@ -549,7 +548,7 @@ $\{ (x_{i, 1}, l_{i, 0}), (y_{i, 0}, y_{i, 1}),
 For $a = z_{0, i}$:
 Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with
 $x = p_{i, 1}$,
-resulting with 8 segments $\chooseOr{false}{i}{0} \cup \chooseOr{true}{i}{1}$
+we obtain 8 segments in $\chooseOr{false}{i}{0} \cup \chooseOr{true}{i}{1}$
 which cover all required points apart from
 $x_{i, 0}, x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 1}, p_{i, 1}$.
 We cover those using additional 3 segments:
@@ -560,16 +559,15 @@ $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 \begin{lemma}
 \label{cover_clauses_solution_false}
 For any $1 \le i \le n$ there is
-$\segmentsClauseSolFalse_i \subset \segmentsClause_i$
+a set $\segmentsClauseSolFalse_i \subseteq \segmentsClause_i$
 with $|\segmentsClauseSolFalse_i| = 12$
-that covers points in $\pointsClause_i$.
+that covers all points in $\pointsClause_i$.
 \end{lemma}
 
 \begin{proof}
 Using Lemma \ref{cover_or_false} twice we can
 cover $\pointsOr{i}{0}$ and  $\pointsOr{i}{1}$
 with 8 segments.
-
 To cover the remaining points we additionally use:
 $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
 (z_{i, 0}, z_{i, 1}), (t_{i, 1}, v_{i, 1}) \}$
@@ -590,23 +588,24 @@ For any $1 \le i \le n$:
 
 
 \begin{proof}[Proof of (1).]
-No segment in $\segmentsClause_i$ covers more than 2 points from
-$\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
-u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}$.
+No segment in $\segmentsClause_i$ covers more than 1 point from
+$$\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
+u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}.$$
 
 Therefore we need to use at least 12 segments.
 \end{proof}
 
 \begin{proof}[Proof of (2).]
 
-We can choose disjoint sets $X, Y, Z$ such that
+We can define disjoint sets $X, Y, Z$ such that
 $X \cup Y \cup Z \subseteq \pointsClause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-and there are no segments covering points from different sets.
-And we prove lower bounds for each of these sets.
+such that there are no segments in $\segmentsClause_i$ covering points from different sets.
+And we prove a lower bound for each of these sets.
+First, let:
 
-$$X = \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}$$
+$$X := \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}.$$
 
-No two points in $X$ are covered with one segment
+No two points in $X$ can be covered with one segment
 of $\segmentsClause_i$, so it must be covered with 3 different segments.
 
 $$Y = \pointsOr{i}{0} - \{l_{i, 0}, p_{i, 0}\}$$
@@ -615,13 +614,14 @@ $$Z = \pointsOr{i}{1} - \{l_{i, 1}, p_{i, 1}\}$$
 
 For both $Y$ and $Z$ we can check all of the subsets of 3 segments
 of $\segmentsClause_i$
-with brutforce that none of them cover the set of points,
+to conclude that none of them cover the considered,
 so both $Y$ and $Z$ have to be covered with 
-disjoined sets of 4 segments.
+disjoint sets of 4 segments each.
 
 TODO: Funny fact, neither Y nor Z does not have independent set of size 4.
 
-Therefore $\pointsClause_i$ must be covered with at least 3 + 4 + 4 = 11 segments.
+Therefore $\pointsClause_i - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
+must be covered with at least 3 + 4 + 4 = 11 segments from $\segmentsClause_i$.
 \end{proof}
 
 \subsection{Summary}
@@ -701,7 +701,7 @@ Consider an instance $S$ of MAX-(3,3)-SAT of size $n$
 with optimum solution satisfying $k$ clauses.
 Let us construct an instance $\setCoverInstance$ of geometric set cover
 as described in Section~\ref{construction_description}
-for instance $S$ of MAX-(3,3)-SAT.
+for the instance $S$ of MAX-(3,3)-SAT.
 
 \begin{lemma}
 	\label{construction_correctness}

@@ -4,14 +4,14 @@
 {\tikzset{point/.style={
     circle, draw=black, fill, fill=black, minimum size=4pt,inner sep=0pt, outer sep=0pt,
     prefix after command= {\pgfextra{\tikzset{every
-    label/.style={label distance=0.1cm,text=black}}}}
+    label/.style={label distance=0.05cm,text=black}}}}
     }
 }
 
 {\tikzset{point_not_cover/.style={
     circle, draw=black, fill, fill=white, minimum size=4pt,inner sep=0pt, outer sep=0pt,
     prefix after command= {\pgfextra{\tikzset{every
-    label/.style={label distance=0.1cm,text=black}}}}
+    label/.style={label distance=0.05cm,text=black}}}}
     }
 }
 
@@ -19,8 +19,8 @@
 \centering
 \begin{tikzpicture}
 \tikzmath{
-\stepx=3;
-\stepy=2;
+\stepx=1.5;
+\stepy=1;
 \y1=0;
 \y2=\y1+\stepy;
 \y3=\y2+\stepy;
@@ -43,7 +43,7 @@
 \node[point,label={below:$c_i$}] at (\x3,\y1) {};
 \node[point,label={left:$d_i$}] at (\x1,\y2) {};
 \node[point,label={above left:$e_i$}] at (\x2,\y2) {};
-\node[point,label={left:$f_i$}] at (\x2,\y3) {};
+\node[point,label={above left:$f_i$}] at (\x2,\y3) {};
 \node[point_not_cover,label={right:$g_i$}] at (\xend,\y1) {};
 \node[point_not_cover,label={right:$h_i$}] at (\xend,\y3) {};
 

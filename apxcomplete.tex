@@ -336,11 +336,10 @@ can be covered by segment not from the OR-gadget.
 \def\svgwidth{0.5\columnwidth}
 \input{apx_or_gadget.pdf_tex}
 \caption{
-	\textbf{OR-gadget.} Figure presenting OR-gadget:
-	segments from $\chooseOr{false}{i}{j}$ are red,
-	segments from $\chooseOr{true}{i}{j}$ are blue,
+	\textbf{OR-gadget.} Segments from $\chooseOr{false}{i}{j}$ are red,
+	segments from $\chooseOr{true}{i}{j}$ are blue (both light blue and dark blue),
 	segments from $\orMoveVariable{i}{j}$ are yellow and green.
-	Dark blue segment is an $output$ segment.
+	Dark blue segment is the $output$ segment.
 	Grey segments $input_x$ and $input_y$ are input segments that
 	are not part of $\segmentsOr{i}{j}$.
 }
@@ -365,11 +364,13 @@ can be covered by segment not from the OR-gadget.
 \end{center}
 
 
-	$$vec_{i, j} = (10i + 3 + 3j, 4n + 2j)$$
-	
-	Define 
-	$\{ l_{i, j}, m_{i, j} \ldots v_{i, j} \}$
-	as $\{l_0, m_0 \ldots v_0\}$ shifted by $vec_{i, j}$
+$$x_{i, j} = (10i + 3 + 3j, 4n + 2j)$$
+
+For integers $i,j$,
+define 
+$\{ l_{i, j}, m_{i, j} \ldots v_{i, j} \}$
+as $\{l_0, m_0 \ldots v_0\}$ shifted by $x_{i, j}$,
+ie. $l_{i,j} = l_0 + x_{i,j}$ etc.
 
 Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
  
@@ -378,7 +379,7 @@ Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
  p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
  $$
  
-Note that $\pointsOr{i}{j}$ does not include point $v_{i,j}$
+Note that $\pointsOr{i}{j}$ does not include the point $v_{i,j}$
  
 \paragraph{Segments.}
 
@@ -424,8 +425,7 @@ with 4 segments from $\segmentsOr{i}{j}$.
 \end{lemma}
 
 \begin{proof}
-We can do that using segments from $\orMoveVariable{i}{j}$
-and $\chooseOr{false}{i}{j}$.
+We can do that using segments from $\orMoveVariable{i}{j} \cup \chooseOr{false}{i}{j}$.
 \end{proof}
 
 

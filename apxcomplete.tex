@@ -406,7 +406,7 @@ We can do that using segments from $\orMoveVariable{i}{j} \cup \chooseOr{false}{
 \subsection{CLAUSE-gadget}
 A CLAUSE-gadget is responsible for determining whether
 variable values assigned in variable gadgets
-satisfy the corresponding clause in the input formula $\rho$.
+satisfy the corresponding clause in the input formula $\phi$.
 It has a minimum solution of weight $w$
 if and only if the clause is satisfied, i.e. at least one
 of the respective variables is assigned a correct value.
@@ -438,41 +438,44 @@ simplifying the construction.
 \newcommand{\pointsClause}{\mathsf{pointsClause}}
 
 \input{fig_apx_clause.tex}
-
-TODO: Rephrase it
-
-Assuming clause $C_i = a \lor b \lor c$.
+First, we define auxiliary functions for literals. 
 For a literal $w$, let $idx(w)$ be the index of the variable in $w$,
 and $neg(w)$ be the Boolean value whether the variable is negated in $w$
 or not.
 
+Let us assume that clause $C_i = a \lor b \lor c$
+for any literals $a,b,c$. Then, we define points in the gadget as:
+
 \begin{center}
 \begin{tabular}{ l l }
-	$x_{i, 0} = (10i+1, 4\cdot idx(a) + 2\cdot neg(c))$ &
-	$x_{i, 1} = (10i+1, 4(n+1))$ \\
-	$y_{i, 0} = (10i+2, 4\cdot idx(b) + 2\cdot neg(b))$ &
-	$y_{i, 1} = (10i+2, 4(n+1) + 4)$ \\
-	$z_{i, 0} = (10i+3, 4\cdot idx(c) + 2\cdot neg(c))$ &
-	$z_{i, 1} = (10i+3, 4(n+1) + 6)$
+	$x_{i, 0} = (10i+1, 4\cdot idx(a) + 2\cdot neg(c)),$ &
+	$x_{i, 1} = (10i+1, 4(n+1)),$ \\
+	$y_{i, 0} = (10i+2, 4\cdot idx(b) + 2\cdot neg(b)),$ &
+	$y_{i, 1} = (10i+2, 4(n+1) + 4),$ \\
+	$z_{i, 0} = (10i+3, 4\cdot idx(c) + 2\cdot neg(c)),$ &
+	$z_{i, 1} = (10i+3, 4(n+1) + 6).$
 \end{tabular}
 \end{center}
 
 \newcommand{\segmentsClause}{\mathsf{segmentsClause}}	
  
+We are now ready to define set of points:
+ 
  $$\mathsf{moveVariable}_i = 
  \{x_{i, j} : j \in \{0, 1\}\} \cup
  \{y_{i, j} : j \in \{0, 1\}\} \cup
- \{z_{i, j} : j \in \{0, 1\}\} 
+ \{z_{i, j} : j \in \{0, 1\}\},
  $$
  
  $$\pointsClause_i = 
  \mathsf{moveVariable}_i \cup \pointsOr{i}{0}
- \cup \pointsOr{i}{1} \cup \{v_{i, 1} \} 
+ \cup \pointsOr{i}{1} \cup \{v_{i, 1} \}.
  $$
  
 Note that $v_{i,0} = l_{i,1}$.
 
 \paragraph{Segments.}
+We also define segments for the clause gadget as below:
 
 \begin{eqnarray*}
 \segmentsClause_i & = & \{ (x_{i, 0}, x_{i, 1}),
@@ -482,7 +485,7 @@ Note that $v_{i,0} = l_{i,1}$.
 (y_{i, 1}, p_{i, 0}),
 (z_{i, 1}, p_{i, 1}),
 \} \cup \\
-& & \cup \ \segmentsOr{i}{0} \cup \segmentsOr{i}{1}
+& & \cup \ \segmentsOr{i}{0} \cup \segmentsOr{i}{1}.
 \end{eqnarray*}
 
 \newcommand{\segmentsClauseSolTrue}[1]{\mathsf{solClause}^{true,#1}}

@@ -32,13 +32,13 @@
 \y5=\y4+\stepy;
 }
 
-\draw[environment,ultra thick] (\xbeg,\y1) -- (\x1,\y1) node[pos=0.15, above] {$input_x$};
-\draw[environment,ultra thick] (\xbeg,\y5) -- (\x1,\y5) node[pos=0.15, above] {$input_y$};
+\draw[environment,ultra thick] (\xbeg,\y1) -- (\x1,\y1) node[black,pos=0.15, above] {$input_x$};
+\draw[environment,ultra thick] (\xbeg,\y5) -- (\x1,\y5) node[black,pos=0.15, above] {$input_y$};
 \draw[move_variable1, ultra thick] (\x1,\y1) -- (\x1,\y3);
 \draw[move_variable2, ultra thick] (\x1,\y5) -- (\x1,\y3);
 \draw[choose_true1, ultra thick] (\x1,\y2) -- (\x3,\y2);
 \draw[choose_true1, ultra thick] (\x1,\y4) -- (\x3,\y4);
-\draw[choose_true2, ultra thick] (\x3,\y3) -- (\xend,\y3);
+\draw[choose_true2, ultra thick] (\x3,\y3) -- (\xend,\y3) node [black,pos=0.5, below] {$output$};
 \draw[choose_false, ultra thick] (\x2,\y2) -- (\x2,\y4);
 \draw[choose_false, ultra thick] (\x3,\y2) -- (\x3,\y4);
 

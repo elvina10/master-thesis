@@ -212,7 +212,7 @@ corresponding to this gadget.
 
 \paragraph{Points.}
 
-Define points $a,b,c,d,e,f,g,h$ as follows, where $L = 12n$:
+Define points $a,b,c,d,e,f,g,h$ as follows, where $L = 22n$:
 
 
 \newcommand{\pointsVarNoArg}{\mathsf{pointsVariable} }
@@ -224,12 +224,12 @@ Define points $a,b,c,d,e,f,g,h$ as follows, where $L = 12n$:
 
 \begin{center}
 \begin{tabular}{ l l l l}
-	$a = (-L, 0)$ &
-	$b = (-\frac{2}{3}L, 0)$ & 
-	$c = (-\frac{1}{3}L, 0)$ & 
-	$d = (-L, 1)$ \\  
-	$e = (-\frac{2}{3}L, 1)$ & 
-	$f = (-\frac{2}{3}L, 2)$ &
+	$a = (-3L, 0)$ &
+	$b = (-2L, 0)$ & 
+	$c = (-L, 0)$ & 
+	$d = (-3L, 1)$ \\  
+	$e = (-2L, 1)$ & 
+	$f = (-2L, 2)$ &
 	$g = (L, 0)$ &
 	$h = (L, 2)$
 \end{tabular}
@@ -322,6 +322,8 @@ for the input segments.
 
 \input{fig_apx_or_gadget.tex}
 
+\newcommand{\clauseXFactor}{20}
+
 \begin{center}
 	\begin{tabular}{ l l l l}
 		$l_0 := (0, 0)$ &
@@ -339,13 +341,13 @@ for the input segments.
 \end{center}
 
 
-$$x_{i, j} := (10i + 3 + 3j, 4n + 2j)$$
+$$vec_{i, j} := (\clauseXFactor i + 3 + 3j, 4n + 2j)$$
 
 For integers $i,j$,
 define 
 $\{ l_{i, j}, m_{i, j} \ldots v_{i, j} \}$
-as $\{l_0, m_0 \ldots v_0\}$ shifted by $x_{i, j}$,
-ie. $l_{i,j} = l_0 + x_{i,j}$ etc.
+as $\{l_0, m_0 \ldots v_0\}$ shifted by $vec_{i, j}$,
+ie. $l_{i,j} = l_0 + vec_{i,j}$ etc.
 
 Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
  
@@ -448,12 +450,12 @@ for any literals $a,b,c$. Then, we define points in the gadget as:
 
 \begin{center}
 \begin{tabular}{ l l }
-	$x_{i, 0} = (10i+1, 4\cdot idx(a) + 2\cdot neg(c)),$ &
-	$x_{i, 1} = (10i+1, 4(n+1)),$ \\
-	$y_{i, 0} = (10i+2, 4\cdot idx(b) + 2\cdot neg(b)),$ &
-	$y_{i, 1} = (10i+2, 4(n+1) + 4),$ \\
-	$z_{i, 0} = (10i+3, 4\cdot idx(c) + 2\cdot neg(c)),$ &
-	$z_{i, 1} = (10i+3, 4(n+1) + 6).$
+	$x_{i, 0} = (\clauseXFactor i+1, 4\cdot idx(a) + 2\cdot neg(c)),$ &
+	$x_{i, 1} = (\clauseXFactor i+1, 4(n+1)),$ \\
+	$y_{i, 0} = (\clauseXFactor i+2, 4\cdot idx(b) + 2\cdot neg(b)),$ &
+	$y_{i, 1} = (\clauseXFactor i+2, 4(n+1) + 4),$ \\
+	$z_{i, 0} = (\clauseXFactor i+3, 4\cdot idx(c) + 2\cdot neg(c)),$ &
+	$z_{i, 1} = (\clauseXFactor i+3, 4(n+1) + 6).$
 \end{tabular}
 \end{center}
 
@@ -593,7 +595,7 @@ Add some smart lemmas that sets will be exclusive to each other.
 
 \begin{lemma}
 \textbf{Robustness to 1/2-extensions}. For every segment $s \in \sets$,
-$s$ and $s^{+1/2}$ cover the same points from $\points$.
+$s$ and $s^{+\frac{1}{2}}$ cover the same points from $\points$.
 \end{lemma}
 
 \begin{proof}
@@ -601,22 +603,39 @@ We can just check every segment. Most of the segments $s$
 are collinear only with points that lay on $s$,
 so trivially $s^{+\frac{1}{2}}$ cannot cover more points than $s$ does.
 
-TODO: list problematic segments here
+Within VARIABLE-gadget for any $1 \le i \le n$ after $\frac{1}{2}$-extension:
+$(c_i,g_i)$ does not cover $b_i$ point.
 
-In the same gadget:
-$(n_{i,j}, p_{i,j})$ does not cover $m_{i,j}$ and symmetrically.
-$(t_{i,j}, v_{i,j})$ does not cover $n_{i,j}$.
-$(o_{i,0}, u_{i,0})$ does not cover $m_{i,1}$ and symmetrically.
-$(y_{i,1}, p_{i,0})$ does not cover $n_{i,j}$.
+Within OR-gadget some of the segments are collinear and share one point;
+specifically, for any $1 \le i \le n$ and $j \in \{0,1\}$, after $\frac{1}{2}$-extension:
+\begin{itemize}
+\item $(l_{i,j}, n_{i,j})$ does not cover $o_{i,j}$,
+\item $(n_{i,j}, p_{i,j})$ does not cover $m_{i,j}$,
+\item $(t_{i,j}, v_{i,j})$ does not cover $n_{i,j}$.
+\end{itemize}
 
+Within CLAUSE-gadget, for any $1 \le i \le n$ after $\frac{1}{2}$-extension:
+\begin{itemize}
+\item $(o_{i,0}, u_{i,0})$ does not cover $m_{i,1}$,
+\item $(m_{i,1}, s_{i,1})$ does not cover $u_{i,0}$,
+\item $(y_{i,1}, p_{i,0})$ does not cover $n_{i,1}$.
+\end{itemize}
 
+For two consequitive VARIABLE-gadgets, for any $1 \le i < n$ after $\frac{1}{2}$-extension:
+$(b_i, f_i)$ does not cover $b_{i+1}$ point (nor $f_{i-1}$ for $i>1$).
 
-From different gadgets:
-$(b_i, f_i)$ after $\frac{1}{2}$-extensions does not
-cover $b_{i+1}$ point.
+For two consequtive CLAUSE-gadgets also segments do not cover anything
+from the other gadget, because gadget's width is 9 and
+every lefmost x-coordnate is divisible by $\clauseXFactor$.
+Hence two different gadgets do not interact with each other
+after $\frac{1}{2}$-extension.
 
-VARIABLE-gadget's $(a_i, c_i)$ after $\frac{1}{2}$-extensions does not
-cover any points $x_{i,0}, y_{i,0}$ or $z_{i,0}$ from CLAUSE-gadget.
+Next we need to check whether VARIABLE-gadget's segments
+do not cover any points $x_{i,0}, y_{i,0}$ or $z_{i,0}$ from CLAUSE-gadget.
+For any $1 \le i \le n$ and $1 \le j \le n$, all points $x_{j,0}, y_{j,0}$ and $z_{j,0}$
+have x-coordinate strictly positive. Segment $(a_i, c_i)$ have length $2L$
+and $c_i$ has x-coordinate equal to $-L$, so after $\frac{1}{2}$-extension
+this segment does not cover any points with positive coordinate.
 
 
 \end{proof}

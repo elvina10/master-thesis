@@ -220,7 +220,7 @@ Define points $a,b,c,d,e,f,g,h$ as follows, where $L = 22n$:
 \newcommand{\chooseVar}[2]{\mathsf{chooseVariable}^{#1}_{#2} }
 \newcommand{\segmentsVar}[1]{\mathsf{segmentsVariable}_{#1} }
 
-\input{fig_apx_choose_variable.tex}
+\input{figures/fig_apx_choose_variable.tex}
 
 \begin{center}
 \begin{tabular}{ l l l l}
@@ -319,7 +319,7 @@ like a binary $or$ function for the input segments.
 \newcommand{\pointsOr}[2]{\mathsf{pointsOr}_{#1,#2}}
 \newcommand{\segmentsOr}[2]{\mathsf{segmentsOr}_{#1,#2}}
 
-\input{fig_apx_or_gadget.tex}
+\input{figures/fig_apx_or_gadget.tex}
 
 \newcommand{\clauseXFactor}{20}
 
@@ -439,7 +439,7 @@ simplifying the construction.
 
 \newcommand{\pointsClause}{\mathsf{pointsClause}}
 
-\input{fig_apx_clause.tex}
+\input{figures/fig_apx_clause.tex}
 First, we define auxiliary functions for literals. 
 For a literal $w$, let $idx(w)$ be the index of the variable in $w$,
 and $neg(w)$ be the Boolean value whether the variable is negated in $w$
@@ -640,7 +640,7 @@ this segment does not cover any points with positive coordinate.
 
 
 \subsection{Summary of construction}
-\input{fig_apx_segment_whole.tex}
+\input{figures/fig_apx_segment_whole.tex}
 
 Finally we define set of points and segments for the constructed instance:
 $$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause_i $$

@@ -297,21 +297,20 @@ can not be covered with fewer than 2 segments.
 \subsection{OR-gadget}
 
 OR-gadget connects input and output segments (see Figure \ref{fig:apx_or_gadget})
-in a way, that is supposed to simulate a binary $or$ function.
+in a way that is supposed to simulate a binary $or$ function.
 
-Input segments are the only segments that cover points
-that do not belong to the gadget.
+Input segments are the only segments that cover points outside of the gadget,
+as their left ends lie outside of it.
 Point $v_{i,j}$ is the only one that can be covered
 by segments that do not belong to the gadget.
 
-Also this gadget has a property that every set of segments
-that cover all the points in this gadget, it uses
-at least 3 segments from the gadget (excluding input segments).
-Moreover output segment can belong to the solution of size 3
+The OR-gadget has the property that every set of segments
+that covers all the points in the gadget uses at least 3 segments from it..
+Moreover, the output segment belongs to the solution of size 3
 only if at least one of the input segments belong to the solution.
-Therefore this gadget behaves in optimum solution
-for this problem like a binary $or$ function
-for the input segments.
+Therefore, optimum solutions restricted to the OR-gadget behave
+like a binary $or$ function for the input segments.
+
 
 \paragraph{Points.}
 
@@ -412,9 +411,10 @@ satisfy the corresponding clause in the input formula $\phi$.
 It has a minimum solution of weight $w$
 if and only if the clause is satisfied, i.e. at least one
 of the respective variables is assigned a correct value.
-Otherwise, a minimum solution of weight $w+1$.
-This way, by analyzing the minimum solution for the whole problem,
-we can tell how many clauses it was possible to satisfy
+Otherwise, its minimum solution has weight $w+1$.
+In this way, by analyzing the cost of the minimum solution
+for the entire constructed instance, we will be able to tell
+how many clauses it was possible to satisfy
 in the optimum solution of $\phi$.
 
 The CLAUSE-gadgets consist of two OR-gadgets.

@@ -45,15 +45,6 @@
 \r9=\x9+\eps;
 }
 
-\addNode{1}{1}{1}{1}
-\addNode{1}{1}{2}{2}
-\addNode{1}{2}{1}{3}
-\addNode{1}{2}{2}{4}
-\addNode{2}{1}{1}{6}
-\addNode{2}{1}{2}{7}
-\addNode{2}{2}{1}{8}
-\addNode{2}{2}{2}{9}
-
 \draw [beg_color] (\l1,0) to[out=150,in=30, looseness=200] (1.49,0);
 \draw [beg_color] (\l1,0) to[out=40,in=140] (\l2,0);
 \draw [beg_color] (\l1,0) to[out=40,in=140] (\l3,0);
@@ -68,6 +59,15 @@
 \draw [seg_color1] (\r3,0) to[out=20,in=160] (\l8,0);
 \draw [seg_color2] (\r4,0) to[out=20,in=160] (\l7,0);
 \draw [seg_color2] (\r4,0) to[out=20,in=160] (\l9,0);
+
+\addNode{1}{1}{1}{1}
+\addNode{1}{1}{2}{2}
+\addNode{1}{2}{1}{3}
+\addNode{1}{2}{2}{4}
+\addNode{2}{1}{1}{6}
+\addNode{2}{1}{2}{7}
+\addNode{2}{2}{1}{8}
+\addNode{2}{2}{2}{9}
 
 \end{tikzpicture} 
 \caption{\textbf{Vertices and segments in $HOR$.}}

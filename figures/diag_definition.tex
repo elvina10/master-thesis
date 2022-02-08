@@ -64,6 +64,12 @@
 	\r6=\x6+\eps;
 }
 
+\draw (0,\x1) -- (\x1,0) node[midway, above] {$\delta$};
+\draw (0,\x2) -- (\x2,0) node[midway, above] {$\delta$};
+\draw (0,\x3) -- (\x3,0) node[midway, above] {$\delta$};
+\draw (0,\x5) -- (\x5,0) node[midway, above] {$\delta$};
+\draw (0,\x6) -- (\x6,0) node[midway, above] {$\delta$};
+
 \addNodeV{1}{1}
 \addNodeV{2}{2}
 \addNodeV{3}{3}
@@ -77,11 +83,6 @@
 \filldraw[black] (\x4,0) circle (0pt) node[anchor=north] {$\ldots$};
 \addNodeH{5}{n^2-1}
 \addNodeH{6}{n^2}
-\draw (0,\x1) -- (\x1,0) node[midway, above] {$\delta$};
-\draw (0,\x2) -- (\x2,0) node[midway, above] {$\delta$};
-\draw (0,\x3) -- (\x3,0) node[midway, above] {$\delta$};
-\draw (0,\x5) -- (\x5,0) node[midway, above] {$\delta$};
-\draw (0,\x6) -- (\x6,0) node[midway, above] {$\delta$};
 \end{tikzpicture} 
 \end{center}
 \caption{\textbf{Vertices and segments in $\alldiag$.}}

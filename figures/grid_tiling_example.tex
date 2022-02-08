@@ -1,0 +1,48 @@
+\definecolor{alternative_sol}{RGB}{48, 48, 255}
+\definecolor{bad_sol}{RGB}{255, 48, 48}
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{ c|c|c|c|c| } 
+          & $x(1)=3$ & $x(2)=1$ & $x(3)=3$ & $x(4) = 7$\\ 
+ \hline
+ $y(4)=1$
+	& \makecell{$\textcolor{alternative_sol}{(2,1)};(2,2);$\\$\textbf{(3,1)};(3,9)$}
+	& $\textbf{(1,1)}; (3,1)$
+	& $\textbf{(3,1)}; (7,2)$
+	& $\textcolor{bad_sol}{(2,1)}; \textbf{(7,1)}$\\ 
+ \hline
+ $y(3)=1$
+	& \makecell{$\textcolor{alternative_sol}{(2,1)};\textbf{(3,1)};$\\$(4,2);(8,2)$}
+	& $\textbf{(1,1)}; (1,3)$
+	& $\textbf{(3,1)}; (4,3)$
+	& $\textcolor{bad_sol}{\textbf{(2,2)}}; \textbf{(7,1)}$\\ 
+ \hline
+ $y(2)=6$
+	& $\textcolor{alternative_sol}{(2,6)};\textbf{(3,6)}$
+	& \makecell{$(1,2); \textbf{(1,6)};$\\$(2,6)$}
+	& $(2,6); \textbf{(3,6)}$
+	& $\textcolor{bad_sol}{(2,6)};\textbf{(7,6)}$\\ 
+ \hline
+ $y(1)=4$
+	& \makecell{$\textcolor{alternative_sol}{(2,4)};(2,6);$\\$\textbf{(3,4)};\textcolor{bad_sol}{(3,9)}$}
+	& $\textbf{(1,4)}; \textcolor{bad_sol}{(1,9)}$
+	& $\textbf{(3,4)}; \textcolor{bad_sol}{(3,9)}$
+	& $\textcolor{bad_sol}{(2,9)}; \textbf{(7,4)}$\\ 
+ \hline
+\end{tabular}
+\end{center}
+\caption{\textbf{Example of a grid tiling instance with its solution.}}
+In the first row and column of the table you can see the solution:
+functions $x$ and $y$.
+The~tiles used in this solution are marked in \textbf{bold}.
+If we instead chose the tiles marked in \textcolor{alternative_sol}{blue}
+(whenever there is one, taking the tile marked in \textbf{bold} otherwise),
+then that corresponds to setting $x(1)=2$, and would also form a correct solution.
+On the other hand, if we instead chose the tiles marked in \textcolor{bad_sol}{red}
+(as before), then that corresponds to setting ${y(1)=9}$ and $x(4)=2$
+and that would $\textbf{not}$ form a correct solution.
+Even though the first row is correct,
+tile with coordinates (3,4) requires tile (2,1), not (2,2).
+\label{fig:grid_tiling_exmample}
+\end{figure}

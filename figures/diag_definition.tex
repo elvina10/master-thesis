@@ -1,0 +1,93 @@
+	
+\definecolor{guards_color}{RGB}{80, 120, 255}
+
+{\tikzset{guard_h/.style={
+    circle, draw=guards_color, fill, fill=guards_color, minimum size=2pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,rotate=90,text=guards_color,font=\footnotesize}}}}
+    }
+}
+{\tikzset{node_h/.style={
+    circle, draw=black, fill, fill=black, minimum size=4pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,rotate=90,text=black}}}}
+    }
+}
+{\tikzset{guard_v/.style={
+    circle, draw=guards_color, fill, fill=guards_color, minimum size=2pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,text=guards_color,font=\footnotesize}}}}
+    }
+}
+{\tikzset{node_v/.style={
+    circle, draw=black, fill, fill=black, minimum size=4pt,inner sep=0pt, outer sep=0pt,
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=0.1cm,text=black}}}}
+    }
+}
+
+\newcommand{\addNodeV}[2]{
+	\node[guard_v, label={left:$v_{i,j,#2}^D$}] at (0, \l#1) {};
+	\node[node_v, label={left:$v_{i,j,#2}$}] at (0,\x#1) {};
+	\node[guard_v, label={left:$v_{i,j,#2}^U$}] at (0, \r#1) {};
+}
+
+\newcommand{\addNodeH}[2]{
+	\node[guard_h, label={left:$h_{i,j,#2}^L$}] at (\l#1,0) {};
+	\node[node_h, label={left:$h_{i,j,#2}$}] at (\x#1,0) {};
+	\node[guard_h, label={left:$h_{i,j,#2}^R$}] at (\r#1,0) {};
+}
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[main/.style = {draw, circle}]
+\tikzmath{
+	\step=2;
+	\eps=0.5;
+	\x1=\step;
+	\x2=\x1+\step;
+	\x3=\x2+\step;
+	\x4=\x3+\step;
+	\x5=\x4+\step;
+	\x6=\x5+\step;
+	\l1=\x1-\eps;
+	\r1=\x1+\eps;
+	\l2=\x2-\eps;
+	\r2=\x2+\eps;
+	\l3=\x3-\eps;
+	\r3=\x3+\eps;
+	\l4=\x4-\eps;
+	\r4=\x4+\eps;
+	\l5=\x5-\eps;
+	\r5=\x5+\eps;
+	\l6=\x6-\eps;
+	\r6=\x6+\eps;
+}
+
+\addNodeV{1}{1}
+\addNodeV{2}{2}
+\addNodeV{3}{3}
+\filldraw[black] (0,\x4) circle (0pt) node[anchor=east] {$\ldots$};
+\addNodeV{5}{n^2-1}
+\addNodeV{6}{n^2}
+
+\addNodeH{1}{1}
+\addNodeH{2}{2}
+\addNodeH{3}{3}
+\filldraw[black] (\x4,0) circle (0pt) node[anchor=north] {$\ldots$};
+\addNodeH{5}{n^2-1}
+\addNodeH{6}{n^2}
+\draw (0,\x1) -- (\x1,0) node[midway, above] {$\delta$};
+\draw (0,\x2) -- (\x2,0) node[midway, above] {$\delta$};
+\draw (0,\x3) -- (\x3,0) node[midway, above] {$\delta$};
+\draw (0,\x5) -- (\x5,0) node[midway, above] {$\delta$};
+\draw (0,\x6) -- (\x6,0) node[midway, above] {$\delta$};
+\end{tikzpicture} 
+\end{center}
+\caption{\textbf{Vertices and segments in $\alldiag$.}}
+This is an example of constructed points any $1 \le i,j \le k$.
+Points from $H$ and $V$ are marked in black,
+their guards are marked in \textcolor{guards_color}{blue}.
+You can also see segments from $\alldiag$ with their weights (equal to $\delta$).
+\label{fig:diag_def}
+\end{figure}

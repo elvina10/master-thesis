@@ -1,0 +1,87 @@
+
+\definecolor{beg_color}{RGB}{255, 40, 40}
+\definecolor{seg_color1}{RGB}{40, 40, 255}
+\definecolor{seg_color2}{RGB}{40, 150, 40}
+
+\newcommand{\addNode}[4]{
+	\node[guard_h, label={left:$h_{#1,j,t_{#2,#3}}^L$}] at (\l#4,0) {};
+	\node[node_h, label={left:$h_{#1,j,t_{#2,#3}}$}] at (\x#4,0) {};
+	\node[guard_h, label={left:$h_{#1,j,t_{#2,#3}}^R$}] at (\r#4,0) {};
+}
+
+\begin{figure}
+\hspace*{-1.5cm}
+\begin{tikzpicture}[main/.style = {draw, circle}]
+\tikzmath{
+\step=2;
+\eps=0.5;
+%genereted by gen_math.py
+\x1=\step;
+\x2=\x1+\step;
+\x3=\x2+\step;
+\x4=\x3+\step;
+\x5=\x4+\step;
+\x6=\x5+\step;
+\x7=\x6+\step;
+\x8=\x7+\step;
+\x9=\x8+\step;
+\l1=\x1-\eps;
+\r1=\x1+\eps;
+\l2=\x2-\eps;
+\r2=\x2+\eps;
+\l3=\x3-\eps;
+\r3=\x3+\eps;
+\l4=\x4-\eps;
+\r4=\x4+\eps;
+\l5=\x5-\eps;
+\r5=\x5+\eps;
+\l6=\x6-\eps;
+\r6=\x6+\eps;
+\l7=\x7-\eps;
+\r7=\x7+\eps;
+\l8=\x8-\eps;
+\r8=\x8+\eps;
+\l9=\x9-\eps;
+\r9=\x9+\eps;
+}
+
+\addNode{1}{1}{1}{1}
+\addNode{1}{1}{2}{2}
+\addNode{1}{2}{1}{3}
+\addNode{1}{2}{2}{4}
+\addNode{2}{1}{1}{6}
+\addNode{2}{1}{2}{7}
+\addNode{2}{2}{1}{8}
+\addNode{2}{2}{2}{9}
+
+\draw [beg_color] (\l1,0) to[out=150,in=30, looseness=200] (1.49,0);
+\draw [beg_color] (\l1,0) to[out=40,in=140] (\l2,0);
+\draw [beg_color] (\l1,0) to[out=40,in=140] (\l3,0);
+\draw [beg_color] (\l1,0) to[out=40,in=140] (\l4,0);
+
+
+\draw [seg_color1] (\r1,0) to[out=20,in=160] (\l6,0);
+\draw [seg_color1] (\r1,0) to[out=20,in=160] (\l8,0);
+\draw [seg_color2] (\r2,0) to[out=20,in=160] (\l7,0);
+\draw [seg_color2] (\r2,0) to[out=20,in=160] (\l9,0);
+\draw [seg_color1] (\r3,0) to[out=20,in=160] (\l6,0);
+\draw [seg_color1] (\r3,0) to[out=20,in=160] (\l8,0);
+\draw [seg_color2] (\r4,0) to[out=20,in=160] (\l7,0);
+\draw [seg_color2] (\r4,0) to[out=20,in=160] (\l9,0);
+
+\end{tikzpicture} 
+\caption{\textbf{Vertices and segments in $HOR$.}}
+This is an example for $n=2$ and any $1 \le j \le k$.
+Points from $H$ are marked in black, their guards are marked in \textcolor{guards_color}{blue}.
+$t_{i,j}$ is a notation that we use for $\order^{-1}(i,j)$.
+Segments are represented as arcs between endpoints.
+You can see $\horbeg{j}{t}$ segments in \textcolor{beg_color}{red}.
+$\horbeg{j}{1}$ is degenerated to a single point at $h_{1,1,t_{1,1}}^L$.
+Segments $\hor{i}{j}{t_{x_1,y}}{t_{x_2,y}}$
+are marked in \textcolor{seg_color1}{blue} and \textcolor{seg_color2}{green}.
+\textcolor{seg_color1}{Blue} segments connect $t_{x_1,y}$ and $t_{x_2,y}$
+such that they share y-coordinate equal to 1,
+for~\textcolor{seg_color2}{green} segments it is equal to 2.
+
+\label{fig:segments_def}
+\end{figure}

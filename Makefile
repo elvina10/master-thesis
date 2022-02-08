@@ -12,3 +12,10 @@ thesis.pdf: $(SRC).tex $(BIBL) pracamgr.cls $(TEXS) $(foreach x,$(SVGS), $x.svg)
 
 %.pdf_tex: $@.svg
 	inkscape -D --export-latex --export-pdf=$@.pdf $@.svg
+
+clean:
+	rm *.aux
+	rm *.bbl
+	rm *.blg
+	rm *.log
+	rm *.toc

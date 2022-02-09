@@ -725,8 +725,9 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 	Suppose we have a solution $\sol$ of the instance $\setCoverInstance$
 	of geometric set cover.
 	Then there exists a solution $\sol'$, such that $|\sol'| \le |\sol|$,
-	and for each VARIABLE-gadget $\sol'$ contains
-	at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$.
+	and $\sol'$ contains
+	at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$
+	from each VARIABLE-gadget.
 \end{lemma}
 \begin{proof}\leavevmode
 Assume that we have $\{\xTrueSegment{i}, \xFalseSegment{i}\} \subseteq \sol$ for some $i$.
@@ -737,23 +738,23 @@ and $|\sol'| \le |\sol|$. Then, by repeating this procedure,
 we can eventually construct a solution satisfying the property from the Lemma.
 
 To construct $\sol'$, 
-we first reove all segments from $\segmentsVar{i}$ that we use.
+we first remove all segments from $\segmentsVar{i}$ that we use.
 Recall that the $i$-th VARIABLE-gadget corresponds to variable $x_i$ in $S$.
 As every variable in $S$ is used in exactly 3 clauses,
-one then one literal $x_i$ or $\neg x_i$ must appear in at least
+then one literal $x_i$ or $\neg x_i$ must appear in at least
 2 clasues.
 If that literal is $x_i$, then we add all segments from $\chooseVar{true}{i}$,
 otherwise we add all segments from $\chooseVar{false}{i}$.
 
 Now, there exists at most one CLAUSE-gadget which needs adjustment to make $\sol'$ valid;
-assuming it is $i$-th gadget, then one of the points $x_{i,0}, y_{i,0}$ or $z_{i,0}$ for this
+assuming it is the $i$-th clause, then one of the points $x_{i,0}, y_{i,0}$ or $z_{i,0}$ for this
 CLAUSE-gadget might be not covered, say $y_{i,0}$.
 We amend the solution by adding $(y_{i,0}, y_{i,1})$ to $\sol'$.
 
 By Lemma \ref{choose_variables_both} we know 
-that $\sol$ uses at least 4 segments from $\segmentsVar{i}$.
+that $\sol$ used at least 4 segments from $\segmentsVar{i}$.
 Therefore, we removed at least 4 segments and added at most 4 segments,
-then $|\sol'| \le |\sol|$.
+so $|\sol'| \le |\sol|$.
 \end{proof}
 
 \begin{lemma}

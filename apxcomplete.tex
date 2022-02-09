@@ -604,7 +604,7 @@ are collinear only with points that lay on $s$,
 so trivially $s^{+\frac{1}{2}}$ cannot cover more points than $s$ does.
 
 Within VARIABLE-gadget for any $1 \le i \le n$ after $\frac{1}{2}$-extension:
-$(c_i,g_i)$ does not cover $b_i$ point.
+$(c_i,g_i)$ does not cover $b_i$.
 
 Within OR-gadget some of the segments are collinear and share one point;
 specifically, for any $1 \le i \le n$ and $j \in \{0,1\}$, after $\frac{1}{2}$-extension:
@@ -620,10 +620,14 @@ Within CLAUSE-gadget, for any $1 \le i \le n$ after $\frac{1}{2}$-extension:
 \item $(y_{i,1}, p_{i,0})$ does not cover $n_{i,1}$.
 \end{itemize}
 For two consequitive VARIABLE-gadgets, for any $1 \le i < n$ after $\frac{1}{2}$-extension:
-$(b_i, f_i)$ does not cover $b_{i+1}$ point (nor $f_{i-1}$ for $i>1$).
+$(b_i, f_i)$ does not cover $b_{i+1}$ (nor $f_{i-1}$ for $i>1$).
+Similiarily $(a_i,d_i)$ does not cover $a_{i+1}$ (nor $d_{i-1}$ for $i>1$),
+because this segment is shorter than the previous one and $a_i$ and $b_i$
+share y-coordinate.
 
-For two consequtive CLAUSE-gadgets also segments do not cover anything
-from the other gadget, because gadget's width is 9 and
+For two consequtive CLAUSE-gadgets,
+segments from one do not cover anything from the other,
+as the gadgets have width 9 and
 every lefmost x-coordnate is divisible by $\clauseXFactor$.
 Hence two different gadgets do not interact with each other
 after $\frac{1}{2}$-extension.
@@ -633,7 +637,7 @@ do not cover any points $x_{i,0}, y_{i,0}$ or $z_{i,0}$ from CLAUSE-gadget.
 For any $1 \le i \le n$ and $1 \le j \le n$, all points $x_{j,0}, y_{j,0}$ and $z_{j,0}$
 have x-coordinate strictly positive. Segment $(a_i, c_i)$ have length $2L$
 and $c_i$ has x-coordinate equal to $-L$, so after $\frac{1}{2}$-extension
-this segment does not cover any points with positive coordinate.
+this segment does not cover any points with a positive x-coordinate.
 
 
 \end{proof}

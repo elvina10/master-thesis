@@ -784,7 +784,7 @@ assignment of variables:
 $$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$$
 that satisfies at least $15n-w$ clauses in $S$.
 
-\subparagraph{Variables.}
+\subparagraph{Definition of $\phi$.}
 Recall that due to Lemma~\ref{at_most_one_var_segment}, $\sol$ contains at most one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$.
 
 We define the value $\phi(x_i)$ for the variable $x_i$ as follows:
@@ -800,7 +800,7 @@ We define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 
 Moreover, from Lemma~\ref{choose_variables_no_less} we get $|\pointsVar{i} \cap \sol| \ge 3$ for every $i$.
 
-\subparagraph{Clauses}
+\subparagraph{Satisfied clauses with chosen variable assignment.}
 
 For a clause $c_i$,
 $\sol$ needs to use at least 11 segments to cover $\pointsClause_i - \{x_{i,0}, y_{i,0}, z_{i,0}\}$
@@ -812,6 +812,7 @@ then $\sol$ needs to cover $\pointsClause_i$
 with at least 12 segments
 by Lemma~\ref{cover_clauses_segments_no_less}.
 
+\iffalse
 \begin{align}
 	\begin{split}
 	\label{eqn:clauses}
@@ -822,9 +823,7 @@ by Lemma~\ref{cover_clauses_segments_no_less}.
 	\end{cases} \\
 	\end{split}
 \end{align}
-
-
-\subparagraph{Satisfied clauses with chosen variable assignment.}
+\fi
 
 Let us denote $a$ as the amount of such clauses $c_i$ for which none of
 the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause_i$ were covered by

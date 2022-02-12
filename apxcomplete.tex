@@ -241,21 +241,25 @@ $$\pointsVarNoArg =  \{a, b, c, d, e, f\}$$
 and, for any $1 \le i \le n$,
 $$\pointsVar{i} = \pointsVarNoArg + (0, 4i).$$
 
-We denote $a_i = a + (0,4i)$ etc.
+We denote $a_i := a + (0,4i)$ etc.
 
 \paragraph{Segments.}
 
-\newcommand{\xTrueSegment}[1]{(c_{#1}, g_{#1})}
-\newcommand{\xFalseSegment}[1]{(f_{#1}, h_{#1})}
+\newcommand{\xTrueSegmentDef}[1]{(c_{#1}, g_{#1})}
+\newcommand{\xFalseSegmentDef}[1]{(f_{#1}, h_{#1})}
+\newcommand{\xTrueSegment}[1]{\mathsf{xTrueSegment}_{#1}}
+\newcommand{\xFalseSegment}[1]{\mathsf{xFalseSegment}_{#1}}
 \newcommand{\orTrueSegment}[2]{(t_{#1, #2}, v_{#1, #2})}
 
 Let us define:
 
-$$\chooseVar{true}{i} =\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\}$$
-$$\chooseVar{false}{i} = \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\}$$
+$$\chooseVar{true}{i} :=\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\},$$
+$$\chooseVar{false}{i} := \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\},$$
+$$\segmentsVar{i} := \chooseVar{true}{i} \cup \chooseVar{false}{i}.$$
 
-$$\segmentsVar{i} = \chooseVar{true}{i} \cup \chooseVar{false}{i}$$
-
+We also name two of these segment for future reference:
+$\xTrueSegment{i} := \xTrueSegmentDef{i},$
+$\xFalseSegment{i} := \xFalseSegmentDef{i}.$
 
 \begin{lemma}
 \label{choose_variables_solution}
@@ -450,12 +454,12 @@ for any literals $a,b,c$. Then, we define points in the gadget as:
 
 \begin{center}
 \begin{tabular}{ l l }
-	$x_{i, 0} = (\clauseXFactor i, 4\cdot idx(a) + 2\cdot neg(c)),$ &
-	$x_{i, 1} = (\clauseXFactor i, 4(n+1)),$ \\
-	$y_{i, 0} = (\clauseXFactor i+1, 4\cdot idx(b) + 2\cdot neg(b)),$ &
-	$y_{i, 1} = (\clauseXFactor i+1, 4(n+1) + 4),$ \\
-	$z_{i, 0} = (\clauseXFactor i+2, 4\cdot idx(c) + 2\cdot neg(c)),$ &
-	$z_{i, 1} = (\clauseXFactor i+2, 4(n+1) + 6).$
+	$x_{i, 0} := (\clauseXFactor i, 4\cdot idx(a) + 2\cdot neg(c)),$ &
+	$x_{i, 1} := (\clauseXFactor i, 4(n+1)),$ \\
+	$y_{i, 0} := (\clauseXFactor i+1, 4\cdot idx(b) + 2\cdot neg(b)),$ &
+	$y_{i, 1} := (\clauseXFactor i+1, 4(n+1) + 4),$ \\
+	$z_{i, 0} := (\clauseXFactor i+2, 4\cdot idx(c) + 2\cdot neg(c)),$ &
+	$z_{i, 1} := (\clauseXFactor i+2, 4(n+1) + 6).$
 \end{tabular}
 \end{center}
 
@@ -463,24 +467,26 @@ for any literals $a,b,c$. Then, we define points in the gadget as:
  
 We are now ready to define set of points:
  
- $$\mathsf{moveVariable}_i = 
+ $$\mathsf{moveVariable}_i := 
  \{x_{i, j} : j \in \{0, 1\}\} \cup
  \{y_{i, j} : j \in \{0, 1\}\} \cup
  \{z_{i, j} : j \in \{0, 1\}\},
  $$
  
- $$\pointsClause_i = 
+ $$\pointsClause_i := 
  \mathsf{moveVariable}_i \cup \pointsOr{i}{0}
  \cup \pointsOr{i}{1} \cup \{v_{i, 1} \}.
  $$
  
-Note that $v_{i,0} = l_{i,1}$.
+Note that these two points are equal: $v_{i,0} = l_{i,1}$.
+This translates to the fact, that output of the one OR-gadget
+is an input to the other OR-gadget to create $or$ of 3 segments.
 
 \paragraph{Segments.}
 We also define segments for the clause gadget as below:
 
 \begin{eqnarray*}
-\segmentsClause_i & = & \{ (x_{i, 0}, x_{i, 1}),
+\segmentsClause_i & := & \{ (x_{i, 0}, x_{i, 1}),
 (y_{i, 0}, y_{i, 1}),
 (z_{i, 0}, z_{i, 1}),
 (x_{i, 1}, l_{i, 0}),
@@ -574,9 +580,10 @@ $$X := \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}.$$
 
 No two points in $X$ can be covered with one segment
 of $\segmentsClause_i$, so it must be covered with 3 different segments.
+Next we define other sets:
 
-$$Y = \pointsOr{i}{0} - \{l_{i, 0}, p_{i, 0}\}$$
-$$Z = \pointsOr{i}{1} - \{l_{i, 1}, p_{i, 1}\}$$
+$$Y := \pointsOr{i}{0} - \{l_{i, 0}, p_{i, 0}\},$$
+$$Z := \pointsOr{i}{1} - \{l_{i, 1}, p_{i, 1}\}.$$
 
 
 For both $Y$ and $Z$ we can check all of the subsets of 3 segments
@@ -698,15 +705,15 @@ $R_i$ and $C_i$ respectively, as following:
 
 \begin{align}
 	\begin{split}
-	& R_i = \begin{cases}
+	& R_i := \begin{cases}
 		\chooseVar{true}{i} & \text{if}\ \phi(x_i) = \true \\
 		\chooseVar{false}{i} & \text{if}\ \phi(x_i) = \false \\
 		\end{cases} \\
-	& C_i = \begin{cases}
+	& C_i := \begin{cases}
 		\segmentsClauseSolTrue{a}_i & \text{if}\ c_i \text{ satisfied by literal corresponding to point } a \\
 		\segmentsClauseSolFalse_i & \text{if}\ c_i \text{ not satisfied}
 		\end{cases} \\
-	& \sol = \bigcup\limits_{i=1}^{n} \{R_i \cup C_i : 1 \le i \le n\}.
+	& \sol := \bigcup\limits_{i=1}^{n} \{R_i \cup C_i : 1 \le i \le n\}.
     \end{split}
 \end{align}
 

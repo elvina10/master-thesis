@@ -654,8 +654,8 @@ this segment does not cover any points with a positive x-coordinate.
 \input{figures/fig_apx_segment_whole.tex}
 
 Finally we define set of points and segments for the constructed instance:
-$$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause_i $$
-$$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i $$
+$$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause_i,$$
+$$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i.$$
 
 \section{Construction lemmas and proof of Lemma \ref{apxconstruction}}
 
@@ -780,8 +780,8 @@ Given a solution $\sol$
 of the instance $\setCoverInstance$ of geometric set cover, we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$ such that for any $i$ it contains at most one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$; this may decrease the cost of $\sol$, but that does not matter in the subsequent construction. To simplify notation, in the remainder of this proof we use $\sol$ to refer to the modified solution.
 
 Given $\sol$, we construct a solution of $S$ by defining an
-assignment of variables 
-$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$
+assignment of variables:
+$$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$$
 that satisfies at least $15n-w$ clauses in $S$.
 
 \subparagraph{Variables.}
@@ -802,11 +802,9 @@ Moreover, from Lemma~\ref{choose_variables_no_less} we get $|\pointsVar{i} \cap 
 
 \subparagraph{Clauses}
 
-For a clause $c_i = x \lor y \lor z$,
+For a clause $c_i$,
 $\sol$ needs to use at least 11 segments to cover $\pointsClause_i - \{x_{i,0}, y_{i,0}, z_{i,0}\}$
-in CLAUSE-gadget (Lemma~\ref{cover_clauses_segments_no_less}).
-
-TODO: maybe put something with cases and names of sets as above
+in the $i$-th CLAUSE-gadget (Lemma~\ref{cover_clauses_segments_no_less}).
 
 Moreover, if all of the points $\{x_{i,0}, y_{i,0}, z_{i,0}\}$
 are not covered by the segments from $\sol~\cap~\pointsVar{i}$,
@@ -814,16 +812,21 @@ then $\sol$ needs to cover $\pointsClause_i$
 with at least 12 segments
 by Lemma~\ref{cover_clauses_segments_no_less}.
 
+\begin{align}
+	\begin{split}
+	\label{eqn:clauses}
+	|\sol \cap \segmentsClause_i| \ge
+	\begin{cases}
+	11 & \text{if any of points } \{x_{i,0}, y_{i,0}, z_{i,0}\} \text{ is covered by segments from } \sol~\cap~\pointsVar{i} \\
+	12 & \text{otherwise} \\
+	\end{cases} \\
+	\end{split}
+\end{align}
 
-TODO: Maybe remove section below, because we do this calculation at the end anyway
-We covered CLAUSE-gadget with at least 11 or at least 12 segments:
-$$\left|\bigcup\limits_{i=1}^n \segmentsClause_i \cap \sol\right| \ge 11n + a$$
-where $a$ is the number of clauses
-where none of the points $x_{i,0}, y_{i,0}, z_{i,0}$
-were covered by $\sol \cap \segmentsVar{j}$ for their respective
-variable $x_j$.
 
 \subparagraph{Satisfied clauses with chosen variable assignment.}
+
+Let us name the amount of the clauses in which
 
 Consider a clause, say $c_i$. If none of
 the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause_i$ were covered by
@@ -831,16 +834,9 @@ segments from $\sol~\cap~\segmentsVar{j}$,
 this clause is not satisfied by assignment $\phi$.
 
 If one of these points is covered by 
-segments from VARIABLE-gadget (TODO better this or $\sol \cap \segmentsVar{j}$),
+segments from VARIABLE-gadget,
 then denote this point as $t$ and say it corresponds to variable $x_j$.
-Consider the cases of choosing value of $\phi(x_j)$
-in equation \eqref{eqn:variable_assignment}.
-
-If $\sol$ contains exactly one of the segments $\xTrueSegment{j}$ and $\xFalseSegment{j}$,
-then the value $\phi(x_j)$ satisfies $c_i$.
-
-If $\sol$ contains neither $\xTrueSegment{j}$ nor $\xFalseSegment{j}$,
-then it is impossible that $t$ is covered by segments in $\sol \cap \segmentsVar{j}$.
+From definition of $\phi$ we know that 
 
 This means that $\phi$ satisfies all but at most $a$ clauses in $S$.
 

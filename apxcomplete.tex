@@ -826,20 +826,26 @@ by Lemma~\ref{cover_clauses_segments_no_less}.
 
 \subparagraph{Satisfied clauses with chosen variable assignment.}
 
-Let us name the amount of the clauses in which
-
-Consider a clause, say $c_i$. If none of
+Let us denote $a$ as the amount of such clauses $c_i$ for which none of
 the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause_i$ were covered by
-segments from $\sol~\cap~\segmentsVar{j}$,
-this clause is not satisfied by assignment $\phi$.
+segments from $\sol~\cap~\segmentsVar{j}$ for any $1 \le j \le n$,
 
-If one of these points is covered by 
-segments from VARIABLE-gadget,
-then denote this point as $t$ and say it corresponds to variable $x_j$.
-From definition of $\phi$ we know that 
+Consider a clause $c_i$ for which at least one of the points
+$x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause_i$ were covered by
+segments from $\sol~\cap~\segmentsVar{j}$ for some $1 \le j \le n$,
+then denote this point as $t$ and say it corresponds to
+literal $w$ and variable $x_j$.
+Point $t$ can be only covered by segments from $\segmentsClause{i}$
+or a corresponding $\xTrueSegment{j}$ or $\xFalseSegment{j}$
+(depending on whether the literal $w$ is negated or not).
+We know that it is not covered by $\segmentsClause{i}$,
+therefore it is covered by segments $\xTrueSegment{j}$ or $\xFalseSegment{j}$.
+From definition of $\phi$ and the fact that one of these segments is
+in $\sol$, we know that
+$\phi(j)$ has the value that evaluates $w$ to be true.
+Therefore clause $c_i$ is satisfied.
 
-This means that $\phi$ satisfies all but at most $a$ clauses in $S$.
-
+Consequently $\phi$ satisfies all but at most $a$ clauses in $S$.
 
 To conclude, we proved that given a solution of $\setCoverInstance$ of size $w$,
 we have constructed a variables assignment $\phi$
@@ -850,7 +856,7 @@ $$w \ge 3n + 11(n-a) + 12a = 3n + 11n + a = 14n + a,$$
 hence
 $$15n - w  \le 15n - 14n - a = n - a.$$
 
-So $\phi$ satisfies at least $15n-w$ clauses of $S$.
+Therefore $\phi$ satisfies at least $15n-w$ clauses of $S$.
 \end{proof}
 
 We are ready to conclude the proof of Lemma $\ref{apxconstruction}$.

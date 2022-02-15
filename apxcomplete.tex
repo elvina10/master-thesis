@@ -414,30 +414,13 @@ variable values assigned in variable gadgets
 satisfy the corresponding clause in the input formula $\phi$.
 It has a minimum solution of weight $w$
 if and only if the clause is satisfied, i.e. at least one
-of the respective variables is assigned a correct value.
+of the respective variables is assigned the correct value.
 Otherwise, its minimum solution has weight $w+1$.
 In this way, by analyzing the cost of the minimum solution
 for the entire constructed instance, we will be able to tell
 how many clauses it was possible to satisfy
 in the optimum solution of $\phi$.
 
-The CLAUSE-gadgets consist of two OR-gadgets.
-It would be inconvenient to position the CLAUSE-gadents
-in between the very long variable segments.
-Instead, we use a simple auxiliary gadget to
-\textit{transfer} whether the segment
-is in a solution, i.e. segments
-$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$.
-Each gadget consists of two segments $(x_{i, 0}, x_{i, 1}), (x_{i, 1}, a)$.
-These are the only segments that can cover $x_{i,1}$.
-If $x_{i,0}$ is already covered by some other gadget,
-we can cover $x_{i,1}$ by the other segment covering another point
-from the gadget, say $a$.
-If $x_{i,0}$ is not covered, then the only way to cover $x_{i,0}$
-is to use segment $(x_{i, 0}, x_{i, 1})$.
-Intuitively, the two segments \textit{transfer} the state of $x_{i,0}$
-onto $a$, but there are less restrictions on where a can be placed,
-simplifying the construction.
 
 \paragraph{Points.}
 
@@ -498,6 +481,33 @@ We also define segments for the clause gadget as below:
 
 \newcommand{\segmentsClauseSolTrue}[1]{\mathsf{solClause}^{true,#1}}
 \newcommand{\segmentsClauseSolFalse}{\mathsf{solClause}^{false}}
+
+The CLAUSE-gadgets consist of two OR-gadgets.
+For the $i$-th CLAUSE-gadget we would like to place them between respective
+$\xTrueSegment{j_1}$ or $\xFalseSegment{j_1}$ segments
+corresponding to the literals that occur in the $i$-th clause.
+It would be inconvenient to position them there, because between them,
+there are already different parallel $\xTrueSegment{j_2}$ segments.
+
+Instead, we use a simple auxiliary gadget to
+\textit{transfer} whether the segment
+is in a solution, i.e. segments
+$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$ in this gadget.
+Each gadget consists of two segments $(x_{i, 0}, x_{i, 1}), (x_{i, 1}, a)$.
+These are the only segments that can cover $x_{i,1}$.
+We place $x_{i,0}$ on a segment that we want to transfer (ie.
+segment responsible for choosing the variable value satisfying the
+corresponding literal).
+If $x_{i,0}$ is already covered by this segment, then
+we can cover $x_{i,1}$ by $(x_{i,1}, a)$, thus also covering $a$.
+If $x_{i,0}$ is not covered by this segment,
+then the only way to cover $x_{i,0}$ is to use segment $(x_{i, 0}, x_{i, 1})$.
+Intuitively,
+in optimal solution the two segments \textit{transfer} the state of whether $x_{i,0}$
+is covered onto whether $a$ is covered.
+Therefore with one additional segment it behaves as if $a$ was placed
+on some segment $s$, but instead it can be placed anywhere on the plane,
+consequently simplifying the construction.
 
 \begin{lemma}
 \label{cover_clauses_solution_true}

@@ -350,7 +350,7 @@ For integers $i,j$,
 define 
 $\{ l_{i, j}, m_{i, j} \ldots v_{i, j} \}$
 as $\{l_0, m_0 \ldots v_0\}$ shifted by $vec_{i, j}$,
-ie. $l_{i,j} = l_0 + vec_{i,j}$ etc.
+i.e. $l_{i,j} = l_0 + vec_{i,j}$ etc.
 
 Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
  
@@ -483,30 +483,33 @@ We also define segments for the clause gadget as below:
 \newcommand{\segmentsClauseSolFalse}{\mathsf{solClause}^{false}}
 
 The CLAUSE-gadgets consist of two OR-gadgets.
-For the $i$-th CLAUSE-gadget we would like to place them between respective
+Ideally, we would place the $i$-th CLAUSE-gadget close to the
 $\xTrueSegment{j_1}$ or $\xFalseSegment{j_1}$ segments
 corresponding to the literals that occur in the $i$-th clause.
-It would be inconvenient to position them there, because between them,
-there are already different parallel $\xTrueSegment{j_2}$ segments.
+It would be inconvenient to position them there,
+because between these segments there may be additional
+$\xTrueSegment{j_2}$ or $\xFalseSegment{j_2}$
+segments corresponding to the other literals.
 
-Instead, we use a simple auxiliary gadget to
+Instead, we use simple auxiliary gadgets to
 \textit{transfer} whether the segment
 is in a solution, i.e. segments
 $(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$ in this gadget.
 Each gadget consists of two segments $(x_{i, 0}, x_{i, 1}), (x_{i, 1}, a)$.
 These are the only segments that can cover $x_{i,1}$.
-We place $x_{i,0}$ on a segment that we want to transfer (ie.
+We place $x_{i,0}$ on a segment that we want to transfer (i.e.
 segment responsible for choosing the variable value satisfying the
 corresponding literal).
-If $x_{i,0}$ is already covered by this segment, then
+If in some solution $x_{i,0}$ is already covered by this segment, then
 we can cover $x_{i,1}$ by $(x_{i,1}, a)$, thus also covering $a$.
 If $x_{i,0}$ is not covered by this segment,
 then the only way to cover $x_{i,0}$ is to use segment $(x_{i, 0}, x_{i, 1})$.
 Intuitively,
-in optimal solution the two segments \textit{transfer} the state of whether $x_{i,0}$
+in any optimal solution the two segments \textit{transfer} the state of whether $x_{i,0}$
 is covered onto whether $a$ is covered.
-Therefore with one additional segment it behaves as if $a$ was placed
-on some segment $s$, but instead it can be placed anywhere on the plane,
+Therefore, the number of segments in the optimal solution is increased by one,
+and we get a point $a$ that was effectively placed
+on some segment $s$, but it can be placed anywhere on the plane instead,
 consequently simplifying the construction.
 
 \begin{lemma}

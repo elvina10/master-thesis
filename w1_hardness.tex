@@ -3,7 +3,7 @@
 
 In this chapter we consider geometric set cover problem with weighted segments.
 Theorem~\ref{w1_hard} proves that this problem is 
-W[1]-hard when parametrized by the size of the solution.
+W[1]-hard when parameterized by the size of the solution.
 We~additionally restrict the problem to only use segments
 in three directions to achieve a stronger result.
 W[1]-hardness is proved by reduction to a grid tiling problem,
@@ -23,7 +23,7 @@ which was introduced in \cite{marx_grid_tiling}.
 	from a set of segments $\sets$ 
 	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
 	so that the weight of the cover is minimal.
-	Then this problem is W[1]-hard when parametrized by $\sqrt k$ and
+	Then this problem is W[1]-hard when parameterized by $\sqrt k$ and
 	assuming ETH, there is no algorithm for this
 	problem with running time
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
@@ -66,14 +66,14 @@ the pair of colors assigned
 to the row and column 
 belongs to the allowed set tiles for this pair.
 The next theorem describes the complexity of this problem,
-which is W[1]-hard when parametrized by the size of the grid.
+which is W[1]-hard when parameterized by the size of the grid.
 
 \input{figures/grid_tiling_example.tex}
 
 \begin{tw}
 \label{grid_tiling_w1_hard}
 \textbf{\cite{marx_grid_tiling}}
-Grid tiling is W[1]-hard when parametrized by $k$ and
+Grid tiling is W[1]-hard when parameterized by $k$ and
 assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
 algorithm solving the grid tiling problem
 for any computable function $f$.

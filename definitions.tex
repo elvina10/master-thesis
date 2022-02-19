@@ -1,17 +1,23 @@
 \chapter{Definitions}
 
-\section{Geometric Set Cover}
+In this chapter we present some definitions, that are later used
+across the different chapters.
+
+\section{Geometric set cover}
+Everytime we refer to the geometric set cover,
+we consider a geometric set cover problem on
+2 dimensional plane.
 
 In the geometric set cover problem we are are given
 $\sets$ -- a set of objects, which are connected
-subsets of the plane, $\points$ -- a set of points in the plane.
+subsets of the plane and $\points$ -- a set of points in the plane.
 The task is to choose $\sol \subseteq \sets$ such that
-every point in $\points$ is inside some element from $\sol$
+every point in $\points$ is inside some object from $\sol$
 and $|\sol|$ is minimized.
 
 In the parameterized setting for a given $k$,
-we only look for a solution $\sol$ such that $|\sol| \le k$.
-
+we only look for a solution $\sol$ such that $|\sol| \le k$
+or decide that there is no such set $\sol$.
 
 In the weighted setting, there is some given weight function
 $f : \sets \rightarrow \mathbb{R^+}$,
@@ -44,15 +50,31 @@ such that there is no polynomial-time $(1+\epsilon)$-approximation algorithm
 for $\Pi$.
 \end{defi}
 
-\section{$\delta$-extensions}
+\section{Problem modification with $\delta$-extension}
 
-TODO PLACEHOLDER for introductory text
+Another idea that we present here, but much less versatile
+than the previous concepts is $\delta$-extensions.
+We define it specificaly for the geometric set cover problem.
 
-$\delta$-extensions is one of the
-modifications to a problem, that makes geometric set cover problem easier,
-it has been already used in literature (place some refrence here).
+It is based on the similar idea of $\delta$-shrinking
+for the geometric independent set problem,
+which is presented in [TODO shrinking paper ref].
 
-\begin{defi}[$\delta$-extensions for center-symmetric objects]
+Intuitively, we consider a problem with slightly larger objects,
+which makes the instance more permissive.
+Although we aim to find a solution,
+that is not larger than the
+optimum solution of the original problem,
+so this is substantially easier than just
+solving the problem for larger objects.
+It may even be the case,
+that we are able to find the solution
+of size smaller than the optimum solution
+to the original problem.
+
+First, we formally define $\delta$-extended objects.
+
+\begin{defi}[$\delta$-extension for center-symmetric objects]
 For any $\delta > 0$ and a center-symmetric object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
 the \textbf{$\delta$-extension} of $L$ is the object $L^{+\delta} =
@@ -69,7 +91,7 @@ is a modified version of geometric set cover where:
 with objects from $\{P^{+\delta} : P \in \sets\}$ (which always 
 include no fewer points than the objects
 before $\delta$-extensions);
-\item We look for a solution that is no larger than the optimum solution
+\item We look for a solution that is not larger than the optimum solution
 for the original problem.
 Note that it does not need to be an optimal solution in
 the modified problem.
@@ -84,13 +106,15 @@ $I=(\sets, \points)$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
-and is no larger than the optimal solution for the problem without
+and is not larger than the optimal solution for the problem without
 extensions, i.e. $|\mathcal{R}| \le |opt(I)|$.
 \end{defi}
 
-TODO: Some text
+At last, we recall definition of the of the
+polynomial-time approximation scheme (PTAS) of
+the problem with $\delta$-extension.
 
-\begin{defi}[Geometric set cover PTAS with $\delta$-extensions]
+\begin{defi}[Geometric set cover PTAS with $\delta$-extension]
 We define a PTAS for geometric set cover 
 with $\delta$-extensions as a family of algorithms
 $\{\mathcal{A}_{\delta, \epsilon}\}_{\delta, \epsilon > 0}$ that

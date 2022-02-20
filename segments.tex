@@ -1,5 +1,5 @@
-In this chapter we show two fixed-parameter tractable algorithms
-for geometric set cover problem in~two different settings.
+In this chapter we show fixed-parameter tractable algorithms
+for the geometric set cover problem in~two different settings.
 Section \ref{section:fpt_unweighted} shows 
 a fixed-parameter tractable algorithm for geometric set cover with unweighted segments.
 The reminder of the chapter presents
@@ -13,26 +13,39 @@ We start with a shared definition for this problem.
 We define \textit{extreme points} for a set of~collinear points.
 
 \begin{defi}
-	For a set of collinear points $C$,
-	\textbf{extreme points} are the ends
+	For a set of collinear points $C$ in the plane,
+	\textbf{extreme points} of $C$ are the endpoints
 	of the smallest segment that covers all points from set $C$.
 	
 	If $C$ consists of one point or is empty, then
-	there exists 1 or 0 extreme points respectively.
+	there are 1 or 0 extreme points respectively.
 \end{defi}
 
 \section{Fixed-parameter tractable algorithm for unweighted segments}
 \label{section:fpt_unweighted}
 In this section we consider fixed-parameter tractable
 algorithms for unweighted geometric set cover with segments.
-The setting where segments are limited to be axis-parallel
+The setting where segments are required to be axis-parallel
 (or limited to a constant number of directions) has an FPT
-algorithm already present in literature.
+algorithm already present in literature in
+the Parametrized Algorithms book \cite{platypus_book}.
 We present an FPT algorithm for geometric set cover
 with unweighted segments, where segments are in arbitrary directions.
 
 \subsection{Axis-parallel segments}
-You can find this simple algorithm in Parameterized Algorithms book \cite{platypus_book}.
+\begin{tw}
+	\textbf{(FPT for segment cover with axis-parallel segments)}.
+	There exists an algorithm that given a family $\sets$ of
+	axis-parallel segments,
+	a set of points $\points$
+	and a parameter $k$,
+	runs in time $O(2^k)$,
+	and outputs a solution $\sol \subseteq \sets$
+	such that $|\sol| \le k$ and $\sol$ covers all points in~$\points$,
+	or determines that such a set $\sol$ does not exist.
+\end{tw}
+
+We present here a simple algorithm from \cite{platypus_book} for completeness.
 
 We show an $\mathcal{O}(2^k)$-time branching algorithm.
 In each step, the algorithm selects a point $a$ which is not yet covered,
@@ -55,18 +68,16 @@ As $a$ was the smallest in the lexicographical order,
 all points on the line $x = x_a$ have the $y$-coordinate larger than $y_a$.
 Therefore, if we denote the~greedily chosen segment as $s$,
 then any other segment on the line $x = x_a$ that covers $a$ can only
-cover a (possibly improper) subset of points covered by $s$.
+cover a (possibly strict) subset of points covered by $s$.
 Thus, greedily choosing $s$ is optimal.
 
 In each step of the algorithm we add one segment to the solution,
-thus each branch can stop at depth $k$.
-If no branch finds a solution, then that means a solution of size at most $k$ does not exist.
+thus the recursion can be stopped at depth $k$.
+If no branch finds a solution, then this means
+that a solution of size at most $k$ does not exist.
 
-
-\begin{remark}
-The same algorithm can be used for segments in $d$ directions,
+Note that, the same algorithm can be used for segments in $d$ directions,
 where we branch over $d$ choices of directions, and it runs in complexity $\mathcal{O}(d^k)$.
-\end{remark}
 
 \subsection{Segments in arbitrary directions}
 \label{segments_in_arbitrary_direction}
@@ -97,10 +108,27 @@ instance of the problem.
    without a loss of generality we can assume that
    no segment covers a superset of what another segment covers.
    That~is, for any distinct $A, B \in \sets$, we have
-   $A \cap C \not \subseteq B \cap C$ and $A \cap C \not \supseteq B \cap C$.
+   $A \cap \points \not \subseteq B \cap \points$ and $A \cap \points \not \supseteq B \cap \points$.
 \end{lemma}   
    
-\begin{proof} Trivial. \end{proof}
+\begin{proof} 
+If there are two distinct subsets of $\sets$,
+$A, B$, such that $A \cap \points \subseteq B \cap \points$.
+
+We construct a set $\sets' := \sets - \{A\}$.
+We prove that for any solution $\sol$ of $(\sets, \points)$,
+we can construct a solution $\sol' \subseteq \sets'$,
+such that $|\sol'| \le |\sol|$.
+Let us take any solution $\sol$ of $(\sets, \points)$.
+If $A \in \sol$, then $\sol' := \sol \cup \{B\} - \{A\}$,
+otherwise $\sol' := \sol$.
+Let us consider the case when $A \in \sol$,
+because the other case is trivial.
+Since $A \cap \points \subseteq B \cap \points$,
+then $\sol \cup \{B\} - \{A\}$
+covers the same points from $\points$ as $\sol$.
+Also $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
+\end{proof}
 
 \begin{lemma}
 	\label{fpt_long_lines}

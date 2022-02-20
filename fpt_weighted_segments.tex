@@ -1,16 +1,17 @@
 \section{Fixed-parameter tractable algorithm for weighted segments with $\delta$-extensions}
 \label{section:fpt_weighted}
 
-In this section we consider a geometric set cover problem
+In this section we consider the geometric set cover problem
 for weighted segments relaxed with $\delta$-extensions.
 We show that this problem
-admits an FPT algorithm when parameterized with the size
+admits an FPT algorithm when parameterized by the size
 of the solution and $\delta$.
 In the next chapter we show that the assumption
 about the problem being relaxed with $\delta$-extensions is necessary:
 we prove that geometric set cover problem
-for weighted segments is W[1]-hard, which means
-there does not exist an FPT algorithm parameterized by solution size for it.
+for weighted segments (without extensions) is W[1]-hard, which means
+there does not exist any FPT algorithm parameterized by solution size for it,
+assuming FPT $\neq$ W[1].
 
 \begin{tw}[FPT for weighted segment cover with $\delta$-extensions]{
 	\label{fpt_weighted_segment}
@@ -28,15 +29,15 @@ there does not exist an FPT algorithm parameterized by solution size for it.
 
 
 To solve this problem we will introduce a lemma about choosing
-a \textit{dense} subset of points. Dense subset of points
+a \textit{dense} subset of points. A dense subset of points
 for a set of collinear points $C$ and parameters $k$ and $\delta$
-is a subset of $C$, such that
+is a subset of $C$ such that
 if we cover it with at most $k$ segments,
 these segments after $\delta$-extensions will cover all of the points from $C$.
-
 We will prove that such set 
-of size bounded by some function $f(k, \delta)$ always exists.
-In later part of the section Lemma \ref{dense_set_exists} will allow us to find a kernel
+of size bounded by some function $f(k, \delta)$
+always exists (Lemma \ref{dense_set_exists}).
+Later, Lemma \ref{dense_set_exists} will allow us to find a kernel
 for our original problem.
 
 \begin{defi}
@@ -52,11 +53,11 @@ for our original problem.
 	there exists a $(k,\delta)$-dense set $A \subseteq C$ of size
 	at most $(2+\frac{2}{\delta})^k$.
 	Moreover, there exists an algorithm that computes the $(k,\delta)$-dense set
-	in time $O(|C| \cdot (2+\frac{2}{\delta}))$.
+	in time $O(|C| \cdot (2+\frac{2}{\delta})^k)$.
 \end{lemma}
 
-\begin{proof}[Proof of Lemma \ref{dense_set_exists}]
-We prove this for a fixed $\delta$ by induction over $k$.
+\begin{proof}
+We prove this for a fixed $\delta$ by induction on $k$.
 
 \subparagraph{Inductive hypothesis.}
 For any set of collinear points $C$, there exists a set $A$ such that:
@@ -64,11 +65,11 @@ For any set of collinear points $C$, there exists a set $A$ such that:
 \item $A$ is subset of $C$,
 \item $A$ is $(\ell, \delta)$-dense for every $1 \le \ell \le k$,
 \item $|A| \le (2+\frac{2}{\delta})^k$,
-\item extreme points from $C$ are in $A$.
+\item the extreme points of $C$ are in $A$.
 \end{itemize}
 
 \subparagraph{Base case for $k = 1$.}
-It is sufficient that $A$ consists of extreme points of $C$.
+It is sufficient that $A$ consists of the extreme points of $C$.
 
 If they are covered with one segment, it must be a segment 
 that includes the extreme points from $C$, so it covers the whole set $C$.
@@ -84,28 +85,31 @@ That is, the extreme points of $C$ are endpoints of $s$.
 
 We define $M = \lceil1+\frac{2}{\delta}\rceil$ subsegments of $s$
 by splitting $s$ into $M$ closed segments of equal length.
-We name these segments $v_i$ and
+We name these segments $v_i$, note that
 $|v_i| = \frac{|s|}{M}$ for each $1 \le i \le M$.
 
-Let $C_i$ be the subset of $C$ consisting of points laying on $v_i$.
+Let $C_i$ be the subset of $C$ consisting of points lying on $v_i$.
 
 Let $t_i$ be the segment with endpoints being the extreme points of $C_i$.
-It might be a degenerate segment if $C_i$ consists of one point
-or empty if $C_i$ is empty.
+It might be a degenerate segment if $C_i$ consists of one point,
+or $t_i$ might be empty if $C_i$ is empty.
 
-You can see an example of such segments $v_i$ and $t_i$ in Figure $\ref{fig:fpt_v_f_def}$.
+Figure $\ref{fig:fpt_v_f_def}$ presents an example
+of such segments $v_i$ and $t_i$.
 
 \begin{figure}[h]
+\begin{center}
 \def\svgwidth{\columnwidth}
 \input{fpt_v_t_def.pdf_tex}
+\end{center}
 \caption{\textbf{Example of segments $v_i$ and $t_i$.}}
 Example for $M = 7$ and some set of points (marked with black circles).
-Upper picture shows segments $v_i$ and lower picture shows segments $t_i$
+The top panel shows segments $v_i$ and the bottom panel shows segments $t_i$
 on the same set of points.
-$a$ and $b$ are extreme points and therefore segment $s$
-ends in $a$ and $b$.
-Red segments denote split into $M$ segments of equal length $v_i$.
-Blue segments denote segments $t_i$. $t_5$ is an empty segment,
+$a$ and $b$ are the extreme points and therefore segment $s$
+ends at $a$ and $b$.
+Red segments depict the split into $M$ segments of equal length $v_i$.
+Blue segments depict the segments $t_i$. $t_5$ is an empty segment,
 because there are no points that lie on segment $v_5$.
 Segments $t_3$ and $t_7$ are degenerated to one point --
 $c$ and $d$ respectively.
@@ -121,8 +125,8 @@ Then we define $A = \bigcup_{i=1}^{M} A_i$.
 Thus $A$ includes the extreme points of $C$,
 because they are included in the sets $A_1$ and $A_M$.
 
-Size of each $A_i$ is at most $(2+\frac{2}{\delta})^{k}$ from the inductive
-hypothesis, therefore size of $A$ is at most:
+The size of each $A_i$ is at most $(2+\frac{2}{\delta})^{k}$
+from the inductive hypothesis, therefore size of $A$ is at most:
 $$M\left(2+\frac{2}{\delta}\right)^{k} =
 \left\lceil1+\frac{2}{\delta}\right\rceil\cdot\left(2+\frac{2}{\delta}\right)^{k}
 \le \left(2+\frac{2}{\delta}\right)^{k+1}.$$
@@ -136,39 +140,42 @@ that is disjoint with $t_i$,
 then we have a cover of $A_i$ with at most $k$
 segments using $\sol - \{x\}$.
 Since $A_i$ is $(k, \delta)$-dense for $t_i$ and $C_i$,
-then $(\sol - \{x\})^{+\delta}$ covers $C_i$.
+$(\sol - \{x\})^{+\delta}$ covers $C_i$.
 So $\sol^{+\delta}$ covers $C_i$ as well.
 
 If there exists a segment $t_i$ for which a segment $x$ as defined above
 does not exist, then all $k+1$ segments that cover
-$A_i$ intersect with $t_i$.
-You can see an example of such segments in Figure \ref{fig:fpt_tricky_case}.
-Note that there may exist only one such segment $t_i$.
-From the inductive hypothesis endpoints of $s$ are
+$A_i$ intersect $t_i$.
+An example of such segments is depicted in Figure~\ref{fig:fpt_tricky_case}.
+Let us consider any such $t_i$.
+By inductive hypothesis, the endpoints of $s$ are
 in $A_1$ and $A_M$ respectively, so $\sol$ must cover them.
 For each endpoint of $s$, there exists
-a segment that starts in this endpoint and ends somewhere in $t_i$.
+a segment that contains this endpoint and intersects $t_i$.
 Let us call these two segments $y$ and $z$. It follows that:
 $|y| + |z| + |t_i| \ge |s|$.
 Since $|t_i| \le |v_i| = \frac{|s|}{M} \le \frac{|s|}{1+\frac{2}{\delta}} = \frac{|s|\delta}{\delta+2}$,
 we have $\max(|y|, |z|) \ge |s|(1-\frac{\delta}{\delta+2})/2 = \frac{|s|}{\delta+2}$.
 
 \begin{figure}[h]
+\begin{center}
 \def\svgwidth{\columnwidth}
 \input{fpt_tricky_case.pdf_tex}
-\caption{\textbf{Example of all $k+1$ segments intersecting with one segment $t_i$.}}
-Both pictures show the same set $\points$ (black circles),
+\end{center}
+\caption{\textbf{Example of all $k+1$ segments intersecting one segment $t_i$.}}
+Both panels show the same set $\points$ (black circles),
 the same as in Figure $\ref{fig:fpt_v_f_def}$.
-The upper picture shows blue segments $t_i$ for $M=7$.
-The lower picture shows green segments -- solution $\sol$ of size 4.
-All segments from $\sol$ intersect with $t_4$.
-Segments $z$ and $y$ are named on the picture.
+The top panel shows blue segments $t_i$ for $M=7$.
+The bottom panel shows green segments -- solution $\sol$ of size 4.
+All segments from $\sol$ intersect $t_4$.
+Segments $z$ and $y$ are named in the figure.
 \label{fig:fpt_tricky_case}
 \end{figure}
 
 After $\delta$-extension, the longer of these segments will
 expand at both ends by at least:
-$$\max(|y|, |z|)\delta \ge \frac{|s|\delta}{\delta+2} = \frac{|s|}{1+\frac{2}{\delta}} \ge \frac{|s|}{M} = v_i \ge t_i.$$
+$$\max(|y|, |z|)\delta \ge \frac{|s|\delta}{\delta+2} =
+\frac{|s|}{1+\frac{2}{\delta}} \ge \frac{|s|}{M} = |v_i| \ge |t_i|.$$
 
 Therefore, the longer of segments $y$ and $z$ will cover the whole segment $t_i$
 after $\delta$-extension. We conclude that $\sol^{+\delta}$ covers $C_i$.
@@ -179,7 +186,7 @@ it follows that $\sol^{+\delta}$ covers $C$.
 
 \subparagraph{Algorithm.}
 
-We can simulate the inductive proof by a recursive algorithm with
+We can simulate the inductive proof presented above by a recursive algorithm with
 the following complexity:
 $$O\left(|C|+\frac{1}{\delta}\right) + O\left(k(2+\frac{1}{\delta})^k\right).$$
 

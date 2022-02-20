@@ -1,0 +1,64 @@
+{\tikzset{clause/.style={
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={label distance=-0.35cm,rotate=90}}}}
+    }
+}
+
+\newcommand{\variableSegments}[3]{
+	\draw (\xbeg,\y#1) -- (\x6,\y#1) node[pos=0.15, above] {$x_#3 = \true$};
+	\draw (\xbeg,\y#2) -- (\x6,\y#2) node[pos=0.15, above] {$x_#3 = \false$};
+}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\tikzmath{
+
+\width=5;
+\height=1;
+\step=1;
+\eps = 0.1;
+\widtheps = 5+\eps;
+\meps = -\eps;
+\y0=0;
+\yeps0 = \y0 - \eps;
+\y1=\height;
+\yx5=\y0+(\height/2);
+\yeps1 = \y1 + \eps;
+\y2=\y1+\height;
+\y3=\y2+\height;
+\y4=\y3+\height;
+\y5=\y4+\height;
+\y6=\y5+\height;
+\x0=0;
+\xx5=\x0+(\width/2);
+\xbeg=\width;
+\x1=\width+3;
+\x2=\x1+\step;
+\x3=\x2+\step;
+\x4=\x3+\step;
+\x5=\x4+\step;
+\x6=\x5+\step;
+}
+
+\filldraw [fill=white, draw=black] (\meps,\yeps0) rectangle (\widtheps, \yeps1) node[pos=-.1] {VARIABLE-gadget$_1$};
+\draw (\x0,\y0) -- (\width,\y0);
+\draw (\x0,\yx5) -- (\width,\yx5);
+
+\filldraw [fill=lime, draw=black] (0,\y2) rectangle (\width, \y3) node[pos=.5] {VARIABLE-gadget$_2$};
+\filldraw [fill=lime, draw=black] (0,\y4) rectangle (\width, \y5) node[pos=.5] {VARIABLE-gadget$_3$};
+
+\variableSegments{0}{1}{1}
+\variableSegments{2}{3}{2}
+\variableSegments{4}{5}{3}
+
+\filldraw [fill=cyan!60, draw=black] (\x1,\y0) rectangle (\x2, \y6) node[clause, pos=.5, label= {CLAUSE-gadget$_1$}] {};
+\filldraw [fill=cyan!60, draw=black] (\x3,\y0) rectangle (\x4, \y6) node[clause, pos=.5, label= {CLAUSE-gadget$_2$}] {};
+\filldraw [fill=cyan!60, draw=black] (\x5,\y0) rectangle (\x6, \y6) node[clause, pos=.5, label= {CLAUSE-gadget$_3$}] {};
+\end{tikzpicture}
+\caption{\textbf{Schema of the whole construction.}}
+General layout of VARIABLE-gadgets and CLAUSE-gadgets and how they
+interact with each other.
+\label{fig:segment_apx_whole}
+\end{figure}
+

@@ -148,11 +148,14 @@ Also $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
 Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots x_t$
 in the order in which they appear on $L$.
 Our proposed set is defined as:
-$$A := \{ \text{segment that have the leftmost point in } x : x \in x_1, x_2, \ldots x_k\}.$$
-If such segment does not exist for any of these points,
-then set $A$ has smaller size.
+$$A := \{ \text{segment collinear with } L \text{ that covers } x_i
+\text{ and does not cover } x_{i-1} : i \in 1, \ldots k\}.$$
+Where for $i = 1$ we just take a segment that covers $x_1$.
+
+If such a segment does not exist for any point $x$
+as the above, then $x$ does not give rise to any segment in $A$.
 We prove the lemma by contradition. Let us assume that there
-exists a solution $\sol$ of size at most $k$, such that $\sol \cap A = \emptyset$.
+exists a solution $\sol$ of size at most $k$ such that $\sol \cap A = \emptyset$.
 
 Every segment that is not collinear with $L$ can cover at~most one of
 the points that lie on this line.

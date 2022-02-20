@@ -58,7 +58,7 @@ We define it specificaly for the geometric set cover problem.
 
 It is based on the similar idea of $\delta$-shrinking
 for the geometric independent set problem,
-which is presented in [TODO shrinking paper ref].
+which is presented in \cite{shrinking}.
 
 Intuitively, we consider a problem with slightly larger objects,
 which makes the instance more permissive.
@@ -74,7 +74,7 @@ to the original problem.
 
 First, we formally define $\delta$-extended objects.
 
-\begin{defi}[$\delta$-extension for center-symmetric objects]
+\begin{defi}
 For any $\delta > 0$ and a center-symmetric object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
 the \textbf{$\delta$-extension} of $L$ is the object $L^{+\delta} =
@@ -90,7 +90,7 @@ is a modified version of geometric set cover where:
 \item We need to cover all the points in $\points$
 with objects from $\{P^{+\delta} : P \in \sets\}$ (which always 
 include no fewer points than the objects
-before $\delta$-extensions);
+before $\delta$-extension);
 \item We look for a solution that is not larger than the optimum solution
 for the original problem.
 Note that it does not need to be an optimal solution in
@@ -99,9 +99,9 @@ the modified problem.
 
 Formally, we have the following.
 
-\begin{defi}[Geometric set cover problem with $\delta$-extensions]
-The geometric set cover problem
-with $\delta$-extensions is the problem where for an input instance
+\begin{defi}
+The \textbf{geometric set cover problem
+with $\delta$-extension} is the problem where for an input instance
 $I=(\sets, \points)$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the $\delta$-extended set
@@ -114,9 +114,9 @@ At last, we recall definition of the of the
 polynomial-time approximation scheme (PTAS) of
 the problem with $\delta$-extension.
 
-\begin{defi}[Geometric set cover PTAS with $\delta$-extension]
-We define a PTAS for geometric set cover 
-with $\delta$-extensions as a family of algorithms
+\begin{defi}
+We define a \textbf{PTAS for geometric set cover 
+with $\delta$-extension} as a family of algorithms
 $\{\mathcal{A}_{\delta, \epsilon}\}_{\delta, \epsilon > 0}$ that
 each takes as an input instance $I=(\sets, \points)$,
 and in polynomial-time outputs a solution $\mathcal{R} \subseteq \sets$

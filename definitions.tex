@@ -6,7 +6,7 @@ across the different chapters.
 \section{Geometric set cover}
 Every time we refer to geometric set cover,
 we consider a geometric set cover problem
-on a 2-dimensional plane.
+on a~2-dimensional plane.
 
 In the geometric set cover problem we are are given
 $\sets$ -- a set of objects, which are connected
@@ -20,7 +20,7 @@ we only look for a solution $\sol$ such that $|\sol| \le k$
 or decide that there is no such set $\sol$.
 
 In the weighted setting, there is some given weight function
-$f : \sets \rightarrow \mathbb{R^+}$,
+$f : \sets \rightarrow \mathbb{R^+}$
 and we would like to find a solution $\sol$
 that minimizes $\sum_{R \in \sol} f(R)$.
 
@@ -34,7 +34,7 @@ A \textbf{polynomial-time approximation scheme (PTAS)}
 for a minimization problem $\Pi$
 is a family of algorithms $\cal{A}_\epsilon$ for
 every $\epsilon > 0$
-such that $\cal{A}_\epsilon$ takes an instance $I$ of $\Pi$
+such that $\cal{A}_\epsilon$ takes an instance $I$ of~$\Pi$
 and in polynomial time
 finds a solution that is within a factor
 of ($1+\epsilon$) of being optimal.
@@ -85,12 +85,13 @@ at $S$ with scale $(1+\delta)$.
 
 
 The geometric set cover problem with $\delta$-extensions
-is a modified version of geometric set cover where:
+is a modified version of geometric set cover with
+the following modifications.
 \begin{itemize}
 \item We need to cover all the points in $\points$
 with objects from $\{P^{+\delta} : P \in \sets\}$ (which always 
 include no fewer points than the objects
-before $\delta$-extension);
+before $\delta$-extension).
 \item We look for a solution that is not larger than the optimum solution
 for the original problem.
 Note that it does not need to be an optimal solution in
@@ -104,13 +105,13 @@ The \textbf{geometric set cover problem
 with $\delta$-extension} is the problem where for an input instance
 $I=(\sets, \points)$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
-such that the $\delta$-extended set
+such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
-and is not larger than the optimal solution for the problem without
-extensions, i.e. $|\mathcal{R}| \le |opt(I)|$.
+and is not larger than the optimal solution for the~problem without
+extensions, i.e.~$|\mathcal{R}| \le |opt(I)|$.
 \end{defi}
 
-At last, we recall definition of the
+At last, we formulate a definition of the
 polynomial-time approximation scheme (PTAS) of
 the problem with $\delta$-extension.
 
@@ -124,6 +125,6 @@ such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
 and is within a $(1+\epsilon)$ factor of the optimal
 solution for this problem without
-extensions, i.e. $(1+\epsilon)|\mathcal{R}| \le |opt(I)|$.
+extensions, i.e.~$(1+\epsilon)|\mathcal{R}| \le |opt(I)|$.
 
 \end{defi}

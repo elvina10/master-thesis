@@ -188,7 +188,7 @@ it follows that $\sol^{+\delta}$ covers $C$.
 
 We can simulate the inductive proof presented above by a recursive algorithm with
 the following complexity:
-$$O\left(|C|+\frac{1}{\delta}\right) + O\left(k(2+\frac{1}{\delta})^k\right).$$
+$$O\left(|C|+\frac{1}{\delta}\right) + O\left(|C|\cdot\left(2+\frac{2}{\delta}\right)^k\right).$$
 
 \end{proof}
 
@@ -196,12 +196,13 @@ Let us now formulate some claims about the
 properties for the problem parameterized by the solution size.
 These properties provide bounds for different
 objects in the problem instance,
-that help us to find small kernel of the problem
-or claim that the minimal
-solution of this instance must be above some treshold.
+which help us to find a small kernel for the problem
+or conclude that the optimum
+solution of this instance must be in terms of size above some treshold.
 
 \begin{defi}
-A line in $\mathbb{R}$ is \textbf{long} if there are at least $k+1$ points from $\points$ on it.
+A line in the plane is \textbf{long}
+if there are at least $k+1$ points from $\points$ on it.
 \end{defi}
 
 \begin{claim}
@@ -214,21 +215,20 @@ $\points$ can not be covered with $k$ segments.
 We prove the claim by contradiction.
 Let us assume that we have at least $k+1$ different
 long lines in our instance of the problem
-and solution $\sol$ of size at most $k$
+and there is a solution $\sol$ of size at most $k$
 covering points $\points$.
 
 Choose any long line $L$.
-Every segment from $\sol$, which is not collinear with $L$,
+Every segment from $\sol$ which is not collinear with $L$,
 covers at most one point that lies on $L$.
-
 $L$ is long, so there are at least $k+1$ points from $\points$ that lie on $L$.
 That implies that there must be a segment in $\sol$ that is
 collinear with $L$.
 
 Since we have at least $k+1$ different long lines,
-then there are at least $k+1$
+there are at least $k+1$
 segments in $\sol$ collinear with different lines.
-It contradicts with the assumption that $|\sol| \le k$.
+This contradicts with the assumption that $|\sol| \le k$.
 \end{proof}
 
 \begin{claim}
@@ -242,13 +242,14 @@ then $\points$ can not be covered with $k$ segments.
 We prove the claim by contradiction.
 Let us assume that we have at least $k^2+1$ points
 from $\points$ that do not lie on any long line, call this set $A$,
-and a solution $\sol$ of size at most $k$ covering points $\points$.
+and a solution $\sol$ of size at most $k$
+covering all points in $\points$.
 
-For every segment $s$ from $\sol$ it covers at most $k$
+Every segment $s$ from $\sol$ covers at most $k$
 points from $A$.
-It holds because if $s$ covered at least $k+1$ points from $A$,
+This is because if $s$ covered at least $k+1$ points from $A$,
 then the line in the direction of $s$ would be a long line
-and that contradicts of definiton of $A$.
+and that contradicts the definiton of $A$.
 
 If every segment from $\sol$ covers at most $k$ points from $A$
 and $|\sol| \le k$, then at most $k^2$ points from $A$ are covered by $\sol$
@@ -260,18 +261,19 @@ We are now ready to give a proof of Theorem \ref{fpt_weighted_segment}.
 
 \begin{proof}[Proof of Theorem \ref{fpt_weighted_segment}]
 
-Applying the claims \ref{few_long_lines} and \ref{few_points},
+Applying Claims \ref{few_long_lines} and \ref{few_points},
 if we have more than $k$ different long lines
 or more than $k^2$ points from $\points$
 that do not lie on any long line, then we answer that
 there is no solution of size at most $k$.
+Let us name the number of different long lines as $l$.
 
 Otherwise, we can split $\points$ into at most $k+1$ sets:
 \begin{itemize}
-\item $D$, at most $k^2$ points that do not lie on any long line;
-\item $C_i$, points that lie on the $i$-th long line.
+\item $D$: at most $k^2$ points that do not lie on any long line;
+\item $C_i$ for $1 \le i \le l$: points that lie on the $i$-th long line.
 \end{itemize}
-Sets $C_i$ do not need to be disjoint.
+Note that sets $C_i$ do not need to be disjoint.
 
 Then for every set $C_i$ we can use Lemma \ref{dense_set_exists}
 to obtain a $(k,\delta)$-dense set $A_i$

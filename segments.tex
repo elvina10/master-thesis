@@ -117,7 +117,7 @@ $A, B$, such that $A \cap \points \subseteq B \cap \points$.
 
 We construct a set $\sets' := \sets - \{A\}$.
 We prove that for any solution $\sol$ of $(\sets, \points)$,
-we can construct a solution $\sol' \subseteq \sets'$,
+we can construct a~solution $\sol' \subseteq \sets'$,
 such that $|\sol'| \le |\sol|$.
 Let us take any solution $\sol$ of $(\sets, \points)$.
 If $A \in \sol$, then $\sol' := \sol \cup \{B\} - \{A\}$,
@@ -142,9 +142,7 @@ Also $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
 	satisfies $|A \cap \sol| \ge 1$.
 	Moreover, such a subset can be found in~polynomial time.
 \end{lemma}
-
 \begin{proof}
-
 Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots x_t$
 in the order in which they appear on $L$.
 Our proposed set is defined as:
@@ -155,52 +153,57 @@ Where for $i = 1$ we just take a segment that covers $x_1$.
 If such a segment does not exist for any point $x$
 as the above, then $x$ does not give rise to any segment in $A$.
 We prove the lemma by contradition. Let us assume that there
-exists a solution $\sol$ of size at most $k$ such that $\sol \cap A = \emptyset$.
+exists a~solution $\sol$ of size at most $k$ such that $\sol \cap A = \emptyset$.
+
+
+Let us define a set $\sol_L$,
+which is defined as segments from $\sol$ that are collinear with $L$.
 
 Every segment that is not collinear with $L$ can cover at~most one of
-the points that lie on this line.
-Hence if all segments from $\sol$ were not collinear with $L$, then
+the points that lie on~this line.
+Hence if $\sol_L$ was empty, then
 $\sol$ would cover at most $k$ points on line $L$,
 but $L$ had at least $k+1$ different points from $\points$ on it.
 
-Therefore we know that one of the segments from $\sol$ must be collinear with $L$
-and at most $k-1$ segments can be not collinear with $L$.
-Segments from $\sol$, that are not collinear with $L$ can cover at most $k-1$
+Therefore, we know that $\sol_L$ is not empty
+and $|\sol - \sol_L| \le k-1$.
+Segments from $\sol_L$ can cover at most $k-1$
 points among $\{x_1, x_2, \ldots x_k\}$, therefore at least
-one of these points must be covered by segments from $\sol$.
-We take leftmost point from $\{x_1, x_2, \ldots x_k\}$ that is
-covered in $\sol$ by segment collinear with $L$ and name it $a$.
-After transformation from Lemma \ref{fpt_reduction}
-there is only one segment that starts in $a$, therefore
-this segment must be in both $\sol$ and $A$.
-
+one of these points must be covered by segments from $\sol_L$.
+We take the leftmost point from $\{x_1, x_2, \ldots x_k\}$ that is
+covered in $\sol_L$ and name it $a$.
+After transformation from Lemma \ref{fpt_reduction},
+in $\sol$ there is only one segment
+that starts in $a$ and is collinear with $L$,
+therefore this segment must be in both $\sol$ and $A$.
 This contradiction concludes the proof that $|A \cap \sol| \ge 1$
 for any solution $\sol$ of size at most $k$.
 \end{proof}
 
 We are now ready to prove Theorem \ref{segment_cover_fpt}.
 
-\begin{proof}[Proof of Theorem \ref{segment_cover_fpt}.]\leavevmode
-
+\begin{proof}[Proof of Theorem \ref{segment_cover_fpt}.]
 We will prove this theorem by presenting a branching algorithm that
-works in desired complexity. It branches over the
-choice of segments to cover the lines with \textit{a lot} of points,
-then solves a small instance (where every line has at most $k$ points)
+works in desired complexity. It first branches over the
+choice of segments to cover the lines with \textit{many} points
+and then solves a small instance (where every line has at most $k$ points)
 by checking all possible solutions.
 
 \subparagraph{Algorithm.}
-First we use Lemma \ref{fpt_reduction}.
-
-Next, we present a recursive algorithm. Given an instance of the problem:
+We present a recursive algorithm. Given an instance of the problem:
 
 \begin{enumerate}[label={(\arabic*)}]
-\item If there exist a line with at least $k+1$ points from $\points$,
-we branch over choice of adding to~the~solution one of~the~at~most $k$ possible segments
+\item Use Lemma \ref{fpt_reduction} to remove some redundant segments from our instance.
+\item If there exists a line with at least $k+1$ points from $\points$,
+we branch over the choice of adding to~the~solution
+one of~the~at~most $k$ possible segments
 provided by Lemma \ref{fpt_long_lines}; name this segment $s$
-and name set of points from $\points$ that lie on $s$ as $S$.
-Then we find a solution $\sol$
+and name the set of points from $\points$ that lie on $s$ as $S$.
+By recursion we find a~solution $\sol$
 for the instance $(\points - S, \sets - \{s\})$,
 and parameter $k-1$. We return $\sol \cup \{s\}$.
+Note that if Lemma \ref{fpt_long_lines} returned $\emptyset$,
+then we respond \texttt{NO}.
 \item If every line has at most $k$ points on it and $|\points| > k^2$,
 then answer \texttt{NO}.
 \item If $|\points| \le k^2$, solve the problem by brute force:
@@ -234,10 +237,12 @@ Thus, (3) takes time $k^{O(k)}$.
 In this branching algorithm our parameter $k$ is decreased with every
 recursive call, so we have at most $k$ levels of recursion with
 branching over $k$ possibilites. Candidates to branch over
-can be found on each level in time $O((|\points|\cdot|\sets|)^2)$.
+can be found on each level in time $O((|\points|\cdot|\sets|)^{O(1)})$.
 
-Reduction from Lemma \ref{fpt_reduction} can be implemented in time $O(|\points|^2|\sets|)$.
+Reduction from Lemma \ref{fpt_reduction} can be implemented
+in time $O((|\points|\cdot|\sets|)^{O(1)})$.
 
-It follows that the overall complexity is $O((|\points|\cdot|\sets|)^2 \cdot k^{O(k)})$
+It follows that the overall complexity
+is $O((|\points|\cdot|\sets|)^{O(1)}) \cdot k^{O(k)})$
 \end{proof}
 

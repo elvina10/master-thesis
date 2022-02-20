@@ -1,12 +1,12 @@
 \chapter{Definitions}
 
-In this chapter we present some definitions, that are later used
+In this chapter we present some definitions that are later used
 across the different chapters.
 
 \section{Geometric set cover}
-Everytime we refer to the geometric set cover,
-we consider a geometric set cover problem on
-2 dimensional plane.
+Every time we refer to geometric set cover,
+we consider a geometric set cover problem
+on a 2-dimensional plane.
 
 In the geometric set cover problem we are are given
 $\sets$ -- a set of objects, which are connected
@@ -37,7 +37,7 @@ every $\epsilon > 0$
 such that $\cal{A}_\epsilon$ takes an instance $I$ of $\Pi$
 and in polynomial time
 finds a solution that is within a factor
-($1+\epsilon$) of being optimal.
+of ($1+\epsilon$) of being optimal.
 That means the reported solution has weight at most
 $(1+\epsilon)opt(I)$, where $opt(I)$ is the weight
 of an optimal solution for $I$.
@@ -52,8 +52,8 @@ for $\Pi$.
 
 \section{Problem modification with $\delta$-extension}
 
-Another idea that we present here, but much less versatile
-than the previous concepts is $\delta$-extensions.
+Another idea presented here, much less versatile than the previous concepts,
+is $\delta$-extensions.
 We define it specificaly for the geometric set cover problem.
 
 It is based on the similar idea of $\delta$-shrinking
@@ -62,12 +62,12 @@ which is presented in \cite{shrinking}.
 
 Intuitively, we consider a problem with slightly larger objects,
 which makes the instance more permissive.
-Although we aim to find a solution,
-that is not larger than the
+However, we aim to find a solution that
+is not larger than the
 optimum solution of the original problem,
 so this is substantially easier than just
-solving the problem for larger objects.
-It may even be the case,
+solving the problem for the larger objects.
+It may even be the case
 that we are able to find the solution
 of size smaller than the optimum solution
 to the original problem.
@@ -80,7 +80,7 @@ centre of symmetry $S = (x_s, y_s)$,
 the \textbf{$\delta$-extension} of $L$ is the object $L^{+\delta} =
 \{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}$,
 that is, $L^{+\delta}$ is the image of $L$ under homothety centered
-at $S$ with scale $(1+\delta)$
+at $S$ with scale $(1+\delta)$.
 \end{defi}
 
 
@@ -110,7 +110,7 @@ and is not larger than the optimal solution for the problem without
 extensions, i.e. $|\mathcal{R}| \le |opt(I)|$.
 \end{defi}
 
-At last, we recall definition of the of the
+At last, we recall definition of the
 polynomial-time approximation scheme (PTAS) of
 the problem with $\delta$-extension.
 

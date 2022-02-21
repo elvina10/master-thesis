@@ -111,8 +111,8 @@ and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 	\item For every solution to instance $S$ that satisfies $w$ clauses,
 	there exists a solution to $I$ of size $15n - w$.
 	
-	\item \label{lemma:apxconstruction:enumerate:extensions}
-	Every solution with $1/2$-extensions of $I$
+	\item \label{lemma:apxconstruction:enumerate:extension}
+	Every solution with $1/2$-extension of $I$
 	is also a solution to the original instance $I$.
 \end{enumerate}
 Therefore, the optimum size of a solution to $I$
@@ -131,7 +131,7 @@ Consider any $0 < \epsilon < 1/(15 \cdot 8)$.
 Let us assume that there exists a polynomial-time
 $(1+\epsilon)$-approximation algorithm
 for unweighted geometric set cover with axis-parallel segments in 2D
-with (1/2)-extensions.
+with (1/2)-extension.
 We construct an algorithm that solves the problem stated in 
 Theorem \ref{hastadtheorem}, thereby proving that P~=~NP.
 
@@ -174,7 +174,7 @@ $$opt(I) \ge 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
 Since a solution to $I$ with $\frac{1}{2}$-extension is
 also a solution without any extention, by 
-Lemma \ref{apxconstruction} \ref{lemma:apxconstruction:enumerate:extensions}, we have:
+Lemma \ref{apxconstruction} \ref{lemma:apxconstruction:enumerate:extension}, we have:
 
 $$approx(I) \ge opt(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
@@ -195,7 +195,7 @@ That is, we show a reduction from the MAX-(3,3)-SAT problem
 to geometric set cover with segments
 parallel to axis. Moreover, the obtained instance
 of geometric set cover will be robust
-to 1/2-extensions (have the same optimal solution
+to 1/2-extension (have the same optimal solution
 after 1/2-extension).
 
 The construction will be composed of 2 types of gadgets:
@@ -614,7 +614,7 @@ must be covered with at least 3 + 4 + 4 = 11 segments from $\segmentsClause_i$.
 Add some smart lemmas that sets will be exclusive to each other.
 
 \begin{lemma}
-\textbf{Robustness to 1/2-extensions}. For every segment $s \in \sets$,
+\textbf{Robustness to 1/2-extension}. For every segment $s \in \sets$,
 $s$ and $s^{+\frac{1}{2}}$ cover the same points from $\points$.
 \end{lemma}
 

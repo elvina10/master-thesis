@@ -172,15 +172,3 @@ interact with each other.
 '''
 print(output)
 
-'''
-\\filldraw [fill=lime, draw=black] (0,\\y2) rectangle (\\width, \\y3) node[pos=.5] {VARIABLE-gadget$_2$};
-\\filldraw [fill=lime, draw=black] (0,\\y4) rectangle (\\width, \\y5) node[pos=.5] {VARIABLE-gadget$_3$};
-
-\\variableSegments{0}{1}{1}
-\\variableSegments{2}{3}{2}
-\\variableSegments{4}{5}{3}
-
-\\filldraw [fill=cyan!60, draw=black] (\\x1,\\y0) rectangle (\\x2, \\y6) node[clause, pos=.5, label= {CLAUSE-gadget$_1$}] {};
-\\filldraw [fill=cyan!60, draw=black] (\\x3,\\y0) rectangle (\\x4, \\y6) node[clause, pos=.5, label= {CLAUSE-gadget$_2$}] {};
-\\filldraw [fill=cyan!60, draw=black] (\\x5,\\y0) rectangle (\\x6, \\y6) node[clause, pos=.5, label= {CLAUSE-gadget$_3$}] {};
-'''

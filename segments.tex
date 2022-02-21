@@ -2,7 +2,7 @@ In this chapter we show fixed-parameter tractable algorithms
 for the geometric set cover problem in~two different settings.
 Section \ref{section:fpt_unweighted} shows 
 a fixed-parameter tractable algorithm for geometric set cover with unweighted segments.
-The reminder of the chapter presents
+The remainder of the chapter presents
 a fixed-parameter tractable algorithm for geometric set cover with weighted segments
 with $\delta$-extensions.
 We show an algorithm for the setting with $\delta$-extensions,
@@ -47,6 +47,7 @@ with unweighted segments, where segments are in arbitrary directions.
 
 We present here a simple algorithm from \cite{platypus_book} for completeness.
 
+\begin{proof}
 We show an $\mathcal{O}(2^k)$-time branching algorithm.
 In each step, the algorithm selects a point $a$ which is not yet covered,
 branches to choose one of the two directions, and greedily chooses
@@ -68,15 +69,16 @@ As $a$ was the smallest in the lexicographical order,
 all points on the line $x = x_a$ have the $y$-coordinate larger than $y_a$.
 Therefore, if we denote the~greedily chosen segment as $s$,
 then any other segment on the line $x = x_a$ that covers $a$ can only
-cover a (possibly strict) subset of points covered by $s$.
+cover a subset of points covered by $s$.
 Thus, greedily choosing $s$ is optimal.
 
 In each step of the algorithm we add one segment to the solution,
 thus the recursion can be stopped at depth $k$.
 If no branch finds a solution, then this means
 that a solution of size at most $k$ does not exist.
+\end{proof}
 
-Note that, the same algorithm can be used for segments in $d$ directions,
+Note that the same algorithm can be used for segments in $d$ directions,
 where we branch over $d$ choices of directions, and it runs in complexity $\mathcal{O}(d^k)$.
 
 \subsection{Segments in arbitrary directions}

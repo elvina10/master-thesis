@@ -227,7 +227,7 @@ w(s) =
 Now, we prove that the constructed instance of geometric set cover
 with weighted segments is indeed a correct and sound reduction
 of the grid tiling problem. Lemma \ref{set_cover_solution_exists}
-proves that if the solution of the instance of the grid tiling instance exists,
+proves that if the solution to the instance of the grid tiling instance exists,
 then there exists a solution with bounded size and weight
 of the constructed instance of geometric set cover problem.
 
@@ -237,8 +237,8 @@ then there exists a solution to the original grid tiling instance.
 
 \begin{lemma}
 \label{set_cover_solution_exists}
-	If there exists a~solution of the grid tiling instance $(f_{i,j})$,
-	then there exists a~solution of the instance $\instanceSetCover$
+	If there exists a~solution to the grid tiling instance $(f_{i,j})$,
+	then there exists a~solution to the instance $\instanceSetCover$
 	of geometric set cover with weight $\solWeight$.
 \end{lemma}
 
@@ -312,7 +312,7 @@ $$2k(k(n^2+1) -2(1-\epsilon)-2k\epsilon) + k^2\delta= \solWeight$$
 
 \begin{claim}
 \label{guards}
-In any solution of the instance $\instanceSetCover$:
+In any solution to the instance $\instanceSetCover$:
 \begin{itemize}
 \item left and right guards of points in $H$
 (points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$)
@@ -349,7 +349,7 @@ Lemma \ref{grid_tiling_exists}.
 \begin{claim}
 \label{one_diag_in_square}
 For any $1 \le i, j \le n$
-and any solution of the instance $\instanceSetCover$
+and any solution to the instance $\instanceSetCover$
 all, but at most one point $h_{i, j, t}$
 and at most one point $v_{i, j, t}$
 for $1 \le t \le n^2$
@@ -376,7 +376,7 @@ This contradicts the assumption, which concludes the proof.
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
-For every solution of the instance $\instanceSetCover$,
+For every solution to the instance $\instanceSetCover$,
 the sum of weights of segments chosen
 from sets $\allhor$ and $\allver$ is at least
 $2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
@@ -520,9 +520,9 @@ and $\matchh(t_1,t_2)$ is $\true$.
 
 \begin{lemma}
 \label{grid_tiling_exists}
-	If there exists solution of instance $\instanceSetCover$
+	If there exists solution to instance $\instanceSetCover$
 	with weight at most $\solWeight$,
-	then there exists a solution for the grid tiling instance $(f_{i,j})$.
+	then there exists a solution to the grid tiling instance $(f_{i,j})$.
 \end{lemma}
 
 \begin{proof}
@@ -535,7 +535,7 @@ Similarily, to define the $y$ function,
 for every $1 \le i \le k$ set $y(i) := y_i$
 where $(b, y_i) = \order(h_{1,i})$
 
-To prove that it is a correct solution for grid tiling,
+To prove that it is a correct solution to grid tiling,
 we need to prove that 
 for every $1 \le i,j \le k$ $(x(i), y(j))$ is in
 allowed tiles set $f(i,j)$.

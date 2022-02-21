@@ -40,7 +40,7 @@ finds a solution that is within a factor
 of ($1+\epsilon$) of being optimal.
 That means the reported solution has weight at most
 $(1+\epsilon)opt(I)$, where $opt(I)$ is the weight
-of an optimal solution for $I$.
+of an optimal solution to $I$.
 \end{defi}
 
 \begin{defi}
@@ -64,7 +64,7 @@ Intuitively, we consider a problem with slightly larger objects,
 which makes the instance more permissive.
 However, we aim to find a solution that
 is not larger than the
-optimum solution of the original problem,
+optimum solution to the original problem,
 so this is substantially easier than just
 solving the problem for the larger objects.
 It may even be the case
@@ -107,7 +107,7 @@ $I=(\sets, \points)$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
-and is not larger than the optimal solution for the~problem without
+and is not larger than the optimal solution to the~problem without
 extensions, i.e.~$|\mathcal{R}| \le |opt(I)|$.
 \end{defi}
 
@@ -124,7 +124,7 @@ and in polynomial-time outputs a solution $\mathcal{R} \subseteq \sets$
 such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
 and is within a $(1+\epsilon)$ factor of the optimal
-solution for this problem without
+solution to this problem without
 extensions, i.e.~$(1+\epsilon)|\mathcal{R}| \le |opt(I)|$.
 
 \end{defi}

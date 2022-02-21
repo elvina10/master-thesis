@@ -22,7 +22,7 @@ assuming FPT $\neq$ W[1].
 	and outputs a set $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$
 	and weight of $\sol$ is not greater than weight
-	of optimum solution of size at most $k$
+	of optimum solution to size at most $k$
 	for this problem without $\delta$-extensions,
 	or determines that such a set $\sol$ does not exist.
 }\end{tw}
@@ -198,7 +198,7 @@ These properties provide bounds for different
 objects in the problem instance,
 which help us to find a small kernel for the problem
 or conclude that the optimum
-solution of this instance must be in terms of size above some treshold.
+solution to this instance must be in terms of size above some treshold.
 
 \begin{defi}
 A line in the plane is \textbf{long}
@@ -253,7 +253,7 @@ and that contradicts the definiton of $A$.
 
 If every segment from $\sol$ covers at most $k$ points from $A$
 and $|\sol| \le k$, then at most $k^2$ points from $A$ are covered by $\sol$
-and that contradicts the fact that $\sol$ is a solution of the given
+and that contradicts the fact that $\sol$ is a solution to the given
 geometric set cover instance.
 \end{proof}
 
@@ -265,7 +265,7 @@ Applying Claims \ref{few_long_lines} and \ref{few_points},
 if we have more than $k$ different long lines
 or more than $k^2$ points from $\points$
 that do not lie on any long line, then we answer that
-there is no solution of size at most $k$.
+there is no solution to size at most $k$.
 Let us name the number of different long lines as $l$.
 
 Otherwise, we can split $\points$ into at most $k+1$ sets:

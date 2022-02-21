@@ -105,17 +105,17 @@ and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 	axis-parallel segments in 2D such that:
 	\begin{enumerate}[label={(\arabic*)}]
 	\item For every solution $X$ of instance $I$,
-	there exists a solution of $S$ that satisfies at least  $15n - |X|$
+	there exists a solution to $S$ that satisfies at least  $15n - |X|$
 	clauses.
 	
-	\item For every solution of instance $S$ that satisfies $w$ clauses,
-	there exists a solution of $I$ of size $15n - w$.
+	\item For every solution to instance $S$ that satisfies $w$ clauses,
+	there exists a solution to $I$ of size $15n - w$.
 	
 	\item \label{lemma:apxconstruction:enumerate:extensions}
 	Every solution with $1/2$-extensions of $I$
 	is also a solution to the original instance $I$.
 \end{enumerate}
-Therefore, the optimum size of a solution of $I$
+Therefore, the optimum size of a solution to $I$
 is $opt(I) = 15n - opt(S)$. 
 	
 }\end{lemma}
@@ -310,7 +310,7 @@ by segments that do not belong to the gadget.
 
 The OR-gadget has the property that every set of segments
 that covers all the points in the gadget uses at least 3 segments from it..
-Moreover, the output segment belongs to the solution of size 3
+Moreover, the output segment belongs to the solution to size 3
 only if at least one of the input segments belong to the solution.
 Therefore, optimum solutions restricted to the OR-gadget behave
 like a binary $or$ function for the input segments.
@@ -412,14 +412,14 @@ We can do that using segments from $\orMoveVariable{i}{j} \cup \chooseOr{false}{
 A CLAUSE-gadget is responsible for determining whether
 variable values assigned in variable gadgets
 satisfy the corresponding clause in the input formula $\phi$.
-It has a minimum solution of weight $w$
+It has a minimum solution to weight $w$
 if and only if the clause is satisfied, i.e. at least one
 of the respective variables is assigned the correct value.
 Otherwise, its minimum solution has weight $w+1$.
 In this way, by analyzing the cost of the minimum solution
 for the entire constructed instance, we will be able to tell
 how many clauses it was possible to satisfy
-in the optimum solution of $\phi$.
+in the optimum solution to $\phi$.
 
 
 \paragraph{Points.}
@@ -687,7 +687,7 @@ for the instance $S$ of MAX-(3,3)-SAT.
 \begin{lemma}
 	\label{construction_correctness}
 	Instance $\setCoverInstance$ of geometric set cover
-	admits a solution of size $15n - k$.
+	admits a solution to size $15n - k$.
 \end{lemma}
 
 \begin{proof}
@@ -755,7 +755,7 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 Assume that we have $\{\xTrueSegment{i}, \xFalseSegment{i}\} \subseteq \sol$ for some $i$.
 We will show how to modify $\sol$ into $\sol'$,
 such that the number of such $i$ decreases,
-while $\sol'$ is still a valid solution of $\setCoverInstance$,
+while $\sol'$ is still a valid solution to $\setCoverInstance$,
 and $|\sol'| \le |\sol|$. Then, by repeating this procedure,
 we can eventually construct a solution satisfying the property from the Lemma.
 
@@ -783,7 +783,7 @@ so $|\sol'| \le |\sol|$.
 	\label{construction_completness}
 	Suppose we have a solution $\sol$ of the instance $\setCoverInstance$
 	of geometric set cover that is of size $w$.
-	Then there exists a solution of $S$
+	Then there exists a solution to $S$
 	that satisfies at least $15n - w$ clauses.
 \end{lemma}
 
@@ -794,7 +794,7 @@ and the variables be $x_1$,~$x_2$~$\ldots$~$x_n$.
 Given a solution $\sol$
 of the instance $\setCoverInstance$ of geometric set cover, we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$ such that for any $i$ it contains at most one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$; this may decrease the cost of $\sol$, but that does not matter in the subsequent construction. To simplify notation, in the remainder of this proof we use $\sol$ to refer to the modified solution.
 
-Given $\sol$, we construct a solution of $S$ by defining an
+Given $\sol$, we construct a solution to $S$ by defining an
 assignment of variables:
 $$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$$
 that satisfies at least $15n-w$ clauses in $S$.
@@ -861,7 +861,7 @@ Therefore, clause $c_i$ is satisfied.
 Consequently, $\phi$ satisfies all but at most $a$ clauses in $S$.
 
 To conclude,
-given a solution of $\setCoverInstance$ of size $w$ we constructed
+given a solution to $\setCoverInstance$ of size $w$ we constructed
 a variable assignment $\phi$
 that satisfies at least $n-a$ clauses of $S$.
 Finally, note that
@@ -879,7 +879,7 @@ We are ready to conclude the proof of Lemma $\ref{apxconstruction}$.
 By Lemma~\ref{construction_correctness}, we know
 that there exists a solution to $\setCoverInstance$ of size $15n-k$, so: 
 $$opt(\setCoverInstance) \le 15n - k.$$
-Since the optimum solution of $S$ satisfies $k$ clauses,
+Since the optimum solution to $S$ satisfies $k$ clauses,
 then according to Lemma~\ref{construction_completness}:
 $$opt(\setCoverInstance) \ge 15n -k.$$
 Therefore, the solution given by Lemma~\ref{construction_correctness} 

@@ -22,7 +22,7 @@ assuming FPT $\neq$ W[1].
 	and outputs a set $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol^{+\delta}$ covers all points in $\points$
 	and weight of $\sol$ is not greater than weight
-	of optimum solution to size at most $k$
+	of optimum solution of size at most $k$
 	for this problem without $\delta$-extensions,
 	or determines that such a set $\sol$ does not exist.
 }\end{tw}
@@ -265,7 +265,7 @@ Applying Claims \ref{few_long_lines} and \ref{few_points},
 if we have more than $k$ different long lines
 or more than $k^2$ points from $\points$
 that do not lie on any long line, then we answer that
-there is no solution to size at most $k$.
+there is no solution of size at most $k$.
 Let us name the number of different long lines as $l$.
 
 Otherwise, we can split $\points$ into at most $k+1$ sets:
@@ -324,8 +324,8 @@ for some computable function $f$.
 Then we can iterate over all subsets of $\sets'$ and
 choose the set with the lowest sum of weights that cover $\points'$.
 This solution
-would have weight not larger than optimal solution
-for the problem without extension, because we iterate
+would have weight not larger than optimal
+solution to the problem without extension, because we iterate
 over all posibilities of covering the subset of $\points'$.
 \end{proof}
 

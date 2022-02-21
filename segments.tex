@@ -75,7 +75,7 @@ Thus, greedily choosing $s$ is optimal.
 In each step of the algorithm we add one segment to the solution,
 thus the recursion can be stopped at depth $k$.
 If no branch finds a solution, then this means
-that a solution to size at most $k$ does not exist.
+that a solution of size at most $k$ does not exist.
 \end{proof}
 
 Note that the same algorithm can be used for segments in $d$ directions,
@@ -221,7 +221,7 @@ Therefore, the recursive call can find a~solution, provided there exists one.
 In (2) the answer is no, because every line covers no more than $k$ points
 from $\points$, which implies the same about every segment from $\sets$.
 Under this assumption
-we can cover only $k^2$ points with a solution to size $k$, which is less
+we can cover only $k^2$ points with a solution of size $k$, which is less
 than $|\points|$.
 
 Checking all possible solutions in (3) is trivially correct.

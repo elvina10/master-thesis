@@ -107,14 +107,15 @@ instance of the problem.
 \begin{lemma}
    \label{fpt_reduction}
    Given an instance $(\sets, \points)$ of the segment cover problem,
-   without a loss of generality we can assume that
+   without loss of generality we can assume that
    no segment covers a superset of what another segment covers.
    That~is, for any distinct $A, B \in \sets$, we have
    $A \cap \points \not \subseteq B \cap \points$ and $A \cap \points \not \supseteq B \cap \points$.
 \end{lemma}   
    
-\begin{proof} 
-If there are two distinct subsets of $\sets$,
+\begin{proof}
+Assume towards a contradiction that there is an instance  $(\sets, \points)$,
+and two distinct subsets of $\sets$,
 $A, B$, such that $A \cap \points \subseteq B \cap \points$.
 
 We construct a set $\sets' := \sets - \{A\}$.
@@ -128,7 +129,7 @@ Let us consider the case when $A \in \sol$,
 because the other case is trivial.
 Since $A \cap \points \subseteq B \cap \points$,
 then $\sol \cup \{B\} - \{A\}$
-covers the same points from $\points$ as $\sol$.
+covers any point from $\points$ that was covered by $\sol$.
 Also $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
 \end{proof}
 
@@ -153,7 +154,7 @@ $$A := \{ \text{segment collinear with } L \text{ that covers } x_i
 Where for $i = 1$ we just take a segment that covers $x_1$.
 
 If such a segment does not exist for any point $x$
-as the above, then $x$ does not give rise to any segment in $A$.
+as above, then $x$ does not give rise to any segment in $A$.
 We prove the lemma by contradition. Let us assume that there
 exists a~solution $\sol$ of size at most $k$ such that $\sol \cap A = \emptyset$.
 
@@ -163,7 +164,7 @@ which is defined as segments from $\sol$ that are collinear with $L$.
 
 Every segment that is not collinear with $L$ can cover at~most one of
 the points that lie on~this line.
-Hence if $\sol_L$ was empty, then
+Hence, if $\sol_L$ was empty, then
 $\sol$ would cover at most $k$ points on line $L$,
 but $L$ had at least $k+1$ different points from $\points$ on it.
 

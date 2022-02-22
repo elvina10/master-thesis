@@ -2,16 +2,16 @@
 \label{chapter:w1_hard}
 
 In this chapter we consider geometric set cover problem with weighted segments.
-Theorem~\ref{w1_hard} proves that this problem is 
+In Theorem~\ref{w1_hard} below, we prove that this problem is 
 W[1]-hard when parameterized by the size of the solution.
 We~additionally restrict the problem to only use segments
 in three directions to achieve a stronger result.
-W[1]-hardness is proved by reduction to a grid tiling problem,
+W[1]-hardness is proved by a reduction from the grid tiling problem,
 which was introduced in \cite{marx_grid_tiling}.
 
 \begin{defi}
-	Line is \textbf{right-diagonal} if it is
-	described by linear function $y = -x + d$ for any $d \in \mathbb{R}$.
+	A line is \textbf{right-diagonal} if it is
+	described by linear function $x + y = d$ for some $d \in \mathbb{R}$.
 	Segment is \textbf{right-diagonal} if its
 	direction is a right-diagonal line.
 \end{defi}
@@ -23,7 +23,7 @@ which was introduced in \cite{marx_grid_tiling}.
 	from a set of segments $\sets$ 
 	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
 	so that the weight of the cover is minimal.
-	Then this problem is W[1]-hard when parameterized by $\sqrt k$ and
+	Then this problem is W[1]-hard when parameterized by $k$ and
 	assuming ETH, there is no algorithm for this
 	problem with running time
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
@@ -32,17 +32,15 @@ which was introduced in \cite{marx_grid_tiling}.
 	are axis-parallel or right-diagonal.
 \end{tw}
 
-Theorem \ref{w1_hard} is also true for less
-restricted problem where segments have any direction.
 In~order to prove Theorem \ref{w1_hard}
 we will show reduction from a W[1]-hard problem.
 We introduce the grid tiling problem, which is proven
-to be W[1]-complete in literature.
+to be W[1]-complete in literature TODO: add reference.
 
 \newcommand{\pow}{\mathsf{Pow}}
 
 \begin{defi}
-We define \textbf{powerset} of a set $A$, denoted as $\pow(A)$,
+We define the \textbf{powerset} of a set $A$, denoted as $\pow(A)$,
 as the set of all subsets of $A$, ie. $\pow(A) = \{B : B \subseteq A\}$.
 \end{defi}
 
@@ -55,16 +53,16 @@ The task is to find functions
 $x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
 that assign colors from $\{1 \ldots n\}$
 to respectively columns and rows of the grid,
-so that $(x(i), y(j)) \in f(i, j)$ for all valid $i$ and $j$,
+so that $(x(i), y(j)) \in f(i, j)$ for all $i,j \in \{1 \ldots k\}$,
 or conclude that such an assignment does not exist.
 \end{defi}
 
-In short, in grid tiling problem you need to assign numbers
-to rows and columns in such a way,
+In short, in grid tiling problem one needs to assign numbers
+to rows and columns in such a way
 that for every pair of a row and a column,
 the pair of colors assigned
 to the row and column 
-belongs to the allowed set tiles for this pair.
+belongs to the allowed set of tiles for this pair.
 The next theorem describes the complexity of this problem,
 which is W[1]-hard when parameterized by the size of the grid.
 
@@ -74,13 +72,13 @@ which is W[1]-hard when parameterized by the size of the grid.
 \label{grid_tiling_w1_hard}
 \textbf{\cite{marx_grid_tiling}}
 Grid tiling is W[1]-hard when parameterized by $k$ and
-assuming ETH, there is no $f(k)\cdot n^{o(\sqrt{k})}$-time
+assuming ETH, there is no $f(k)\cdot n^{o(k)}$-time
 algorithm solving the grid tiling problem
 for any computable function $f$.
 \end{tw}
 
-The remainder of this section is proving Theorem \ref{w1_hard}
-by reduction of a grid tiling problem instance
+The remainder of this section is devoted to proving Theorem \ref{w1_hard}
+by a reduction from a grid tiling problem instance
 to a geometric set cover instance.
 That proves the W[1]-hardness of the geometric set cover problem,
 because if we could solve it with an FPT algorithm,

@@ -32,7 +32,7 @@
  \hline
 \end{tabular}
 \end{center}
-\caption{\textbf{Example of a grid tiling instance with its solution.}}
+\caption{\textbf{Example of a grid tiling instance and its solution.}}
 In the first row and column of the table you can see the solution:
 functions $x$ and $y$.
 The~tiles used in this solution are marked in \textbf{bold}.
@@ -40,9 +40,10 @@ If we instead chose the tiles marked in \textcolor{alternative_sol}{blue}
 (whenever there is one, taking the tile marked in \textbf{bold} otherwise),
 then that corresponds to setting $x(1)=2$, and would also form a correct solution.
 On the other hand, if we instead chose the tiles marked in \textcolor{bad_sol}{red}
-(as before), then that corresponds to setting ${y(1)=9}$ and $x(4)=2$
+(as before), then this corresponds to setting ${y(1)=9}$ and $x(4)=2$
 and that would $\textbf{not}$ form a correct solution.
 Even though the first row is correct,
-tile with coordinates (3,4) requires tile (2,1), not (2,2).
+the cell with coordinates (3,4) requires tile (2,1), not (2,2)
+(marked in \textbf{\textcolor{bad_sol}{bold red}}).
 \label{fig:grid_tiling_exmample}
 \end{figure}

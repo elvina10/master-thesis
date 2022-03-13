@@ -14,7 +14,8 @@ APX-hard and W[2]-hard \cite{platypus_book}
 	\begin{enumerate}
 		\item with squares is W[1]-hard
 	\end{enumerate}
-\item Explain what weighted FPT is (TODO: refs about wighted FPT)
+\item Explain what weighted FPT is. Similar weighted settings
+were described there TODO
 \end{enumerate}
 
 In this paper, we focus on Geometric Set Cover wih segments
@@ -25,15 +26,18 @@ and investigate whether approximation and FPT algorithms exist.
 \section{Our contribution}
 \begin{enumerate}
 \item Approximation of uweighted geometric set cover (even if we relax it with 
-$\frac{1}{2}$-extensions) is APX-hard (Thm ...)
+$\frac{1}{2}$-extensions) is APX-hard (Theorem \ref{segment_cover_apx_hard})
 	\begin{enumerate}
 	\item TODO: Compare it with the tightest similar result
 	\item This proves that assumption about polgons being fat for
-	the EPTAS is a necessary condition
+	the EPTAS in \cite{harpeled12} is a necessary condition
 	\end{enumerate}
-\item unweighted segments admit FPT algorithm (Thm ...)
-\item weighted segments relaxed with $\delta$-extensions admit FPT (Thm ...)
-\item weighted segments in 2 directions is W[1]-hard (Thm ...)
+\item unweighted segments admit FPT algorithm (Theorem \ref{segment_cover_fpt})
+\item weighted segments relaxed with $\delta$-extensions admit FPT (Theorem \ref{fpt_weighted_segment})
+	\begin{enumerate}
+	\item Permissive fpt, similar idea in \cite{permissive_problem1}, \cite{permissive_problem2}.
+	\end{enumerate}
+\item weighted segments in 2 directions is W[1]-hard (Theorem \ref{w1_hard})
 \end{enumerate}
 
 

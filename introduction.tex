@@ -9,6 +9,8 @@ APX-hard and W[2]-hard \cite{platypus_book}
 \item Approximation of geometric set cover
 	\begin{enumerate}
 		\item with fat polygons with $\delta$-extensions admits EPTAS \cite{harpeled12}
+		\item with balls admit PTAS \cite{settling_apx_hardness}
+		\item with axis-parallel rectangles is APX-hard \cite{settling_apx_hardness}
 	\end{enumerate}
 \item Geometric set cover parameterized by size of solution
 	\begin{enumerate}
@@ -25,8 +27,9 @@ and investigate whether approximation and FPT algorithms exist.
 
 \section{Our contribution}
 \begin{enumerate}
-\item Approximation of uweighted geometric set cover (even if we relax it with 
-$\frac{1}{2}$-extensions) is APX-hard (Theorem \ref{segment_cover_apx_hard})
+\item Approximation of uweighted geometric set cover with axis-parallel segments
+(even if we relax it with  $\frac{1}{2}$-extensions) is APX-hard
+(Theorem \ref{segment_cover_apx_hard})
 	\begin{enumerate}
 	\item Stronger result than cover with unweighted axis-parallel
 	rectangles being APX-hard in \cite{settling_apx_hardness}
@@ -39,7 +42,7 @@ $\frac{1}{2}$-extensions) is APX-hard (Theorem \ref{segment_cover_apx_hard})
 	\begin{enumerate}
 	\item Permissive fpt, similar idea in \cite{permissive_problem1}, \cite{permissive_problem2}.
 	\end{enumerate}
-\item weighted segments in 2 directions is W[1]-hard (Theorem \ref{w1_hard}),
+\item weighted axis-parallel segments is W[1]-hard (Theorem \ref{w1_hard}),
     see Figure \ref{tab:weighted_fpt}
 
 \end{enumerate}

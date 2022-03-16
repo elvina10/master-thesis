@@ -6,25 +6,32 @@
 APX-hard and W[2]-hard \cite{platypus_book}
 \item Therefore we restrict a problem and look at Geometric Set Cover,
       what can yield more interesting results.
-\item Approximation of geometric set cover
+\end{enumerate}
+\subsection{Approximation}
+Approximation of geometric set cover
 	\begin{enumerate}
-		\item with fat polygons with $\delta$-extensions admits EPTAS \cite{harpeled12}
-		\item with balls admit PTAS \cite{settling_apx_hardness}
+		\item unweighted unit disks admit PTAS \cite{unit_disks}
+		\item with weighted unit disks or squared admit QPTAS \cite{voronoi_true}
 		\item with axis-parallel rectangles is APX-hard \cite{settling_apx_hardness}
 	\end{enumerate}
-\item Geometric set cover parameterized by size of solution
+\subsection{Parametrization}
+Geometric set cover parameterized by size of solution
 	\begin{enumerate}
 		\item with unit squares is W[1]-hard \cite{marx05}
 		\item TODO add more W[1] / FPT algorithms
-	\end{enumerate}
 \item Explain what weighted FPT is. Similar weighted settings
 were described there TODO
-\end{enumerate}
+	\end{enumerate}
 
+\subsection{$\delta$-extensions}
 In this paper, we focus on Geometric Set Cover wih segments
-in various settings , ie. $\delta$-extensions, weighted segments
+in various settings, ie. $\delta$-extensions, weighted segments
 and investigate whether approximation and FPT algorithms exist.
 
+\begin{enumerate}
+\item based on $\delta$-shrinking \cite{shrinking_original}, \cite{shriking1} and \cite{shrinking2}.
+\item with fat polygons with $\delta$-extensions (with similar model of extensions) admits EPTAS \cite{harpeled12}
+\end{enumerate}
 
 \section{Our contribution}
 \begin{enumerate}
@@ -40,9 +47,6 @@ and investigate whether approximation and FPT algorithms exist.
 \item unweighted segments admit FPT algorithm (Theorem \ref{segment_cover_fpt})
 \item weighted segments relaxed with $\delta$-extensions admit FPT (Theorem \ref{fpt_weighted_segment}),
     see Figure \ref{tab:weighted_fpt}
-	\begin{enumerate}
-	\item Permissive fpt, similar idea in \cite{permissive_problem1}, \cite{permissive_problem2}.
-	\end{enumerate}
 \item weighted axis-parallel segments is W[1]-hard (Theorem \ref{w1_hard}),
     see Figure \ref{tab:weighted_fpt}
 

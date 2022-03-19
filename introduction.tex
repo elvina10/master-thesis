@@ -25,13 +25,20 @@ is APX-hard as well as set cover with many other
 standard geometric objects.
 
 \subsection{Parametrization}
-Geometric set cover parameterized by size of solution
-	\begin{enumerate}
-		\item with unit squares is W[1]-hard \cite{marx05}
-		\item TODO add more W[1] / FPT algorithms
-\item Explain what weighted FPT is. Similar weighted settings
-were described there TODO
-	\end{enumerate}
+We consider Geometric Set Cover 
+parameterized by the size of solution in paremetrized setting.
+Geomtric Set Cover with unit squares is proven to be W[1]-hard 
+Theorem 5 in \cite{marx05}.
+
+We also consider parametrization in weighted setting.
+There does not seem to be a consensus of what parametrization
+in weighted setting is exactly, there
+was an attempt to introduce quite complicated general
+framework of weighted parametrized setting in \cite{weighted_framework}.
+Kernels for several well known weighted problems
+such as Subset Sum or Knapsack are presented in \cite{kernel_weighted}.
+Another work \cite{weighted_flow} presents weighted
+parametrization of Weighted Directed Feedback Set and Weighted $st$-Cut.
 
 \subsection{$\delta$-extensions}
 In this paper, we focus on Geometric Set Cover wih segments

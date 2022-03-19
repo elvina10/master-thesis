@@ -8,67 +8,69 @@ Set Cover is one classical example of an NP-complete problem,
 which has been proven
 in literature to be APX-hard and W[2]-hard \cite{platypus_book}.
 We can also restrict the problem to various specialized settings,
-what can yield more insteresting complexity and approximation results.
-In this paper we take a closer look at Geometric Set Cover problem
+which can yield more complexity and approximation results.
+In this paper we take a closer look at the Geometric Set Cover problem
 on a plane, where points to cover are points on a plane
 and sets to cover them with are geometric objects.
 
 \paragraph{Approximation}
 Over the years there has been a lot of work related to approximation
-of Geometric Set Cover. Notably 
-Geometric Set Cover with unweighted unit disks admits PTAS, see
-Corollary 1.1 in \cite{unit_disks}. When we consider the same problem
+of Geometric Set Cover. Notably,
+Geometric Set Cover with unweighted unit disks admits PTAS (see
+Corollary 1.1 in \cite{unit_disks}). When we consider the same problem
 with weighted unit disks (or unit squares), the problem admits QPTAS
 \cite{settling_apx_hardness}, later improved in
 Theorem 2 in \cite{voronoi_true}.
 On the other hand, \cite{rectangles_apx_hard} 
 proves that cover with unweighted axis-parallel rectangles
-is APX-hard as well as set cover with many other
+is APX-hard, which they also show for set cover with many other
 standard geometric objects.
 
 \paragraph{Parametrization}
 We consider Geometric Set Cover 
-parameterized by the size of solution in paremetrized setting.
-Geomtric Set Cover with unit squares is proven to be W[1]-hard 
+parameterized by the size of solution.
+Geometric Set Cover with unit squares is proven to be W[1]-hard 
 Theorem 5 in \cite{marx05}.
 
-We also consider parametrization in weighted setting.
+We also consider parametrization in the weighted setting.
 There does not seem to be a consensus of what parametrization
-in weighted setting is exactly, there
+in weighted setting is exactly; there
 was an attempt to introduce quite complicated general
-framework of weighted parametrized setting in \cite{weighted_framework}.
+framework of weighted parameterized setting in \cite{weighted_framework}.
 Kernels for several well known weighted problems
 such as Subset Sum or Knapsack are presented in \cite{kernel_weighted}.
 Another work \cite{weighted_flow} presents weighted
 parametrization of Weighted Directed Feedback Set and Weighted $st$-Cut.
 
 \paragraph{$\delta$-extensions}
-In this paper, we focus on Geometric Set Cover wih segments with $\delta$-extensions.
-$\delta$-extensions is a problem relaxation method based on
+In this paper, we focus on Geometric Set Cover with segments with $\delta$-extensions.
+$\delta$-extensions is a problem relaxation method based on the
 $\delta$-shrinking model which was introduced in \cite{shrinking_original}
-and used is later works \cite{shrinking1} and \cite{shrinking2}.
+and later used in \cite{shrinking1} and \cite{shrinking2}.
 
 Similar model is used to prove that Geometric Set Cover with fat polygons
 relaxed with $\delta$-extensions admits EPTAS \cite{harpeled12}.
 
 \section*{Our contribution}
-Approximation of uweighted Geometric Set Cover with axis-parallel segments
+In this paper we make the following contributions.
+
+We show that approximation of uweighted Geometric Set Cover with axis-parallel segments
 (even if we relax it with  $\frac{1}{2}$-extensions) is APX-hard
 (Theorem \ref{segment_cover_apx_hard}).
 This expands the previous result of Geometric Set Cover
 with unweighted axis-parallel rectangles being APX-hard in \cite{rectangles_apx_hard}.
-That also proves that assumption in \cite{harpeled12}
-for EPTAS about polygons being fat is a necessary, because
-cover with any polygons with $\delta$-extensions is APX-hard.
+That also proves that the assumption in \cite{harpeled12}
+for EPTAS about polygons being fat is necessary, because
+cover with arbitrary polygons with $\delta$-extensions is APX-hard.
 
-We also provide two FPT algorithms for parametrized Geometric Set Cover 	
+We also provide two FPT algorithms for parameterized Geometric Set Cover 	
 with unweighted segments (Theorem~\ref{segment_cover_fpt})
 and weighted segments relaxed with $\delta$-extensions
 (Theorem~\ref{fpt_weighted_segment}).
 But Geometric Set Cover with weighted
 axis-parallel segments is W[1]-hard (Theorem~\ref{w1_hard}).
-See Figure \ref{tab:weighted_fpt} for summary of parametrized
-results for weighted setting.
+See Figure \ref{tab:weighted_fpt} for a summary of parameterized
+results for the weighted setting.
 
 \begin{figure}[h]
 \begin{center}
@@ -82,7 +84,7 @@ results for weighted setting.
 \hline                
 \end{tabular}
 \caption{\textbf{Our results for Geometric Set Cover problem with weighted segments 
-parametrized by the size of solution.}}
+parameterized by the size of solution.}}
 
 Results marked with * directly follow from more or less restricted settings.
 \label{tab:weighted_fpt}

@@ -1,17 +1,22 @@
 \chapter{Introduction}
 
 \section{Background}
-\begin{enumerate}
-\item Some problems are hard, like Set Cover. It is NP-complete,
-APX-hard and W[2]-hard \cite{platypus_book}
-\item Therefore we restrict a problem and look at Geometric Set Cover,
-      what can yield more interesting results.
-\end{enumerate}
+Some of the problems are very well known to be NP-complete, like
+Set Cover problem. Even so they still can have a variety
+of different properties. Set Cover problem has been proven
+in literature to be APX-hard and W[2]-hard \cite{platypus_book}.
+We can also restrict a problem to look at it in various setting,
+what can yield more insteresting complexity and apporximation results.
+In this paper we take a closer look at Geometric Set Cover problem
+on a plane, where points to cover are points on a plane
+and sets to cover them with are geometric objects.
+
 \subsection{Approximation}
-Approximation of geometric set cover
+Over the years there have been a lot of work related to approximation
+of Geometric Set Cover. Notabely 
 	\begin{enumerate}
 		\item unweighted unit disks admit PTAS \cite{unit_disks}
-		\item with weighted unit disks or squared admit QPTAS \cite{voronoi_true}
+		\item with weighted unit disks or squares admit QPTAS \cite{voronoi_true}
 		\item with axis-parallel rectangles is APX-hard \cite{settling_apx_hardness}
 	\end{enumerate}
 \subsection{Parametrization}

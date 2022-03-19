@@ -1,6 +1,5 @@
 \chapter{Introduction}
 
-\section{Background}
 Some of the problems are very well known to be NP-complete, like
 Set Cover problem. Even so they still can have a variety
 of different properties. Set Cover problem has been proven
@@ -11,7 +10,7 @@ In this paper we take a closer look at Geometric Set Cover problem
 on a plane, where points to cover are points on a plane
 and sets to cover them with are geometric objects.
 
-\subsection{Approximation}
+\paragraph{Approximation}
 Over the years there have been a lot of work related to approximation
 of Geometric Set Cover. Notabely 
 Geometric Set Cover with unweighted unit disks admits PTAS, see
@@ -24,7 +23,7 @@ proves that cover with unweighted axis-parallel rectangles
 is APX-hard as well as set cover with many other
 standard geometric objects.
 
-\subsection{Parametrization}
+\paragraph{Parametrization}
 We consider Geometric Set Cover 
 parameterized by the size of solution in paremetrized setting.
 Geomtric Set Cover with unit squares is proven to be W[1]-hard 
@@ -40,17 +39,16 @@ such as Subset Sum or Knapsack are presented in \cite{kernel_weighted}.
 Another work \cite{weighted_flow} presents weighted
 parametrization of Weighted Directed Feedback Set and Weighted $st$-Cut.
 
-\subsection{$\delta$-extensions}
-In this paper, we focus on Geometric Set Cover wih segments
-in various settings, ie. $\delta$-extensions, weighted segments
-and investigate whether approximation and FPT algorithms exist.
+\paragraph{$\delta$-extensions}
+In this paper, we focus on Geometric Set Cover wih segments with $\delta$-extensions.
+$\delta$-extensions is a problem relaxation method based on
+$\delta$-shrinking model which was introduced in \cite{shrinking_original}
+and used is later works \cite{shrinking1} and \cite{shrinking2}.
 
-\begin{enumerate}
-\item based on $\delta$-shrinking \cite{shrinking_original}, \cite{shriking1} and \cite{shrinking2}.
-\item with fat polygons with $\delta$-extensions (with similar model of extensions) admits EPTAS \cite{harpeled12}
-\end{enumerate}
+Similar model is used to prove that Geometric Set Cover with fat polygons
+relaxed with $\delta$-extensions admits EPTAS \cite{harpeled12}.
 
-\section{Our contribution}
+\section*{Our contribution}
 \begin{enumerate}
 \item Approximation of uweighted geometric set cover with axis-parallel segments
 (even if we relax it with  $\frac{1}{2}$-extensions) is APX-hard

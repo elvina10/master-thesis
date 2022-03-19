@@ -1,24 +1,27 @@
 \chapter{Introduction}
 
-Some of the problems are very well known to be NP-complete, like
-Set Cover problem. Even so they still can have a variety
-of different properties. Set Cover problem has been proven
+Some problems in Computer Science are known to be NP-complete,
+meaning that assuming P$\neq$NP there is no polynomial time
+algorithm that can solve these problems.
+Even so, they still can have a variety of interesting properties.
+Set Cover is one classical example of an NP-complete problem,
+which has been proven
 in literature to be APX-hard and W[2]-hard \cite{platypus_book}.
-We can also restrict a problem to look at it in various setting,
-what can yield more insteresting complexity and apporximation results.
+We can also restrict the problem to various specialized settings,
+what can yield more insteresting complexity and approximation results.
 In this paper we take a closer look at Geometric Set Cover problem
 on a plane, where points to cover are points on a plane
 and sets to cover them with are geometric objects.
 
 \paragraph{Approximation}
-Over the years there have been a lot of work related to approximation
-of Geometric Set Cover. Notabely 
+Over the years there has been a lot of work related to approximation
+of Geometric Set Cover. Notably 
 Geometric Set Cover with unweighted unit disks admits PTAS, see
 Corollary 1.1 in \cite{unit_disks}. When we consider the same problem
 with weighted unit disks (or unit squares), the problem admits QPTAS
 \cite{settling_apx_hardness}, later improved in
 Theorem 2 in \cite{voronoi_true}.
-Although \cite{rectangles_apx_hard} 
+On the other hand, \cite{rectangles_apx_hard} 
 proves that cover with unweighted axis-parallel rectangles
 is APX-hard as well as set cover with many other
 standard geometric objects.

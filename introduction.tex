@@ -49,24 +49,23 @@ Similar model is used to prove that Geometric Set Cover with fat polygons
 relaxed with $\delta$-extensions admits EPTAS \cite{harpeled12}.
 
 \section*{Our contribution}
-\begin{enumerate}
-\item Approximation of uweighted geometric set cover with axis-parallel segments
+Approximation of uweighted Geometric Set Cover with axis-parallel segments
 (even if we relax it with  $\frac{1}{2}$-extensions) is APX-hard
-(Theorem \ref{segment_cover_apx_hard})
-	\begin{enumerate}
-	\item Stronger result than cover with unweighted axis-parallel
-	rectangles being APX-hard in \cite{rectangles_apx_hard}
-	\item This proves that assumption about polgons being fat for
-	the EPTAS in \cite{harpeled12} is a necessary condition
-	\end{enumerate}
-\item unweighted segments admit FPT algorithm (Theorem \ref{segment_cover_fpt})
-\item weighted segments relaxed with $\delta$-extensions admit FPT (Theorem \ref{fpt_weighted_segment}),
-    see Figure \ref{tab:weighted_fpt}
-\item weighted axis-parallel segments is W[1]-hard (Theorem \ref{w1_hard}),
-    see Figure \ref{tab:weighted_fpt}
+(Theorem \ref{segment_cover_apx_hard}).
+This expands the previous result of Geometric Set Cover
+with unweighted axis-parallel rectangles being APX-hard in \cite{rectangles_apx_hard}.
+That also proves that assumption in \cite{harpeled12}
+for EPTAS about polygons being fat is a necessary, because
+cover with any polygons with $\delta$-extensions is APX-hard.
 
-\end{enumerate}
-
+We also provide two FPT algorithms for parametrized Geometric Set Cover 	
+with unweighted segments (Theorem~\ref{segment_cover_fpt})
+and weighted segments relaxed with $\delta$-extensions
+(Theorem~\ref{fpt_weighted_segment}).
+But Geometric Set Cover with weighted
+axis-parallel segments is W[1]-hard (Theorem~\ref{w1_hard}).
+See Figure \ref{tab:weighted_fpt} for summary of parametrized
+results for weighted setting.
 
 \begin{figure}[h]
 \begin{center}
@@ -76,7 +75,7 @@ relaxed with $\delta$-extensions admits EPTAS \cite{harpeled12}.
 \hline                
  axis-parallel   & W[1]-hard & FPT* \\  
 \hline                
- any             & W[1]-hard* & FPT \\
+ any direction   & W[1]-hard* & FPT \\
 \hline                
 \end{tabular}
 \caption{\textbf{Our results for Geometric Set Cover problem with weighted segments 

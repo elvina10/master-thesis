@@ -15,12 +15,15 @@ and sets to cover them with are geometric objects.
 Over the years there have been a lot of work related to approximation
 of Geometric Set Cover. Notabely 
 Geometric Set Cover with unweighted unit disks admits PTAS, see
-Corollary 1.1 in \cite{unit_disks}.
+Corollary 1.1 in \cite{unit_disks}. When we consider the same problem
+with weighted unit disks (or unit squares), the problem admits QPTAS
+\cite{settling_apx_hardness}, later improved in
+Theorem 2 in \cite{voronoi_true}.
+Although \cite{rectangles_apx_hard} 
+proves that cover with unweighted axis-parallel rectangles
+is APX-hard as well as with many other
+standard geometric objects.
 
-	\begin{enumerate}
-		\item with weighted unit disks or squares admit QPTAS \cite{voronoi_true}
-		\item with axis-parallel rectangles is APX-hard \cite{settling_apx_hardness}
-	\end{enumerate}
 \subsection{Parametrization}
 Geometric set cover parameterized by size of solution
 	\begin{enumerate}
@@ -47,7 +50,7 @@ and investigate whether approximation and FPT algorithms exist.
 (Theorem \ref{segment_cover_apx_hard})
 	\begin{enumerate}
 	\item Stronger result than cover with unweighted axis-parallel
-	rectangles being APX-hard in \cite{settling_apx_hardness}
+	rectangles being APX-hard in \cite{rectangles_apx_hard}
 	\item This proves that assumption about polgons being fat for
 	the EPTAS in \cite{harpeled12} is a necessary condition
 	\end{enumerate}

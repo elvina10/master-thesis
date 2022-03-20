@@ -153,27 +153,6 @@ APX-completeness, PCP theorem, NP-completeness}
 \input{segments.tex}
 \input{fpt_weighted_segments.tex}
 \input{w1_hardness.tex}
-
-\chapter{Geometric Set Cover with polygons}
-\section{State of the art}
-
-Covering points with weighted discs admits PTAS \cite{li}
-and with fat polygons with $\delta$-extensions with unit weights
-admits EPTAS \cite{harpeled12}.
-
-Although with thin objects, even if we allow $\delta$-expansion,
-the Set Cover with rectangles
-is APX-complete (for~$\delta = 1/2$),
-it follows from APX-completeness for segments with $\delta$-expansion
-in Section \ref{section:segment_apx}.
-
-Covering points with squares is W[1]-hard \cite{marx05}.
-It can be proven that assuming $SETH$,
-there is no $f(k)\cdot(|\points|+|\sets|)^{k-\epsilon}$ time algorithm
-for any computable function $f$ and $\epsilon >0$ that decides if there
-are $k$ polygons in $\sets$ that together cover $\points$,
-\textit{Theorem 1.9} in \cite{voronoi}.
-
 \input{conclusions.tex}
 
 \bibliographystyle{apalike}

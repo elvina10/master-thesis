@@ -29,8 +29,12 @@ standard geometric objects.
 \paragraph{Parametrization}
 We consider Geometric Set Cover 
 parameterized by the size of solution.
-Geometric Set Cover with unit squares is proven to be W[1]-hard 
-Theorem 5 in \cite{marx05}.
+Geometric Set Cover with unit squares is first proven to be W[1]-hard 
+Theorem 5 in \cite{marx05}, later work \cite{voronoi}
+shows that there is an algorithm running in time $O(n^{\sqrt{k}})$
+that solves Geometric Set Cover with unit squares or disks
+and that there is no algorithm running in time $f(k) \cdot n^{\sqrt{k}-\epsilon}$
+for any $\epsilon > 0$, so this is a tight bound for this problem.
 
 We also consider parametrization in the weighted setting.
 There does not seem to be a consensus of what parametrization
@@ -73,8 +77,6 @@ and assiming ETH there does not exist algorithm for this problem
 that runs in time $f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$.
 See Figure \ref{tab:weighted_fpt} for a summary of parameterized
 results for the weighted setting.
-
-TODO: cite bounds from other voronoi diagrams paper
 
 \begin{figure}[h]
 \begin{center}

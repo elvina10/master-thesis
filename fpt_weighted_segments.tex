@@ -316,9 +316,9 @@ We define $\points':= D \cup (\bigcup A_i)$. $\points'$ has size at most
 $k^2 + k(2+\frac{2}{\delta})^k$.
 We define $\sets'$ as
 for every pair of points $\points'$, we can choose one segment from
-$\sets$ that have the lowest weight
+$\sets$ that has the lowest weight
 among segments that cover these points 
-or decide there is no segment that cover them.
+or decide that there is no segment that covers them.
 There are at most $|\points'|^2$ different segments in $\sets'$,
 Therefore both $\sets'$ and $\points'$ have size bounded
 by some function $f(k)$.
@@ -351,9 +351,9 @@ let us look at the points from $\points'$ that lie on $s$
 and call this set of points $F$.
 $F$ is a set of collinear points for course.
 We can cover $F$ with any segment that covers extreme points of $F$,
-because all other points lay on the segment between these points.
-Therefore we can change $s$ to a segment $s'$
-that have lowest weight among the points that cover extreme points of $F$.
+because all other points lie on the segment between these points.
+Therefore we can replace $s$ with a segment $s'$
+that has lowest weight among the points that cover extreme points of $F$.
 Such a segment belongs to $\sets'$, because this is how it was defined.
 Of course segment $s'$ also have weight no greater than weight of $s$,
 because $s$ also covers $F$.
@@ -362,8 +362,10 @@ Therefore we produced the set $\sol_1$ that has the same size,
 weight not greather than $\sol$ and it covers $\points'$.
 
 \paragraph{Complexity}
+We find solutin of $(\points', \sets')$ by iterating
+over all possible subsets of $\sets$.
 Finding sets $\sets'$ and $\points'$ and then solving 
-problem for $(\points', \sets')$ has overall complexity
-$(|\sets| + |\points|)^{O(1)}O((2 + \frac{2}{\delta})^k)$.
+problem for kernel has overall complexity
+$(|\sets| + |\points|)^{O(1)}O((2 + \frac{2}{\delta})^k) + O((k^2 + k(2 + \frac{2}{\delta})^k)^k)$.
 \end{proof}
 

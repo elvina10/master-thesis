@@ -266,18 +266,32 @@ geometric set cover instance.
 We are now ready to give a proof of Theorem \ref{fpt_weighted_segment}.
 
 \begin{proof}[Proof of Theorem \ref{fpt_weighted_segment}]
+Our goal is to either answer \texttt{NO} or to find a kernel
+$(\sets', \points')$ of bounded size, such that:
+\begin{itemize}
+\item \textit{(Property 1)} for every solution
+$\sol$ to $(\sets, \points)$ of size at most $k$,
+there exists a set $\sol_1 \subseteq \sets'$ such that
+$\sol_1 \le k$, weight of $\sol_1$ is not greater than weight of $\sol$
+and $\sol_1$ covers $\points'$;
+\item \textit{(Property 2)}
+for every set $\sol_2 \subseteq \sets'$ such that $|\sol_2| \le k$
+and $\sol_2$ covers points in $\points'$, $\sol_2^{+\delta}$
+covers points in original instance $\points$.
+\end{itemize}
 
+Let us name the number of different long lines as $l$.
 Applying Claims \ref{few_long_lines} and \ref{few_points},
 if we have more than $k$ different long lines
 or more than $k^2$ points from $\points$
-that do not lie on any long line, then we answer that
-there is no solution of size at most $k$.
-Let us name the number of different long lines as $l$.
+that do not lie on any long line, then we answer \texttt{NO},
+becase these lemmas prove that there is no solution of size at most $k$
+to this instance.
 
 Otherwise, we can split $\points$ into at most $k+1$ sets:
 \begin{itemize}
-\item $D$: at most $k^2$ points that do not lie on any long line;
-\item $C_i$ for $1 \le i \le l$: points that lie on the $i$-th long line.
+\item $D$: points that do not lie on any long line, $|D| \le k^2$;
+\item $C_i$ for $1 \le i \le l$: points that lie on the $i$-th long line, $|C_i| > k$.
 \end{itemize}
 Note that sets $C_i$ do not need to be disjoint.
 
@@ -285,53 +299,59 @@ Then for every set $C_i$ we can use Lemma \ref{dense_set_exists}
 to obtain a $(k,\delta)$-dense set $A_i$
 for $C_i$ with $|A_i| \le (2+\frac{2}{\delta})^k$.
 
-Then we have a set $\points' = D \cup (\bigcup A_i)$ of size at most
+\paragraph{Definition of $\points'$ and $\sets'$.}
+We define $\points':= D \cup (\bigcup A_i)$. $\points'$ has size at most
 $k^2 + k(2+\frac{2}{\delta})^k$.
-Observe that if we have a solution $\sol$ of size at most $k$
-that covers $\points'$, then $\sol^{+\delta}$ covers $\points$.
-
-$\points$ is separated into several parts -- sets $D$ and $C_i$.
-Points from $D$ are covered by $\sol$, because $D$ is part of $\points'$.
-Each $A_i$ is covered, because $A_i$ is part of $\points'$;
-$A_i$ is a $(k,\delta)$-dense set for $C_i$, therefore $\sol^{+\delta}$ covers $C_i$.
-
-After that we shrunk down $\points$ to $\points'$ of size $f(k, \delta)$
-for some computable function $f$.
-Then we would like to shrink down $\sets$ to some set of
-relevant segments of bounded size as well.
-
-For every pair of points $\points'$, we can choose one segment from
+We define $\sets'$ as
+for every pair of points $\points'$, we can choose one segment from
 $\sets$ that have the lowest weight
 among segments that cover these points 
 or decide there is no segment that cover them.
-Call this set $\sets'$ and name these segments \textbf{interesting}.
-There are at most $|\points'|^2$ different segments in $\sets'$.
+There are at most $|\points'|^2$ different segments in $\sets'$,
+Therefore both $\sets'$ and $\points'$ have size bounded
+by some function $f(k)$.
 
-We need to show that when we cover $\points'$
-with segments from $\sets'$ we achieve the same minimal
-solution as when we cover them with segments from $\sets$. 
-In order to prove this,
-consider a minimal solution $\sol$ that covers $\points'$
-with segments from $\sets'$
-and take any segment $s$ from $\sol$.
-Let us look at the points from $\points'$ that lie on $s$
+\paragraph{Proof of Property 1.}
+First, we prove that
+for every set $\sol_2 \subseteq \sets'$ such that $|\sol_2| \le k$
+and $\sol_2$ covers points in $\points'$, $\sol_2^{+\delta}$
+covers points in original instance $\points$.
+
+Let us take such a set $\sol_2$.
+
+$\points$ is separated into several parts -- sets $D$ and $C_i$.
+Points from $D$ are covered by $\sol_2$, because $D$ is part of $\points'$.
+Each point from any $A_i$ is covered, because $A_i$ is a part of $\points'$;
+$A_i$ is a $(k,\delta)$-dense set for $C_i$, therefore $\sol_2^{+\delta}$
+covers all points in $C_i$. Therefore $\sol_2^{+\delta}$ covers
+all points in $\points$.
+
+\paragraph{Proof of Property 2.}
+Secondly, we prove that for every solution
+$\sol$ to $(\sets, \points)$ of size at most $k$,
+there exists a set $\sol_1 \subseteq \sets'$ such that
+$\sol_1 \le k$ and
+$\sol_1^{+\delta}$ covers all points in $\points$ and
+weight of $\sol_1$ is not greater than weight of $\sol$.
+
+For every segment in $\sol$, say $s$,
+let us look at the points from $\points'$ that lie on $s$
 and call this set of points $F$.
 $F$ is a set of collinear points for course.
 We can cover $F$ with any segment that covers extreme points of $F$,
 because all other points lay on the segment between these points.
-Therefore we can change $s$ to an interesting segment $s'$
-and interesting segments are defined in such a way, that $s'$
-has weight no larger than weight of $s$.
+Therefore we can change $s$ to a segment $s'$
+that have lowest weight among the points that cover extreme points of $F$.
+Such a segment belongs to $\sets'$, because this is how it was defined.
+Of course segment $s'$ also have weight no greater than weight of $s$,
+because $s$ also covers $F$.
 
-This has complexity $O(|\points'|^2|\sets|)$ and produces shrunk down
-set of segments $\sets'$ of size $f(k, \delta)$
-for some computable function $f$.
+Therefore we produced the set $\sol_1$ that has the same size,
+weight not greather than $\sol$ and it covers $\points'$.
 
-Then we can iterate over all subsets of $\sets'$ and
-choose the set with the lowest sum of weights that cover $\points'$.
-This solution
-would have weight not larger than optimal
-solution to the problem without extension, because we iterate
-over all posibilities of covering the subset of $\points'$.
+\paragraph{Complexity}
+Finding sets $\sets'$ and $\points'$ and then solving 
+problem for $(\points', \sets')$ has overall complexity
+$(|\sets| + |\points|)^{O(1)}O((2 + \frac{2}{\delta})^k)$.
 \end{proof}
 

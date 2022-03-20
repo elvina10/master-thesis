@@ -1,13 +1,13 @@
-\chapter{W[1]-hardness for weighted segments in 3 directions}
+\chapter{W[1]-hardness for axis-parallel weighted segments}
 \label{chapter:w1_hard}
 
-In this chapter we consider geometric set cover problem with weighted segments.
+In this chapter we consider geometric set cover problem with 
+axis-parallel weighted segments.
 In Theorem~\ref{w1_hard} below, we prove that this problem is 
 W[1]-hard when parameterized by the size of the solution.
-We~additionally restrict the problem to only use segments
-in three directions to achieve a stronger result.
-W[1]-hardness is proved by a reduction from the grid tiling problem,
-which was introduced in \cite{marx_grid_tiling}.
+For simplicity we present here solution that uses segments in
+3 directions, but there exists isomorphism that transposes
+these points in such a way, that all segments become axis-parallel.
 
 \begin{defi}
 	A line is \textbf{right-diagonal} if it is
@@ -34,8 +34,8 @@ which was introduced in \cite{marx_grid_tiling}.
 
 In~order to prove Theorem \ref{w1_hard}
 we will show reduction from a W[1]-hard problem.
-We introduce the grid tiling problem, which is proven
-to be W[1]-complete in literature TODO: add reference.
+We introduce the grid tiling problem,
+which was introduced and proved to be W[1]-hard in \cite{marx_grid_tiling}.
 
 \newcommand{\pow}{\mathsf{Pow}}
 

@@ -280,6 +280,19 @@ and $\sol_2$ covers points in $\points'$, $\sol_2^{+\delta}$
 covers points in original instance $\points$.
 \end{itemize}
 
+If we found such sets $(\sets', \points')$,
+using \textit{Property 1} we know that optimum solution 
+of size at most $k$ to $(\points', \sets')$
+has no greater weight than optimum solution
+of size at most $k$ to $(\points, \sets)$.
+Using \textit{Property 2} we know that
+any solution to $(\points', \sets')$
+after $\delta$-extensions covers $\points$.
+
+Therefore finding such sets in desired complexity
+is sufficient to prove Theorem \ref{fpt_weighted_segment}.
+
+\paragraph{Definition of $\points'$ and $\sets'$.}
 Let us name the number of different long lines as $l$.
 Applying Claims \ref{few_long_lines} and \ref{few_points},
 if we have more than $k$ different long lines
@@ -299,7 +312,6 @@ Then for every set $C_i$ we can use Lemma \ref{dense_set_exists}
 to obtain a $(k,\delta)$-dense set $A_i$
 for $C_i$ with $|A_i| \le (2+\frac{2}{\delta})^k$.
 
-\paragraph{Definition of $\points'$ and $\sets'$.}
 We define $\points':= D \cup (\bigcup A_i)$. $\points'$ has size at most
 $k^2 + k(2+\frac{2}{\delta})^k$.
 We define $\sets'$ as

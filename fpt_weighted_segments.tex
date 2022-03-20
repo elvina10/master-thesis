@@ -267,12 +267,12 @@ We are now ready to give a proof of Theorem \ref{fpt_weighted_segment}.
 
 \begin{proof}[Proof of Theorem \ref{fpt_weighted_segment}]
 Our goal is to either answer \texttt{NO} or to find a kernel
-$(\sets', \points')$ of bounded size, such that:
+$(\sets', \points')$ of size bounded by $f(k)$ for some function $f$, such that:
 \begin{itemize}
 \item \textit{(Property 1)} for every solution
 $\sol$ to $(\sets, \points)$ of size at most $k$,
 there exists a set $\sol_1 \subseteq \sets'$ such that
-$\sol_1 \le k$, weight of $\sol_1$ is not greater than weight of $\sol$
+$|\sol_1| \le k$, weight of $\sol_1$ is not greater than weight of $\sol$
 and $\sol_1$ covers $\points'$;
 \item \textit{(Property 2)}
 for every set $\sol_2 \subseteq \sets'$ such that $|\sol_2| \le k$
@@ -289,7 +289,11 @@ Using \textit{Property 2} we know that
 any solution to $(\points', \sets')$
 after $\delta$-extensions covers $\points$.
 
-Therefore finding such sets in desired complexity
+Therefore finding such sets 
+and solving the instance $(\sets', \points')$
+by iterating over all of the subsets of $\sets'$
+of size at most $k$
+in desired complexity
 is sufficient to prove Theorem \ref{fpt_weighted_segment}.
 
 \paragraph{Definition of $\points'$ and $\sets'$.}
@@ -308,7 +312,7 @@ Otherwise, we can split $\points$ into at most $k+1$ sets:
 \end{itemize}
 Note that sets $C_i$ do not need to be disjoint.
 
-Then for every set $C_i$ we can use Lemma \ref{dense_set_exists}
+Then, for every set $C_i$ we can use Lemma \ref{dense_set_exists}
 to obtain a $(k,\delta)$-dense set $A_i$
 for $C_i$ with $|A_i| \le (2+\frac{2}{\delta})^k$.
 
@@ -320,14 +324,14 @@ $\sets$ that has the lowest weight
 among segments that cover these points 
 or decide that there is no segment that covers them.
 There are at most $|\points'|^2$ different segments in $\sets'$,
-Therefore both $\sets'$ and $\points'$ have size bounded
-by some function $f(k)$.
+therefore both $\sets'$ and $\points'$ have size bounded
+by $O(k^4 + k^2(2+\frac{2}{\delta})^2k)$.
 
 \paragraph{Proof of Property 1.}
 First, we prove that
 for every set $\sol_2 \subseteq \sets'$ such that $|\sol_2| \le k$
 and $\sol_2$ covers points in $\points'$, $\sol_2^{+\delta}$
-covers points in original instance $\points$.
+covers points in the original instance $\points$.
 
 Let us take such a set $\sol_2$.
 

@@ -327,7 +327,7 @@ There are at most $|\points'|^2$ different segments in $\sets'$,
 therefore both $\sets'$ and $\points'$ have size bounded
 by $O(k^4 + k^2(2+\frac{2}{\delta})^2k)$.
 
-\paragraph{Proof of Property 1.}
+\paragraph{Proof of Property 2.}
 First, we prove that
 for every set $\sol_2 \subseteq \sets'$ such that $|\sol_2| \le k$
 and $\sol_2$ covers points in $\points'$, $\sol_2^{+\delta}$
@@ -342,32 +342,32 @@ $A_i$ is a $(k,\delta)$-dense set for $C_i$, therefore $\sol_2^{+\delta}$
 covers all points in $C_i$. Therefore $\sol_2^{+\delta}$ covers
 all points in $\points$.
 
-\paragraph{Proof of Property 2.}
+\paragraph{Proof of Property 1.}
 Secondly, we prove that for every solution
 $\sol$ to $(\sets, \points)$ of size at most $k$,
 there exists a set $\sol_1 \subseteq \sets'$ such that
-$\sol_1 \le k$ and
-$\sol_1^{+\delta}$ covers all points in $\points$ and
-weight of $\sol_1$ is not greater than weight of $\sol$.
+$|\sol_1| \le k$, weight of $\sol_1$ is not greater than weight of $\sol$.
 
 For every segment in $\sol$, say $s$,
 let us look at the points from $\points'$ that lie on $s$
 and call this set of points $F$.
-$F$ is a set of collinear points for course.
+$F$ is of course a set of collinear points.
 We can cover $F$ with any segment that covers extreme points of $F$,
 because all other points lie on the segment between these points.
 Therefore we can replace $s$ with a segment $s'$
 that has lowest weight among the points that cover extreme points of $F$.
 Such a segment belongs to $\sets'$, because this is how it was defined.
-Of course segment $s'$ also have weight no greater than weight of $s$,
+Segment $s'$ has weight no greater than the weight of $s$,
 because $s$ also covers $F$.
 
-Therefore we produced the set $\sol_1$ that has the same size,
+Therefore we produced the set $\sol_1$ that has size not greater
+than size of $\sol$ (because some segments $s$ can map
+to the same segment $s'$),
 weight not greather than $\sol$ and it covers $\points'$.
 
 \paragraph{Complexity}
-We find solutin of $(\points', \sets')$ by iterating
-over all possible subsets of $\sets$.
+We find a solution of $(\points', \sets')$ by iterating
+over all the possible subsets of $\sets'$.
 Finding sets $\sets'$ and $\points'$ and then solving 
 problem for kernel has overall complexity
 $(|\sets| + |\points|)^{O(1)}O((2 + \frac{2}{\delta})^k) + O((k^2 + k(2 + \frac{2}{\delta})^k)^k)$.

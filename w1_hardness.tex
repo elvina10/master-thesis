@@ -34,7 +34,7 @@ these points in such a way, that all segments become axis-parallel.
 
 In~order to prove Theorem \ref{w1_hard}
 we will show reduction from a W[1]-hard problem.
-We introduce the grid tiling problem,
+We~introduce the grid tiling problem,
 which was introduced and proved to be W[1]-hard in \cite{marx_grid_tiling}.
 
 \newcommand{\pow}{\mathsf{Pow}}
@@ -77,10 +77,13 @@ algorithm solving the grid tiling problem
 for any computable function $f$.
 \end{tw}
 
+TODO: Add a theorem about contruction issue 46
+
 The remainder of this section is devoted to proving Theorem \ref{w1_hard}
-by a reduction from a grid tiling problem instance
-to a geometric set cover instance.
-That proves the W[1]-hardness of the geometric set cover problem,
+by a reduction from a~grid tiling problem instance
+with parameter (number of rows in the grid) $k$
+to a geometric set cover instance with parameter (size of solution) $k^2$.
+This proves the W[1]-hardness of the geometric set cover problem,
 because if we could solve it with an FPT algorithm,
 then we could also solve the grid tiling problem
 (which we reduced to the geometric set cover).

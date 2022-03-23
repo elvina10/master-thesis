@@ -130,7 +130,7 @@ because the other case is trivial.
 Since $A \cap \points \subseteq B \cap \points$,
 then $\sol \cup \{B\} - \{A\}$
 covers any point from $\points$ that was covered by $\sol$.
-Also $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
+Also, $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
 \end{proof}
 
 \begin{lemma}
@@ -149,8 +149,8 @@ Also $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
 Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots x_t$
 in the order in which they appear on $L$.
 Our proposed set is defined as:
-$$A := \{ \text{segment collinear with } L \text{ that covers } x_i
-\text{ and does not cover } x_{i-1} : i \in 1, \ldots k\}.$$
+$$A := \left\{ \text{segment collinear with } L \text{ that covers } x_i
+\text{ and does not cover } x_{i-1} : i \in \{1, \ldots k\}\right\}.$$
 Where for $i = 1$ we just take a segment that covers $x_1$.
 
 If such a segment does not exist for any point $x$
@@ -170,12 +170,12 @@ but $L$ had at least $k+1$ different points from $\points$ on it.
 
 Therefore, we know that $\sol_L$ is not empty
 and $|\sol - \sol_L| \le k-1$.
-Segments from $\sol_L$ can cover at most $k-1$
+Segments from $\sol - \sol_L$ can cover at most $k-1$
 points among $\{x_1, x_2, \ldots x_k\}$, therefore at least
 one of these points must be covered by segments from $\sol_L$.
 We take the leftmost point from $\{x_1, x_2, \ldots x_k\}$ that is
 covered in $\sol_L$ and name it $a$.
-After transformation from Lemma \ref{fpt_reduction},
+After the transformation from Lemma \ref{fpt_reduction},
 in $\sol$ there is only one segment
 that starts in $a$ and is collinear with $L$,
 therefore this segment must be in both $\sol$ and $A$.
@@ -202,7 +202,7 @@ we branch over the choice of adding to~the~solution
 one of~the~at~most $k$ possible segments
 provided by Lemma \ref{fpt_long_lines}; name this segment $s$
 and name the set of points from $\points$ that lie on $s$ as $S$.
-By recursion we find a~solution $\sol$
+By recursion, we find a~solution $\sol$
 for the instance $(\points - S, \sets - \{s\})$,
 and parameter $k-1$. We return $\sol \cup \{s\}$.
 Note that if Lemma \ref{fpt_long_lines} returned $\emptyset$,
@@ -246,6 +246,6 @@ Reduction from Lemma \ref{fpt_reduction} can be implemented
 in time $\mathcal{O}((|\points|\cdot|\sets|)^{\mathcal{O}(1)})$.
 
 It follows that the overall complexity
-is $\mathcal{O}((|\points|\cdot|\sets|)^{\mathcal{O}(1)}) \cdot k^{\mathcal{O}(k)})$
+is $\mathcal{O}(((|\points|\cdot|\sets|)^{\mathcal{O}(1)}) \cdot k^{\mathcal{O}(k)})$
 \end{proof}
 

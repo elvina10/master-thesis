@@ -105,7 +105,9 @@ of such segments $v_i$ and $t_i$.
 
 \begin{figure}[h]
 \begin{center}
-\def\svgwidth{\columnwidth}
+\centering
+\hspace*{0.6cm}
+\def\svgwidth{\textwidth}
 \input{fpt_v_t_def.pdf_tex}
 \end{center}
 \caption{\textbf{Example of segments $v_i$ and $t_i$.}}
@@ -118,7 +120,7 @@ Red segments depict the split into $M$ segments of equal length $v_i$.
 Blue segments depict the segments $t_i$. $t_5$ is an empty segment,
 because there are no points that lie on segment $v_5$.
 Segments $t_3$ and $t_7$ are degenerated to one point --
-$c$ and $d$ respectively.
+$c$ and $d$, respectively.
 Segments $t_1$ and $t_2$ share one point $b$.
 \label{fig:fpt_v_f_def}
 \end{figure}
@@ -154,7 +156,7 @@ does not exist, then all $k+1$ segments that cover
 $A_i$ intersect $t_i$.
 An example of such segments is depicted in Figure~\ref{fig:fpt_tricky_case}.
 Let us consider any such $t_i$.
-By inductive hypothesis, the endpoints of $s$ are
+By the inductive hypothesis, the endpoints of $s$ are
 in $A_1$ and $A_M$ respectively, so $\sol$ must cover them.
 For each endpoint of $s$, there exists
 a segment that contains this endpoint and intersects $t_i$.
@@ -204,7 +206,7 @@ These properties provide bounds for different
 objects in the problem instance,
 which help us to find a small kernel for the problem
 or conclude that the optimum
-solution to this instance must be in terms of size, above some treshold.
+solution to this instance must be, in terms of size, above some treshold.
 
 \begin{defi}
 A line in the plane is \textbf{long}
@@ -265,12 +267,15 @@ geometric set cover instance.
 
 We are now ready to give a proof of Theorem \ref{fpt_weighted_segment}.
 
+\newcommand{\instance}{(\points,\sets)}
+\newcommand{\instancePrim}{(\points',\sets')}
+
 \begin{proof}[Proof of Theorem \ref{fpt_weighted_segment}]
 Our goal is to either answer \texttt{NO} or to find a kernel
-$(\sets', \points')$ of size bounded by $f(k)$ for some function $f$, such that:
+$\instancePrim$ of size bounded by $f(k)$ for some function $f$, such that:
 \begin{itemize}
 \item \textit{(Property 1)} for every solution
-$\sol$ to $(\sets, \points)$ of size at most $k$,
+$\sol$ to $\instance$ of size at most $k$,
 there exists a set $\sol_1 \subseteq \sets'$ such that
 $|\sol_1| \le k$, weight of $\sol_1$ is not greater than weight of $\sol$
 and $\sol_1$ covers $\points'$;
@@ -280,17 +285,17 @@ and $\sol_2$ covers points in $\points'$, $\sol_2^{+\delta}$
 covers points in original instance $\points$.
 \end{itemize}
 
-If we found such sets $(\sets', \points')$,
+If we found such sets $\instancePrim$,
 using \textit{Property 1} we know that optimum solution 
-of size at most $k$ to $(\points', \sets')$
+of size at most $k$ to $\instancePrim$
 has no greater weight than optimum solution
-of size at most $k$ to $(\points, \sets)$.
+of size at most $k$ to $\instance$.
 Using \textit{Property 2} we know that
-any solution to $(\points', \sets')$
+any solution to $\instancePrim$
 after $\delta$-extensions covers $\points$.
 
 Therefore finding such sets 
-and solving the instance $(\sets', \points')$
+and solving the instance $\instancePrim$
 by iterating over all of the subsets of $\sets'$
 of size at most $k$
 in desired complexity
@@ -344,7 +349,7 @@ all points in $\points$.
 
 \paragraph{Proof of Property 1.}
 Secondly, we prove that for every solution
-$\sol$ to $(\sets, \points)$ of size at most $k$,
+$\sol$ to $\instance$ of size at most $k$,
 there exists a set $\sol_1 \subseteq \sets'$ such that
 $|\sol_1| \le k$, weight of $\sol_1$ is not greater than weight of $\sol$.
 
@@ -366,7 +371,7 @@ to the same segment $s'$),
 weight not greather than $\sol$ and it covers $\points'$.
 
 \paragraph{Complexity}
-We find a solution of $(\points', \sets')$ by iterating
+We find a solution of $\instancePrim$ by iterating
 over all the possible subsets of $\sets'$.
 Finding sets $\sets'$ and $\points'$ and then solving 
 problem for kernel has overall complexity

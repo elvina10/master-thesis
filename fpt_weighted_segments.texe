@@ -59,7 +59,7 @@ for our original problem.
 	there exists a $(k,\delta)$-dense set $A \subseteq C$ of size
 	at most $(2+\frac{2}{\delta})^k$.
 	Moreover, there exists an algorithm that computes the $(k,\delta)$-dense set
-	in time $\mathcal{O}(|C| \cdot (2+\frac{2}{\delta})^k)$.
+	in time $O(|C| \cdot (2+\frac{2}{\delta})^k)$.
 \end{lemma}
 
 \begin{proof}
@@ -325,7 +325,7 @@ among segments that cover these points
 or decide that there is no segment that covers them.
 There are at most $|\points'|^2$ different segments in $\sets'$,
 therefore both $\sets'$ and $\points'$ have size bounded
-by $\mathcal{O}(k^4 + k^2(2+\frac{2}{\delta})^2k)$.
+by $O(k^4 + k^2(2+\frac{2}{\delta})^2k)$.
 
 \paragraph{Proof of Property 2.}
 First, we prove that
@@ -370,6 +370,6 @@ We find a solution of $(\points', \sets')$ by iterating
 over all the possible subsets of $\sets'$.
 Finding sets $\sets'$ and $\points'$ and then solving 
 problem for kernel has overall complexity
-$(|\sets| + |\points|)^{\mathcal{O}(1)}\mathcal{O}((2 + \frac{2}{\delta})^k) + \mathcal{O}((k^2 + k(2 + \frac{2}{\delta})^k)^k)$.
+$(|\sets| + |\points|)^{O(1)}O((2 + \frac{2}{\delta})^k) + O((k^2 + k(2 + \frac{2}{\delta})^k)^k)$.
 \end{proof}
 

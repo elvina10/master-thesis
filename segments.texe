@@ -39,7 +39,7 @@ with unweighted segments, where segments are in arbitrary directions.
 	axis-parallel segments,
 	a set of points $\points$
 	and a parameter $k$,
-	runs in time $\mathcal{O}(2^k)$,
+	runs in time $O(2^k)$,
 	and outputs a solution $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol$ covers all points in~$\points$,
 	or determines that such a set $\sol$ does not exist.
@@ -95,7 +95,7 @@ parameterized by the size of the solution.
 	segments (in any direction),
 	a set of points $\points$
 	and a parameter $k$,
-	runs in time $k^{\mathcal{O}(k)} \cdot (|\points|\cdot|\sets|)^2$,
+	runs in time $k^{O(k)} \cdot (|\points|\cdot|\sets|)^2$,
 	and outputs a solution $\sol \subseteq \sets$
 	such that $|\sol| \le k$ and $\sol$ covers all points in~$\points$,
 	or determines that such a set $\sol$ does not exist.
@@ -233,19 +233,19 @@ Checking all possible solutions in (3) is trivially correct.
 In the leaves of the recursion we have $|\points| \le k^2$, so $|\sets| \le k^4$,
 because every segment can be uniquely identified by the two extreme points it covers
 (by Lemma \ref{fpt_reduction}). Therefore, there are $\binom{k^4}{k}$
-possible solutions to check, each can be checked in time $\mathcal{O}(k|\points|)$.
-Thus, (3) takes time $k^{\mathcal{O}(k)}$.
+possible solutions to check, each can be checked in time $O(k|\points|)$.
+Thus, (3) takes time $k^{O(k)}$.
 
 
 In this branching algorithm our parameter $k$ is decreased with every
 recursive call, so we have at most $k$ levels of recursion with
 branching over $k$ possibilites. Candidates to branch over
-can be found on each level in time $\mathcal{O}((|\points|\cdot|\sets|)^{\mathcal{O}(1)})$.
+can be found on each level in time $O((|\points|\cdot|\sets|)^{O(1)})$.
 
 Reduction from Lemma \ref{fpt_reduction} can be implemented
-in time $\mathcal{O}((|\points|\cdot|\sets|)^{\mathcal{O}(1)})$.
+in time $O((|\points|\cdot|\sets|)^{O(1)})$.
 
 It follows that the overall complexity
-is $\mathcal{O}((|\points|\cdot|\sets|)^{\mathcal{O}(1)}) \cdot k^{\mathcal{O}(k)})$
+is $O((|\points|\cdot|\sets|)^{O(1)}) \cdot k^{O(k)})$
 \end{proof}
 

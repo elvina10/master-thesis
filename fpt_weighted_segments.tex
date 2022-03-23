@@ -323,14 +323,14 @@ for $C_i$ with $|A_i| \le (2+\frac{2}{\delta})^k$.
 
 We define $\points':= D \cup (\bigcup A_i)$. $\points'$ has size at most
 $k^2 + k(2+\frac{2}{\delta})^k$.
-We define $\sets'$ as
-for every pair of points $\points'$, we can choose one segment from
+We define $\sets'$ as follows: for every pair of points $\points'$,
+we choose one segment from
 $\sets$ that has the lowest weight
 among segments that cover these points 
 or decide that there is no segment that covers them.
 There are at most $|\points'|^2$ different segments in $\sets'$,
 therefore both $\sets'$ and $\points'$ have size bounded
-by $\mathcal{O}(k^4 + k^2(2+\frac{2}{\delta})^2k)$.
+by~$\mathcal{O}\left((k^2 + k(2+\frac{2}{\delta}))^2\right)$.
 
 \paragraph{Proof of Property 2.}
 First, we prove that
@@ -344,14 +344,15 @@ $\points$ is separated into several parts -- sets $D$ and $C_i$.
 Points from $D$ are covered by $\sol_2$, because $D$ is part of $\points'$.
 Each point from any $A_i$ is covered, because $A_i$ is a part of $\points'$;
 $A_i$ is a $(k,\delta)$-dense set for $C_i$, therefore $\sol_2^{+\delta}$
-covers all points in $C_i$. Therefore $\sol_2^{+\delta}$ covers
+covers all points in $C_i$. Therefore, $\sol_2^{+\delta}$ covers
 all points in $\points$.
 
 \paragraph{Proof of Property 1.}
 Secondly, we prove that for every solution
 $\sol$ to $\instance$ of size at most $k$,
 there exists a set $\sol_1 \subseteq \sets'$ such that
-$|\sol_1| \le k$, weight of $\sol_1$ is not greater than weight of $\sol$.
+$|\sol_1| \le k$ and the weight of $\sol_1$ is not greater than
+the weight of $\sol$.
 
 For every segment in $\sol$, say $s$,
 let us look at the points from $\points'$ that lie on $s$
@@ -359,22 +360,23 @@ and call this set of points $F$.
 $F$ is of course a set of collinear points.
 We can cover $F$ with any segment that covers extreme points of $F$,
 because all other points lie on the segment between these points.
-Therefore we can replace $s$ with a segment $s'$
-that has lowest weight among the points that cover extreme points of $F$.
+Therefore, we can replace $s$ with a segment $s'$
+that has lowest weight among the points that cover the extreme points of $F$.
 Such a segment belongs to $\sets'$, because this is how it was defined.
 Segment $s'$ has weight no greater than the weight of $s$,
 because $s$ also covers $F$.
 
-Therefore we produced the set $\sol_1$ that has size not greater
+Therefore, we produced the set $\sol_1$ that has size not greater
 than size of $\sol$ (because some segments $s$ can map
 to the same segment $s'$),
-weight not greather than $\sol$ and it covers $\points'$.
+weight not greater than $\sol$, and it covers $\points'$.
 
 \paragraph{Complexity}
 We find a solution of $\instancePrim$ by iterating
 over all the possible subsets of $\sets'$.
 Finding sets $\sets'$ and $\points'$ and then solving 
 problem for kernel has overall complexity
-$(|\sets| + |\points|)^{\mathcal{O}(1)}\mathcal{O}((2 + \frac{2}{\delta})^k) + \mathcal{O}((k^2 + k(2 + \frac{2}{\delta})^k)^k)$.
+${(|\sets| + |\points|)^{\mathcal{O}(1)}
+\mathcal{O}((2 + \frac{2}{\delta})^k) + \mathcal{O}((k^2 + k(2 + \frac{2}{\delta})^k)^k)}$.
 \end{proof}
 

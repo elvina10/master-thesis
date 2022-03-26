@@ -77,8 +77,6 @@ algorithm solving the grid tiling problem
 for any computable function $f$.
 \end{tw}
 
-TODO: Add a theorem about contruction issue 46
-
 The remainder of this section is devoted to proving Theorem \ref{w1_hard}
 by a reduction from a~grid tiling problem instance
 with parameter (number of rows in the grid) $k$
@@ -91,20 +89,68 @@ Therefore geometric set cover with setting
 described in Theorem \ref{w1_hard}
 is at least as hard as the grid tiling problem.
 
+Let us denote instance of grid tiling problem as $(n, k, f)$, it consists of:
+\begin{itemize}
+\item the size of the grid $k$,
+\item the number of colors $n$,
+\item the function of allowed tiles
+$f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
+\end{itemize}
+
+Let us also define a constant $W_{hv} := 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$,
+that is going to be used when defining the weight of the constructed
+instance of geometric set sover with weighted segments.
+
+\newcommand{\solWeight}{W_{hv} +k^2\delta }
+\newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
+
+\begin{lemma}
+\label{w1_construction}
+Given an instance $(n,k,f)$ of the grid tiling problem,
+we can construct an instance $\instanceSetCover$ of the geometric set cover
+with weighted segments such that:
+\begin{enumerate}[label={(\arabic*)}]
+\item if there exists a solution to $(n,k,f)$, then there exists a solution
+to $\instanceSetCover$ of weight at most $\solWeight$;
+\item if there exists a solution to $\instanceSetCover$ of weight at most $\solWeight$,
+then there exists a solution to $(n,k,f)$.
+\end{enumerate}
+\end{lemma}
+
+
+First, let us prove Theorem \ref{w1_hard} using Lemma \cite{w1_construction}.
+
+\begin{proof}
+TODO: write a real proof
+\end{proof}
+
+We prove Lemma \ref{w1_construction} in subsequent sections.
+First, we define a constructed instance $I$, later
+$(1)$ is proved by Lemma \ref{set_cover_solution_exists}
+and $(2)$ is proved by Lemma \ref{grid_tiling_exists}.
+
+TODO: Do the same summary of Proofs in chapter 3.
+
+
+In proof of Lemma \ref{grid_tiling_exists}
+we do not use the assumption that
+the solution is bounded by the size,
+which the problem is parametrized by, $3k^2+2k$.
+Thus this reduction
+proves that the problem is not only W[1]-hard, but assuming ETH 
+there also does not exist permissive FPT algorithm for this problem.
+
+TODO: rewrite this
+Permissive FPT is a stronger result, where 
+we need to find an optimal solution
+of any size, but it is still parametrized
+by the size of the.
+Similar idea for local search was presented in \cite{permissive_problem1}, \cite{permissive_problem2}.
+
 \paragraph{Construction.}
 \newcommand{\order}{\mathsf{order}}
 \newcommand{\matchv}{\mathsf{match}_v}
 \newcommand{\matchh}{\mathsf{match}_h}
-\newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
-
-We start with an instance of the grid tiling problem $(n, k, f)$.
-The instance consists of:
-\begin{itemize}
-\item size of the grid $k$,
-\item number of colors $n$,
-\item function of allowed tiles
-$f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
-\end{itemize}
 
 We construct an instance $\instanceSetCover$ of geometric set cover as follows.
 
@@ -222,8 +268,6 @@ w(s) =
 	  \delta        & if $s \in \alldiag$
 	\end{cases*}
 \end{equation}
-
-\newcommand{\solWeight}{2k^2(n^2+1) - 4k^2\epsilon -4k(1-\epsilon) +k^2\delta }
 
 Now, we prove that the constructed instance of geometric set cover
 with weighted segments is indeed a correct and sound reduction
@@ -553,15 +597,3 @@ $(x(i), y(j))$
 is in $f(i,j)$.
 \end{proof}
 
-\begin{proof}[Proof of Theorem \ref{w1_hard}]
-Follows from Lemmas \ref{set_cover_solution_exists} and \ref{grid_tiling_exists}.
-\end{proof}
-
-TODO: Add reference when known
-In proof of reduction we did not use the assumption that
-the solution is of bounded size. Thus this reduction
-proves that the problem is not only W[1]-hard, but assuming ETH 
-there also does not exist permissive FPT algorithm for this problem.
-
-
-Permissive fpt, similar idea in \cite{permissive_problem1}, \cite{permissive_problem2}.

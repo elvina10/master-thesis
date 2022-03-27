@@ -35,7 +35,8 @@ these points in such a way, that all segments become axis-parallel.
 In~order to prove Theorem \ref{w1_hard}
 we will show reduction from a W[1]-hard problem.
 We~introduce the grid tiling problem,
-which was introduced and proved to be W[1]-hard in \cite{marx_grid_tiling}.
+which was introduced and proved to be W[1]-hard in \cite{marx_grid_tiling}
+(authors call it matrix tiling instead).
 
 \newcommand{\pow}{\mathsf{Pow}}
 
@@ -103,17 +104,18 @@ instance of geometric set sover with weighted segments.
 
 \newcommand{\solWeight}{W_{hv} +k^2\delta }
 \newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
+\newcommand{\instanceGridTiling}{(n,k,f)}
 
 \begin{lemma}
 \label{w1_construction}
-Given an instance $(n,k,f)$ of the grid tiling problem,
+Given an instance $\instanceGridTiling$ of the grid tiling problem,
 we can construct an instance $\instanceSetCover$ of the geometric set cover
 with weighted segments such that:
 \begin{enumerate}[label={(\arabic*)}]
-\item if there exists a solution to $(n,k,f)$, then there exists a solution
+\item \label{part1} if there exists a solution to $\instanceGridTiling$, then there exists a solution
 to $\instanceSetCover$ of weight at most $\solWeight$;
-\item if there exists a solution to $\instanceSetCover$ of weight at most $\solWeight$,
-then there exists a solution to $(n,k,f)$.
+\item \label{part2} if there exists a solution to $\instanceSetCover$ of weight at most $\solWeight$,
+then there exists a solution to $\instanceGridTiling$.
 \end{enumerate}
 \end{lemma}
 
@@ -121,13 +123,25 @@ then there exists a solution to $(n,k,f)$.
 First, let us prove Theorem \ref{w1_hard} using Lemma \cite{w1_construction}.
 
 \begin{proof}
-TODO: write a real proof
+Let us take any intance $\instanceGridTiling$ of grid tiling problem.
+We prove this by contradiction, therefore we assume
+that geometric set cover with weighted segments
+with solution of size at most $k$ segments admits a $n^{o(sqrt(k))}$ algorithm.
+
+Using Lemma \ref{w1_construction} let us construct an instance $I$
+for $\instanceGridTiling$.
+If we could find the optimum solution of size at most $k$ to $I$,
+let us assume it has weight $w$.
+Using \ref{part2} we know that if $w \le \solWeight$,
+then $\instanceGridTiling$ 
+
+
 \end{proof}
 
 We prove Lemma \ref{w1_construction} in subsequent sections.
 First, we define a constructed instance $I$, later
-$(1)$ is proved by Lemma \ref{set_cover_solution_exists}
-and $(2)$ is proved by Lemma \ref{grid_tiling_exists}.
+\ref{part1} is proved by Lemma \ref{set_cover_solution_exists}
+and \ref{part2} is proved by Lemma \ref{grid_tiling_exists}.
 
 TODO: Do the same summary of Proofs in chapter 3.
 

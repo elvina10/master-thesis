@@ -78,6 +78,7 @@ algorithm solving the grid tiling problem
 for any computable function $f$.
 \end{tw}
 
+TODO: Fix the paragraph below
 The remainder of this section is devoted to proving Theorem \ref{w1_hard}
 by a reduction from a~grid tiling problem instance
 with parameter (number of rows in the grid) $k$
@@ -105,6 +106,8 @@ instance of geometric set sover with weighted segments.
 \newcommand{\solWeight}{W_{hv} +k^2\delta }
 \newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
 \newcommand{\instanceGridTiling}{(n,k,f)}
+\newcommand{\yes}{\texttt{YES}}
+\newcommand{\no}{\texttt{NO}}
 
 \begin{lemma}
 \label{w1_construction}
@@ -112,30 +115,43 @@ Given an instance $\instanceGridTiling$ of the grid tiling problem,
 we can construct an instance $\instanceSetCover$ of the geometric set cover
 with weighted segments such that:
 \begin{enumerate}[label={(\arabic*)}]
-\item \label{part1} if there exists a solution to $\instanceGridTiling$, then there exists a solution
+\item \label{part1} if the answer to $\instanceGridTiling$ is $\yes$, then there exists a solution
 to $\instanceSetCover$ of weight at most $\solWeight$;
 \item \label{part2} if there exists a solution to $\instanceSetCover$ of weight at most $\solWeight$,
-then there exists a solution to $\instanceGridTiling$.
+then the answer to $\instanceGridTiling$ is $\yes$.
 \end{enumerate}
 \end{lemma}
 
 
-First, let us prove Theorem \ref{w1_hard} using Lemma \cite{w1_construction}.
+First, let us prove Theorem \ref{w1_hard} using Lemma \ref{w1_construction}.
 
 \begin{proof}
-Let us take any intance $\instanceGridTiling$ of grid tiling problem.
-We prove this by contradiction, therefore we assume
+Let us take any instance $\instanceGridTiling$ of the grid tiling problem
+of the grid size $l$.
+We prove the theorem by contradiction, therefore we assume
 that geometric set cover with weighted segments
 with solution of size at most $k$ segments admits a $n^{o(sqrt(k))}$ algorithm.
 
 Using Lemma \ref{w1_construction} let us construct an instance $I$
 for $\instanceGridTiling$.
-If we could find the optimum solution of size at most $k$ to $I$,
-let us assume it has weight $w$.
+Let us assume that the optimum solution of size at most $k$
+to the instance $I$ has weight $w$.
 Using \ref{part2} we know that if $w \le \solWeight$,
-then $\instanceGridTiling$ 
+then answer to $\instanceGridTiling$ is $\yes$.
+If $w > \solWeight$, then using \ref{part1}
+we know that the answer to $\instanceGridTiling$ must be $\no$.
 
+Therefore if we could find it in time $n^{o(sqrt(k))}$,
+then we could solve grid tiling problem
+in $n^{o(l)}$ by constructing an instance of the set cover with
+weighted segments, solving it 
+for parameter $k = 3l^2+2l$ in time $n^{o(sqrt(3l^2+2l))} \ge n^{o(l)}$
+and then answering based on the weight
+of the optimum solution.
+Existance of this algorithm contradicts Theorem
+\ref{grid_tiling_w1_hard}.
 
+Hence such an algirhtm can not exist.
 \end{proof}
 
 We prove Lemma \ref{w1_construction} in subsequent sections.
@@ -160,6 +176,12 @@ we need to find an optimal solution
 of any size, but it is still parametrized
 by the size of the.
 Similar idea for local search was presented in \cite{permissive_problem1}, \cite{permissive_problem2}.
+
+\begin{tw}
+\textbf{Permissive FPT does not exist.}
+
+TODO: Here state stronger theorem
+\end{tw}
 
 \paragraph{Construction.}
 \newcommand{\order}{\mathsf{order}}

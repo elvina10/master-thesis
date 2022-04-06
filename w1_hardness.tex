@@ -310,14 +310,13 @@ w(s) =
 \end{equation}
 
 Now, we prove that the constructed instance of geometric set cover
-with weighted segments is indeed a correct and sound reduction
+with weighted segments indeed gives a correct and sound reduction
 of the grid tiling problem. Lemma \ref{set_cover_solution_exists}
-proves that if the solution to the instance of the grid tiling instance exists,
-then there exists a solution with bounded size and weight
-of the constructed instance of geometric set cover problem.
-
+proves that if a solution to the instance of the grid tiling instance exists,
+then there exists a solution with suitably bounded size and weight
+of the constructed instance of geometric set cover.
 Then Lemma \ref{grid_tiling_exists} proves that if
-the solution to the geometric set cover instance with bounded weight exists,
+there is a solution to the geometric set cover instance with bounded weight,
 then there exists a solution to the original grid tiling instance.
 
 \begin{lemma}
@@ -331,9 +330,9 @@ then there exists a solution to the original grid tiling instance.
 Suppose there exists a solution $x,y$ of the instance $(f_{i,j})$
 of the grid tiling problem.
 	
-We define the proposed solution $\sol \subset \sets$ of the instance
+We define the proposed solution $\sol \subseteq \sets$ of the instance
 of geometric set cover
-in three parts $D \subset \alldiag$, $A \subset \allhor$ and $B \subset \allver$:
+in three parts: $D \subseteq \alldiag$, $A \subseteq \allhor$ and $B \subseteq \allver$:
 \begin{eqnarray*}
 	D & := & \{(v_{i, j, t}, h_{i, j, t}) : 1 \le i, j \le k, t = \order^{-1}(x(i), y(j))\}, \\
 	A & := & \{\horbeg{i}{\order^{-1}(x(1), y(i))} : 1 \le i \le k\} \\
@@ -345,37 +344,37 @@ in three parts $D \subset \alldiag$, $A \subset \allhor$ and $B \subset \allver$
 \end{eqnarray*}
 	$$\sol := D \cup A \cup B.$$
 
-Since $\points = H \cup V$, we show that $\sol$ covers the whole set $H$,
-proof for $V$ is analogous.
+Since $\points = H \cup V$, we show that $\sol$ covers the whole set $H$;
+the proof for $V$ is analogous.
 
-Take any $1 \le j \le k$ and define $t_{i} := \order^{-1}(x(i), y(j))$.
+Fix any $1 \le j \le k$ and define $t_{i} := \order^{-1}(x(i), y(j))$.
 The two leftmost segments in~$A$ for this $j$ are
 $\horbeg{j}{t_1} = (h_{1,j,1}^L, h_{1, j, t_1}^L)$ and
 $\hor{1}{j}{t_1}{t_2} = (h_{1,j, t_1}^R, h_{2,j,t_2}^L)$.
-Therefore points $h_{1,j,x}, h_{1,j,x}^L$ and $h_{1,j,x}^R$
+Therefore, points $h_{1,j,x}, h_{1,j,x}^L$ and $h_{1,j,x}^R$
 for all $1 \le x \le n^2$ ale covered by $\horbeg{j}{t_1}$ and $\hor{1}{j}{t_1}{t_2}$,
 excluding point $h_{1,j,t_1}$.
 
-Analogously for $2 \le i \le k-1$
-for two consecutive segments $\hor{i-1}{j}{t_{i-1}}{t_i}$
-and $\hor{i}{j}{t_i}{t_{i+1}}$ we prove that 
-all points $h_{i,j,x}, h_{i,j,x}^L$ and $h_{i,j,x}^R$
-for all $1 \le x \le n^2$ ale covered by these segments
+Analogously for $2 \le i \le k-1$,
+the two consecutive segments $\hor{i-1}{j}{t_{i-1}}{t_i}$
+and $\hor{i}{j}{t_i}{t_{i+1}}$ cover points $h_{i,j,x}, h_{i,j,x}^L$ and $h_{i,j,x}^R$
+for all $1 \le x \le n^2$,
 excluding point $h_{i,j,t_i}$.
 
 Finally $\hor{k-1}{j}{t_{k-1}}{t_k}$ and $\horend{j}{t_k}$
 cover all points $h_{k,j,x}, h_{k,j,x}^L$ and $h_{k,j,x}^R$
-for all ${1 \le x \le n^2}$ excluding point $h_{k,j,t_k}$.
+for ${1 \le x \le n^2}$, excluding point $h_{k,j,t_k}$.
 
-$D$ covers all points $h_{i,j, t_i}$ and $v_{i,j,t_i}$, therefore
-all points in $H$ are covered.
+$D$ covers all points $h_{i,j,t_i}$ and $v_{i,j,t_i}$.
+As $j$ was chosen arbitrarily, all points in $H$ are covered.
 
-Size of this proposed solution is:
+The size of this proposed solution is:
 $$|\sol| = |D| + |A| + |B| = k^2 + (k+1)k + (k+1)k = 3k^2+2k.$$
 
 Then, we need to compute the total weight of the solution $\sol$.
 First, we compute the sum of weights of segments in $A$.
-Fix $1 \le j \le k$ and compute segments collinear with the $j$-th line.
+Fix $1 \le j \le k$ and consider segments collinear
+with the $j$-th horizontal line.
 All points $h_{i,j,t}$, $h_{i,j,t}^L$ and $h_{i,j,t}^R$
 for every $1 \le i \le k$ and $1 \le t \le n^2$ are covered by $A$
 excluding points $h_{i,j,\order^{-1}(x(i),y(j))}$.
@@ -387,22 +386,25 @@ $(h_{i,1,1}^L, h_{i,k,n^2}^R)$
 minus $2\epsilon k$, which is $k(n^2+1) -2(1-\epsilon)-2k\epsilon$.
 We need to multiply that by $k$, as we consider all possible values of $j$.
 
-Calculation for vertical segments is analogous and has the same result.
+Computation for vertical segments is analogous and yields the same result.
 Every segment in~$D$ has weight $\delta$, therefore the sum of all weights
 is equal to:
 
-$$2k(k(n^2+1) -2(1-\epsilon)-2k\epsilon) + k^2\delta= \solWeight$$
+$$2k(k(n^2+1) -2(1-\epsilon)-2k\epsilon) + k^2\delta= \solWeight.$$
 \end{proof}
 
+Now we present a few additional properties of the constructed instance
+of the geometric set cover that help us to prove
+Lemma \ref{grid_tiling_exists}.
 
 \begin{claim}
 \label{guards}
 In any solution to the instance $\instanceSetCover$:
 \begin{itemize}
-\item left and right guards of points in $H$
+\item the left and right guards of points in $H$
 (points in $\{p^L : p \in H\} \cup \{p^R : p \in H\}$)
 have to~be~covered with segments from $\allhor$,
-\item lower and upper guards of points in $V$
+\item the lower and upper guards of points in $V$
 (points in $\{p^D : p \in V\} \cup \{p^U : p \in V\}$)
 have to~be~covered with segments from $\allver$.
 \end{itemize}
@@ -417,19 +419,15 @@ has x-coordinate equal to $i(n^2+1)$ for some $1\le i \le k$,
 so they all have different x-coordinate
 than any left or right guard of points in $H$.
 
-Every point $x$, which is a left or right guard of points in $H$
-have $kn^2$ segments from $\alldiag$ that intersect with the horizontal
+For every point $x$ which is a left or right guard of a point in $H$,
+there are $kn^2$ segments from $\alldiag$ that intersect with the horizontal
 line that goes through $x$. All of these segments intersect with
 this line in points from set $H$, therefore none of them
-cover any of the guards.
+covers any of the guards.
 
-Therefore none of the segments from $\allver$ or $\alldiag$ cover any
+Therefore none of the segments from $\allver$ or $\alldiag$ covers any
 of the guards of the points in $H$.
 \end{proof}
-
-Now we present a few additional properties of the constructed instance
-of the geometric set cover that help us to prove
-Lemma \ref{grid_tiling_exists}.
 
 \begin{claim}
 \label{one_diag_in_square}

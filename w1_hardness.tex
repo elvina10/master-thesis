@@ -35,8 +35,12 @@ these points in such a way, that all segments become axis-parallel.
 In~order to prove Theorem \ref{w1_hard}
 we will show reduction from a W[1]-hard problem.
 We~introduce the grid tiling problem,
-which was introduced and proved to be W[1]-hard in \cite{marx_grid_tiling}
+which was introduced in \cite{marx_grid_tiling}
 (authors call it matrix tiling instead).
+It was originally described as parametrization problem,
+but W[1]-hardness follows directly from the theorems states there.
+For more contemporary description of this artificial problem
+and proof of W[1]-hardness see Chapter 14 of \cite{platypus}.
 
 \newcommand{\pow}{\mathsf{Pow}}
 
@@ -50,12 +54,11 @@ In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
 and a function
 $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \pow(\{1 \ldots n\} \times \{1 \ldots n\})$
 specifying the set of allowed tiles for each cell of a $k \times k$ grid.
-The task is to find functions
+The task is to decide whether there exists such functions
 $x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
 that assign colors from $\{1 \ldots n\}$
 to respectively columns and rows of the grid,
-so that $(x(i), y(j)) \in f(i, j)$ for all $i,j \in \{1 \ldots k\}$,
-or conclude that such an assignment does not exist.
+so that $(x(i), y(j)) \in f(i, j)$ for all $i,j \in \{1 \ldots k\}$.
 \end{defi}
 
 In short, in grid tiling problem one needs to assign numbers
@@ -78,11 +81,11 @@ algorithm solving the grid tiling problem
 for any computable function $f$.
 \end{tw}
 
-TODO: Fix the paragraph below
 The remainder of this section is devoted to proving Theorem \ref{w1_hard}
 by a reduction from a~grid tiling problem instance
 with parameter (number of rows in the grid) $k$
 to a geometric set cover instance with parameter (size of solution) $k^2$.
+This reduction is described in Lemma~\ref{w1_construction}.
 This proves the W[1]-hardness of the geometric set cover problem,
 because if we could solve it with an FPT algorithm,
 then we could also solve the grid tiling problem
@@ -91,7 +94,14 @@ Therefore geometric set cover with setting
 described in Theorem \ref{w1_hard}
 is at least as hard as the grid tiling problem.
 
-Let us denote instance of grid tiling problem as $(n, k, f)$, it consists of:
+
+\newcommand{\solWeight}{W_{hv} +k^2\delta }
+\newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
+\newcommand{\instanceGridTiling}{(n,k,f)}
+\newcommand{\yes}{\texttt{YES}}
+\newcommand{\no}{\texttt{NO}}
+
+Let us denote instance of grid tiling problem as $\instanceGridTiling$, it consists of:
 \begin{itemize}
 \item the size of the grid $k$,
 \item the number of colors $n$,
@@ -103,11 +113,6 @@ Let us also define a constant $W_{hv} := 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilo
 that is going to be used when defining the weight of the constructed
 instance of geometric set sover with weighted segments.
 
-\newcommand{\solWeight}{W_{hv} +k^2\delta }
-\newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
-\newcommand{\instanceGridTiling}{(n,k,f)}
-\newcommand{\yes}{\texttt{YES}}
-\newcommand{\no}{\texttt{NO}}
 
 \begin{lemma}
 \label{w1_construction}
@@ -130,7 +135,7 @@ Let us take any instance $\instanceGridTiling$ of the grid tiling problem
 of the grid size $l$.
 We prove the theorem by contradiction, therefore we assume
 that geometric set cover with weighted segments
-with solution of size at most $k$ segments admits a $n^{o(sqrt(k))}$ algorithm.
+with solution of size at most $k$ segments admits a $n^{o(\sqrt(k))}$ algorithm.
 
 Using Lemma \ref{w1_construction} let us construct an instance $I$
 for $\instanceGridTiling$.
@@ -141,11 +146,11 @@ then answer to $\instanceGridTiling$ is $\yes$.
 If $w > \solWeight$, then using \ref{part1}
 we know that the answer to $\instanceGridTiling$ must be $\no$.
 
-Therefore if we could find it in time $n^{o(sqrt(k))}$,
-then we could solve grid tiling problem
+Therefore if we could find it in time $n^{o(\sqrt(k))}$,
+then we could solve the grid tiling problem
 in $n^{o(l)}$ by constructing an instance of the set cover with
 weighted segments, solving it 
-for parameter $k = 3l^2+2l$ in time $n^{o(sqrt(3l^2+2l))} \ge n^{o(l)}$
+for parameter $k = 3l^2+2l$ in time $n^{o(\sqrt(3l^2+2l))} \ge n^{o(l)}$
 and then answering based on the weight
 of the optimum solution.
 Existance of this algorithm contradicts Theorem
@@ -155,12 +160,11 @@ Hence such an algirhtm can not exist.
 \end{proof}
 
 We prove Lemma \ref{w1_construction} in subsequent sections.
-First, we define a constructed instance $I$, later
+First, we define a constructed instance $I$, later property
 \ref{part1} is proved by Lemma \ref{set_cover_solution_exists}
-and \ref{part2} is proved by Lemma \ref{grid_tiling_exists}.
+and property \ref{part2} is proved by Lemma \ref{grid_tiling_exists}.
 
 TODO: Do the same summary of Proofs in chapter 3.
-
 
 In proof of Lemma \ref{grid_tiling_exists}
 we do not use the assumption that

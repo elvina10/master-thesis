@@ -105,7 +105,7 @@ Let us denote instance of grid tiling problem as $\instanceGridTiling$, it consi
 \begin{itemize}
 \item the size of the grid $k$,
 \item the number of colors $n$,
-\item the function of allowed tiles
+\item the function specifying the allowed tiles
 $f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
 \end{itemize}
 
@@ -244,7 +244,7 @@ $$\points := H \cup \{p^L : p \in H\} \cup \{p^R : p \in H\}
 \newcommand{\horend}[2]{\mathsf{horEnd}_{#1,#2}}
 \newcommand{\verend}[2]{\mathsf{verEnd}_{#1,#2}}
 
-For $1 \le i,j \le k$ and $1 \le t_1, t_2 \le n^2$ define segments:
+For $1 \le i,j \le k$ and $1 \le t, t_1, t_2 \le n^2$ define segments:
 \begin{eqnarray*}
 \hor{i}{j}{t_1}{t_2} & := & (h^R_{i,j,t_1}, h^L_{i+1, j, t_2}), \\
 \ver{i}{j}{t_1}{t_2} & := & (v^U_{i,j,t_1}, v^D_{i, j+1, t_2}), \\
@@ -273,12 +273,12 @@ Next, we define sets of vertical and horizontal segments:
 \\
 &\cup &\{\verend{i}{t} : 1 \le i \le k, 1 \le t \le n^2\}.
 \end{eqnarray*}
-You can see an example of these segments in Figure \ref{fig:segments_def}.
+An example is depicted in Figure \ref{fig:segments_def}.
 
 Finally, we also define a set of right-diagonal segments:
 $$\alldiag := \{ (h_{i, j, t}, v_{i, j, t}) :
 	1 \le i, j \le k, 1 \le t \le n^2, \order(t) \in f(i, j)\}.$$
-You can see an example of such segments in Figure \ref{fig:diag_def}.
+An example of such segments is depicted in Figure \ref{fig:diag_def}.
 
 \input{figures/diag_definition.tex}
 
@@ -287,7 +287,7 @@ connects points $(i(n^2+1) + t, j \cdot (n^2+1))$
 and ${(i \cdot (n^2+1), j(n^2+1) + t)}$
 for some $1 \le i,j \le k, 1 \le t \le n^2$.
 The line on which it lies can be described
-by linear equation ${y=-x+(t+(i+j)(n^2+1))}$,
+by linear equation ${x+y=t+(i+j)(n^2+1)}$,
 thus these segments are in fact right-diagonal.
 
 The constructed segment set is defined as:

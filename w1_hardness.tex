@@ -505,15 +505,15 @@ there exists $1 \le t \le n^2$ such that:
 \end{lemma}
 
 \begin{proof}
-At most one of points $\{h_{i,j,t_x} : 1 \le t_x \le n^2\}$
-and one of points $\{v_{i,j,t_y} : 1 \le t_y \le n^2\}$
+At most one of the points $\{h_{i,j,t_x} : 1 \le t_x \le n^2\}$
+and one of the points $\{v_{i,j,t_y} : 1 \le t_y \le n^2\}$
 is covered with $\alldiag$
 (Claim \ref{one_diag_in_square}).
 	
 Moreover, exactly one such point $h_{i,j,t_x}$ and one such point $v_{i,j,t_y}$
 is covered with $\alldiag$,
 because if none of them were covered, then the solution would have to
-have weight at least $W_{hv} + 2\epsilon$ (Lemma \ref{vertical_horizontal_sum}),
+have weight at least $\hvWeight + 2\epsilon$ (see the proof of Lemma \ref{vertical_horizontal_sum}),
 which is more than $\solWeight$.
 
 We observe that points $h_{i,j,t_x}$ and $v_{i,j,t_y}$
@@ -522,7 +522,8 @@ Indeed we need to use at least $k^2$ of them to use
 exactly one DIAG segment for every pair of $1 \le i,j \le k$,
 if we used 2 segments from $\alldiag$
 for one pair $(i,j)$,
-then we would have used $W_{hv} + k^2\delta + \delta$ (Lemma \ref{vertical_horizontal_sum}),
+then we would have used total weight at least
+$\hvWeight + k^2\delta + \delta$ (Lemma \ref{vertical_horizontal_sum}),
 which if more than $\solWeight$.
 Since points $h_{i,j,t_x}$ and $v_{i,j,t_y}$ are covered by
 a single segment from $\alldiag$, we have $t_x = t_y$.
@@ -538,9 +539,9 @@ as $\diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\
 
 \begin{lemma}
 \label{vertical_horizontal_synchronized}
-For any solution $\sol$
+Let $\sol$ be any solution
 of a constructed instance $\instanceSetCover$
-with weight at most $\solWeight$:
+with weight at most $\solWeight$. Then:
 \begin{enumerate}
 \item 
 for any $1 \le i < k, 1 \le j \le k$,
@@ -566,6 +567,7 @@ are not covered by segments from $\allhor$ (Lemma \ref{diag_correct}),
 while $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 have to be covered by segments from $\allhor$ (Claim \ref{guards}).
 
+TODO: Fix for horbeg and horend
 Every segment from $\allhor$ starts at point $h^R_{x,y,z_1}$
 and ends at point $h^L_{x+1,y,z_2}$ for some
 $1 \le x < k$,$1 \le y \le k$ and $1 \le z_1, z_2 \le n^2$.
@@ -581,13 +583,13 @@ for some $1 \le z_1, z_2 \le n^2$.
 
 Thus, the space between $h^R_{i,j,z_1}$ and $h^L_{i,j+1,z_2}$
 would be covered twice and is longer than $\epsilon$.
-By Lemma \ref{vertical_horizontal_sum},
-the lower bound for weight of such a solution is $W_{hv} + \epsilon$
+By the proof of Lemma \ref{vertical_horizontal_sum},
+the lower bound for weight of such a solution is $\hvWeight + \epsilon$
 which is more than $\solWeight$.
 
 Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$ must be covered
-by one segment from $\allhor$,
-$(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$ is a segment in $\allhor$
+by one segment from $\allhor$, namely $(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$.
+Hence $(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$ is a segment in $\allhor$
 and $\matchh(t_1,t_2)$ is $\true$.
 \end{proof}
 
@@ -609,10 +611,10 @@ Similarily, to define the $y$ function,
 for every $1 \le i \le k$ set $y(i) := y_i$
 where $(b, y_i) = \order(h_{1,i})$
 
-To prove that it is a correct solution to grid tiling,
+To prove that this is a correct solution to grid tiling,
 we need to prove that 
-for every $1 \le i,j \le k$ $(x(i), y(j))$ is in
-allowed tiles set $f(i,j)$.
+for every $1 \le i,j \le k$, $(x(i), y(j))$ is in
+the allowed tiles set $f(i,j)$.
 
 Let us take any $1 \le i,j \le k$.
 By Lemma \ref{vertical_horizontal_synchronized}

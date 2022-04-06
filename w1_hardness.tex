@@ -54,9 +54,9 @@ In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
 and a function
 $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \pow(\{1 \ldots n\} \times \{1 \ldots n\})$
 specifying the set of allowed tiles for each cell of a $k \times k$ grid.
-The task is to decide whether there exists such functions
+The task is to decide whether there exists functions
 $x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
-that assign colors from $\{1 \ldots n\}$
+such that they assign colors from $\{1 \ldots n\}$
 to respectively columns and rows of the grid,
 so that $(x(i), y(j)) \in f(i, j)$ for all $i,j \in \{1 \ldots k\}$.
 \end{defi}
@@ -94,8 +94,8 @@ Therefore geometric set cover with setting
 described in Theorem \ref{w1_hard}
 is at least as hard as the grid tiling problem.
 
-
-\newcommand{\solWeight}{W_{hv} +k^2\delta }
+\newcommand{\hvWeight}{W_{\mathsf{hv}}}
+\newcommand{\solWeight}{\hvWeight+k^2\delta }
 \newcommand{\instanceSetCover}{(\points, \sets, w, 3k^2+2k)}
 \newcommand{\instanceGridTiling}{(n,k,f)}
 \newcommand{\yes}{\texttt{YES}}
@@ -109,7 +109,7 @@ Let us denote instance of grid tiling problem as $\instanceGridTiling$, it consi
 $f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
 \end{itemize}
 
-Let us also define a constant $W_{hv} := 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$,
+Let us also define a constant $\hvWeight := 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$,
 that is going to be used when defining the weight of the constructed
 instance of geometric set sover with weighted segments.
 
@@ -433,7 +433,7 @@ of the guards of the points in $H$.
 \label{one_diag_in_square}
 For any $1 \le i, j \le n$
 and any solution to the instance $\instanceSetCover$
-all, but at most one point $h_{i, j, t}$
+all but at most one point $h_{i, j, t}$
 and at most one point $v_{i, j, t}$
 for $1 \le t \le n^2$
 must be
@@ -445,11 +445,10 @@ We prove the claim for horizontal segments,
 as the proof for vertical segments is analoguous.
 
 We prove this by contradiction. Assume that we
-have two points $h_{i,j,t_1}, h_{i,j,t_2}$
-such that they are not covered with segments from $\allhor$
-for any $1 \le t_1 < t2 \le n^2$.
+have two points $h_{i,j,t_1}, h_{i,j,t_2},1 \le t_1 <  t_2 \le n^2$,
+such that they are not covered with segments from $\allhor$.
 
-Point $h^R_{i, j, t_1}$ has to be covered with $\allhor$
+Point $h^R_{i, j, t_1}$ has to be covered with a segment from $\allhor$
 by Claim $\ref{guards}$.
 Every segment in $\allhor$ covering $h^R_{i, j, t_1}$,
 but not $h_{i,j,t_1}$ must start at $h^R_{i, j, t_1}$
@@ -459,22 +458,19 @@ This contradicts the assumption, which concludes the proof.
 
 \begin{lemma}
 \label{vertical_horizontal_sum}
-For every solution to the instance $\instanceSetCover$,
+For every solution $\sol$ to the instance $\instanceSetCover$,
 the sum of weights of segments chosen
 from sets $\allhor$ and $\allver$ is at least
-$2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$.
+$\hvWeight$.
 \end{lemma}
 
 \begin{proof}
-We prove the lemma for vertical lines,
-as the proof for horizontal segments is analogous.
-
 Let us fix $1 \le i \le k$.
 
 We provide a lower bound for the sum of lengths
 of vertical segments from $\sol \cap \allver$.
 This bound is the same for each $i$ and is the same
-for horizontal lines, thus we need to multiply such bound by $2k$.
+for horizontal lines, thus we need to multiply such a bound by $2k$.
 
 \begin{enumerate}[label={(\arabic*)}]
 \item The total length between $v^D_{i, 1, 1}$ and $v^U_{i, k, n^2}$ is:
@@ -490,19 +486,15 @@ not covered by segments from $\allver$ between $v_{i,1,1}^D$ and $v_{i,k,n^2}^U$
 
 \end{enumerate}
 The sum of these lower bounds for vertical and horizontal lines is:
-$$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$$
+$$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon) = \hvWeight.$$
 \end{proof}
-
-Let us name the bound from the previous lemma
-as $W_{hv} := 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$
-for future reference.
 
 \begin{lemma}
 \label{diag_correct}
 Let $\sol$ be a solution to a constructed instance $\instanceSetCover$
 with weight at most  $\solWeight$.
 Then for every $1 \le i,j \le k$
-there exists such $1 \le t \le n^2$ that:
+there exists $1 \le t \le n^2$ such that:
 \begin{enumerate}[label={(\arabic*)}]
 \item $v_{i,j,t}, h_{i,j,t}$ are not covered by segments from $\allver$ or $\allhor$;
 \item segment $(v_{i,j,t}, h_{i,j,t})$ is in solution $\sol$;

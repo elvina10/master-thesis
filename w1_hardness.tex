@@ -585,15 +585,23 @@ are not covered by segments from $\allhor$ (Lemma \ref{diag_correct}),
 while $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 have to be covered by segments from $\allhor$ (Claim \ref{guards}).
 
-TODO: Fix for horbeg and horend
-Every segment from $\allhor$ starts at point $h^R_{x,y,z_1}$
+
+Every segment from $\allhor$ either:
+\begin{itemize}
+\item starts at point $h^R_{x,y,z_1}$
 and ends at point $h^L_{x+1,y,z_2}$ for some
-$1 \le x < k$,$1 \le y \le k$ and $1 \le z_1, z_2 \le n^2$.
+$1 \le x < k$,$1 \le y \le k$ and $1 \le z_1, z_2 \le n^2$;
+\item is a $\horbeg{y}{z}$ 
+and starts at $h^L{1,y,1}$ and ends at $h^L{1,y,z}$ for some $1 \le y \le k$ and $1 \le z \le n^2$;
+\item is a $\horend{y}{z}$
+and starts at $h^R{k,y,t}$ and ends at $h^R{k,y,n^2}$ for some $1 \le y \le k$ and $1 \le z \le n^2$.
+\end{itemize}
 All of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 are covered by segments in $\allhor$ 
 and there is no segment $(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$ in $\allhor$.
 Hence, there are at least two different segments covering them.
-One of them must begin
+If both of these segments are neiteher $\horbeg{y}{z}$ nor $\horend{y}{z}$,
+then one of them must begin
 at $h^R_{i,j,t_1}$ and end at $h^L_{i+1,j,z_2}$
 and there must be other one that begins at $h^R_{i,j,z_1}$
 and ends at $h^L_{i+1,j,t_2}$
@@ -601,6 +609,9 @@ for some $1 \le z_1, z_2 \le n^2$.
 
 Thus, the space between $h^R_{i,j,z_1}$ and $h^L_{i,j+1,z_2}$
 would be covered twice and is longer than $\epsilon$.
+The case when one of them is $\horbeg{y}{z}$ or $\horend{y}{z}$ is analogous.
+They can't be both $\horbeg{y}{z}$ or $\horend{y}{z}$.
+
 By the proof of Lemma \ref{vertical_horizontal_sum},
 the lower bound for weight of such a solution is $\hvWeight + \epsilon$
 which is more than $\solWeight$.

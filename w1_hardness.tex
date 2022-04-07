@@ -29,7 +29,7 @@ these points in such a way, that all segments become axis-parallel.
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
 	for any computable function $f$.
 	Moreover, this holds even if all segments in $\sets$
-	are axis-parallel or right-diagonal.
+	are axis-parallel.
 \end{tw}
 
 In~order to prove Theorem \ref{w1_hard}
@@ -166,25 +166,43 @@ and property \ref{part2} is proved by Lemma \ref{grid_tiling_exists}.
 
 TODO: Do the same summary of Proofs in chapter 3.
 
-In proof of Lemma \ref{grid_tiling_exists}
+
+Permissive FPT is a relaxed FPT problem, where 
+we need to find solution of any size in FPT-time,
+but we compare it to the optimum solution of size at most $k$.
+Idea for permissive FPT in local search was presented in \cite{permissive_problem1}, \cite{permissive_problem2}.
+
+
+In the proof of Lemma \ref{grid_tiling_exists}
 we do not use the assumption that
 the solution is bounded by the size,
 which the problem is parametrized by, $3k^2+2k$.
+If we had a permissive FPT algorihtm,
+that finds solution of any size that still
+has weight no more than $\solWeight$,
+then we still would have a contradiction with grid tiling being W[1]-hard
+in proof of Theorem \ref{w1_hard}.
 Thus this reduction
 proves that the problem is not only W[1]-hard, but assuming ETH 
 there also does not exist permissive FPT algorithm for this problem.
 
-TODO: rewrite this
-Permissive FPT is a stronger result, where 
-we need to find an optimal solution
-of any size, but it is still parametrized
-by the size of the.
-Similar idea for local search was presented in \cite{permissive_problem1}, \cite{permissive_problem2}.
-
 \begin{tw}
 \textbf{Permissive FPT does not exist.}
-
-TODO: Here state stronger theorem
+	Consider the problem of covering a set $\points$ of points
+	from a set of segments $\sets$ 
+	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
+	so that the weight of the cover is minimal.
+	Let $\sol^k$ be the
+	optimum solution to this problem of size at most $k$.
+	The task is to find solution $\sol$ of any size
+	such that weight of $\sol$ is not greater than the weight of $\sol^k$.
+	
+	Assuming ETH, there is no algorithm for this
+	problem with running time
+	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
+	for any computable function $f$.
+	Moreover, this holds even if all segments in $\sets$
+	are axis-parallel.
 \end{tw}
 
 \paragraph{Construction.}

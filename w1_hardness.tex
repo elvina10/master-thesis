@@ -5,8 +5,8 @@ In this chapter we consider geometric set cover problem with
 axis-parallel weighted segments.
 In Theorem~\ref{w1_hard} below, we prove that this problem is 
 W[1]-hard when parameterized by the size of the solution.
-For simplicity we present here solution that uses segments in
-3 directions, but there exists isomorphism that transposes
+For simplicity we present here a solution that uses segments in
+3 directions, but there exists an isomorphism that transposes
 these points in such a way, that all segments become axis-parallel.
 
 \begin{defi}
@@ -33,20 +33,20 @@ these points in such a way, that all segments become axis-parallel.
 \end{tw}
 
 In~order to prove Theorem \ref{w1_hard}
-we will show reduction from a W[1]-hard problem.
+we will show a reduction from a W[1]-hard problem.
 We~introduce the grid tiling problem,
 which was introduced in \cite{marx_grid_tiling}
 (authors call it matrix tiling instead).
-It was originally described as parametrization problem,
-but W[1]-hardness follows directly from the theorems states there.
-For more contemporary description of this artificial problem
-and proof of W[1]-hardness see Chapter 14 of \cite{platypus}.
+It was originally described as parameterized problem,
+but W[1]-hardness follows directly from the theorems stated there.
+For a more contemporary description of this problem
+and a proof of W[1]-hardness see Chapter 14 of \cite{platypus_book}.
 
 \newcommand{\pow}{\mathsf{Pow}}
 
 \begin{defi}
 We define the \textbf{powerset} of a set $A$, denoted as $\pow(A)$,
-as the set of all subsets of $A$, ie. $\pow(A) = \{B : B \subseteq A\}$.
+as the set of all subsets of $A$, i.e. $\pow(A) = \{B : B \subseteq A\}$.
 \end{defi}
 
 \begin{defi}
@@ -54,14 +54,14 @@ In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
 and a function
 $f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \pow(\{1 \ldots n\} \times \{1 \ldots n\})$
 specifying the set of allowed tiles for each cell of a $k \times k$ grid.
-The task is to decide whether there exists functions
+The task is to decide whether there exist functions
 $x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
-such that they assign colors from $\{1 \ldots n\}$
+that assign colors from $\{1 \ldots n\}$
 to respectively columns and rows of the grid,
 so that $(x(i), y(j)) \in f(i, j)$ for all $i,j \in \{1 \ldots k\}$.
 \end{defi}
 
-In short, in grid tiling problem one needs to assign numbers
+In short, in the grid tiling problem one needs to assign numbers
 to rows and columns in such a way
 that for every pair of a row and a column,
 the pair of colors assigned
@@ -83,8 +83,8 @@ for any computable function $f$.
 
 The remainder of this section is devoted to proving Theorem \ref{w1_hard}
 by a reduction from a~grid tiling problem instance
-with parameter (number of rows in the grid) $k$
-to a geometric set cover instance with parameter (size of solution) $k^2$.
+with parameter $k$ (number of rows in the grid)
+to a geometric set cover instance with parameter $k^2$ (size of solution).
 This reduction is described in Lemma~\ref{w1_construction}.
 This proves the W[1]-hardness of the geometric set cover problem,
 because if we could solve it with an FPT algorithm,
@@ -109,15 +109,20 @@ Let us denote instance of grid tiling problem as $\instanceGridTiling$, it consi
 $f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
 \end{itemize}
 
-Let us also define a constant $\hvWeight := 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)$,
-that is going to be used when defining the weight of the constructed
-instance of geometric set sover with weighted segments.
+Let us also define constants: 
+\begin{eqnarray*}
+\epsilon & := & \frac{1}{2k^2} \\
+\delta & := & \frac{1}{4k^4} \\
+\hvWeight & := & 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)
+\end{eqnarray*}
+which are going to be used when defining the weight of the constructed
+instance of geometric set cover with weighted segments.
 
 
 \begin{lemma}
 \label{w1_construction}
 Given an instance $\instanceGridTiling$ of the grid tiling problem,
-we can construct an instance $\instanceSetCover$ of the geometric set cover
+we can construct an instance $\instanceSetCover$ of geometric set cover
 with weighted segments such that:
 \begin{enumerate}[label={(\arabic*)}]
 \item \label{part1} if the answer to $\instanceGridTiling$ is $\yes$, then there exists a solution
@@ -234,7 +239,7 @@ Let us define sets $H$ and $V$ as:
 $$H := \{h_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\},$$
 $$V := \{v_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\}.$$
 	
-Let $\epsilon = \frac{1}{2k^2}$.
+Let us recall that $\epsilon = \frac{1}{2k^2}$.
 For a point $p = (x, y)$ we define points:
 $$p^{L} := (x - \epsilon, y),$$
 $$p^{R} := (x + \epsilon, y),$$
@@ -315,7 +320,7 @@ $$\sets := \allhor \cup \allver \cup \alldiag.$$
 The weight of each segment in $\allhor \cup \allver$
 is equal to its length,
 while every segment in $\alldiag$ has weight
-$\delta := \frac{1}{4k^4}$.
+$\delta$.
 
 \input{figures/w1_hard_segments.tex}
 

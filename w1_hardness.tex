@@ -135,33 +135,34 @@ then the answer to $\instanceGridTiling$ is $\yes$.
 
 First, let us prove Theorem \ref{w1_hard} using Lemma \ref{w1_construction}.
 
-\begin{proof}
-Let us take any instance $\instanceGridTiling$ of the grid tiling problem
-of the grid size $l$.
+\begin{proof}[Proof of Theorem \ref{w1_hard}]
+Let us take any instance $(n,l,f)$ of the grid tiling problem.
 We prove the theorem by contradiction, therefore we assume
 that geometric set cover with weighted segments
-with solution of size at most $k$ segments admits a $n^{o(\sqrt(k))}$ algorithm.
+parameterized by solution size $k$ admits an $n^{o(\sqrt{k})}$ algorithm.
 
 Using Lemma \ref{w1_construction} let us construct an instance $I$
-for $\instanceGridTiling$.
+for $(n,l,f)$.
 Let us assume that the optimum solution of size at most $k$
 to the instance $I$ has weight $w$.
 Using \ref{part2} we know that if $w \le \solWeight$,
-then answer to $\instanceGridTiling$ is $\yes$.
+then answer to $(n,l,f)$ is $\yes$.
 If $w > \solWeight$, then using \ref{part1}
-we know that the answer to $\instanceGridTiling$ must be $\no$.
+we know that the answer to $(n,l,f)$ must be $\no$.
 
-Therefore if we could find it in time $n^{o(\sqrt(k))}$,
+Therefore if we could find the solution in time $n^{o(\sqrt{k})}$,
 then we could solve the grid tiling problem
 in $n^{o(l)}$ by constructing an instance of the set cover with
 weighted segments, solving it 
-for parameter $k = 3l^2+2l$ in time $n^{o(\sqrt(3l^2+2l))} \ge n^{o(l)}$
+for parameter $k = 3l^2+2l$ in time $n^{o(\sqrt{3l^2+2l})}$
 and then answering based on the weight
-of the optimum solution.
-Existance of this algorithm contradicts Theorem
+of the optimum solution..
+
+Hence $O(n^{o(l)}) \subseteq O(n^{o(\sqrt{3l^2+2l})})$,
+existance of this algorithm contradicts Theorem
 \ref{grid_tiling_w1_hard}.
 
-Hence such an algirhtm can not exist.
+Hence such an algorihtm can not exist.
 \end{proof}
 
 We prove Lemma \ref{w1_construction} in subsequent sections.
@@ -182,7 +183,7 @@ In the proof of Lemma \ref{grid_tiling_exists}
 we do not use the assumption that
 the solution is bounded by the size,
 which the problem is parametrized by, $3k^2+2k$.
-If we had a permissive FPT algorihtm,
+If we had a permissive FPT algorithm,
 that finds solution of any size that still
 has weight no more than $\solWeight$,
 then we still would have a contradiction with grid tiling being W[1]-hard
@@ -455,7 +456,7 @@ of the guards of the points in $H$.
 \begin{claim}
 \label{one_diag_in_square}
 For any $1 \le i, j \le n$
-and any solution to the instance $\instanceSetCover$
+and any solution to the instance $\instanceSetCover$,
 all but at most one point $h_{i, j, t}$
 and at most one point $v_{i, j, t}$
 for $1 \le t \le n^2$
@@ -596,16 +597,16 @@ Every segment from $\allhor$ either:
 \item starts at point $h^R_{x,y,z_1}$
 and ends at point $h^L_{x+1,y,z_2}$ for some
 $1 \le x < k$,$1 \le y \le k$ and $1 \le z_1, z_2 \le n^2$;
-\item is a $\horbeg{y}{z}$ 
-and starts at $h^L{1,y,1}$ and ends at $h^L{1,y,z}$ for some $1 \le y \le k$ and $1 \le z \le n^2$;
-\item is a $\horend{y}{z}$
-and starts at $h^R{k,y,t}$ and ends at $h^R{k,y,n^2}$ for some $1 \le y \le k$ and $1 \le z \le n^2$.
+\item is $\horbeg{y}{z}$ 
+and starts at $h^L_{1,y,1}$ and ends at $h^L_{1,y,z}$ for some $1 \le y \le k$ and $1 \le z \le n^2$;
+\item is $\horend{y}{z}$
+and starts at $h^R_{k,y,z}$ and ends at $h^R_{k,y,n^2}$ for some $1 \le y \le k$ and $1 \le z \le n^2$.
 \end{itemize}
 All of the points between $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$
 are covered by segments in $\allhor$ 
 and there is no segment $(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$ in $\allhor$.
 Hence, there are at least two different segments covering them.
-If both of these segments are neiteher $\horbeg{y}{z}$ nor $\horend{y}{z}$,
+If both of these segments are neither $\horbeg{y}{z}$ nor $\horend{y}{z}$,
 then one of them must begin
 at $h^R_{i,j,t_1}$ and end at $h^L_{i+1,j,z_2}$
 and there must be other one that begins at $h^R_{i,j,z_1}$
@@ -630,7 +631,7 @@ and $\matchh(t_1,t_2)$ is $\true$.
 
 \begin{lemma}
 \label{grid_tiling_exists}
-	If there exists solution to instance $\instanceSetCover$
+	If there exists a solution to instance $\instanceSetCover$
 	with weight at most $\solWeight$,
 	then there exists a solution to the grid tiling instance $(f_{i,j})$.
 \end{lemma}

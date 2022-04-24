@@ -19,25 +19,24 @@ which has been proven
 in literature to be
 inapproximable with factor $(1-o(1))\ln n$ unless $P = NP$
 (which is a stronger result than APX-hardness),
-and W[2]-hard with natural parametrization.
-We can also restrict the problem to various specialized settings,
-which can yield more complexity and approximation results.
-In this paper we take a closer look at the Geometric Set Cover problem
-on a plane, where points to cover are points on a plane
+and W[2]-hard with natural parametrization,
+but restricting the problem to various specialized settings
+can lead to more tractable special cases.
+In this thesis we take a closer look at the Geometric Set Cover problem
+in the plane, where points to cover are points in the plane
 and sets to cover them with are geometric objects.
 
 \paragraph{Approximation}
 Over the years there has been a lot of work related to approximation
 of Geometric Set Cover. Notably,
-Geometric Set Cover with unweighted unit disks admits PTAS (see
+Geometric Set Cover with unweighted unit disks admits a PTAS (see
 Corollary 1.1 in \cite{unit_disks}). When we consider the same problem
-with weighted unit disks (or unit squares), the problem admits QPTAS
-\cite{settling_apx_hardness}, later improved in
-Theorem 2 in \cite{voronoi_true}.
+with weighted unit disks (or unit squares), the problem admits a QPTAS
+\cite{settling_apx_hardness}, see also \cite{voronoi_true}.
 On the other hand, \cite{rectangles_apx_hard} 
-proves that cover with unweighted axis-parallel rectangles
-is APX-hard, which they also show for set cover with many other
-standard geometric objects.
+proves that Geometric Set Cover with unweighted axis-parallel rectangles
+is APX-hard; they also show similar hardness
+for Geometric Set Cover with many other standard geometric objects.
 
 \paragraph{Parametrization}
 We consider Geometric Set Cover 
@@ -46,27 +45,37 @@ Geometric Set Cover with unit squares was first proven to be W[1]-hard
 in \cite{marx05} (Theorem 5), later follow-up \cite{voronoi}
 shows that there is an algorithm running in time $\mathcal{O}(n^{\sqrt{k}})$
 that solves Geometric Set Cover with unit squares or disks
-and that there is no algorithm running in time $f(k) \cdot n^{\sqrt{k}-\epsilon}$
-for any $\epsilon > 0$, so this is a tight bound for this problem.
+and that there is no algorithm running in time $f(k) \cdot o(n^{\sqrt{k}})$
+for any computable $f$, so this is a tight bound for this problem.
 
-We also consider parametrization in the weighted setting.
+We also consider parametrization of weighted problems.
 There does not seem to be a consensus of what parametrization
-in weighted setting is exactly; there
-was an attempt to introduce quite complicated general
+in the weighted setting is exactly; there
+was an attempt to introduce a quite complicated general
 framework of weighted parameterized setting in \cite{weighted_framework}.
-Kernels for several well known weighted problems
+Kernels for several well-known weighted problems
 such as Subset Sum or Knapsack are presented in \cite{kernel_weighted}.
-Another work \cite{weighted_flow} presents weighted
+Another work \cite{weighted_flow} considers weighted
 parametrization of Weighted Directed Feedback Set and Weighted $st$-Cut.
 
 \paragraph{$\delta$-extensions}
-In this paper, we focus on Geometric Set Cover with segments with $\delta$-extensions.
-$\delta$-extensions is a problem relaxation method based on the
+In this paper, we focus on Geometric Set Cover with segments with $\delta$-extension.
+$\delta$-extension is a problem relaxation method based on the
 $\delta$-shrinking model which was introduced in \cite{shrinking_original}
-and later used in \cite{shrinking1} and \cite{shrinking2}.
+and later used in \cite{shrinking2} and \cite{shrinking1}.
+
+\begin{defi}
+\label{definition:delta_extension}
+For any $\delta > 0$ and a center-symmetric object $L$ with
+centre of symmetry $S = (x_s, y_s)$,
+the \textbf{$\delta$-extension} of $L$ is the object $L^{+\delta} =
+\{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}$,
+that is, $L^{+\delta}$ is the image of $L$ under homothety centered
+at $S$ with scale $(1+\delta)$.
+\end{defi}
 
 Similar model is used to prove that Geometric Set Cover with fat polygons
-relaxed with $\delta$-extensions admits EPTAS \cite{harpeled12}.
+relaxed with $\delta$-extension admits EPTAS \cite{harpeled12}.
 
 \section*{Our contribution}
 In this paper we make the following contributions.

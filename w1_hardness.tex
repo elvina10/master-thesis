@@ -103,8 +103,8 @@ is at least as hard as the grid tiling problem.
 
 Let us denote instance of grid tiling problem as $\instanceGridTiling$, it consists of:
 \begin{itemize}
-\item the size of the grid $k$,
 \item the number of colors $n$,
+\item the size of the grid $k$,
 \item the function specifying the allowed tiles
 $f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$.
 \end{itemize}
@@ -156,13 +156,13 @@ in $n^{o(l)}$ by constructing an instance of the set cover with
 weighted segments, solving it 
 for parameter $k = 3l^2+2l$ in time $n^{o(\sqrt{3l^2+2l})}$
 and then answering based on the weight
-of the optimum solution..
+of the optimum solution.
 
-Hence $O(n^{o(l)}) \subseteq O(n^{o(\sqrt{3l^2+2l})})$,
+As $\mathcal{O}(n^{o(l)}) \subseteq \mathcal{O}(n^{o(\sqrt{3l^2+2l})})$,
 existance of this algorithm contradicts Theorem
 \ref{grid_tiling_w1_hard}.
 
-Hence such an algorihtm can not exist.
+Hence such an algorithm can not exist.
 \end{proof}
 
 We prove Lemma \ref{w1_construction} in subsequent sections.

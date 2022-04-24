@@ -88,18 +88,7 @@ to a constant number of directions.
 We present a fixed-parameter tractable algorithm,
 parameterized by the size of the solution.
 
-\begin{tw}{
-	\label{segment_cover_fpt}
-	\textbf{(FPT for segment cover)}.
-	There exists an algorithm that given a family $\sets$ of
-	segments (in any direction),
-	a set of points $\points$
-	and a parameter $k$,
-	runs in time $k^{\mathcal{O}(k)} \cdot (|\points|\cdot|\sets|)^2$,
-	and outputs a solution $\sol \subseteq \sets$
-	such that $|\sol| \le k$ and $\sol$ covers all points in~$\points$,
-	or determines that such a set $\sol$ does not exist.
-}\end{tw}
+\segmentCoverFpt*
 
 We will need the following lemmas proving properties of any
 instance of the problem.

@@ -16,21 +16,7 @@ these points in such a way, that all segments become axis-parallel.
 	direction is a right-diagonal line.
 \end{defi}
 
-\begin{tw}
-\label{w1_hard}
-	Consider the problem of covering a set $\points$ of points
-	by selecting at most $k$ segments
-	from a set of segments $\sets$ 
-	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
-	so that the weight of the cover is minimal.
-	Then this problem is W[1]-hard when parameterized by $k$ and
-	assuming ETH, there is no algorithm for this
-	problem with running time
-	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
-	for any computable function $f$.
-	Moreover, this holds even if all segments in $\sets$
-	are axis-parallel.
-\end{tw}
+\wOneHard*
 
 In~order to prove Theorem \ref{w1_hard}
 we will show a reduction from a W[1]-hard problem.

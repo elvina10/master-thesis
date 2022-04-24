@@ -13,26 +13,7 @@ for weighted segments (without extensions) is W[1]-hard, which means
 there does not exist any FPT algorithm parameterized by solution size for it,
 assuming FPT $\neq$ W[1].
 
-\begin{tw}[FPT for weighted segment cover with $\delta$-extensions]{
-	\label{fpt_weighted_segment}
-	There exists an algorithm that given a family $\sets$ of
-	$n$ weighted segments (in any direction),
-	a set of $m$ points $\points$, and parameters $k$ and $\delta > 0$,
-	such that it
-	runs in time $f(k, \delta) \cdot (nm)^c$ for some computable function $f$ and a constant $c$ and
-	outputs a set $\sol$ such that:
-	\begin{itemize}
-	\item $\sol \subseteq \sets$,
-	\item $|\sol| \le k$,
-	\item $\sol^{+\delta}$ covers all points in $\points$,
-	\item the weight of $\sol$ is not greater than the weight
-	of an optimum solution of size at most $k$
-	for this problem without $\delta$-extensions
-	\end{itemize}
-	or determines that there is no set $\sol$ with $|\sol| \le k$
-	such that $\sol$ covers all points in $\points$.
-}\end{tw}
-
+\fptWeightedSegment*
 
 To solve this problem we will introduce a lemma about choosing
 a \textit{dense} subset of points. A dense subset of points

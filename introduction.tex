@@ -3,10 +3,23 @@
 Some problems in Computer Science are known to be NP-complete,
 meaning that assuming P$\neq$NP there is no polynomial time
 algorithm that can solve these problems.
-Even so, they still can have a variety of interesting properties.
+Even so, they still can be amendable to different approaches,
+such as approximation or parametrization.
+
+\begin{defi}
+In \textbf{Set Cover} problem we are given a set of elements (universe)
+$\points$ and a family of sets $\sets$, that are subsets of unvierse $\points$
+and they sum up to the whole $\points$ set.
+Our task is to find such a set $\sol \subseteq \sets$,
+that $\bigcup \sol = \points$ and size of $\sol$ is minimal possible.
+\end{defi}
+
 Set Cover is one classical example of an NP-complete problem,
 which has been proven
-in literature to be APX-hard and W[2]-hard \cite{platypus_book}.
+in literature to be
+inapproximable with factor $(1-o(1))\ln n$ unless $P = NP$
+(which is a stronger result than APX-hardness),
+and W[2]-hard with natural parametrization.
 We can also restrict the problem to various specialized settings,
 which can yield more complexity and approximation results.
 In this paper we take a closer look at the Geometric Set Cover problem

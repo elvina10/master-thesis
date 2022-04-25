@@ -76,11 +76,11 @@ is present in Defintion
 \ref{definition:delta_extension}.
 
 The geometric set cover problem with $\delta$-extension
-is a modified version of geometric set cover with
+is a version of geometric set cover with
 the following modifications.
 \begin{itemize}
 \item We need to cover all the points in $\points$
-with objects from $\{P^{+\delta} : P \in \sets\}$ (which always 
+by selecting objects from $\{P^{+\delta} : P \in \sets\}$ (which always 
 include no fewer points than the objects
 before $\delta$-extension).
 \item We look for a solution that is not larger than the optimum
@@ -88,13 +88,12 @@ solution to the original problem.
 Note that it does not need to be an optimal solution in
 the modified problem.
 \end{itemize}
-
 Formally, we have the following.
 
 \begin{defi}
 The \textbf{geometric set cover problem
 with $\delta$-extension} is the problem where for an input instance
-$I=(\sets, \points)$,
+$I=(\sets, \points)$ of geometric set cover,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
@@ -103,14 +102,15 @@ extension, i.e.~$|\mathcal{R}| \le |opt(I)|$.
 \end{defi}
 
 At last, we formulate a definition of the
-polynomial-time approximation scheme (PTAS) of
-the problem with $\delta$-extension.
+polynomial-time approximation scheme (PTAS)
+for a problem with $\delta$-extension.
 
 \begin{defi}
-We define a \textbf{PTAS for geometric set cover 
-with $\delta$-extension} as a family of algorithms
+A \textbf{PTAS for geometric set cover 
+with $\delta$-extension} is a family of algorithms
 $\{\mathcal{A}_{\delta, \epsilon}\}_{\delta, \epsilon > 0}$ that
-each takes as an input instance $I=(\sets, \points)$,
+each takes as an input instance $I=(\sets, \points)$
+of geometric set cover where objects are centre-symmetric and strongly convex,
 and in polynomial-time outputs a solution $\mathcal{R} \subseteq \sets$
 such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$

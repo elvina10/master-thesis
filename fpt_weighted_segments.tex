@@ -1,15 +1,15 @@
-\section{Fixed-parameter tractable algorithm for weighted segments with $\delta$-extensions}
+\section{Fixed-parameter tractable algorithm for weighted segments with $\delta$-extension}
 \label{section:fpt_weighted}
 
 In this section we consider the geometric set cover problem
-for weighted segments relaxed with $\delta$-extensions.
+for weighted segments relaxed with $\delta$-extension.
 We show that this problem
 admits an FPT algorithm when parameterized by the size
 of the solution and $\delta$.
 In the next chapter we show that the assumption
-about the problem being relaxed with $\delta$-extensions is necessary:
+about the problem being relaxed with $\delta$-extension is necessary:
 we prove that geometric set cover problem
-for weighted segments (without extensions) is W[1]-hard, which means
+for weighted segments (without extension) is W[1]-hard, which means
 there does not exist any FPT algorithm parameterized by solution size for it,
 assuming FPT $\neq$ W[1].
 
@@ -20,7 +20,7 @@ a \textit{dense} subset of points. A dense subset of points
 for a set of collinear points $C$ and parameters $k$ and $\delta$
 is a subset of $C$ such that
 if we cover it with at most $k$ segments,
-these segments after $\delta$-extensions will cover all of the points from $C$.
+these segments after $\delta$-extension will cover all of the points from $C$.
 We will prove that such set 
 of size bounded by some function $f(k, \delta)$
 always exists (Lemma \ref{dense_set_exists}).
@@ -273,7 +273,7 @@ has no greater weight than optimum solution
 of size at most $k$ to $\instance$.
 Using \textit{Property 2} we know that
 any solution to $\instancePrim$
-after $\delta$-extensions covers $\points$.
+after $\delta$-extension covers $\points$.
 
 Therefore finding such sets 
 and solving the instance $\instancePrim$

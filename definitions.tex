@@ -1,23 +1,22 @@
 \chapter{Definitions}
 
-In this chapter we present some definitions that are later used
-across the different chapters.
+In this chapter we present some basic definitions that
+will be used later.
 
 \section{Geometric set cover}
-Every time we refer to geometric set cover,
-we consider a geometric set cover problem
-on a~2-dimensional plane.
+Whenever speaking about geometric set cover,
+we consider it in the 2-dimensional plane.
 
 In the geometric set cover problem we are are given
-$\sets$ -- a set of objects, which are connected
-subsets of the plane and $\points$ -- a set of points in the plane.
+$\sets$ --- a set of objects, which are connected
+subsets of the plane and $\points$ --- a set of points in the plane.
 The task is to choose $\sol \subseteq \sets$ such that
 every point in $\points$ is inside some object from $\sol$
 and $|\sol|$ is minimized.
 
 In the parameterized setting for a given $k$,
-we only look for a solution $\sol$ such that $|\sol| \le k$
-or decide that there is no such set $\sol$.
+our task is to either find a solution $\sol$ such that $|\sol| \le k$
+or decide that there is no such solution.
 
 In the weighted setting, there is some given weight function
 $f : \sets \rightarrow \mathbb{R^+}$
@@ -26,8 +25,7 @@ that minimizes $\sum_{R \in \sol} f(R)$.
 
 \section{Approximation}
 
-Let us recall some definitions related to optimization problems
-that are used in the following sections.
+Let us recall some definitions related to optimization problems.
 
 \begin{defi}
 A \textbf{polynomial-time approximation scheme (PTAS)}
@@ -38,7 +36,7 @@ such that $\cal{A}_\epsilon$ takes an instance $I$ of~$\Pi$
 and in polynomial time
 finds a solution that is within a factor
 of ($1+\epsilon$) of being optimal.
-That means the reported solution has weight at most
+This means that the reported solution has weight at most
 $(1+\epsilon)opt(I)$, where $opt(I)$ is the weight
 of an optimal solution to $I$.
 \end{defi}
@@ -50,7 +48,7 @@ such that there is no polynomial-time $(1+\epsilon)$-approximation algorithm
 for $\Pi$.
 \end{defi}
 
-\section{Problem modification with $\delta$-extension}
+\section{$\delta$-extension}
 
 Another idea presented here, much less versatile than the previous concepts,
 is $\delta$-extension.

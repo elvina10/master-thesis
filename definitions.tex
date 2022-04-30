@@ -12,7 +12,8 @@ $\sets$ --- a set of objects, which are connected
 subsets of the plane and $\points$ --- a set of points in the plane.
 The task is to choose $\sol \subseteq \sets$ such that
 every point in $\points$ is inside some object from $\sol$
-and $|\sol|$ is minimized.
+and $|\sol|$ is minimized. We will mostly consider the case where
+$\sets$ consists of segments in plane. 
 
 In the parameterized setting for a given $k$,
 our task is to either find a solution $\sol$ such that $|\sol| \le k$
@@ -22,6 +23,23 @@ In the weighted setting, there is some given weight function
 $f : \sets \rightarrow \mathbb{R^+}$
 and we would like to find a solution $\sol$
 that minimizes $\sum_{R \in \sol} f(R)$.
+
+We also consider weighted parameterized setting, which is a combination
+of the two above, we already argued in introduction that there is
+no consensus of how it is defined, but when we discuss the
+weighted parametrized setting we will consider the following
+definition.
+
+There is some given weight function
+$f : \sets \rightarrow \mathbb{R^+}$
+and we would like to find a solution $\sol$,
+such that $|\sol| \le k$
+that minimizes $\sum_{R \in \sol} f(R)$ among such sets $\sol$.
+
+\begin{defi}
+Segment is \textbf{axis-parallel} if it lies on line that is
+either horizontal $x = c$ or vertical $y = c$.
+\end{defi}
 
 \section{Approximation}
 

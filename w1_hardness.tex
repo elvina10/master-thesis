@@ -390,7 +390,7 @@ Computation for vertical segments is analogous and yields the same result.
 Every segment in~$D$ has weight $\delta$, therefore the sum of all weights
 is equal to:
 
-$$2k(k(n^2+1) -2(1-\epsilon)-2k\epsilon) + k^2\delta= \solWeight.$$
+$$2k(k(n^2+1) -2(1-\epsilon)-2k\epsilon) + k^2\delta= \solWeight.\qedhere$$
 \end{proof}
 
 Now we present a few additional properties of the constructed instance
@@ -486,7 +486,7 @@ not covered by segments from $\allver$ between $v_{i,1,1}^D$ and $v_{i,k,n^2}^U$
 
 \end{enumerate}
 The sum of these lower bounds for vertical and horizontal lines is:
-$$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon) = \hvWeight.$$
+$$2k(k(n^2+1) -2k\epsilon -2(1-\epsilon)) = 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon) = \hvWeight.\qedhere$$
 \end{proof}
 
 \begin{lemma}
@@ -572,9 +572,9 @@ Every segment from $\allhor$ either:
 \begin{itemize}
 \item starts at point $h^R_{x,y,z_1}$
 and ends at point $h^L_{x+1,y,z_2}$ for some
-$1 \le x < k$,$1 \le y \le k$ and $1 \le z_1, z_2 \le n^2$;
+$1 \le x < k$,$1 \le y \le k$ and $1 \le z_1, z_2 \le n^2$; or
 \item is $\horbeg{y}{z}$ 
-and starts at $h^L_{1,y,1}$ and ends at $h^L_{1,y,z}$ for some $1 \le y \le k$ and $1 \le z \le n^2$;
+and starts at $h^L_{1,y,1}$ and ends at $h^L_{1,y,z}$ for some $1 \le y \le k$ and $1 \le z \le n^2$; or
 \item is $\horend{y}{z}$
 and starts at $h^R_{k,y,z}$ and ends at $h^R_{k,y,n^2}$ for some $1 \le y \le k$ and $1 \le z \le n^2$.
 \end{itemize}
@@ -592,7 +592,7 @@ for some $1 \le z_1, z_2 \le n^2$.
 Thus, the space between $h^R_{i,j,z_1}$ and $h^L_{i,j+1,z_2}$
 would be covered twice and is longer than $\epsilon$.
 The case when one of them is $\horbeg{y}{z}$ or $\horend{y}{z}$ is analogous.
-They can't be both $\horbeg{y}{z}$ or $\horend{y}{z}$.
+Note that they cannot be both $\horbeg{y}{z}$ or $\horend{y}{z}$.
 
 By the proof of Lemma \ref{vertical_horizontal_sum},
 the lower bound for weight of such a solution is $\hvWeight + \epsilon$

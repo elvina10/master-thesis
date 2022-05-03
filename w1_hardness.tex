@@ -117,29 +117,28 @@ First, let us prove Theorem \ref{w1_hard} using Lemma \ref{w1_construction}.
 Let us take any instance $(n,l,f)$ of the grid tiling problem.
 We prove the theorem by contradiction, therefore we assume
 that geometric set cover with weighted segments
-parameterized by solution size $k$ admits an $n^{o(\sqrt{k})}$ algorithm.
+parameterized by solution size $k$ admits a
+$g(k)\cdot n^{o(\sqrt{k})}$-time algorithm for some computable function $g$.
 
 Using Lemma \ref{w1_construction} let us construct an instance $I$
 for $(n,l,f)$.
 Let us assume that the optimum solution of size at most $k$
-to the instance $I$ has weight $w$.
-Using \ref{part2} we know that if $w \le \solWeight$,
-then answer to $(n,l,f)$ is $\yes$.
-If $w > \solWeight$, then using \ref{part1}
+to the instance $I$ has weight $u$.
+Using \ref{part2} we know that if $u \le \solWeight$,
+then the answer to $(n,l,f)$ is $\yes$.
+If $u > \solWeight$, then using \ref{part1}
 we know that the answer to $(n,l,f)$ must be $\no$.
 
-Therefore if we could find the solution in time $n^{o(\sqrt{k})}$,
+Therefore if we could find the solution in time $g(k) \cdot n^{o(\sqrt{k})}$,
 then we could solve the grid tiling problem
-in $n^{o(l)}$ by constructing an instance of the set cover with
+in time $g(l)\cdot n^{o(l)}$ by constructing an instance of the set cover with
 weighted segments, solving it 
 for parameter $k = 3l^2+2l$ in time $n^{o(\sqrt{3l^2+2l})}$
 and then answering based on the weight
 of the optimum solution.
-
 As $\mathcal{O}(n^{o(l)}) \subseteq \mathcal{O}(n^{o(\sqrt{3l^2+2l})})$,
-existance of this algorithm contradicts Theorem
+the existence of this algorithm contradicts Theorem
 \ref{grid_tiling_w1_hard}.
-
 Hence such an algorithm can not exist.
 \end{proof}
 
@@ -147,9 +146,6 @@ We prove Lemma \ref{w1_construction} in subsequent sections.
 First, we define a constructed instance $I$, later property
 \ref{part1} is proved by Lemma \ref{set_cover_solution_exists}
 and property \ref{part2} is proved by Lemma \ref{grid_tiling_exists}.
-
-TODO: Do the same summary of Proofs in chapter 3.
-
 
 Permissive FPT is a relaxed FPT problem, where 
 we need to find solution of any size in FPT-time,
@@ -160,8 +156,8 @@ In the proof of Lemma \ref{grid_tiling_exists}
 we do not use the assumption that
 the solution is bounded by the size,
 which the problem is parametrized by, $3k^2+2k$.
-If we had a permissive FPT algorithm,
-that finds solution of any size that still
+If we had a permissive FPT algorithm
+that finds a solution of any size that still
 has weight no more than $\solWeight$,
 then we still would have a contradiction with grid tiling being W[1]-hard
 in proof of Theorem \ref{w1_hard}.
@@ -180,7 +176,7 @@ Formally we state this in the Theorem $\ref{permissive_w1_hard}$.
 	so that the weight of the cover is minimal.
 	Let $\sol^k$ be the
 	optimum solution to this problem of size at most $k$.
-	The task is to find solution $\sol$ of any size
+	The task is to find a solution $\sol$ of any size
 	such that weight of $\sol$ is not greater than the weight of $\sol^k$.
 	
 	Assuming ETH, there is no algorithm for this

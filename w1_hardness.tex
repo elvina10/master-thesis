@@ -2,19 +2,12 @@
 \label{chapter:w1_hard}
 
 In this chapter we consider geometric set cover problem with 
-axis-parallel weighted segments.
+axis-parallel or right-diagonal weighted segments.
 In Theorem~\ref{w1_hard} below, we prove that this problem is 
 W[1]-hard when parameterized by the size of the solution.
-For simplicity we present here a solution that uses segments in
-3 directions, but there exists an isomorphism that transposes
-these points in such a way, that all segments become axis-parallel.
 
-\begin{defi}
-	A line is \textbf{right-diagonal} if it is
-	described by linear function $x + y = d$ for some $d \in \mathbb{R}$.
-	Segment is \textbf{right-diagonal} if its
-	direction is a right-diagonal line.
-\end{defi}
+We believe that the below construction can be improved to only
+utilize the axis-parallel segments.
 
 \wOneHard*
 
@@ -178,7 +171,26 @@ proves that the problem is not only W[1]-hard, but assuming ETH
 there also does not exist permissive FPT algorithm for this problem.
 Formally we state this in the Theorem $\ref{permissive_w1_hard}$.
 
-\permissiveWOneHard*
+
+\begin{restatable}{tw}{permissiveWOneHard}
+\label{permissive_w1_hard}
+\textbf{(Permissive FPT does not exist).}
+	Consider the problem of covering a set $\points$ of points
+	using segments from a set $\sets$ 
+	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
+	so that the weight of the cover is minimal.
+	Let $\sol^k$ be the
+	optimum solution to this problem of size at most $k$.
+	The task is to find solution $\sol$ of any size
+	such that weight of $\sol$ is not greater than the weight of $\sol^k$.
+	
+	Assuming ETH, there is no algorithm for this
+	problem with running time
+	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
+	for any computable function $f$.
+	Moreover, this holds even if all segments in $\sets$
+	are axis-parallel or right-diagonal.
+\end{restatable}
 
 \paragraph{Construction.}
 \newcommand{\order}{\mathsf{order}}

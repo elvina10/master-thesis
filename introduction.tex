@@ -158,28 +158,13 @@ results for the weighted setting.
 	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
 	for any computable function $f$.
 	Moreover, this holds even if all segments in $\sets$
-	are axis-parallel.
+	are axis-parallel or right-diagonal.
 \end{restatable}
 
-\begin{restatable}{tw}{permissiveWOneHard}
-\label{permissive_w1_hard}
-\textbf{(Permissive FPT does not exist).}
-	Consider the problem of covering a set $\points$ of points
-	using segments from a set $\sets$ 
-	with non-negative weights $w : \sets \rightarrow \mathbb{R^+}$
-	so that the weight of the cover is minimal.
-	Let $\sol^k$ be the
-	optimum solution to this problem of size at most $k$.
-	The task is to find solution $\sol$ of any size
-	such that weight of $\sol$ is not greater than the weight of $\sol^k$.
-	
-	Assuming ETH, there is no algorithm for this
-	problem with running time
-	$f(k)\cdot(|\points| + |\sets|)^{o(\sqrt{k})}$
-	for any computable function $f$.
-	Moreover, this holds even if all segments in $\sets$
-	are axis-parallel.
-\end{restatable}
+Please see Section \ref{section:def:geometric__set_cover}
+for exact definitions of axis-parallel and right-diagonal segments.
+
+TODO: Write something about persmissive as a side thingy
 
 This result is not tight. There exists a simple algorithm 
 running in time ${\mathcal{O}(f(k)(|\points| + |\sets|)^k)}$,

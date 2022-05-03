@@ -8,27 +8,28 @@ such as approximation or parametrization.
 
 \begin{defi}
 In the \textbf{Set Cover} problem we are given a set of elements (universe)
-$\points$ and a family of sets $\sets$, that are subsets of the universe $\points$
+$\points$ and a family of sets $\sets$ that are subsets of the universe $\points$
 and sum up to the whole $\points$.
-Our task is to find such a set $\sol \subseteq \sets$,
-that $\bigcup \sol = \points$ and size of $\sol$ is minimal possible.
+Our task is to find a set $\sol \subseteq \sets$
+such that $\bigcup \sol = \points$ and the size of $\sol$ is minimum possible.
 \end{defi}
 
-Set Cover is one classical example of an NP-complete problem,
+Set Cover is a classical example of an NP-complete problem,
 which has been proven
-in literature to be
-inapproximable with factor $(1-o(1))\ln n$ unless $P = NP$
+in the literature to be
+inapproximable with factor $(1-o(1))\ln n$ asssuming P $\neq$ NP
 (which is a stronger result than APX-hardness),
-and W[2]-hard with natural parametrization,
-but restricting the problem to various specialized settings
+and W[2]-hard with the natural parametrization.
+TODO: citation
+However restricting the problem to various specialized settings
 can lead to more tractable special cases.
 In this thesis we take a closer look at the Geometric Set Cover problem
-in the plane, where points to cover are points in the plane
+in the plane, where elements to cover are points in the plane
 and sets to cover them with are geometric objects.
 
 \paragraph{Approximation}
 Over the years there has been a lot of work related to approximation
-of Geometric Set Cover. Notably,
+algorithms for Geometric Set Cover. Notably,
 Geometric Set Cover with unweighted unit disks admits a PTAS (see
 Corollary 1.1 in \cite{unit_disks}). When we consider the same problem
 with weighted unit disks (or unit squares), the problem admits a QPTAS
@@ -42,11 +43,12 @@ for Geometric Set Cover with many other standard geometric objects.
 We consider Geometric Set Cover 
 parameterized by the size of solution.
 Geometric Set Cover with unit squares was first proven to be W[1]-hard 
-in \cite{marx05} (Theorem 5), later follow-up \cite{voronoi}
-shows that there is an algorithm running in time $\mathcal{O}(n^{\sqrt{k}})$
+in \cite{marx05} (Theorem 5). A later follow-up work \cite{voronoi}
+shows that there is an algorithm running in time $n^{\mathcal{O}(\sqrt{k})}$
 that solves Geometric Set Cover with unit squares or disks
 and that there is no algorithm running in time $f(k) \cdot n^{o(\sqrt{k})}$
-for any computable $f$, so this is a tight bound for this problem.
+for any computable $f$ under the Exponential-Time Hyphothesis,
+so this is a tight bound for this problem.
 
 We also consider parametrization of weighted problems.
 There does not seem to be a consensus of what parametrization
@@ -66,13 +68,15 @@ and later used in \cite{shrinking2} and \cite{shrinking1}.
 
 \begin{defi}
 \label{definition:delta_extension}
-For any $\delta > 0$ and a centre-symmetric strongly convex object $L$ with
+For any $\delta > 0$ and a centre-symmetric convex object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
 the \textbf{$\delta$-extension} of $L$ is the object $L^{+\delta} =
 \{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}$.
 That is, $L^{+\delta}$ is the image of $L$ under homothety centred
 at $S$ with scale $(1+\delta)$.
 \end{defi}
+
+TODO: Do some more stuff about extensions
 
 Similar model is used to prove that Geometric Set Cover with fat polygons
 relaxed with $\delta$-extension admits EPTAS \cite{harpeled12}.
@@ -94,8 +98,9 @@ We show that approximation of uweighted Geometric Set Cover with axis-parallel s
 	for this problem.
 }\end{restatable}
 
-This expands the previous result of Geometric Set Cover
-with unweighted axis-parallel rectangles being APX-hard in \cite{rectangles_apx_hard}.
+This expands the previous result of \cite{rectangles_apx_hard} 
+that Geometric Set Cover
+with unweighted axis-parallel rectangles being APX-hard.
 This also proves that the assumption in \cite{harpeled12}
 for EPTAS about polygons being fat is necessary, because
 cover with arbitrary polygons with $\delta$-extension is APX-hard.
@@ -139,7 +144,7 @@ and weighted segments relaxed with $\delta$-extension
 	such that $\sol$ covers all points in $\points$.
 }\end{restatable}
 
-On the other hand Geometric Set Cover with weighted
+On the other hand, we prove that Geometric Set Cover with weighted
 axis-parallel segments is W[1]-hard (Theorem~\ref{w1_hard})
 and assuming ETH there does not exist algorithm for this problem
 that runs in time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
@@ -167,10 +172,10 @@ for exact definitions of axis-parallel and right-diagonal segments.
 
 TODO: Write something about persmissive as a side thingy
 
-The result of theorem \ref{w1_hard} is not tight.
-There exists a simple algorithm 
-running in time ${\mathcal{O}(f(k)(|\points| + |\sets|)^k)}$,
-so the question whether there exists an algorithm
+Not that the result of theorem \ref{w1_hard} is not tight:
+there exists a simple algorithm 
+running in time ${\mathcal{O}(f(k)(|\points| + |\sets|)^k)}$.
+So the question whether there exists an algorithm
 for this problem running in time ${f(k)\cdot(|\points| + |\sets|)^{o(k)}}$
 is still open.
 
@@ -189,7 +194,8 @@ is still open.
 \end{tabular}
 \caption{Our results for Geometric Set Cover problem with weighted segments 
 parameterized by the size of solution.
-Results marked with * directly follow from more or less restricted settings.}
+Results marked with * directly follow from more or less restricted settings.
+TODO: Fix unclear wording here}
 \label{tab:weighted_fpt}
 \end{center}
 \end{figure}

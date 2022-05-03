@@ -86,7 +86,7 @@ We show that approximation of uweighted Geometric Set Cover with axis-parallel s
 
 \begin{restatable}{tw}{segmentCoverApxHard}{
 \label{segment_cover_apx_hard}
-	\textbf{(axis-parallel segment set cover with $\frac{1}{2}$-extension is APX-hard)}.	
+	\textbf{(Axis-parallel segment set cover with $\frac{1}{2}$-extension is APX-hard)}.	
 	Unweighted geometric set cover
 	with axis-parallel segments in the 2D plane
 	(even with $\frac{1}{2}$-extension) is APX-hard.
@@ -107,7 +107,7 @@ and weighted segments relaxed with $\delta$-extension
 
 \begin{restatable}{tw}{segmentCoverFpt}{
 	\label{segment_cover_fpt}
-	\textbf{(FPT for segment cover)}.
+	\textbf{(FPT for segment cover).}
 	There exists an algorithm that given a family $\sets$ of
 	segments (in any direction),
 	a set of points $\points$
@@ -118,8 +118,9 @@ and weighted segments relaxed with $\delta$-extension
 	or determines that such a set $\sol$ does not exist.
 }\end{restatable}
 
-\begin{restatable}{tw}{fptWeightedSegment}[FPT for weighted segment cover with $\delta$-extension]{
+\begin{restatable}{tw}{fptWeightedSegment}{
 	\label{fpt_weighted_segment}
+	\textbf{(FPT for weighted segment cover with $\delta$-extension).}
 	There exists an algorithm that given a family $\sets$ of
 	$n$ weighted segments (in any direction),
 	a set of $m$ points $\points$, and parameters $k$ and $\delta > 0$,
@@ -140,7 +141,7 @@ and weighted segments relaxed with $\delta$-extension
 
 On the other hand Geometric Set Cover with weighted
 axis-parallel segments is W[1]-hard (Theorem~\ref{w1_hard})
-and assiming ETH there does not exist algorithm for this problem
+and assuming ETH there does not exist algorithm for this problem
 that runs in time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
 See Figure \ref{tab:weighted_fpt} for a summary of parameterized
 results for the weighted setting.
@@ -166,7 +167,8 @@ for exact definitions of axis-parallel and right-diagonal segments.
 
 TODO: Write something about persmissive as a side thingy
 
-This result is not tight. There exists a simple algorithm 
+The result of theorem \ref{w1_hard} is not tight.
+There exists a simple algorithm 
 running in time ${\mathcal{O}(f(k)(|\points| + |\sets|)^k)}$,
 so the question whether there exists an algorithm
 for this problem running in time ${f(k)\cdot(|\points| + |\sets|)^{o(k)}}$

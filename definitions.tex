@@ -4,6 +4,7 @@ In this chapter we present some basic definitions that
 will be used later.
 
 \section{Geometric set cover}
+\label{section:def:geometric__set_cover}
 Whenever speaking about geometric set cover,
 we consider it in the 2-dimensional plane.
 
@@ -23,16 +24,6 @@ In the weighted setting, there is some given weight function
 $f : \sets \rightarrow \mathbb{R^+}$
 and we would like to find a solution $\sol$
 that minimizes $\sum_{R \in \sol} f(R)$.
-
-We also consider a weighted parameterized setting, which is a combination
-of the two above settings. We already argued in the introduction
-that there is no consensus of how it is defined, but when we discuss the
-weighted parametrized setting we will consider the following
-definition. There is a given weight function
-$f : \sets \rightarrow \mathbb{R^+}$
-and we would like to find a solution $\sol$,
-such that $|\sol| \le k$
-that minimizes $\sum_{R \in \sol} f(R)$ among such sets $\sol$.
 
 \begin{defi}
 Segment is \textbf{axis-parallel} if it lies on line that is
@@ -66,8 +57,8 @@ for $\Pi$.
 
 \section{$\delta$-extension}
 
-Another idea presented here, which can be utilized only when talking
-about the problems with geometric objects,
+Another idea presented here, which can be utilized only when considering
+the problems with geometric objects,
 is $\delta$-extension.
 We define it specificaly for the geometric set cover problem.
 
@@ -79,7 +70,7 @@ optimum solution to the original problem,
 so this is substantially easier than just
 solving the problem for the larger objects.
 It may even be the case
-that we are able to find the solution
+that we are able to find a solution
 of size smaller than the optimum solution
 to the original problem.
 
@@ -129,5 +120,33 @@ $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
 and is within a $(1+\epsilon)$ factor of the optimal
 solution to this problem without
 extension, i.e.~$(1+\epsilon)|\mathcal{R}| \le |opt(I)|$.
+\end{defi}
 
+\section{Weighted setting}
+
+In this thesis we also consider a weighted parameterized setting,
+which is a combination
+of the weighted and parameterized setting described in 
+\ref{section:def:geometric__set_cover}.
+We already argued in the introduction
+that there is no consensus of how it is defined, but when we discuss the
+weighted parametrized setting we will consider the following
+definition. There is a given weight function
+$f : \sets \rightarrow \mathbb{R^+}$
+and we would like to find a solution $\sol$,
+such that $|\sol| \le k$
+that minimizes $\sum_{R \in \sol} f(R)$ among such sets $\sol$.
+
+We also consider weighted parameterized setting with $\delta$-extension,
+which we formally define below.
+
+\begin{defi}
+The \textbf{weighted geometric set cover problem
+with $\delta$-extension} is the problem where for an input instance
+$I=(\sets, \points, f)$ of weighted geometric set cover,
+the task is to output a solution $\mathcal{R} \subseteq \sets$
+such that the~$\delta$-extended set
+$\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
+and is not larger than the optimal solution to the~problem without
+extension, i.e.~$\sum_{R \in \mathcal{R}} f(R) \le |opt(I)|$.
 \end{defi}

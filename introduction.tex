@@ -104,6 +104,20 @@ For more elaborate discussion of this concept see Section
 
 Similar model is used to prove that Geometric Set Cover with fat polygons
 relaxed with $\delta$-extension admits EPTAS \cite{harpeled12}.
+$\delta$-extension model presented there is well-defined only
+for fat polygons. It extends the object by all the points that
+have distance to the closest point in the object $P$
+no larger than $\delta\cdot \mathsf{rad}(P)$, where $\mathsf{rad}(P)$
+is a radius of a circle inscribed into $P$.
+Since segments do not have any circle inscribled into them,
+the defintion presented there cannot be utilized for this problem.
+Polygons extended by $\delta$-extension
+defined in \ref{definition:delta_extension}
+covers a superset of set of points that object extended
+by $\delta$-extension defined in \cite{harpeled12}.
+Since our definition is more permissive for any polygon,
+then EPTAS from \cite{harpeled12}
+also works for polygons extended by our $\delta$-extension.
 
 \section*{Our contribution}
 In this paper we make the following contributions.

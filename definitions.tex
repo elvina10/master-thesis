@@ -41,15 +41,32 @@ our task is to either find a solution $\sol$ such that $|\sol| \le k$
 or decide that there is no such solution.
 
 \begin{defi}
-An \textbf{FPT} algorithm is...
+A \textbf{Fixed-parameter Tractable (FPT)} algorithm 
+for a problem with parameter $k$ and instance size $n$
+is an algorithm running in time $f(k) \cdot n^c$
+for some constant $c$ and some computable function $f$.
 \end{defi}
 
 \begin{defi}
-\textbf{Exponential Time Hypothesis} is...
+\textbf{$k$-SAT} problem is defined as...
+\end{defi}
+
+\begin{defi}
+For $k \ge 3$ set us define $S_k$ as a set of constants $\sigma$
+such that there exists an algorithm solving $k$-SAT running in time
+$\mathcal{O}^{*}(2^{\sigma n})$.
+Set us define $s_k$ as the infinimum  of the set $S_k$.
+
+\textbf{Exponential Time Hypothesis (ETH)} is a conjecture
+that $s_3 > 0$, which implies that
+there does not exist an algorithm solving 3-SAT
+running in time $2^{o(n)}$.
 \end{defi}
 
 \begin{tw}
-Problem is \textbf{W[1]-hard} if assuming ETH there is no...
+Problem parameterized by $k$ is \textbf{W[1]-hard} if assuming ETH there
+does no algorithm solving this problem running in time
+$f(k)\cdot n^{o(k)}$.
 \end{tw}
 
 \section{Approximation}

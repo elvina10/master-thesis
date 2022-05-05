@@ -121,7 +121,7 @@ $$M\left(2+\frac{2}{\delta}\right)^{k} =
 \le \left(2+\frac{2}{\delta}\right)^{k+1}.$$
 
 
-\subparagraph{Proof that $A$ is $(k, \delta)$-dense for $C$.}
+\subparagraph{Proof that $A$ is $(k+1, \delta)$-dense for $C$.}
 Let us take any cover of $A$ with $k+1$ segments and call it $\sol$.
 
 For every segment $t_i$, if there exists a segment $x$ in $\sol$ 
@@ -258,24 +258,24 @@ $\instancePrim$ of size bounded by $f(k)$ for some function $f$, such that:
 \item \textit{(Property 1)} for every solution
 $\sol$ to $\instance$ of size at most $k$,
 there exists a set $\sol_1 \subseteq \sets'$ such that
-$|\sol_1| \le k$, weight of $\sol_1$ is not greater than weight of $\sol$
+$|\sol_1| \le k$, the weight of $\sol_1$ is not greater than the weight of $\sol$
 and $\sol_1$ covers $\points'$;
 \item \textit{(Property 2)}
 for every set $\sol_2 \subseteq \sets'$ such that $|\sol_2| \le k$
-and $\sol_2$ covers points in $\points'$, $\sol_2^{+\delta}$
-covers points in original instance $\points$.
+and $\sol_2$ covers all points in $\points'$, $\sol_2^{+\delta}$
+covers all points in the original set $\points$.
 \end{itemize}
 
 If we found such sets $\instancePrim$,
-using \textit{Property 1} we know that optimum solution 
+using \textit{Property 1} we know that an optimum solution 
 of size at most $k$ to $\instancePrim$
-has no greater weight than optimum solution
+has no greater weight than an optimum solution
 of size at most $k$ to $\instance$.
 Using \textit{Property 2} we know that
 any solution to $\instancePrim$
 after $\delta$-extension covers $\points$.
 
-Therefore finding such sets 
+Therefore, finding such sets 
 and solving the instance $\instancePrim$
 by iterating over all of the subsets of $\sets'$
 of size at most $k$
@@ -314,14 +314,14 @@ therefore both $\sets'$ and $\points'$ have size bounded
 by~$\mathcal{O}\left((k^2 + k(2+\frac{2}{\delta}))^2\right)$.
 
 \paragraph{Proof of Property 2.}
-First, we prove that
+Firstly, we prove that
 for every set $\sol_2 \subseteq \sets'$ such that $|\sol_2| \le k$
 and $\sol_2$ covers points in $\points'$, $\sol_2^{+\delta}$
 covers points in the original instance $\points$.
 
 Let us take such a set $\sol_2$.
 
-$\points$ is separated into several parts -- sets $D$ and $C_i$.
+$\points$ is partitioned into several parts -- sets $D$ and $C_i$.
 Points from $D$ are covered by $\sol_2$, because $D$ is part of $\points'$.
 Each point from any $A_i$ is covered, because $A_i$ is a part of $\points'$;
 $A_i$ is a $(k,\delta)$-dense set for $C_i$, therefore $\sol_2^{+\delta}$
@@ -332,8 +332,8 @@ all points in $\points$.
 Secondly, we prove that for every solution
 $\sol$ to $\instance$ of size at most $k$,
 there exists a set $\sol_1 \subseteq \sets'$ such that
-$|\sol_1| \le k$ and the weight of $\sol_1$ is not greater than
-the weight of $\sol$.
+$|\sol_1| \le k$, the weight of $\sol_1$ is not greater than
+the weight of $\sol$ and $\sol_1$ covers $\points'$.
 
 For every segment in $\sol$, say $s$,
 let us look at the points from $\points'$ that lie on $s$
@@ -348,7 +348,7 @@ Segment $s'$ has weight no greater than the weight of $s$,
 because $s$ also covers $F$.
 
 Therefore, we produced the set $\sol_1$ that has size not greater
-than size of $\sol$ (because some segments $s$ can map
+than the size of $\sol$ (because some segments $s$ can map
 to the same segment $s'$),
 weight not greater than $\sol$, and it covers $\points'$.
 

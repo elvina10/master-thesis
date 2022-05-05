@@ -26,9 +26,7 @@ We define \textit{extreme points} for a set of~collinear points.
 In this section we consider fixed-parameter tractable
 algorithms for unweighted geometric set cover with segments.
 The setting where segments are required to be axis-parallel
-(or limited to a constant number of directions) has an FPT
-algorithm already present in literature in
-the Parametrized Algorithms book \cite{platypus_book}.
+(or limited to a constant number of directions) has a trivial FPT algorithm.
 We present an FPT algorithm for geometric set cover
 with unweighted segments, where segments are in arbitrary directions.
 
@@ -44,8 +42,6 @@ with unweighted segments, where segments are in arbitrary directions.
 	such that $|\sol| \le k$ and $\sol$ covers all points in~$\points$,
 	or determines that such a set $\sol$ does not exist.
 \end{tw}
-
-We present here a simple algorithm from \cite{platypus_book} for completeness.
 
 \begin{proof}
 We show an $\mathcal{O}(2^k)$-time branching algorithm.
@@ -139,17 +135,15 @@ Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots 
 in the order in which they appear on $L$.
 Our proposed set is defined as:
 $$A := \left\{ \text{segment collinear with } L \text{ that covers } x_i
-\text{ and does not cover } x_{i-1} : i \in \{1, \ldots k\}\right\}.$$
-Where for $i = 1$ we just take a segment that covers $x_1$.
-
+\text{ and does not cover } x_{i-1} : i \in \{1, \ldots k\}\right\},$$
+where for $i = 1$ we just take a segment that covers $x_1$.
 If such a segment does not exist for any point $x$
 as above, then $x$ does not give rise to any segment in $A$.
 We prove the lemma by contradition. Let us assume that there
 exists a~solution $\sol$ of size at most $k$ such that $\sol \cap A = \emptyset$.
 
 
-Let us define a set $\sol_L$,
-which is defined as segments from $\sol$ that are collinear with $L$.
+Let $\sol_L$ be the set of segments from $\sol$ that are collinear with $L$.
 
 Every segment that is not collinear with $L$ can cover at~most one of
 the points that lie on~this line.

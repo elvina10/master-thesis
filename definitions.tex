@@ -48,7 +48,19 @@ for some constant $c$ and some computable function $f$.
 \end{defi}
 
 \begin{defi}
-\textbf{$k$-SAT} problem is defined as...
+\label{definition:cnf}
+Booleam formula is in \textbf{conjunctive normal form (CNF)} if
+it is a conjunction of one or more fomulas,
+which are disjuntion of literals.
+\textbf{$k$-CNF} formula is a CNF formula, where
+every disjunction consists of at most $k$ literals.
+\end{defi}
+
+\begin{defi}
+\textbf{$k$-SAT} problem is 
+a boolean satisfiability problem of $k$-CNF formulas.
+Given $k$-CNF formula, one must answer if there
+exists any variables assignment that satisfies the formula.
 \end{defi}
 
 \begin{defi}
@@ -58,10 +70,14 @@ $\mathcal{O}^{*}(2^{\sigma n})$.
 Set us define $s_k$ as the infinimum  of the set $S_k$.
 
 \textbf{Exponential Time Hypothesis (ETH)} is a conjecture
-that $s_3 > 0$, which implies that
+that $s_3 > 0$. This conjecture implies that
 there does not exist an algorithm solving 3-SAT
 running in time $2^{o(n)}$.
 \end{defi}
+
+We provide the main theorem that we use in this thesis for W[1]-hard
+problems. To see the definition of a W[1]-hard problem,
+see Chapter 13.3 of \cite{platypus_book}.
 
 \begin{tw}
 Problem parameterized by $k$ is \textbf{W[1]-hard} if assuming ETH there
@@ -163,9 +179,9 @@ solution to this problem without
 extension, i.e.~$(1+\epsilon)|\mathcal{R}| \le |opt(I)|$.
 \end{defi}
 
-\section{Weighted setting}
+\section{Weighted Geometric Set Cover}
 
-In this thesis we also consider a weighted parameterized setting,
+In this thesis we also consider a weighted Geometric Set Cover problem,
 which is a combination
 of the weighted and parameterized setting described in 
 \ref{section:def:geometric__set_cover}.
@@ -178,10 +194,6 @@ and we would like to find a solution $\sol$,
 such that $|\sol| \le k$
 that minimizes $\sum_{R \in \sol} f(R)$ among such sets $\sol$.
 
-We also consider weighted parameterized setting with $\delta$-extension,
-which we formally define below.
-
-TODO: Restate below for FPT
 \begin{defi}
 The \textbf{weighted geometric set cover problem
 with $\delta$-extension} is the problem where for an input instance
@@ -189,6 +201,23 @@ $I=(\sets, \points, f)$ of weighted geometric set cover,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
-and is not larger than the optimal solution to the~problem without
+and it has weight not larger than the optimal solution to the~problem without
+extension, i.e.~$\sum_{R \in \mathcal{R}} f(R) \le |opt(I)|$.
+\end{defi}
+
+We also consider weighted parameterized setting with $\delta$-extension,
+which we formally define below.
+
+\begin{defi}
+The \textbf{weighted geometric set cover problem
+with $\delta$-extension parameterized by the size of a solution}
+is a problem where for an input instance
+${I=(\sets, \points, f, k)}$ of weighted geometric set cover
+parametrized by the size of a solution $k$,
+the task is to output a solution $\mathcal{R} \subseteq \sets$
+such that the~$\delta$-extended set
+$\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$,
+uses no more than $k$ sets, i.e. $|\sol| \le k$
+and it has weight not larger than the optimal solution to the~problem without
 extension, i.e.~$\sum_{R \in \mathcal{R}} f(R) \le |opt(I)|$.
 \end{defi}

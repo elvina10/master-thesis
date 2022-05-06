@@ -115,7 +115,7 @@ Draw ({x2},{y1}) -- ({x2},{y3});
 Draw ({x2},{y2}) -- ({x3},{y2});'''.replace("Draw", "\\draw").replace("Filldraw", "\\filldraw")
 	return out
 
-def clause_gadget(i):
+def clause_gadget(i, x_id, x_val, y_id, y_val, z_id, z_val):
 	label = '{CLAUSE-gadget$_' + str(i) + '$}'
 	x1 = get_clause_x1(i)
 	x2 = get_clause_x2(i)
@@ -129,13 +129,18 @@ def clause_gadget(i):
 	z11_y = movey(y_start, 5*stepy)
 	or1_x = movex(x1, 4*stepx)
 	or2_x = movex(or1_x, or_width)
+	def function(b):
+		if b:
+			return get_rect_y1
+		else:
+			return get_rect_y2
 	out = f'''
 Filldraw [fill=cyan!30, draw=black] ({add_eps(x1,'-')},{add_eps(ybeg_label,'-')}) rectangle ({add_eps(x2,'+')}, {add_eps(y_top, '+')});
-Draw ({x11_x},{get_rect_y1(2)}) -- ({x11_x},{x11_y});
+Draw ({x11_x},{function(x_val)(x_id)}) -- ({x11_x},{x11_y});
 Draw ({x11_x},{x11_y}) -- ({or1_x},{x11_y});
-Draw ({y11_x},{get_rect_y1(3)}) -- ({y11_x},{y11_y});
+Draw ({y11_x},{function(y_val)(y_id)}) -- ({y11_x},{y11_y});
 Draw ({y11_x},{y11_y}) -- ({or1_x},{y11_y});
-Draw ({z11_x},{get_rect_y2(1)}) -- ({z11_x},{z11_y});
+Draw ({z11_x},{function(z_val)(z_id)}) -- ({z11_x},{z11_y});
 Draw ({z11_x},{z11_y}) -- ({or2_x},{z11_y});
 \\node[above right] at ({add_eps(x1,'-')},{add_eps(y_top,'+')}) {label};'''.replace("Draw", "\\draw").replace("Filldraw", "\\filldraw")
 	return out + or_gadget(or1_x, x11_y) + or_gadget(or2_x, movey(z11_y, - 2 * stepy))
@@ -151,7 +156,8 @@ variable_segment1 = variable_segment(1)
 variable_segment2 = variable_segment(2)
 variable_segment3 = variable_segment(3)
 
-clause_gadget1 = clause_gadget(1)
+clause_gadget1 = clause_gadget(1, 2, True, 3, True, 1, False)
+clause_gadget2 = clause_gadget(2, 3, False, 1, True, 2, True)
 
 output = '''{
 \\begin{figure}
@@ -160,11 +166,12 @@ output = '''{
 \\tikzmath{
 ''' + gen_tikzmath() + '''}
 ''' + clause_gadget1 + '''
+''' + clause_gadget2 + '''
 ''' + variable_segment1 + '''
 ''' + variable_segment2 + '''
 ''' + variable_segment3 + '''
 \\end{tikzpicture}
-\\caption{\\textbf{Schema of the whole construction.}}
+\\caption{\\textbf{Scheme of the whole construction.}}
 General layout of VARIABLE-gadgets and CLAUSE-gadgets and how they
 interact with each other.
 \\label{fig:segment_apx_whole}

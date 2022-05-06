@@ -43,7 +43,7 @@ for the definition of the CNF formula.
 
 \begin{defi}
 \textbf{MAX-3SAT} is the following maximization problem. We are given a 3-CNF
-formula, and need to find an assignment of variables
+formula, and we need to find a boolean assignment of variables
 that satisfies the most clauses.
 \end{defi}
 
@@ -59,15 +59,14 @@ hardness of approximation of MAX-(3,3)-SAT proved
 in \cite{hastad} and described in
 Theorem \ref{hastadtheorem} below.
 
-\begin{defi}[$\alpha$-satisfiable MAX-3SAT formula]
-MAX-3SAT formula with $m$ clauses is at most $\alpha$-satisfiable, if
+\begin{defi}
+MAX-3SAT formula with $m$ clauses is \textbf{at most $\alpha$-satisfiable}, if
 every assignment of variables satisfies no more than $\alpha m$
 clauses. 
 \end{defi}
 
-\begin{tw}{
+\begin{tw}[\cite{hastad}]{
 	\label{hastadtheorem}
-	\textbf{\cite{hastad}}
 	For any $\epsilon > 0$, it is NP-hard to distinguish satisfiable
 	\linebreak
 	(3,3)-SAT formulas from
@@ -662,15 +661,13 @@ this segment does not cover any points with a positive x-coordinate.
 
 
 \subsection{Summary of construction}
-\input{draft_figures/fig_apx_segment_whole.tex}
-
 \input{figures/fig_apx_segment_whole.tex}
 
 Finally we define set of points and segments for the constructed instance:
 $$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause{i},$$
 $$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i.$$
 
-\section{Construction lemmas and proof of Lemma \ref{apxconstruction}}
+\section{Proof of Lemma \ref{apxconstruction}}
 
 In order to prove Lemma \ref{apxconstruction} we introduce several
 auxiliary lemmas proving properties of the construction
@@ -684,7 +681,7 @@ for the instance $S$ of MAX-(3,3)-SAT.
 
 \begin{lemma}
 	\label{construction_correctness}
-	Instance $\setCoverInstance$ of geometric set cover
+	The instance $\setCoverInstance$ of geometric set cover
 	admits a solution of size $15n - k$.
 \end{lemma}
 

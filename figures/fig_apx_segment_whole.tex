@@ -89,6 +89,57 @@
 \xbalabel=12.85;
 \xbblabel=13.049999999999999;
 \xbclabel=13.249999999999998;
+\xbdlabel=11.25;
+\xbelabel=13.25;
+\xbflabel=14.25;
+\xbglabel=11.25;
+\xbhlabel=13.25;
+\xbilabel=14.25;
+\xcjlabel=16.25;
+\ydilabel=1.5;
+\yejlabel=2.5;
+\yealabel=4.0;
+\yeblabel=5.0;
+\yeclabel=6.5;
+\yedlabel=8.5;
+\yeelabel=1.5;
+\yeflabel=2.5;
+\yeglabel=4.0;
+\yehlabel=5.0;
+\yeilabel=6.5;
+\xcalabel=14.45;
+\yfjlabel=7.166666666666667;
+\xcblabel=14.65;
+\yfalabel=7.833333333333333;
+\xcclabel=14.85;
+\yfblabel=8.166666666666666;
+\xcdlabel=15.05;
+\xcelabel=15.65;
+\mepsxbflabel=14.05;
+\epsxcjlabel=16.45;
+\epsyedlabel=8.7;
+\yfclabel=1.5;
+\yfdlabel=2.5;
+\yfelabel=4.0;
+\yfflabel=5.0;
+\yfglabel=6.5;
+\yfhlabel=1.5;
+\yfilabel=2.5;
+\ygjlabel=7.833333333333334;
+\ygalabel=7.333333333333334;
+\ygblabel=7.5;
+\ygclabel=7.666666666666667;
+\xcflabel=15.25;
+\xcglabel=15.45;
+\xchlabel=15.649999999999999;
+\ygdlabel=7.499999999999999;
+\ygelabel=8.166666666666666;
+\ygflabel=7.666666666666666;
+\ygglabel=7.833333333333332;
+\yghlabel=7.999999999999999;
+\xcilabel=15.85;
+\xdjlabel=16.05;
+\xdalabel=16.25;
 }
 
 \filldraw [fill=cyan!30, draw=black] (\mepsxajlabel,\mepsy0) rectangle (\epsxablabel, \epsybdlabel);
@@ -111,6 +162,27 @@
 \draw (\xbalabel,\ydflabel) -- (\xbalabel,\ydhlabel);
 \draw (\xbblabel,\ydflabel) -- (\xbblabel,\ydhlabel);
 \draw (\xbblabel,\ydglabel) -- (\xbclabel,\ydglabel);
+
+\filldraw [fill=cyan!30, draw=black] (\mepsxbflabel,\mepsy0) rectangle (\epsxcjlabel, \epsyedlabel);
+\draw (\xcalabel,\yfglabel) -- (\xcalabel,\yfjlabel);
+\draw (\xcalabel,\yfjlabel) -- (\xcdlabel,\yfjlabel);
+\draw (\xcblabel,\y0) -- (\xcblabel,\yfalabel);
+\draw (\xcblabel,\yfalabel) -- (\xcdlabel,\yfalabel);
+\draw (\xcclabel,\yfilabel) -- (\xcclabel,\yfblabel);
+\draw (\xcclabel,\yfblabel) -- (\xcelabel,\yfblabel);
+\node[above right] at (\mepsxbflabel,\epsyedlabel) {CLAUSE-gadget$_2$};
+\draw (\xcdlabel,\yfjlabel) -- (\xcdlabel,\ygjlabel);
+\draw (\xcdlabel,\ygalabel) -- (\xcglabel,\ygalabel);
+\draw (\xcdlabel,\ygclabel) -- (\xcglabel,\ygclabel);
+\draw (\xcflabel,\ygalabel) -- (\xcflabel,\ygclabel);
+\draw (\xcglabel,\ygalabel) -- (\xcglabel,\ygclabel);
+\draw (\xcglabel,\ygblabel) -- (\xchlabel,\ygblabel);
+\draw (\xcelabel,\ygdlabel) -- (\xcelabel,\ygelabel);
+\draw (\xcelabel,\ygflabel) -- (\xdjlabel,\ygflabel);
+\draw (\xcelabel,\yghlabel) -- (\xdjlabel,\yghlabel);
+\draw (\xcilabel,\ygflabel) -- (\xcilabel,\yghlabel);
+\draw (\xdjlabel,\ygflabel) -- (\xdjlabel,\yghlabel);
+\draw (\xdjlabel,\ygglabel) -- (\xdalabel,\ygglabel);
 \draw (\xclabel,\y0) -- (\xalabel,\y0) node[pos=0.2, above] {$x_1 = \true$};
 \draw (\xclabel,\yalabel) -- (\xalabel,\yalabel) node[pos=0.2, above] {$x_1 = \false$};
 \filldraw [fill=lime!30, draw=black] (\mepsx0,\mepsy0) rectangle (\epsxclabel, \epsyalabel);
@@ -139,7 +211,7 @@
 \draw (\x0,\yahlabel) -- (\xhlabel,\yahlabel);
 \node[above right] at (\mepsx0,\epsyaglabel) {VARIABLE-gadget$_3$};
 \end{tikzpicture}
-\caption{\textbf{Schema of the whole construction.}}
+\caption{\textbf{Scheme of the whole construction.}}
 General layout of VARIABLE-gadgets and CLAUSE-gadgets and how they
 interact with each other.
 \label{fig:segment_apx_whole}

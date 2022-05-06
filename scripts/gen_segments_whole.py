@@ -1,4 +1,4 @@
-width=15
+width=10
 height=1
 step=0.75
 var_gap = 1
@@ -63,15 +63,16 @@ def variable_segment(i):
 	xeps = add_eps(xbeg_label, '-')
 	y1 = get_rect_y1(i)
 	y2 = get_rect_y2(i)
-	width_label = next_id('x', width)
+	width_label = next_id('x', width * 1.25)
 	width_label_smol = next_id('x', width/4)
 	width_half = next_id('x', width/2)
 	yhalf = movey(y1, step)
 	label = '{VARIABLE-gadget$_' + str(i) + '$}'
 	x_true = '{$x_' + str(i) + ' = \\true$}'
 	x_false = '{$x_' + str(i) + ' = \\false$}'
-	out = f'''Draw ({width_half},{y1}) -- ({width_label},{y1}) node[pos=0.2, above] {x_true};
-Draw ({width_half},{y2}) -- ({width_label},{y2}) node[pos=0.2, above] {x_false};
+	label_pos = 0.17
+	out = f'''Draw ({width_half},{y1}) -- ({width_label},{y1}) node[pos={label_pos}, above] {x_true};
+Draw ({width_half},{y2}) -- ({width_label},{y2}) node[pos={label_pos}, above] {x_false};
 Filldraw [fill=lime!30, draw=black] ({xeps},{add_eps(y1, '-')}) rectangle ({add_eps(width_half, '+')}, {add_eps(y2, '+')});
 Draw ({xbeg_label},{y1}) -- ({width_label},{y1});
 Draw ({xbeg_label},{y1}) -- ({xbeg_label},{yhalf});
@@ -159,7 +160,17 @@ variable_segment3 = variable_segment(3)
 clause_gadget1 = clause_gadget(1, 2, True, 3, True, 1, False)
 clause_gadget2 = clause_gadget(2, 3, False, 1, True, 2, True)
 
+# This style below doesn't work for labels
+
+style ='''
+{\tikzset{node/.style={
+    prefix after command= {\pgfextra{\tikzset{every
+    label/.style={font=\footnotesize}}}}
+    }
+}'''
+
 output = '''{
+''' +  style + '''
 \\begin{figure}
 \\centering
 \\begin{tikzpicture}

@@ -187,7 +187,7 @@ These properties provide bounds for different
 objects in the problem instance,
 which help us to find a small kernel for the problem
 or conclude that the optimum
-solution to this instance must be, in terms of size, above some threshold.
+solution to this instance must be, in terms of size, above some treshold.
 
 \begin{defi}
 A line in the plane is \textbf{long}
@@ -238,7 +238,7 @@ Every segment $s$ from $\sol$ covers at most $k$
 points from $A$.
 This is because if $s$ covered at least $k+1$ points from $A$,
 then the line in the direction of $s$ would be a long line
-and that contradicts the definition of $A$.
+and that contradicts the definiton of $A$.
 
 If every segment from $\sol$ covers at most $k$ points from $A$
 and $|\sol| \le k$, then at most $k^2$ points from $A$ are covered by $\sol$
@@ -288,7 +288,7 @@ Applying Claims \ref{few_long_lines} and \ref{few_points},
 if we have more than $k$ different long lines
 or more than $k^2$ points from $\points$
 that do not lie on any long line, then we answer \texttt{NO},
-because these lemmas prove that there is no solution of size at most $k$
+becase these lemmas prove that there is no solution of size at most $k$
 to this instance.
 
 Otherwise, we can split $\points$ into at most $k+1$ sets:

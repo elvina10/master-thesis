@@ -139,7 +139,7 @@ $$A := \left\{ \text{segment collinear with } L \text{ that covers } x_i
 where for $i = 1$ we just take a segment that covers $x_1$.
 If such a segment does not exist for any point $x$
 as above, then $x$ does not give rise to any segment in $A$.
-We prove the lemma by contradiction. Let us assume that there
+We prove the lemma by contradition. Let us assume that there
 exists a~solution $\sol$ of size at most $k$ such that $\sol \cap A = \emptyset$.
 
 
@@ -222,7 +222,7 @@ Thus, (3) takes time $k^{\mathcal{O}(k)}$.
 
 In this branching algorithm our parameter $k$ is decreased with every
 recursive call, so we have at most $k$ levels of recursion with
-branching over $k$ possibilities. Candidates to branch over
+branching over $k$ possibilites. Candidates to branch over
 can be found on each level in time $\mathcal{O}((|\points|\cdot|\sets|)^{\mathcal{O}(1)})$.
 
 Reduction from Lemma \ref{fpt_reduction} can be implemented

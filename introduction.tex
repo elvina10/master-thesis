@@ -8,23 +8,23 @@ such as approximation or parametrization.
 
 \begin{defi}
 In the \textbf{Set Cover} problem we are given a set of elements (universe)
-$\points$ and a family of sets $\sets$ that are subsets of the universe $\points$
+$\points$ and~a~family of sets $\sets$ that are subsets of the universe $\points$
 and sum up to the whole $\points$.
-Our task is to find a set $\sol \subseteq \sets$
+Our~task is to find a set $\sol \subseteq \sets$
 such that $\bigcup \sol = \points$ and the size of $\sol$ is minimum possible.
 \end{defi}
 
 Set Cover is a classical example of an NP-complete problem,
 which has been proven
-in the literature to be
-inapproximable with factor $(1-o(1))\ln n$ asssuming P $\neq$ NP
-(which is a stronger result than APX-hardness)
-proved in \cite{set_cover_inapproximation},
-and W[2]-hard with the natural parametrization.
+in \cite{set_cover_inapproximation} to be
+inapproximable with factor $(1-o(1))\ln n$ asssuming P~$\neq$~NP
+(which is a stronger result than APX-hardness),
+and W[2]-complete with the natural parametrization,
+see Theorem 13.21 in \cite{platypus_book}.
 However restricting the problem to various specialized settings
 can lead to more tractable special cases.
 In this thesis we take a closer look at the Geometric Set Cover problem
-in the plane, where elements to cover are points in the plane
+in the plane, where elements to cover are~points in the plane
 and sets to cover them with are geometric objects.
 
 \paragraph{Approximation}
@@ -44,19 +44,19 @@ We consider Geometric Set Cover
 parameterized by the size of solution.
 Geometric Set Cover with unit squares was first proven to be W[1]-hard 
 in \cite{marx05} (Theorem 5). A later follow-up work \cite{voronoi}
-shows that there is an algorithm running in time $n^{\mathcal{O}(\sqrt{k})}$
+shows that there is an~algorithm running in time $n^{\mathcal{O}(\sqrt{k})}$
 that solves Geometric Set Cover with unit squares or disks
 and that there is no algorithm running in time $f(k) \cdot n^{o(\sqrt{k})}$
-for any computable $f$ under the Exponential-Time Hyphothesis,
+for any computable $f$ under the~Exponential-Time Hyphothesis,
 so this is a tight bound for this problem.
 
 We also consider parametrization of weighted problems.
-There does not seem to be a consensus of what parametrization
+There does not seem to be a~consensus of what parametrization
 in the weighted setting is exactly; there
 was an attempt to introduce a quite complicated general
 framework of weighted parameterized setting in \cite{weighted_framework}.
 Kernels for several well-known weighted problems
-such as Subset Sum or Knapsack are presented in \cite{kernel_weighted}.
+such as Subset Sum or~Knapsack are presented in \cite{kernel_weighted}.
 Another work \cite{weighted_flow} considers weighted
 parametrization of Weighted Directed Feedback Set and Weighted $st$-Cut.
 
@@ -71,16 +71,16 @@ weighted rectangles with maximum sum of weight possible.
 In the $\delta$-shrinking relaxed problem
 the returned set of rectangles must be non-overlapping
 after all the rectangles are shrunk by a tiny fraction $\delta$
-towards the centre of symmetry on all sides.
+towards the centre of symmetry.
 This problem is easier, because we compare this result
 to the optimum result before the shrinking. It might
 even lead to finding a set with result better than the optimum
 for the original problem.
-The author in \cite{shrinking_original} presents a PTAS
+The author in~\cite{shrinking_original} presents a PTAS
 for Maximum Weight Independent Set of Rectangles with $\delta$-shrinking,
 which is later improved to EPTAS in \cite{shrinking1} alongside
-presenting a new FPT result for this problem with natural parametrization.
-Later the similar $\delta$-shrinking model was used in \cite{shrinking2}
+presenting a new FPT result for this problem with the natural parametrization.
+Later the~similar $\delta$-shrinking model was used in \cite{shrinking2}
 to present a PTAS for
 Maximum Weight Independent Set of Polygons with $\delta$-shrinking.
 
@@ -88,26 +88,26 @@ Maximum Weight Independent Set of Polygons with $\delta$-shrinking.
 \label{definition:delta_extension}
 For any $\delta > 0$ and a centre-symmetric convex object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
-the \textbf{$\delta$-extension} of $L$ is the object $L^{+\delta} =
-\{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}$.
+the \textbf{$\delta$-extension} of $L$ is the object:
+$$L^{+\delta} = \{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}.$$
 That is, $L^{+\delta}$ is the image of $L$ under homothety centred
 at $S$ with scale $(1+\delta)$.
 \end{defi}
 
 Analogous to $\delta$-shrinking,
-$\delta$-extension provides a framework of relaxing
+$\delta$-extension provides a framework for relaxing
 Geometric Set Cover problems, where we allow the returned set of
 objects $\sol$ to \textit{almost} cover the points in the universe
-by requiring that $\sol$ covers the all the points in the universe
-$\points$ after $\delta$-extension, ie. by set $\sol^{+\delta}$.
+by requiring that they are covered by $\sol$ after $\delta$-extension,
+i.e. by set $\sol^{+\delta}$.
 The same concept could be used for Geometric Set Hitting problems.
  
-For more elaborate discussion of this concept see Section
+For a longer discussion of this concept see Section
 \ref{section:def:delta_extension}.
 
 Similar model is used to prove that Geometric Set Cover with fat polygons
 relaxed with $\delta$-extension admits EPTAS \cite{harpeled12}.
-$\delta$-extension model presented there is well-defined only
+The $\delta$-extension model presented there is well-defined only
 for fat polygons. It extends the object by all the points that
 have distance to the closest point in the object $P$
 no larger than $\delta\cdot \mathsf{rad}(P)$, where $\mathsf{rad}(P)$
@@ -115,11 +115,11 @@ is a radius of a circle inscribed into $P$.
 Since segments do not have any circle inscribled into them,
 the defintion presented there cannot be utilized for this problem.
 Polygons extended by $\delta$-extension
-defined in \ref{definition:delta_extension}
+defined in Definition \ref{definition:delta_extension}
 covers a superset of set of points that object extended
 by $\delta$-extension defined in \cite{harpeled12}.
 Since our definition is more permissive for any polygon,
-then EPTAS from \cite{harpeled12}
+the EPTAS from \cite{harpeled12}
 also works for polygons extended by our $\delta$-extension.
 
 \section*{Our contribution}
@@ -141,7 +141,7 @@ We show that approximation of uweighted Geometric Set Cover with axis-parallel s
 
 This expands the previous result of \cite{rectangles_apx_hard} 
 that Geometric Set Cover
-with unweighted axis-parallel rectangles being APX-hard.
+with unweighted axis-parallel rectangles is APX-hard.
 This also proves that the assumption in \cite{harpeled12}
 for EPTAS about polygons being fat is necessary, because
 cover with arbitrary polygons with $\delta$-extension is APX-hard.
@@ -207,7 +207,7 @@ results for the weighted setting.
 	are axis-parallel or right-diagonal.
 \end{restatable}
 
-Please see Section \ref{section:def:geometric__set_cover}
+See Section \ref{section:def:geometric__set_cover}
 for exact definitions of axis-parallel and right-diagonal segments.
 
 This result is particularily interesting,
@@ -215,7 +215,7 @@ because problem without weights is FPT and weighted problem is W[1]-hard.
 Moreover $\delta$-extension allowed us to provide an FPT algorithm
 for a problem, which is W[1]-hard otherwise.
 
-Not that the result of theorem \ref{w1_hard} is not tight:
+Note that the result of Theorem \ref{w1_hard} is not tight:
 there exists a simple algorithm 
 running in time ${\mathcal{O}(f(k)(|\points| + |\sets|)^k)}$.
 So the question whether there exists an algorithm
@@ -230,7 +230,7 @@ in \cite{permissive_problem1}, \cite{permissive_problem2}.
 
 Thorem \ref{w1_hard} can be improved to show that a permissive FPT
 algorithm does not exist.
-This is formulated precisely in \ref{permissive_w1_hard}.
+This is formulated precisely in Theorem \ref{permissive_w1_hard}.
 
 \begin{figure}[h]
 \begin{center}
@@ -247,7 +247,8 @@ This is formulated precisely in \ref{permissive_w1_hard}.
 \end{tabular}
 \caption{Our results for Geometric Set Cover problem with weighted segments 
 parameterized by the size of solution.
-Results marked with * trivially follow from the results presented in this thesis.}
+Results marked with * are not explicitly given in this thesis,
+but they trivially follow from stronger results shown in other cells of the table.}
 \label{tab:weighted_fpt}
 \end{center}
 \end{figure}
@@ -256,7 +257,7 @@ Results marked with * trivially follow from the results presented in this thesis
 that relate to Theorem \ref{w1_hard} and were not solved in this thesis.
 We have not presented W[1]-hardness proof
 of Geometric Set Cover problem with axis-parallel weighted segments,
-but this construction maybe might be improved to utilize segments
+but it may be possible to improve this construction to use segments
 in 2 directions instead of 3 directions. 
 The other question is what is the tight bound for this problem.
 The simple algorithm solving

@@ -54,9 +54,9 @@ for some constant $c$ and some computable function $f$.
 
 \begin{defi}
 \label{definition:cnf}
-Booleam formula is in \textbf{conjunctive normal form (CNF)} if
-it is a conjunction of one or more fomulas,
-which are disjuntion of literals.
+Boolean formula is in \textbf{conjunctive normal form (CNF)} if
+it is a conjunction of one or more formulas,
+which are disjunction of literals.
 \textbf{$k$-CNF} formula is a CNF formula, where
 every disjunction consists of at most $k$ literals.
 \end{defi}
@@ -72,7 +72,7 @@ exists any variables assignment that satisfies the formula.
 For $k \ge 3$ set us define $S_k$ as a set of constants $\sigma$
 such that there exists an algorithm solving $k$-SAT running in time
 $\mathcal{O}^{*}(2^{\sigma n})$.
-Set us define $s_k$ as the infinimum  of the set $S_k$.
+Set us define $s_k$ as the infimum  of the set $S_k$.
 
 \textbf{Exponential Time Hypothesis (ETH)} is a conjecture
 that $s_3 > 0$. This conjecture implies that
@@ -121,7 +121,7 @@ for $\Pi$.
 Another idea presented here, which can be utilized only when considering
 the problems with geometric objects,
 is $\delta$-extension.
-We define it specificaly for the geometric set cover problem
+We define it specifically for the geometric set cover problem
 with convex centre-symmetric objects.
 
 Intuitively, we consider a problem with slightly larger objects,
@@ -137,7 +137,7 @@ of size smaller than the optimum solution
 to the original problem.
 
 Formal definition of $\delta$-extended objects.
-is present in Defintion
+is present in Definition
 \ref{definition:delta_extension}.
 
 The geometric set cover problem with $\delta$-extension
@@ -192,7 +192,7 @@ of the weighted and parameterized setting described in
 \ref{section:def:geometric__set_cover}.
 We already argued in the introduction
 that there is no consensus of how it is defined, but when we discuss the
-weighted parametrized setting we will consider the following
+weighted parameterized setting we will consider the following
 definition. There is a given weight function
 $f : \sets \rightarrow \mathbb{R^+}$
 and we would like to find a solution $\sol$,
@@ -218,7 +218,7 @@ The \textbf{weighted geometric set cover problem
 with $\delta$-extension parameterized by the size of a solution}
 is a problem where for an input instance
 ${I=(\sets, \points, f, k)}$ of weighted geometric set cover
-parametrized by the size of a solution $k$,
+parameterized by the size of a solution $k$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$,

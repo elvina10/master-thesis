@@ -345,8 +345,8 @@ $$vec_{i, j} := (\clauseXFactor i + 3 + 3j, 4(n+1) + 2j)$$
 
 For integers $i,j$,
 define 
-$\{ l_{i, j}, m_{i, j} \ldots v_{i, j} \}$
-as $\{l_0, m_0 \ldots v_0\}$ shifted by $vec_{i, j}$,
+$\{ l_{i, j}, m_{i, j}, \ldots, v_{i, j} \}$
+as $\{l_0, m_0, \ldots, v_0\}$ shifted by $vec_{i, j}$,
 i.e. $l_{i,j} = l_0 + vec_{i,j}$ etc.
 
 Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
@@ -686,11 +686,11 @@ for the instance $S$ of MAX-(3,3)-SAT.
 \end{lemma}
 
 \begin{proof}
-Let the clauses in $S$ be $c_1$,~$c_2$~$\ldots$~$c_n$
-and the variables be $x_1$,~$x_2$~$\ldots$~$x_n$.
+Let the clauses in $S$ be $c_1$,~$c_2$~,$\ldots$,~$c_n$
+and the variables be $x_1$,~$x_2$~,$\ldots$,~$x_n$.
 Let the variable assignment in
 the optimum solution to $S$ be
-$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$.
+$\phi : \{ x_1, x_2, \ldots, x_n\} \rightarrow \{\true, \false\}$.
 
 
 We cover every VARIABLE-gadget with solution described in
@@ -784,14 +784,14 @@ so $|\sol'| \le |\sol|$.
 
 
 \begin{proof}\leavevmode
-Let the clauses in $S$ be $c_1$,~$c_2$~$\ldots$~$c_n$
-and the variables be $x_1$,~$x_2$~$\ldots$~$x_n$.
+Let the clauses in $S$ be $c_1$,~$c_2$~,$\ldots$,~$c_n$
+and the variables be $x_1$,~$x_2$~,$\ldots$,~$x_n$.
 Given a solution $\sol$
 of the instance $\setCoverInstance$ of geometric set cover, we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$ such that for any $i$ it contains at most one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$; this may decrease the cost of $\sol$, but that does not matter in the subsequent construction. To simplify notation, in the remainder of this proof we use $\sol$ to refer to the modified solution.
 
 Given $\sol$, we construct a solution to $S$ by defining an
 assignment of variables:
-$$\phi : \{ x_1, x_2 \ldots x_n\} \rightarrow \{\true, \false\}$$
+$$\phi : \{ x_1, x_2, \ldots, x_n\} \rightarrow \{\true, \false\}$$
 that satisfies at least $15n-w$ clauses in $S$.
 
 \subparagraph{Definition of $\phi$.}

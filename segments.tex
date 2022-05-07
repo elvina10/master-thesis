@@ -131,14 +131,15 @@ Also, $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
 	Moreover, such a subset can be found in~polynomial time.
 \end{lemma}
 \begin{proof}
-Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots x_t$
+Let us enumerate the points from $\points$ that lie on $L$ as $x_1, x_2, \ldots, x_t$
 in the order in which they appear on $L$.
 Our proposed set is defined as:
 $$A := \left\{ \text{segment collinear with } L \text{ that covers } x_i
-\text{ and does not cover } x_{i-1} : i \in \{1, \ldots k\}\right\},$$
+\text{ and does not cover } x_{i-1} : i \in \{1, \ldots, k\}\right\},$$
 where for $i = 1$ we just take a segment that covers $x_1$.
 If such a segment does not exist for any point $x$
 as above, then $x$ does not give rise to any segment in $A$.
+
 We prove the lemma by contradiction. Let us assume that there
 exists a~solution $\sol$ of size at most $k$ such that $\sol \cap A = \emptyset$.
 
@@ -154,9 +155,9 @@ but $L$ had at least $k+1$ different points from $\points$ on it.
 Therefore, we know that $\sol_L$ is not empty
 and $|\sol - \sol_L| \le k-1$.
 Segments from $\sol - \sol_L$ can cover at most $k-1$
-points among $\{x_1, x_2, \ldots x_k\}$, therefore at least
+points among $\{x_1, x_2, \ldots, x_k\}$, therefore at least
 one of these points must be covered by segments from $\sol_L$.
-We take the leftmost point from $\{x_1, x_2, \ldots x_k\}$ that is
+We take the leftmost point from $\{x_1, x_2, \ldots, x_k\}$ that is
 covered in $\sol_L$ and name it $a$.
 After the transformation from Lemma \ref{fpt_reduction},
 in $\sol$ there is only one segment

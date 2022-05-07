@@ -32,13 +32,13 @@ as the set of all subsets of $A$, i.e. $\pow(A) = \{B : B \subseteq A\}$.
 \begin{defi}
 In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
 and a function
-$f : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \pow(\{1 \ldots n\} \times \{1 \ldots n\})$
+$f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$
 specifying the set of allowed tiles for each cell of a $k \times k$ grid.
 The task is to decide whether there exist functions
-$x,y : \{1 \ldots k\} \rightarrow \{1 \ldots n\}$
-that assign colors from $\{1 \ldots n\}$
+$x,y : \{1, \ldots, k\} \rightarrow \{1, \ldots, n\}$
+that assign colors from $\{1, \ldots, n\}$
 to respectively columns and rows of the grid,
-so that $(x(i), y(j)) \in f(i, j)$ for all $i,j \in \{1 \ldots k\}$.
+so that $(x(i), y(j)) \in f(i, j)$ for all $i,j \in \{1, \ldots, k\}$.
 \end{defi}
 
 In short, in the grid tiling problem one needs to assign numbers
@@ -536,7 +536,7 @@ because the corresponding segment is in $\alldiag$.
 
 \newcommand{\diagonal}{\mathsf{diagonal}}
 We refer to the function mapping $1 \le x \le k$ to $t_x$ from Lemma \ref{diag_correct}
-as $\diagonal : \{1 \ldots k\} \times \{1 \ldots k\} \rightarrow \{1 \ldots n^2\}$.
+as $\diagonal : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \{1, \ldots, n^2\}$.
 
 \begin{lemma}
 \label{vertical_horizontal_synchronized}

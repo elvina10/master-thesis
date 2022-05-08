@@ -315,6 +315,7 @@ like a binary disjunction for the input segments.
 
 
 \paragraph{Points.}
+We define
 
 \newcommand{\chooseOr}[3]{\mathsf{chooseOr}^{#1}_{#2,#3}}
 \newcommand{\orMoveVariable}[2]{\mathsf{orMoveVariable}_{#1,#2}}
@@ -348,31 +349,28 @@ For integers $i,j$,
 define 
 $\{ l_{i, j}, m_{i, j}, \ldots, v_{i, j} \}$
 as $\{l_0, m_0, \ldots, v_0\}$ shifted by $vec_{i, j}$,
-i.e. $l_{i,j} = l_0 + vec_{i,j}$ etc.
+i.e. ${l_{i,j} = l_0 + vec_{i,j}}$ etc.
 
-Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause})
- 
+Note that $v_{i, 0} = l_{i, 1}$ (see Figure~\ref{fig:apx_clause}).
+Next, let
+
 $$\pointsOr{i}{j} := 
  \{l_{i, j}, m_{i, j}, n_{i, j}, o_{i, j},
  p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
  $$
- 
 Note that $\pointsOr{i}{j}$ does not include the point $v_{i,j}$
  
 \paragraph{Segments.}
 
-We define set of segments in several parts:
+We define the set of segments in several parts:
  
-$$\chooseOr{\false}{i}{j} :=
-\{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\},$$
-$$\chooseOr{\true}{i}{j} :=
-\{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),
-(t_{i, j}, v_{i, j}) \},$$
-
-$$\orMoveVariable{i}{j} :=
-\{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}.$$
-
-Finally all segments in OR-gadget are defined as:
+ 
+\begin{eqnarray*}
+\chooseOr{\false}{i}{j} &:=& \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\}, \\
+\chooseOr{\true}{i}{j} &:=& \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}), (t_{i, j}, v_{i, j}) \}, \\
+\orMoveVariable{i}{j} &:=& \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}.
+\end{eqnarray*}
+Finally all segments on OR-gadget are defined as:
 
 $$\segmentsOr{i}{j} := 
   \chooseOr{\false}{i}{j} \cup \chooseOr{\true}{i}{j} \cup \orMoveVariable{i}{j}

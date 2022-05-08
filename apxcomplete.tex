@@ -291,15 +291,15 @@ it holds that $|A| \ge 4$.
 No segment from $\segmentsVar{i}$ covers more than one point from
 $\{a_i, e_i\}$,
 therefore 
-$\pointsVar{i} - \{c_i, f_i, g_i, h_i\}$
+$\pointsVar{i} - \{c_i, f_i\}$
 can not be covered with fewer than 2 segments.
 \end{proof}
 
 
 \subsection{OR-gadget}
 
-OR-gadget connects input and output segments (see Figure \ref{fig:apx_or_gadget})
-in a way that is supposed to simulate a binary $or$ function.
+An OR-gadget connects input and output segments (see Figure \ref{fig:apx_or_gadget})
+in a way that is supposed to simulate the binary disjunction.
 
 Input segments are the only segments that cover points outside of the gadget,
 as their left ends lie outside of it.
@@ -307,11 +307,11 @@ Point $v_{i,j}$ is the only one that can be covered
 by segments that do not belong to the gadget.
 
 The OR-gadget has the property that every set of segments
-that covers all the points in the gadget uses at least 3 segments from it..
+that covers all the points in the gadget uses at least 3 segments from it.
 Moreover, the output segment belongs to the solution of size 3
-only if at least one of the input segments belong to the solution.
+only if at least one of the input segments belongs to the solution.
 Therefore, optimum solutions restricted to the OR-gadget behave
-like a binary $or$ function for the input segments.
+like a binary disjunction for the input segments.
 
 
 \paragraph{Points.}

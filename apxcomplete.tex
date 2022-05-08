@@ -381,13 +381,13 @@ $$
 \label{cover_or_true}
 For any $1 \le i \le n, j \in \{0, 1\}$ and 
  $x \in \{l_{i, j}, p_{i, j}\}$, points in
-$\pointsOr_{i, j} - \{ x\} \cup \{v_{i, j}\}$
+${\pointsOr_{i, j} - \{ x\} \cup \{v_{i, j}\}}$
 can be covered
 with 4 segments from $\segmentsOr{i}{j}$.
 \end{lemma}
 
 \begin{proof}
-We can do that using one segment from
+We can do this using one segment from
 $\orMoveVariable{i}{j}$, the one that does not cover $x$,
 and all segments from $\chooseOr{\true}{i}{j}$.
 \end{proof}
@@ -400,7 +400,7 @@ with 4 segments from $\segmentsOr{i}{j}$.
 \end{lemma}
 
 \begin{proof}
-We can do that using segments from $\orMoveVariable{i}{j} \cup \chooseOr{\false}{i}{j}$.
+We can do this using segments from $\orMoveVariable{i}{j} \cup \chooseOr{\false}{i}{j}$.
 \end{proof}
 
 
@@ -414,56 +414,66 @@ of the respective variables is assigned the correct value.
 Otherwise, its minimum solution has weight $w+1$.
 In this way, by analyzing the cost of the minimum
 solution to the entire constructed instance, we will be able to tell
-how many clauses it was possible to satisfy
-in the optimum solution to $\phi$.
+how many clauses it is possible to satisfy
+in an optimum solution to $\phi$.
 
 
 \paragraph{Points.}
 
 \newcommand{\pointsClause}[1]{\mathsf{pointsClause}_{#1}}
+\newcommand{\negate}{\mathsf{neg}}
+\newcommand{\idx}{\mathsf{idx}}
 
 \input{figures/fig_apx_clause.tex}
 First, we define auxiliary functions for literals. 
-For a literal $w$, let $idx(w)$ be the index of the variable in $w$,
-and $neg(w)$ be the Boolean value whether the variable is negated in $w$
+For a literal $w$, let $\idx(w)$ be the index of the variable in $w$,
+and $\negate(w)$ be the Boolean value (0 or 1) whether the variable is negated in $w$
 or not.
+
+\begin{eqnarray*}
+\idx(w) & := &  i \text{ when } w = x_i \\
+\negate(w) & := & 
+\begin{cases}
+ 0 & \text{if } w = x_i \\
+ 1 & \text{if } w = \neg x_i
+\end{cases}
+\end{eqnarray*}
 
 Let us assume that clause $C_i = a \lor b \lor c$
 for any literals $a,b,c$. Then, we define points in the gadget as:
 
 \begin{center}
 \begin{tabular}{ l l }
-	$x_{i, 0} := (\clauseXFactor i, 4\cdot idx(a) + 2\cdot neg(c)),$ &
+	$x_{i, 0} := (\clauseXFactor i, 4\cdot \idx(a) + 2\cdot \negate(c)),$ &
 	$x_{i, 1} := (\clauseXFactor i, 4(n+1)),$ \\
-	$y_{i, 0} := (\clauseXFactor i+1, 4\cdot idx(b) + 2\cdot neg(b)),$ &
+	$y_{i, 0} := (\clauseXFactor i+1, 4\cdot \idx(b) + 2\cdot \negate(b)),$ &
 	$y_{i, 1} := (\clauseXFactor i+1, 4(n+1) + 4),$ \\
-	$z_{i, 0} := (\clauseXFactor i+2, 4\cdot idx(c) + 2\cdot neg(c)),$ &
+	$z_{i, 0} := (\clauseXFactor i+2, 4\cdot \idx(c) + 2\cdot \negate(c)),$ &
 	$z_{i, 1} := (\clauseXFactor i+2, 4(n+1) + 6).$
 \end{tabular}
 \end{center}
 
 \newcommand{\segmentsClause}{\mathsf{segmentsClause}}	
  
-We are now ready to define set of points:
+We are now ready to define the set of points in a clause gadget:
  
  $$\mathsf{moveVariable}_i := 
  \{x_{i, j} : j \in \{0, 1\}\} \cup
  \{y_{i, j} : j \in \{0, 1\}\} \cup
  \{z_{i, j} : j \in \{0, 1\}\},
  $$
- 
  $$\pointsClause{i} := 
  \mathsf{moveVariable}_i \cup \pointsOr{i}{0}
  \cup \pointsOr{i}{1} \cup \{v_{i, 1} \}.
  $$
  
 Note that these two points are equal: $v_{i,0} = l_{i,1}$.
-This translates to the fact, that output of the one OR-gadget
-is an input to the other OR-gadget to create $or$ of 3 segments.
+This translates to the fact that the output of the first OR-gadget
+is an input to the second OR-gadget.
+This creates an $or$ of 3 boolean values.
 
 \paragraph{Segments.}
 We also define segments for the clause gadget as below:
-
 \begin{eqnarray*}
 \segmentsClause_i & := & \{ (x_{i, 0}, x_{i, 1}),
 (y_{i, 0}, y_{i, 1}),
@@ -490,8 +500,8 @@ segments corresponding to the other literals.
 Instead, we use simple auxiliary gadgets to
 \textit{transfer} whether the segment
 is in a solution, i.e. segments
-$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$ in this gadget.
-Each gadget consists of two segments $(x_{i, 0}, x_{i, 1}), (x_{i, 1}, a)$.
+$(x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}), (z_{i, 0}, z_{i, 1})$.
+Each transfer gadget consists of two segments $(x_{i, 0}, x_{i, 1}), (x_{i, 1}, a)$.
 These are the only segments that can cover $x_{i,1}$.
 We place $x_{i,0}$ on a segment that we want to transfer (i.e.
 segment responsible for choosing the variable value satisfying the
@@ -525,7 +535,7 @@ which cover all required points apart from
 $x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 0}, z_{i, 1}, l_{i, 0}$.
 We cover those using additional 3 segments:
 $\{ (x_{i, 1}, l_{i, 0}), (y_{i, 0}, y_{i, 1}),
-(z_{i, 0}, z_{i, 1}) \}$
+(z_{i, 0}, z_{i, 1}) \}$.
 
 For $a = z_{0, i}$:
 Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with
@@ -552,7 +562,7 @@ cover $\pointsOr{i}{0}$ and  $\pointsOr{i}{1}$
 with 8 segments.
 To cover the remaining points we additionally use:
 $\{ (x_{i, 0}, x_{i, 1}), (y_{i, 0}, y_{i, 1}),
-(z_{i, 0}, z_{i, 1}), (t_{i, 1}, v_{i, 1}) \}$
+(z_{i, 0}, z_{i, 1}), (t_{i, 1}, v_{i, 1}) \}.$
 \end{proof}
 
 \begin{lemma}
@@ -573,15 +583,14 @@ For any $1 \le i \le n$:
 No segment in $\segmentsClause_i$ covers more than 1 point from
 $$\{ x_{i, 0}, y_{i, 0}, z_{i, 0}, l_{i, 0}, p_{i, 0}, q_{i, 0},
 u_{i, 0}, v_{i, 0} = l_{i, 1}, p_{i, 1}, q_{i, 1}, u_{i, 1}, v_{i, 1} \}.$$
-
 Therefore we need to use at least 12 segments.
 \end{proof}
 
 \begin{proof}[Proof of (2).]
 
 We can define disjoint sets $X, Y, Z$ such that
-$X \cup Y \cup Z \subseteq \pointsClause{i} - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$
-such that there are no segments in $\segmentsClause_i$ covering points from different sets.
+$$X \cup Y \cup Z \subseteq \pointsClause{i} - \{x_{i, 0}, y_{i, 0}, z_{i, 0}\}$$
+and there are no segments in $\segmentsClause_i$ covering points from different sets.
 And we prove a lower bound for each of these sets.
 First, let:
 
@@ -609,7 +618,7 @@ must be covered with at least 3 + 4 + 4 = 11 segments from $\segmentsClause_i$.
 
 \input{figures/fig_apx_segment_whole.tex}
 
-Finally we define set of points and segments for the constructed instance:
+Finally we define the set of points and segments for the constructed instance:
 $$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause{i},$$
 $$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i.$$
 
@@ -622,10 +631,16 @@ For every segment $s \in \sets$,
 $s$ and $s^{+\frac{1}{2}}$ cover the same points from $\points$.
 \end{lemma}
 
+TODO: We can rewrite the proof below with rectangles
+that should take care of the smart lemmas above and make the proof easier.
+
 \begin{proof}
 We can just check every segment. Most of the segments $s$
 are collinear only with points that lie on $s$,
 so trivially $s^{+\frac{1}{2}}$ cannot cover more points than $s$ does.
+We discuss only the segments that are collinear with
+a point from outside of its gadget
+or with a point that belongs to another copy of the gadget.
 
 Within VARIABLE-gadget for any $1 \le i \le n$ after $\frac{1}{2}$-extension:
 $(c_i,g_i)$ does not cover $b_i$.

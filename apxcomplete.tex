@@ -251,9 +251,9 @@ We denote $a_i := a + (0,4i)$ etc.
 
 Let us define:
 
-$$\chooseVar{true}{i} :=\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\},$$
+$$\chooseVar{\true}{i} :=\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\},$$
 $$\chooseVar{false}{i} := \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\},$$
-$$\segmentsVar{i} := \chooseVar{true}{i} \cup \chooseVar{false}{i}.$$
+$$\segmentsVar{i} := \chooseVar{\true}{i} \cup \chooseVar{false}{i}.$$
 
 We also name two of these segment for future reference:
 $\xTrueSegment{i} := \xTrueSegmentDef{i},$
@@ -266,7 +266,7 @@ can be covered using 3 segments from $\segmentsVar{i}$.
 \end{lemma}
 
 \begin{proof}
-We can use either set $\chooseVar{true}{i}$ or $\chooseVar{false}{i}$.
+We can use either set $\chooseVar{\true}{i}$ or $\chooseVar{false}{i}$.
 \end{proof}
 
 \begin{lemma}
@@ -365,7 +365,7 @@ We define set of segments in several parts:
  
 $$\chooseOr{false}{i}{j} :=
 \{ (q_{i, j}, r_{i, j}), (s_{i, j}, u_{i, j})\},$$
-$$\chooseOr{true}{i}{j} :=
+$$\chooseOr{\true}{i}{j} :=
 \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}),
 (t_{i, j}, v_{i, j}) \},$$
 
@@ -375,7 +375,7 @@ $$\orMoveVariable{i}{j} :=
 Finally all segments in OR-gadget are defined as:
 
 $$\segmentsOr{i}{j} := 
-  \chooseOr{false}{i}{j} \cup \chooseOr{true}{i}{j} \cup \orMoveVariable{i}{j}
+  \chooseOr{false}{i}{j} \cup \chooseOr{\true}{i}{j} \cup \orMoveVariable{i}{j}
 $$
 
 
@@ -391,7 +391,7 @@ with 4 segments from $\segmentsOr{i}{j}$.
 \begin{proof}
 We can do that using one segment from
 $\orMoveVariable{i}{j}$, the one that does not cover $x$,
-and all segments from $\chooseOr{true}{i}{j}$.
+and all segments from $\chooseOr{\true}{i}{j}$.
 \end{proof}
 
 \begin{lemma}
@@ -477,7 +477,7 @@ We also define segments for the clause gadget as below:
 & & \cup \ \segmentsOr{i}{0} \cup \segmentsOr{i}{1}.
 \end{eqnarray*}
 
-\newcommand{\segmentsClauseSolTrue}[1]{\mathsf{solClause}^{true,#1}}
+\newcommand{\segmentsClauseSolTrue}[1]{\mathsf{solClause}^{\true,#1}}
 \newcommand{\segmentsClauseSolFalse}{\mathsf{solClause}^{false}}
 
 The CLAUSE-gadgets consist of two OR-gadgets.
@@ -522,7 +522,7 @@ that covers all points in $\pointsClause{i} - \{a\}$.
 For $a = x_{i, 0}$ (analogous proof for $y_{i, 0}$):
 First we use Lemma~\ref{cover_or_true} twice with excluded $x = l_{i, 0}$ and
 $x = l_{i, 1} = v_{i, 0}$,
-resulting with 8 segments in $\chooseOr{true}{i}{0} \cup \chooseOr{true}{i}{1}$
+resulting with 8 segments in $\chooseOr{\true}{i}{0} \cup \chooseOr{\true}{i}{1}$
 which cover all required points apart from
 $x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 0}, z_{i, 1}, l_{i, 0}$.
 We cover those using additional 3 segments:
@@ -532,7 +532,7 @@ $\{ (x_{i, 1}, l_{i, 0}), (y_{i, 0}, y_{i, 1}),
 For $a = z_{0, i}$:
 Using Lemma~\ref{cover_or_false} and Lemma~\ref{cover_or_true} with
 $x = p_{i, 1}$,
-we obtain 8 segments in $\chooseOr{false}{i}{0} \cup \chooseOr{true}{i}{1}$
+we obtain 8 segments in $\chooseOr{false}{i}{0} \cup \chooseOr{\true}{i}{1}$
 which cover all required points apart from
 $x_{i, 0}, x_{i, 1}, y_{i, 0}, y_{i, 1}, z_{i, 1}, p_{i, 1}$.
 We cover those using additional 3 segments:
@@ -715,7 +715,7 @@ $R_i$ and $C_i$ respectively, as following:
 \begin{align}
 	\begin{split}
 	& R_i := \begin{cases}
-		\chooseVar{true}{i} & \text{if}\ \phi(x_i) = \true \\
+		\chooseVar{\true}{i} & \text{if}\ \phi(x_i) = \true \\
 		\chooseVar{false}{i} & \text{if}\ \phi(x_i) = \false \\
 		\end{cases} \\
 	& C_i := \begin{cases}
@@ -759,7 +759,7 @@ Recall that the $i$-th VARIABLE-gadget corresponds to variable $x_i$ in $S$.
 As every variable in $S$ is used in exactly 3 clauses,
 then one literal $x_i$ or $\neg x_i$ must appear in at least
 2 clauses.
-If that literal is $x_i$, then we add to the constructed solution all segments from $\chooseVar{true}{i}$,
+If that literal is $x_i$, then we add to the constructed solution all segments from $\chooseVar{\true}{i}$,
 otherwise we add all segments from $\chooseVar{false}{i}$.
 
 Now, there exists at most one CLAUSE-gadget which needs adjustment to make $\sol'$ valid;
@@ -856,7 +856,7 @@ by a corresponding segment $\xTrueSegment{j}$ or $\xFalseSegment{j}$
 (depending on whether the literal $q$ is negated or not).
 From the definition of $\phi$ and the fact that one of this segment is
 in $\sol$, we know that
-$\phi(j)$ has the value that evaluates $q$ to be true.
+$\phi(j)$ has the value that evaluates $q$ to be $\true$.
 Therefore, clause $c_i$ is satisfied.
 
 Consequently, $\phi$ satisfies all but at most $a$ clauses in $S$.

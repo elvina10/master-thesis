@@ -163,9 +163,9 @@ clause_gadget2 = clause_gadget(2, 3, False, 1, True, 2, True)
 # This style below doesn't work for labels
 
 style ='''
-{\tikzset{node/.style={
-    prefix after command= {\pgfextra{\tikzset{every
-    label/.style={font=\footnotesize}}}}
+{\\tikzset{node/.style={
+    prefix after command= {\pgfextra{\\tikzset{every
+    label/.style={font=\\footnotesize}}}}
     }
 }'''
 

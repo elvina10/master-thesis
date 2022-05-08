@@ -2,14 +2,18 @@
 \newcommand{\setCoverInstance}{(\points, \sets)}
 \newcommand{\true}{\texttt{true}}
 \newcommand{\false}{\texttt{false}}
+\newcommand{\opt}{\mathsf{opt}}
+\newcommand{\approximate}{\mathsf{approx}}
 
 \label{chapter:segment_apx}
+
+TODO: Adjust to the discussion in intro
 
 In this section we analyze whether there exists 
 a PTAS for geometric set cover for rectangles.
 We show that we can restrict this problem
 to a very simple setting:
-segments parallel to axes and allow (1/2)-extension,
+segments parallel to axes and allow $\frac{1}{2}$-extension,
 and the problem is still APX-hard.
 Note that segments are just degenerated rectangles
 with one side being very narrow.
@@ -36,10 +40,10 @@ and showing a reduction.
 For this problem we choose
 MAX-(3,3)-SAT which we define below.
 
-\section{MAX-(3,3)-SAT and statement of reduction}
+\section{MAX-(3,3)-SAT}
 
 See Definition \ref{definition:cnf}
-for the definition of the CNF formula.
+for the definition of the $k$-CNF formula.
 
 \begin{defi}
 \textbf{MAX-3SAT} is the following maximization problem. We are given a 3-CNF
@@ -71,22 +75,11 @@ clauses.
 	\linebreak
 	(3,3)-SAT formulas from
 	at most
-	\mbox{$(7/8 + \epsilon)$-satisfiable}
+	\mbox{$(\frac{7}{8} + \epsilon)$-satisfiable}
 	(3,3)-SAT formulas.
 }\end{tw}
 
-
-Given an instance $I$ of MAX-(3,3)-SAT,
-we construct an instance $J$ of 
-axis-parallel segment set cover problem
-such that for a sufficiently small $\epsilon > 0$,
-a polynomial time $(1+\epsilon)$-approximation algorithm for $J$
-would be able to distinguish  whether an instance $I$ of MAX-(3,3)-SAT
-is fully satisfiable
-or is at most $(7/8 + \epsilon)$-satisfiable.
-However, according to Theorem \ref{hastadtheorem} the latter problem
-is NP-hard.
-This would imply P = NP, contradicting the assumption.
+\section{Reduction}
 
 The following lemma encapsulates the properties
 of the reduction described in this section,
@@ -94,68 +87,76 @@ and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 
 \begin{lemma}{
 	\label{apxconstruction}
-	Given an instance $S$ of  MAX-(3,3)-SAT 
-	with $n$ variables and optimum value $opt(S)$,
-	we can construct an instance $I$ of geometric set cover with
+	Given an instance $S$ of MAX-(3,3)-SAT 
+	with $n$ variables and optimum value $\opt(S)$,
+	we can construct an instance $\setCoverInstance$ of geometric set cover with
 	axis-parallel segments in 2D such that:
 	\begin{enumerate}[label={(\arabic*)}]
-	\item For every solution $X$ of instance $I$,
-	there exists a solution to $S$ that satisfies at least  $15n - |X|$
+	\item \label{item:apxconstruction_correctness}
+	For every solution to instance $S$ that satisfies $k$ clauses,
+	there exists a solution to $\setCoverInstance$ of size $15n - k$.
+	
+	\item \label{item:apxconstruction_completness}
+	For every solution $\sol$ to instance $\setCoverInstance$,
+	there exists a solution to $S$ that satisfies at least  $15n - |\sol|$
 	clauses.
 	
-	\item For every solution to instance $S$ that satisfies $w$ clauses,
-	there exists a solution to $I$ of size $15n - w$.
-	
 	\item \label{lemma:apxconstruction:enumerate:extension}
-	Every solution with $1/2$-extension of $I$
-	is also a solution to the original instance $I$.
+	For every $\sol \subseteq \sets$, if $\sol^{+\frac{1}{2}}$
+	is a solution to the $\setCoverInstance$, then $\sol$
+	is also a solution to the $\setCoverInstance$.
 \end{enumerate}
-Therefore, the optimum size of a solution to $I$
-is $opt(I) = 15n - opt(S)$. 
+Therefore, the optimum size of a solution to $\setCoverInstance$
+is $\opt(\setCoverInstance) = 15n - \opt(S)$. 
 	
 }\end{lemma}
 
-
-TODO: Do the summary which dot corresponds to which lemma to have better structure
 We prove Lemma \ref{apxconstruction} in
-subsequent sections, but meanwhile let us prove
+subsequent sections. Section \ref{construction_description}
+describes proposed instance $\setCoverInstance$.
+Property \ref{item:apxconstruction_correctness} is proved by Lemma~\ref{construction_correctness},
+\ref{item:apxconstruction_completness} by Lemma~\ref{construction_completness},
+and finally \ref{lemma:apxconstruction:enumerate:extension} trivially
+follows from Lemma~\ref{lemma:exntension_robust}.
+Firstly let us prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
 and Theorem \ref{hastadtheorem}.
 
 \begin{proof}[Proof of Theorem \ref{segment_cover_apx_hard}]
-Consider any $0 < \epsilon < 1/(15 \cdot 8)$.
+Consider any $0 < \epsilon < \frac{1}{15 \cdot 8}$.
 
 Let us assume that there exists a polynomial-time
 $(1+\epsilon)$-approximation algorithm
 for unweighted geometric set cover with axis-parallel segments in 2D
-with (1/2)-extension.
+with $\frac{1}{2}$-extension.
 We construct an algorithm that solves the problem stated in 
 Theorem \ref{hastadtheorem}, thereby proving that P~=~NP.
 
 Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
-and construct an instance of geometric set cover $I$
+and construct an instance of geometric set cover $\setCoverInstance$
 using Lemma \ref{apxconstruction}.
 We now use the $(1+\epsilon)$-approximation algorithm
-for geometric set cover on $I$.
-Denote the size of the solution returned by this algorithm as $approx(I)$.
+for geometric set cover on $\setCoverInstance$.
+Denote the size of the solution returned by this algorithm as $\approximate(\setCoverInstance)$.
+(TODO: Figure out which approximation it should be, with ext or without)
 We prove that 
 if in $S$
 one can satisfy at most $(\frac{7}{8}+\epsilon)n$ clauses,
-then $approx(I) \ge 15n - (\frac{7}{8} + \epsilon)n$
+then $\approximate(\setCoverInstance) \ge 15n - (\frac{7}{8} + \epsilon)n$,
 and if $S$ is
-satisfiable, then $approx(I) < 15n - (\frac{7}{8} + \epsilon)n$.
+satisfiable, then $\approximate(\setCoverInstance) < 15n - (\frac{7}{8} + \epsilon)n$.
 
 
 \textbf{Assume $S$ satisfiable.}
 From the definition of $S$ being satisfiable, we have:
-$$opt(S) = n.$$
+$$\opt(S) = n.$$
 
 From Lemma \ref{apxconstruction} we have:
 
-$$opt(I) = 14n.$$
+$$\opt(\setCoverInstance) = 14n.$$
 
 Therefore,
-$$approx(I) \le (1+\epsilon)opt(I) = 14n(1+\epsilon)
+$$\approximate(\setCoverInstance) \le (1+\epsilon)\opt(\setCoverInstance) = 14n(1+\epsilon)
 	= 14n + 14\epsilon\cdot n =$$ 
 	$$= 14n + (15\epsilon - \epsilon)n < 
   14n + \left(\frac{1}{8} - \epsilon\right)n 
@@ -164,36 +165,36 @@ $$approx(I) \le (1+\epsilon)opt(I) = 14n(1+\epsilon)
 $\left(\frac{7}{8} + \epsilon\right)$ satisfiable.}
 From the defintion of $S$ being at most 
 $\left(\frac{7}{8} + \epsilon\right)n$ satisfiable, we have:
-$$opt(S) \le \left(\frac{7}{8} + \epsilon\right)n$$
+$$\opt(S) \le \left(\frac{7}{8} + \epsilon\right)n$$
 
 From Lemma \ref{apxconstruction} we have:
-$$opt(I) \ge 15n - \left(\frac{7}{8} + \epsilon\right)n$$
+$$\opt(\setCoverInstance) \ge 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
-Since a solution to $I$ with $\frac{1}{2}$-extension is
+Since a solution to $\setCoverInstance$ with $\frac{1}{2}$-extension is
 also a solution without any extention, by 
 Lemma \ref{apxconstruction} \ref{lemma:apxconstruction:enumerate:extension}, we have:
 
-$$approx(I) \ge opt(I) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
+$$\approximate(\setCoverInstance) \ge \opt(\setCoverInstance) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
 
 Therefore, by using the assumed $(1+\epsilon)$-approximation
 algorithm,
 it is possible to distinguish the case when
-$S$ is satisfiable: from the case when it is
-at most $(\frac{7}{8} + \epsilon)n$ satisfiable,
-it suffices to compare $approx(I)$ with $15n - (\frac{7}{8}+\epsilon)n$.
+$S$ is satisfiable from the case when it is
+at most $(\frac{7}{8} + \epsilon)n$ satisfiable:
+it suffices to compare $\approximate(\setCoverInstance)$ with $15n - (\frac{7}{8}+\epsilon)n$.
 Hence, the assumed approximation algorithm cannot exist, unless P = NP.
 \end{proof}
 
-\section{Reduction}
+\section{Construction of the Geometric Set Cover instance}
 \label{construction_description}
 We proceed to the proof of Lemma \ref{apxconstruction}.
 That is, we show a reduction from the MAX-(3,3)-SAT problem
 to geometric set cover with segments
-parallel to axis. Moreover, the obtained instance
+parallel to axes. Moreover, the obtained instance
 of geometric set cover will be robust
-to 1/2-extension (have the same optimal solution
-after 1/2-extension).
+to $\frac{1}{2}$-extension (have the same optimal solution
+after $\frac{1}{2}$-extension).
 
 The construction will be composed of 2 types of gadgets:
 \textbf{VARIABLE-gadgets} and \textbf{CLAUSE-gadgets}.
@@ -221,22 +222,22 @@ Define points $a,b,c,d,e,f,g,h$ as follows, where $L = 22n$:
 
 \begin{center}
 \begin{tabular}{ l l l l}
-	$a = (-3L, 0)$ &
-	$b = (-2L, 0)$ & 
-	$c = (-L, 0)$ & 
-	$d = (-3L, 1)$ \\  
-	$e = (-2L, 1)$ & 
-	$f = (-2L, 2)$ &
-	$g = (L, 0)$ &
-	$h = (L, 2)$
+	$a := (-3L, 0)$ &
+	$b := (-2L, 0)$ & 
+	$c := (-L, 0)$ & 
+	$d := (-3L, 1)$ \\  
+	$e := (-2L, 1)$ & 
+	$f := (-2L, 2)$ &
+	$g := (L, 0)$ &
+	$h := (L, 2)$
 \end{tabular}
 \end{center}
 
 
 Let us define:
-$$\pointsVarNoArg =  \{a, b, c, d, e, f\}$$
+$$\pointsVarNoArg :=  \{a, b, c, d, e, f\}$$
 and, for any $1 \le i \le n$,
-$$\pointsVar{i} = \pointsVarNoArg + (0, 4i).$$
+$$\pointsVar{i} := \pointsVarNoArg + (0, 4i).$$
 
 We denote $a_i := a + (0,4i)$ etc.
 
@@ -608,10 +609,18 @@ must be covered with at least 3 + 4 + 4 = 11 segments from $\segmentsClause_i$.
 
 \subsection{Summary}
 
-Add some smart lemmas that sets will be exclusive to each other.
+\input{figures/fig_apx_segment_whole.tex}
 
-\begin{lemma}
-\textbf{Robustness to 1/2-extension}. For every segment $s \in \sets$,
+Finally we define set of points and segments for the constructed instance:
+$$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause{i},$$
+$$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i.$$
+
+
+TODO: Add some smart lemmas that sets will be exclusive to each other.
+
+\begin{lemma}[Robustness to $\frac{1}{2}$-extension]
+\label{lemma:exntension_robust}
+For every segment $s \in \sets$,
 $s$ and $s^{+\frac{1}{2}}$ cover the same points from $\points$.
 \end{lemma}
 
@@ -655,19 +664,9 @@ For any $1 \le i \le n$ and $1 \le j \le n$, all points $x_{j,0}, y_{j,0}$ and $
 have x-coordinate strictly positive. Segment $(a_i, c_i)$ have length $2L$
 and $c_i$ has x-coordinate equal to $-L$, so after $\frac{1}{2}$-extension
 this segment does not cover any points with a positive x-coordinate.
-
-
 \end{proof}
 
-
-\subsection{Summary of construction}
-\input{figures/fig_apx_segment_whole.tex}
-
-Finally we define set of points and segments for the constructed instance:
-$$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause{i},$$
-$$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i.$$
-
-\section{Proof of Lemma \ref{apxconstruction}}
+\section{Proof that the construction is correct and sound}
 
 In order to prove Lemma \ref{apxconstruction} we introduce several
 auxiliary lemmas proving properties of the construction
@@ -777,9 +776,9 @@ so $|\sol'| \le |\sol|$.
 \begin{lemma}
 	\label{construction_completness}
 	Suppose we have a solution $\sol$ of the instance $\setCoverInstance$
-	of geometric set cover that is of size $w$.
+	of geometric set cover.
 	Then there exists a solution to $S$
-	that satisfies at least $15n - w$ clauses.
+	that satisfies at least $15n - |\sol|$ clauses.
 \end{lemma}
 
 
@@ -787,12 +786,19 @@ so $|\sol'| \le |\sol|$.
 Let the clauses in $S$ be $c_1$,~$c_2$~,$\ldots$,~$c_n$
 and the variables be $x_1$,~$x_2$~,$\ldots$,~$x_n$.
 Given a solution $\sol$
-of the instance $\setCoverInstance$ of geometric set cover, we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$ such that for any $i$ it contains at most one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$; this may decrease the cost of $\sol$, but that does not matter in the subsequent construction. To simplify notation, in the remainder of this proof we use $\sol$ to refer to the modified solution.
+of the instance $\setCoverInstance$ of geometric set cover,
+we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$
+such that for any $i$ it contains at most
+one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$;
+this may decrease the size of $\sol$,
+but that does not matter in the subsequent construction.
+To simplify notation,
+in the remainder of this proof we use $\sol$ to refer to the modified solution.
 
 Given $\sol$, we construct a solution to $S$ by defining an
 assignment of variables:
-$$\phi : \{ x_1, x_2, \ldots, x_n\} \rightarrow \{\true, \false\}$$
-that satisfies at least $15n-w$ clauses in $S$.
+$$\phi : \{ x_1, x_2 \ldots, x_n\} \rightarrow \{\true, \false\}$$
+that satisfies at least $15n-|\sol|$ clauses in $S$.
 
 \subparagraph{Definition of $\phi$.}
 Recall that due to Lemma~\ref{at_most_one_var_segment},
@@ -850,22 +856,22 @@ by a corresponding segment $\xTrueSegment{j}$ or $\xFalseSegment{j}$
 (depending on whether the literal $q$ is negated or not).
 From the definition of $\phi$ and the fact that one of this segment is
 in $\sol$, we know that
-$\phi(j)$ has the value that evaluates $w$ to be true.
+$\phi(j)$ has the value that evaluates $q$ to be true.
 Therefore, clause $c_i$ is satisfied.
 
 Consequently, $\phi$ satisfies all but at most $a$ clauses in $S$.
 
 To conclude,
-given a solution to $\setCoverInstance$ of size $w$ we constructed
+given a solution $\sol$ to $\setCoverInstance$ we constructed
 a variable assignment $\phi$
 that satisfies at least $n-a$ clauses of $S$.
 Finally, note that
 
-$$w \ge 3n + 11(n-a) + 12a = 3n + 11n + a = 14n + a,$$
+$$|\sol| \ge 3n + 11(n-a) + 12a = 3n + 11n + a = 14n + a,$$
 hence
-$$15n - w  \le 15n - 14n - a = n - a.$$
+$$15n - |\sol|  \le 15n - 14n - a = n - a.$$
 
-Therefore $\phi$ satisfies at least $15n-w$ clauses of $S$.
+Therefore $\phi$ satisfies at least $15n-|\sol|$ clauses of $S$.
 \end{proof}
 
 We are ready to conclude the proof of Lemma $\ref{apxconstruction}$.
@@ -873,10 +879,10 @@ We are ready to conclude the proof of Lemma $\ref{apxconstruction}$.
 \begin{proof}[Proof of Lemma \ref{apxconstruction}]
 By Lemma~\ref{construction_correctness}, we know
 that there exists a solution to $\setCoverInstance$ of size $15n-k$, so: 
-$$opt(\setCoverInstance) \le 15n - k.$$
+$$\opt(\setCoverInstance) \le 15n - k.$$
 Since the optimum solution to $S$ satisfies $k$ clauses,
 then according to Lemma~\ref{construction_completness}:
-$$opt(\setCoverInstance) \ge 15n -k.$$
+$$\opt(\setCoverInstance) \ge 15n -k.$$
 Therefore, the solution given by Lemma~\ref{construction_correctness} 
 of size $15n - k$ is an optimum solution to the instance $\setCoverInstance$.
 \end{proof}

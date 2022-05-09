@@ -1,5 +1,10 @@
 \chapter{Introduction}
 
+\newcommand{\SetCover}{\textsc{Set Cover}}
+\newcommand{\GeometricSetCover}{\textsc{Geometric Set Cover}}
+\newcommand{\SegmentSetCover}{\textsc{Segment Set Cover}}
+\newcommand{\WeightedSegmentSetCover}{\textsc{Weighted Segment Set Cover}}
+
 Some problems in Computer Science are known to be NP-complete,
 meaning that assuming P$\neq$NP there is no polynomial time
 algorithm that can solve these problems.
@@ -7,14 +12,14 @@ Even so, they still can be amenable to different approaches,
 such as approximation or parameterization.
 
 \begin{defi}
-In the \textbf{Set Cover} problem we are given a set of elements (universe)
+In the \textbf{$\SetCover$} problem we are given a set of elements (universe)
 $\points$ and~a~family of sets $\sets$ that are subsets of the universe $\points$
 and sum up to the whole $\points$.
 Our~task is to find a set $\sol \subseteq \sets$
 such that $\bigcup \sol = \points$ and the size of $\sol$ is minimum possible.
 \end{defi}
 
-Set Cover is a classical example of an NP-complete problem,
+\SetCover is a classical example of an NP-complete problem,
 which has been proven
 in \cite{set_cover_inapproximation} to be
 inapproximable with factor $(1-o(1))\ln n$ assuming P~$\neq$~NP
@@ -23,29 +28,34 @@ and W[2]-complete with the natural parameterization,
 see Theorem 13.21 in \cite{platypus_book}.
 However restricting the problem to various specialized settings
 can lead to more tractable special cases.
-In this thesis we take a closer look at the Geometric Set Cover problem
+In this thesis we take a closer look at the $\GeometricSetCover$ problem
 in the plane, where elements to cover are~points in the plane
 and sets to cover them with are geometric objects.
 
+\begin{defi}
+\textbf{$\SegmentSetCover$} is a $\GeometricSetCover$, where
+objects that we cover the points with are segments.
+\end{defi}
+
 \paragraph{Approximation}
 Over the years there has been a lot of work related to approximation
-algorithms for Geometric Set Cover. Notably,
-Geometric Set Cover with unweighted unit disks admits a PTAS (see
+algorithms for $\GeometricSetCover$. Notably,
+$\GeometricSetCover$ with unweighted unit disks admits a PTAS (see
 Corollary 1.1 in \cite{unit_disks}). When we consider the same problem
 with weighted unit disks (or unit squares), the problem admits a QPTAS
 \cite{settling_apx_hardness}, see also \cite{voronoi_true}.
 On the other hand, \cite{rectangles_apx_hard} 
-proves that Geometric Set Cover with unweighted axis-parallel rectangles
+proves that $\GeometricSetCover$ with unweighted axis-parallel fat rectangles
 is APX-hard; they also show similar hardness
-for Geometric Set Cover with many other standard geometric objects.
+for $\GeometricSetCover$ with many other standard geometric objects.
 
 \paragraph{Parameterization}
-We consider Geometric Set Cover 
+We consider $\GeometricSetCover$ 
 parameterized by the size of solution.
-Geometric Set Cover with unit squares was first proven to be W[1]-hard 
+$\GeometricSetCover$ with unit squares was first proven to be W[1]-hard 
 in \cite{marx05} (Theorem 5). A later follow-up work \cite{voronoi}
 shows that there is an~algorithm running in time $n^{\mathcal{O}(\sqrt{k})}$
-that solves Geometric Set Cover with unit squares or disks
+that solves $\GeometricSetCover$ with unit squares or disks
 and that there is no algorithm running in time $f(k) \cdot n^{o(\sqrt{k})}$
 for any computable $f$ under the~Exponential-Time Hypothesis,
 so this is a tight bound for this problem.
@@ -56,16 +66,16 @@ in the weighted setting is exactly; there
 was an attempt to introduce a quite complicated general
 framework of weighted parameterized setting in \cite{weighted_framework}.
 Kernels for several well-known weighted problems
-such as Subset Sum or~Knapsack are presented in \cite{kernel_weighted}.
+such as \textsc{Weighted Subset Sum} or~\textsc{Weighted Knapsack} are presented in \cite{kernel_weighted}.
 Another work \cite{weighted_flow} considers weighted
-parameterization of Weighted Directed Feedback Set and Weighted $st$-Cut.
+parameterization of \textsc{Weighted Directed Feedback Set} and \textsc{Weighted $st$-Cut}.
 
 \paragraph{$\delta$-extension}
-In this paper, we focus on Geometric Set Cover with segments with $\delta$-extension.
+In this paper, we focus on $\SegmentSetCover$ with $\delta$-extension.
 $\delta$-extension is a problem relaxation method based on the
 $\delta$-shrinking model which was introduced in \cite{shrinking_original}
 to provide an interesting result for
-the Maximum Weight Independent Set of Rectangles problem.
+the \textsc{Maximum Weight Independent Set of Rectangles} problem.
 In this problem one needs to find a set of non-overlapping
 weighted rectangles with maximum sum of weight possible.
 In the $\delta$-shrinking relaxed problem
@@ -77,12 +87,12 @@ to the optimum result before the shrinking. It might
 even lead to finding a set with result better than the optimum
 for the original problem.
 The author in~\cite{shrinking_original} presents a PTAS
-for Maximum Weight Independent Set of Rectangles with $\delta$-shrinking,
+for \textsc{Maximum Weight Independent Set of Rectangles} with $\delta$-shrinking,
 which is later improved to EPTAS in \cite{shrinking1} alongside
 presenting a new FPT result for this problem with the natural parameterization.
 Later the~similar $\delta$-shrinking model was used in \cite{shrinking2}
 to present a PTAS for
-Maximum Weight Independent Set of Polygons with $\delta$-shrinking.
+\textsc{Maximum Weight Independent Set of Polygons} with $\delta$-shrinking.
 
 \begin{defi}
 \label{definition:delta_extension}
@@ -96,16 +106,16 @@ at $S$ with scale $(1+\delta)$.
 
 Analogous to $\delta$-shrinking,
 $\delta$-extension provides a framework for relaxing
-Geometric Set Cover problems, where we allow the returned set of
+$\GeometricSetCover$ problems, where we allow the returned set of
 objects $\sol$ to \textit{almost} cover the points in the universe
 by requiring that they are covered by $\sol$ after $\delta$-extension,
 i.e. by set $\sol^{+\delta}$.
-The same concept could be used for Geometric Set Hitting problems.
+The same concept could be used for \textsc{Geometric Set Hitting} problems.
  
 For a longer discussion of this concept see Section
 \ref{section:def:delta_extension}.
 
-Similar model is used to prove that Geometric Set Cover with fat polygons
+Similar model is used to prove that $\GeometricSetCover$ with fat polygons
 relaxed with $\delta$-extension admits EPTAS \cite{harpeled12}.
 The $\delta$-extension model presented there is well-defined only
 for fat polygons. It extends the object by all the points that
@@ -125,15 +135,15 @@ also works for polygons extended by our $\delta$-extension.
 \section*{Our contribution}
 In this paper we make the following contributions.
 
-We show that approximation of unweighted Geometric Set Cover with axis-parallel segments
+We show that approximation of axis-parallel $\SegmentSetCover$
 (even if we relax the problem with  $\frac{1}{2}$-extension) is APX-hard
 (Theorem \ref{segment_cover_apx_hard}).
 
 \begin{restatable}{tw}{segmentCoverApxHard}{
 \label{segment_cover_apx_hard}
-	\textbf{(Axis-parallel segment set cover with $\frac{1}{2}$-extension is APX-hard)}.	
-	Unweighted geometric set cover
-	with axis-parallel segments in the 2D plane
+	\textbf{(Axis-parallel $\SegmentSetCover$ with $\frac{1}{2}$-extension is APX-hard)}.	
+	Unweighted axis-parallel $\SegmentSetCover$
+	in the 2D plane
 	is APX-hard (even with $\frac{1}{2}$-extension).
 	That is, assuming $P\neq NP$, there does not exist a PTAS
 	for this problem.
@@ -144,13 +154,13 @@ Note that segments are just degenerated rectangles.
 
 \begin{corollary}{
 \label{rectangle_cover_apx_hard}
-	\textbf{(rectangle set cover is APX-hard)}.	
-	Unweighted geometric set cover
+	\textbf{($\GeometricSetCover$ with rectangles is APX-hard)}.	
+	Unweighted $\GeometricSetCover$
 	with axis-parallel rectangles is APX-hard (even with $\frac{1}{2}$-extension).
 }\end{corollary}
 
 This expands the previous result of \cite{rectangles_apx_hard} 
-that Geometric Set Cover
+that $\GeometricSetCover$
 with axis-parallel fat rectangles is APX-hard,
 we improved the result that rectangles no longer
 have to be fat (Corollary \ref{rectangle_cover_apx_hard}).
@@ -158,14 +168,14 @@ This also proves that the assumption in \cite{harpeled12}
 for EPTAS about polygons being fat is necessary, because
 cover with arbitrary polygons with $\delta$-extension is APX-hard.
 
-We also provide two FPT algorithms for parameterized Geometric Set Cover 	
-with unweighted segments (Theorem~\ref{segment_cover_fpt})
-and weighted segments relaxed with $\delta$-extension
+We also provide two FPT algorithms for parameterized $\SegmentSetCover$ 	
+(Theorem~\ref{segment_cover_fpt})
+and $\WeightedSegmentSetCover$ relaxed with $\delta$-extension
 (Theorem~\ref{fpt_weighted_segment}).
 
 \begin{restatable}{tw}{segmentCoverFpt}{
 	\label{segment_cover_fpt}
-	\textbf{(FPT for segment cover).}
+	\textbf{(FPT for $\SegmentSetCover$).}
 	There exists an algorithm that given a family $\sets$ of
 	segments (in any direction),
 	a set of points $\points$
@@ -178,7 +188,7 @@ and weighted segments relaxed with $\delta$-extension
 
 \begin{restatable}{tw}{fptWeightedSegment}{
 	\label{fpt_weighted_segment}
-	\textbf{(FPT for weighted segment cover with $\delta$-extension).}
+	\textbf{(FPT for $\WeightedSegmentSetCover$ with $\delta$-extension).}
 	There exists an algorithm that given a family $\sets$ of
 	$n$ weighted segments (in any direction),
 	a set of $m$ points $\points$, and parameters $k$ and $\delta > 0$,
@@ -196,12 +206,12 @@ and weighted segments relaxed with $\delta$-extension
 	such that $\sol$ covers all points in $\points$.
 }\end{restatable}
 
-On the other hand, we prove that Geometric Set Cover with weighted
-axis-parallel segments is W[1]-hard (Theorem~\ref{w1_hard})
+On the other hand, we prove that $\WeightedSegmentSetCover$ 
+is W[1]-hard even if segments are limited to 3 directions (Theorem~\ref{w1_hard})
 and assuming ETH there does not exist algorithm for this problem
 that runs in time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
 See Figure \ref{tab:weighted_fpt} for a summary of parameterized
-results for the weighted setting.
+results for $\WeightedSegmentSetCover$.
 
 \begin{restatable}{tw}{wOneHard}
 \label{w1_hard}
@@ -257,7 +267,7 @@ This is formulated precisely in Theorem \ref{permissive_w1_hard}.
  any direction   & W[1]-hard* & FPT \\
 \hline                
 \end{tabular}
-\caption{Our results for Geometric Set Cover problem with weighted segments 
+\caption{Our results for $\WeightedSegmentSetCover$
 parameterized by the size of solution.
 Results marked with * are not explicitly given in this thesis,
 but they trivially follow from stronger results shown in the other cells of the table.}
@@ -268,10 +278,13 @@ but they trivially follow from stronger results shown in the other cells of the 
 \paragraph{Future work.} There are two aforementioned problems
 that relate to Theorem \ref{w1_hard} and were not solved in this thesis.
 We have not presented W[1]-hardness proof
-of Geometric Set Cover problem with axis-parallel weighted segments,
+of $\WeightedSegmentSetCover$ where segments are limited to 3 directions,
 but it may be possible to improve this construction to use segments
 in 2 directions instead of 3 directions. 
 The other question is what is the tight bound for this problem.
 The simple algorithm solving
 this problem is running in time ${\mathcal{O}(f(k)(|\points| + |\sets|)^k)}$.
 
+Another problem to consider is whether
+\textsc{Geometric Set Hitting} relaxed with $\delta$-extension
+can yield some better results.

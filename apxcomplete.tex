@@ -19,7 +19,7 @@ Note that segments are just degenerated rectangles
 with one side being very narrow.
 
 
-Our results can be summarized in the following
+Our result can be summarized in the following
 theorem and this section aims to prove it.
 
 \segmentCoverApxHard*
@@ -103,8 +103,8 @@ and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 	
 	\item \label{lemma:apxconstruction:enumerate:extension}
 	For every $\sol \subseteq \sets$, if $\sol^{+\frac{1}{2}}$
-	is a solution to the $\setCoverInstance$, then $\sol$
-	is also a solution to the $\setCoverInstance$.
+	is a solution to $\setCoverInstance$, then $\sol$
+	is also a solution to $\setCoverInstance$.
 \end{enumerate}
 Therefore, the optimum size of a solution to $\setCoverInstance$
 is $\opt(\setCoverInstance) = 15n - \opt(S)$. 
@@ -113,7 +113,7 @@ is $\opt(\setCoverInstance) = 15n - \opt(S)$.
 
 We prove Lemma \ref{apxconstruction} in
 subsequent sections. Section \ref{construction_description}
-describes proposed instance $\setCoverInstance$.
+describes the proposed instance $\setCoverInstance$.
 Property \ref{item:apxconstruction_correctness} is proved by Lemma~\ref{construction_correctness},
 \ref{item:apxconstruction_completness} by Lemma~\ref{construction_completness},
 and finally \ref{lemma:apxconstruction:enumerate:extension} trivially
@@ -163,7 +163,7 @@ $$\approximate(\setCoverInstance) \le (1+\epsilon)\opt(\setCoverInstance) = 14n(
 = 15n - \left(\frac{7}{8} + \epsilon\right)n.$$
 \textbf{Assume $S$ is at most 
 $\left(\frac{7}{8} + \epsilon\right)$ satisfiable.}
-From the defintion of $S$ being at most 
+From the definition of $S$ being at most 
 $\left(\frac{7}{8} + \epsilon\right)n$ satisfiable, we have:
 $$\opt(S) \le \left(\frac{7}{8} + \epsilon\right)n$$
 

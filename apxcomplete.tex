@@ -155,7 +155,7 @@ From Lemma \ref{apxconstruction} we have:
 $$\opt(\setCoverInstance) \ge 15n - \left(\frac{7}{8} + \epsilon\right)n$$
 
 Since a solution to $\setCoverInstance$ with $\frac{1}{2}$-extension is
-also a solution without any extention, by 
+also a solution without any extension, by 
 Lemma \ref{apxconstruction} \ref{lemma:apxconstruction:enumerate:extension}, we have:
 
 $$\approximate(\setCoverInstance) \ge \opt(\setCoverInstance) = 15n - \left(\frac{7}{8} + \epsilon\right)n$$
@@ -642,16 +642,16 @@ Within CLAUSE-gadget, for any $1 \le i \le n$ after $\frac{1}{2}$-extension:
 \item $(m_{i,1}, s_{i,1})$ does not cover $u_{i,0}$,
 \item $(y_{i,1}, p_{i,0})$ does not cover $n_{i,1}$.
 \end{itemize}
-For two consequitive VARIABLE-gadgets, for any $1 \le i < n$ after $\frac{1}{2}$-extension:
+For two consecutive VARIABLE-gadgets, for any $1 \le i < n$ after $\frac{1}{2}$-extension:
 $(b_i, f_i)$ does not cover $b_{i+1}$ (nor $f_{i-1}$ for $i>1$).
-Similiarily $(a_i,d_i)$ does not cover $a_{i+1}$ (nor $d_{i-1}$ for $i>1$),
+Similarly $(a_i,d_i)$ does not cover $a_{i+1}$ (nor $d_{i-1}$ for $i>1$),
 because this segment is shorter than the previous one and $a_i$ and $b_i$
 share y-coordinate.
 
-For two consequtive CLAUSE-gadgets,
+For two consecutive CLAUSE-gadgets,
 segments from one do not cover anything from the other,
 as the gadgets have width 9 and
-every lefmost x-coordnate is divisible by $\clauseXFactor$.
+every leftmost x-coordinate is divisible by $\clauseXFactor$.
 Hence two different gadgets do not interact with each other
 after $\frac{1}{2}$-extension.
 
@@ -706,7 +706,7 @@ with set $\segmentsClauseSolFalse_i$ described in
 Lemma~\ref{cover_clauses_solution_false}.
 
 Formally, we define 
-sets responsible for choosing variable assignment and satisfing clauses,
+sets responsible for choosing variable assignment and satisfying clauses,
 $R_i$ and $C_i$ respectively, as following:
 
 \begin{align}

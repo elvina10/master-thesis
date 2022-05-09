@@ -1,4 +1,5 @@
-width=10
+L_width=3
+total_width=15
 height=1
 step=0.75
 var_gap = 1
@@ -59,20 +60,41 @@ def get_rect_y1(i):
 def get_rect_y2(i):
 	return movey(get_rect_y1(i), 2*step)
 
+def L_lines(n):
+	y_beg = -2*eps
+	y_end = get_rect_y2(n+1)
+	def x_coord(n):
+		return (3-n)*L_width
+	def L(n):
+		if n == 0:
+			return '{0}'
+		if n == 1:
+			return '{$-L$}'
+		return '{$-' + str(n) + 'L$}'
+	out = f'''
+	Draw[dashed] ({x_coord(3)}, {y_beg}) -- ({x_coord(3)}, {y_end}) node[above] {L(3)};
+	Draw[dashed] ({x_coord(2)}, {y_beg}) -- ({x_coord(2)}, {y_end}) node[above] {L(2)};
+	Draw[dashed] ({x_coord(1)}, {y_beg}) -- ({x_coord(1)}, {y_end}) node[above] {L(1)};
+	Draw[dashed] ({x_coord(0)}, {y_beg}) -- ({x_coord(0)}, {y_end}) node[above] {L(0)};
+'''.replace("Draw", "\\draw")
+	return out
+
 def variable_segment(i):
 	xeps = add_eps(xbeg_label, '-')
 	y1 = get_rect_y1(i)
 	y2 = get_rect_y2(i)
-	width_label = next_id('x', width * 1.25)
-	width_label_smol = next_id('x', width/4)
-	width_half = next_id('x', width/2)
+	width_label = next_id('x', L_width*3)
+	width_label_smol = next_id('x', L_width)
+	width_half = next_id('x', L_width*2)
 	yhalf = movey(y1, step)
 	label = '{VARIABLE-gadget$_' + str(i) + '$}'
 	x_true = '{$x_' + str(i) + ' = \\true$}'
 	x_false = '{$x_' + str(i) + ' = \\false$}'
-	label_pos = 0.17
+	label_pos = 0.5
 	out = f'''Draw ({width_half},{y1}) -- ({width_label},{y1}) node[pos={label_pos}, above] {x_true};
 Draw ({width_half},{y2}) -- ({width_label},{y2}) node[pos={label_pos}, above] {x_false};
+Draw ({width_label},{y1}) -- ({total_width},{y1});
+Draw ({width_label},{y2}) -- ({total_width},{y2});
 Filldraw [fill=lime!30, draw=black] ({xeps},{add_eps(y1, '-')}) rectangle ({add_eps(width_half, '+')}, {add_eps(y2, '+')});
 Draw ({xbeg_label},{y1}) -- ({width_label},{y1});
 Draw ({xbeg_label},{y1}) -- ({xbeg_label},{yhalf});
@@ -85,7 +107,7 @@ Draw ({xbeg_label},{yhalf}) -- ({width_label_smol},{yhalf});
 
 def get_clause_x1(i):
 	if i == 1:
-		quarter_width = next_id('x', 3*width/4)
+		quarter_width = next_id('x', 3*L_width + 2*eps)
 		return quarter_width
 	else:
 		return movex(get_clause_x2(i-1), clause_gap)
@@ -153,6 +175,8 @@ def gen_tikzmath():
 		out += x + '=' + str(y) + ';\n'
 	return out 
 
+axis_lines = L_lines(3)
+
 variable_segment1 = variable_segment(1)
 variable_segment2 = variable_segment(2)
 variable_segment3 = variable_segment(3)
@@ -181,6 +205,7 @@ output = '''{
 ''' + variable_segment1 + '''
 ''' + variable_segment2 + '''
 ''' + variable_segment3 + '''
+''' + axis_lines + '''
 \\end{tikzpicture}
 \\caption{\\textbf{Scheme of the whole construction.}}
 General layout of VARIABLE-gadgets and CLAUSE-gadgets and how they

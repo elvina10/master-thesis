@@ -7,32 +7,17 @@
 
 \label{chapter:segment_apx}
 
-TODO: Adjust to the discussion in intro
-
 In this section we analyze whether there exists 
 a PTAS for geometric set cover for rectangles.
-We show that we can restrict this problem
+We show that Segment Set Cover
+is APX-hard even if we can restrict this problem
 to a very simple setting:
-segments parallel to axes and allow $\frac{1}{2}$-extension,
-and the problem is still APX-hard.
-Note that segments are just degenerated rectangles
-with one side being very narrow.
-
+segments parallel to axes and allow $\frac{1}{2}$-extension.
 
 Our result can be summarized in the following
 theorem and this section aims to prove it.
 
 \segmentCoverApxHard*
- 
-Theorem \ref{segment_cover_apx_hard} implies the following.
-
-\begin{corollary}{
-\label{rectangle_cover_apx_hard}
-	\textbf{(rectangle set cover is APX-hard)}.	
-	Unweighted geometric set cover
-	with axis-parallel rectangles is APX-hard (even with $\frac{1}{2}$-extension).
-}\end{corollary}
-
 
 We prove Theorem \ref{segment_cover_apx_hard}
 by taking a problem that is APX-hard

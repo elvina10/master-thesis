@@ -753,7 +753,7 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 	\label{at_most_one_var_segment}
 	Suppose we have a solution $\sol$ of the instance $\setCoverInstance$
 	of geometric set cover.
-	Then there exists a solution $\sol'$, such that $|\sol'| \le |\sol|$,
+	Then there exists a solution $\sol'$ such that $|\sol'| \le |\sol|$
 	and $\sol'$ contains
 	at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$
 	from each VARIABLE-gadget.
@@ -801,7 +801,7 @@ and the variables be $x_1$,~$x_2$~,$\ldots$,~$x_n$.
 Given a solution $\sol$
 of the instance $\setCoverInstance$ of geometric set cover,
 we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$
-such that for any $i$ it contains at most
+so that for any $i$, $\sol$ contains at most
 one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$;
 this may decrease the size of $\sol$,
 but that does not matter in the subsequent construction.
@@ -821,13 +821,12 @@ We define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 \begin{align}
 	\begin{split}
 	\label{eqn:variable_assignment}
-	& \begin{cases}
-	\phi(x_i) = \true & \text{if}\ \xTrueSegment{i} \in \sol \\
-	\phi(x_i) = \false & \text{otherwise}
+	\phi(x_i) := & \begin{cases}
+	\true & \text{if}\ \xTrueSegment{i} \in \sol \\
+	\false & \text{otherwise}
 	\end{cases}
 	\end{split}
 \end{align}
-
 Moreover, from Lemma~\ref{choose_variables_no_less} we get $|\segmentsVar{i} \cap \sol| \ge 3$ for every $i$.
 
 \subparagraph{Clauses satisfied with the chosen variable assignment.}
@@ -837,19 +836,19 @@ $\sol$ needs to use at least 11 segments to cover $\pointsClause{i} - \{x_{i,0},
 in the $i$-th CLAUSE-gadget (Lemma~\ref{cover_clauses_segments_no_less}).
 
 Moreover, if none of the points $\{x_{i,0}, y_{i,0}, z_{i,0}\}$
-are covered by the segments from $\sol~\cap~\segmentsVar{i}$,
+are covered by the segments from $\sol \cap \segmentsVar{i}$,
 then $\sol$ needs to cover $\pointsClause{i}$
 with at least 12 segments
 by Lemma~\ref{cover_clauses_segments_no_less}.
 
-Let us denote $a$ as the amount of such clauses $c_i$ for which none of
-the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause{i}$ were covered by
+Let $a$ be the number of clauses $c_i$ for which none of
+the points $x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause{i}$ are covered by
 segments from $\sol~\cap~\segmentsVar{j}$ for any $1 \le j \le n$.
 
 Consider a clause $c_i$ for which at least one of the points
-$x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause{i}$ were covered by
-segments from $\sol~\cap~\segmentsVar{j}$ for some $1 \le j \le n$,
-then denote this point as $t$ and say it corresponds to
+$x_{i,0}, y_{i,0}, z_{i,0}$ in $\pointsClause{i}$ is covered by
+segments from $\sol~\cap~\segmentsVar{j}$ for some $1 \le j \le n$.
+Denote this point as $t$ and say it corresponds to
 literal $q$ and variable $x_j$.
 Point $t$ can be only covered in $\segmentsVar{j}$
 by a corresponding segment $\xTrueSegment{j}$ or $\xFalseSegment{j}$
@@ -870,19 +869,5 @@ Finally, note that
 $$|\sol| \ge 3n + 11(n-a) + 12a = 3n + 11n + a = 14n + a,$$
 hence
 $$15n - |\sol|  \le 15n - 14n - a = n - a.$$
-
-Therefore $\phi$ satisfies at least $15n-|\sol|$ clauses of $S$.
-\end{proof}
-
-We are ready to conclude the proof of Lemma $\ref{apxconstruction}$.
-
-\begin{proof}[Proof of Lemma \ref{apxconstruction}]
-By Lemma~\ref{construction_correctness}, we know
-that there exists a solution to $\setCoverInstance$ of size $15n-k$, so: 
-$$\opt(\setCoverInstance) \le 15n - k.$$
-Since the optimum solution to $S$ satisfies $k$ clauses,
-then according to Lemma~\ref{construction_completness}:
-$$\opt(\setCoverInstance) \ge 15n -k.$$
-Therefore, the solution given by Lemma~\ref{construction_correctness} 
-of size $15n - k$ is an optimum solution to the instance $\setCoverInstance$.
+Therefore, $\phi$ satisfies at least $15n-|\sol|$ clauses of $S$.
 \end{proof}

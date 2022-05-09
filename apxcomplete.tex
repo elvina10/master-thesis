@@ -3,7 +3,7 @@
 \newcommand{\true}{\texttt{true}}
 \newcommand{\false}{\texttt{false}}
 \newcommand{\opt}{\mathsf{opt}}
-\newcommand{\approximate}{\mathsf{approx}}
+\newcommand{\approximate}{\mathsf{approx}^{*}}
 
 \label{chapter:segment_apx}
 
@@ -121,9 +121,8 @@ Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
 and construct an instance of geometric set cover $\setCoverInstance$
 using Lemma \ref{apxconstruction}.
 We now use the $(1+\epsilon)$-approximation algorithm
-for geometric set cover on $\setCoverInstance$.
+for geometric set cover relaxed with $\frac{1}{2}$-extensions on $\setCoverInstance$.
 Denote the size of the solution returned by this algorithm as $\approximate(\setCoverInstance)$.
-(TODO: Figure out which approximation it should be, with ext or without)
 We prove that 
 if in $S$
 one can satisfy at most $(\frac{7}{8}+\epsilon)n$ clauses,

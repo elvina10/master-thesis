@@ -239,7 +239,7 @@ $$\chooseVar{\true}{i} :=\{ (a_i, d_i), (b_i, f_i), (c_i, g_i)\},$$
 $$\chooseVar{\false}{i} := \{(a_i, c_i), (d_i, e_i), (f_i, h_i)\},$$
 $$\segmentsVar{i} := \chooseVar{\true}{i} \cup \chooseVar{\false}{i}.$$
 
-We also name two of these segment for future reference:
+We also name two of these segments for future reference:
 $\xTrueSegment{i} := \xTrueSegmentDef{i},$
 $\xFalseSegment{i} := \xFalseSegmentDef{i}.$
 
@@ -342,7 +342,7 @@ $$\pointsOr{i}{j} :=
  \{l_{i, j}, m_{i, j}, n_{i, j}, o_{i, j},
  p_{i, j}, q_{i, j}, r_{i, j}, s_{i, j}, t_{i, j}, u_{i, j} \}
  $$
-Note that $\pointsOr{i}{j}$ does not include the point $v_{i,j}$
+Note that $\pointsOr{i}{j}$ does not include the point $v_{i,j}$.
  
 \paragraph{Segments.}
 
@@ -392,11 +392,11 @@ We can do this using segments from $\orMoveVariable{i}{j} \cup \chooseOr{\false}
 A CLAUSE-gadget is responsible for determining whether
 variable values assigned in variable gadgets
 satisfy the corresponding clause in the input formula $\phi$.
-It has a minimum solution to weight $w$
+It has a minimum solution of size $w$
 if and only if the clause is satisfied, i.e. at least one
 of the respective variables is assigned the correct value.
-Otherwise, its minimum solution has weight $w+1$.
-In this way, by analyzing the cost of the minimum
+Otherwise, its minimum solution has size $w+1$.
+In this way, by analyzing the size of the minimum
 solution to the entire constructed instance, we will be able to tell
 how many clauses it is possible to satisfy
 in an optimum solution to $\phi$.
@@ -682,8 +682,8 @@ for the instance $S$ of MAX-(3,3)-SAT.
 \end{lemma}
 
 \begin{proof}
-Let the clauses in $S$ be $c_1$,~$c_2$~,$\ldots$,~$c_n$
-and the variables be $x_1$,~$x_2$~,$\ldots$,~$x_n$.
+Let the clauses in $S$ be $c_1,c_2,\ldots,c_n$
+and the variables be $x_1,x_2,\ldots,x_n$.
 Let the variable assignment in
 the optimum solution to $S$ be
 $\phi : \{ x_1, x_2, \ldots, x_n\} \rightarrow \{\true, \false\}$.
@@ -716,7 +716,7 @@ $R_i$ and $C_i$ respectively, as following:
 		\chooseVar{\false}{i} & \text{if}\ \phi(x_i) = \false \\
 		\end{cases} \\
 	& C_i := \begin{cases}
-		\segmentsClauseSolTrue{a}_i & \text{if}\ c_i \text{ satisfied by literal corresponding to point } a \\
+		\segmentsClauseSolTrue{a}_i & \text{if}\ c_i \text{ satisfied by the literal corresponding to point } a \\
 		\segmentsClauseSolFalse_i & \text{if}\ c_i \text{ not satisfied}
 		\end{cases} \\
 	& \sol := \bigcup\limits_{i=1}^{n} \{R_i \cup C_i : 1 \le i \le n\}.
@@ -780,8 +780,8 @@ so $|\sol'| \le |\sol|$.
 
 
 \begin{proof}\leavevmode
-Let the clauses in $S$ be $c_1$,~$c_2$~,$\ldots$,~$c_n$
-and the variables be $x_1$,~$x_2$~,$\ldots$,~$x_n$.
+Let the clauses in $S$ be $c_1,c_2,\ldots,c_n$
+and the variables be $x_1,x_2,\ldots,x_n$.
 Given a solution $\sol$
 of the instance $\setCoverInstance$ of geometric set cover,
 we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$
@@ -794,7 +794,7 @@ in the remainder of this proof we use $\sol$ to refer to the modified solution.
 
 Given $\sol$, we construct a solution to $S$ by defining an
 assignment of variables:
-$$\phi : \{ x_1, x_2 \ldots, x_n\} \rightarrow \{\true, \false\}$$
+$$\phi : \{ x_1, x_2, \ldots, x_n\} \rightarrow \{\true, \false\}$$
 that satisfies at least $15n-|\sol|$ clauses in $S$.
 
 \subparagraph{Definition of $\phi$.}
@@ -806,7 +806,7 @@ We define the value $\phi(x_i)$ for the variable $x_i$ as follows:
 	\begin{split}
 	\label{eqn:variable_assignment}
 	\phi(x_i) := & \begin{cases}
-	\true & \text{if}\ \xTrueSegment{i} \in \sol \\
+	\true & \text{if}\ \xTrueSegment{i} \in \sol, \\
 	\false & \text{otherwise}
 	\end{cases}
 	\end{split}

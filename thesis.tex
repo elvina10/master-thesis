@@ -75,13 +75,20 @@ pokrywania punktów odcinkami na płaszczyźnie}
 }
 
 %Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
-\klasyfikacja{D. Software\\
-  D.127. Blabalgorithms\\
-  D.127.6. Numerical blabalysis}
+\klasyfikacja{
+Theory of computation
+$\rightarrow$ Design and analysis of algorithms
+$\rightarrow$ Parameterized complexity and exact algorithms\\
+Theory of computation
+$\rightarrow$ Design and analysis of algorithms
+$\rightarrow$ Approximation algorithms analysis
+$\rightarrow$ Packing and covering problems \\
+}
 
 % Słowa kluczowe:
-\keywords{set cover, geometric set cover, FPT, W[1]-completeness,
-APX-completeness, PCP theorem, NP-completeness}
+\keywords{set cover, geometric set cover,
+weighted set cover, FPT, W[1]-hard,
+APX-hard, ETH, grid tiling, MAX-(3,3)-SAT, $\delta$-extension}
 
 % Tu jest dobre miejsce na Twoje własne makra i~środowiska:
 
@@ -135,12 +142,33 @@ APX-completeness, PCP theorem, NP-completeness}
 \begin{document}
 \maketitle
 
+\newcommand{\SetCover}{\textsc{Set Cover}}
+\newcommand{\GeometricSetCover}{\textsc{Geometric Set Cover}}
+\newcommand{\SegmentSetCover}{\textsc{Segment Set Cover}}
+\newcommand{\WeightedSegmentSetCover}{\textsc{Weighted Segment Set Cover}}
+\newcommand{\WeightedGeometricSetCover}{\textsc{Weighted Geometric Set Cover}}
+
 %tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-  The work presents a study
-  of different geometric set cover problems.
-  It mostly focuses on segment set cover
-  and its connection to the polygon set cover.
+	In this thesis we analyze approximation
+	and parametrization of $\GeometricSetCover$ with segments.
+	To achieve interesting results we define a concept
+	of $\GeometricSetCover$ with $\delta$-extension, where we
+	need to cover the points by geometric objects,
+	which are extended by a tiny fraction,
+	but we compare the soltuion size to the optimum solution without extension.
+	We prove that $\SegmentSetCover$ is APX-hard
+	even if we restrict segments to be axis-pararell
+	and allow $\frac{1}{2}$-extension (Chapter \ref{chapter:segment_apx}).
+	We provide an FPT algorithm for unweighted $\SegmentSetCover$
+	(Section \ref{section:fpt_unweighted})
+	and for $\WeightedSegmentSetCover$ with $\delta$-extension
+	(Section \label{section:fpt_weighted}).
+	Finally we prove that $\WeightedSegmentSetCover$
+	is W[1]-hard and there does not exist algorithm running
+	in time $f(k)\cdot n^{o(\sqrt{k})}$ solving this problem
+	even if we restrict segments to 3 directions
+	(Chapter \ref{chapter:w1_hard}).
 \end{abstract}
 
 \tableofcontents

@@ -3,12 +3,12 @@
 In this chapter we present some basic definitions that
 will be used later.
 
-\section{Geometric set cover}
+\section{Geometric Set Cover}
 \label{section:def:geometric__set_cover}
-Whenever speaking about geometric set cover,
+Whenever speaking about $\GeometricSetCover$,
 we consider it in the 2-dimensional plane.
 
-In the geometric set cover problem we are are given
+In the $\GeometricSetCover$ problem we are are given
 $\sets$ --- a set of objects, which are connected
 subsets of the plane and $\points$ --- a set of points in the plane.
 The task is to choose $\sol \subseteq \sets$ such that
@@ -22,20 +22,20 @@ and we would like to find a solution $\sol$
 that minimizes $\sum_{R \in \sol} f(R)$.
 
 \begin{defi}
-Segment is \textbf{axis-parallel} if it lies on line that is
-either horizontal $x = c$ or vertical $y = c$.
+A segment is \textbf{axis-parallel} if it lies on a line that is
+either horizontal $y = c$ or vertical $x = c$.
 \end{defi}
 
 \begin{defi}
 	A line is \textbf{right-diagonal} if it is
-	described by linear function $x + y = d$ for some $d \in \mathbb{R}$.
+	described by the linear function $x + y = d$ for some $d \in \mathbb{R}$.
 	Segment is \textbf{right-diagonal} if its
 	direction is a right-diagonal line.
 \end{defi}
 
 \section{Parameterization}
 
-In the parameterized setting of the Geometric Set Cover
+In the parameterized setting of the $\GeometricSetCover$
 for a given $k$,
 our task is to either find a solution $\sol$ such that $|\sol| \le k$
 or decide that there is no such solution.
@@ -60,30 +60,26 @@ every disjunction consists of at most $k$ literals.
 \textbf{$k$-SAT} problem is 
 a boolean satisfiability problem of $k$-CNF formulas.
 Given $k$-CNF formula, one must answer if there
-exists any variables assignment that satisfies the formula.
+exists any variable assignment that satisfies the formula.
 \end{defi}
 
 \begin{defi}
 For $k \ge 3$ set us define $S_k$ as a set of constants $\sigma$
 such that there exists an algorithm solving $k$-SAT running in time
 $\mathcal{O}^{*}(2^{\sigma n})$.
-Set us define $s_k$ as the infimum  of the set $S_k$.
+Let $s_k$ be the infimum  of the set $S_k$.
 
-\textbf{Exponential Time Hypothesis (ETH)} is a conjecture
+\textbf{Exponential Time Hypothesis (ETH)} asserts
 that $s_3 > 0$. This conjecture implies that
 there does not exist an algorithm solving 3-SAT
 running in time $2^{o(n)}$.
 \end{defi}
 
-We provide the main theorem that we use in this thesis for W[1]-hard
-problems. To see the definition of a W[1]-hard problem,
+To see the definition of a W[1]-hard problem and W hierarchy,
 see Chapter 13.3 of \cite{platypus_book}.
-
-\begin{tw}
-Problem parameterized by $k$ is \textbf{W[1]-hard} if assuming ETH there
-does no algorithm solving this problem running in time
-$f(k)\cdot n^{o(k)}$.
-\end{tw}
+When proving that a problem is W[1]-hard,
+we are going to use Theorem 
+\ref{grid_tiling_w1_hard}, which was proved in \cite{marx_grid_tiling}.
 
 \section{Approximation}
 
@@ -116,7 +112,7 @@ for $\Pi$.
 Another idea presented here, which can be utilized only when considering
 the problems with geometric objects,
 is $\delta$-extension.
-We define it specifically for the geometric set cover problem
+We define it specifically for the $\GeometricSetCover$ problem
 with convex centre-symmetric objects.
 
 Intuitively, we consider a problem with slightly larger objects,
@@ -131,12 +127,12 @@ that we are able to find a solution
 of size smaller than the optimum solution
 to the original problem.
 
-Formal definition of $\delta$-extended objects.
+Formal definition of $\delta$-extended objects
 is present in Definition
 \ref{definition:delta_extension}.
 
-The geometric set cover problem with $\delta$-extension
-is a version of geometric set cover with
+The $\GeometricSetCover$ with $\delta$-extension
+is a version of $\GeometricSetCover$ with
 the following modifications.
 \begin{itemize}
 \item We need to cover all the points in $\points$
@@ -151,9 +147,9 @@ the modified problem.
 Formally, we have the following.
 
 \begin{defi}
-The \textbf{geometric set cover problem
+The \textbf{$\GeometricSetCover$ problem
 with $\delta$-extension} is the problem where for an input instance
-$I=(\sets, \points)$ of geometric set cover,
+$I=(\sets, \points)$ of $\GeometricSetCover$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
@@ -166,11 +162,11 @@ polynomial-time approximation scheme (PTAS)
 for a problem with $\delta$-extension.
 
 \begin{defi}
-A \textbf{PTAS for geometric set cover 
+A \textbf{PTAS for $\GeometricSetCover$
 with $\delta$-extension} is a family of algorithms
 $\{\mathcal{A}_{\delta, \epsilon}\}_{\delta, \epsilon > 0}$ that
 each takes as an input instance $I=(\sets, \points)$
-of geometric set cover where objects are centre-symmetric and strongly convex,
+of $\GeometricSetCover$ where objects are centre-symmetric and convex,
 and in polynomial-time outputs a solution $\mathcal{R} \subseteq \sets$
 such that the $\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
@@ -181,23 +177,23 @@ extension, i.e.~$(1+\epsilon)|\mathcal{R}| \le |opt(I)|$.
 
 \section{Weighted Geometric Set Cover}
 
-In this thesis we also consider a weighted Geometric Set Cover problem,
+In this thesis we also consider a $\WeightedGeometricSetCover$ problem,
 which is a combination
 of the weighted and parameterized setting described in 
-\ref{section:def:geometric__set_cover}.
+Section \ref{section:def:geometric__set_cover}.
 We already argued in the introduction
 that there is no consensus of how it is defined, but when we discuss the
 weighted parameterized setting we will consider the following
 definition. There is a given weight function
 $f : \sets \rightarrow \mathbb{R^+}$
-and we would like to find a solution $\sol$,
+and we would like to find a solution $\sol$
 such that $|\sol| \le k$
-that minimizes $\sum_{R \in \sol} f(R)$ among such sets $\sol$.
+and $\sum_{R \in \sol} f(R)$ is minimum possible among such sets $\sol$.
 
 \begin{defi}
-The \textbf{weighted geometric set cover problem
+The \textbf{$\WeightedGeometricSetCover$ problem
 with $\delta$-extension} is the problem where for an input instance
-$I=(\sets, \points, f)$ of weighted geometric set cover,
+$I=(\sets, \points, f)$ of $\WeightedGeometricSetCover$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
@@ -209,10 +205,10 @@ We also consider weighted parameterized setting with $\delta$-extension,
 which we formally define below.
 
 \begin{defi}
-The \textbf{weighted geometric set cover problem
+The \textbf{$\WeightedGeometricSetCover$ problem
 with $\delta$-extension parameterized by the size of a solution}
 is a problem where for an input instance
-${I=(\sets, \points, f, k)}$ of weighted geometric set cover
+${I=(\sets, \points, f, k)}$ of $\WeightedGeometricSetCover$
 parameterized by the size of a solution $k$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set

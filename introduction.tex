@@ -4,6 +4,7 @@
 \newcommand{\GeometricSetCover}{\textsc{Geometric Set Cover}}
 \newcommand{\SegmentSetCover}{\textsc{Segment Set Cover}}
 \newcommand{\WeightedSegmentSetCover}{\textsc{Weighted Segment Set Cover}}
+\newcommand{\WeightedGeometricSetCover}{\textsc{Weighted Geometric Set Cover}}
 
 Some problems in Computer Science are known to be NP-complete,
 meaning that assuming P$\neq$NP there is no polynomial time
@@ -33,8 +34,8 @@ in the plane, where elements to cover are~points in the plane
 and sets to cover them with are geometric objects.
 
 \begin{defi}
-\textbf{$\SegmentSetCover$} is a $\GeometricSetCover$, where
-objects that we cover the points with are segments.
+\textbf{$\SegmentSetCover$} is $\GeometricSetCover$ where
+objects that we cover the points with are segments in the plane.
 \end{defi}
 
 \paragraph{Approximation}
@@ -135,15 +136,15 @@ also works for polygons extended by our $\delta$-extension.
 \section*{Our contribution}
 In this paper we make the following contributions.
 
-We show that approximation of axis-parallel $\SegmentSetCover$
-(even if we relax the problem with  $\frac{1}{2}$-extension) is APX-hard
-(Theorem \ref{segment_cover_apx_hard}).
+We show that approximation of $\SegmentSetCover$,
+even if segments are axis-parallel and we relax the problem with  $\frac{1}{2}$-extension,
+is APX-hard (Theorem \ref{segment_cover_apx_hard}).
 
 \begin{restatable}{tw}{segmentCoverApxHard}{
 \label{segment_cover_apx_hard}
-	\textbf{(Axis-parallel $\SegmentSetCover$ with $\frac{1}{2}$-extension is APX-hard)}.	
-	Unweighted axis-parallel $\SegmentSetCover$
-	in the 2D plane
+	\textbf{($\SegmentSetCover$ with axis-parallel segments and $\frac{1}{2}$-extension is APX-hard)}.	
+	$\SegmentSetCover$
+	with axis-parallel segments in the 2D plane
 	is APX-hard (even with $\frac{1}{2}$-extension).
 	That is, assuming $P\neq NP$, there does not exist a PTAS
 	for this problem.
@@ -155,7 +156,7 @@ Note that segments are just degenerated rectangles.
 \begin{corollary}{
 \label{rectangle_cover_apx_hard}
 	\textbf{($\GeometricSetCover$ with rectangles is APX-hard)}.	
-	Unweighted $\GeometricSetCover$
+	\textsc{Geometric} \textsc{Set} \textsc{Cover}
 	with axis-parallel rectangles is APX-hard (even with $\frac{1}{2}$-extension).
 }\end{corollary}
 
@@ -212,6 +213,7 @@ and assuming ETH there does not exist algorithm for this problem
 that runs in time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
 See Figure \ref{tab:weighted_fpt} for a summary of parameterized
 results for $\WeightedSegmentSetCover$.
+Similar table for unweighted problem is present in Figure \ref{tab:unweighted_fpt}.
 
 \begin{restatable}{tw}{wOneHard}
 \label{w1_hard}
@@ -272,6 +274,27 @@ parameterized by the size of solution.
 Results marked with * are not explicitly given in this thesis,
 but they trivially follow from stronger results shown in the other cells of the table.}
 \label{tab:weighted_fpt}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{ | c | c | c | }
+\hline
+                & exact     & $\delta$-extension \\ 
+\hline                
+ axis-parallel   & FPT* & FPT* \\  
+\hline                
+ 3 directions    & FPT* & FPT* \\  
+\hline                
+ any direction   & FPT  & FPT* \\
+\hline                
+\end{tabular}
+\caption{Our results for unweighted $\SegmentSetCover$
+parameterized by the size of solution.
+Results marked with * are not explicitly given in this thesis,
+but they trivially follow from stronger results shown in the other cells of the table.}
+\label{tab:unweighted_fpt}
 \end{center}
 \end{figure}
 

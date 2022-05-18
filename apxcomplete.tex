@@ -619,6 +619,29 @@ TODO: We can rewrite the proof below with rectangles
 that should take care of the smart lemmas above and make the proof easier.
 
 \begin{proof}
+We will show that every gadget fits in their boundary rectanges
+with no interactions
+with other gadgets (even after $\frac{1}{2}$-extensions)
+other than the ones described in lemmas described earler.
+
+$i$-th VARIABLE-gadget's segements (TODO add symbol) fit in rectangle 
+(TODO def of rectangle),
+the only points from $\points$ that are in this rectangle
+before and after $\frac{1}{2}$-extensions are
+points $x_{j,0}, y_{j,0}$ or $z_{j,0}$ 
+from CLAUSE-gadget for some clause $c_j$.
+
+$i$-th VARIABLE-gadget's points (TODO add symbol) fit in rectangle
+(TODO def of rectangle). 
+Segments from (TODO add symbol) other than (TODO add true and false segments)
+also fit in this segment
+After $\delta$-extension no other
+point from $\points$ is covered by this rectangle.
+
+\end{proof}
+
+\iffalse
+\begin{proof}
 We can just check every segment. Most of the segments $s$
 are collinear only with points that lie on $s$,
 so trivially $s^{+\frac{1}{2}}$ cannot cover more points than $s$ does.
@@ -662,6 +685,7 @@ have x-coordinate strictly positive. Segment $(a_i, c_i)$ have length $2L$
 and $c_i$ has x-coordinate equal to $-L$, so after $\frac{1}{2}$-extension
 this segment does not cover any points with a positive x-coordinate.
 \end{proof}
+\fi
 
 \section{Proof that the construction is correct and sound}
 

@@ -89,13 +89,15 @@ Later the~similar $\delta$-shrinking model was used in \cite{shrinking2}
 to present a PTAS for
 \textsc{Maximum Weight Independent Set of Polygons} with $\delta$-shrinking.
 
+\newcommand{\Int}{\mathsf{Int}}
 \begin{defi}
 \label{definition:delta_extension}
 For any $\delta > 0$ and a centre-symmetric convex object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
-the \textbf{$\delta$-extension} of $L$ is the object:
-$$L^{+\delta} = \{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\}.$$
-That is, $L^{+\delta}$ is the image of $L$ under homothety centred
+the \textbf{$\delta$-extension} of $L$ is the open set of points:
+$$L^{+\delta} = \Int\{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\},$$
+where $\Int$ denotes the interior of a set of points.
+That is, $L^{+\delta}$ is interior of the image of $L$ under homothety centred
 at $S$ with scale $(1+\delta)$.
 \end{defi}
 

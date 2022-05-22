@@ -612,7 +612,6 @@ For every segment $s \in \sets$,
 $s$ and $s^{+\frac{1}{2}}$ cover the same points from $\points$.
 \end{lemma}
 
-
 In order to prove this lemma we will define 
 a claim about bounding rectangle
 for every gadget, which fits both segments and points from this
@@ -628,14 +627,29 @@ between the gadgets,
 which are also mentioned in the helper lemmas above,
 and prove that gadgets are independent otherwise. 
 
+\newcommand{\pointsIn}{\mathsf{points}}
+First let us define points to cover inside of rectangle $R$ as:
+$$\pointsIn(R) :=  \text{ points from } \points
+\text{ that lie in rectangle } R.$$
+ 
+
 \begin{claim}
 \label{claim:variable_bounding_rectangle}
-$i$-th VARIABLE-gadget's segements (TODO add symbol) fit in rectangle 
-(TODO def of rectangle),
-the only points from $\points$ that are in this rectangle
-before and after $\frac{1}{2}$-extensions are
-points $x_{j,0}, y_{j,0}$ or $z_{j,0}$ 
+For any $1 \le i \le n$, $\segmentsVar{i}$  fit in rectangle 
+defined by points $a_i$ and $h_i$ from VARIABLE-gadget:
+$R := [-3L,L] \times [4i,4i+2]$.
+\begin{enumerate}
+\item 
+The only points in $R$ are $\pointsVar{i}$
+and $x_{j,0}, y_{j,0}$ or $z_{j,0}$ points 
 from CLAUSE-gadget for some clause $c_j$.
+$\pointsIn(R) \subseteq \pointsVar{i} \cup
+\{x_{j,0}, y_{j,0}, z_{j,0}: 1 \le j \le n\}$. 
+\item 
+$R$ covers the same points from $\points$
+before and after $\frac{1}{2}$-extension, i.e.
+$\pointsIn(R) = \pointsIn(R^{+\delta})$.
+\end{enumerate}
 \end{claim}
 
 \begin{claim}

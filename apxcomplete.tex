@@ -606,30 +606,61 @@ Finally we define the set of points and segments for the constructed instance:
 $$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause{i},$$
 $$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i.$$
 
-
-TODO: Add some smart lemmas that sets will be exclusive to each other.
-
 \begin{lemma}[Robustness to $\frac{1}{2}$-extension]
 \label{lemma:exntension_robust}
 For every segment $s \in \sets$,
 $s$ and $s^{+\frac{1}{2}}$ cover the same points from $\points$.
 \end{lemma}
 
-TODO: We can rewrite the proof below with rectangles
-that should take care of the smart lemmas above and make the proof easier.
 
-\begin{proof}
-We will show that every gadget fits in their boundary rectanges
-with no interactions
-with other gadgets (even after $\frac{1}{2}$-extensions)
-other than the ones described in lemmas described earler.
+In order to prove this lemma we will define 
+a claim about bounding rectangle
+for every gadget, which fits both segments and points from this
+gadget and after $\frac{1}{2}$-extension does not cover
+any points from outside of this rectangle.
+Checking that the property from the above
+lemma holds for points and segments within the same gagdet
+can be easily done using the figures above as references.
 
+
+Note that the lemmas stated below also encapsulate the interactions
+between the gadgets,
+which are also mentioned in the helper lemmas above,
+and prove that gadgets are independent otherwise. 
+
+\begin{claim}
+\label{claim:variable_bounding_rectangle}
 $i$-th VARIABLE-gadget's segements (TODO add symbol) fit in rectangle 
 (TODO def of rectangle),
 the only points from $\points$ that are in this rectangle
 before and after $\frac{1}{2}$-extensions are
 points $x_{j,0}, y_{j,0}$ or $z_{j,0}$ 
 from CLAUSE-gadget for some clause $c_j$.
+\end{claim}
+
+\begin{claim}
+\label{claim:or_bounding_rectangle}
+For every clause $c_i$:
+Points from OR-gadget (TODO add symbol) fit in rectangle (TODO def of rectangle)
+and second or-gadget (TODO def of rectangle).
+These rectangle do not cover any points after $\frac{1}{2}$-extension.
+\end{claim}
+
+\begin{claim}
+\label{claim:clause_bounding_rectangle}
+For every clause $c_i$:
+The whole clause gadget (Add segments from clause gadget)
+fits in rectangle (TODO add rectangle) and this rectangle after
+$\frac{1}{2}$-extension does not cover any points outside of
+(TODO symbol clause points).
+\end{claim}
+
+\begin{proof}[Proof of Lemma \ref{lemma:exntension_robust}]
+We will show that every gadget fits in their boundary rectanges
+with no interactions
+with other gadgets (even after $\frac{1}{2}$-extensions)
+other than the ones described in lemmas described earler.
+
 
 To prove that points $x_{j,0}, y_{j,0}$ or $z_{j,0}$ are
 not covered by any segment from VARIABLE segments (TODO add symbol)
@@ -641,17 +672,9 @@ also fit in this segment
 After $\delta$-extension no other
 point from $\points$ is covered by this rectangle.
 
-For every clause $c_i$:
-Points from OR-gadget (TODO add symbol) fit in rectangle (TODO def of rectangle)
-and second or-gadget (TODO def of rectangle).
-These rectangle do not cover any points after $\frac{1}{2}$-extension.
-
+Using claims \ref{claim:or_bounding_rectangle}
+and \ref{claim:clause_bounding_rectangle}.
 None of the segments in clause cover any new point after $\delta$-ext.
-
-The whole clause gadget (Add segments from clause gadget)
-fits in rectangle (TODO add rectangle) and this rectangle after
-$\frac{1}{2}$-extension does not cover any points outside of
-(TODO symbol clause points).
 
 \end{proof}
 

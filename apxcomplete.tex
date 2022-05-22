@@ -638,7 +638,7 @@ $$\pointsIn(R) :=  \text{ points from } \points
 For any $1 \le i \le n$, $\segmentsVar{i}$ fit in rectangle 
 defined by points $a_i$ and $h_i$ from VARIABLE-gadget:
 $R := [-3L,L] \times [4i,4i+2]$.
-\begin{enumerate}
+\begin{enumerate}[label={(\arabic*)}]
 \item 
 The only points in $R$ are $\pointsVar{i}$
 and $x_{j,0}, y_{j,0}$ or $z_{j,0}$ points 
@@ -649,6 +649,7 @@ $$\pointsVar{i} \subseteq \pointsIn(R) \subseteq \pointsVar{i} \cup
 $R$ covers the same points from $\points$
 before and after $\frac{1}{2}$-extension, i.e.
 $\pointsIn(R) = \pointsIn(R^{+\delta})$.
+\item All segments $\segmentsVar{i}$ fit fully inside of $R$.
 \end{enumerate}
 \end{claim}
 
@@ -660,11 +661,13 @@ and segments $\segmentsOr{i}{j} - \{(t_{i, j}, v_{i, j})\}$
 fit in rectangle defined as:
 $$R := [x,x+2] \times [y,y+4],
 \text{ where } x = \clauseXFactor i+3j+3, y = 4(n+1)+2j.$$
-\begin{enumerate}
+\begin{enumerate}[label={(\arabic*)}]
 \item $R$ covers only $\pointsOr{i}{j}$, i.e. $\pointsIn(R) = \pointsOr{i}{j}.$
 \item $R$ covers the same points from $\points$
 before and after $\frac{1}{2}$-extension, i.e.
 $\pointsIn(R) = \pointsIn(R^{+\delta})$.
+\item All segments $\segmentsOr{i}{j} - \{(t_{i, j}, v_{i, j})\}$
+fit fully inside of $R$.
 \end{enumerate}
 \end{claim}
 
@@ -673,11 +676,13 @@ $\pointsIn(R) = \pointsIn(R^{+\delta})$.
 For any $1 \le i \le n$, $\segmentsClause_i$ and $\pointsClause{i}$
 fit in rectangle:
 $$R :=  [\clauseXFactor i,\clauseXFactor i+8] \times [0,6(n+1)].$$
-
-
-and this rectangle after
-$\frac{1}{2}$-extension does not cover any points outside of
-(TODO symbol clause points).
+\begin{enumerate}[label={(\arabic*)}]
+\item $R$ covers only $\pointsClause{i}$, i.e. $\pointsIn(R) = \pointsClause{i}.$
+\item $R$ covers the same points from $\points$
+before and after $\frac{1}{2}$-extension, i.e.
+$\pointsIn(R) = \pointsIn(R^{+\delta})$.
+\item All segments $\segmentsClause_i$ fit fully inside of $R$.
+\end{enumerate}
 \end{claim}
 
 \begin{proof}[Proof of Lemma \ref{lemma:exntension_robust}]

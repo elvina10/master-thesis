@@ -613,16 +613,18 @@ $s$ and $s^{+\frac{1}{2}}$ cover the same points from $\points$.
 \end{lemma}
 
 In order to prove this lemma we will define 
-a claim about bounding rectangle
-for every gadget, which fits both segments and points from this
-gadget and after $\frac{1}{2}$-extension does not cover
-any points from outside of this rectangle.
+a bounding rectangle $R$
+for every gadget,
+with the following property:
+$R$ fits both segments and points from the
+gadget and $R^{\frac{1}{2}}$ ($R$ after $\frac{1}{2}$-extension)
+does not cover any points outside of $R$.
 Checking that the property from the above
 lemma holds for points and segments within the same gadget
 can be easily done using the figures above as references.
 
 
-Note that the lemmas stated below also encapsulate the interactions
+Note that the claims stated below also encapsulate the interactions
 between the gadgets,
 which are also mentioned in the helper lemmas above,
 and prove that gadgets are independent otherwise. 
@@ -656,7 +658,7 @@ $\pointsIn(R) = \pointsIn(R^{+\delta})$.
 \begin{claim}
 \label{claim:variable_small_bounding_rectangle}
 For any $1 \le i \le n$, $\pointsVar{i}$ fit in rectangle 
-defined by points $a_i$ and $h_i$ from VARIABLE-gadget:
+from VARIABLE-gadget:
 $R := [-3L,-L] \times [4i,4i+2]$.
 \begin{enumerate}[label={(\arabic*)}]
 \item 
@@ -674,7 +676,7 @@ fit fully inside of $R$.
 \begin{claim}
 \label{claim:or_bounding_rectangle}
 For any $1 \le i \le n$ and $j \in \{0, 1\}$,
-points from OR-gadget point $\pointsOr{i}{j}$ 
+points from OR-gadget $\pointsOr{i}{j}$ 
 and segments $\segmentsOr{i}{j} - \{(t_{i, j}, v_{i, j})\}$
 fit in rectangle defined as:
 $$R := [x,x+2] \times [y,y+4],
@@ -693,7 +695,7 @@ fit fully inside of $R$.
 \label{claim:clause_bounding_rectangle}
 For any $1 \le i \le n$, $\segmentsClause_i$ and $\pointsClause{i}$
 fit in rectangle:
-$$R :=  [\clauseXFactor i,\clauseXFactor i+8] \times [0,6(n+1)].$$
+$$R :=  [\clauseXFactor i,\clauseXFactor i+9] \times [0,4(n+1)+6].$$
 \begin{enumerate}[label={(\arabic*)}]
 \item $R$ covers only $\pointsClause{i}$, i.e. $\pointsIn(R) = \pointsClause{i}.$
 \item $R$ covers the same points from $\points$
@@ -704,17 +706,21 @@ $\pointsIn(R) = \pointsIn(R^{+\delta})$.
 \end{claim}
 
 \begin{proof}[Proof of Lemma \ref{lemma:exntension_robust}]
-First, we check one-by-one for every segment within every gadget
+First, we check one by one for every segment within every gadget
 that if it covers some point after $\frac{1}{2}$-extension,
 then it covered that point before extension. In other words,
 every segments does not cover any new point from
 the same gadget after $\frac{1}{2}$-extension.
 
+Next, we consider interactions of segments and points
+from different gadgets.
+
 \paragraph{VARIABLE-gadget}
-We use Claim \ref{claim:or_bounding_rectangle}
-and name this rectangle $R_1$.
-For any $1 \le i \le n$ $\segmentsVar{i}$
-do not cover any point outside of $R_i$
+Let us fix $1 \le i \le n$
+and consider segments from the $i$-th VARIABLE-gadget.
+We use Claim \ref{claim:variable_bounding_rectangle}
+and name this rectangle $R_1$. $\segmentsVar{i}$
+do not cover any point outside of $R_1$
 after $\frac{1}{2}$-extension.
 Although some points from $\pointsClause{j}$
 for any $j$ can lie within $R_1$,
@@ -731,10 +737,12 @@ with these segments, so they cover exactly the same set of points
 after extension.
 
 \paragraph{CLAUSE-gadget}
+Let us fix $1 \le i \le n$ and consiser
+segments from the $i$-th CLAUSE-gadget.
 We use Claims \ref{claim:or_bounding_rectangle}
-and \ref{claim:clause_bounding_rectangle}.
-For any $1 \le i \le n$ and $j \in \{0, 1\}$,
-we need to check 
+for $j \in \{0, 1\}$ to get rectangles $R_0$ and $R_1$ respectively.
+We also get rectangle $R_2$ from Claim \ref{claim:clause_bounding_rectangle}.
+We need to check for any $j \in \{0, 1\}$,
 whether segment $(t_{i, j}, v_{i, j})$
 does not cover any new points from $\segmentsClause_i$
 after $\frac{1}{2}$-extension,

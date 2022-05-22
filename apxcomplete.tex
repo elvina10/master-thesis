@@ -1,4 +1,4 @@
-\chapter{APX-hardness of Segment Set Cover}
+\chapter{APX-hardness of $\SegmentSetCover$}
 \newcommand{\setCoverInstance}{(\points, \sets)}
 \newcommand{\true}{\texttt{true}}
 \newcommand{\false}{\texttt{false}}
@@ -9,7 +9,7 @@
 
 In this section we analyze whether there exists 
 a PTAS for $\GeometricSetCover$ for rectangles.
-We show that Segment Set Cover
+We show that $\SegmentSetCover$
 is APX-hard even if we can restrict this problem
 to a very simple setting:
 segments parallel to axes and allow $\frac{1}{2}$-extension.
@@ -74,7 +74,7 @@ and it allows us to prove Theorem \ref{segment_cover_apx_hard}.
 	\label{apxconstruction}
 	Given an instance $S$ of MAX-(3,3)-SAT 
 	with $n$ variables and optimum value $\opt(S)$,
-	we can construct an instance $\setCoverInstance$ of geometric set cover with
+	we can construct an instance $\setCoverInstance$ of $\SegmentSetCover$ with
 	axis-parallel segments in 2D such that:
 	\begin{enumerate}[label={(\arabic*)}]
 	\item \label{item:apxconstruction_correctness}
@@ -112,16 +112,16 @@ Consider any $0 < \epsilon < \frac{1}{15 \cdot 8}$.
 
 Let us assume that there exists a polynomial-time
 $(1+\epsilon)$-approximation algorithm
-for unweighted geometric set cover with axis-parallel segments in 2D
+for unweighted $\SegmentSetCover$ with axis-parallel segments in 2D
 with $\frac{1}{2}$-extension.
 We construct an algorithm that solves the problem stated in 
 Theorem \ref{hastadtheorem}, thereby proving that P~=~NP.
 
 Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
-and construct an instance of geometric set cover $\setCoverInstance$
+and construct an instance of $\SegmentSetCover$ $\setCoverInstance$
 using Lemma \ref{apxconstruction}.
 We now use the $(1+\epsilon)$-approximation algorithm
-for geometric set cover relaxed with $\frac{1}{2}$-extensions on $\setCoverInstance$.
+for $\SegmentSetCover$ relaxed with $\frac{1}{2}$-extensions on $\setCoverInstance$.
 Denote the size of the solution returned by this algorithm as $\approximate(\setCoverInstance)$.
 We prove that 
 if in $S$
@@ -170,13 +170,13 @@ it suffices to compare $\approximate(\setCoverInstance)$ with $15n - (\frac{7}{8
 Hence, the assumed approximation algorithm cannot exist, unless P = NP.
 \end{proof}
 
-\section{Construction of the Geometric Set Cover instance}
+\section{Construction of the $\SegmentSetCover$ instance}
 \label{construction_description}
 We proceed to the proof of Lemma \ref{apxconstruction}.
 That is, we show a reduction from the MAX-(3,3)-SAT problem
-to geometric set cover with segments
+to $\SegmentSetCover$ with segments
 parallel to axes. Moreover, the obtained instance
-of geometric set cover will be robust
+of $\SegmentSetCover$ will be robust
 to $\frac{1}{2}$-extension (have the same optimal solution
 after $\frac{1}{2}$-extension).
 
@@ -811,13 +811,13 @@ described in the previous section.
 
 Consider an instance $S$ of MAX-(3,3)-SAT of size $n$
 with optimum solution satisfying $k$ clauses.
-Let us construct an instance $\setCoverInstance$ of geometric set cover
+Let us construct an instance $\setCoverInstance$ of $\SegmentSetCover$
 as described in Section~\ref{construction_description}
 for the instance $S$ of MAX-(3,3)-SAT.
 
 \begin{lemma}
 	\label{construction_correctness}
-	The instance $\setCoverInstance$ of geometric set cover
+	The instance $\setCoverInstance$ of $\SegmentSetCover$
 	admits a solution of size $15n - k$.
 \end{lemma}
 
@@ -876,7 +876,7 @@ $$|\sol| = \sum_{i=1}^{n} R_i + \sum_{i=1}^n C_i = 3n + 11k + 12(n-k) = 15n - k.
 \begin{lemma}
 	\label{at_most_one_var_segment}
 	Suppose we have a solution $\sol$ of the instance $\setCoverInstance$
-	of geometric set cover.
+	of $\SegmentSetCover$.
 	Then there exists a solution $\sol'$ such that $|\sol'| \le |\sol|$
 	and $\sol'$ contains
 	at most one of the segments $\xTrueSegment{i}$ and $\xFalseSegment{i}$
@@ -913,7 +913,7 @@ so $|\sol'| \le |\sol|$.
 \begin{lemma}
 	\label{construction_completness}
 	Suppose we have a solution $\sol$ of the instance $\setCoverInstance$
-	of geometric set cover.
+	of $\SegmentSetCover$.
 	Then there exists a solution to $S$
 	that satisfies at least $15n - |\sol|$ clauses.
 \end{lemma}
@@ -923,7 +923,7 @@ so $|\sol'| \le |\sol|$.
 Let the clauses in $S$ be $c_1,c_2,\ldots,c_n$
 and the variables be $x_1,x_2,\ldots,x_n$.
 Given a solution $\sol$
-of the instance $\setCoverInstance$ of geometric set cover,
+of the instance $\setCoverInstance$ of $\SegmentSetCover$,
 we use Lemma~\ref{at_most_one_var_segment} to modify $\sol$
 so that for any $i$, $\sol$ contains at most
 one of $\xTrueSegment{i}$ and $\xFalseSegment{i}$;

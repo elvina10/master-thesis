@@ -635,16 +635,16 @@ $$\pointsIn(R) :=  \text{ points from } \points
 
 \begin{claim}
 \label{claim:variable_bounding_rectangle}
-For any $1 \le i \le n$, $\segmentsVar{i}$  fit in rectangle 
+For any $1 \le i \le n$, $\segmentsVar{i}$ fit in rectangle 
 defined by points $a_i$ and $h_i$ from VARIABLE-gadget:
 $R := [-3L,L] \times [4i,4i+2]$.
 \begin{enumerate}
 \item 
 The only points in $R$ are $\pointsVar{i}$
 and $x_{j,0}, y_{j,0}$ or $z_{j,0}$ points 
-from CLAUSE-gadget for some clause $c_j$.
-$\pointsIn(R) \subseteq \pointsVar{i} \cup
-\{x_{j,0}, y_{j,0}, z_{j,0}: 1 \le j \le n\}$. 
+from CLAUSE-gadget for some clause $c_j$:
+$$\pointsVar{i} \subseteq \pointsIn(R) \subseteq \pointsVar{i} \cup
+\{x_{j,0}, y_{j,0}, z_{j,0}: 1 \le j \le n\}.$$
 \item 
 $R$ covers the same points from $\points$
 before and after $\frac{1}{2}$-extension, i.e.
@@ -654,17 +654,28 @@ $\pointsIn(R) = \pointsIn(R^{+\delta})$.
 
 \begin{claim}
 \label{claim:or_bounding_rectangle}
-For every clause $c_i$:
-Points from OR-gadget (TODO add symbol) fit in rectangle (TODO def of rectangle)
-and second or-gadget (TODO def of rectangle).
-These rectangle do not cover any points after $\frac{1}{2}$-extension.
+For any $1 \le i \le n$ and $j \in \{0, 1\}$,
+points from OR-gadget point $\pointsOr{i}{j}$ 
+and segments $\segmentsOr{i}{j} - \{(t_{i, j}, v_{i, j})\}$
+fit in rectangle defined as:
+$$R := [x,x+2] \times [y,y+4],
+\text{ where } x = \clauseXFactor i+3j+3, y = 4(n+1)+2j.$$
+\begin{enumerate}
+\item $R$ covers only $\pointsOr{i}{j}$, i.e. $\pointsIn(R) = \pointsOr{i}{j}.$
+\item $R$ covers the same points from $\points$
+before and after $\frac{1}{2}$-extension, i.e.
+$\pointsIn(R) = \pointsIn(R^{+\delta})$.
+\end{enumerate}
 \end{claim}
 
 \begin{claim}
 \label{claim:clause_bounding_rectangle}
-For every clause $c_i$:
-The whole clause gadget (Add segments from clause gadget)
-fits in rectangle (TODO add rectangle) and this rectangle after
+For any $1 \le i \le n$, $\segmentsClause_i$ and $\pointsClause{i}$
+fit in rectangle:
+$$R :=  [\clauseXFactor i,\clauseXFactor i+8] \times [0,6(n+1)].$$
+
+
+and this rectangle after
 $\frac{1}{2}$-extension does not cover any points outside of
 (TODO symbol clause points).
 \end{claim}

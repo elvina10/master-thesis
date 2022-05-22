@@ -627,7 +627,7 @@ lemma holds for points and segments within the same gadget
 can be easily done using the figures above as references.
 
 
-Note that the claims stated below also encapsulate the interactions
+Note that the claims stated below also encapsulate the interaction
 between the gadgets,
 which are also mentioned in the helper lemmas above,
 and prove that gadgets are independent otherwise. 
@@ -647,7 +647,7 @@ $$R := [-3L,L] \times [4i,4i+2].$$
 \item 
 The only points in $R$ are $\pointsVar{i}$
 and $x_{j,0}, y_{j,0}$ or $z_{j,0}$ points 
-from CLAUSE-gadget for some clause $c_j$:
+from CLAUSE-gadgets:
 $$\pointsVar{i} \subseteq \pointsIn(R) \subseteq \pointsVar{i} \cup
 \{x_{j,0}, y_{j,0}, z_{j,0}: 1 \le j \le n\}.$$
 \item 
@@ -713,7 +713,7 @@ First, we check one by one for every segment within every
 VARIABLE-gadget and OR-gadget
 that if it covers some point after $\frac{1}{2}$-extension,
 then it covered that point before extension. In other words,
-every segments does not cover any new point from
+every segment does not cover any new point from
 the same gadget after $\frac{1}{2}$-extension.
 
 Next, we consider interactions of segments and points
@@ -723,37 +723,38 @@ from different gadgets.
 Let us fix $1 \le i \le n$
 and consider segments from the $i$-th VARIABLE-gadget.
 We use Claim \ref{claim:variable_bounding_rectangle}
-and name this rectangle $R_1$. $\segmentsVar{i}$
+and name the resulting rectangle $R_1$. $\segmentsVar{i}$
 do not cover any point outside of $R_1$
 after $\frac{1}{2}$-extension.
-Although some points from $\pointsClause{j}$
-for any $j$ can lie within $R_1$,
+However, some points from $\pointsClause{j}$
+for some $j$ can lie within $R_1$,
 hence we use Claim \ref{claim:variable_small_bounding_rectangle}
-and name this rectangle $R_2$.
+and name the resulting rectangle $R_2$.
 $R_2$ covers only points from $\pointsVar{i}$
 (even after $\frac{1}{2}$-extension),
-then any points CLAUSE-gadgets
-are covered by $\xTrueSegment{i}$ or $\xFalseSegment{i}$
-and it is enough to check that they cover exactly the same
-points from CLAUSE-gadget before and after $\frac{1}{2}$-extension.
-They both cover all points from CLAUSE-gadget that are collinear
+then all points from CLAUSE-gadgets inside of $R_1$
+lie on either $\xTrueSegment{i}$ or $\xFalseSegment{i}$,
+and it is enough to check that these segments cover exactly the same
+points from CLAUSE-gadgets before and after $\frac{1}{2}$-extension.
+They both cover all points from any CLAUSE-gadget that are collinear
 with these segments, so they cover exactly the same set of points
 after extension.
 
 \paragraph{CLAUSE-gadget}
 Let us fix $1 \le i \le n$ and consider
 segments from the $i$-th CLAUSE-gadget.
+We use Claim \ref{claim:or_bounding_rectangle}
 for $j \in \{0, 1\}$ to get rectangles $R_0$ and $R_1$ respectively.
 We need to check whether segments
 $\moveVariableSegments{i} \cup \{(t_{i, j}, v_{i, j}) : j \in \{0, 1\}\}$
 cover any new points from $\pointsClause{i}$
 after $\frac{1}{2}$-extension, because their interaction
-are not covered by Claim \ref{claim:or_bounding_rectangle} for $R_0$ and $R_0$.
+is not considered by Claim \ref{claim:or_bounding_rectangle} for $R_0$ and $R_1$.
 
 Then we use Claim \ref{claim:clause_bounding_rectangle}
 to conclude that no segment from $\segmentsClause_i$
 after $\frac{1}{2}$-extension covers
-any point from different CLAUSE-gadget or VARIABLE-gadget.
+any point from different CLAUSE-gadget or any VARIABLE-gadget.
 \end{proof}
 
 \iffalse

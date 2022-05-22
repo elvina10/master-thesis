@@ -654,6 +654,24 @@ $\pointsIn(R) = \pointsIn(R^{+\delta})$.
 \end{claim}
 
 \begin{claim}
+\label{claim:variable_small_bounding_rectangle}
+For any $1 \le i \le n$, $\pointsVar{i}$ fit in rectangle 
+defined by points $a_i$ and $h_i$ from VARIABLE-gadget:
+$R := [-3L,-L] \times [4i,4i+2]$.
+\begin{enumerate}[label={(\arabic*)}]
+\item 
+The only points in $R$ are $\pointsVar{i}$:
+$\pointsIn(R) = \pointsVar{i}.$
+\item 
+$R$ covers the same points from $\points$
+before and after $\frac{1}{2}$-extension, i.e.
+$\pointsIn(R) = \pointsIn(R^{+\delta})$.
+\item All segments $\segmentsVar{i} - \{\xTrueSegment{i}, \xFalseSegment{i}\}$ 
+fit fully inside of $R$.
+\end{enumerate}
+\end{claim}
+
+\begin{claim}
 \label{claim:or_bounding_rectangle}
 For any $1 \le i \le n$ and $j \in \{0, 1\}$,
 points from OR-gadget point $\pointsOr{i}{j}$ 
@@ -693,18 +711,27 @@ every segments does not cover any new point from
 the same gadget after $\frac{1}{2}$-extension.
 
 \paragraph{VARIABLE-gadget}
-To prove that points $x_{j,0}, y_{j,0}$ or $z_{j,0}$ are
-not covered by any segment from VARIABLE segments (TODO add symbol)
-after $\delta$-extension:
-$i$-th VARIABLE-gadget's points (TODO add symbol) fit in rectangle
-(TODO def of rectangle). 
-Segments from (TODO add symbol) other than (TODO add true and false segments)
-also fit in this segment
-After $\delta$-extension no other
-point from $\points$ is covered by this rectangle.
+We use Claim \ref{claim:or_bounding_rectangle}
+and name this rectangle $R_1$.
+For any $1 \le i \le n$ $\segmentsVar{i}$
+do not cover any point outside of $R_i$
+after $\frac{1}{2}$-extension.
+Although some points from $\pointsClause{j}$
+for any $j$ can lie within $R_1$,
+hence we use Claim \ref{claim:variable_small_bounding_rectangle}
+and name this rectangle $R_2$.
+$R_2$ covers only points from $\pointsVar{i}$
+(even after $\frac{1}{2}$-extension),
+then any points CLAUSE-gadgets
+are covered by $\xTrueSegment{i}$ or $\xFalseSegment{i}$
+and it is enough to check that they cover exactly the same
+points from CLAUSE-gadget before and after $\frac{1}{2}$-extension.
+They both cover all points from CLAUSE-gadget that are collinear
+with these segments, so they cover exactly the same set of points
+after extension.
 
 \paragraph{CLAUSE-gadget}
-We use claims \ref{claim:or_bounding_rectangle}
+We use Claims \ref{claim:or_bounding_rectangle}
 and \ref{claim:clause_bounding_rectangle}.
 For any $1 \le i \le n$ and $j \in \{0, 1\}$,
 we need to check 

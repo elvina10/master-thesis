@@ -441,7 +441,7 @@ for any literals $a,b,c$. Then, we define points in the gadget as:
 \newcommand{\moveVariablePoints}[1]{\mathsf{moveVariablePoints}_{#1}}
 \newcommand{\moveVariableSegments}[1]{\mathsf{moveVariableSegments}_{#1}}
  
-We are now ready to define the set of points in a clause gadget:
+We are now ready to define the set of points in a CLAUSE-gadget:
  
  $$\moveVariablePoints{i} := 
  \{x_{i, j} : j \in \{0, 1\}\} \cup
@@ -459,7 +459,7 @@ is an input to the second OR-gadget.
 This creates an $or$ of 3 boolean values.
 
 \paragraph{Segments.}
-We also define segments for the clause gadget as below:
+We also define segments for the CLAUSE-gadget as below:
 \begin{eqnarray*}
 \moveVariableSegments{i} & := & \{
 (x_{i, 0}, x_{i, 1}),

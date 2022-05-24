@@ -143,10 +143,11 @@ is APX-hard (Theorem \ref{segment_cover_apx_hard}).
 
 \begin{restatable}{tw}{segmentCoverApxHard}{
 \label{segment_cover_apx_hard}
-	\textbf{($\SegmentSetCover$ with axis-parallel segments and $\frac{1}{2}$-extension is APX-hard)}.	
+	\textbf{($\SegmentSetCover$ is APX-hard)}.	
 	$\SegmentSetCover$
-	with axis-parallel segments in the 2D plane
-	is APX-hard (even with $\frac{1}{2}$-extension).
+	is APX-hard even when 
+	relaxed with $\frac{1}{2}$-extension
+	and segments are axis-parallel.
 	That is, assuming $P\neq NP$, there does not exist a PTAS
 	for this problem.
 }\end{restatable}
@@ -158,7 +159,8 @@ Note that segments are just degenerated rectangles.
 \label{rectangle_cover_apx_hard}
 	\textbf{($\GeometricSetCover$ with rectangles is APX-hard)}.	
 	\textsc{Geometric} \textsc{Set} \textsc{Cover}
-	with axis-parallel rectangles is APX-hard (even with $\frac{1}{2}$-extension).
+	with axis-parallel rectangles is APX-hard
+	even when relaxed with $\frac{1}{2}$-extension.
 }\end{corollary}
 
 This expands the previous result of \cite{rectangles_apx_hard} 
@@ -209,7 +211,7 @@ and with $\WeightedSegmentSetCover$ relaxed with $\delta$-extension
 }\end{restatable}
 
 On the other hand, we prove that $\WeightedSegmentSetCover$ 
-is W[1]-hard even if segments are limited to 3 directions (Theorem~\ref{w1_hard})
+is W[1]-hard even when segments are limited to 3 directions (Theorem~\ref{w1_hard})
 and assuming ETH there does not exist algorithm for this problem
 that runs in time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
 See Figure \ref{tab:weighted_fpt} for a summary of parameterized

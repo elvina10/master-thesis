@@ -1,0 +1,22 @@
+\begin{abstract}
+	In this thesis we analyze approximation
+	and parametrization of $\GeometricSetCover$ with segments.
+	To achieve interesting results we define a concept
+	of $\GeometricSetCover$ with $\delta$-extension, where we
+	need to cover the points by geometric objects,
+	which are extended by a tiny fraction,
+	but we compare the solution size to the optimum solution without extension.
+	We prove that $\SegmentSetCover$ is APX-hard
+	even if we restrict segments to be axis-pararell
+	and allow $\frac{1}{2}$-extension (Chapter \ref{chapter:segment_apx}).
+	We provide an FPT algorithm for unweighted $\SegmentSetCover$
+	parametrized by the size of the solution $k$
+	(Section \ref{section:fpt_unweighted})
+	and for $\WeightedSegmentSetCover$ with $\delta$-extension
+	(Section \ref{section:fpt_weighted}).
+	Finally, we prove that $\WeightedSegmentSetCover$
+	is W[1]-hard and there does not exist an algorithm running
+	in time $f(k)\cdot n^{o(\sqrt{k})}$ solving this problem
+	even if we restrict the segments to 3 directions
+	(Chapter \ref{chapter:w1_hard}).
+\end{abstract}

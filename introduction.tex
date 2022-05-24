@@ -1,7 +1,7 @@
 \chapter{Introduction}
 \section{Background}
 Some problems in Computer Science are known to be NP-complete,
-meaning that assuming P$\neq$NP there is no polynomial time
+meaning that assuming P$\neq$NP there is no polynomial-time
 algorithm that can solve these problems.
 Even so, they still can be amenable to different approaches,
 such as approximation or parameterization.
@@ -21,7 +21,7 @@ inapproximable with factor $(1-o(1))\ln n$ assuming P~$\neq$~NP
 (which is a stronger result than APX-hardness),
 and W[2]-complete with the natural parameterization,
 see Theorem 13.21 in \cite{platypus_book}.
-However restricting the problem to various specialized settings
+However, restricting the problem to various specialized settings
 can lead to more tractable special cases.
 In this thesis we take a closer look at the $\GeometricSetCover$ problem
 in the plane, where elements to cover are~points in the plane
@@ -40,7 +40,7 @@ Corollary 1.1 in \cite{unit_disks}). When we consider the same problem
 with weighted unit disks (or unit squares), the problem admits a QPTAS
 \cite{settling_apx_hardness}, see also \cite{voronoi_true}.
 On the other hand, \cite{rectangles_apx_hard} 
-proves that $\GeometricSetCover$ with unweighted axis-parallel fat rectangles
+proved that $\GeometricSetCover$ with unweighted axis-parallel fat rectangles
 is APX-hard; they also show similar hardness
 for $\GeometricSetCover$ with many other standard geometric objects.
 
@@ -69,23 +69,26 @@ parameterization of \textsc{Weighted Directed Feedback Set} and \textsc{Weighted
 In this paper, we focus on $\SegmentSetCover$ with $\delta$-extension.
 $\delta$-extension is a problem relaxation method based on the
 $\delta$-shrinking model which was introduced in \cite{shrinking_original}
-to provide an interesting result for
+to provide interesting results for
 the \textsc{Maximum Weight Independent Set of Rectangles} problem.
-In this problem one needs to find a set of non-overlapping
-weighted rectangles with maximum sum of weight possible.
+In this problem one is given a family of weighted rectangles
+and needs to find a set of non-overlapping rectangles
+with the largest possible total weight.
 In the $\delta$-shrinking relaxed problem
 the returned set of rectangles must be non-overlapping
 after all the rectangles are shrunk by a tiny fraction $\delta$
 towards the centre of symmetry.
-This problem is easier, because we compare this result
+This problem is easier, because we compare the
+weight of the obtained solution
 to the optimum result before the shrinking. It might
 even lead to finding a set with result better than the optimum
 for the original problem.
-The author in~\cite{shrinking_original} presents a PTAS
+The authors in~\cite{shrinking_original} present a PTAS
 for \textsc{Maximum Weight Independent Set of Rectangles} with $\delta$-shrinking,
-which is later improved to EPTAS in \cite{shrinking1} alongside
-presenting a new FPT result for this problem with the natural parameterization.
-Later the~similar $\delta$-shrinking model was used in \cite{shrinking2}
+which was later improved to an EPTAS in \cite{shrinking1}, alongside
+with presenting a new FPT algorithm
+for this problem with the natural parameterization.
+Later, a similar $\delta$-shrinking model was used in \cite{shrinking2}
 to present a PTAS for
 \textsc{Maximum Weight Independent Set of Polygons} with $\delta$-shrinking.
 
@@ -106,31 +109,33 @@ $\delta$-extension provides a framework for relaxing
 \textsc{Geometric} \textsc{Set} \textsc{Cover} problems, where we allow the returned set of
 objects $\sol$ to \textit{almost} cover the points in the universe
 by requiring that they are covered by $\sol$ after $\delta$-extension,
-i.e. by set $\sol^{+\delta}$.
+i.e. by the set $\sol^{+\delta}$.
 The same concept could be used for \textsc{Geometric Set Hitting} problems.
  
 For a longer discussion of this concept see Section
 \ref{section:def:delta_extension}.
 
 Similar model is used to prove that $\GeometricSetCover$ with fat polygons
-relaxed with $\delta$-extension admits EPTAS \cite{harpeled12}.
+relaxed with $\delta$-extension admits an EPTAS \cite{harpeled12}.
 The $\delta$-extension model presented there is well-defined only
-for fat polygons. It extends the object by all the points that
-have distance to the closest point in the object $P$
+for fat polygons. An object is extended by all the points that
+are at distance to the closest point in the object $P$
 no larger than $\delta\cdot \mathsf{rad}(P)$, where $\mathsf{rad}(P)$
-is a radius of a circle inscribed into $P$.
+is the largest radius of a circle inscribed into $P$.
 Since segments do not have any circle inscribed into them,
-the definition presented there cannot be utilized for this problem.
+the definition presented there cannot be utilized
+for the setting of segments considered here.
 Polygons extended by $\delta$-extension
 defined in Definition \ref{definition:delta_extension}
-covers a superset of set of points that object extended
+covers a superset of points that the polygon extended
 by $\delta$-extension defined in \cite{harpeled12}.
 Since our definition is more permissive for any polygon,
 the EPTAS from \cite{harpeled12}
-also works for polygons extended by our $\delta$-extension.
+also works for polygons extended
+according to our definition of $\delta$-extension.
 
 \section{Our contribution}
-In this paper we make the following contributions.
+In this thesis we make the following contributions.
 
 We show that approximation of $\SegmentSetCover$,
 even if segments are axis-parallel and we relax the problem with  $\frac{1}{2}$-extension,
@@ -161,13 +166,13 @@ that $\GeometricSetCover$
 with axis-parallel fat rectangles is APX-hard,
 we improved the result that rectangles no longer
 have to be fat (Corollary \ref{rectangle_cover_apx_hard}).
-This also proves that the assumption in \cite{harpeled12}
-for EPTAS about polygons being fat is necessary, because
-cover with arbitrary polygons with $\delta$-extension is APX-hard.
+It also proves that the assumption in \cite{harpeled12}
+about polygons being fat is necessary, because
+covering with arbitrary polygons with $\frac{1}{2}$-extension is APX-hard.
 
 We also provide two FPT algorithms for parameterized $\SegmentSetCover$ 	
 (Theorem~\ref{segment_cover_fpt})
-and $\WeightedSegmentSetCover$ relaxed with $\delta$-extension
+and with $\WeightedSegmentSetCover$ relaxed with $\delta$-extension
 (Theorem~\ref{fpt_weighted_segment}).
 
 \begin{restatable}{tw}{segmentCoverFpt}{
@@ -231,13 +236,14 @@ See Section \ref{section:def:geometric__set_cover}
 for exact definitions of axis-parallel and right-diagonal segments.
 
 This result is particularly interesting,
-because problem without weights is FPT and weighted problem is W[1]-hard.
-Moreover $\delta$-extension allowed us to provide an FPT algorithm
-for a problem, which is W[1]-hard otherwise.
+because the problem without weights is FPT,
+while the weighted variant is W[1]-hard.
+Moreover, $\delta$-extension allowed us to provide an FPT algorithm
+for the problem which is W[1]-hard otherwise.
 
 Note that the result of Theorem \ref{w1_hard} is not tight:
 there exists a simple algorithm 
-running in time ${\mathcal{O}(f(k)(|\points| + |\sets|)^k)}$.
+running in time ${f(k)(|\points| + |\sets|)^k}$.
 So the question whether there exists an algorithm
 for this problem running in time ${f(k)\cdot(|\points| + |\sets|)^{o(k)}}$
 is still open.
@@ -247,7 +253,6 @@ we need to find solution of \textit{any} size in FPT-time,
 but we compare it to the optimum solution of size at most $k$.
 Idea for permissive FPT in local search was presented
 in \cite{permissive_problem1}, \cite{permissive_problem2}.
-
 Theorem \ref{w1_hard} can be improved to show that a permissive FPT
 algorithm does not exist.
 This is formulated precisely in Theorem \ref{permissive_w1_hard}.
@@ -296,14 +301,16 @@ but they trivially follow from stronger results shown in the other cells of the 
 
 \paragraph{Future work.} There are two aforementioned problems
 that relate to Theorem \ref{w1_hard} and were not solved in this thesis.
-We have not presented W[1]-hardness proof
-of \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover} where segments are limited to 3 directions,
-but it may be possible to improve this construction to use segments
+We have not given a W[1]-hardness proof
+for \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover} where segments are limited to 3 directions,
+but the segments in the construction may be also right-diagonal.
+However, it may be possible to improve this construction to use segments
 in 2 directions instead of 3 directions. 
 The other question is what is the tight bound for this problem.
 The simple algorithm solving
-this problem is running in time ${\mathcal{O}(f(k)(|\points| + |\sets|)^k)}$.
+this problem is running in time ${f(k)(|\points| + |\sets|)^k}$,
+while our lower bound refutes running time ${f(k)(|\points| + |\sets|)^{\sqrt{k}}}$.
 
 Another problem to consider is whether
-\textsc{Geometric Set Hitting} relaxed with $\delta$-extension
+\textsc{Geometric Hitting Set} relaxed with $\delta$-extension
 can yield some better results.

@@ -1,13 +1,16 @@
 \begin{abstract}
-	In this thesis we analyze approximation
-	and parametrization of $\GeometricSetCover$ with segments.
+	In this thesis we study approximation
+	and parametrized algorithms for a variant of $\SetCover$ problem,
+	where universe of elements to cover are points in plane.
+	and sets to cover objects with are segments.
+	We call such variant of $\SetCover$ $\SegmentSetCover$.
 	To achieve interesting results we define a concept
-	of $\GeometricSetCover$ with $\delta$-extension, where we
-	need to cover the points by geometric objects,
+	of $\SegmentSetCover$ with $\delta$-extension, where we
+	need to cover the points by segments,
 	which are extended by a tiny fraction,
 	but we compare the solution size to the optimum solution without extension.
 	We prove that $\SegmentSetCover$ is APX-hard
-	even if we restrict segments to be axis-pararell
+	even if we restrict segments to be axis-pararell segments
 	and allow $\frac{1}{2}$-extension (Chapter \ref{chapter:segment_apx}).
 	We provide an FPT algorithm for unweighted $\SegmentSetCover$
 	parametrized by the size of the solution $k$

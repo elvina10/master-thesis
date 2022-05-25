@@ -100,7 +100,7 @@ centre of symmetry $S = (x_s, y_s)$,
 the \textbf{$\delta$-extension} of $L$ is the open set of points:
 $$L^{+\delta} = \Int\{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\},$$
 where $\Int$ denotes the interior of a set of points.
-That is, $L^{+\delta}$ is interior of the image of $L$ under homothety centred
+That is, $L^{+\delta}$ is the interior of the image of $L$ under homothety centred
 at $S$ with scale $(1+\delta)$.
 \end{defi}
 
@@ -118,17 +118,17 @@ For a longer discussion of this concept see Section
 Similar model is used to prove that $\GeometricSetCover$ with fat polygons
 relaxed with $\delta$-extension admits an EPTAS \cite{harpeled12}.
 The $\delta$-extension model presented there is well-defined only
-for fat polygons. An object is extended by all the points that
+for fat polygons. An object P is extended by all the points that
 are at distance to the closest point in the object $P$
 no larger than $\delta\cdot \mathsf{rad}(P)$, where $\mathsf{rad}(P)$
 is the largest radius of a circle inscribed into $P$.
 Since segments do not have any circle inscribed into them,
 the definition presented there cannot be utilized
 for the setting of segments considered here.
-Polygons extended by $\delta$-extension
+Polygon extended by $\delta$-extension
 defined in Definition \ref{definition:delta_extension}
 covers a superset of points that the polygon extended
-by $\delta$-extension defined in \cite{harpeled12}.
+by $\delta$-extension defined in \cite{harpeled12} covers.
 Since our definition is more permissive for any polygon,
 the EPTAS from \cite{harpeled12}
 also works for polygons extended
@@ -137,9 +137,9 @@ according to our definition of $\delta$-extension.
 \section{Our contribution}
 In this thesis we make the following contributions.
 
-We show that approximation of $\SegmentSetCover$,
-even if segments are axis-parallel and we relax the problem with  $\frac{1}{2}$-extension,
-is APX-hard (Theorem \ref{segment_cover_apx_hard}).
+We show that $\SegmentSetCover$ is APX-hard,
+even if segments are axis-parallel and we relax the problem with $\frac{1}{2}$-extension,
+(Theorem \ref{segment_cover_apx_hard}).
 
 \begin{restatable}{tw}{segmentCoverApxHard}{
 \label{segment_cover_apx_hard}
@@ -168,14 +168,14 @@ that $\GeometricSetCover$
 with axis-parallel fat rectangles is APX-hard,
 we improved the result that rectangles no longer
 have to be fat (Corollary \ref{rectangle_cover_apx_hard})
-and it holds when problem is relaxed with $\frac{1}{2}$-extension.
+and it holds when the problem is relaxed with $\frac{1}{2}$-extension.
 It also proves that the assumption in \cite{harpeled12}
 about polygons being fat is necessary, because
 covering with arbitrary polygons with $\frac{1}{2}$-extension is APX-hard.
 
 We also provide two FPT algorithms for parameterized $\SegmentSetCover$ 	
 (Theorem~\ref{segment_cover_fpt})
-and with $\WeightedSegmentSetCover$ relaxed with $\delta$-extension
+and $\WeightedSegmentSetCover$ relaxed with $\delta$-extension
 (Theorem~\ref{fpt_weighted_segment}).
 
 \begin{restatable}{tw}{segmentCoverFpt}{
@@ -213,11 +213,12 @@ and with $\WeightedSegmentSetCover$ relaxed with $\delta$-extension
 
 On the other hand, we prove that $\WeightedSegmentSetCover$ 
 is W[1]-hard even when segments are limited to 3 directions (Theorem~\ref{w1_hard})
-and assuming ETH there does not exist algorithm for this problem
+and assuming ETH there does not exist an algorithm for this problem
 that runs in time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
 See Figure \ref{tab:weighted_fpt} for a summary of parameterized
 results for $\WeightedSegmentSetCover$.
-Similar table for unweighted problem is present in Figure \ref{tab:unweighted_fpt}.
+Similar table for the unweighted problem
+is shown in Figure \ref{tab:unweighted_fpt}.
 
 \begin{restatable}{tw}{wOneHard}
 \label{w1_hard}
@@ -253,7 +254,7 @@ for this problem running in time ${f(k)\cdot(|\points| + |\sets|)^{o(k)}}$
 is still open.
 
 Permissive FPT is a relaxed FPT problem, where 
-we need to find solution of \textit{any} size in FPT-time,
+we need to find a solution of \textit{any} size in FPT-time,
 but we compare it to the optimum solution of size at most $k$.
 Idea for permissive FPT in local search was presented
 in \cite{permissive_problem1}, \cite{permissive_problem2}.
@@ -275,7 +276,7 @@ This is formulated precisely in Theorem \ref{permissive_w1_hard}.
 \hline                
 \end{tabular}
 \caption{Our results for $\WeightedSegmentSetCover$
-parameterized by the size of solution.
+parameterized by the size of a solution.
 Results marked with * are not explicitly given in this thesis,
 but they trivially follow from stronger results shown in the other cells of the table.}
 \label{tab:weighted_fpt}
@@ -296,7 +297,7 @@ but they trivially follow from stronger results shown in the other cells of the 
 \hline                
 \end{tabular}
 \caption{Our results for unweighted $\SegmentSetCover$
-parameterized by the size of solution.
+parameterized by the size of a solution.
 Results marked with * are not explicitly given in this thesis,
 but they trivially follow from stronger results shown in the other cells of the table.}
 \label{tab:unweighted_fpt}
@@ -305,8 +306,9 @@ but they trivially follow from stronger results shown in the other cells of the 
 
 \paragraph{Future work.} There are two aforementioned problems
 that relate to Theorem \ref{w1_hard} and were not solved in this thesis.
-We have not given a W[1]-hardness proof
-for \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover} where segments are limited to 3 directions,
+We have given a W[1]-hardness proof
+for \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
+where segments are limited to 3 directions,
 but the segments in the construction may be also right-diagonal.
 However, it may be possible to improve this construction to use segments
 in 2 directions instead of 3 directions. 

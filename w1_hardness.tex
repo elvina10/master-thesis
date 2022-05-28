@@ -1,8 +1,8 @@
-\chapter{W[1]-hardness of $\SegmentSetCover$}
+\chapter{W[1]-hardness of $\WeightedSegmentSetCover$}
 \label{chapter:w1_hard}
 
-In this chapter we consider the geometric set cover problem with 
-axis-parallel or right-diagonal weighted segments.
+In this chapter we consider the $\WeightedSegmentSetCover$ problem with 
+axis-parallel or right-diagonal segments.
 In Theorem~\ref{w1_hard} below, we prove that this problem is 
 W[1]-hard when parameterized by the size of the solution.
 We believe that the construction can be improved to only
@@ -63,13 +63,14 @@ for any computable function $f$.
 The remainder of this section is devoted to proving Theorem \ref{w1_hard}
 by a reduction from a~grid tiling problem instance
 with parameter $k$ (number of rows in the grid)
-to a geometric set cover instance with parameter $k^2$ (size of solution).
+to a \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
+instance with parameter $k^2$ (size of solution).
 This reduction is described in Lemma~\ref{w1_construction}.
-This proves the W[1]-hardness of the geometric set cover problem,
+This proves the W[1]-hardness of the $\WeightedSegmentSetCover$ problem,
 because if we could solve it with an FPT algorithm,
 then we could also solve the grid tiling problem
-(which we reduced to the geometric set cover).
-Therefore, geometric set cover with setting
+(which we reduced to the $\WeightedSegmentSetCover$).
+Therefore, $\WeightedSegmentSetCover$ with setting
 described in Theorem \ref{w1_hard}
 is at least as hard as the grid tiling problem.
 
@@ -97,14 +98,14 @@ Let us also define constants:
 \hvWeight & := & 2k^2(n^2+1) -4k^2\epsilon -4k(1-\epsilon)
 \end{eqnarray*}
 which are going to be used when defining the weight of the constructed
-instance of geometric set cover with weighted segments.
+instance of \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}.
 
 
 \begin{lemma}
 \label{w1_construction}
 Given an instance $\instanceGridTiling$ of the grid tiling problem,
-we can construct an instance $\instanceSetCover$ of geometric set cover
-with weighted segments such that:
+we can construct an instance $\instanceSetCover$ of $\WeightedSegmentSetCover$
+such that:
 \begin{enumerate}[label={(\arabic*)}]
 \item \label{part1} if the answer to $\instanceGridTiling$ is $\yes$, then there exists a solution
 to $\instanceSetCover$ of weight at most $\solWeight$;
@@ -119,7 +120,7 @@ First, let us prove Theorem \ref{w1_hard} using Lemma \ref{w1_construction}.
 \begin{proof}[Proof of Theorem \ref{w1_hard}]
 Let us take any instance $(n,l,f)$ of the grid tiling problem.
 We prove the theorem by contradiction, therefore we assume
-that geometric set cover with weighted segments
+that $\WeightedSegmentSetCover$
 parameterized by solution size $k$ admits a
 $g(k)\cdot n^{o(\sqrt{k})}$-time algorithm for some computable function $g$.
 
@@ -134,8 +135,8 @@ we know that the answer to $(n,l,f)$ must be $\no$.
 
 Therefore if we could find the solution in time $g(k) \cdot n^{o(\sqrt{k})}$,
 then we could solve the grid tiling problem
-in time $g(l)\cdot n^{o(l)}$ by constructing an instance of the set cover with
-weighted segments, solving it 
+in time $g(l)\cdot n^{o(l)}$ by constructing an instance of the
+\textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}, solving it 
 for parameter $k = 3l^2+2l$ in time $n^{o(\sqrt{3l^2+2l})}$
 and then answering based on the weight
 of the optimum solution.
@@ -191,7 +192,7 @@ Formally we state this in Theorem $\ref{permissive_w1_hard}$ below.
 \newcommand{\matchv}{\mathsf{match}_v}
 \newcommand{\matchh}{\mathsf{match}_h}
 
-We construct an instance $\instanceSetCover$ of geometric set cover as follows.
+We construct an instance $\instanceSetCover$ of $\SegmentSetCover$ as follows.
 
 First, let us choose any bijection
 $\order : \{1, \ldots, n^2\} \rightarrow \{1, \ldots, n\} \times \{1, \ldots, n\}$.
@@ -310,21 +311,21 @@ w(s) =
 
 \section{Proof that the reduction is correct}
 
-Now, we prove that the constructed instance of geometric set cover
-with weighted segments indeed gives a correct and sound reduction
+Now, we prove that the constructed instance of $\WeightedSegmentSetCover$
+indeed gives a correct and sound reduction
 of the grid tiling problem. Lemma \ref{set_cover_solution_exists}
 proves that if a solution to the instance of the grid tiling instance exists,
 then there exists a solution with suitably bounded size and weight
-of the constructed instance of geometric set cover.
+of the constructed instance of $\WeightedSegmentSetCover$.
 Then Lemma \ref{grid_tiling_exists} proves that if
-there is a solution to the geometric set cover instance with bounded weight,
+there is a solution to the $\WeightedSegmentSetCover$ instance with bounded weight,
 then there exists a solution to the original grid tiling instance.
 
 \begin{lemma}
 \label{set_cover_solution_exists}
 	If there exists a~solution to the grid tiling instance $(f_{i,j})$,
 	then there exists a~solution to the instance $\instanceSetCover$
-	of geometric set cover with weight $\solWeight$.
+	of $\WeightedSegmentSetCover$ with weight $\solWeight$.
 \end{lemma}
 
 \begin{proof}
@@ -332,7 +333,7 @@ Suppose there exists a solution $x,y$ of the instance $(f_{i,j})$
 of the grid tiling problem.
 	
 We define the proposed solution $\sol \subseteq \sets$ of the instance
-of geometric set cover
+of \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
 in three parts: $D \subseteq \alldiag$, $A \subseteq \allhor$ and $B \subseteq \allver$:
 \begin{eqnarray*}
 	D & := & \{(v_{i, j, t}, h_{i, j, t}) : 1 \le i, j \le k, t = \order^{-1}(x(i), y(j))\}, \\
@@ -395,8 +396,8 @@ $$2k(k(n^2+1) -2(1-\epsilon)-2k\epsilon) + k^2\delta= \solWeight.\qedhere$$
 \end{proof}
 
 Now we present a few additional properties of the constructed instance
-of the geometric set cover that help us to prove
-Lemma \ref{grid_tiling_exists}.
+of the \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
+that help us to prove Lemma \ref{grid_tiling_exists}.
 
 \begin{claim}
 \label{guards}

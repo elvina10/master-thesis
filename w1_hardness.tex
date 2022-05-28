@@ -5,8 +5,7 @@ In this chapter we consider the geometric set cover problem with
 axis-parallel or right-diagonal weighted segments.
 In Theorem~\ref{w1_hard} below, we prove that this problem is 
 W[1]-hard when parameterized by the size of the solution.
-
-We believe that the below construction can be improved to only
+We believe that the construction can be improved to only
 utilize the axis-parallel segments.
 
 \wOneHard*
@@ -151,7 +150,8 @@ First, we define a constructed instance $I$, later property
 \ref{part1} is proved by Lemma \ref{set_cover_solution_exists}
 and property \ref{part2} is proved by Lemma \ref{grid_tiling_exists}.
 
-In the proof of Lemma \ref{grid_tiling_exists}
+In the proof of Lemma \ref{w1_construction}
+(see proof of Lemma \ref{grid_tiling_exists})
 we do not use the assumption that
 the solution is bounded by the size,
 which the problem is parameterized by, $3k^2+2k$.
@@ -163,7 +163,7 @@ in proof of Theorem \ref{w1_hard}.
 Thus, this reduction
 proves that the problem is not only W[1]-hard, but assuming ETH 
 there also does not exist permissive FPT algorithm for this problem.
-Formally we state this in the Theorem $\ref{permissive_w1_hard}$.
+Formally we state this in Theorem $\ref{permissive_w1_hard}$ below.
 
 
 \begin{restatable}{tw}{permissiveWOneHard}

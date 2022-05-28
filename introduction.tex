@@ -88,20 +88,20 @@ for \textsc{Maximum Weight Independent Set of Rectangles} with $\delta$-shrinkin
 which was later improved to an EPTAS in \cite{shrinking1}, alongside
 with presenting a new FPT algorithm
 for this problem with the natural parameterization.
-Later, a similar $\delta$-shrinking model was used in \cite{shrinking2}
+A similar $\delta$-shrinking model was used in \cite{shrinking2}
 to present a PTAS for
 \textsc{Maximum Weight Independent Set of Polygons} with $\delta$-shrinking.
 
-\newcommand{\Int}{\mathsf{Int}}
 \begin{defi}
 \label{definition:delta_extension}
 For any $\delta > 0$ and a centre-symmetric convex object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
 the \textbf{$\delta$-extension} of $L$ is the open set of points:
-$$L^{+\delta} = \Int\{(1 + \delta)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L\},$$
-where $\Int$ denotes the interior of a set of points.
-That is, $L^{+\delta}$ is the interior of the image of $L$ under homothety centred
-at $S$ with scale $(1+\delta)$.
+$$L^{+\delta} = \{(1 + \epsilon)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L, 0 \le \epsilon < \delta\}.$$
+That is, $L^{+\delta}$ is the the image of $L$ under homothety centred
+at $S$ with scale $(1+\delta)$ without the edge.
+Every segment is turned into a segment without endpoints
+and any rectangle is turned into a interior of rectangle.
 \end{defi}
 
 Analogous to $\delta$-shrinking,
@@ -216,9 +216,7 @@ is W[1]-hard even when segments are limited to 3 directions (Theorem~\ref{w1_har
 and assuming ETH there does not exist an algorithm for this problem
 that runs in time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
 See Figure \ref{tab:weighted_fpt} for a summary of parameterized
-results for $\WeightedSegmentSetCover$.
-Similar table for the unweighted problem
-is shown in Figure \ref{tab:unweighted_fpt}.
+results for $\SegmentSetCover$ and $\WeightedSegmentSetCover$.
 
 \begin{restatable}{tw}{wOneHard}
 \label{w1_hard}
@@ -264,43 +262,22 @@ This is formulated precisely in Theorem \ref{permissive_w1_hard}.
 
 \begin{figure}[h]
 \begin{center}
-\begin{tabular}{ | c | c | c | }
+\begin{tabular}{ | c | c | c | c | }
 \hline
-                & exact     & $\delta$-extension \\ 
+                & weighted exact    & weighted $\delta$-extension & unweighted \\ 
 \hline                
- axis-parallel   & ? & FPT* \\  
+ axis-parallel   & ? & FPT* & FPT*\\  
 \hline                
- 3 directions    & W[1]-hard & FPT* \\  
+ 3 directions    & W[1]-hard~ & FPT* & FPT*\\  
 \hline                
- any direction   & W[1]-hard* & FPT \\
+ any direction   & W[1]-hard* & FPT~ & FPT~ \\
 \hline                
 \end{tabular}
-\caption{Our results for $\WeightedSegmentSetCover$
+\caption{Our results for $\WeightedSegmentSetCover$ and $\SegmentSetCover$
 parameterized by the size of a solution.
 Results marked with * are not explicitly given in this thesis,
 but they trivially follow from stronger results shown in the other cells of the table.}
 \label{tab:weighted_fpt}
-\end{center}
-\end{figure}
-
-\begin{figure}[h]
-\begin{center}
-\begin{tabular}{ | c | c | c | }
-\hline
-                & exact     & $\delta$-extension \\ 
-\hline                
- axis-parallel   & FPT* & FPT* \\  
-\hline                
- 3 directions    & FPT* & FPT* \\  
-\hline                
- any direction   & FPT  & FPT* \\
-\hline                
-\end{tabular}
-\caption{Our results for unweighted $\SegmentSetCover$
-parameterized by the size of a solution.
-Results marked with * are not explicitly given in this thesis,
-but they trivially follow from stronger results shown in the other cells of the table.}
-\label{tab:unweighted_fpt}
 \end{center}
 \end{figure}
 
@@ -314,8 +291,8 @@ However, it may be possible to improve this construction to use segments
 in 2 directions instead of 3 directions. 
 The other question is what is the tight bound for this problem.
 The simple algorithm solving
-this problem is running in time ${f(k)(|\points| + |\sets|)^k}$,
-while our lower bound refutes running time ${f(k)(|\points| + |\sets|)^{\sqrt{k}}}$.
+this problem is running in time ${f(k)(|\points| + |\sets|)^{O(k)}}$,
+while our lower bound refutes running time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
 
 Another problem to consider is whether
 \textsc{Geometric Hitting Set} relaxed with $\delta$-extension

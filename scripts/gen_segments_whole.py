@@ -209,7 +209,9 @@ output = '''{
 \\end{tikzpicture}
 \\caption{\\textbf{Scheme of the whole construction.}}
 General layout of VARIABLE-gadgets and CLAUSE-gadgets and how they
-interact with each other.
+interact with each other. In \\textcolor{lime}{green} and \\textcolor{cyan}{blue}
+we depict bounding boxes given by Claims \\ref{claim:variable_small_bounding_rectangle}
+and \\ref{claim:clause_bounding_rectangle}, respectively.
 \\label{fig:segment_apx_whole}
 \\end{figure}
 '''

@@ -27,7 +27,7 @@ MAX-(3,3)-SAT which we define below.
 \section{MAX-(3,3)-SAT}
 
 See Definition \ref{definition:cnf}
-for the definition of the $k$-CNF formula.
+for the definition of a $k$-CNF formula.
 
 \begin{defi}
 \textbf{MAX-3SAT} is the following maximization problem. We are given a 3-CNF
@@ -441,7 +441,6 @@ for any literals $a,b,c$. Then, we define points in the gadget as:
 \newcommand{\moveVariableSegments}[1]{\mathsf{moveVariableSegments}_{#1}}
  
 We are now ready to define the set of points in a CLAUSE-gadget:
- 
  $$\moveVariablePoints{i} := 
  \{x_{i, j} : j \in \{0, 1\}\} \cup
  \{y_{i, j} : j \in \{0, 1\}\} \cup
@@ -619,12 +618,13 @@ a bounding rectangle $R$
 for every gadget,
 with the following property:
 $R$ fits both segments and points from the
-gadget and $R^{\frac{1}{2}}$ ($R$ after $\frac{1}{2}$-extension)
+gadget and $R^{+\frac{1}{2}}$ ($R$ after $\frac{1}{2}$-extension)
 does not cover any points outside of $R$.
 Checking that the property from the above
 lemma holds for points and segments within the same gadget
 can be easily done using the figures above as references.
-
+We omit the proofs, and only express the necessary assertions 
+in claims below.
 
 Note that the claims stated below also encapsulate the interaction
 between the gadgets,
@@ -636,44 +636,44 @@ First let us define points to cover inside of rectangle $R$ as:
 $$\pointsIn(R) :=  \text{ points from } \points
 \text{ that lie in rectangle } R.$$
  
-
-\begin{claim}
-\label{claim:variable_bounding_rectangle}
-For any $1 \le i \le n$, $\segmentsVar{i}$ fit in rectangle 
-defined by points $a_i$ and $h_i$ from VARIABLE-gadget:
-$$R := [-3L,L] \times [4i,4i+2].$$
-\begin{enumerate}[label={(\arabic*)}]
-\item 
-The only points in $R$ are $\pointsVar{i}$
-and $x_{j,0}, y_{j,0}$ or $z_{j,0}$ points 
-from CLAUSE-gadgets:
-$$\pointsVar{i} \subseteq \pointsIn(R) \subseteq \pointsVar{i} \cup
-\{x_{j,0}, y_{j,0}, z_{j,0}: 1 \le j \le n\}.$$
-\item 
-$R$ covers the same points from $\points$
-before and after $\frac{1}{2}$-extension, i.e.
-$\pointsIn(R) = \pointsIn(R^{+\delta})$.
-\item All segments $\segmentsVar{i}$ fit fully inside of $R$.
-\end{enumerate}
-\end{claim}
-
 \begin{claim}
 \label{claim:variable_small_bounding_rectangle}
 For any $1 \le i \le n$, $\pointsVar{i}$ fit in rectangle 
-from VARIABLE-gadget:
-$$R := [-3L,-L] \times [4i,4i+2].$$
+defined as:
+$$R_2 := [-3L,-L] \times [4i,4i+2].$$
 \begin{enumerate}[label={(\arabic*)}]
 \item 
-The only points in $R$ are $\pointsVar{i}$:
-$\pointsIn(R) = \pointsVar{i}.$
+The only points in $R_2$ are $\pointsVar{i}$:
+$\pointsIn(R_2) = \pointsVar{i}.$
 \item 
-$R$ covers the same points from $\points$
+$R_2$ covers the same points from $\points$
 before and after $\frac{1}{2}$-extension, i.e.
-$\pointsIn(R) = \pointsIn(R^{+\delta})$.
-\item All segments $\segmentsVar{i} - \{\xTrueSegment{i}, \xFalseSegment{i}\}$ 
-fit fully inside of $R$.
+$$\pointsIn(R_2) = \pointsIn(R_2^{+\frac{1}{2}}).$$
+\item All segments of $\segmentsVar{i} - \{\xTrueSegment{i}, \xFalseSegment{i}\}$ 
+fit fully inside of $R_2$.
 \end{enumerate}
 \end{claim}
+
+\begin{claim}
+\label{claim:variable_bounding_rectangle}
+For any $1 \le i \le n$, $\segmentsVar{i}$ fit in the rectangle 
+defined by points $a_i$ and $h_i$ from VARIABLE-gadget:
+$$R_1 := [-3L,L] \times [4i,4i+2].$$
+\begin{enumerate}[label={(\arabic*)}]
+\item 
+The only points in $R_1$ are $\pointsVar{i}$
+and $x_{j,0}, y_{j,0}$ or $z_{j,0}$ points 
+from CLAUSE-gadgets:
+$$\pointsVar{i} \subseteq \pointsIn(R_1) \subseteq \pointsVar{i} \cup
+\{x_{j,0}, y_{j,0}, z_{j,0}: 1 \le j \le n\}.$$
+\item 
+$R_1$ covers the same points from $\points$
+before and after $\frac{1}{2}$-extension, i.e.
+$\pointsIn(R_1) = \pointsIn(R_1^{+\frac{1}{2}})$.
+\item All segments of $\segmentsVar{i}$ fit fully inside of $R_1$.
+\end{enumerate}
+\end{claim}
+
 
 \begin{claim}
 \label{claim:or_bounding_rectangle}
@@ -681,15 +681,15 @@ For any $1 \le i \le n$ and $j \in \{0, 1\}$,
 points from OR-gadget $\pointsOr{i}{j}$ 
 and segments $\segmentsOr{i}{j} - \{(t_{i, j}, v_{i, j})\}$
 fit in rectangle defined as:
-$$R := [x,x+2] \times [y,y+4],
+$$Q_j := [x,x+2] \times [y,y+4],
 \text{ where } x = \clauseXFactor i+3j+3, y = 4(n+1)+2j.$$
 \begin{enumerate}[label={(\arabic*)}]
-\item $R$ covers only $\pointsOr{i}{j}$, i.e. $\pointsIn(R) = \pointsOr{i}{j}.$
-\item $R$ covers the same points from $\points$
+\item $Q_j$ covers only $\pointsOr{i}{j}$, i.e. $\pointsIn(Q_j) = \pointsOr{i}{j}.$
+\item $Q_j$ covers the same points from $\points$
 before and after $\frac{1}{2}$-extension, i.e.
-$\pointsIn(R) = \pointsIn(R^{+\delta})$.
-\item All segments $\segmentsOr{i}{j} - \{(t_{i, j}, v_{i, j})\}$
-fit fully inside of $R$.
+$\pointsIn(Q_j) = \pointsIn(Q_j^{+\frac{1}{2}})$.
+\item All segments of $\segmentsOr{i}{j} - \{(t_{i, j}, v_{i, j})\}$
+fit fully inside of $Q_j$.
 \end{enumerate}
 \end{claim}
 
@@ -697,15 +697,17 @@ fit fully inside of $R$.
 \label{claim:clause_bounding_rectangle}
 For any $1 \le i \le n$, $\segmentsClause_i$ and $\pointsClause{i}$
 fit in rectangle:
-$$R :=  [\clauseXFactor i,\clauseXFactor i+9] \times [0,4(n+1)+6].$$
+$$Q :=  [\clauseXFactor i,\clauseXFactor i+9] \times [0,4(n+1)+6].$$
 \begin{enumerate}[label={(\arabic*)}]
-\item $R$ covers only $\pointsClause{i}$, i.e. $\pointsIn(R) = \pointsClause{i}.$
-\item $R$ covers the same points from $\points$
+\item $Q$ covers only $\pointsClause{i}$, i.e. $\pointsIn(Q) = \pointsClause{i}.$
+\item $Q$ covers the same points from $\points$
 before and after $\frac{1}{2}$-extension, i.e.
-$\pointsIn(R) = \pointsIn(R^{+\delta})$.
-\item All segments $\segmentsClause_i$ fit fully inside of $R$.
+$\pointsIn(Q) = \pointsIn(Q^{+\frac{1}{2}})$.
+\item All segments of $\segmentsClause_i$ fit fully inside of $Q$.
 \end{enumerate}
 \end{claim}
+
+With claims asserted, we can give a proof of Lemma \ref{lemma:exntension_robust}.
 
 \begin{proof}[Proof of Lemma \ref{lemma:exntension_robust}]
 First, we check one by one for every segment within every
@@ -743,17 +745,17 @@ after extension.
 Let us fix $1 \le i \le n$ and consider
 segments from the $i$-th CLAUSE-gadget.
 We use Claim \ref{claim:or_bounding_rectangle}
-for $j \in \{0, 1\}$ to get rectangles $R_0$ and $R_1$ respectively.
+for $j \in \{0, 1\}$ to get rectangles $Q_0$ and $Q_1$ respectively.
 We need to check whether segments
 $\moveVariableSegments{i} \cup \{(t_{i, j}, v_{i, j}) : j \in \{0, 1\}\}$
 cover any new points from $\pointsClause{i}$
 after $\frac{1}{2}$-extension, because their interaction
-is not considered by Claim \ref{claim:or_bounding_rectangle} for $R_0$ and $R_1$.
+is not considered by Claim \ref{claim:or_bounding_rectangle} for $Q_0$ and $Q_1$.
 
 Then we use Claim \ref{claim:clause_bounding_rectangle}
 to conclude that no segment from $\segmentsClause_i$
 after $\frac{1}{2}$-extension covers
-any point from different CLAUSE-gadget or any VARIABLE-gadget.
+any point from a different CLAUSE-gadget or any VARIABLE-gadget.
 \end{proof}
 
 \iffalse
@@ -995,3 +997,7 @@ hence
 $$15n - |\sol|  \le 15n - 14n - a = n - a.$$
 Therefore, $\phi$ satisfies at least $15n-|\sol|$ clauses of $S$.
 \end{proof}
+
+Now Lemma~\ref{apxconstruction} follows immidiately from
+Lemmas~\ref{construction_correctness},
+\ref{construction_completness} and \ref{lemma:exntension_robust}.

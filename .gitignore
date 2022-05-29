@@ -4,5 +4,6 @@
 *.log
 *.toc
 *.out
+*.bak
 poprawki\ do\ wprowadzenia/*
 bibliography/*

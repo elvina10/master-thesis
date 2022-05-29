@@ -53,7 +53,8 @@ every assignment of variables satisfies no more than $\alpha m$
 clauses. 
 \end{defi}
 
-\begin{tw}[\cite{hastad}]{
+\begin{tw}{
+	\textbf{(\cite{hastad})}.
 	\label{hastadtheorem}
 	For any $\epsilon > 0$, it is NP-hard to distinguish satisfiable
 	\linebreak
@@ -607,7 +608,8 @@ Finally we define the set of points and segments for the constructed instance:
 $$\points := \bigcup_{1 \le i \le n} \pointsVar{i} \cup \pointsClause{i},$$
 $$\sets := \bigcup_{1 \le i \le n} \segmentsVar{i} \cup \segmentsClause_i.$$
 
-\begin{lemma}[Robustness to $\frac{1}{2}$-extension]
+\begin{lemma}
+\textbf{(Robustness to $\frac{1}{2}$-extension)}.
 \label{lemma:exntension_robust}
 For every segment $s \in \sets$,
 $s$ and $s^{+\frac{1}{2}}$ cover the same points from $\points$.

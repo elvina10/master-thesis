@@ -124,7 +124,7 @@ First, let us prove Theorem \ref{w1_hard} using Lemma \ref{w1_construction}.
 Let us take any instance $(n,l,f)$ of the $\GridTiling$ problem.
 We prove the theorem by contradiction, therefore we assume
 that \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
-parameterized by solution size $k$ admits a
+parameterized by solution size $k = 3l^2+2l$ admits a
 $g(k)\cdot n^{o(\sqrt{k})}$-time algorithm for some computable function $g$.
 
 Using Lemma \ref{w1_construction} let us construct an instance $I$
@@ -138,9 +138,9 @@ we know that the answer to $(n,l,f)$ must be $\no$.
 
 Therefore if we could find the solution in time $g(k) \cdot n^{o(\sqrt{k})}$,
 then we could solve the $\GridTiling$ problem
-in time $g(l)\cdot n^{o(l)}$ by constructing an instance of the
+in time $g(l)\cdot n^{o(l)}$ by constructing an instance of
 \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}, solving it 
-for parameter $k = 3l^2+2l$ in time $n^{o(\sqrt{3l^2+2l})}$
+for parameter $k$ in time $n^{o(\sqrt{3l^2+2l})}$
 and then answering based on the weight
 of the optimum solution.
 As $\mathcal{O}(n^{o(l)}) \subseteq \mathcal{O}(n^{o(\sqrt{3l^2+2l})})$,
@@ -216,8 +216,8 @@ For $1 \le i,j \le k$ and $1 \le t \le n^2$ define points:
 	$$v_{i, j, t} := (i \cdot (n^2+1), j \cdot (n^2+1) + t).$$
 	
 Let us define sets $H$ and $V$ as:
-$$H := \{h_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\},$$
-$$V := \{v_{i, j, t} : 1 \le i, j, \le k, 1 \le t \le n^2\}.$$
+$$H := \{h_{i, j, t} : 1 \le i, j \le k, 1 \le t \le n^2\},$$
+$$V := \{v_{i, j, t} : 1 \le i, j \le k, 1 \le t \le n^2\}.$$
 	
 Let us recall that $\epsilon = \frac{1}{2k^2}$.
 For a point $p = (x, y)$ we define points:
@@ -286,8 +286,8 @@ An example of such segments is depicted in Figure \ref{fig:diag_def}.
 \input{figures/diag_definition.tex}
 
 Every segment in $\alldiag$
-connects points $(i(n^2+1) + t, j \cdot (n^2+1))$
-and ${(i \cdot (n^2+1), j(n^2+1) + t)}$
+connects points $(i(n^2+1) + t, j(n^2+1))$
+and $(i(n^2+1), j(n^2+1) + t)$
 for some $1 \le i,j \le k, 1 \le t \le n^2$.
 The line on which it lies can be described
 by linear equation ${x+y=t+(i+j)(n^2+1)}$,

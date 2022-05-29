@@ -10,10 +10,13 @@ utilize the axis-parallel segments.
 
 \wOneHard*
 
-\section{\textsc{Grid Tiling}}
+\newcommand{\GridTiling}{\textsc{Grid Tiling}}
+
+\section{$\GridTiling$}
 
 In~order to prove Theorem \ref{w1_hard}
-we will show a reduction from a W[1]-hard problem: grid tiling.
+we will show a reduction from a W[1]-hard problem:
+\textsc{Grid} \textsc{Tiling}.
 This problem was introduced in \cite{marx_grid_tiling}
 (the author called it matrix tiling instead).
 It was originally described as an approximation problem,
@@ -29,7 +32,7 @@ as the set of all subsets of $A$, i.e. $\pow(A) = \{B : B \subseteq A\}$.
 \end{defi}
 
 \begin{defi}
-In the \textbf{grid tiling} problem we are given integers $n$ and $k$,
+In the \textbf{$\GridTiling$} problem we are given integers $n$ and $k$,
 and a function
 $f : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \pow(\{1, \ldots, n\} \times \{1, \ldots, n\})$
 specifying the set of allowed tiles for each cell of a $k \times k$ grid.
@@ -40,7 +43,7 @@ to respectively columns and rows of the grid,
 so that $(x(i), y(j)) \in f(i, j)$ for all $i,j \in \{1, \ldots, k\}$.
 \end{defi}
 
-In short, in the grid tiling problem one needs to assign numbers
+In short, in the $\GridTiling$ problem one needs to assign numbers
 to rows and columns in such a way
 that for every pair of a row and a column,
 the pair of colors assigned
@@ -54,25 +57,25 @@ which is W[1]-hard when parameterized by the size of the grid.
 \begin{tw}
 \label{grid_tiling_w1_hard}
 \textbf{(\cite{marx_grid_tiling}).}
-Grid tiling is W[1]-hard when parameterized by $k$ and
+$\GridTiling$ is W[1]-hard when parameterized by $k$ and
 assuming ETH, there is no $f(k)\cdot n^{o(k)}$-time
-algorithm solving the grid tiling problem
+algorithm solving the $\GridTiling$ problem
 for any computable function $f$.
 \end{tw}
 
 The remainder of this section is devoted to proving Theorem \ref{w1_hard}
-by a reduction from a~grid tiling problem instance
+by a reduction from a~$\GridTiling$ problem instance
 with parameter $k$ (number of rows in the grid)
 to a \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
 instance with parameter $k^2$ (size of solution).
 This reduction is described in Lemma~\ref{w1_construction}.
 This proves the W[1]-hardness of the $\WeightedSegmentSetCover$ problem,
 because if we could solve it with an FPT algorithm,
-then we could also solve the grid tiling problem
+then we could also solve the $\GridTiling$ problem
 (which we reduced to the $\WeightedSegmentSetCover$).
 Therefore, $\WeightedSegmentSetCover$ with setting
 described in Theorem \ref{w1_hard}
-is at least as hard as the grid tiling problem.
+is at least as hard as the $\GridTiling$ problem.
 
 \newcommand{\hvWeight}{W_{\mathsf{hv}}}
 \newcommand{\solWeight}{\hvWeight+k^2\delta }
@@ -83,7 +86,7 @@ is at least as hard as the grid tiling problem.
 
 \section{Statement of reduction}
 
-Let us denote an instance of grid tiling problem as $\instanceGridTiling$ consisting of:
+Let us denote an instance of $\GridTiling$ problem as $\instanceGridTiling$ consisting of:
 \begin{itemize}
 \item the number of colors $n$,
 \item the size of the grid $k$,
@@ -103,7 +106,7 @@ instance of \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}.
 
 \begin{lemma}
 \label{w1_construction}
-Given an instance $\instanceGridTiling$ of the grid tiling problem,
+Given an instance $\instanceGridTiling$ of the $\GridTiling$ problem,
 we can construct an instance $\instanceSetCover$ of $\WeightedSegmentSetCover$
 such that:
 \begin{enumerate}[label={(\arabic*)}]
@@ -118,9 +121,9 @@ then the answer to $\instanceGridTiling$ is $\yes$.
 First, let us prove Theorem \ref{w1_hard} using Lemma \ref{w1_construction}.
 
 \begin{proof}[Proof of Theorem \ref{w1_hard}]
-Let us take any instance $(n,l,f)$ of the grid tiling problem.
+Let us take any instance $(n,l,f)$ of the $\GridTiling$ problem.
 We prove the theorem by contradiction, therefore we assume
-that $\WeightedSegmentSetCover$
+that \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
 parameterized by solution size $k$ admits a
 $g(k)\cdot n^{o(\sqrt{k})}$-time algorithm for some computable function $g$.
 
@@ -134,7 +137,7 @@ If $u > \solWeight$, then using \ref{part1}
 we know that the answer to $(n,l,f)$ must be $\no$.
 
 Therefore if we could find the solution in time $g(k) \cdot n^{o(\sqrt{k})}$,
-then we could solve the grid tiling problem
+then we could solve the $\GridTiling$ problem
 in time $g(l)\cdot n^{o(l)}$ by constructing an instance of the
 \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}, solving it 
 for parameter $k = 3l^2+2l$ in time $n^{o(\sqrt{3l^2+2l})}$
@@ -159,7 +162,7 @@ which the problem is parameterized by, $3k^2+2k$.
 If we had a permissive FPT algorithm
 that finds a solution of any size that still
 has weight no more than $\solWeight$,
-then we still would have a contradiction with grid tiling being W[1]-hard
+then we still would have a contradiction with $\GridTiling$ being W[1]-hard
 in proof of Theorem \ref{w1_hard}.
 Thus, this reduction
 proves that the problem is not only W[1]-hard, but assuming ETH 
@@ -313,24 +316,27 @@ w(s) =
 
 Now, we prove that the constructed instance of $\WeightedSegmentSetCover$
 indeed gives a correct and sound reduction
-of the grid tiling problem. Lemma \ref{set_cover_solution_exists}
-proves that if a solution to the instance of the grid tiling instance exists,
+of the $\GridTiling$ problem. Lemma \ref{set_cover_solution_exists}
+proves that if a solution to the instance of the $\GridTiling$ instance exists,
 then there exists a solution with suitably bounded size and weight
-of the constructed instance of $\WeightedSegmentSetCover$.
+of the constructed instance of
+\textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}.
 Then Lemma \ref{grid_tiling_exists} proves that if
-there is a solution to the $\WeightedSegmentSetCover$ instance with bounded weight,
-then there exists a solution to the original grid tiling instance.
+there is a solution to the
+\textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
+instance with bounded weight,
+then there exists a solution to the original $\GridTiling$ instance.
 
 \begin{lemma}
 \label{set_cover_solution_exists}
-	If there exists a~solution to the grid tiling instance $(f_{i,j})$,
+	If there exists a~solution to the $\GridTiling$ instance $(f_{i,j})$,
 	then there exists a~solution to the instance $\instanceSetCover$
 	of $\WeightedSegmentSetCover$ with weight $\solWeight$.
 \end{lemma}
 
 \begin{proof}
 Suppose there exists a solution $x,y$ of the instance $(f_{i,j})$
-of the grid tiling problem.
+of the $\GridTiling$ problem.
 	
 We define the proposed solution $\sol \subseteq \sets$ of the instance
 of \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover}
@@ -611,7 +617,7 @@ and $\matchh(t_1,t_2)$ is $\true$.
 \label{grid_tiling_exists}
 	If there exists a solution to instance $\instanceSetCover$
 	with weight at most $\solWeight$,
-	then there exists a solution to the grid tiling instance $(f_{i,j})$.
+	then there exists a solution to the $\GridTiling$ instance $(f_{i,j})$.
 \end{lemma}
 
 \begin{proof}
@@ -624,7 +630,7 @@ Similarly, to define the $y$ function,
 for every $1 \le i \le k$ set $y(i) := y_i$
 where $(b, y_i) = \order(h_{1,i})$
 
-To prove that this is a correct solution to grid tiling,
+To prove that this is a correct solution to $\GridTiling$,
 we need to prove that 
 for every $1 \le i,j \le k$, $(x(i), y(j))$ is in
 the allowed tiles set $f(i,j)$.

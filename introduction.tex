@@ -98,10 +98,11 @@ For any $\delta > 0$ and a centre-symmetric convex object $L$ with
 centre of symmetry $S = (x_s, y_s)$,
 the \textbf{$\delta$-extension} of $L$ is the open set of points:
 $$L^{+\delta} = \{(1 + \epsilon)\cdot(x - x_s, y - y_s) + (x_s, y_s) : (x, y) \in L, 0 \le \epsilon < \delta\}.$$
-That is, $L^{+\delta}$ is the the image of $L$ under homothety centred
-at $S$ with scale $(1+\delta)$ without the edge.
-Every segment is turned into a segment without endpoints
-and any rectangle is turned into a interior of rectangle.
+That is, $L^{+\delta}$ is the image of $L$ under homothety centred
+at $S$ with scale $(1+\delta)$ but with the extreme points excluded.
+In particular, $\delta$-extension turns a segment
+into a segment without endpoints
+and a rectangle into an interior of a rectangle.
 \end{defi}
 
 Analogous to $\delta$-shrinking,
@@ -264,7 +265,7 @@ This is formulated precisely in Theorem \ref{permissive_w1_hard}.
 \begin{center}
 \begin{tabular}{ | c | c | c | c | }
 \hline
-                & weighted exact    & weighted $\delta$-extension & unweighted \\ 
+                & exact weighted    & $\delta$-extension weighted  & exact unweighted \\ 
 \hline                
  axis-parallel   & ? & FPT* & FPT*\\  
 \hline                
@@ -291,7 +292,7 @@ However, it may be possible to improve this construction to use segments
 in 2 directions instead of 3 directions. 
 The other question is what is the tight bound for this problem.
 The simple algorithm solving
-this problem is running in time ${f(k)(|\points| + |\sets|)^{O(k)}}$,
+this problem is running in time ${f(k)(|\points| + |\sets|)^{\mathcal{O}(k)}}$,
 while our lower bound refutes running time ${f(k)(|\points| + |\sets|)^{o(\sqrt{k})}}$.
 
 Another problem to consider is whether

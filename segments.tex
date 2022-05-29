@@ -1,9 +1,9 @@
 In this chapter we show fixed-parameter tractable algorithms
-for the geometric set cover problem in~two different settings.
+for the $\SegmentSetCover$ problem in~two different settings.
 Section \ref{section:fpt_unweighted} shows 
-a fixed-parameter tractable algorithm for geometric set cover with unweighted segments.
+a fixed-parameter tractable algorithm for unweighted $\SegmentSetCover$.
 The remainder of the chapter presents
-a fixed-parameter tractable algorithm for geometric set cover with weighted segments
+a fixed-parameter tractable algorithm for $\WeightedSegmentSetCover$
 with $\delta$-extension.
 We show an algorithm for the setting with $\delta$-extension,
 because the original problem with weights is W[1]-hard,
@@ -25,11 +25,11 @@ We define \textit{extreme points} for a set of~collinear points.
 unweighted \textsc{Segment} \textsc{Set} \textsc{Cover}}
 \label{section:fpt_unweighted}
 In this section we consider fixed-parameter tractable
-algorithms for unweighted geometric set cover with segments.
+algorithms for $\SegmentSetCover$.
 The setting where segments are required to be axis-parallel
 (or limited to a constant number of directions) has a trivial FPT algorithm.
-We present an FPT algorithm for geometric set cover
-with unweighted segments, where segments are in arbitrary directions.
+We present an FPT algorithm for $\SegmentSetCover$,
+where segments are in arbitrary directions.
 
 \subsection{Axis-parallel segments}
 \begin{tw}

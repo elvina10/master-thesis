@@ -2,15 +2,15 @@
 \textsc{Weighted} \textsc{Segment} \textsc{Set} \textsc{Cover} with $\delta$-extension}
 \label{section:fpt_weighted}
 
-In this section we consider the geometric set cover problem
-for weighted segments relaxed with $\delta$-extension.
+In this section we consider the $\WeightedSegmentSetCover$ problem
+relaxed with $\delta$-extension.
 We show that this problem
 admits an FPT algorithm when parameterized by the size
 of the solution and $\delta$.
 In the next chapter we show that the assumption
 about the problem being relaxed with $\delta$-extension is necessary:
-we prove that geometric set cover problem
-for weighted segments (without extension) is W[1]-hard, which means
+we prove that $\WeightedSegmentSetCover$ problem
+(without extension) is W[1]-hard, which means
 there does not exist any FPT algorithm parameterized by solution size for it,
 assuming FPT $\neq$ W[1].
 
@@ -248,7 +248,7 @@ and that contradicts the definition of $A$.
 If every segment from $\sol$ covers at most $k$ points from $A$
 and $|\sol| \le k$, then at most $k^2$ points from $A$ are covered by $\sol$
 and that contradicts the fact that $\sol$ is a solution to the given
-geometric set cover instance.
+$\WeightedSegmentSetCover$ instance.
 \end{proof}
 
 We are now ready to give a proof of Theorem \ref{fpt_weighted_segment}.

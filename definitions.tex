@@ -29,7 +29,7 @@ either horizontal $y = c$ or vertical $x = c$.
 \begin{defi}
 	A line is \textbf{right-diagonal} if it is
 	described by the linear function $x + y = d$ for some $d \in \mathbb{R}$.
-	Segment is \textbf{right-diagonal} if its
+	A segment is \textbf{right-diagonal} if its
 	direction is a right-diagonal line.
 \end{defi}
 
@@ -41,7 +41,7 @@ our task is to either find a solution $\sol$ such that $|\sol| \le k$
 or decide that there is no such solution.
 
 \begin{defi}
-A \textbf{Fixed-parameter Tractable (FPT)} algorithm 
+A \textbf{fixed-parameter (FPT)} algorithm 
 for a problem with parameter $k$ and instance size $n$
 is an algorithm running in time $f(k) \cdot n^c$
 for some constant $c$ and some computable function $f$.
@@ -64,9 +64,9 @@ exists any variable assignment that satisfies the formula.
 \end{defi}
 
 \begin{defi}
-For $k \ge 3$ set us define $S_k$ as a set of constants $\sigma$
+For $k \ge 3$, let us define $S_k$ as the set of constants $\sigma$
 such that there exists an algorithm solving \textsc{$k$-SAT} running in time
-$\mathcal{O}^{*}(2^{\sigma n})$.
+$2^{\sigma n} \cdot n^{\mathcal{O}(1)}$.
 Let $s_k$ be the infimum  of the set $S_k$.
 
 \textbf{Exponential Time Hypothesis (ETH)} asserts
@@ -75,15 +75,18 @@ there does not exist an algorithm solving \textsc{3-SAT}
 running in time $2^{o(n)}$.
 \end{defi}
 
-To see the definition of a W[1]-hard problem and W hierarchy,
-see Chapter 13.3 of \cite{platypus_book}.
+The definition of a W[1]-hard problem and W hierarchy,
+can be found in Chapter 13.3 of \cite{platypus_book}.
 When proving that a problem is W[1]-hard,
-we are going to use Theorem 
-\ref{grid_tiling_w1_hard}, which was proved in \cite{marx_grid_tiling}.
+we are going to use Theorem~\ref{grid_tiling_w1_hard}
+(W[1]-hardness of \textsc{Grid Tiling}),
+which was proved in \cite{marx_grid_tiling}.
 
 \section{Approximation}
 
 Let us recall some definitions related to optimization problems.
+
+\newcommand{\opt}{\mathsf{opt}}
 
 \begin{defi}
 A \textbf{polynomial-time approximation scheme (PTAS)}
@@ -95,7 +98,7 @@ and in polynomial time
 finds a solution that is within a factor
 of ($1+\epsilon$) of being optimal.
 This means that the reported solution has weight at most
-$(1+\epsilon)opt(I)$, where $opt(I)$ is the weight
+$(1+\epsilon)\opt(I)$, where $\opt(I)$ is the weight
 of an optimal solution to $I$.
 \end{defi}
 
@@ -198,7 +201,7 @@ the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$
 and it has weight not larger than the optimal solution to the~problem without
-extension, i.e.~$\sum_{R \in \mathcal{R}} f(R) \le |opt(I)|$.
+extension, i.e.~$\sum_{R \in \mathcal{R}} f(R) \le |\opt(I)|$.
 \end{defi}
 
 We also consider weighted parameterized setting with $\delta$-extension,
@@ -215,5 +218,5 @@ such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$,
 uses no more than $k$ sets, i.e. $|\sol| \le k$
 and it has weight not larger than the optimal solution to the~problem without
-extension, i.e.~$\sum_{R \in \mathcal{R}} f(R) \le |opt(I)|$.
+extension, i.e.~$\sum_{R \in \mathcal{R}} f(R) \le |\opt(I)|$.
 \end{defi}

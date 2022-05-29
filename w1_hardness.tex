@@ -329,13 +329,13 @@ then there exists a solution to the original $\GridTiling$ instance.
 
 \begin{lemma}
 \label{set_cover_solution_exists}
-	If there exists a~solution to the $\GridTiling$ instance $(f_{i,j})$,
+	If there exists a~solution to the $\GridTiling$ instance $(n,k,f)$,
 	then there exists a~solution to the instance $\instanceSetCover$
 	of $\WeightedSegmentSetCover$ with weight $\solWeight$.
 \end{lemma}
 
 \begin{proof}
-Suppose there exists a solution $x,y$ of the instance $(f_{i,j})$
+Suppose there exists a solution $x,y$ of the instance $(n,k,f)$
 of the $\GridTiling$ problem.
 	
 We define the proposed solution $\sol \subseteq \sets$ of the instance
@@ -617,7 +617,7 @@ and $\matchh(t_1,t_2)$ is $\true$.
 \label{grid_tiling_exists}
 	If there exists a solution to instance $\instanceSetCover$
 	with weight at most $\solWeight$,
-	then there exists a solution to the $\GridTiling$ instance $(f_{i,j})$.
+	then there exists a solution to the $\GridTiling$ instance $(n,k,f)$.
 \end{lemma}
 
 \begin{proof}

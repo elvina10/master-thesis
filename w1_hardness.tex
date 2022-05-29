@@ -458,7 +458,7 @@ such that they are not covered with segments from $\allhor$.
 
 Point $h^R_{i, j, t_1}$ has to be covered with a segment from $\allhor$
 by Claim $\ref{guards}$.
-Every segment in $\allhor$ covering $h^R_{i, j, t_1}$,
+Every segment in $\allhor$ covering $h^R_{i, j, t_1}$
 but not $h_{i,j,t_1}$ must start at $h^R_{i, j, t_1}$
 and all such segments cover also $h_{i, j, t_2}$.
 This contradicts the assumption, which concludes the proof.
@@ -532,7 +532,7 @@ if we used 2 segments from $\alldiag$
 for one pair $(i,j)$,
 then we would have used total weight at least
 $\hvWeight + k^2\delta + \delta$ (Lemma \ref{vertical_horizontal_sum}),
-which if more than $\solWeight$.
+which is more than $\solWeight$.
 Since points $h_{i,j,t_x}$ and $v_{i,j,t_y}$ are covered by
 a single segment from $\alldiag$, we have $t_x = t_y$.
 
@@ -542,7 +542,8 @@ because the corresponding segment is in $\alldiag$.
 \end{proof}
 
 \newcommand{\diagonal}{\mathsf{diagonal}}
-We refer to the function mapping $1 \le x \le k$ to $t_x$ from Lemma \ref{diag_correct}
+We refer to the function mapping from a pair $(i,j)$, where $1\le i,j \le k$
+to a number $t_x$ from Lemma \ref{diag_correct}
 as $\diagonal : \{1, \ldots, k\} \times \{1, \ldots, k\} \rightarrow \{1, \ldots, n^2\}$.
 
 \begin{lemma}
@@ -606,8 +607,8 @@ By the proof of Lemma \ref{vertical_horizontal_sum},
 the lower bound for weight of such a solution is $\hvWeight + \epsilon$
 which is more than $\solWeight$.
 
-Therefore $h^R_{i,j,t_1}$ and $h^L_{i+1,j,t_2}$ must be covered
-by one segment from $\allhor$, namely $(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$.
+Therefore ${h^R_{i,j,t_1}}$ and ${h^L_{i+1,j,t_2}}$ must be covered
+by one segment from $\allhor$, namely \linebreak ${(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})}$.
 Hence $(h^R_{i,j,t_1}, h^L_{i+1,j,t_2})$ is a segment in $\allhor$
 and $\matchh(t_1,t_2)$ is $\true$.
 \end{proof}

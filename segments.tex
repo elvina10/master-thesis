@@ -33,7 +33,7 @@ where segments are in arbitrary directions.
 
 \subsection{Axis-parallel segments}
 \begin{tw}
-	\textbf{(FPT for segment cover with axis-parallel segments)}.
+	\textbf{(FPT for $\SegmentSetCover$ with axis-parallel segments)}.
 	There exists an algorithm that given a family $\sets$ of
 	axis-parallel segments,
 	a set of points $\points$
@@ -92,7 +92,7 @@ instance of the problem.
 
 \begin{lemma}
    \label{fpt_reduction}
-   Given an instance $(\sets, \points)$ of the segment cover problem,
+   Given an instance $(\sets, \points)$ of the $\SegmentSetCover$ problem,
    without loss of generality we can assume that
    no segment covers a superset of what another segment covers.
    That~is, for any distinct $A, B \in \sets$, we have
@@ -122,7 +122,7 @@ Also, $|\sol \cup \{B\} - \{A\}| \le |\sol|$.
 \begin{lemma}
 	\label{fpt_long_lines}
 	Given an instance $(\sets, \points)$
-	of the segment cover problem 
+	of the $\SegmentSetCover$ problem 
 	transformed by Lemma~\ref{fpt_reduction},
 	if there exists a line $L$ with at least
 	$k+1$ points on it, then there exists a subset $A \subseteq \sets$,

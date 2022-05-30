@@ -35,7 +35,7 @@ either horizontal $y = c$ or vertical $x = c$.
 
 \section{Parameterization}
 
-In the parameterized setting of the $\GeometricSetCover$
+In the parameterized setting of $\GeometricSetCover$
 for a given $k$,
 our task is to either find a solution $\sol$ such that $|\sol| \le k$
 or decide that there is no such solution.
@@ -75,7 +75,7 @@ there does not exist an algorithm solving \textsc{3-SAT}
 running in time $2^{o(n)}$.
 \end{defi}
 
-The definition of a W[1]-hard problem and W hierarchy,
+The definition of a W[1]-hard problem and W hierarchy
 can be found in Chapter 13.3 of \cite{platypus_book}.
 When proving that a problem is W[1]-hard,
 we are going to use Theorem~\ref{grid_tiling_w1_hard}
@@ -216,7 +216,7 @@ parameterized by the size of a solution $k$,
 the task is to output a solution $\mathcal{R} \subseteq \sets$
 such that the~$\delta$-extended set
 $\{ R^{+\delta} :  R \in \mathcal{R} \}$ covers $\points$,
-uses no more than $k$ sets, i.e. $|\sol| \le k$
+uses no more than $k$ sets, i.e. $|\sol| \le k$,
 and it has weight not larger than the optimal solution to the~problem without
 extension, i.e.~$\sum_{R \in \mathcal{R}} f(R) \le |\opt(I)|$.
 \end{defi}

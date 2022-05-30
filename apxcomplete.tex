@@ -105,7 +105,7 @@ and finally \ref{lemma:apxconstruction:enumerate:extension} trivially
 follows from Lemma~\ref{lemma:exntension_robust}.
 Firstly let us prove
 Theorem \ref{segment_cover_apx_hard} using Lemma \ref{apxconstruction}
-and Theorem \ref{hastadtheorem}.
+and Theorem~\ref{hastadtheorem}.
 
 \begin{proof}[Proof of Theorem \ref{segment_cover_apx_hard}]
 Consider any $0 < \epsilon < \frac{1}{15 \cdot 8}$.
@@ -121,7 +121,7 @@ Take an instance~$S$ of MAX-(3,3)-SAT to be distinguished
 and construct an instance of $\SegmentSetCover$ $\setCoverInstance$
 using Lemma \ref{apxconstruction}.
 We now use the $(1+\epsilon)$-approximation algorithm
-for $\SegmentSetCover$ relaxed with $\frac{1}{2}$-extensions on $\setCoverInstance$.
+for $\SegmentSetCover$ relaxed with $\frac{1}{2}$-extension on $\setCoverInstance$.
 Denote the size of the solution returned by this algorithm as $\approximate(\setCoverInstance)$.
 We prove that 
 if in $S$
@@ -354,7 +354,7 @@ We define the set of segments in several parts:
 \chooseOr{\true}{i}{j} &:=& \{ (m_{i, j}, s_{i, j}), (o_{i, j}, u_{i, j}), (t_{i, j}, v_{i, j}) \}, \\
 \orMoveVariable{i}{j} &:=& \{ (l_{i, j}, n_{i, j}), (n_{i, j}, p_{i, j})\}.
 \end{eqnarray*}
-Finally all segments on OR-gadget are defined as:
+Finally all segments of an OR-gadget are defined as:
 
 $$\segmentsOr{i}{j} := 
   \chooseOr{\false}{i}{j} \cup \chooseOr{\true}{i}{j} \cup \orMoveVariable{i}{j}
@@ -584,7 +584,7 @@ $$X := \{x_{i, 1}, y_{i, 1}, z_{i, 1}\}.$$
 
 No two points in $X$ can be covered with one segment
 of $\segmentsClause_i$, so it must be covered with 3 different segments.
-Next we define other sets:
+Next, we define the other sets:
 
 $$Y := \pointsOr{i}{0} - \{l_{i, 0}, p_{i, 0}\},$$
 $$Z := \pointsOr{i}{1} - \{l_{i, 1}, p_{i, 1}\}.$$
@@ -592,7 +592,7 @@ $$Z := \pointsOr{i}{1} - \{l_{i, 1}, p_{i, 1}\}.$$
 
 For both $Y$ and $Z$ we can check all of the subsets of 3 segments
 of $\segmentsClause_i$
-to conclude that none of them cover the considered,
+to conclude that none of them cover the considered points,
 so both $Y$ and $Z$ have to be covered with 
 disjoint sets of 4 segments each.
 
@@ -634,13 +634,13 @@ which are also mentioned in the helper lemmas above,
 and prove that gadgets are independent otherwise. 
 
 \newcommand{\pointsIn}{\mathsf{points}}
-First let us define points to cover inside of rectangle $R$ as:
+First, let us define points to cover inside of rectangle $R$ as:
 $$\pointsIn(R) :=  \text{ points from } \points
 \text{ that lie in rectangle } R.$$
  
 \begin{claim}
 \label{claim:variable_small_bounding_rectangle}
-For any $1 \le i \le n$, $\pointsVar{i}$ fit in rectangle 
+For any $1 \le i \le n$, $\pointsVar{i}$ fit in the rectangle 
 defined as:
 $$R_2 := [-3L,-L] \times [4i,4i+2].$$
 \begin{enumerate}[label={(\arabic*)}]
@@ -682,7 +682,7 @@ $\pointsIn(R_1) = \pointsIn(R_1^{+\frac{1}{2}})$.
 For any $1 \le i \le n$ and $j \in \{0, 1\}$,
 points from OR-gadget $\pointsOr{i}{j}$ 
 and segments $\segmentsOr{i}{j} - \{(t_{i, j}, v_{i, j})\}$
-fit in rectangle defined as:
+fit in the rectangle defined as:
 $$Q_j := [x,x+2] \times [y,y+4],
 \text{ where } x = \clauseXFactor i+3j+3, y = 4(n+1)+2j.$$
 \begin{enumerate}[label={(\arabic*)}]
@@ -698,7 +698,7 @@ fit fully inside of $Q_j$.
 \begin{claim}
 \label{claim:clause_bounding_rectangle}
 For any $1 \le i \le n$, $\segmentsClause_i$ and $\pointsClause{i}$
-fit in rectangle:
+fit in the rectangle:
 $$Q :=  [\clauseXFactor i,\clauseXFactor i+9] \times [0,4(n+1)+6].$$
 \begin{enumerate}[label={(\arabic*)}]
 \item $Q$ covers only $\pointsClause{i}$, i.e. $\pointsIn(Q) = \pointsClause{i}.$
@@ -981,7 +981,7 @@ literal $q$ and variable $x_j$.
 Point $t$ can be only covered in $\segmentsVar{j}$
 by a corresponding segment $\xTrueSegment{j}$ or $\xFalseSegment{j}$
 (depending on whether the literal $q$ is negated or not).
-From the definition of $\phi$ and the fact that one of this segment is
+From the definition of $\phi$ and the fact that one of these segments is
 in $\sol$, we know that
 $\phi(j)$ has the value that evaluates $q$ to be $\true$.
 Therefore, clause $c_i$ is satisfied.

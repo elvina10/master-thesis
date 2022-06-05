@@ -108,7 +108,7 @@
 %----------------------------------------------------------------------------------------
 
 \title[Segment Set Cover]{Approximation and parametrization\\
-of \textsc{Segment Set Cover}}
+of Segment Set Cover}
 % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{Katarzyna Kowalska, Michał Pilipczuk} % Your name
@@ -138,7 +138,7 @@ University of Warsaw, MIMUW \\ % Your institution for the title page
 %	PRESENTATION SLIDES
 %----------------------------------------------------------------------------------------
 
-\section{Set cover}
+\section{\textsc{Set Cover}}
 \begin{frame}
 \frametitle{Problem Statement: \textsc{Set Cover}}
 \textbf{Input:} universe $\mathcal{U}$,
@@ -149,116 +149,19 @@ $\bigcup C = \mathcal{U}$
 \newline
 Minimal subfamily that covers all elements in $\mathcal{U}$.
 
+% TODO: Better picture
 \includesvg[width=0.5\textwidth]{set_cover.svg}
 
 \end{frame}
+\subsection{\textsc{Geometric Set Cover}}
 
 \begin{frame}
-\frametitle{Problem Statement: Set cover}
-\textbf{Input:} universe $\mathcal{U}$,
-family $S$ of subsets of $\mathcal{U}$
-\newline
-\textbf{Output:} $C \subseteq S$ such that $|C|$ is minimal and
-$\bigcup C = \mathcal{U}$
-\newline
-Minimal subfamily that covers all elements in $\mathcal{U}$.
-
-\includesvg[width=0.5\textwidth]{set_cover_solve.svg}
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Parametrized algorithms vs. W[1]-completeness}
-Given:
+\frametitle{Problem Statement: \textsc{Geometric Set Cover}}
 \begin{itemize}
-\item parameter $k$ (eg. size of solution, given in problem definition)
-\item instance size $n$ (number of sets in the input)
-\end{itemize}
-\bigskip
-
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Class} & \textbf{Complexity} & \textbf{Example}\\
-\hline
-W[1]-complete & $n^{O(k)}$ & $k$-Clique\\
-\hline
-FPT & $f(k) \cdot n^{O(1)}$ & $k$-Vertex-cover\\
-\hline
-\end{tabular}
-
-\bigskip
-FPT $\rightarrow$ polynomial\newline
-W[1]-complete $\rightarrow$ NP-complete
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Approximation}
-Given:
-\begin{itemize}
-\item optimization problem (looking for minimal solution)
-\item some instance with optimal solution OPT
-\end{itemize}
-$p$-approximation is algorithm that yields solution not larger than
-$p\cdot$OPT
-\begin{block}{PTAS -- polynomial time approximation scheme}
-For every $\epsilon > 0$, there exists $(1+\epsilon)$-approximation
-algorithm.
-
-Example: knapsack problem
-
-\end{block}
-
-\begin{block}{APX-hardness}
-For sufficiently small $\epsilon > 0$,
-if $(1+\epsilon)$-approximation exists, then P = NP.
-
-Example: MAX-3-SAT (how many clauses in 3-SAT can be solved)
-\end{block}
-
-
-\end{frame}
-
-
-\section{Different variants of set cover}
-\begin{frame}
-\frametitle{Problem Properties: Set cover}
-$k$ -- size of solution
-\begin{itemize}
-\item NP-complete
-\item W[2]-complete (no algorithm with running time $n^{k-\epsilon}$)
-\item best known approximation -- $\log n$
-\item there is no $o(\log n)$ approximation unless P = NP
-\end{itemize}
-
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Problem Properties: Vertex cover}
-Vertex cover is set cover with sets of size 2
-
-$k$ -- size of solution
-\begin{itemize}
-\item NP-complete
-\item Algorithm FPT ($2^k$)
-\item 2-approximation
-\end{itemize}
-
-
-\end{frame}
-
-\section{Problem Statement of Geometric Set Cover}
-
-\begin{frame}
-\frametitle{Problem Statement: Geometric Set Cover}
-\begin{itemize}
-\item Universe $\mathcal{U}$ is set of points on the plane
+\item Universe $\mathcal{U}$ is set of points in the plane
 \item Sets $S$ are some geometric shapes
 \item Formally, each set in $S$ is intersection of $\mathcal{U}$
-with some geometric shape
+with some geometric shape.
 \end{itemize}
 
 Example for rectangles:
@@ -267,23 +170,116 @@ Example for rectangles:
 
 
 \end{frame}
-
-\section{Results for set cover with segments }
+\subsection{\textsc{Segment Set Cover}}
 
 \begin{frame}
-\frametitle{Parametrization of set cover with segments}
-\begin{block}{Theorem 1}
-	Set Cover for segments in the plane can be solved in time
-	$k^k \cdot n^{O(1)}$,\newline
-	where $k$ is the requested solution size.
-\end{block}
+\frametitle{Problem Statement: \textsc{Segment Set Cover}}
+\begin{itemize}
+\item Universe $\mathcal{U}$ is set of points in the plane
+\item Sets $S$ are segments.
+\end{itemize}
 
-\textbf{Technique:} Branching over segments with more than $k$ points
-on them.
+Example (TODO):
+
+\includesvg[width=0.5\textwidth]{geometric_set_cover.svg}
+
+
+\end{frame}
+
+\section{$\delta$-extension}
+\begin{frame}
+\frametitle{$\delta$-extension for \textsc{Segment Set Cover}}
+\begin{itemize}
+\item $\delta$-extension for a segment is a segment which is longer by
+$\delta$ fraction at both ends
+\item We accept solution in which segments cover solution after
+$\delta$-extension
+\item The solution is compared to optimal solution without extension.
+\end{itemize}
+
+Example:
+
+\includesvg[width=0.5\textwidth]{delta_extension.svg}
 \end{frame}
 
 \begin{frame}
-\frametitle{Approxmiation of set cover with segments}
+\frametitle{$\delta$-extensions for \textsc{Segment Set Cover}}
+\begin{itemize}
+\item We are given universe $\mathcal{U}$ and set of segments $S$
+\item We construct set $S^{+\delta}$ consisting of  
+segments longer by $\delta$ fraction at both ends
+\item We look for $C \subseteq S^{+\delta}$ that $\bigcup C = \mathcal{U}$
+\item solution $C$ is compared with optimal solution for $S$ without extensions
+for both parametrized and approximation setting
+\end{itemize}
+
+Example:
+
+\includesvg[width=0.5\textwidth]{delta_extension.svg}
+\end{frame}
+
+\section{Approximation}
+\begin{frame}
+\frametitle{Preliminaries: Approximation}
+Given:
+\begin{itemize}
+\item instance $I$ of the optimization problem (looking for minimal solution)
+\item weight of the optimal solution $\mathsf{opt}(I)$
+\end{itemize}
+$p$-approximation is algorithm that yields solution of weight not larger than
+$p\cdot \mathsf{opt}(I)$
+\begin{block}{PTAS -- polynomial time approximation scheme}
+For every $\epsilon > 0$, there exists $(1+\epsilon)$-approximation
+algorithm running in time $n^{f(\epsilon)}$ for any computable function $f$.
+
+Example: \textsc{Knapsack}.
+
+\end{block}
+
+\begin{block}{APX-hardness}
+For sufficiently small $\epsilon > 0$,
+if $(1+\epsilon)$-approximation exists, then P = NP.
+
+Example: \textsc{MAX-3-SAT} (how many clauses in 3-SAT can be solved)
+\end{block}
+
+
+\end{frame}
+\begin{frame}
+\frametitle{Approximation results for \textsc{Set Cover} from literature}
+\textsc{Set Cover}
+\begin{itemize}
+\item $\log n$-approximation, no $o(\log n)$ approximation assuing P $\neq$ NP
+\end{itemize}
+
+\textsc{Geometric Set Cover}
+\begin{itemize}
+\item with fat rectangles is APX-hard
+\item (E?Q?)PTAS for FAT polygons with $\delta$-ext (TODO reference)
+\end{itemize}
+
+
+\begin{definition}{
+Fatness of polygons $\tau$ is a ratio between a radius of circle
+circumscribed on this polygon and inscribed in this polygon.
+}\end{definition}
+\includesvg[width=0.2\textwidth]{fat_polygon.svg}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Parametrization of \textsc{Segment Set Cover}}
+\begin{block}{Theorem 1}
+	\textsc{Segment Set Cover} parametrized by the solution size $k$
+	can be solved in time $k^k \cdot n^{O(1)}$.
+\end{block}
+
+\textbf{Technique:} Branching over at most $k+1$
+segments on the lines with more than $k$ points on them.
+\end{frame}
+
+\begin{frame}
+\frametitle{Approxmiation of \textsc{Segment Set Cover}}
 \begin{block}{Theorem 2}
 	Set cover with segments is APX-hard, ie.\newline
 	for small $\epsilon =0.001$,
@@ -299,37 +295,6 @@ close to them
 
 \end{frame}
 
-\begin{frame}
-\frametitle{$\delta$-extensions for set cover with segments}
-\begin{itemize}
-\item $\delta$-extension for a segment is a segment which is longer by
-$\delta$ fraction at both ends
-\item We accept solution in which segments cover solution after
-$\delta$-extension
-\item The solution is compared to optimal solution without extensions
-\end{itemize}
-
-Example:
-
-\includesvg[width=0.5\textwidth]{delta_extension.svg}
-\end{frame}
-
-\begin{frame}
-\frametitle{$\delta$-extensions for set cover with segments}
-\begin{itemize}
-\item We are given universe $\mathcal{U}$ and set of segments $S$
-\item We construct set $S^{+\delta}$ consisting of  
-segments longer by $\delta$ fraction at both ends
-\item We look for $C \subseteq S^{+\delta}$ that $\bigcup C = \mathcal{U}$
-\item solution $C$ is compared with optimal solution for $S$ without extensions
-for both parametrized and approximation setting
-\end{itemize}
-
-Example:
-
-\includesvg[width=0.5\textwidth]{delta_extension.svg}
-\end{frame}
-
 
 \begin{frame}
 \frametitle{Approxmiation of set cover with segments}
@@ -342,6 +307,32 @@ Example:
 
 \end{frame}
 
+
+\begin{frame}
+\frametitle{Parametrized algorithms vs. W[1]-hardness}
+Given:
+\begin{itemize}
+\item parameter $k$ (usually size of the solution)
+\item size of the instance $n$
+\end{itemize}
+\bigskip
+
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Class} & \textbf{Complexity} & \textbf{Example}\\
+\hline
+W[1]-hard & $n^{O(k)}$ & \textsc{$k$-Clique}, \textsc{Grid Tiling}\\
+\hline
+FPT & $f(k) \cdot n^{O(1)}$ & \textsc{Vertex Cover}\\
+\hline
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Parametrization of \textsc{Set Cover}}
+W[2]-complete (no algorithm with running time $n^{k-\epsilon}$)
+\end{frame}
 
 \begin{frame}
 \frametitle{Approxmiation of set cover with segments}
@@ -392,11 +383,6 @@ I initially started with rectangles problem\ldots
 	
 \end{block}
 
-\begin{definition}{
-Fatness of polygons $\tau$ is a ratio between a radius of circle
-circumscribed on this polygon and inscribed in this polygon.
-}\end{definition}
-\includesvg[width=0.3\textwidth]{fat_polygon.svg}
 
 
 \end{frame}

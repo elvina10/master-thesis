@@ -1,0 +1,540 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+\usepackage{eucal}
+\usepackage{lmodern}
+\usepackage{color, colortbl, linegoal}
+\usepackage{setspace}
+\usepackage{svg}
+\usepackage{pgfplots}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Segment Set Cover]{Approximation and parametrization\\
+of \textsc{Segment Set Cover}}
+% The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Katarzyna Kowalska, Michał Pilipczuk} % Your name
+\institute[UW] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+University of Warsaw, MIMUW \\ % Your institution for the title page
+\medskip
+\textit{kk371053@students.mimuw.edu.pl} % Your email address
+}
+\date{21.06.2022} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+\definecolor{olivegreen}{HTML}{2a9d8f}
+\definecolor{shary}{HTML}{8d99ae}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\section{Set cover}
+\begin{frame}
+\frametitle{Problem Statement: \textsc{Set Cover}}
+\textbf{Input:} universe $\mathcal{U}$,
+family $S$ of subsets of $\mathcal{U}$
+\newline
+\textbf{Output:} $C \subseteq S$ such that $|C|$ is minimal and
+$\bigcup C = \mathcal{U}$
+\newline
+Minimal subfamily that covers all elements in $\mathcal{U}$.
+
+\includesvg[width=0.5\textwidth]{set_cover.svg}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Problem Statement: Set cover}
+\textbf{Input:} universe $\mathcal{U}$,
+family $S$ of subsets of $\mathcal{U}$
+\newline
+\textbf{Output:} $C \subseteq S$ such that $|C|$ is minimal and
+$\bigcup C = \mathcal{U}$
+\newline
+Minimal subfamily that covers all elements in $\mathcal{U}$.
+
+\includesvg[width=0.5\textwidth]{set_cover_solve.svg}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Parametrized algorithms vs. W[1]-completeness}
+Given:
+\begin{itemize}
+\item parameter $k$ (eg. size of solution, given in problem definition)
+\item instance size $n$ (number of sets in the input)
+\end{itemize}
+\bigskip
+
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Class} & \textbf{Complexity} & \textbf{Example}\\
+\hline
+W[1]-complete & $n^{O(k)}$ & $k$-Clique\\
+\hline
+FPT & $f(k) \cdot n^{O(1)}$ & $k$-Vertex-cover\\
+\hline
+\end{tabular}
+
+\bigskip
+FPT $\rightarrow$ polynomial\newline
+W[1]-complete $\rightarrow$ NP-complete
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Approximation}
+Given:
+\begin{itemize}
+\item optimization problem (looking for minimal solution)
+\item some instance with optimal solution OPT
+\end{itemize}
+$p$-approximation is algorithm that yields solution not larger than
+$p\cdot$OPT
+\begin{block}{PTAS -- polynomial time approximation scheme}
+For every $\epsilon > 0$, there exists $(1+\epsilon)$-approximation
+algorithm.
+
+Example: knapsack problem
+
+\end{block}
+
+\begin{block}{APX-hardness}
+For sufficiently small $\epsilon > 0$,
+if $(1+\epsilon)$-approximation exists, then P = NP.
+
+Example: MAX-3-SAT (how many clauses in 3-SAT can be solved)
+\end{block}
+
+
+\end{frame}
+
+
+\section{Different variants of set cover}
+\begin{frame}
+\frametitle{Problem Properties: Set cover}
+$k$ -- size of solution
+\begin{itemize}
+\item NP-complete
+\item W[2]-complete (no algorithm with running time $n^{k-\epsilon}$)
+\item best known approximation -- $\log n$
+\item there is no $o(\log n)$ approximation unless P = NP
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Problem Properties: Vertex cover}
+Vertex cover is set cover with sets of size 2
+
+$k$ -- size of solution
+\begin{itemize}
+\item NP-complete
+\item Algorithm FPT ($2^k$)
+\item 2-approximation
+\end{itemize}
+
+
+\end{frame}
+
+\section{Problem Statement of Geometric Set Cover}
+
+\begin{frame}
+\frametitle{Problem Statement: Geometric Set Cover}
+\begin{itemize}
+\item Universe $\mathcal{U}$ is set of points on the plane
+\item Sets $S$ are some geometric shapes
+\item Formally, each set in $S$ is intersection of $\mathcal{U}$
+with some geometric shape
+\end{itemize}
+
+Example for rectangles:
+
+\includesvg[width=0.5\textwidth]{geometric_set_cover.svg}
+
+
+\end{frame}
+
+\section{Results for set cover with segments }
+
+\begin{frame}
+\frametitle{Parametrization of set cover with segments}
+\begin{block}{Theorem 1}
+	Set Cover for segments in the plane can be solved in time
+	$k^k \cdot n^{O(1)}$,\newline
+	where $k$ is the requested solution size.
+\end{block}
+
+\textbf{Technique:} Branching over segments with more than $k$ points
+on them.
+\end{frame}
+
+\begin{frame}
+\frametitle{Approxmiation of set cover with segments}
+\begin{block}{Theorem 2}
+	Set cover with segments is APX-hard, ie.\newline
+	for small $\epsilon =0.001$,
+	doesn't have $(1+\epsilon)$-approximation unless P = NP.
+\end{block}
+
+How can we make this problem \textit{easier}?
+\begin{itemize}
+\item Allow only segments in 2 directions (pararell to the two axes)
+\item Allow segments to \textit{almost} cover the points, ie. be very
+close to them
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{$\delta$-extensions for set cover with segments}
+\begin{itemize}
+\item $\delta$-extension for a segment is a segment which is longer by
+$\delta$ fraction at both ends
+\item We accept solution in which segments cover solution after
+$\delta$-extension
+\item The solution is compared to optimal solution without extensions
+\end{itemize}
+
+Example:
+
+\includesvg[width=0.5\textwidth]{delta_extension.svg}
+\end{frame}
+
+\begin{frame}
+\frametitle{$\delta$-extensions for set cover with segments}
+\begin{itemize}
+\item We are given universe $\mathcal{U}$ and set of segments $S$
+\item We construct set $S^{+\delta}$ consisting of  
+segments longer by $\delta$ fraction at both ends
+\item We look for $C \subseteq S^{+\delta}$ that $\bigcup C = \mathcal{U}$
+\item solution $C$ is compared with optimal solution for $S$ without extensions
+for both parametrized and approximation setting
+\end{itemize}
+
+Example:
+
+\includesvg[width=0.5\textwidth]{delta_extension.svg}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Approxmiation of set cover with segments}
+\begin{block}{Theorem 2 (rephrased)}
+	Set cover with segments parallel to two axes with $\frac{1}{2}$-extension
+	is APX-hard, ie.\newline
+	for small $\epsilon =0.001$,
+	doesn't have $(1+\epsilon)$-approximation unless P = NP.
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Approxmiation of set cover with segments}
+How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
+
+\begin{block}{Max-(3,3)-SAT problem}
+Given 3-SAT instance with $n$ variables, $n$ clauses
+and every variable appears in exactly 3 clauses,
+find an assignment
+that satisfies the maximum number of clauses
+(not necessarily all of them).
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}{PCP theorem}
+How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
+\begin{block}{NP-completeness}
+Distinguishing if result of MAX-(3,3)-SAT is
+$n$ or less than $n$ is NP-complete.
+\end{block}
+
+\begin{block}{Remark}
+Result of MAX-(3,3)-SAT is not less than $\frac{7}{8}n$
+\end{block}
+
+\begin{block}{PCP theorem}
+Distinguishing if result of MAX-(3,3)-SAT is $n$
+or at most $(\frac{7}{8} + \epsilon)n$
+cannot be done in polynomial time assuming $NP \nsubseteq DTIME(2^{O(\log n \log \log n)})$
+\end{block}
+
+Therefore MAX-(3,3)-SAT does not have
+$(\frac{7}{8}+\epsilon)$-approximation
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Approxmiation of set cover with segments}
+I initially started with rectangles problem\ldots
+
+\begin{block}{Theorem 2.5 (Har-Peled also did that in 2012)}
+	Set cover with polygons of bounded fatness (at least $\tau$)
+	 with $\delta$-extension has $(1+\epsilon)$-approximation
+	 for any $\epsilon > 0$.
+	
+\end{block}
+
+\begin{definition}{
+Fatness of polygons $\tau$ is a ratio between a radius of circle
+circumscribed on this polygon and inscribed in this polygon.
+}\end{definition}
+\includesvg[width=0.3\textwidth]{fat_polygon.svg}
+
+
+\end{frame}
+
+
+\section{Results for set cover with weighted segments} 
+
+\begin{frame}
+\frametitle{Definition of set cover with weighted segments}
+
+\textbf{Input:} universe $\mathcal{U}$,
+subfamily $S$ of subsets of $\mathcal{U}$
+and function of weights assigned to sets $w : S \rightarrow \mathbb{N}$
+\newline
+\textbf{Output:} $C \subseteq S$ such that $\sum_{c \in C} w(c)$ is minimal and
+$\bigcup C = \mathcal{U}$
+\newline
+Minimal subfamily that covers all elements in $\mathcal{U}$.
+
+\bigskip
+\textbf{In parametrized setting:}
+We look for the \textit{best} solution with restricted size $|C| \le k$.
+
+\textbf{In approximation setting:}
+It is still APX-hard, nothing interesting
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Parametrization for set cover with weighted segments}
+\begin{block}{Theorem 3}
+	Weighted set cover with segments is W[1]-hard.
+	
+	Doesn't have FPT algorithm
+\end{block}
+
+How can we make this problem easier?
+\begin{itemize}
+\item Allow less directions (maybe just two parallel to axes)
+\item Allow $\delta$-extension
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Parametrization for set cover with weighted segments}
+\begin{block}{Theorem 4}
+	Weighted set cover with segments 
+	with $\delta$-extensions is in FPT.
+	
+	It can be solved with complexity $O((k/\delta)^k \cdot n^{O(1)})$.
+\end{block}
+
+\textbf{Technique intuition:} Provide kernel in problem where you need to
+cover both points and some segments (these are required
+by high density of points to cover on them)
+\end{frame}
+
+\begin{frame}
+\frametitle{Parametrization for set cover with weighted segments}
+\begin{block}{Theorem 3 (rephrased)}
+	Weighted set cover with segments in 3 directions is W[1]-hard.
+	
+	
+These directions are: parallel to axis and diagonal 45 degrees.
+	
+	Doesn't have FPT algorithm
+\end{block}
+
+Nobody\footnote{that I know of} knows if this still holds with
+2 directions or in 3D with segments parallel to axis.
+
+This is particalarily interesting, because unweighted problem is in FPT.
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Summary of results for parametrization of set cover with segments}
+
+\textbf{Unweighted}
+
+\begin{tabular}{|c|c|c|}
+\hline
+ &2 directions & arbitrarily many (at least 3)\\
+ \hline
+ exact& FPT & \textcolor{olivegreen}{FPT (Theorem 1)}\\
+ 
+ \hline
+ $\delta$-extensions & FPT & \textcolor{olivegreen}{FPT}\\
+\hline
+\end{tabular}
+\bigskip
+
+\textbf{Weighted}
+
+\begin{tabular}{|c|c|c|}
+\hline
+ &2 directions & arbitrarily many (at least 3)\\
+ \hline
+ exact& \textbf{???} & \textcolor{olivegreen}{W[1]-hard (Theorem 3)}\\
+ 
+ \hline
+ $\delta$-extensions & \textcolor{olivegreen}{FPT} & \textcolor{olivegreen}{FPT (Theorem 4)}\\
+\hline
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary of results for approximation of set cover with segments}
+
+\textbf{Unweighted}
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+ &2 directions & any directions & Fat Polygons\\
+ \hline
+ exact& APX-hard & \textcolor{olivegreen}{APX-hard} & APX-hard \\
+ 
+ \hline
+ $\delta$-extensions & \textcolor{olivegreen}{APX-hard (Th. 2)} & \textcolor{olivegreen}{APX-hard} & PTAS (Har-Peled)\\
+\hline
+\end{tabular}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Approxmiation of set cover with lines}
+We can reduce set cover with lines to Vertex Cover, so it's
+NP-hard and APX-hard.
+
+Nobody\footnote{that I know of} knows if there exist 2-approximation.
+
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 

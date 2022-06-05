@@ -454,66 +454,39 @@ This is particalarily interesting, because unweighted problem is in FPT.
 \end{frame}
 
 \begin{frame}
-
-\frametitle{Summary of results for parametrization of set cover with segments}
-
-\textbf{Unweighted}
+\frametitle{Regults of parametrization of \textsc{Segment Set Cover}}
 
 \begin{tabular}{|c|c|c|}
 \hline
- &2 directions & arbitrarily many (at least 3)\\
- \hline
- exact& FPT & \textcolor{olivegreen}{FPT (Theorem 1)}\\
- 
- \hline
- $\delta$-extensions & FPT & \textcolor{olivegreen}{FPT}\\
+           & exact & $\delta$-extensions \\
+\hline
+unweighted & \textcolor{olivegreen}{FPT (Theorem 1)} & \textcolor{olivegreen}{FPT*} \\
+\hline
+weighted 2 directions & ??? & \textcolor{olivegreen}{FPT*} \\
+\hline
+weighted 3 directions & \textcolor{olivegreen}{W[1]-hard (Theorem 3)} &  \textcolor{olivegreen}{FPT*}\\
+\hline
+weighted any directions & \textcolor{olivegreen}{W[1]-hard*} &  \textcolor{olivegreen}{FPT (Theorem 4)}\\
 \hline
 \end{tabular}
-\bigskip
 
-\textbf{Weighted}
+\end{frame}
 
+
+\begin{frame}
+\frametitle{Summary of results for approximation of \textsc{Geometric Set Cover}}
 \begin{tabular}{|c|c|c|}
 \hline
- &2 directions & arbitrarily many (at least 3)\\
- \hline
- exact& \textbf{???} & \textcolor{olivegreen}{W[1]-hard (Theorem 3)}\\
- 
- \hline
- $\delta$-extensions & \textcolor{olivegreen}{FPT} & \textcolor{olivegreen}{FPT (Theorem 4)}\\
+           & exact & $\delta$-extensions \\
+\hline
+fat polygons & APX-hard (TODO ref) &  PTAS (Har-Peled)\\
+\hline
+segments & \textcolor{olivegreen}{APX-hard} & \textcolor{olivegreen}{APX-hard (Th. 2)} \\
+\hline
+any polygons & \textcolor{olivegreen}{APX-hard} &  \textcolor{olivegreen}{APX-hard} \\
 \hline
 \end{tabular}
-
 \end{frame}
-
-\begin{frame}
-\frametitle{Summary of results for approximation of set cover with segments}
-
-\textbf{Unweighted}
-
-\begin{tabular}{|c|c|c|c|}
-\hline
- &2 directions & any directions & Fat Polygons\\
- \hline
- exact& APX-hard & \textcolor{olivegreen}{APX-hard} & APX-hard \\
- 
- \hline
- $\delta$-extensions & \textcolor{olivegreen}{APX-hard (Th. 2)} & \textcolor{olivegreen}{APX-hard} & PTAS (Har-Peled)\\
-\hline
-\end{tabular}
-
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Approxmiation of set cover with lines}
-We can reduce set cover with lines to Vertex Cover, so it's
-NP-hard and APX-hard.
-
-Nobody\footnote{that I know of} knows if there exist 2-approximation.
-
-\end{frame}
-
 
 %----------------------------------------------------------------------------------------
 

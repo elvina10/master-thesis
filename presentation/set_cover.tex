@@ -267,21 +267,35 @@ circumscribed on this polygon and inscribed in this polygon.
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Parametrization of \textsc{Segment Set Cover}}
-\begin{block}{Theorem 1}
-	\textsc{Segment Set Cover} parametrized by the solution size $k$
-	can be solved in time $k^k \cdot n^{O(1)}$.
+
+\begin{frame}{PCP theorem}
+How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
+\begin{block}{NP-completeness}
+Distinguishing if result of MAX-(3,3)-SAT is
+$n$ or less than $n$ is NP-complete.
 \end{block}
 
-\textbf{Technique:} Branching over at most $k+1$
-segments on the lines with more than $k$ points on them.
+\begin{block}{Remark}
+Result of MAX-(3,3)-SAT is not less than $\frac{7}{8}n$
+\end{block}
+
+\begin{block}{PCP theorem}
+Distinguishing if result of MAX-(3,3)-SAT is $n$
+or at most $(\frac{7}{8} + \epsilon)n$
+cannot be done in polynomial time assuming $NP \nsubseteq DTIME(2^{O(\log n \log \log n)})$
+\end{block}
+
+Therefore MAX-(3,3)-SAT does not have
+$(\frac{7}{8}+\epsilon)$-approximation
+
+
 \end{frame}
+
 
 \begin{frame}
 \frametitle{Approxmiation of \textsc{Segment Set Cover}}
 \begin{block}{Theorem 2}
-	Set cover with segments is APX-hard, ie.\newline
+	\textsc{Segment Set Cover} is APX-hard, ie.\newline
 	for small $\epsilon =0.001$,
 	doesn't have $(1+\epsilon)$-approximation unless P = NP.
 \end{block}
@@ -293,20 +307,12 @@ How can we make this problem \textit{easier}?
 close to them
 \end{itemize}
 
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Approxmiation of set cover with segments}
 \begin{block}{Theorem 2 (rephrased)}
-	Set cover with segments parallel to two axes with $\frac{1}{2}$-extension
-	is APX-hard, ie.\newline
-	for small $\epsilon =0.001$,
-	doesn't have $(1+\epsilon)$-approximation unless P = NP.
+	\textsc{Segment Set Cover} is APX-hard, even if segments are axis-parallel
+	and problem is relaxed with $\frac{1}{2}$-extension.
 \end{block}
 
 \end{frame}
-
 
 \begin{frame}
 \frametitle{Parametrized algorithms vs. W[1]-hardness}
@@ -335,40 +341,28 @@ W[2]-complete (no algorithm with running time $n^{k-\epsilon}$)
 \end{frame}
 
 \begin{frame}
+\frametitle{Parametrization of \textsc{Segment Set Cover}}
+\begin{block}{Theorem 1}
+	\textsc{Segment Set Cover} parametrized by the solution size $k$
+	can be solved in time $k^k \cdot n^{O(1)}$.
+\end{block}
+
+\textbf{Technique:} Branching over at most $k+1$
+segments on the lines with more than $k$ points on them.
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Approxmiation of set cover with segments}
 How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
 
-\begin{block}{Max-(3,3)-SAT problem}
+\begin{block}{\textsc{MAX-(3,3)-SAT} problem}
 Given 3-SAT instance with $n$ variables, $n$ clauses
 and every variable appears in exactly 3 clauses,
 find an assignment
 that satisfies the maximum number of clauses
 (not necessarily all of them).
 \end{block}
-
-\end{frame}
-
-
-\begin{frame}{PCP theorem}
-How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
-\begin{block}{NP-completeness}
-Distinguishing if result of MAX-(3,3)-SAT is
-$n$ or less than $n$ is NP-complete.
-\end{block}
-
-\begin{block}{Remark}
-Result of MAX-(3,3)-SAT is not less than $\frac{7}{8}n$
-\end{block}
-
-\begin{block}{PCP theorem}
-Distinguishing if result of MAX-(3,3)-SAT is $n$
-or at most $(\frac{7}{8} + \epsilon)n$
-cannot be done in polynomial time assuming $NP \nsubseteq DTIME(2^{O(\log n \log \log n)})$
-\end{block}
-
-Therefore MAX-(3,3)-SAT does not have
-$(\frac{7}{8}+\epsilon)$-approximation
-
 
 \end{frame}
 

@@ -267,14 +267,27 @@ circumscribed on this polygon and inscribed in this polygon.
 
 \end{frame}
 
-
-\begin{frame}{PCP theorem}
+\begin{frame}{\textsc{MAX-(3,3)-SAT}}
 How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
+
+
+\begin{block}{\textsc{MAX-(3,3)-SAT} problem}
+Given 3-SAT instance with $n$ variables, $n$ clauses
+and every variable appears in exactly 3 clauses,
+find an assignment
+that satisfies the maximum number of clauses
+(not necessarily all of them).
+\end{block}
+
+MAX-(3,3)-SAT is NP-complete, therefore:
+
 \begin{block}{NP-completeness}
 Distinguishing if result of MAX-(3,3)-SAT is
 $n$ or less than $n$ is NP-complete.
 \end{block}
+\end{frame}
 
+\begin{frame}{PCP theorem}
 \begin{block}{Remark}
 Result of MAX-(3,3)-SAT is not less than $\frac{7}{8}n$
 \end{block}
@@ -287,8 +300,6 @@ cannot be done in polynomial time assuming $NP \nsubseteq DTIME(2^{O(\log n \log
 
 Therefore MAX-(3,3)-SAT does not have
 $(\frac{7}{8}+\epsilon)$-approximation
-
-
 \end{frame}
 
 
@@ -310,6 +321,13 @@ close to them
 \begin{block}{Theorem 2 (rephrased)}
 	\textsc{Segment Set Cover} is APX-hard, even if segments are axis-parallel
 	and problem is relaxed with $\frac{1}{2}$-extension.
+\end{block}
+
+
+\begin{block}{Theorem 2.5 (Har-Peled also did that in 2012)}
+	Set cover with polygons of bounded fatness (at least $\tau$)
+	 with $\delta$-extension has $(1+\epsilon)$-approximation
+	 for any $\epsilon > 0$.
 \end{block}
 
 \end{frame}
@@ -350,37 +368,6 @@ W[2]-complete (no algorithm with running time $n^{k-\epsilon}$)
 \textbf{Technique:} Branching over at most $k+1$
 segments on the lines with more than $k$ points on them.
 \end{frame}
-
-
-\begin{frame}
-\frametitle{Approxmiation of set cover with segments}
-How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
-
-\begin{block}{\textsc{MAX-(3,3)-SAT} problem}
-Given 3-SAT instance with $n$ variables, $n$ clauses
-and every variable appears in exactly 3 clauses,
-find an assignment
-that satisfies the maximum number of clauses
-(not necessarily all of them).
-\end{block}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Approxmiation of set cover with segments}
-I initially started with rectangles problem\ldots
-
-\begin{block}{Theorem 2.5 (Har-Peled also did that in 2012)}
-	Set cover with polygons of bounded fatness (at least $\tau$)
-	 with $\delta$-extension has $(1+\epsilon)$-approximation
-	 for any $\epsilon > 0$.
-	
-\end{block}
-
-
-
-\end{frame}
-
 
 \section{Results for set cover with weighted segments} 
 

@@ -355,7 +355,7 @@ FPT & $f(k) \cdot n^{O(1)}$ & \textsc{Vertex Cover}\\
 
 \begin{frame}
 \frametitle{Parametrization of \textsc{Set Cover}}
-W[2]-complete (no algorithm with running time $n^{k-\epsilon}$)
+W[2]-complete (no algorithm with running time $n^{k-\epsilon}$ for any $\epsilon > 0$)
 \end{frame}
 
 \begin{frame}
@@ -433,15 +433,16 @@ These directions are: parallel to axis and diagonal 45 degrees.
 	Doesn't have FPT algorithm
 \end{block}
 
-Nobody\footnote{that I know of} knows if this still holds with
-2 directions or in 3D with segments parallel to axis.
 
-This is particalarily interesting, because unweighted problem is in FPT.
+This result is particalarily interesting, because unweighted problem is in FPT.
+
+Nobody\footnote{that I know of} knows if this still holds with
+2 directions.
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Regults of parametrization of \textsc{Segment Set Cover}}
+\frametitle{Results of parametrization of \textsc{Segment Set Cover}}
 
 \begin{tabular}{|c|c|c|}
 \hline
@@ -461,14 +462,14 @@ weighted any directions & \textcolor{olivegreen}{W[1]-hard*} &  \textcolor{olive
 
 
 \begin{frame}
-\frametitle{Summary of results for approximation of \textsc{Geometric Set Cover}}
+\frametitle{Results for approximation of \textsc{Geometric Set Cover}}
 \begin{tabular}{|c|c|c|}
 \hline
            & exact & $\delta$-extensions \\
 \hline
 fat polygons & APX-hard (TODO ref) &  PTAS (Har-Peled)\\
 \hline
-segments & \textcolor{olivegreen}{APX-hard*} & \textcolor{olivegreen}{APX-hard (Th. 2)} \\
+segments & \textcolor{olivegreen}{APX-hard*} & \textcolor{olivegreen}{APX-hard (Theorem 2)} \\
 \hline
 any polygons & \textcolor{olivegreen}{APX-hard*} &  \textcolor{olivegreen}{APX-hard*} \\
 \hline

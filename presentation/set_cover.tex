@@ -254,13 +254,13 @@ Example: \textsc{MAX-3-SAT} (how many clauses in 3-SAT can be solved)
 \frametitle{Approximation results for \textsc{Set Cover} from literature}
 \textsc{Set Cover}
 \begin{itemize}
-\item $\log n$-approximation, no $o(\log n)$ approximation assuing P $\neq$ NP
+\item $\log n$ approximation, no $o(\log n)$ approximation assuing P $\neq$ NP
 \end{itemize}
 
 \textsc{Geometric Set Cover}
 \begin{itemize}
 \item with fat rectangles is APX-hard
-\item (E?Q?)PTAS for FAT polygons with $\delta$-ext (TODO reference)
+\item EPTAS for FAT polygons with $\delta$-extensions \textbf{[Har-Peled and Lee, 2012]}
 \end{itemize}
 
 
@@ -293,14 +293,17 @@ $n$ or less than $n$ is NP-complete.
 \end{frame}
 
 \begin{frame}{PCP theorem}
+\begin{block}{PCP Theorem}
+NP = PCP($\log n$, $\mathcal{O}(1)$).
+\end{block}
+
 \begin{block}{Remark}
 Result of MAX-(3,3)-SAT is not less than $\frac{7}{8}n$
 \end{block}
 
-\begin{block}{PCP theorem}
+\begin{block}{PCP theorem implication}
 Distinguishing if result of MAX-(3,3)-SAT is $n$
-or at most $(\frac{7}{8} + \epsilon)n$
-cannot be done in polynomial time assuming $NP \nsubseteq DTIME(2^{O(\log n \log \log n)})$
+or at most $(\frac{7}{8} + \epsilon)n$ is NP-hard.
 \end{block}
 
 Therefore MAX-(3,3)-SAT does not have
@@ -310,7 +313,7 @@ $(\frac{7}{8}+\epsilon)$-approximation
 
 \begin{frame}
 \frametitle{Approxmiation of \textsc{Segment Set Cover}}
-\begin{block}{Theorem 2}
+\begin{block}{Theorem APX}
 	\textsc{Segment Set Cover} is APX-hard, ie.\newline
 	for small $\epsilon =0.001$,
 	doesn't have $(1+\epsilon)$-approximation unless P = NP.
@@ -319,21 +322,40 @@ $(\frac{7}{8}+\epsilon)$-approximation
 How can we make this problem \textit{easier}?
 \begin{itemize}
 \item Allow only segments in 2 directions (pararell to the two axes)
-\item Allow segments to \textit{almost} cover the points, ie. be very
-close to them
+\item Allow segments to \textit{almost} cover the points, ie. $\delta$-extensions
 \end{itemize}
 
-\begin{block}{Theorem 2 (rephrased)}
+\begin{block}{Theorem APX (rephrased)}
 	\textsc{Segment Set Cover} is APX-hard, even if segments are axis-parallel
 	and problem is relaxed with $\frac{1}{2}$-extension.
 \end{block}
 
 
-\begin{block}{Theorem 2.5 (Har-Peled also did that in 2012)}
+\begin{block}{Theorem [Har-Peled and Lee, 2012]}
 	Set cover with polygons of bounded fatness (at least $\tau$)
-	 with $\delta$-extension has $(1+\epsilon)$-approximation
-	 for any $\epsilon > 0$.
+	with $\delta$-extension has EPTAS.
 \end{block}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Results for approximation of \textsc{Geometric Set Cover}}
+\begin{tabular}{|c|c|c|}
+\hline
+           & exact & $\delta$-extensions \\
+\hline
+fat polygons & APX-hard  &  EPTAS \\
+& [Chan and Grant, 2014] & [Har-Peled and Lee, 2012] \\
+\hline
+segments & \textcolor{olivegreen}{APX-hard*} & \textcolor{olivegreen}{APX-hard (Theorem APX)} \\
+\hline
+any polygons & APX-hard* &  \textcolor{olivegreen}{APX-hard*} \\
+\hline
+\end{tabular}
+
+\bigskip
+Results marked with * follow from results for more restricted settings.
 
 \end{frame}
 
@@ -350,19 +372,19 @@ Given:
 
 \begin{tabular}{|c|c|c|}
 \hline
-\textbf{Class} & \textbf{Complexity} & \textbf{Example}\\
+\textbf{Class} & \textbf{Upper Bound of Complexity} & \textbf{Example}\\
 \hline
 W[1]-hard & $n^{O(k)}$ & \textsc{$k$-Clique}, \textsc{Grid Tiling}\\
 \hline
 FPT & $f(k) \cdot n^{O(1)}$ & \textsc{Vertex Cover}\\
 \hline
 \end{tabular}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Parametrization of \textsc{Set Cover}}
-W[2]-complete (no algorithm with running time $n^{k-\epsilon}$ for any $\epsilon > 0$)
+\bigskip
+\textsc{Set Cover} is:
+\begin{itemize}
+\item W[2]-complete
+\item no algorithm with running time $n^{k-\epsilon}$ for any $\epsilon > 0$
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -468,20 +490,6 @@ weighted any directions & \textcolor{olivegreen}{W[1]-hard*} &  \textcolor{olive
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Results for approximation of \textsc{Geometric Set Cover}}
-\begin{tabular}{|c|c|c|}
-\hline
-           & exact & $\delta$-extensions \\
-\hline
-fat polygons & APX-hard (TODO ref) &  PTAS (Har-Peled)\\
-\hline
-segments & \textcolor{olivegreen}{APX-hard*} & \textcolor{olivegreen}{APX-hard (Theorem 2)} \\
-\hline
-any polygons & \textcolor{olivegreen}{APX-hard*} &  \textcolor{olivegreen}{APX-hard*} \\
-\hline
-\end{tabular}
-\end{frame}
 
 %----------------------------------------------------------------------------------------
 

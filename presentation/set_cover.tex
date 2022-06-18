@@ -221,7 +221,7 @@ $p$-approximation is algorithm that yields solution of weight not larger than
 $p\cdot \mathsf{opt}(I)$
 \begin{block}{PTAS -- polynomial time approximation scheme}
 For every $\epsilon > 0$, there exists $(1+\epsilon)$-approximation
-algorithm running in time $n^{f(\epsilon)}$ for any computable function $f$.
+algorithm running in time $n^{f(\epsilon)}$ for some computable function $f$.
 
 Example: \textsc{Knapsack}.
 
@@ -246,7 +246,7 @@ Example: \textsc{MAX-3-SAT} (how many clauses in 3-SAT can be solved)
 \textsc{Geometric Set Cover}
 \begin{itemize}
 \item with fat rectangles is APX-hard
-\item EPTAS for FAT polygons with $\delta$-extensions \textbf{[Har-Peled and Lee, 2012]}
+\item EPTAS for fat polygons with $\delta$-extensions \textbf{[Har-Peled and Lee, 2012]}
 \end{itemize}
 
 
@@ -284,7 +284,7 @@ NP = PCP($\log n$, $\mathcal{O}(1)$).
 \end{block}
 
 \begin{block}{Remark}
-Result of MAX-(3,3)-SAT is not less than $\frac{7}{8}n$
+Each instance of MAX-(3,3)-SAT is $\lceil\frac{7}{8}n\rceil$-satisfiable
 \end{block}
 
 \begin{block}{PCP theorem implication}

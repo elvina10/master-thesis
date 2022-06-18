@@ -313,7 +313,7 @@ $(\frac{7}{8}+\epsilon)$-approximation
 
 \begin{frame}
 \frametitle{Approxmiation of \textsc{Segment Set Cover}}
-\begin{block}{Theorem APX}
+\begin{block}{Theorem 1}
 	\textsc{Segment Set Cover} is APX-hard, ie.\newline
 	for small $\epsilon =0.001$,
 	doesn't have $(1+\epsilon)$-approximation unless P = NP.
@@ -325,7 +325,7 @@ How can we make this problem \textit{easier}?
 \item Allow segments to \textit{almost} cover the points, ie. $\delta$-extensions
 \end{itemize}
 
-\begin{block}{Theorem APX (rephrased)}
+\begin{block}{Theorem 1 (rephrased)}
 	\textsc{Segment Set Cover} is APX-hard, even if segments are axis-parallel
 	and problem is relaxed with $\frac{1}{2}$-extension.
 \end{block}
@@ -348,7 +348,7 @@ How can we make this problem \textit{easier}?
 fat polygons & APX-hard  &  EPTAS \\
 & [Chan and Grant, 2014] & [Har-Peled and Lee, 2012] \\
 \hline
-segments & \textcolor{olivegreen}{APX-hard*} & \textcolor{olivegreen}{APX-hard (Theorem APX)} \\
+segments & \textcolor{olivegreen}{APX-hard*} & \textcolor{olivegreen}{APX-hard (Theorem 1)} \\
 \hline
 any polygons & APX-hard* &  \textcolor{olivegreen}{APX-hard*} \\
 \hline
@@ -390,7 +390,7 @@ FPT & $f(k) \cdot n^{O(1)}$ & \textsc{Vertex Cover}\\
 
 \begin{frame}
 \frametitle{Parametrization of \textsc{Segment Set Cover}}
-\begin{block}{Theorem 1}
+\begin{block}{Theorem 2}
 	\textsc{Segment Set Cover} parametrized by the solution size $k$
 	can be solved in time $k^k \cdot n^{O(1)}$.
 \end{block}
@@ -478,7 +478,7 @@ Nobody\footnote{that I know of} knows if this still holds with
 \hline
            & exact & $\delta$-extensions \\
 \hline
-unweighted & \textcolor{olivegreen}{FPT (Theorem 1)} & \textcolor{olivegreen}{FPT*} \\
+unweighted & \textcolor{olivegreen}{FPT (Theorem 2)} & \textcolor{olivegreen}{FPT*} \\
 \hline
 weighted 2 directions & ??? & \textcolor{olivegreen}{FPT*} \\
 \hline

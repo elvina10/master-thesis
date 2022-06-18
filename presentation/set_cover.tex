@@ -458,26 +458,34 @@ How can we make this problem easier?
 \textbf{$k$-good} set of points of size at most $f(k, \delta)$
 on each line with more than $k+1$ points on them.
 
-Set is \textbf{$k$-good} if no matter how we cover it with $k$
-segments, then it covers all poins from original set after $\delta$-extension.
+Subset of a set of collinear points $S$
+is \textbf{$k$-good}
+if no matter how we cover it with $k$
+segments, then these segents after $\delta$-extension
+cover all points from the original set of points $S$.
 \end{frame}
 
 \begin{frame}
-\frametitle{Parametrization for set cover with weighted segments}
-\begin{block}{Theorem 3 (rephrased)}
-	Weighted set cover with segments in 3 directions is W[1]-hard.
-	
-	
-These directions are: parallel to axis and diagonal 45 degrees.
-	
-	Doesn't have FPT algorithm
+\frametitle{Parametrization of \textsc{Weighted Segment Set cover}}
+
+\begin{block}{Theorem 3}
+	\textsc{Weighted Segment Set cover} is W[1]-hard
+	and there does not exists an algorithm running in time $n^{o(\sqrt(k))}$
+	even when segments are limited to 3 directions.
 \end{block}
 
 
-This result is particalarily interesting, because unweighted problem is in FPT.
+This result is particalarily interesting, because unweighted problem 
+has an FPT algorithm.
 
-Nobody\footnote{that I know of} knows if this still holds with
-2 directions.
+\bigskip
+
+\textbf{Future work:}
+\begin{itemize}
+\item prove Theorem 3 for axis-parallel segments (2 directions);
+\item remove the gap between the lower bound of complexity $n^{o(\sqrt(k))}$
+and algorithm in $n^{\mathcal{O}(k)}$.
+\end{itemize}
 
 \end{frame}
 

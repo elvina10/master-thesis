@@ -434,9 +434,8 @@ It is still APX-hard, nothing interesting
 \begin{frame}
 \frametitle{Parametrization for set cover with weighted segments}
 \begin{block}{Theorem 3}
-	Weighted set cover with segments is W[1]-hard.
-	
-	Doesn't have FPT algorithm
+	\textsc{Weighted Segment Set cover} is W[1]-hard
+	and there does not exists an algorithm running in time $n^{o(\sqrt(k))}$.
 \end{block}
 
 How can we make this problem easier?
@@ -449,15 +448,18 @@ How can we make this problem easier?
 \begin{frame}
 \frametitle{Parametrization for set cover with weighted segments}
 \begin{block}{Theorem 4}
-	Weighted set cover with segments 
-	with $\delta$-extensions is in FPT.
+	\textsc{Weighted Segment Set cover} relaxed
+	with $\delta$-extensions has an FPT algorithm.
 	
-	It can be solved with complexity $O((k/\delta)^k \cdot n^{O(1)})$.
+	It can be solved with algorithm running in time $\mathcal{O}((2+k/\delta)^k \cdot n^{O(1)})$.
 \end{block}
 
-\textbf{Technique intuition:} Provide kernel in problem where you need to
-cover both points and some segments (these are required
-by high density of points to cover on them)
+\textbf{Technique intuition:} Provide a kernel where we choose
+\textbf{$k$-good} set of points of size at most $f(k, \delta)$
+on each line with more than $k+1$ points on them.
+
+Set is \textbf{$k$-good} if no matter how we cover it with $k$
+segments, then it covers all poins from original set after $\delta$-extension.
 \end{frame}
 
 \begin{frame}

@@ -96,12 +96,14 @@
 
 \urlstyle{same}
 
-\usepackage{polski}
 \usepackage[utf8]{inputenc}
-
+\usepackage{tikz}
+\usetikzlibrary{calc,math}
 \usepackage{amsmath}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\true}{\texttt{true}}
+\newcommand{\false}{\texttt{false}}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -314,9 +316,9 @@ $(\frac{7}{8}+\epsilon)$-approximation
 \begin{frame}
 \frametitle{Approxmiation of \textsc{Segment Set Cover}}
 \begin{block}{Theorem 1}
-	\textsc{Segment Set Cover} is APX-hard, ie.\newline
-	for small $\epsilon =0.001$,
-	doesn't have $(1+\epsilon)$-approximation unless P = NP.
+	\textsc{Segment Set Cover} is APX-hard, ie.
+	there exists such $\epsilon>0$
+	that $(1+\epsilon)$-approximation does not exist unless P = NP.
 \end{block}
 
 How can we make this problem \textit{easier}?
@@ -325,17 +327,20 @@ How can we make this problem \textit{easier}?
 \item Allow segments to \textit{almost} cover the points, ie. $\delta$-extensions
 \end{itemize}
 
-\begin{block}{Theorem 1 (rephrased)}
-	\textsc{Segment Set Cover} is APX-hard, even if segments are axis-parallel
-	and problem is relaxed with $\frac{1}{2}$-extension.
-\end{block}
-
-
 \begin{block}{Theorem [Har-Peled and Lee, 2012]}
 	Set cover with polygons of bounded fatness (at least $\tau$)
 	with $\delta$-extension has EPTAS.
 \end{block}
 
+\end{frame}
+
+\begin{frame}
+\begin{block}{Theorem 1 (rephrased)}
+	\textsc{Segment Set Cover} is APX-hard, even if segments are axis-parallel
+	and problem is relaxed with $\frac{1}{2}$-extension.
+\end{block}
+
+\input{figures/apxhard.tex}
 \end{frame}
 
 

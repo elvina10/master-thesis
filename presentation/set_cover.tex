@@ -264,7 +264,7 @@ How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
 
 
 \begin{block}{\textsc{MAX-(3,3)-SAT} problem}
-Given 3-SAT instance with $n$ variables, $n$ clauses
+Given 3-SAT instance with $n$ variables, $m$ clauses
 and every variable appears in exactly 3 clauses,
 find an assignment
 that satisfies the maximum number of clauses
@@ -284,17 +284,13 @@ $n$ or less than $n$ is NP-complete.
 NP = PCP($\log n$, $\mathcal{O}(1)$).
 \end{block}
 
-\begin{block}{Remark}
-Each instance of MAX-(3,3)-SAT is $\lceil\frac{7}{8}n\rceil$-satisfiable
-\end{block}
-
-\begin{block}{PCP theorem implication}
+\begin{block}{PCP theorem implication [Håstad, 2001]}
 Distinguishing if result of MAX-(3,3)-SAT is $n$
-or at most $(\frac{7}{8} + \epsilon)n$ is NP-hard.
+or at most $\frac{49}{50} \cdot n$ is NP-hard.
 \end{block}
 
 Therefore MAX-(3,3)-SAT does not have
-$(\frac{7}{8}+\epsilon)$-approximation
+$(1+\frac{1}{49})$-approximation
 \end{frame}
 
 
@@ -303,7 +299,8 @@ $(\frac{7}{8}+\epsilon)$-approximation
 \begin{block}{Theorem 1}
 	\textsc{Segment Set Cover} is APX-hard, i.e.
 	there exists such $\epsilon>0$
-	that $(1+\epsilon)$-approximation does not exist unless P = NP.
+	that $(1+\epsilon)$-approximation 
+	running in time $n^{f(\epsilon)}$ does not exist if P $\neq$ NP.
 \end{block}
 
 How can we make this problem \textit{easier}?
@@ -312,10 +309,16 @@ How can we make this problem \textit{easier}?
 \item Allow segments to \textit{almost} cover the points, i.e. $\delta$-extensions
 \end{itemize}
 
-\begin{block}{Theorem [Har-Peled and Lee, 2012]}
-	Set cover with polygons of bounded fatness (at least $\tau$)
-	with $\delta$-extension has EPTAS.
-\end{block}
+\pause
+
+\bigskip
+
+\textbf{Remark:}
+	Set cover with polygons of bounded fatness (at least $\tau$):
+	\begin{enumerate}
+	\item is APX-hard;
+	\item with $\delta$-extension has EPTAS.
+	\end{enumerate}
 
 \end{frame}
 
@@ -352,11 +355,11 @@ Results marked with * follow from results for more restricted settings.
 \section{Parameterization}
 
 \begin{frame}
-\frametitle{Parameterized algorithms vs. W[1]-hardness}
-Given:
+\frametitle{Prelimiaries: Parameterized algorithms}
+Instance $I$ of a parameterized problem now has:
 \begin{itemize}
-\item parameter $k$ (usually size of the solution)
-\item size of the instance $n$
+\item size of the instance $n$;
+\item parameter $k$ (usually size of the solution).
 \end{itemize}
 \bigskip
 
@@ -364,11 +367,13 @@ Given:
 \hline
 \textbf{Class} & \textbf{Upper Bound of Complexity} & \textbf{Example}\\
 \hline
-W[1]-hard & $n^{O(k)}$ & \textsc{$k$-Clique}, \textsc{Grid Tiling}\\
-\hline
 FPT & $f(k) \cdot n^{O(1)}$ & \textsc{Vertex Cover}\\
 \hline
+W[1] & $n^{O(k)}$ & \textsc{$k$-Clique}, \textsc{Grid Tiling}\\
+\hline
 \end{tabular}
+
+\pause
 
 \bigskip
 \textsc{Set Cover} is:
@@ -387,6 +392,13 @@ FPT & $f(k) \cdot n^{O(1)}$ & \textsc{Vertex Cover}\\
 
 \textbf{Technique:} Branching over at most $k+1$
 segments on the lines with more than $k$ points on them.
+
+\pause
+
+\bigskip
+
+Now let's make problem \textcolor{red}{\textbf{harder}}...
+
 \end{frame}
 
 \section{\textsc{Weighted Segment Set Cover}} 
@@ -396,12 +408,14 @@ segments on the lines with more than $k$ points on them.
 
 \textbf{Input:} universe $\mathcal{U}$,
 subfamily $S$ of subsets of $\mathcal{U}$
-and function of weights assigned to sets $w : S \rightarrow \mathbb{N}$
+and function of weights assigned to sets $w : S \rightarrow \mathbb{R^+}$
 \newline
 \textbf{Output:} $C \subseteq S$ such that $\sum_{c \in C} w(c)$ is minimal and
 $\bigcup C = \mathcal{U}$
 \newline
 Minimal subfamily that covers all elements in $\mathcal{U}$.
+
+\pause
 
 \bigskip
 \textbf{In parameterized setting:}
@@ -410,6 +424,7 @@ We look for the \textit{best} solution with restricted size $|C| \le k$.
 \textbf{In approximation setting:}
 It is still APX-hard, nothing interesting
 \bigskip
+\pause
 
 \textbf{FPT results for weighted problems in literature:}
 \begin{itemize}
@@ -422,46 +437,10 @@ It is still APX-hard, nothing interesting
 \end{frame}
 
 \begin{frame}
-\frametitle{Parameterization for set cover with weighted segments}
+\frametitle{Parameterization of \textsc{Weighted Segment Set Cover}}
 \begin{block}{Theorem 3}
-	\textsc{Weighted Segment Set cover} is W[1]-hard
-	and there does not exists an algorithm running in time $n^{o(\sqrt(k))}$.
-\end{block}
-
-How can we make this problem easier?
-\begin{itemize}
-\item Allow less directions (maybe just two parallel to axes)
-\item Allow $\delta$-extension
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Parameterization for set cover with weighted segments}
-\begin{block}{Theorem 4}
-	\textsc{Weighted Segment Set cover} relaxed
-	with $\delta$-extensions has an FPT algorithm.
-	
-	It can be solved with algorithm running in time $\mathcal{O}((2+k/\delta)^k \cdot n^{O(1)})$.
-\end{block}
-
-\textbf{Technique intuition:} Provide a kernel where we choose
-\textbf{$k$-good} set of points of size at most $f(k, \delta)$
-on each line with more than $k+1$ points on them.
-
-Subset of a set of collinear points $S$
-is \textbf{$k$-good}
-if no matter how we cover it with $k$
-segments, then these segments after $\delta$-extension
-cover all points from the original set of points $S$.
-\end{frame}
-
-\begin{frame}
-\frametitle{Parameterization of \textsc{Weighted Segment Set cover}}
-
-\begin{block}{Theorem 3}
-	\textsc{Weighted Segment Set cover} is W[1]-hard
-	and there does not exists an algorithm running in time $n^{o(\sqrt(k))}$
-	even when segments are limited to 3 directions.
+	\textsc{Weighted Segment Set Cover} is W[1]-hard
+	and there does not exists an algorithm running in time $n^{o(\sqrt{k})}$.
 \end{block}
 
 
@@ -470,13 +449,42 @@ has an FPT algorithm.
 
 \bigskip
 
-\textbf{Future work:}
+How can we make this problem easier?
 \begin{itemize}
-\item prove Theorem 3 for axis-parallel segments (2 directions);
-\item remove the gap between the lower bound of complexity $n^{o(\sqrt(k))}$
-and algorithm in $n^{\mathcal{O}(k)}$.
+\item allow less directions (maybe just two parallel to axes);
+\item allow $\delta$-extension.
 \end{itemize}
+\end{frame}
 
+\begin{frame}
+\frametitle{Parameterization of \textsc{Weighted Segment Set cover}}
+
+\begin{block}{Theorem 3 (rephrased)}
+	\textsc{Weighted Segment Set cover} is W[1]-hard
+	and there does not exists an algorithm running in time $n^{o(\sqrt{k})}$
+	even when segments are limited to 3 directions.
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Parameterization of \textsc{Weighted Segment Set Cover}}
+\begin{block}{Theorem 4}
+	\textsc{Weighted Segment Set Cover} relaxed
+	with $\delta$-extension has an FPT algorithm.
+	
+	It can be solved with algorithm running in time $\mathcal{O}((2+k/\delta)^k \cdot n^{O(1)})$.
+\end{block}
+
+\textbf{Technique intuition:} Provide a kernel where we choose
+\textbf{$(k, \delta)$-good} set of points of size at most $f(k, \delta)$
+on each line with more than $k+1$ points on them.
+
+Subset of a set of collinear points $S$
+is \textbf{$(k, \delta)$-good}
+if no matter how we cover it with $k$
+segments, then these segments after $\delta$-extension
+cover all points from the original set of points $S$.
 \end{frame}
 
 \begin{frame}
@@ -496,6 +504,23 @@ weighted any directions & \textcolor{olivegreen}{W[1]-hard*} &  \textcolor{olive
 \hline
 \end{tabular}
 
+\end{frame}
+
+
+\begin{frame}
+\begin{block}{Theorem 3 (reminder)}
+	\textsc{Weighted Segment Set cover} is W[1]-hard
+	and there does not exists an algorithm running in time $n^{o(\sqrt{k})}$
+	even when segments are limited to 3 directions.
+\end{block}
+\bigskip
+
+\textbf{Future work:}
+\begin{itemize}
+\item prove Theorem 3 for axis-parallel segments (2 directions);
+\item remove the gap between the lower bound of complexity $n^{o(\sqrt{k})}$
+and a simple algorithm running in time $n^{\mathcal{O}(k)}$.
+\end{itemize}
 \end{frame}
 
 \begin{frame}

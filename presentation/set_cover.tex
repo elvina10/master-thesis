@@ -285,8 +285,9 @@ NP = PCP($\log n$, $\mathcal{O}(1)$).
 \end{block}
 
 \begin{block}{PCP theorem implication [Håstad, 2001]}
-Distinguishing if result of MAX-(3,3)-SAT is $n$
-or at most $\frac{49}{50} \cdot n$ is NP-hard.
+Distinguishing whether optimum result of
+the instance of MAX-(3,3)-SAT is $m$
+or at most $\frac{49}{50} \cdot m$ is NP-hard.
 \end{block}
 
 Therefore MAX-(3,3)-SAT does not have
@@ -381,6 +382,19 @@ W[1] & $n^{O(k)}$ & \textsc{$k$-Clique}, \textsc{Grid Tiling}\\
 \item W[2]-complete
 \item no algorithm with running time $n^{k-\epsilon}$ for any $\epsilon > 0$
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Parameterization of \textsc{Geometric Set Cover}}
+\begin{block}{Theoem [Marx, 2005]}
+	\textsc{Geometric Set Cover} 
+	with unit squares parameterized by the solution size $k$
+	is W[1]-hard.
+\end{block}
+
+The followup work [Marx and Pilipczuk, 2022]
+shows a tight bound for this problem $n^{\mathcal{O}(\sqrt{k})}$.
+
 \end{frame}
 
 \begin{frame}

@@ -178,8 +178,8 @@ Example for rectangles:
 \begin{frame}
 \frametitle{Problem Statement: \textsc{Segment Set Cover}}
 \begin{itemize}
-\item Universe $\mathcal{U}$ is set of points in the plane
-\item Sets $S$ are segments.
+\item Universe $\mathcal{U}$ is a set of points in the plane.
+\item Sets $S$ are line segments.
 \end{itemize}
 
 \begin{center}
@@ -247,7 +247,7 @@ Example: \textsc{MAX-3-SAT} (how many clauses in 3-SAT can be solved)
 \textsc{Geometric Set Cover}
 \begin{itemize}
 \item with fat rectangles is APX-hard
-\item EPTAS for fat polygons with $\delta$-extensions \textbf{[Har-Peled and Lee, 2012]}
+\item EPTAS for fat polygons with $\delta$-extension \textbf{[Har-Peled and Lee, 2012]}
 \end{itemize}
 
 
@@ -307,7 +307,7 @@ $(1+\frac{1}{49})$-approximation
 How can we make this problem \textit{easier}?
 \begin{itemize}
 \item Allow only segments in 2 directions (parallel to the two axes)
-\item Allow segments to \textit{almost} cover the points, i.e. $\delta$-extensions
+\item Allow segments to \textit{almost} cover the points, i.e. $\delta$-extension
 \end{itemize}
 
 \pause
@@ -337,7 +337,7 @@ How can we make this problem \textit{easier}?
 \frametitle{Results for approximation of \textsc{Geometric Set Cover}}
 \begin{tabular}{|c|c|c|}
 \hline
-           & exact & $\delta$-extensions \\
+           & exact & $\delta$-extension \\
 \hline
 fat polygons & APX-hard  &  EPTAS \\
 & [Chan and Grant, 2014] & [Har-Peled and Lee, 2012] \\
@@ -386,13 +386,13 @@ W[1] & $n^{O(k)}$ & \textsc{$k$-Clique}, \textsc{Grid Tiling}\\
 
 \begin{frame}
 \frametitle{Parameterization of \textsc{Geometric Set Cover}}
-\begin{block}{Theoem [Marx, 2005]}
+\begin{block}{Theorem [Marx, 2005]}
 	\textsc{Geometric Set Cover} 
 	with unit squares parameterized by the solution size $k$
 	is W[1]-hard.
 \end{block}
 
-The followup work [Marx and Pilipczuk, 2022]
+The follow-up work [Marx and Pilipczuk, 2022]
 shows a tight bound for this problem $n^{\mathcal{O}(\sqrt{k})}$.
 
 \end{frame}
@@ -502,11 +502,26 @@ cover all points from the original set of points $S$.
 \end{frame}
 
 \begin{frame}
-\frametitle{Results of parameterization of \textsc{Segment Set Cover}}
+\frametitle{Results of parameterization of \textsc{Geomtric Set Cover}}
 
+
+\textsc{Geometric Set Cover}
 \begin{tabular}{|c|c|c|}
 \hline
-           & exact & $\delta$-extensions \\
+           & exact & $\delta$-extension \\
+\hline
+fat polygons & W[1]-hard [Marx, 2005] & ??? \\
+\hline
+segments &  \textcolor{olivegreen}{FPT (Theorem 2)} & \textcolor{olivegreen}{FPT*} \\
+\hline
+\end{tabular}
+
+\bigskip
+
+\textsc{Segment Set Cover}
+\begin{tabular}{|c|c|c|}
+\hline
+           & exact & $\delta$-extension \\
 \hline
 unweighted & \textcolor{olivegreen}{FPT (Theorem 2)} & \textcolor{olivegreen}{FPT*} \\
 \hline
@@ -533,7 +548,9 @@ weighted any directions & \textcolor{olivegreen}{W[1]-hard*} &  \textcolor{olive
 \begin{itemize}
 \item prove Theorem 3 for axis-parallel segments (2 directions);
 \item remove the gap between the lower bound of complexity $n^{o(\sqrt{k})}$
-and a simple algorithm running in time $n^{\mathcal{O}(k)}$.
+and a simple algorithm running in time $n^{\mathcal{O}(k)}$;
+\item investigate whether $\textsc{Geometric Set Cover}$ 
+with fat polygons relaxed with $\delta$-extension has FPT algorithm.
 \end{itemize}
 \end{frame}
 

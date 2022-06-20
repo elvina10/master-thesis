@@ -113,8 +113,8 @@
 of Segment Set Cover}
 % The short title appears at the bottom of every slide, the full title is only on the title page
 
-\author{Katarzyna Kowalska, Michał Pilipczuk} % Your name
-\institute[UW] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+\author{Katarzyna Kowalska} % Your name
+\institute[MIMUW] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
 University of Warsaw, MIMUW \\ % Your institution for the title page
 \medskip
@@ -241,13 +241,13 @@ Example: \textsc{MAX-3-SAT} (how many clauses in 3-SAT can be solved)
 \frametitle{Approximation results for \textsc{Set Cover} from literature}
 \textsc{Set Cover}
 \begin{itemize}
-\item $\log n$ approximation, no $o(\log n)$ approximation assuming P $\neq$ NP
+\item $\log n$ approximation, no $o(\log n)$ approximation assuming P $\neq$ NP [Dinur and Steurer, 2014]
 \end{itemize}
 
 \textsc{Geometric Set Cover}
 \begin{itemize}
-\item with fat rectangles is APX-hard
-\item EPTAS for fat polygons with $\delta$-extension \textbf{[Har-Peled and Lee, 2012]}
+\item with fat rectangles is APX-hard [Chan and Grant, 2014]
+\item EPTAS for fat polygons with $\delta$-extension [Har-Peled and Lee, 2012]
 \end{itemize}
 
 
@@ -259,39 +259,39 @@ circumscribed on this polygon and inscribed in this polygon.
 
 \end{frame}
 
-\begin{frame}{\textsc{MAX-(3,3)-SAT}}
+\begin{frame}{\textsc{MAX-(3,5)-SAT}}
 How do we prove that there doesn't exist $(1+\epsilon)$-approximation?
 
+Let's start with APX-hard problem.
 
-\begin{block}{\textsc{MAX-(3,3)-SAT} problem}
+\begin{block}{\textsc{MAX-(3,5)-SAT} problem}
 Given 3-SAT instance with $n$ variables, $m$ clauses
-and every variable appears in exactly 3 clauses,
+and every variable appears in exactly 5 clauses,
 find an assignment
 that satisfies the maximum number of clauses
 (not necessarily all of them).
 \end{block}
 
-MAX-(3,3)-SAT is NP-complete, therefore:
+\pause
+We can show linear reduction (L-reduction),
+but in this case we couldn't find L-reduction.
 
-\begin{block}{NP-completeness}
-Distinguishing if result of MAX-(3,3)-SAT is
-$n$ or less than $n$ is NP-complete.
-\end{block}
 \end{frame}
 
 \begin{frame}{PCP theorem}
+
 \begin{block}{PCP Theorem}
 NP = PCP($\log n$, $\mathcal{O}(1)$).
 \end{block}
 
 \begin{block}{PCP theorem implication [Håstad, 2001]}
 Distinguishing whether optimum result of
-the instance of MAX-(3,3)-SAT is $m$
-or at most $\frac{49}{50} \cdot m$ is NP-hard.
+the instance of MAX-(3,5)-SAT is $m$
+or at most $(1-\epsilon)m$ for some $\epsilon > 0$ is NP-hard.
 \end{block}
 
-Therefore MAX-(3,3)-SAT does not have
-$(1+\frac{1}{49})$-approximation
+Therefore MAX-(3,5)-SAT does not have
+$(1+\epsilon)$-approximation
 \end{frame}
 
 
@@ -356,7 +356,7 @@ Results marked with * follow from results for more restricted settings.
 \section{Parameterization}
 
 \begin{frame}
-\frametitle{Prelimiaries: Parameterized algorithms}
+\frametitle{Preliminaries: Parameterized algorithms}
 Instance $I$ of a parameterized problem now has:
 \begin{itemize}
 \item size of the instance $n$;
@@ -364,9 +364,10 @@ Instance $I$ of a parameterized problem now has:
 \end{itemize}
 \bigskip
 
+
 \begin{tabular}{|c|c|c|}
 \hline
-\textbf{Class} & \textbf{Upper Bound of Complexity} & \textbf{Example}\\
+\textbf{Class} & \textbf{Complexity} & \textbf{Example}\\
 \hline
 FPT & $f(k) \cdot n^{O(1)}$ & \textsc{Vertex Cover}\\
 \hline
@@ -379,9 +380,23 @@ W[1] & $n^{O(k)}$ & \textsc{$k$-Clique}, \textsc{Grid Tiling}\\
 \bigskip
 \textsc{Set Cover} is:
 \begin{itemize}
-\item W[2]-complete
-\item no algorithm with running time $n^{k-\epsilon}$ for any $\epsilon > 0$
+\item W[2]-hard;
+\item assuming ETH no algorithm with running time $n^{k -\epsilon}$ for any $\epsilon > 0$.
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Preliminaries: Parameterized algorithms}
+
+How do we prove lower bounds of parameterized complexity?
+\bigskip
+
+Assuming ETH, FPT $\neq$ W[1].
+
+\bigskip
+
+Therefore we can prove lower bounds of parameterized complexity for W[1]-hard problems.
+
 \end{frame}
 
 \begin{frame}
@@ -434,9 +449,6 @@ Minimal subfamily that covers all elements in $\mathcal{U}$.
 \bigskip
 \textbf{In parameterized setting:}
 We look for the \textit{best} solution with restricted size $|C| \le k$.
-
-\textbf{In approximation setting:}
-It is still APX-hard, nothing interesting
 \bigskip
 \pause
 
@@ -463,6 +475,7 @@ has an FPT algorithm.
 
 \bigskip
 
+\pause
 How can we make this problem easier?
 \begin{itemize}
 \item allow less directions (maybe just two parallel to axes);
@@ -487,11 +500,11 @@ How can we make this problem easier?
 	\textsc{Weighted Segment Set Cover} relaxed
 	with $\delta$-extension has an FPT algorithm.
 	
-	It can be solved with algorithm running in time $\mathcal{O}((2+k/\delta)^k \cdot n^{O(1)})$.
+	It can be solved with algorithm running in time $\mathcal{O}(f(k,\delta) \cdot n^{O(1)})$.
 \end{block}
 
 \textbf{Technique intuition:} Provide a kernel where we choose
-\textbf{$(k, \delta)$-good} set of points of size at most $f(k, \delta)$
+\textbf{$(k, \delta)$-good} set of points of size at most $g(k, \delta)$
 on each line with more than $k+1$ points on them.
 
 Subset of a set of collinear points $S$
@@ -502,7 +515,7 @@ cover all points from the original set of points $S$.
 \end{frame}
 
 \begin{frame}
-\frametitle{Results of parameterization of \textsc{Geomtric Set Cover}}
+\frametitle{Results of parameterization of \textsc{Geometric Set Cover}}
 
 
 \textsc{Geometric Set Cover}
@@ -532,6 +545,10 @@ weighted 3 directions & \textcolor{olivegreen}{W[1]-hard (Theorem 3)} &  \textco
 weighted any directions & \textcolor{olivegreen}{W[1]-hard*} &  \textcolor{olivegreen}{FPT (Theorem 4)}\\
 \hline
 \end{tabular}
+
+
+\bigskip
+Results marked with * follow from results for more or restricted settings respectively.
 
 \end{frame}
 
